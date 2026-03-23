@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* 1. IMPORTAÇÃO DA FONTE ABADI */
+/* Coloque o arquivo da fonte (ex: abadi.woff2) na sua pasta public/fonts */
+@font-face {
+  font-family: 'Abadi';
+  src: url('/fonts/abadi.woff2') format('woff2'),
+       url('/fonts/abadi.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* 2. FORÇANDO A ABADI COMO FONTE PRINCIPAL */
+  --font-sans: "Abadi", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Abadi", ui-serif, Georgia, serif; 
+  
+  --color-gold: #c9a84c;
+  --color-green-main: #0b1f14;
+  --color-green-dark: #06120b;
+  --color-green-light: #123321;
+  --color-light: #fdfcf9;
+  --color-text-light: #dcdedd;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #128C7E;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
