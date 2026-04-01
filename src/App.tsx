@@ -50,9 +50,9 @@ const PLANS: PlanData[] = [
     description: "Para quem quer peças de qualidade sem acumular. Uma peça-chave por mês, escolhida com base no seu perfil, com tecido de alta performance e estética alinhada ao seu estilo.",
     includes: "Peça selecionada + VIVE Guide + mimo de experiência + certificado de seleção",
     checkoutLinks: {
-      mensal: "#checkout-essential-m", // EDITAR LINK CHECKOUT
-      trimestral: "#checkout-essential-t",
-      anual: "#checkout-essential-a"
+      mensal: "https://checkout.vivefit.com.br/essential-mensal", // EDITAR LINK CHECKOUT
+      trimestral: "https://checkout.vivefit.com.br/essential-trimestral",
+      anual: "https://checkout.vivefit.com.br/essential-anual"
     }
   },
   {
@@ -67,9 +67,9 @@ const PLANS: PlanData[] = [
     description: "Looks mais completos e menos esforço. Duas peças coordenadas, pensadas para funcionar juntas e com o que você já tem. Mais praticidade, mais presença e mais identidade visual.",
     includes: "2 peças selecionadas + VIVE Guide + mimo de experiência + certificado de seleção",
     checkoutLinks: {
-      mensal: "#checkout-select-m",
-      trimestral: "#checkout-select-t",
-      anual: "#checkout-select-a"
+      mensal: "https://checkout.vivefit.com.br/select-mensal",
+      trimestral: "https://checkout.vivefit.com.br/select-trimestral",
+      anual: "https://checkout.vivefit.com.br/select-anual"
     }
   },
   {
@@ -84,17 +84,17 @@ const PLANS: PlanData[] = [
     description: "A versão mais completa da VIVE FIT BOX. Três peças por mês, com mais versatilidade, mais combinações possíveis e a sensação de um guarda-roupa de treino que se renova de verdade.",
     includes: "3 peças selecionadas + VIVE Guide + mimo de experiência premium + certificado de seleção",
     checkoutLinks: {
-      mensal: "#checkout-premium-m",
-      trimestral: "#checkout-premium-t",
-      anual: "#checkout-premium-a"
+      mensal: "https://checkout.vivefit.com.br/premium-mensal",
+      trimestral: "https://checkout.vivefit.com.br/premium-trimestral",
+      anual: "https://checkout.vivefit.com.br/premium-anual"
     }
   }
 ];
 
 const PERIOD_NOTES: Record<Period, string> = {
-  mensal: "Flexibilidade total. Cobrança mês a mês, sem compromisso longo.",
-  trimestral: "Um compromisso leve, com desconto progressivo e mimos exclusivos.",
-  anual: "O melhor valor da assinatura, com o maior desconto e acesso antecipado a coleções."
+  mensal: "Flexibilidade total. Cobrança mês a mês, sem compromisso longo. Ideal para quem quer testar a experiência.",
+  trimestral: "Um compromisso leve, com 10% de desconto progressivo e mimos exclusivos em cada entrega.",
+  anual: "O melhor valor da assinatura, com 20% de desconto e acesso antecipado a coleções limitadas."
 };
 
 // --- POLÍTICAS E DÚVIDAS (FAQ) ---
@@ -105,23 +105,23 @@ const FAQ_ITEMS = [
   },
   {
     q: "Posso alterar minhas preferências depois?",
-    a: "Sim. Na Área da Assinante, você pode atualizar qualquer informação a qualquer momento — cores, peças, tamanho, blacklist, compressão."
+    a: "Sim. Na Área da Assinante, você pode atualizar qualquer informação a qualquer momento — cores, peças, tamanho, blacklist, compressão. As mudanças valerão para a próxima box a ser faturada."
   },
   {
     q: "E se vier uma peça que eu não goste?",
-    a: "Oferecemos uma política de troca facilitada para assinantes. Se a peça não for o que você esperava, você pode solicitar a troca por crédito ou por outra peça selecionada na próxima box." // EDITAR POLÍTICA DE TROCA
+    a: "Oferecemos uma política de troca facilitada para assinantes. Se a peça não for o que você esperava, você tem até 7 dias após o recebimento para solicitar a troca por crédito ou por outra peça selecionada na próxima box, sem custos de frete na primeira troca." // EDITAR POLÍTICA DE TROCA
   },
   {
     q: "E se o tamanho não servir?",
-    a: "A primeira troca de tamanho de cada box é por nossa conta. Queremos garantir que você tenha o caimento perfeito para o seu treino." // EDITAR POLÍTICA DE TAMANHO
+    a: "A primeira troca de tamanho de cada box é por nossa conta. Queremos garantir que você tenha o caimento perfeito para o seu treino. Basta solicitar pelo nosso portal do assinante em até 7 dias." // EDITAR POLÍTICA DE TAMANHO
   },
   {
     q: "Posso pausar ou cancelar?",
-    a: "Sim, a qualquer momento. No plano mensal não há fidelidade. Nos planos trimestral e anual, você pode pausar a assinatura por até 2 meses ou cancelar seguindo as regras de encerramento antecipado." // EDITAR REGRAS DE CANCELAMENTO
+    a: "Sim, a qualquer momento. No plano mensal não há fidelidade. Nos planos trimestral e anual, você pode pausar a assinatura por até 2 meses ou cancelar seguindo as regras de encerramento antecipado (cobrança proporcional ao período utilizado)." // EDITAR REGRAS DE CANCELAMENTO
   },
   {
     q: "As peças podem repetir?",
-    a: "Não. O sistema registra tudo o que já foi enviado para você. Nenhuma peça é repetida."
+    a: "Não. O sistema registra tudo o que já foi enviado para você. Nenhuma peça é repetida, garantindo que seu guarda-roupa fitness esteja sempre em evolução."
   }
 ];
 
@@ -156,6 +156,25 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const [quizAnswers, setQuizAnswers] = useState<Record<number, string[]>>({});
+
+  const toggleOption = (step: number, option: string, multi = true) => {
+    setQuizAnswers(prev => {
+      const current = prev[step] || [];
+      if (multi) {
+        if (current.includes(option)) {
+          return { ...prev, [step]: current.filter(o => o !== option) };
+        }
+        return { ...prev, [step]: [...current, option] };
+      }
+      return { ...prev, [step]: [option] };
+    });
+  };
+
+  const isSelected = (step: number, option: string) => {
+    return (quizAnswers[step] || []).includes(option);
+  };
 
   const nextStep = () => setQuizStep(prev => Math.min(prev + 1, 6));
   const prevStep = () => setQuizStep(prev => Math.max(prev - 1, 1));
@@ -387,7 +406,11 @@ export default function App() {
                         <p className="text-sm text-text-muted mb-8">Selecione uma ou mais opções.</p>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                           {['Neutras', 'Naturais', 'Terrosas', 'Vibrantes', 'Escuras', 'Um pouco de tudo'].map(opt => (
-                            <button key={opt} className="bg-white border-2 border-border p-4 rounded-xl text-sm font-medium hover:border-olive-light transition-all active:bg-olive active:text-white">
+                            <button 
+                              key={opt} 
+                              onClick={() => toggleOption(1, opt)}
+                              className={`border-2 p-4 rounded-xl text-sm font-medium transition-all ${isSelected(1, opt) ? 'bg-olive border-olive text-white shadow-md' : 'bg-white border-border hover:border-olive-light'}`}
+                            >
                               {opt}
                             </button>
                           ))}
@@ -401,7 +424,11 @@ export default function App() {
                         <p className="text-sm text-text-muted mb-8">Selecione uma ou mais opções.</p>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                           {['Yoga', 'Pilates', 'Musculação', 'Corrida', 'Funcional', 'Outro'].map(opt => (
-                            <button key={opt} className="bg-white border-2 border-border p-4 rounded-xl text-sm font-medium hover:border-olive-light transition-all">
+                            <button 
+                              key={opt} 
+                              onClick={() => toggleOption(2, opt)}
+                              className={`border-2 p-4 rounded-xl text-sm font-medium transition-all ${isSelected(2, opt) ? 'bg-olive border-olive text-white shadow-md' : 'bg-white border-border hover:border-olive-light'}`}
+                            >
                               {opt}
                             </button>
                           ))}
@@ -415,7 +442,11 @@ export default function App() {
                         <p className="text-sm text-text-muted mb-8">Selecione todas que se aplicam.</p>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                           {['Legging', 'Short', 'Top', 'Regata', 'Jaqueta', 'Body', 'Camiseta', 'Calça jogger'].map(opt => (
-                            <button key={opt} className="bg-white border-2 border-border p-4 rounded-xl text-sm font-medium hover:border-olive-light transition-all">
+                            <button 
+                              key={opt} 
+                              onClick={() => toggleOption(3, opt)}
+                              className={`border-2 p-4 rounded-xl text-sm font-medium transition-all ${isSelected(3, opt) ? 'bg-olive border-olive text-white shadow-md' : 'bg-white border-border hover:border-olive-light'}`}
+                            >
                               {opt}
                             </button>
                           ))}
@@ -429,7 +460,11 @@ export default function App() {
                         <p className="text-sm text-text-muted mb-8">Marque tudo que não combina com você.</p>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                           {['Shorts curtos', 'Top com bojo', 'Cores claras', 'Cores neon', 'Peças muito justas', 'Estampas', 'Transparência', 'Nenhuma restrição'].map(opt => (
-                            <button key={opt} className="bg-white border-2 border-border p-4 rounded-xl text-sm font-medium hover:border-olive-light transition-all">
+                            <button 
+                              key={opt} 
+                              onClick={() => toggleOption(4, opt)}
+                              className={`border-2 p-4 rounded-xl text-sm font-medium transition-all ${isSelected(4, opt) ? 'bg-olive border-olive text-white shadow-md' : 'bg-white border-border hover:border-olive-light'}`}
+                            >
                               {opt}
                             </button>
                           ))}
@@ -445,7 +480,11 @@ export default function App() {
                           <p className="text-xs font-bold uppercase mb-3">Tamanho</p>
                           <div className="flex flex-wrap gap-2">
                             {['PP', 'P', 'M', 'G', 'GG', 'XG'].map(s => (
-                              <button key={s} className="w-12 h-12 bg-white border-2 border-border rounded-lg flex items-center justify-center font-bold text-sm hover:border-olive transition-all">
+                              <button 
+                                key={s} 
+                                onClick={() => toggleOption(5, s, false)}
+                                className={`w-12 h-12 border-2 rounded-lg flex items-center justify-center font-bold text-sm transition-all ${isSelected(5, s) ? 'bg-olive border-olive text-white shadow-md' : 'bg-white border-border hover:border-olive'}`}
+                              >
                                 {s}
                               </button>
                             ))}
@@ -455,7 +494,11 @@ export default function App() {
                           <p className="text-xs font-bold uppercase mb-3">Nível de compressão</p>
                           <div className="grid grid-cols-2 gap-3">
                             {['Leve', 'Média', 'Alta', 'Sem preferência'].map(opt => (
-                              <button key={opt} className="bg-white border-2 border-border p-3 rounded-xl text-sm font-medium hover:border-olive transition-all">
+                              <button 
+                                key={opt} 
+                                onClick={() => toggleOption(5.1, opt, false)}
+                                className={`border-2 p-3 rounded-xl text-sm font-medium transition-all ${isSelected(5.1, opt) ? 'bg-olive border-olive text-white shadow-md' : 'bg-white border-border hover:border-olive'}`}
+                              >
                                 {opt}
                               </button>
                             ))}

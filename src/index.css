@@ -39,4 +39,7 @@
   .container-narrow {
     @apply w-[90%] max-w-[840px] mx-auto;
   }
+  .bg-radial-gradient {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
 }
