@@ -141,8 +141,45 @@ export default function App() {
   const [quizFinished, setQuizFinished] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [stickyVisible, setStickyVisible] = useState(false);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [isTestimonialPaused, setIsTestimonialPaused] = useState(false);
   
   const heroRef = useRef<HTMLElement>(null);
+
+  const testimonials = [
+    { 
+      text: "A curadoria é impecável. As peças que recebi realmente combinam com o meu estilo e o tecido é de uma qualidade que eu não encontrava facilmente.", 
+      author: "camilas_fit", 
+      meta: "São Paulo · Plano Select",
+      image: "https://picsum.photos/seed/user1/400/400"
+    },
+    { 
+      text: "O unboxing é uma experiência à parte. Dá pra sentir o cuidado em cada detalhe, desde o perfume até a escolha das peças. Recomendo muito!", 
+      author: "juliana_yoga", 
+      meta: "Curitiba · Plano Premium",
+      image: "https://picsum.photos/seed/user2/400/400"
+    },
+    { 
+      text: "Finalmente uma assinatura que entende que eu não gosto de cores neon. Minha box veio exatamente com a paleta neutra que eu pedi.", 
+      author: "beatriz.m", 
+      meta: "Belo Horizonte · Plano Essential",
+      image: "https://picsum.photos/seed/user3/400/400"
+    },
+    { 
+      text: "Praticidade é tudo. Não perco mais tempo escolhendo roupa de treino, a VIVE faz isso por mim com muito bom gosto.", 
+      author: "marina_corredora", 
+      meta: "Rio de Janeiro · Plano Select",
+      image: "https://picsum.photos/seed/user4/400/400"
+    }
+  ];
+
+  useEffect(() => {
+    if (isTestimonialPaused) return;
+    const interval = setInterval(() => {
+      setTestimonialIndex(prev => (prev + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isTestimonialPaused, testimonials.length]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -588,8 +625,9 @@ export default function App() {
       </section>
 
       {/* Sensory Experience */}
-      <section className="py-24 bg-olive-deep text-sand relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-radial-gradient from-terracotta/10 to-transparent pointer-events-none" />
+      <section className="py-24 bg-[#1A1917] text-sand relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-radial-gradient from-terracotta/20 to-transparent pointer-events-none" />
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -597,16 +635,16 @@ export default function App() {
             viewport={{ once: true }}
           >
             <SectionLabel className="text-terracotta-soft">Unboxing</SectionLabel>
-            <h2 className="text-4xl text-sand mb-6">Abrir a box faz parte da experiência.</h2>
-            <p className="text-sand/80 leading-relaxed mb-4">
+            <h2 className="text-4xl text-white mb-6">Abrir a box faz parte da experiência.</h2>
+            <p className="text-sand/90 leading-relaxed mb-4">
               Cada entrega é montada com atenção ao que você vê, toca e sente. Papel de seda com fragrância sutil de bambu. Apresentação limpa, sem excesso de plástico. Tags em papel reciclado encorpado. Logo com acabamento em relevo.
             </p>
-            <p className="text-sand/80 leading-relaxed mb-8">
+            <p className="text-sand/90 leading-relaxed mb-8">
               A ideia é que o momento de abrir a box seja uma pausa — não uma pressa. Um instante de cuidado, de atenção ao detalhe e de conexão com algo que foi pensado para você.
             </p>
             <div className="flex flex-wrap gap-3">
               {['Papel de seda perfumado', 'Sem plástico', 'Acabamento em relevo', 'Papel reciclado'].map(tag => (
-                <span key={tag} className="bg-white/10 border border-white/15 px-4 py-2 rounded-full text-[0.7rem] font-medium tracking-wider uppercase text-sand/70">
+                <span key={tag} className="bg-white/20 backdrop-blur-md border border-white/30 px-4 py-2 rounded-full text-[0.7rem] font-bold tracking-wider uppercase text-white">
                   {tag}
                 </span>
               ))}
@@ -617,16 +655,17 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="aspect-[3/4] bg-gradient-to-br from-olive to-olive-light rounded-[2rem] flex items-center justify-center border border-dashed border-white/20 p-8 text-center overflow-hidden"
+            className="aspect-[3/4] bg-gradient-to-br from-olive-deep to-olive rounded-[2rem] flex items-center justify-center border border-white/10 p-8 text-center overflow-hidden relative"
           >
             <img 
               src="https://picsum.photos/seed/unboxing/600/800" 
               alt="VIVE FIT Unboxing" 
               referrerPolicy="no-referrer"
-              className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60"
+              className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50"
             />
-            <div className="relative z-10 text-sand/40 text-sm font-medium">
-              <p>[FOTO DE UNBOXING VIVE FIT]</p>
+            <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white text-sm font-medium">
+              <p className="mb-2 uppercase tracking-widest text-[0.6rem] opacity-70">A experiência</p>
+              <p className="text-lg font-heading">[FOTO DE UNBOXING VIVE FIT]</p>
             </div>
           </motion.div>
         </div>
@@ -655,7 +694,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 items-start">
+          <div className="flex md:grid md:grid-cols-3 gap-6 items-start overflow-x-auto pb-8 md:pb-0 snap-x no-scrollbar">
             {PLANS.map((plan, i) => (
               <motion.div 
                 key={plan.name}
@@ -663,7 +702,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative bg-white border-2 p-10 rounded-[2rem] transition-all hover:shadow-xl ${plan.featured ? 'border-olive shadow-lg shadow-olive/10' : 'border-border hover:border-sand-dark'}`}
+                className={`relative bg-white border-2 p-10 rounded-[2rem] transition-all hover:shadow-xl flex-shrink-0 w-[85%] md:w-full snap-center ${plan.featured ? 'border-olive shadow-lg shadow-olive/10' : 'border-border hover:border-sand-dark'}`}
               >
                 {plan.featured && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-olive text-white px-4 py-1 rounded-full text-[0.65rem] font-bold uppercase tracking-widest">
@@ -777,29 +816,92 @@ export default function App() {
       </section>
 
       {/* Social Proof */}
-      <section id="depoimentos" className="py-24 bg-sand">
+      <section id="depoimentos" className="py-24 bg-sand overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <SectionLabel>Quem usa, aprova</SectionLabel>
-            <h2 className="text-4xl">Quem recebe, sente a diferença.</h2>
+            <h2 className="text-4xl">VIVE FIT no seu feed</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { text: "A curadoria é impecável. As peças que recebi realmente combinam com o meu estilo e o tecido é de uma qualidade que eu não encontrava facilmente.", author: "Camila S.", meta: "São Paulo · Plano Select" },
-              { text: "O unboxing é uma experiência à parte. Dá pra sentir o cuidado em cada detalhe, desde o perfume até a escolha das peças. Recomendo muito!", author: "Juliana R.", meta: "Curitiba · Plano Premium" },
-              { text: "Finalmente uma assinatura que entende que eu não gosto de cores neon. Minha box veio exatamente com a paleta neutra que eu pedi.", author: "Beatriz M.", meta: "Belo Horizonte · Plano Essential" }
-            ].map((t, i) => (
-              <div key={i} className="bg-white p-10 rounded-[2rem] flex flex-col justify-between border border-border-light">
-                <blockquote className="text-sm text-text-secondary italic leading-relaxed mb-8">
-                  "{t.text}"
-                </blockquote>
-                <div>
-                  <div className="font-heading font-bold text-sm">{t.author}</div>
-                  <div className="text-xs text-text-muted mt-1">{t.meta}</div>
-                </div>
-              </div>
-            ))}
+          <div 
+            className="relative max-w-4xl mx-auto"
+            onMouseEnter={() => setIsTestimonialPaused(true)}
+            onMouseLeave={() => setIsTestimonialPaused(false)}
+            onTouchStart={() => setIsTestimonialPaused(true)}
+          >
+            <div className="flex justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={testimonialIndex}
+                  initial={{ opacity: 0, scale: 0.9, x: 20 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, x: -20 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="w-full max-w-sm bg-white rounded-3xl shadow-xl overflow-hidden border border-border-light"
+                >
+                  {/* Instagram Header */}
+                  <div className="p-4 flex items-center justify-between border-b border-border-light">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-terracotta to-olive p-[2px]">
+                        <div className="w-full h-full rounded-full bg-white p-[2px]">
+                          <img 
+                            src={testimonials[testimonialIndex].image} 
+                            alt={testimonials[testimonialIndex].author}
+                            className="w-full h-full rounded-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-text-primary">@{testimonials[testimonialIndex].author}</div>
+                        <div className="text-[0.65rem] text-text-muted">{testimonials[testimonialIndex].meta}</div>
+                      </div>
+                    </div>
+                    <button className="text-text-muted">
+                      <Plus size={20} className="rotate-45" />
+                    </button>
+                  </div>
+
+                  {/* Instagram Image/Content */}
+                  <div className="aspect-square bg-sand-warm relative group">
+                    <img 
+                      src={testimonials[testimonialIndex].image} 
+                      alt="Post content"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+
+                  {/* Instagram Actions */}
+                  <div className="p-4">
+                    <div className="flex items-center gap-4 mb-3">
+                      <Heart size={24} className="text-terracotta fill-terracotta" />
+                      <Instagram size={22} className="text-text-secondary" />
+                      <ArrowRight size={22} className="text-text-secondary ml-auto" />
+                    </div>
+                    <div className="text-sm text-text-primary font-bold mb-1">Curtido por vivefitbox e outras pessoas</div>
+                    <div className="text-sm leading-relaxed">
+                      <span className="font-bold mr-2">@{testimonials[testimonialIndex].author}</span>
+                      <span className="text-text-secondary">"{testimonials[testimonialIndex].text}"</span>
+                    </div>
+                    <div className="mt-2 text-[0.65rem] text-text-muted uppercase tracking-widest font-bold">Ver todos os 12 comentários</div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Carousel Indicators */}
+            <div className="flex justify-center gap-2 mt-8">
+              {testimonials.map((_, i) => (
+                <button 
+                  key={i}
+                  onClick={() => {
+                    setTestimonialIndex(i);
+                    setIsTestimonialPaused(true);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all ${testimonialIndex === i ? 'bg-olive w-6' : 'bg-sand-dark'}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
