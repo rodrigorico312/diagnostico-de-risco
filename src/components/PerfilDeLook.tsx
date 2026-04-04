@@ -208,7 +208,7 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
         <div className="q-hdr">
           <span className="q-logo">
-  <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '36px' }} />
+  <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '100px' }} />
 </span>
         </div>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 5%' }}>
