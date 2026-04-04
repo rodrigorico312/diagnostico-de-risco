@@ -207,7 +207,9 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
         <div className="q-hdr">
-          <span className="q-logo">VIVE FIT</span>
+          <span className="q-logo">
+  <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '36px' }} />
+</span>
         </div>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 5%' }}>
           <div className="done">
@@ -256,7 +258,9 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
       {/* Header mini */}
       <div className="q-hdr">
-        <span className="q-logo">VIVE FIT</span>
+        <span className="q-logo">
+  <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '36px' }} />
+</span>
         <a href="#/" className="q-close">voltar ao site</a>
       </div>
 

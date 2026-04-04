@@ -6,7 +6,7 @@ export default function Footer() {
           <img 
             src="/img/logo.svg" 
             alt="VIVE FIT" 
-            style={{ height: '60px', display: 'block', margin: '0 auto' }} 
+            style={{ height: '110px', display: 'block', margin: '0 auto' }} 
           />
         </div>
 
