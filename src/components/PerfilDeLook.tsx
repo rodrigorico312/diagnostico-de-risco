@@ -123,7 +123,7 @@ const PLAN_NAMES: Record<string, string> = {
 
 async function criarCheckoutInfinitePay(plano: string): Promise<string | null> {
   try {
-    const response = await fetch('http://31.97.253.234:3333/checkout', {
+    const response = await fetch('https://api.ogestordolucro.site/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ plano }),
