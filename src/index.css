@@ -335,31 +335,76 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
    PERSONALIZAÇÃO
    ══════════════════════════════════════════ */
 .perso {
-  text-align: center;
   background: var(--gelo);
 }
 
-.perso-img-full {
+.perso-inner {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1440 / 482;
+  background: var(--cobalto);
+}
+
+.perso-bg {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.perso-link {
-  display: inline-block;
-  padding: 20px 0;
+.perso-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 28px 28px;
+  text-align: left;
+  z-index: 1;
+  width: 60%;
+}
+
+.perso-repeat {
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: clamp(28px, 6vw, 42px);
   font-weight: 700;
-  color: var(--cobalto);
+  line-height: 1.1;
+  color: var(--gelo);
+  margin: 0;
+}
+
+.perso-repeat--areia { color: var(--areia); }
+.perso-repeat--turquesa { color: var(--turquesa); }
+
+.perso-title {
+  font-family: Georgia, serif;
+  font-size: clamp(36px, 7vw, 52px);
+  font-weight: 700;
+  color: var(--gelo);
+  margin: 2px 0 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.perso-desc {
+  font-family: Arial, Inter, sans-serif;
+  font-size: clamp(11px, 2.5vw, 14px);
+  color: rgba(248, 250, 252, 0.85);
+  line-height: 1.4;
+  max-width: 280px;
+  margin-bottom: 16px;
+}
+
+.perso-link {
+  font-family: Arial, Inter, sans-serif;
+  font-size: clamp(12px, 2.5vw, 14px);
+  font-weight: 600;
+  color: var(--gelo);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
 .perso-link:hover {
-  color: var(--coral);
+  color: var(--turquesa);
 }
-
 /* ══════════════════════════════════════════
    MAIS QUE UMA BOX
    ══════════════════════════════════════════ */
