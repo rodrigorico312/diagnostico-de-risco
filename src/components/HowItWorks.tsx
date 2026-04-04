@@ -69,27 +69,33 @@ export default function HowItWorks() {
           <div className="step-card__circle circle-a"></div>
           <div className="step-card__circle circle-b"></div>
           <div className="step-card__circle circle-c"></div>
-          <p className="step-card__num">1.</p>
-          <h3 className="step-card__title">Conta pra gente<br />quem você é</h3>
-          <p className="step-card__desc">O quiz de estilo leva 2 minutos. A gente conhece seu corpo, seu gosto e seu treino.</p>
+          <div className="step-card__top">
+            <p className="step-card__num">1.</p>
+            <h3 className="step-card__title">Crie seu perfil de look</h3>
+          </div>
+          <p className="step-card__desc">Conta pra gente seu tamanho, estilo, cores favoritas e tipo de treino. Leva 2 minutos.</p>
         </div>
 
         <div className="step-card step-card--2">
           <div className="step-card__circle circle-a"></div>
           <div className="step-card__circle circle-b"></div>
           <div className="step-card__circle circle-c"></div>
-          <p className="step-card__num">2.</p>
-          <h3 className="step-card__title">A gente monta<br />sua box com carinho</h3>
-          <p className="step-card__desc">3 peças escolhidas pro seu estilo, tamanho e tipo de treino. Curadoria de verdade.</p>
+          <div className="step-card__top">
+            <p className="step-card__num">2.</p>
+            <h3 className="step-card__title">Nossa IA encontra suas peças</h3>
+          </div>
+          <p className="step-card__desc">Uma inteligência treinada em moda fitness cruza seu perfil com as melhores peças pra você. Zero erro.</p>
         </div>
 
         <div className="step-card step-card--3">
           <div className="step-card__circle circle-a"></div>
           <div className="step-card__circle circle-b"></div>
           <div className="step-card__circle circle-c"></div>
-          <p className="step-card__num">3.</p>
-          <h3 className="step-card__title">Abre a porta<br />e se surpreende</h3>
-          <p className="step-card__desc">Sua box chega todo mês, direto na sua casa. Vista, treine, repita.</p>
+          <div className="step-card__top">
+            <p className="step-card__num">3.</p>
+            <h3 className="step-card__title">Escolha o plano e espere na porta</h3>
+          </div>
+          <p className="step-card__desc">Assine, pague e receba todo mês peças que combinam com você de verdade. Sem surpresa ruim.</p>
         </div>
       </div>
 

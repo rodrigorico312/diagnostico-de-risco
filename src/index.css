@@ -210,28 +210,84 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 .mob-btn.open span:nth-child(1) { transform: translateY(2.75px) rotate(45deg); }
 .mob-btn.open span:nth-child(2) { opacity: 0; }
 .mob-btn.open span:nth-child(3) { transform: translateY(-2.75px) rotate(-45deg); }
-.mob-nav {
+.mob-btn {
   display: none;
-  position: fixed;
-  top: 52px; left: 0; right: 0; bottom: 0;
-  background: var(--gelo);
-  z-index: 99;
   flex-direction: column;
-  padding: 1rem 5%;
+  gap: 4px;
+  width: 22px;
 }
-.mob-nav.open { display: flex; }
+.mob-btn span {
+  display: block;
+  height: 1.5px;
+  background: var(--azul-noite);
+  border-radius: 2px;
+  transition: all .3s;
+}
+.mob-btn.open span:nth-child(1) { transform: translateY(2.75px) rotate(45deg); }
+.mob-btn.open span:nth-child(2) { opacity: 0; }
+.mob-btn.open span:nth-child(3) { transform: translateY(-2.75px) rotate(-45deg); }
+
+.mob-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 98;
+}
+
+.mob-nav {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  width: 280px;
+  height: 100%;
+  background: var(--branco);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 28px 28px;
+  transition: right .35s var(--ease);
+  box-shadow: -8px 0 32px rgba(0,0,0,0.1);
+}
+
+.mob-nav.open {
+  right: 0;
+}
+
 .mob-nav a {
   font-family: var(--font-body);
-  font-size: .85rem;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  padding: .8rem 0;
+  color: var(--azul-noite);
+  padding: 16px 0;
   border-bottom: 1px solid var(--border-light);
+  text-decoration: none;
 }
+
+.mob-nav a:hover {
+  color: var(--cobalto);
+}
+
+.mob-nav-cta {
+  margin-top: 20px;
+  background: var(--coral) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 60px;
+  text-align: center;
+  padding: 16px !important;
+  font-size: 14px !important;
+}
+
 @media (max-width: 768px) {
   .nav-d { display: none; }
   .mob-btn { display: flex; }
+}
+
+@media (min-width: 769px) {
+  .mob-nav { display: none; }
+  .mob-overlay { display: none; }
 }
 
 /* ══════════════════════════════════════════
