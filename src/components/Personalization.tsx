@@ -8,11 +8,9 @@ export default function Personalization() {
           className="perso-bg"
         />
         <div className="perso-text">
-          <p className="perso-repeat">sua.</p>
-          <p className="perso-repeat perso-repeat--areia">sua.</p>
-          <p className="perso-repeat perso-repeat--turquesa">sua.</p>
-          <h2 className="perso-title">só sua.</h2>
-          <p className="perso-desc">3 peças fitness escolhidas pro seu estilo, todo mês na sua porta.</p>
+          <p className="perso-repeat">sua sua sua</p>
+          <h2 className="perso-title">personalizada.</h2>
+          <p className="perso-desc">pra você treinar sem mesmice, sem erro e sem genérico.</p>
           <a href="#/perfil-de-look" className="perso-link">crie seu perfil de look</a>
         </div>
       </div>
