@@ -1,16 +1,5 @@
 import { useState, useCallback } from 'react'
 
-/*
-  PERFIL DE LOOK — Quiz + fluxo duplo
-  
-  FLUXO 1 (perfil primeiro):
-    Pessoa clica "crie seu perfil de look" → Quiz → Tela final → "escolher meu plano" → volta pra #planos
-    
-  FLUXO 2 (plano primeiro):
-    Pessoa clica "quero assinar" num plano → Quiz → Tela final → "ir pro pagamento" → vai pro checkout
-    O plano já vem pré-selecionado via ?plano=anual|semestral|mensal
-*/
-
 interface Props {
   planoPreSelecionado?: string | null
 }
@@ -126,32 +115,94 @@ const STEPS: QuizStep[] = [
   },
 ]
 
-// EDITAR: links reais de checkout por plano
-const CHECKOUT_LINKS: Record<string, string> = {
-  anual: '#', // link real de pagamento anual
-  semestral: '#', // link real de pagamento semestral
-  mensal: '#', // link real de pagamento mensal
+/* ═══════════════════════════════════
+   INFINITEPAY — CONFIG
+   ═══════════════════════════════════ */
+const INFINITEPAY_HANDLE = 'ogestordolucro'
+const REDIRECT_URL = 'https://vivefit.ogestordolucro.site/#/obrigado'
+
+const PLAN_CONFIG: Record<string, { name: string; price: number; description: string }> = {
+  anual: {
+    name: 'Plano Anual',
+    price: 17990, // R$179,90 em centavos
+    description: 'VIVE FIT BOX — Plano Anual (3 peças/mês)',
+  },
+  semestral: {
+    name: 'Plano Semestral',
+    price: 18990, // R$189,90 em centavos
+    description: 'VIVE FIT BOX — Plano Semestral (3 peças/mês)',
+  },
+  mensal: {
+    name: 'Plano Mensal',
+    price: 19990, // R$199,90 em centavos
+    description: 'VIVE FIT BOX — Plano Mensal (3 peças/mês)',
+  },
 }
 
-const PLAN_NAMES: Record<string, string> = {
-  anual: 'Plano Anual',
-  semestral: 'Plano Semestral',
-  mensal: 'Plano Mensal',
+async function criarCheckoutInfinitePay(plano: string): Promise<string | null> {
+  const config = PLAN_CONFIG[plano]
+  if (!config) return null
+
+  const orderId = `vivefit-${plano}-${Date.now()}`
+
+  try {
+    const response = await fetch('https://api.infinitepay.io/invoices/public/checkout/links', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        handle: INFINITEPAY_HANDLE,
+        redirect_url: REDIRECT_URL,
+        order_nsu: orderId,
+        items: [
+          {
+            quantity: 1,
+            price: config.price,
+            description: config.description,
+          },
+        ],
+      }),
+    })
+
+    const data = await response.json()
+
+    if (data.url) {
+      return data.url
+    }
+
+    console.error('InfinitePay erro:', data)
+    return null
+  } catch (err) {
+    console.error('Erro ao criar checkout:', err)
+    return null
+  }
 }
+
+/* ═══════════════════════════════════ */
 
 export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   const [current, setCurrent] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
   const [done, setDone] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const step = STEPS[current]
   const total = STEPS.length
   const progress = ((current + 1) / total) * 100
 
-  // Fluxo: veio de um plano ou veio do "crie seu perfil"?
   const veioDoPlano = !!planoPreSelecionado
-  const nomePlano = planoPreSelecionado ? PLAN_NAMES[planoPreSelecionado] || planoPreSelecionado : ''
-  const checkoutLink = planoPreSelecionado ? CHECKOUT_LINKS[planoPreSelecionado] || '#' : '#'
+  const nomePlano = planoPreSelecionado ? PLAN_CONFIG[planoPreSelecionado]?.name || planoPreSelecionado : ''
+
+  const irParaPagamento = async (plano: string) => {
+    setLoading(true)
+    const url = await criarCheckoutInfinitePay(plano)
+    setLoading(false)
+
+    if (url) {
+      window.location.href = url
+    } else {
+      alert('Não foi possível gerar o link de pagamento. Tente novamente ou entre em contato pelo WhatsApp.')
+    }
+  }
 
   const toggle = useCallback(
     (val: string) => {
@@ -186,7 +237,6 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
 
   const next = () => {
     if (current >= total - 1) {
-      // EDITAR: aqui manda as respostas pro backend
       console.log('Perfil de Look:', JSON.stringify(answers, null, 2))
       setDone(true)
       window.scrollTo(0, 0)
@@ -201,37 +251,38 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   }
 
   /* ═══════════════════════════════════
-     TELA FINAL — muda conforme o fluxo
+     TELA FINAL
      ═══════════════════════════════════ */
   if (done) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
         <div className="q-hdr">
           <span className="q-logo">
-  <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '100px' }} />
-</span>
+            <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '44px' }} />
+          </span>
         </div>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 5%' }}>
           <div className="done">
-            {/* EDITAR: substituir emoji por imagem → <img src="/img/done-check.png" ... /> */}
             <div className="done-ico">✨</div>
             <h2>Seu perfil de look tá pronto.</h2>
             <p className="editorial">"Agora a gente cuida do resto."</p>
 
-            {veioDoPlano ? (
+            {veioDoPlano && planoPreSelecionado ? (
               <>
-                {/* FLUXO 2: veio do plano → vai pro pagamento */}
                 <p>Tudo certo com o seu perfil. Agora é só finalizar o pagamento do <strong>{nomePlano}</strong>.</p>
-                <a href={checkoutLink} className="btn btn-coral" style={btnStyle}>
-                  ir pro pagamento
-                </a>
+                <button
+                  className="btn btn-coral"
+                  style={btnStyle}
+                  onClick={() => irParaPagamento(planoPreSelecionado)}
+                  disabled={loading}
+                >
+                  {loading ? 'gerando link...' : 'ir pro pagamento'}
+                </button>
               </>
             ) : (
               <>
-                {/* FLUXO 1: veio do perfil → vai escolher plano */}
                 <p>Com base nas suas escolhas, vamos selecionar peças que combinam com o seu estilo. Agora escolha seu plano.</p>
                 <a href="#/" className="btn btn-coral" style={btnStyle} onClick={() => {
-                  // Volta pra landing e scrolla pros planos
                   setTimeout(() => {
                     const el = document.getElementById('planos')
                     if (el) el.scrollIntoView({ behavior: 'smooth' })
@@ -252,19 +303,17 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   }
 
   /* ═══════════════════════════════════
-     QUIZ — perguntas
+     QUIZ
      ═══════════════════════════════════ */
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
-      {/* Header mini */}
       <div className="q-hdr">
         <span className="q-logo">
-  <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '36px' }} />
-</span>
+          <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '44px' }} />
+        </span>
         <a href="#/" className="q-close">voltar ao site</a>
       </div>
 
-      {/* Info do plano pré-selecionado */}
       {veioDoPlano && (
         <div style={{
           textAlign: 'center',
@@ -279,7 +328,6 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
         </div>
       )}
 
-      {/* Conteúdo da pergunta */}
       <div className="q-wrap">
         <h2 className="q-title">{step.title}</h2>
         <p className="q-sub">{step.sub}</p>
@@ -328,7 +376,6 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
         )}
       </div>
 
-      {/* Footer fixo */}
       <div className="q-footer">
         <div className="q-footer-in">
           <button className={`q-back${current === 0 ? ' hidden' : ''}`} onClick={prev}>
@@ -349,15 +396,14 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   )
 }
 
-// Estilo inline pro btn da tela final (pra não depender de classe externa)
 const btnStyle: React.CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
   fontFamily: 'var(--font-heading)',
-  fontWeight: 400,
+  fontWeight: 700,
   fontSize: '.82rem',
-  letterSpacing: '.08em',
+  letterSpacing: '.06em',
   textTransform: 'uppercase',
   padding: '.9rem 2.2rem',
   borderRadius: '60px',
@@ -366,4 +412,6 @@ const btnStyle: React.CSSProperties = {
   boxShadow: '0 2px 12px rgba(255,90,95,.25)',
   textDecoration: 'none',
   transition: 'all .3s',
+  border: 'none',
+  cursor: 'pointer',
 }
