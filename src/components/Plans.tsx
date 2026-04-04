@@ -25,7 +25,7 @@ const plans = [
   {
     id: 'mensal',
     name: 'Plano Mensal',
-    sub: '3 peças por mês',
+    sub: '4 peças por mês',
     oldPrice: null,
     price: 'R$199,90',
     per: '/mês',
