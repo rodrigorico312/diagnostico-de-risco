@@ -115,69 +115,28 @@ const STEPS: QuizStep[] = [
   },
 ]
 
-/* ═══════════════════════════════════
-   INFINITEPAY — CONFIG
-   ═══════════════════════════════════ */
-const INFINITEPAY_HANDLE = 'ogestordolucro'
-const REDIRECT_URL = 'https://vivefit.ogestordolucro.site/#/obrigado'
-
-const PLAN_CONFIG: Record<string, { name: string; price: number; description: string }> = {
-  anual: {
-    name: 'Plano Anual',
-    price: 17990, // R$179,90 em centavos
-    description: 'VIVE FIT BOX — Plano Anual (3 peças/mês)',
-  },
-  semestral: {
-    name: 'Plano Semestral',
-    price: 18990, // R$189,90 em centavos
-    description: 'VIVE FIT BOX — Plano Semestral (3 peças/mês)',
-  },
-  mensal: {
-    name: 'Plano Mensal',
-    price: 19990, // R$199,90 em centavos
-    description: 'VIVE FIT BOX — Plano Mensal (3 peças/mês)',
-  },
+const PLAN_NAMES: Record<string, string> = {
+  anual: 'Plano Anual',
+  semestral: 'Plano Semestral',
+  mensal: 'Plano Mensal',
 }
 
 async function criarCheckoutInfinitePay(plano: string): Promise<string | null> {
-  const config = PLAN_CONFIG[plano]
-  if (!config) return null
-
-  const orderId = `vivefit-${plano}-${Date.now()}`
-
   try {
-    const response = await fetch('https://api.infinitepay.io/invoices/public/checkout/links', {
+    const response = await fetch('http://31.97.253.234:3333/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        handle: INFINITEPAY_HANDLE,
-        redirect_url: REDIRECT_URL,
-        order_nsu: orderId,
-        items: [
-          {
-            quantity: 1,
-            price: config.price,
-            description: config.description,
-          },
-        ],
-      }),
+      body: JSON.stringify({ plano }),
     })
-
     const data = await response.json()
-
-    if (data.url) {
-      return data.url
-    }
-
-    console.error('InfinitePay erro:', data)
+    if (data.url) return data.url
+    console.error('Erro:', data)
     return null
   } catch (err) {
     console.error('Erro ao criar checkout:', err)
     return null
   }
 }
-
-/* ═══════════════════════════════════ */
 
 export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   const [current, setCurrent] = useState(0)
@@ -190,7 +149,7 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   const progress = ((current + 1) / total) * 100
 
   const veioDoPlano = !!planoPreSelecionado
-  const nomePlano = planoPreSelecionado ? PLAN_CONFIG[planoPreSelecionado]?.name || planoPreSelecionado : ''
+  const nomePlano = planoPreSelecionado ? PLAN_NAMES[planoPreSelecionado] || planoPreSelecionado : ''
 
   const irParaPagamento = async (plano: string) => {
     setLoading(true)
@@ -250,9 +209,6 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
     if (current > 0) setCurrent((c) => c - 1)
   }
 
-  /* ═══════════════════════════════════
-     TELA FINAL
-     ═══════════════════════════════════ */
   if (done) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
@@ -302,9 +258,6 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
     )
   }
 
-  /* ═══════════════════════════════════
-     QUIZ
-     ═══════════════════════════════════ */
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
       <div className="q-hdr">
