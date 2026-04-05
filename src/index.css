@@ -61,7 +61,7 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 /* ══════════════════════════════════════════ HEADER */
 .hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(248, 250, 252, .88); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(0, 0, 0, .04); transition: transform .35s var(--ease); }
 .hdr.hide { transform: translateY(-100%); }
-.hdr-in { width: min(92%, 1060px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+.hdr-in { width: min(99%, 1060px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
 .logo { font-family: var(--font-heading); font-weight: 700; font-size: .9rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cobalto); }
 .nav-d { display: flex; gap: 1.4rem; align-items: center; }
 .nav-d a { font-family: var(--font-body); font-size: .6rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cinza-mudo); transition: color .3s; }
@@ -88,9 +88,9 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 /* ══════════════════════════════════════════ HERO */
 .hero { padding-top: 52px; position: relative; background: var(--areia); }
 .hero-img { width: 100%; display: block; }
-.hero-cta { position: absolute; top: calc(52px + 1.2rem); left: 50%; transform: translateX(-50%); z-index: 2; }
+.hero-cta { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 2; }
 .hero-cta .btn { font-size: .72rem; padding: .65rem 1.8rem; box-shadow: 0 4px 20px rgba(0, 0, 0, .1); }
-@media (max-width: 768px) { .hero-cta .btn { font-size: .68rem; padding: .6rem 1.6rem; } }
+@media (max-width: 768px) { .hero-cta { bottom: 1rem; } .hero-cta .btn { font-size: .68rem; padding: .6rem 1.6rem; } }
 
 /* ══════════════════════════════════════════ COMO FUNCIONA (antigo) */
 .how { background: var(--branco); border-radius: var(--radius-lg); margin: 0 auto; width: min(92%, 1060px); padding: clamp(1.75rem, 3.5vw, 2.5rem); }
