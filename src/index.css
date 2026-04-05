@@ -45,7 +45,7 @@ p { color: var(--cinza-chumbo); max-width: 500px; }
 
 /* ══════════════════════════════════════════ LAYOUT */
 .wrap { width: min(92%, 1060px); margin: 0 auto; }
-section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
+section { padding: clamp(.5rem, 1vw, 1rem) 0; }
 .tc { text-align: center; }
 
 /* ══════════════════════════════════════════ BOTÕES */
@@ -86,14 +86,14 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 @media (min-width: 769px) { .mob-nav { display: none; } .mob-overlay { display: none; } }
 
 /* ══════════════════════════════════════════ HERO */
-.hero { padding-top: 52px; position: relative; background: var(--areia); }
+.hero { padding-top: 52px; padding-bottom: 0 !important; position: relative; background: var(--areia); }
 .hero-img { width: 100%; display: block; }
 .hero-cta { position: absolute; bottom: 4rem; left: 50%; transform: translateX(-50%); z-index: 10; }
 .hero-cta .btn { font-size: .72rem; padding: .65rem 1.8rem; box-shadow: 0 4px 20px rgba(0, 0, 0, .1); }
 @media (max-width: 768px) { .hero-cta { bottom: 1rem; } .hero-cta .btn { font-size: .68rem; padding: .6rem 1.6rem; } }
 
 /* ══════════════════════════════════════════ COMO FUNCIONA (antigo) */
-.how { background: var(--branco); border-radius: var(--radius-lg); margin: 0 auto; width: min(92%, 1060px); padding: clamp(1.75rem, 3.5vw, 2.5rem); }
+.how { background: var(--branco); border-radius: var(--radius-lg); margin: 0rem auto 0; width: min(92%, 1060px); padding: clamp(1.75rem, 3.5vw, 2.5rem); }
 .how-hdr { margin-bottom: 1rem; }
 .how-track { display: flex; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .how-track::-webkit-scrollbar { display: none; }
@@ -269,103 +269,25 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
    QUIZ — AJUSTES MOBILE
    ══════════════════════════════════════════ */
 @media (max-width: 600px) {
-  .q-title {
-    font-size: 1.8rem;
-    line-height: 1.15;
-    margin-bottom: .5rem;
-  }
-
-  .q-sub {
-    font-size: 1rem;
-    margin-bottom: 1.4rem;
-  }
-
-  .pill {
-    padding: 1.1rem 2rem;
-    font-size: 1rem;
-    min-width: 70px;
-    text-align: center;
-  }
-
-  .card-opt {
-    padding: 1.3rem .8rem;
-    border-radius: 20px;
-  }
-
-  .card-ico {
-    font-size: 2rem;
-    margin-bottom: .5rem;
-  }
-
-  .card-label {
-    font-size: .82rem;
-  }
-
-  .swatch {
-    width: 72px;
-    height: 72px;
-  }
-
-  .swatch-name {
-    font-size: .68rem;
-    margin-top: .3rem;
-  }
-
-  .swatches {
-    gap: 1rem;
-  }
-
-  .tag {
-    padding: .8rem 1.4rem;
-    font-size: .95rem;
-  }
-
-  .multi-hint {
-    font-size: .82rem;
-    margin-bottom: 1rem;
-  }
-
-  .q-footer {
-    padding: 1rem 5%;
-  }
-
-  .q-footer-in {
-    gap: 1.2rem;
-  }
-
-  .q-next {
-    width: 56px;
-    height: 56px;
-  }
-
-  .q-next svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .q-back {
-    font-size: .9rem;
-    padding: .6rem;
-  }
-
-  .q-progress {
-    height: 6px;
-    border-radius: 6px;
-  }
-
-  .q-progress-bar {
-    border-radius: 6px;
-  }
-
-  .done h2 {
-    font-size: 1.6rem;
-  }
-
-  .done p {
-    font-size: 1rem;
-  }
-
-  .done .editorial {
-    font-size: 1.2rem;
-  }
+  .q-title { font-size: 1.8rem; line-height: 1.15; margin-bottom: .5rem; }
+  .q-sub { font-size: 1rem; margin-bottom: 1.4rem; }
+  .pill { padding: 1.1rem 2rem; font-size: 1rem; min-width: 70px; text-align: center; }
+  .card-opt { padding: 1.3rem .8rem; border-radius: 20px; }
+  .card-ico { font-size: 2rem; margin-bottom: .5rem; }
+  .card-label { font-size: .82rem; }
+  .swatch { width: 72px; height: 72px; }
+  .swatch-name { font-size: .68rem; margin-top: .3rem; }
+  .swatches { gap: 1rem; }
+  .tag { padding: .8rem 1.4rem; font-size: .95rem; }
+  .multi-hint { font-size: .82rem; margin-bottom: 1rem; }
+  .q-footer { padding: 1rem 5%; }
+  .q-footer-in { gap: 1.2rem; }
+  .q-next { width: 56px; height: 56px; }
+  .q-next svg { width: 24px; height: 24px; }
+  .q-back { font-size: .9rem; padding: .6rem; }
+  .q-progress { height: 6px; border-radius: 6px; }
+  .q-progress-bar { border-radius: 6px; }
+  .done h2 { font-size: 1.6rem; }
+  .done p { font-size: 1rem; }
+  .done .editorial { font-size: 1.2rem; }
 }
