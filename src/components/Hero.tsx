@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section className="hero" id="hero">
       <img
-        src="https://i.postimg.cc/rpBTS4MX/HERO-VIVEFIT.png"
+        src="https://i.postimg.cc/JhdP2whk/HERO-VIVEFIT.png"
         alt="VIVE FIT BOX — A vida fit começa pelo look"
         className="hero-img"
       />
