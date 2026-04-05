@@ -5,8 +5,7 @@ export default function Personalization() {
         <img
           src="https://i.postimg.cc/cJJFh109/TERCEIRA-PAGINA.png"
           alt="VIVE FIT — Seleção personalizada — crie seu perfil de look"
-          style={{ width: '100%', display: 'block' }}
-        />
+style={{ padding: 0 }}        />
       </a>
     </section>
   )

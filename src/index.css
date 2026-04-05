@@ -45,7 +45,13 @@ p { color: var(--cinza-chumbo); max-width: 500px; }
 
 /* ══════════════════════════════════════════ LAYOUT */
 .wrap { width: min(92%, 1060px); margin: 0 auto; }
-section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
+section { padding: 0; }
+.hero { padding-top: 52px; padding-bottom: 2.5rem; position: relative; background: var(--areia); }
+.como-funciona { padding: 1.5rem 4% 2rem; margin-top: -60px; border-radius: 32px 32px 0 0; }
+.perso { padding: 0; background: transparent; overflow: visible; }
+.brands { padding: 12px 0; }
+.editorial-break { padding: 1rem 0; }
+.faq-section { padding: 1rem 4%; }
 .tc { text-align: center; }
 
 /* ══════════════════════════════════════════ BOTÕES */
@@ -122,6 +128,7 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 .perso-desc { font-family: Arial, Inter, sans-serif; font-size: clamp(12px, 2.8vw, 15px); color: rgba(248, 250, 252, 0.8); line-height: 1.4; max-width: 300px; margin-bottom: 14px; }
 .perso-link { font-family: Arial, Inter, sans-serif; font-size: clamp(13px, 2.8vw, 15px); font-weight: 600; color: var(--turquesa); text-decoration: underline; text-underline-offset: 4px; }
 .perso-link:hover { color: var(--gelo); }
+.perso { padding: 0; background: transparent; overflow: visible; }
 
 /* ══════════════════════════════════════════ MAIS QUE UMA BOX */
 .more { background: var(--branco); }
