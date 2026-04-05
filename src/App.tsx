@@ -33,13 +33,12 @@ export default function App() {
       <Brands />
       <Personalization />
 
-<div className="editorial-break">
-      <p className="editorial">"Menos tempo escolhendo. Mais tempo treinando."</p>
-      </div>
+<div className="editorial-break" style={{ paddingTop: '0.5rem', paddingBottom: '2.5rem' }}>
+  <p className="editorial">"Menos tempo escolhendo. Mais tempo treinando."</p>
+</div>
 
       <Plans />
       <FAQ />
-
       <Footer />
       <SmartCTA />
     </>
