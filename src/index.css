@@ -88,7 +88,7 @@ section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 /* ══════════════════════════════════════════ HERO */
 .hero { padding-top: 52px; position: relative; background: var(--areia); }
 .hero-img { width: 100%; display: block; }
-.hero-cta { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 2; }
+.hero-cta { position: absolute; bottom: 4rem; left: 50%; transform: translateX(-50%); z-index: 10; }
 .hero-cta .btn { font-size: .72rem; padding: .65rem 1.8rem; box-shadow: 0 4px 20px rgba(0, 0, 0, .1); }
 @media (max-width: 768px) { .hero-cta { bottom: 1rem; } .hero-cta .btn { font-size: .68rem; padding: .6rem 1.6rem; } }
 

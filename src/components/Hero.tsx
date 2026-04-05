@@ -1,21 +1,25 @@
 export default function Hero() {
   return (
     <section className="hero" id="hero">
-      
-      {/* 1º PRIMEIRO VEM A IMAGEM */}
       <img
-        src="https://i.postimg.cc/FsT14fFz/PERFIL.jpg"
+        src="https://i.postimg.cc/rpBTS4MX/HERO-VIVEFIT.png"
         alt="VIVE FIT BOX — A vida fit começa pelo look"
         className="hero-img"
       />
-
-      {/* 2º DEPOIS VEM O BOTÃO */}
-      <div className="hero-cta">
-        <a href="#planos" className="btn btn-coral">
+      <div style={{
+        position: 'absolute',
+        bottom: '6rem',
+        left: '5%',
+        zIndex: 10
+      }}>
+        <a href="#/perfil-de-look" className="btn btn-white" style={{
+          padding: '.7rem 1.6rem',
+          fontSize: '.72rem',
+          boxShadow: '0 4px 20px rgba(0,0,0,.15)'
+        }}>
           quero assinar
         </a>
       </div>
-      
     </section>
   )
 }
