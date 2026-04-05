@@ -9,7 +9,7 @@ const brands = [
 
 export default function Brands() {
   return (
-    <section className="brands">
+<section className="brands" style={{ padding: '8px 0' }}>
       <div className="brands-track">
         {[...brands, ...brands].map((brand, i) => (
           <div className="brand-item" key={i}>

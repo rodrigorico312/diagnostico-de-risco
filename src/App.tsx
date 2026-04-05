@@ -33,8 +33,8 @@ export default function App() {
       <Brands />
       <Personalization />
 
-      <div className="editorial-break">
-        <p className="editorial">"Menos tempo escolhendo. Mais tempo treinando."</p>
+<div className="editorial-break">
+      <p className="editorial">"Menos tempo escolhendo. Mais tempo treinando."</p>
       </div>
 
       <Plans />
