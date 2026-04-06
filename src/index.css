@@ -206,7 +206,7 @@ section { padding: 0; }
 
 /* ══════════════════════════════════════════ FRASE EDITORIAL */
 .editorial-break { padding: clamp(2rem, 4vw, 3rem) 0; background: var(--branco); text-align: center; }
-.editorial-break .editorial { font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--azul-noite); max-width: 500px; margin: 0 auto; line-height: 1.4; font-weight: 500; }
+.editorial-break .editorial { font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--azul-noite); max-width: 500px; margin: 0 auto; line-height: 1.4; font-weight: 560; }
 
 /* ══════════════════════════════════════════ PLANOS */
 .plans { background: var(--cobalto-soft); padding: 40px 20px 64px; border-radius: 32px 32px 0 0; margin-top: -32px; position: relative; z-index: 2; }
