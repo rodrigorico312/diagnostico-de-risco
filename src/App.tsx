@@ -4,7 +4,6 @@ import Hero from './components/Hero'
 import HowItWorks from './components/HowItWorks'
 import Brands from './components/Brands'
 import Personalization from './components/Personalization'
-import MoreThanABox from './components/MoreThanABox'
 import Plans from './components/Plans'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
@@ -73,10 +72,6 @@ export default function App() {
 
       <div className="reveal-glow">
         <Personalization />
-      </div>
-
-      <div className="reveal-surprise">
-        <MoreThanABox />
       </div>
 
       <div className="reveal" style={{ paddingTop: '0.5rem', paddingBottom: '2.5rem' }}>

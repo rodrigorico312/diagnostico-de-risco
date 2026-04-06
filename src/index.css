@@ -142,48 +142,6 @@ section { padding: 0; }
 .perso-link { font-family: Arial, sans-serif; font-size: clamp(14px, 2vw, 13px); font-weight: 600; color: var(--turquesa); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .perso-link:hover { color: var(--gelo); }
 
-/* ══════════════════════════════════════════ MAIS QUE UMA BOX */
-.mtb { padding: 0; background: var(--gelo); }
-
-.mtb-anchor { padding: 2.5rem 5% 1.5rem; text-align: center; }
-.mtb-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--turquesa); margin-bottom: 8px; }
-.mtb-title { font-family: Georgia, serif; font-size: clamp(30px, 6vw, 42px); font-weight: 700; color: var(--azul-noite); margin-bottom: 10px; text-transform: lowercase; }
-.mtb-subtitle { font-family: Georgia, serif; font-style: italic; font-size: clamp(16px, 3.5vw, 20px); color: var(--cinza-chumbo); max-width: 380px; margin: 0 auto 2rem; line-height: 1.5; }
-
-.mtb-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 400px; margin: 0 auto 1.25rem; }
-.mtb-col { border-radius: 24px; padding: 22px 16px 20px; }
-.mtb-col-old { background: #E8ECF1; }
-.mtb-col-new { background: var(--cobalto); box-shadow: 0 8px 24px rgba(30, 58, 138, 0.2); }
-.mtb-col-tag { display: inline-block; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
-.mtb-col-old .mtb-col-tag { color: var(--cinza-mudo); }
-.mtb-col-new .mtb-col-tag { color: var(--turquesa); }
-.mtb-col-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.mtb-col-list li { font-family: Arial, sans-serif; font-size: clamp(13px, 2.5vw, 15px); line-height: 1.4; }
-.mtb-col-old .mtb-col-list li { color: var(--cinza-mudo); text-decoration: line-through; }
-.mtb-col-new .mtb-col-list li { color: rgba(248, 250, 252, 0.85); }
-.mtb-col-total { font-weight: 700; font-size: clamp(16px, 3vw, 20px) !important; padding-top: 10px; margin-top: 4px; border-top: 1px solid rgba(0,0,0,0.06); text-decoration: none !important; }
-.mtb-col-old .mtb-col-total { color: #8B95A5; }
-.mtb-col-new .mtb-col-total { color: #fff; border-top-color: rgba(255,255,255,0.12); }
-
-.mtb-math { font-family: Georgia, serif; font-style: italic; font-size: clamp(15px, 3vw, 18px); color: var(--cinza-chumbo); max-width: 360px; margin: 0 auto; line-height: 1.6; }
-
-.mtb-cards-wrap { padding: 1.5rem 0 2rem; }
-.mtb-cards { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 5%; scrollbar-width: none; }
-.mtb-cards::-webkit-scrollbar { display: none; }
-.mtb-card { min-width: 220px; flex: 0 0 220px; scroll-snap-align: start; background: var(--branco); border-radius: 22px; padding: 24px 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s; }
-.mtb-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-
-.mtb-card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
-.mtb-icon-cobalto { background: var(--cobalto-soft); color: var(--cobalto); }
-.mtb-icon-turquesa { background: var(--turquesa-soft); color: var(--turquesa); }
-.mtb-icon-coral { background: var(--coral-soft); color: var(--coral); }
-.mtb-icon-areia { background: #F3E8D8; color: #8B6F4E; }
-
-.mtb-card-title { font-family: Georgia, serif; font-size: 15px; font-weight: 700; color: var(--azul-noite); margin-bottom: 6px; text-transform: lowercase; }
-.mtb-card-desc { font-family: Arial, sans-serif; font-size: 13px; color: var(--cinza-mudo); line-height: 1.5; }
-
-@media (min-width: 769px) { .mtb-cards { overflow: visible; display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 5%; } .mtb-card { min-width: 0; } }
-
 /* ══════════════════════════════════════════ FRASE EDITORIAL */
 .editorial-break { padding: clamp(2rem, 4vw, 3rem) 0; background: var(--branco); text-align: center; }
 .editorial-break .editorial { font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--azul-noite); max-width: 500px; margin: 0 auto; line-height: 1.4; font-weight: 560; }
