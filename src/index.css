@@ -117,18 +117,16 @@ section { padding: 0; }
 .brand-item img:hover { filter: grayscale(0%); opacity: 1; }
 
 /* ══════════════════════════════════════════ PERSONALIZAÇÃO */
-.perso { background: var(--gelo); }
-.perso-inner { position: relative; overflow: hidden; background: var(--cobalto); aspect-ratio: 1440 / 482; }
-@media (max-width: 600px) { .perso-inner { aspect-ratio: auto; min-height: 320px; } }
-.perso-bg { position: absolute; top: 0; right: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
-.perso-inner::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, rgba(30, 58, 138, 0.9) 0%, rgba(30, 58, 138, 0.6) 40%, transparent 70%); }
-.perso-text { position: relative; z-index: 3; padding: 32px 28px; text-align: left; width: 60%; }
-.perso-repeat { font-family: Georgia, serif; font-size: clamp(26px, 5.5vw, 40px); font-weight: 700; line-height: 1.1; color: var(--gelo); margin: 0 0 2px; }
-.perso-title { font-family: Georgia, serif; font-size: clamp(32px, 7vw, 52px); font-weight: 700; color: var(--gelo); margin: 0 0 10px; text-transform: none; letter-spacing: 0; line-height: 1; }
-.perso-desc { font-family: Arial, Inter, sans-serif; font-size: clamp(12px, 2.8vw, 15px); color: rgba(248, 250, 252, 0.8); line-height: 1.4; max-width: 300px; margin-bottom: 14px; }
-.perso-link { font-family: Arial, Inter, sans-serif; font-size: clamp(13px, 2.8vw, 15px); font-weight: 600; color: var(--turquesa); text-decoration: underline; text-underline-offset: 4px; }
+.perso { padding: 0; }
+.perso-inner { position: relative; overflow: hidden; }
+.perso-bg { width: 100%; display: block; }
+.perso-inner::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, rgba(30, 58, 138, 0.85) 0%, rgba(30, 58, 138, 0.5) 35%, transparent 65%); }
+.perso-text { position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 3; padding: 16px 20px; width: 60%; }
+.perso-repeat { font-family: Georgia, serif; font-size: clamp(14px, 3vw, 22px); font-weight: 700; line-height: 1.1; color: var(--gelo); margin: 0; text-transform: uppercase; white-space: nowrap; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+.perso-title { font-family: Georgia, serif; font-size: clamp(18px, 4vw, 32px); font-weight: 700; color: var(--gelo); margin: 0 0 3px; text-transform: none; letter-spacing: 0; line-height: 1; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+.perso-desc { font-family: 'DM Sans', sans-serif; font-size: clamp(9px, 2vw, 12px); font-weight: 300; color: rgba(248, 250, 252, 0.7); line-height: 1.3; max-width: 180px; margin-bottom: 3px; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+.perso-link { font-family: Arial, sans-serif; font-size: clamp(10px, 2vw, 13px); font-weight: 600; color: var(--turquesa); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .perso-link:hover { color: var(--gelo); }
-.perso { padding: 0; background: transparent; overflow: visible; }
 
 /* ══════════════════════════════════════════ MAIS QUE UMA BOX */
 .more { background: var(--branco); }

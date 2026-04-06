@@ -9,8 +9,8 @@ const brands = [
 
 export default function Brands() {
   return (
-<section className="brands" style={{ padding: '8px 0' }}>
-      <div className="brands-track">
+<section className="brands" style={{ padding: '20px 0 20px' }}>      
+<div className="brands-track">
         {[...brands, ...brands].map((brand, i) => (
           <div className="brand-item" key={i}>
             <img src={brand.src} alt={brand.name} />
