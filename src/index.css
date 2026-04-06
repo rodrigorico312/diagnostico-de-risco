@@ -138,54 +138,34 @@ section { padding: 0; }
 .perso-text { position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 3; padding: 19px 20px; width: 60%; }
 .perso-repeat { font-family: Georgia, serif; font-size: clamp(24px, 3vw, 22px); font-weight: 700; line-height: 1.1; color: var(--gelo); margin: 0; text-transform: uppercase; white-space: nowrap; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
 .perso-title { font-family: Georgia, serif; font-size: clamp(22px, 4vw, 32px); font-weight: 700; color: var(--gelo); margin: 0 0 3px; text-transform: none; letter-spacing: 0; line-height: 1; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
-.perso-desc { font-family: 'DM Sans', sans-serif; font-size: clamp(16px, 2vw, 12px); font-weight: 300; color: rgba(248, 250, 252, 0.7); line-height: 1.3; max-width: 180px; margin-bottom: 3px; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+.perso-desc { font-family: 'DM Sans', sans-serif; font-size: clamp(16px, 2vw, 12px); font-weight: 300; color: rgba(248, 250, 252, 0.7); line-height: 1.3; max-width: 180px; margin-bottom: 8px; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
 .perso-link { font-family: Arial, sans-serif; font-size: clamp(14px, 2vw, 13px); font-weight: 600; color: var(--turquesa); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .perso-link:hover { color: var(--gelo); }
-
-/* ══════════════════════════════════════════ MAIS QUE UMA BOX */
-.more { background: var(--branco); }
-.more-hdr { margin-bottom: 1rem; }
-.more-track { display: flex; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-.more-track::-webkit-scrollbar { display: none; }
-.more-card { min-width: 230px; flex: 0 0 230px; scroll-snap-align: start; border-radius: var(--radius-lg); overflow: hidden; background: var(--gelo); border-top: 3px solid var(--cobalto-soft); transition: border-color .3s, transform .3s; }
-.more-card:hover { border-top-color: var(--cobalto); transform: translateY(-2px); }
-.more-card:nth-child(2) { border-top-color: var(--turquesa-soft); }
-.more-card:nth-child(2):hover { border-top-color: var(--turquesa); }
-.more-card:nth-child(3) { border-top-color: var(--areia); }
-.more-card:nth-child(3):hover { border-top-color: #C9AA81; }
-.more-card:nth-child(4) { border-top-color: var(--coral-soft); }
-.more-card:nth-child(4):hover { border-top-color: var(--coral); }
-.more-ph { aspect-ratio: 4/3; background: var(--cinza-fundo); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
-.more-card-txt { padding: 1rem 1.1rem; }
-.more-card-tag { display: inline-block; font-family: var(--font-body); font-size: .5rem; font-weight: 600; color: var(--cobalto); letter-spacing: .08em; text-transform: uppercase; background: var(--cobalto-soft); padding: .18rem .55rem; border-radius: 60px; margin-bottom: .35rem; }
-.more-card h3 { margin-bottom: .2rem; font-size: .82rem; }
-.more-card p { font-size: .72rem; color: var(--cinza-mudo); line-height: 1.5; max-width: 100%; }
-@media (min-width: 769px) { .more-track { overflow: visible; display: grid; grid-template-columns: repeat(4, 1fr); } .more-card { min-width: 0; } }
 
 /* ══════════════════════════════════════════ MAIS QUE UMA BOX */
 .mtb { padding: 0; background: var(--gelo); }
 
 .mtb-anchor { padding: 2.5rem 5% 1.5rem; text-align: center; }
-.mtb-label { font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--turquesa); margin-bottom: 6px; }
-.mtb-title { font-family: Georgia, serif; font-size: clamp(26px, 5vw, 36px); font-weight: 700; color: var(--azul-noite); margin-bottom: 8px; text-transform: lowercase; }
-.mtb-subtitle { font-family: Georgia, serif; font-style: italic; font-size: clamp(14px, 3vw, 17px); color: var(--cinza-chumbo); max-width: 380px; margin: 0 auto 2rem; line-height: 1.5; }
+.mtb-label { font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--turquesa); margin-bottom: 8px; }
+.mtb-title { font-family: Georgia, serif; font-size: clamp(30px, 6vw, 42px); font-weight: 700; color: var(--azul-noite); margin-bottom: 10px; text-transform: lowercase; }
+.mtb-subtitle { font-family: Georgia, serif; font-style: italic; font-size: clamp(16px, 3.5vw, 20px); color: var(--cinza-chumbo); max-width: 380px; margin: 0 auto 2rem; line-height: 1.5; }
 
 .mtb-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 400px; margin: 0 auto 1.25rem; }
 .mtb-col { border-radius: 24px; padding: 22px 16px 20px; }
 .mtb-col-old { background: #E8ECF1; }
 .mtb-col-new { background: var(--cobalto); box-shadow: 0 8px 24px rgba(30, 58, 138, 0.2); }
-.mtb-col-tag { display: inline-block; font-family: Arial, sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+.mtb-col-tag { display: inline-block; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
 .mtb-col-old .mtb-col-tag { color: var(--cinza-mudo); }
 .mtb-col-new .mtb-col-tag { color: var(--turquesa); }
 .mtb-col-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.mtb-col-list li { font-family: Arial, sans-serif; font-size: clamp(11px, 2.3vw, 13px); line-height: 1.35; }
+.mtb-col-list li { font-family: Arial, sans-serif; font-size: clamp(13px, 2.5vw, 15px); line-height: 1.4; }
 .mtb-col-old .mtb-col-list li { color: var(--cinza-mudo); text-decoration: line-through; }
 .mtb-col-new .mtb-col-list li { color: rgba(248, 250, 252, 0.85); }
-.mtb-col-total { font-weight: 700; font-size: clamp(14px, 2.8vw, 17px) !important; padding-top: 10px; margin-top: 4px; border-top: 1px solid rgba(0,0,0,0.06); text-decoration: none !important; }
+.mtb-col-total { font-weight: 700; font-size: clamp(16px, 3vw, 20px) !important; padding-top: 10px; margin-top: 4px; border-top: 1px solid rgba(0,0,0,0.06); text-decoration: none !important; }
 .mtb-col-old .mtb-col-total { color: #8B95A5; }
 .mtb-col-new .mtb-col-total { color: #fff; border-top-color: rgba(255,255,255,0.12); }
 
-.mtb-math { font-family: Georgia, serif; font-style: italic; font-size: clamp(13px, 2.8vw, 16px); color: var(--cinza-chumbo); max-width: 360px; margin: 0 auto; line-height: 1.6; }
+.mtb-math { font-family: Georgia, serif; font-style: italic; font-size: clamp(15px, 3vw, 18px); color: var(--cinza-chumbo); max-width: 360px; margin: 0 auto; line-height: 1.6; }
 
 .mtb-cards-wrap { padding: 1.5rem 0 2rem; }
 .mtb-cards { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 5%; scrollbar-width: none; }

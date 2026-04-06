@@ -46,7 +46,7 @@ export default function MoreThanABox() {
               </svg>
             </div>
             <h3 className="mtb-card-title">curadoria sob medida</h3>
-            <p className="mtb-card-desc">cada peca escolhida a partir do seu perfil de look.</p>
+            <p className="mtb-card-desc">4 pecas escolhidas a partir do seu perfil de look. todo mes.</p>
           </div>
 
           <div className="mtb-card">
