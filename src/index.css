@@ -130,7 +130,7 @@ section { padding: 0; }
     object-position: 70% center;
   }
   .perso-inner {
-    min-height: 200px;
+    min-height: 320px;
     position: relative;
   }
 }

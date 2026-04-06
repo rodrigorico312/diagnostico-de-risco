@@ -20,6 +20,38 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onChange)
   }, [])
 
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal, .reveal-glow, .reveal-surprise, .reveal-price')
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add('visible')
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    const obsS = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add('visible')
+        })
+      },
+      { threshold: 0.6 }
+    )
+
+    els.forEach((el) => {
+      if (el.classList.contains('reveal-surprise')) {
+        obsS.observe(el)
+      } else {
+        obs.observe(el)
+      }
+    })
+
+    return () => { obs.disconnect(); obsS.disconnect() }
+  }, [])
+
   if (hash.startsWith('#/perfil-de-look')) {
     const params = new URLSearchParams(hash.split('?')[1] || '')
     const planoEscolhido = params.get('plano')
@@ -30,17 +62,37 @@ export default function App() {
     <>
       <Header />
       <Hero />
-      <HowItWorks />
-      <Brands />
-      <Personalization />
-      <MoreThanABox />
 
-      <div className="editorial-break" style={{ paddingTop: '0.5rem', paddingBottom: '2.5rem' }}>
-        <p className="editorial">"Menos tempo escolhendo. Mais tempo treinando."</p>
+      <div className="reveal-glow">
+        <HowItWorks />
       </div>
 
-      <Plans />
-      <FAQ />
+      <div className="reveal">
+        <Brands />
+      </div>
+
+      <div className="reveal-glow">
+        <Personalization />
+      </div>
+
+      <div className="reveal-surprise">
+        <MoreThanABox />
+      </div>
+
+      <div className="reveal" style={{ paddingTop: '0.5rem', paddingBottom: '2.5rem' }}>
+        <div className="editorial-break">
+          <p className="editorial">"Menos tempo escolhendo. Mais tempo treinando."</p>
+        </div>
+      </div>
+
+      <div className="reveal-price">
+        <Plans />
+      </div>
+
+      <div className="reveal">
+        <FAQ />
+      </div>
+
       <Footer />
       <SmartCTA />
     </>
