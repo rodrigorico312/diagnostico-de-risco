@@ -2,7 +2,7 @@ export default function Personalization() {
   return (
     <section className="perso" id="perfil" style={{padding: 0}}>
       <img
-        src="https://i.postimg.cc/BQ9pPcys/TERCEIRA-PAGINA.png"
+        src="https://i.postimg.cc/T2DJVdKN/TERCEIRA-PAGINA.png"
         alt="VIVE FIT"
         style={{width: '100%', display: 'block'}}
       />
