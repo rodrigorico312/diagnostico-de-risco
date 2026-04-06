@@ -207,7 +207,7 @@ section { padding: 0; }
 .plan-sub { font-family: Arial, Inter, sans-serif; font-size: 13px; color: rgba(15, 23, 42, 0.45); margin-bottom: 20px; }
 .plan-pricing { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
 .plan-old { font-family: Arial, Inter, sans-serif; font-size: 14px; color: rgba(15, 23, 42, 0.28); text-decoration: line-through; }
-.plan-price { font-family: Georgia, serif; font-size: 36px; font-weight: 700; color: var(--azul-noite); line-height: 1; }
+.plan-price { font-family: Arial, sans-serif; font-size: 36px; font-weight: 700; color: var(--azul-noite); line-height: 1; }
 .plan-per { font-family: Arial, Inter, sans-serif; font-size: 14px; color: rgba(15, 23, 42, 0.4); }
 .plan-desc { font-family: Arial, Inter, sans-serif; font-size: 13px; color: rgba(15, 23, 42, 0.45); margin-bottom: 28px; }
 .plan-btn { display: block; width: 100%; text-align: center; font-family: Arial, Inter, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 16px 24px; border-radius: 60px; transition: all 0.3s ease; margin-top: auto; background: transparent; color: var(--cobalto); border: 2px solid var(--cobalto); }
