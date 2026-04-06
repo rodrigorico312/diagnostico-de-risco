@@ -49,7 +49,7 @@ export default function App() {
     })
 
     return () => { obs.disconnect(); obsS.disconnect() }
-  }, [])
+  }, [hash])
 
   if (hash.startsWith('#/perfil-de-look')) {
     const params = new URLSearchParams(hash.split('?')[1] || '')
