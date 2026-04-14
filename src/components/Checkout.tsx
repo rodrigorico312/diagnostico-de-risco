@@ -37,6 +37,14 @@ function formatCep(val: string): string {
   return nums
 }
 
+function filtrarFreteOpcoes(opcoes: FreteOpcao[]): FreteOpcao[] {
+  if (opcoes.length === 0) return []
+  const barato = opcoes[0]
+  const rapido = [...opcoes].sort((a, b) => a.prazo - b.prazo)[0]
+  if (barato.nome === rapido.nome && barato.empresa === rapido.empresa) return [barato]
+  return [barato, rapido]
+}
+
 export default function Checkout({ plano }: Props) {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
@@ -85,8 +93,9 @@ export default function Checkout({ plano }: Props) {
       })
       const data = await res.json()
       if (data.opcoes && data.opcoes.length > 0) {
-        setFreteOpcoes(data.opcoes)
-        setFreteSelecionado(data.opcoes[0])
+        const filtradas = filtrarFreteOpcoes(data.opcoes)
+        setFreteOpcoes(filtradas)
+        setFreteSelecionado(filtradas[0])
       } else {
         setErroFrete(data.error || 'Nenhuma opção de frete encontrada')
       }
@@ -102,14 +111,12 @@ export default function Checkout({ plano }: Props) {
   const irParaPagamento = async () => {
     setErroCpf('')
     setErroGeral('')
-
     const cpfLimpo = cpf.replace(/\D/g, '')
     if (cpfLimpo.length !== 11) {
       setErroCpf('CPF precisa ter 11 dígitos')
       return
     }
     if (!freteSelecionado || !token) return
-
     setPagando(true)
     try {
       const res = await fetch(API + '/checkout', {
@@ -186,7 +193,7 @@ export default function Checkout({ plano }: Props) {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
                       <span style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--azul-noite)' }}>{op.empresa} — {op.nome}</span>
-                      <span style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', marginLeft: '.4rem' }}>{op.prazo} dias úteis</span>
+                      <div style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '.1rem' }}>{op.prazo} dias úteis {i === 0 && freteOpcoes.length > 1 ? '· mais econômico' : ''}{i === 1 ? '· mais rápido' : ''}</div>
                     </div>
                     <span style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(op.preco)}/mês</span>
                   </div>
@@ -204,7 +211,7 @@ export default function Checkout({ plano }: Props) {
                 <span>{formatBRL(info.valorTotal)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.75rem', color: 'var(--azul-noite)' }}>
-                <span>Frete ({freteSelecionado.empresa}) × {info.meses} {info.meses === 1 ? 'mês' : 'meses'}</span>
+                <span>Frete ({freteSelecionado.empresa}) x {info.meses} {info.meses === 1 ? 'mês' : 'meses'}</span>
                 <span>{formatBRL(freteTotal)}</span>
               </div>
               <div style={{ borderTop: '1px solid #eee', paddingTop: '.4rem', marginTop: '.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
