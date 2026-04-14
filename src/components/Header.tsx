@@ -3,6 +3,11 @@ import { useState, useEffect } from 'react'
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
+  const [logado, setLogado] = useState(false)
+
+  useEffect(() => {
+    setLogado(!!localStorage.getItem('vivefit_token'))
+  }, [])
 
   useEffect(() => {
     let lastY = 0
@@ -18,6 +23,9 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false)
 
+  const contaLink = logado ? '#/minha-conta' : '#/login'
+  const contaTexto = logado ? 'Minha conta' : 'Entrar'
+
   return (
     <>
       <header className={`hdr${hidden ? ' hide' : ''}`}>
@@ -29,6 +37,7 @@ export default function Header() {
             <a href="#como">Como funciona</a>
             <a href="#planos">Planos</a>
             <a href="#faq">Dúvidas</a>
+            <a href={contaLink} style={{ color: 'var(--turquesa)', fontWeight: 600 }}>{contaTexto}</a>
             <a href="#/perfil-de-look" className="nav-pill">Criar meu perfil</a>
           </nav>
           <button
@@ -45,6 +54,7 @@ export default function Header() {
         <a href="#como" onClick={closeMenu}>Como funciona</a>
         <a href="#planos" onClick={closeMenu}>Planos</a>
         <a href="#faq" onClick={closeMenu}>Dúvidas</a>
+        <a href={contaLink} onClick={closeMenu} style={{ color: 'var(--turquesa)', fontWeight: 600 }}>{contaTexto}</a>
         <a href="#/perfil-de-look" className="mob-nav-cta" onClick={closeMenu}>Criar meu perfil de look</a>
       </nav>
     </>
