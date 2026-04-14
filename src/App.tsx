@@ -71,10 +71,14 @@ export default function App() {
       <AuthPage
         planoPreSelecionado={plano}
         onAuth={() => {
-          if (plano) {
+          // Após cadastro/login → quiz
+          const fezQuiz = localStorage.getItem('vivefit_quiz_done')
+          if (fezQuiz && plano) {
+            // Já fez quiz e tem plano → pagamento direto
             window.location.hash = `#/perfil-de-look?plano=${plano}`
           } else {
-            window.location.hash = '#/minha-conta'
+            // Não fez quiz → vai pro quiz
+            window.location.hash = '#/perfil-de-look'
           }
         }}
       />
@@ -86,9 +90,9 @@ export default function App() {
     const params = new URLSearchParams(hash.split('?')[1] || '')
     const planoEscolhido = params.get('plano')
 
-    // Se tem plano mas não tá logado, manda pro cadastro primeiro
-    if (planoEscolhido && !localStorage.getItem('vivefit_token')) {
-      window.location.hash = `#/cadastro?plano=${planoEscolhido}`
+    // Se não tá logado → cadastro primeiro
+    if (!localStorage.getItem('vivefit_token')) {
+      window.location.hash = '#/cadastro'
       return null
     }
 

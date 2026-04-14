@@ -55,7 +55,7 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
       <div className="q-hdr">
         <span className="q-logo">
-          <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '44px' }} />
+ <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '44px' }} />
         </span>
         <a href="#/" className="q-close">voltar ao site</a>
       </div>

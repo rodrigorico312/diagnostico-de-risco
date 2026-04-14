@@ -4,7 +4,7 @@ const plans = [
   {
     id: 'anual',
     name: 'Plano Anual',
-    sub: '3 peças por mês',
+    sub: '4 peças por mês',
     oldPrice: 'R$199,90',
     price: 'R$179,90',
     per: '/mês',
@@ -15,7 +15,7 @@ const plans = [
   {
     id: 'semestral',
     name: 'Plano Semestral',
-    sub: '3 peças por mês',
+    sub: '4 peças por mês',
     oldPrice: 'R$199,90',
     price: 'R$189,90',
     per: '/mês',
@@ -33,6 +33,44 @@ const plans = [
     pop: false,
   },
 ]
+
+async function irParaPagamento(plano: string) {
+  try {
+    const res = await fetch('https://api.ogestordolucro.site/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plano }),
+    })
+    const data = await res.json()
+    if (data.url) {
+      window.location.href = data.url
+    } else {
+      alert('Erro ao gerar pagamento. Tente novamente.')
+    }
+  } catch {
+    alert('Erro de conexão. Tente novamente.')
+  }
+}
+
+function handlePlanClick(planoId: string) {
+  const token = localStorage.getItem('vivefit_token')
+  const fezQuiz = localStorage.getItem('vivefit_quiz_done')
+
+  if (!token) {
+    // Não tem conta → cadastro → quiz → volta pros planos
+    window.location.hash = '#/cadastro'
+    return
+  }
+
+  if (!fezQuiz) {
+    // Tem conta mas não fez quiz → manda pro quiz com plano
+    window.location.hash = `#/perfil-de-look?plano=${planoId}`
+    return
+  }
+
+  // Tem conta + fez quiz → pagamento direto
+  irParaPagamento(planoId)
+}
 
 export default function Plans() {
   const ref = useRef<HTMLDivElement>(null)
@@ -65,9 +103,13 @@ export default function Plans() {
               <span className="plan-per">{plan.per}</span>
             </div>
             <p className="plan-desc">{plan.desc}</p>
-            <a href={`#/perfil-de-look?plano=${plan.id}`} className="plan-btn">
+            <button
+              className="plan-btn"
+              onClick={() => handlePlanClick(plan.id)}
+              style={{ cursor: 'pointer' }}
+            >
               quero assinar
-            </a>
+            </button>
           </div>
         ))}
       </div>

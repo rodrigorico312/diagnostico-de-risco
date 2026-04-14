@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 
+const API = 'https://api.ogestordolucro.site'
+
 interface Props {
   planoPreSelecionado?: string | null
 }
@@ -77,14 +79,14 @@ const STEPS: QuizStep[] = [
     type: 'multi',
     style: 'card',
     options: [
-      { val: 'legging', label: 'Legging', icon: '' },
-      { val: 'top', label: 'Top', icon: '' },
-      { val: 'short', label: 'Short', icon: '' },
-      { val: 'jaqueta', label: 'Corta Vento', icon: '' },
-      { val: 'body', label: 'Body', icon: '' },
-      { val: 'macaquinho', label: 'Macaquinho', icon: '' },
-      { val: 'cropped', label: 'Cropped', icon: '' },
-      { val: 'regata', label: 'Regata', icon: '' },
+      { val: 'legging', label: 'Legging' },
+      { val: 'top', label: 'Top' },
+      { val: 'short', label: 'Short' },
+      { val: 'jaqueta', label: 'Corta Vento' },
+      { val: 'body', label: 'Body' },
+      { val: 'macaquinho', label: 'Macaquinho' },
+      { val: 'cropped', label: 'Cropped' },
+      { val: 'regata', label: 'Regata' },
     ],
   },
   {
@@ -94,7 +96,7 @@ const STEPS: QuizStep[] = [
     type: 'multi',
     style: 'card',
     options: [
-      { val: 'cintura-alta', label: 'Cintura alta'},
+      { val: 'cintura-alta', label: 'Cintura alta' },
       { val: 'compressao', label: 'Com compressão' },
       { val: 'soltinho', label: 'Soltinho' },
       { val: 'justo', label: 'Justo no corpo' },
@@ -129,7 +131,7 @@ const PLAN_NAMES: Record<string, string> = {
 
 async function criarCheckoutInfinitePay(plano: string): Promise<string | null> {
   try {
-    const response = await fetch('https://api.ogestordolucro.site/checkout', {
+    const response = await fetch(API + '/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ plano }),
@@ -141,6 +143,31 @@ async function criarCheckoutInfinitePay(plano: string): Promise<string | null> {
   } catch (err) {
     console.error('Erro ao criar checkout:', err)
     return null
+  }
+}
+
+async function salvarPerfilNoServidor(answers: Record<string, string | string[]>) {
+  const token = localStorage.getItem('vivefit_token')
+  if (!token) return
+
+  try {
+    await fetch(API + '/perfil', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        tamanho: answers.tamanho || null,
+        treinos: answers.treino || [],
+        cores: answers.cores || [],
+        pecas: answers.pecas || [],
+        modelagem: answers.modelagem || [],
+        blacklist: answers.blacklist || [],
+      }),
+    })
+  } catch (err) {
+    console.error('Erro ao salvar perfil:', err)
   }
 }
 
@@ -200,9 +227,10 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
     return Array.isArray(a) && a.length > 0
   }
 
-  const next = () => {
+  const next = async () => {
     if (current >= total - 1) {
-      console.log('Perfil de Look:', JSON.stringify(answers, null, 2))
+      await salvarPerfilNoServidor(answers)
+      localStorage.setItem('vivefit_quiz_done', 'true')
       setDone(true)
       window.scrollTo(0, 0)
       return
@@ -220,7 +248,7 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
         <div className="q-hdr">
           <span className="q-logo">
-            <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '44px' }} />
+            <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '44px' }} />
           </span>
         </div>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 5%' }}>
@@ -244,19 +272,24 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
             ) : (
               <>
                 <p>Com base nas suas escolhas, vamos selecionar peças que combinam com o seu estilo. Agora escolha seu plano.</p>
-                <a href="#/" className="btn btn-coral" style={btnStyle} onClick={() => {
-                  setTimeout(() => {
-                    const el = document.getElementById('planos')
-                    if (el) el.scrollIntoView({ behavior: 'smooth' })
-                  }, 100)
-                }}>
+                
+                  <a href="#/"
+                  className="btn btn-coral"
+                  style={btnStyle}
+                  onClick={() => {
+                    setTimeout(() => {
+                      const el = document.getElementById('planos')
+                      if (el) el.scrollIntoView({ behavior: 'smooth' })
+                    }, 100)
+                  }}
+                >
                   escolher meu plano
                 </a>
               </>
             )}
 
             <p style={{ marginTop: '1rem', fontSize: '.72rem', color: 'var(--cinza-mudo)' }}>
-              Você pode alterar seu perfil a qualquer momento.
+              Você pode alterar seu perfil a qualquer momento na sua área de assinante.
             </p>
           </div>
         </div>
@@ -268,7 +301,7 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
       <div className="q-hdr">
         <span className="q-logo">
-          <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '44px' }} />
+          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '44px' }} />
         </span>
         <a href="#/" className="q-close">voltar ao site</a>
       </div>

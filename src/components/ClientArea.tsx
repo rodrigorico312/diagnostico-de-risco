@@ -136,7 +136,7 @@ export default function ClientArea() {
       {/* Header */}
       <div className="q-hdr" style={{ justifyContent: 'space-between' }}>
         <span className="q-logo">
-          <img src="/img/logo.svg" alt="VIVE FIT" style={{ height: '44px' }} />
+          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '44px' }} />
         </span>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <a href="#/" style={{ fontSize: '.72rem', color: 'var(--cinza-mudo)', textDecoration: 'none' }}>site</a>
@@ -313,7 +313,7 @@ export default function ClientArea() {
                 Precisa de ajuda? Fale pelo WhatsApp
               </p>
               
-                href="https://wa.me/5593992101980"
+                <a href="https://wa.me/5593992101980"
                 target="_blank"
                 rel="noopener"
                 style={{ fontSize: '.72rem', color: 'var(--turquesa)', textDecoration: 'none' }}
