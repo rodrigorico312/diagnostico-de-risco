@@ -9,6 +9,8 @@ import FAQ from './components/FAQ'
 import Footer from './components/Footer'
 import SmartCTA from './components/SmartCTA'
 import PerfilDeLook from './components/PerfilDeLook'
+import AuthPage from './components/AuthPage'
+import ClientArea from './components/ClientArea'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
@@ -51,12 +53,49 @@ export default function App() {
     return () => { obs.disconnect(); obsS.disconnect() }
   }, [hash])
 
+  // ── ROTA: Área da cliente ──
+  if (hash === '#/minha-conta') {
+    const token = localStorage.getItem('vivefit_token')
+    if (!token) {
+      window.location.hash = '#/login'
+      return null
+    }
+    return <ClientArea />
+  }
+
+  // ── ROTA: Login/Cadastro ──
+  if (hash.startsWith('#/login') || hash.startsWith('#/cadastro')) {
+    const params = new URLSearchParams(hash.split('?')[1] || '')
+    const plano = params.get('plano')
+    return (
+      <AuthPage
+        planoPreSelecionado={plano}
+        onAuth={() => {
+          if (plano) {
+            window.location.hash = `#/perfil-de-look?plano=${plano}`
+          } else {
+            window.location.hash = '#/minha-conta'
+          }
+        }}
+      />
+    )
+  }
+
+  // ── ROTA: Quiz Perfil de Look ──
   if (hash.startsWith('#/perfil-de-look')) {
     const params = new URLSearchParams(hash.split('?')[1] || '')
     const planoEscolhido = params.get('plano')
+
+    // Se tem plano mas não tá logado, manda pro cadastro primeiro
+    if (planoEscolhido && !localStorage.getItem('vivefit_token')) {
+      window.location.hash = `#/cadastro?plano=${planoEscolhido}`
+      return null
+    }
+
     return <PerfilDeLook planoPreSelecionado={planoEscolhido} />
   }
 
+  // ── ROTA: Home ──
   return (
     <>
       <Header />
