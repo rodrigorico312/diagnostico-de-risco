@@ -50,11 +50,19 @@ export default function Checkout({ plano }: Props) {
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
   const [cep, setCep] = useState('')
+  const [rua, setRua] = useState('')
+  const [numero, setNumero] = useState('')
+  const [complemento, setComplemento] = useState('')
+  const [bairro, setBairro] = useState('')
+  const [cidade, setCidade] = useState('')
+  const [estado, setEstado] = useState('')
+  const [buscandoCep, setBuscandoCep] = useState(false)
   const [buscandoFrete, setBuscandoFrete] = useState(false)
   const [freteOpcoes, setFreteOpcoes] = useState<FreteOpcao[]>([])
   const [freteSelecionado, setFreteSelecionado] = useState<FreteOpcao | null>(null)
   const [erroFrete, setErroFrete] = useState('')
   const [erroCpf, setErroCpf] = useState('')
+  const [erroEndereco, setErroEndereco] = useState('')
   const [pagando, setPagando] = useState(false)
   const [erroGeral, setErroGeral] = useState('')
 
@@ -63,9 +71,7 @@ export default function Checkout({ plano }: Props) {
 
   useEffect(() => {
     if (!token) return
-    fetch(API + '/auth/me', {
-      headers: { 'Authorization': 'Bearer ' + token },
-    })
+    fetch(API + '/auth/me', { headers: { 'Authorization': 'Bearer ' + token } })
       .then(r => r.json())
       .then(data => {
         if (data.nome) setNome(data.nome)
@@ -73,7 +79,53 @@ export default function Checkout({ plano }: Props) {
         if (data.cpf) setCpf(formatCpf(data.cpf))
       })
       .catch(() => {})
+
+    fetch(API + '/endereco', { headers: { 'Authorization': 'Bearer ' + token } })
+      .then(r => r.json())
+      .then(data => {
+        if (data.endereco) {
+          const e = data.endereco
+          if (e.endereco_cep) setCep(formatCep(e.endereco_cep))
+          if (e.endereco_rua) setRua(e.endereco_rua)
+          if (e.endereco_numero) setNumero(e.endereco_numero)
+          if (e.endereco_complemento) setComplemento(e.endereco_complemento)
+          if (e.endereco_bairro) setBairro(e.endereco_bairro)
+          if (e.endereco_cidade) setCidade(e.endereco_cidade)
+          if (e.endereco_estado) setEstado(e.endereco_estado)
+        }
+      })
+      .catch(() => {})
   }, [])
+
+  const buscarCep = async (cepVal: string) => {
+    const cepLimpo = cepVal.replace(/\D/g, '')
+    if (cepLimpo.length !== 8) return
+
+    setBuscandoCep(true)
+    setErroEndereco('')
+    try {
+      const res = await fetch('https://viacep.com.br/ws/' + cepLimpo + '/json/')
+      const data = await res.json()
+      if (data.erro) {
+        setErroEndereco('CEP não encontrado')
+      } else {
+        setRua(data.logradouro || '')
+        setBairro(data.bairro || '')
+        setCidade(data.localidade || '')
+        setEstado(data.uf || '')
+      }
+    } catch {
+      setErroEndereco('Erro ao buscar CEP')
+    }
+    setBuscandoCep(false)
+  }
+
+  const handleCepChange = (val: string) => {
+    const formatted = formatCep(val)
+    setCep(formatted)
+    const limpo = formatted.replace(/\D/g, '')
+    if (limpo.length === 8) buscarCep(limpo)
+  }
 
   const calcularFrete = async () => {
     const cepLimpo = cep.replace(/\D/g, '')
@@ -81,10 +133,26 @@ export default function Checkout({ plano }: Props) {
       setErroFrete('Digite um CEP válido com 8 dígitos')
       return
     }
+    if (!numero.trim()) {
+      setErroEndereco('Preencha o número do endereço')
+      return
+    }
     setErroFrete('')
+    setErroEndereco('')
     setBuscandoFrete(true)
     setFreteOpcoes([])
     setFreteSelecionado(null)
+
+    // Salva endereco no servidor
+    try {
+      await fetch(API + '/endereco', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ cep: cepLimpo, rua, numero, complemento, bairro, cidade, estado }),
+      })
+    } catch {}
+
+    // Calcula frete
     try {
       const res = await fetch(API + '/frete', {
         method: 'POST',
@@ -111,25 +179,18 @@ export default function Checkout({ plano }: Props) {
   const irParaPagamento = async () => {
     setErroCpf('')
     setErroGeral('')
+    setErroEndereco('')
     const cpfLimpo = cpf.replace(/\D/g, '')
-    if (cpfLimpo.length !== 11) {
-      setErroCpf('CPF precisa ter 11 dígitos')
-      return
-    }
+    if (cpfLimpo.length !== 11) { setErroCpf('CPF precisa ter 11 dígitos'); return }
+    if (!rua || !numero || !bairro || !cidade || !estado) { setErroEndereco('Preencha o endereço completo'); return }
     if (!freteSelecionado || !token) return
+
     setPagando(true)
     try {
       const res = await fetch(API + '/checkout', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token,
-        },
-        body: JSON.stringify({
-          plano,
-          frete: freteSelecionado.preco,
-          cpf: cpfLimpo,
-        }),
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ plano, frete: freteSelecionado.preco, cpf: cpfLimpo }),
       })
       const data = await res.json()
       if (data.url) {
@@ -142,6 +203,10 @@ export default function Checkout({ plano }: Props) {
     }
     setPagando(false)
   }
+
+  const enderecoPreenchido = rua && numero && bairro && cidade && estado
+  const cpfValido = cpf.replace(/\D/g, '').length === 11
+  const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && !pagando
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
@@ -163,9 +228,9 @@ export default function Checkout({ plano }: Props) {
         </Card>
 
         <Card>
-          <CardLabel>CPF (obrigatório para pagamento)</CardLabel>
+          <CardLabel>CPF</CardLabel>
           <input type="text" placeholder="000.000.000-00" value={cpf} onChange={e => setCpf(formatCpf(e.target.value))} style={{ ...inputStyle, width: '100%', marginTop: '.3rem' }} />
-          {erroCpf && <p style={{ fontSize: '.7rem', color: 'var(--coral)', marginTop: '.3rem' }}>{erroCpf}</p>}
+          {erroCpf && <p style={erroStyle}>{erroCpf}</p>}
         </Card>
 
         <Card>
@@ -180,12 +245,34 @@ export default function Checkout({ plano }: Props) {
         </Card>
 
         <Card>
-          <CardLabel>Calcular frete</CardLabel>
-          <div style={{ display: 'flex', gap: '.5rem', marginTop: '.4rem' }}>
-            <input type="text" placeholder="00000-000" value={cep} onChange={e => setCep(formatCep(e.target.value))} style={inputStyle} />
-            <button onClick={calcularFrete} disabled={buscandoFrete} style={calcBtnStyle}>{buscandoFrete ? '...' : 'calcular'}</button>
+          <CardLabel>Endereço de entrega</CardLabel>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', marginTop: '.3rem' }}>
+            <div style={{ display: 'flex', gap: '.5rem' }}>
+              <div style={{ flex: 1 }}>
+                <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, width: '100%' }} />
+              </div>
+              {buscandoCep && <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', alignSelf: 'center' }}>buscando...</span>}
+            </div>
+            <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, width: '100%', background: rua ? '#fff' : '#f8f8f8' }} />
+            <div style={{ display: 'flex', gap: '.5rem' }}>
+              <input type="text" placeholder="Número" value={numero} onChange={e => setNumero(e.target.value)} style={{ ...inputStyle, width: '35%' }} />
+              <input type="text" placeholder="Complemento (opcional)" value={complemento} onChange={e => setComplemento(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
+            </div>
+            <input type="text" placeholder="Bairro" value={bairro} onChange={e => setBairro(e.target.value)} style={{ ...inputStyle, width: '100%', background: bairro ? '#fff' : '#f8f8f8' }} />
+            <div style={{ display: 'flex', gap: '.5rem' }}>
+              <input type="text" placeholder="Cidade" value={cidade} onChange={e => setCidade(e.target.value)} style={{ ...inputStyle, flex: 1, background: cidade ? '#fff' : '#f8f8f8' }} />
+              <input type="text" placeholder="UF" value={estado} onChange={e => setEstado(e.target.value)} maxLength={2} style={{ ...inputStyle, width: '60px', textAlign: 'center', background: estado ? '#fff' : '#f8f8f8' }} />
+            </div>
           </div>
-          {erroFrete && <p style={{ fontSize: '.72rem', color: 'var(--coral)', marginTop: '.4rem' }}>{erroFrete}</p>}
+          {erroEndereco && <p style={erroStyle}>{erroEndereco}</p>}
+        </Card>
+
+        <Card>
+          <CardLabel>Frete</CardLabel>
+          <button onClick={calcularFrete} disabled={buscandoFrete || cep.replace(/\D/g, '').length !== 8} style={{ ...calcBtnStyle, width: '100%', marginTop: '.3rem', opacity: (buscandoFrete || cep.replace(/\D/g, '').length !== 8) ? 0.5 : 1 }}>
+            {buscandoFrete ? 'calculando...' : 'calcular frete'}
+          </button>
+          {erroFrete && <p style={erroStyle}>{erroFrete}</p>}
           {freteOpcoes.length > 0 && (
             <div style={{ marginTop: '.8rem', display: 'flex', flexDirection: 'column', gap: '.4rem' }}>
               {freteOpcoes.map((op, i) => (
@@ -230,11 +317,11 @@ export default function Checkout({ plano }: Props) {
 
         {erroGeral && <p style={{ textAlign: 'center', fontSize: '.75rem', color: 'var(--coral)', marginBottom: '.5rem' }}>{erroGeral}</p>}
 
-        <button onClick={irParaPagamento} disabled={!freteSelecionado || pagando || cpf.replace(/\D/g, '').length !== 11} style={{ ...pagarBtnStyle, opacity: (!freteSelecionado || pagando || cpf.replace(/\D/g, '').length !== 11) ? 0.5 : 1, cursor: (!freteSelecionado || pagando) ? 'not-allowed' : 'pointer' }}>
+        <button onClick={irParaPagamento} disabled={!podePagar} style={{ ...pagarBtnStyle, opacity: podePagar ? 1 : 0.5, cursor: podePagar ? 'pointer' : 'not-allowed' }}>
           {pagando ? 'gerando pagamento...' : 'finalizar pagamento'}
         </button>
 
-        {!freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Calcule o frete pra liberar o pagamento</p>}
+        {!freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Preencha o endereço e calcule o frete pra liberar o pagamento</p>}
 
         <p style={{ textAlign: 'center', fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1.5rem' }}>Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.</p>
       </div>
@@ -252,8 +339,10 @@ function CardLabel({ children }: { children: React.ReactNode }) {
 
 const dataText: React.CSSProperties = { fontSize: '.82rem', color: 'var(--azul-noite)', margin: '.1rem 0', fontFamily: 'var(--font-body)' }
 
-const inputStyle: React.CSSProperties = { flex: 1, padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'var(--font-body)', background: '#fff', outline: 'none', boxSizing: 'border-box' as const }
+const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'var(--font-body)', background: '#fff', outline: 'none', boxSizing: 'border-box' as const }
 
-const calcBtnStyle: React.CSSProperties = { padding: '.65rem 1rem', borderRadius: '10px', border: 'none', background: 'var(--cobalto)', color: '#fff', fontSize: '.72rem', fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: '.04em', textTransform: 'uppercase' as const, cursor: 'pointer' }
+const calcBtnStyle: React.CSSProperties = { padding: '.7rem 1rem', borderRadius: '10px', border: 'none', background: 'var(--cobalto)', color: '#fff', fontSize: '.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: '.04em', textTransform: 'uppercase' as const, cursor: 'pointer' }
 
 const pagarBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '.82rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '1rem 2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', marginTop: '1rem', transition: 'all .3s' }
+
+const erroStyle: React.CSSProperties = { fontSize: '.7rem', color: 'var(--coral)', marginTop: '.3rem' }
