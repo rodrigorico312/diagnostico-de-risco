@@ -13,10 +13,12 @@ interface FreteOpcao {
   prazo: number
 }
 
-const PLAN_INFO: Record<string, { nome: string; valorMes: string; valorTotal: number; parcelas: string; meses: number }> = {
-  mensal: { nome: 'Plano Mensal', valorMes: 'R$199,90/mês', valorTotal: 199.90, parcelas: 'recorrência mensal no cartão', meses: 1 },
-  semestral: { nome: 'Plano Semestral', valorMes: 'R$189,90/mês', valorTotal: 1139.40, parcelas: '6x no cartão', meses: 6 },
-  anual: { nome: 'Plano Anual', valorMes: 'R$179,90/mês', valorTotal: 2158.80, parcelas: '12x no cartão', meses: 12 },
+type MetodoPagamento = 'PIX' | 'BOLETO' | 'CREDIT_CARD' | null
+
+const PLAN_INFO: Record<string, { nome: string; valorTotal: number; parcelas: string; meses: number; maxParcelas: number }> = {
+  mensal: { nome: 'Plano Mensal', valorTotal: 199.90, parcelas: 'recorrência mensal', meses: 1, maxParcelas: 1 },
+  semestral: { nome: 'Plano Semestral', valorTotal: 1139.40, parcelas: '6 meses', meses: 6, maxParcelas: 6 },
+  anual: { nome: 'Plano Anual', valorTotal: 2158.80, parcelas: '12 meses', meses: 12, maxParcelas: 12 },
 }
 
 function formatBRL(val: number): string {
@@ -60,6 +62,8 @@ export default function Checkout({ plano }: Props) {
   const [buscandoFrete, setBuscandoFrete] = useState(false)
   const [freteOpcoes, setFreteOpcoes] = useState<FreteOpcao[]>([])
   const [freteSelecionado, setFreteSelecionado] = useState<FreteOpcao | null>(null)
+  const [metodo, setMetodo] = useState<MetodoPagamento>(null)
+  const [parcelas, setParcelas] = useState(1)
   const [erroFrete, setErroFrete] = useState('')
   const [erroCpf, setErroCpf] = useState('')
   const [erroEndereco, setErroEndereco] = useState('')
@@ -68,6 +72,7 @@ export default function Checkout({ plano }: Props) {
 
   const info = PLAN_INFO[plano] || PLAN_INFO.mensal
   const token = localStorage.getItem('vivefit_token')
+  const isMensal = plano === 'mensal'
 
   useEffect(() => {
     if (!token) return
@@ -79,7 +84,6 @@ export default function Checkout({ plano }: Props) {
         if (data.cpf) setCpf(formatCpf(data.cpf))
       })
       .catch(() => {})
-
     fetch(API + '/endereco', { headers: { 'Authorization': 'Bearer ' + token } })
       .then(r => r.json())
       .then(data => {
@@ -100,50 +104,36 @@ export default function Checkout({ plano }: Props) {
   const buscarCep = async (cepVal: string) => {
     const cepLimpo = cepVal.replace(/\D/g, '')
     if (cepLimpo.length !== 8) return
-
     setBuscandoCep(true)
     setErroEndereco('')
     try {
       const res = await fetch('https://viacep.com.br/ws/' + cepLimpo + '/json/')
       const data = await res.json()
-      if (data.erro) {
-        setErroEndereco('CEP não encontrado')
-      } else {
+      if (data.erro) { setErroEndereco('CEP não encontrado') } else {
         setRua(data.logradouro || '')
         setBairro(data.bairro || '')
         setCidade(data.localidade || '')
         setEstado(data.uf || '')
       }
-    } catch {
-      setErroEndereco('Erro ao buscar CEP')
-    }
+    } catch { setErroEndereco('Erro ao buscar CEP') }
     setBuscandoCep(false)
   }
 
   const handleCepChange = (val: string) => {
     const formatted = formatCep(val)
     setCep(formatted)
-    const limpo = formatted.replace(/\D/g, '')
-    if (limpo.length === 8) buscarCep(limpo)
+    if (formatted.replace(/\D/g, '').length === 8) buscarCep(formatted)
   }
 
   const calcularFrete = async () => {
     const cepLimpo = cep.replace(/\D/g, '')
-    if (cepLimpo.length !== 8) {
-      setErroFrete('Digite um CEP válido com 8 dígitos')
-      return
-    }
-    if (!numero.trim()) {
-      setErroEndereco('Preencha o número do endereço')
-      return
-    }
+    if (cepLimpo.length !== 8) { setErroFrete('Digite um CEP válido'); return }
+    if (!numero.trim()) { setErroEndereco('Preencha o número'); return }
     setErroFrete('')
     setErroEndereco('')
     setBuscandoFrete(true)
     setFreteOpcoes([])
     setFreteSelecionado(null)
-
-    // Salva endereco no servidor
     try {
       await fetch(API + '/endereco', {
         method: 'PUT',
@@ -151,8 +141,6 @@ export default function Checkout({ plano }: Props) {
         body: JSON.stringify({ cep: cepLimpo, rua, numero, complemento, bairro, cidade, estado }),
       })
     } catch {}
-
-    // Calcula frete
     try {
       const res = await fetch(API + '/frete', {
         method: 'POST',
@@ -164,17 +152,14 @@ export default function Checkout({ plano }: Props) {
         const filtradas = filtrarFreteOpcoes(data.opcoes)
         setFreteOpcoes(filtradas)
         setFreteSelecionado(filtradas[0])
-      } else {
-        setErroFrete(data.error || 'Nenhuma opção de frete encontrada')
-      }
-    } catch {
-      setErroFrete('Erro ao calcular frete. Tente novamente.')
-    }
+      } else { setErroFrete(data.error || 'Nenhuma opção de frete encontrada') }
+    } catch { setErroFrete('Erro ao calcular frete. Tente novamente.') }
     setBuscandoFrete(false)
   }
 
   const freteTotal = freteSelecionado ? freteSelecionado.preco * info.meses : 0
   const total = freteSelecionado ? info.valorTotal + freteTotal : null
+  const valorParcela = total && parcelas > 1 ? total / parcelas : null
 
   const irParaPagamento = async () => {
     setErroCpf('')
@@ -183,30 +168,27 @@ export default function Checkout({ plano }: Props) {
     const cpfLimpo = cpf.replace(/\D/g, '')
     if (cpfLimpo.length !== 11) { setErroCpf('CPF precisa ter 11 dígitos'); return }
     if (!rua || !numero || !bairro || !cidade || !estado) { setErroEndereco('Preencha o endereço completo'); return }
-    if (!freteSelecionado || !token) return
-
+    if (!freteSelecionado || !token || !metodo) return
     setPagando(true)
     try {
       const res = await fetch(API + '/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify({ plano, frete: freteSelecionado.preco, cpf: cpfLimpo }),
+        body: JSON.stringify({ plano, frete: freteSelecionado.preco, cpf: cpfLimpo, metodoPagamento: metodo, parcelas: metodo === 'CREDIT_CARD' ? parcelas : 1 }),
       })
       const data = await res.json()
-      if (data.url) {
-        window.location.href = data.url
-      } else {
-        setErroGeral(data.error || 'Erro ao gerar pagamento. Tente novamente.')
-      }
-    } catch {
-      setErroGeral('Erro de conexão. Tente novamente.')
-    }
+      if (data.url) { window.location.href = data.url } else { setErroGeral(data.error || 'Erro ao gerar pagamento. Tente novamente.') }
+    } catch { setErroGeral('Erro de conexão. Tente novamente.') }
     setPagando(false)
   }
 
   const enderecoPreenchido = rua && numero && bairro && cidade && estado
   const cpfValido = cpf.replace(/\D/g, '').length === 11
-  const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && !pagando
+  const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && metodo && !pagando
+
+  // Gera array de parcelas conforme o plano
+  const opcoesParcelamento: number[] = []
+  for (let i = 1; i <= info.maxParcelas; i++) opcoesParcelamento.push(i)
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
@@ -247,21 +229,19 @@ export default function Checkout({ plano }: Props) {
         <Card>
           <CardLabel>Endereço de entrega</CardLabel>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', marginTop: '.3rem' }}>
-            <div style={{ display: 'flex', gap: '.5rem' }}>
-              <div style={{ flex: 1 }}>
-                <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, width: '100%' }} />
-              </div>
-              {buscandoCep && <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', alignSelf: 'center' }}>buscando...</span>}
+            <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+              <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
+              {buscandoCep && <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)' }}>buscando...</span>}
             </div>
-            <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, width: '100%', background: rua ? '#fff' : '#f8f8f8' }} />
+            <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, background: rua ? '#fff' : '#f8f8f8' }} />
             <div style={{ display: 'flex', gap: '.5rem' }}>
               <input type="text" placeholder="Número" value={numero} onChange={e => setNumero(e.target.value)} style={{ ...inputStyle, width: '35%' }} />
               <input type="text" placeholder="Complemento (opcional)" value={complemento} onChange={e => setComplemento(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
             </div>
-            <input type="text" placeholder="Bairro" value={bairro} onChange={e => setBairro(e.target.value)} style={{ ...inputStyle, width: '100%', background: bairro ? '#fff' : '#f8f8f8' }} />
+            <input type="text" placeholder="Bairro" value={bairro} onChange={e => setBairro(e.target.value)} style={{ ...inputStyle, background: bairro ? '#fff' : '#f8f8f8' }} />
             <div style={{ display: 'flex', gap: '.5rem' }}>
               <input type="text" placeholder="Cidade" value={cidade} onChange={e => setCidade(e.target.value)} style={{ ...inputStyle, flex: 1, background: cidade ? '#fff' : '#f8f8f8' }} />
-              <input type="text" placeholder="UF" value={estado} onChange={e => setEstado(e.target.value)} maxLength={2} style={{ ...inputStyle, width: '60px', textAlign: 'center', background: estado ? '#fff' : '#f8f8f8' }} />
+              <input type="text" placeholder="UF" value={estado} onChange={e => setEstado(e.target.value)} maxLength={2} style={{ ...inputStyle, width: '60px', textAlign: 'center' as const, background: estado ? '#fff' : '#f8f8f8' }} />
             </div>
           </div>
           {erroEndereco && <p style={erroStyle}>{erroEndereco}</p>}
@@ -292,6 +272,40 @@ export default function Checkout({ plano }: Props) {
 
         {freteSelecionado && total && (
           <Card>
+            <CardLabel>Forma de pagamento</CardLabel>
+            <div style={{ display: 'flex', gap: '.4rem', marginTop: '.4rem' }}>
+              {([['PIX', 'Pix', 'à vista'], ['BOLETO', 'Boleto', 'à vista'], ['CREDIT_CARD', 'Cartão', isMensal ? 'recorrente' : 'até ' + info.maxParcelas + 'x']] as const).map(([val, label, sub]) => (
+                <div key={val} onClick={() => { setMetodo(val as MetodoPagamento); if (val !== 'CREDIT_CARD') setParcelas(1); else setParcelas(isMensal ? 1 : info.maxParcelas) }} style={{ flex: 1, padding: '.6rem .4rem', borderRadius: '10px', border: metodo === val ? '2px solid var(--coral)' : '1px solid #ddd', background: metodo === val ? 'rgba(255,90,95,.05)' : '#fff', cursor: 'pointer', textAlign: 'center' as const, transition: 'all .2s' }}>
+                  <span style={{ fontSize: '.75rem', fontWeight: 600, color: metodo === val ? 'var(--coral)' : 'var(--azul-noite)' }}>{label}</span>
+                  <div style={{ fontSize: '.6rem', color: 'var(--cinza-mudo)', marginTop: '.15rem' }}>{sub}</div>
+                </div>
+              ))}
+            </div>
+
+            {metodo === 'CREDIT_CARD' && isMensal && (
+              <div style={{ marginTop: '.6rem', padding: '.5rem .7rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)' }}>
+                Cobrança automática de {total ? formatBRL(total) : ''}/mês no cartão. Cancele quando quiser.
+              </div>
+            )}
+
+            {metodo === 'CREDIT_CARD' && !isMensal && info.maxParcelas > 1 && (
+              <div style={{ marginTop: '.8rem' }}>
+                <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', marginBottom: '.4rem' }}>Parcelas sem juros:</p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '.3rem' }}>
+                  {opcoesParcelamento.map(n => (
+                    <div key={n} onClick={() => setParcelas(n)} style={{ padding: '.45rem .3rem', borderRadius: '8px', border: parcelas === n ? '2px solid var(--coral)' : '1px solid #ddd', background: parcelas === n ? 'rgba(255,90,95,.05)' : '#fff', cursor: 'pointer', textAlign: 'center' as const, transition: 'all .2s' }}>
+                      <span style={{ fontSize: '.72rem', fontWeight: 600, color: parcelas === n ? 'var(--coral)' : 'var(--azul-noite)' }}>{n}x</span>
+                      <div style={{ fontSize: '.58rem', color: 'var(--cinza-mudo)' }}>{formatBRL(total / n)}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </Card>
+        )}
+
+        {freteSelecionado && total && metodo && (
+          <Card>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.75rem', color: 'var(--azul-noite)' }}>
                 <span>{info.nome}</span>
@@ -305,12 +319,14 @@ export default function Checkout({ plano }: Props) {
                 <span style={{ fontFamily: 'var(--font-heading)', fontSize: '.8rem', fontWeight: 700, color: 'var(--azul-noite)' }}>Total</span>
                 <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(total)}</span>
               </div>
-              {plano !== 'mensal' && (
-                <p style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', textAlign: 'right', margin: '.1rem 0 0' }}>{info.parcelas}</p>
+              {metodo === 'CREDIT_CARD' && !isMensal && parcelas > 1 && valorParcela && (
+                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>{parcelas}x de {formatBRL(valorParcela)} sem juros</p>
               )}
-              {plano === 'mensal' && (
-                <p style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', textAlign: 'right', margin: '.1rem 0 0' }}>{formatBRL(199.90 + freteSelecionado.preco)}/mês no cartão</p>
+              {metodo === 'CREDIT_CARD' && isMensal && (
+                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>{formatBRL(total)}/mês no cartão (recorrente)</p>
               )}
+              {metodo === 'PIX' && <p style={{ fontSize: '.68rem', color: '#16a34a', textAlign: 'right' as const, margin: '.1rem 0 0' }}>Pagamento instantâneo via Pix</p>}
+              {metodo === 'BOLETO' && <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>Boleto à vista — vence em 3 dias úteis</p>}
             </div>
           </Card>
         )}
@@ -321,7 +337,8 @@ export default function Checkout({ plano }: Props) {
           {pagando ? 'gerando pagamento...' : 'finalizar pagamento'}
         </button>
 
-        {!freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Preencha o endereço e calcule o frete pra liberar o pagamento</p>}
+        {!metodo && freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Escolha a forma de pagamento</p>}
+        {!freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Preencha o endereço e calcule o frete</p>}
 
         <p style={{ textAlign: 'center', fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1.5rem' }}>Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.</p>
       </div>
@@ -338,11 +355,7 @@ function CardLabel({ children }: { children: React.ReactNode }) {
 }
 
 const dataText: React.CSSProperties = { fontSize: '.82rem', color: 'var(--azul-noite)', margin: '.1rem 0', fontFamily: 'var(--font-body)' }
-
-const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'var(--font-body)', background: '#fff', outline: 'none', boxSizing: 'border-box' as const }
-
+const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'var(--font-body)', background: '#fff', outline: 'none', boxSizing: 'border-box' as const, width: '100%' }
 const calcBtnStyle: React.CSSProperties = { padding: '.7rem 1rem', borderRadius: '10px', border: 'none', background: 'var(--cobalto)', color: '#fff', fontSize: '.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: '.04em', textTransform: 'uppercase' as const, cursor: 'pointer' }
-
 const pagarBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '.82rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '1rem 2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', marginTop: '1rem', transition: 'all .3s' }
-
 const erroStyle: React.CSSProperties = { fontSize: '.7rem', color: 'var(--coral)', marginTop: '.3rem' }
