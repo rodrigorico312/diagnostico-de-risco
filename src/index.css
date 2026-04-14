@@ -377,3 +377,31 @@ section { padding: 0; }
     font-size: 1.2rem;
   }
 }
+/* ══════════════════════════════════════════ MARCAS MARQUEE */
+.brands-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+.brands-marquee__inner {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  animation: marquee 15s linear infinite;
+  width: max-content;
+}
+.brands-marquee__inner .brand-item img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+.brands-marquee__inner .brand-item img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

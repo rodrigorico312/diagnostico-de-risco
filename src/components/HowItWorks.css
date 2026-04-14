@@ -1,182 +1,193 @@
-/* ========== SEÇÃO COMO FUNCIONA ========== */
+/* ══════════════════════════════════════════
+   COMO FUNCIONA — REDESIGN COLORIDO
+   Estilo: cards coloridos com flores SVG
+   ══════════════════════════════════════════ */
+
 .como-funciona {
-  background: var(--gelo, #F8FAFC);
-  border-radius: 32px 32px 0 0;
+  padding: 1.5rem 4% 2rem;
   margin-top: -60px;
-  position: relative;
-  z-index: 2;
-  padding: 48px 0 64px;
-  overflow: hidden;
+  border-radius: 32px 32px 0 0;
+  background: var(--gelo);
 }
 
 .como-funciona__titulo {
   font-family: Georgia, serif;
-  font-size: clamp(22px, 3.5vw, 32px);
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
   font-weight: 700;
-  color: var(--azul-noite, #0F172A);
-  line-height: 1.2;
-  padding-left: 40px;
-  margin-bottom: 32px;
+  text-align: center;
+  color: var(--azul-noite);
+  margin-bottom: 1.2rem;
+  text-transform: lowercase;
+  letter-spacing: .02em;
 }
 
-@media (max-width: 600px) {
-  .como-funciona__titulo {
-    padding-left: 20px;
-    margin-bottom: 24px;
-  }
-  .como-funciona {
-    padding: 36px 0 48px;
-  }
-}
-
-/* ========== CARROSSEL ========== */
+/* ── CAROUSEL ── */
 .carousel {
   display: flex;
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 40px 28px;
-  cursor: grab;
-  -ms-overflow-style: none;
   scrollbar-width: none;
+  padding: 0 4px 8px;
+  cursor: grab;
 }
+.carousel::-webkit-scrollbar { display: none; }
+.carousel:active { cursor: grabbing; }
 
-.carousel:active {
-  cursor: grabbing;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  .carousel {
-    padding: 4px 20px 28px;
-  }
-}
-
-/* ========== CARDS ========== */
+/* ── CARDS ── */
 .step-card {
+  min-width: 280px;
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  border-radius: 24px;
   position: relative;
-  border-radius: 20px;
-  padding: 36px 28px;
-  min-height: 280px;
   overflow: hidden;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex: 0 0 80%;
-  max-width: 340px;
-  scroll-snap-align: center;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
-@media (min-width: 600px) {
-  .step-card { flex: 0 0 44%; }
-}
-
-@media (min-width: 1024px) {
-  .step-card { flex: 0 0 31%; }
-}
-
-.step-card__circle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-/* --- Card 1: Cobalto --- */
-.step-card--1 { background: var(--cobalto, #1E3A8A); }
-.step-card--1 .step-card__num { color: var(--turquesa, #06B6D4); }
-.step-card--1 .step-card__title { color: var(--gelo, #F8FAFC); }
-.step-card--1 .step-card__desc { color: rgba(248, 250, 252, 0.7); }
-
-.step-card--1 .circle-a { width: 120px; height: 120px; top: -30px; right: -30px; border: 2px solid rgba(6, 182, 212, 0.25); }
-.step-card--1 .circle-b { width: 75px; height: 75px; top: -8px; right: -8px; background: rgba(6, 182, 212, 0.1); }
-.step-card--1 .circle-c { width: 50px; height: 50px; bottom: -16px; left: -16px; border: 1.5px solid rgba(232, 213, 181, 0.15); }
-
-/* --- Card 2: Areia --- */
-.step-card--2 { background: var(--areia, #E8D5B5); }
-.step-card--2 .step-card__num { color: var(--cobalto, #1E3A8A); }
-.step-card--2 .step-card__title { color: var(--azul-noite, #0F172A); }
-.step-card--2 .step-card__desc { color: rgba(15, 23, 42, 0.6); }
-
-.step-card--2 .circle-a { width: 100px; height: 100px; top: -22px; right: -22px; border: 2px solid rgba(30, 58, 138, 0.12); }
-.step-card--2 .circle-b { width: 45px; height: 45px; bottom: -10px; right: 30px; background: rgba(30, 58, 138, 0.06); }
-.step-card--2 .circle-c { width: 32px; height: 32px; top: 20px; right: 20px; background: rgba(255, 90, 95, 0.08); }
-
-/* --- Card 3: Gelo --- */
-.step-card--3 { background: var(--gelo, #F8FAFC); border: 1.5px solid rgba(30, 58, 138, 0.1); }
-.step-card--3 .step-card__num { color: var(--coral, #FF5A5F); }
-.step-card--3 .step-card__title { color: var(--azul-noite, #0F172A); }
-.step-card--3 .step-card__desc { color: rgba(15, 23, 42, 0.55); }
-
-.step-card--3 .circle-a { width: 110px; height: 110px; top: -26px; right: -26px; border: 2px solid rgba(255, 90, 95, 0.15); }
-.step-card--3 .circle-b { width: 65px; height: 65px; bottom: -12px; left: -12px; background: rgba(6, 182, 212, 0.06); }
-.step-card--3 .circle-c { width: 38px; height: 38px; bottom: 20px; right: 16px; border: 1.5px solid rgba(232, 213, 181, 0.3); }
-
-/* --- Tipografia (conforme manual: Georgia títulos, Arial corpo) --- */
-.step-card__top {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 12px;
+.step-card__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  padding: 2.5rem 2rem;
+  text-align: center;
 }
 
+/* Card 1 — Coral/Laranja */
+.step-card--1 {
+  background: #E8521F;
+}
+.step-card--1 .step-card__num,
+.step-card--1 .step-card__title {
+  color: #F5D5B0;
+}
+.step-card--1 .step-card__desc {
+  color: rgba(245, 213, 176, 0.85);
+}
+
+/* Card 2 — Turquesa */
+.step-card--2 {
+  background: #0A9AA8;
+}
+.step-card--2 .step-card__num,
+.step-card--2 .step-card__title {
+  color: #FFFFFF;
+}
+.step-card--2 .step-card__desc {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Card 3 — Areia/Bege */
+.step-card--3 {
+  background: #EDDCC3;
+}
+.step-card--3 .step-card__num,
+.step-card--3 .step-card__title {
+  color: #E8521F;
+}
+.step-card--3 .step-card__desc {
+  color: rgba(232, 82, 31, 0.7);
+}
+
+/* ── TIPOGRAFIA DOS CARDS ── */
 .step-card__num {
   font-family: Georgia, serif;
-  font-size: 42px;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
   font-weight: 700;
   line-height: 1;
-  flex-shrink: 0;
+  margin-bottom: 0.8rem;
 }
 
 .step-card__title {
   font-family: Georgia, serif;
-  font-size: clamp(17px, 2.5vw, 20px);
+  font-size: clamp(1.3rem, 3.5vw, 1.7rem);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
 }
 
 .step-card__desc {
-  font-family: Arial, Inter, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
+  font-family: Arial, 'DM Sans', sans-serif;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 260px;
+  margin: 0 auto;
 }
 
-/* ========== DOTS ========== */
+/* ── DOTS ── */
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 4px;
+  gap: 8px;
+  margin-top: 1rem;
 }
 
 .carousel-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(30, 58, 138, 0.15);
+  background: var(--border);
   border: none;
-  padding: 0;
   cursor: pointer;
   transition: all 0.3s ease;
+  padding: 0;
 }
 
 .carousel-dot.active {
-  background: var(--cobalto, #1E3A8A);
-  width: 28px;
+  background: var(--coral);
+  width: 24px;
   border-radius: 4px;
 }
 
-@media (min-width: 1024px) {
-  .carousel-dots { display: none; }
+/* ── DESKTOP: GRID ── */
+@media (min-width: 769px) {
+  .carousel {
+    overflow: visible;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    cursor: default;
+  }
+
+  .step-card {
+    min-width: 0;
+    flex: 1;
+    min-height: 420px;
+  }
+
+  .carousel-dots {
+    display: none;
+  }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .step-card {
+    min-width: 85vw;
+    flex: 0 0 85vw;
+    min-height: 360px;
+  }
+
+  .step-card__content {
+    padding: 2rem 1.5rem;
+  }
+
+  .step-card__num {
+    font-size: 2.5rem;
+  }
+
+  .step-card__title {
+    font-size: 1.4rem;
+  }
+
+  .step-card__desc {
+    font-size: 0.9rem;
+  }
 }

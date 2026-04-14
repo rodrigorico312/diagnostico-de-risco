@@ -1,12 +1,35 @@
 import { useRef, useEffect, useState } from "react";
 import "./HowItWorks.css";
 
+function FlowerSVG({ color, style }: { color: string; style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 200 200" style={{ position: 'absolute', ...style }} fill={color}>
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" />
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" transform="rotate(45 100 100)" />
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" transform="rotate(90 100 100)" />
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" transform="rotate(135 100 100)" />
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" transform="rotate(180 100 100)" />
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" transform="rotate(225 100 100)" />
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" transform="rotate(270 100 100)" />
+      <path d="M100 0C100 0 120 40 100 70C80 40 100 0 100 0Z" transform="rotate(315 100 100)" />
+    </svg>
+  );
+}
+
+function BlobSVG({ color, style }: { color: string; style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 200 200" style={{ position: 'absolute', ...style }} fill={color}>
+      <path d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.5,90,-16.3,88.5,-0.9C87,14.5,81.3,29,72.6,41.3C63.9,53.6,52.1,63.7,38.8,71.3C25.5,78.9,10.7,84,-3.2,89.5C-17.2,95,-34.3,100.8,-47.6,93.3C-60.9,85.7,-70.4,64.8,-77.5,45.5C-84.6,26.2,-89.4,8.5,-86.8,-7.5C-84.2,-23.5,-74.3,-37.8,-62.3,-49.6C-50.3,-61.4,-36.3,-70.6,-21.7,-77.4C-7.2,-84.3,7.8,-88.9,22.1,-86.2C36.3,-83.5,49.8,-73.6,44.7,-76.4Z" transform="translate(100 100)" />
+    </svg>
+  );
+}
+
 export default function HowItWorks() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const isDragging = useRef(false);
   const startX = useRef(0);
-  const scrollLeft = useRef(0);
+  const scrollLeftRef = useRef(0);
 
   useEffect(() => {
     const carousel = carouselRef.current;
@@ -23,17 +46,15 @@ export default function HowItWorks() {
     const handleMouseDown = (e: MouseEvent) => {
       isDragging.current = true;
       startX.current = e.pageX - carousel.offsetLeft;
-      scrollLeft.current = carousel.scrollLeft;
+      scrollLeftRef.current = carousel.scrollLeft;
     };
-
     const handleMouseLeave = () => { isDragging.current = false; };
     const handleMouseUp = () => { isDragging.current = false; };
-
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging.current) return;
       e.preventDefault();
       const x = e.pageX - carousel.offsetLeft;
-      carousel.scrollLeft = scrollLeft.current - (x - startX.current) * 1.5;
+      carousel.scrollLeft = scrollLeftRef.current - (x - startX.current) * 1.5;
     };
 
     carousel.addEventListener("scroll", handleScroll);
@@ -41,7 +62,6 @@ export default function HowItWorks() {
     carousel.addEventListener("mouseleave", handleMouseLeave);
     carousel.addEventListener("mouseup", handleMouseUp);
     carousel.addEventListener("mousemove", handleMouseMove);
-
     return () => {
       carousel.removeEventListener("scroll", handleScroll);
       carousel.removeEventListener("mousedown", handleMouseDown);
@@ -66,36 +86,30 @@ export default function HowItWorks() {
 
       <div className="carousel" ref={carouselRef}>
         <div className="step-card step-card--1">
-          <div className="step-card__circle circle-a"></div>
-          <div className="step-card__circle circle-b"></div>
-          <div className="step-card__circle circle-c"></div>
-          <div className="step-card__top">
+          <FlowerSVG color="rgba(232,213,181,0.7)" style={{ width: '180px', top: '-40px', left: '-40px', transform: 'rotate(-15deg)' }} />
+          <div className="step-card__content">
             <p className="step-card__num">1.</p>
-            <h3 className="step-card__title">Crie seu perfil de look</h3>
+            <h3 className="step-card__title">Você preenche seu perfil de look</h3>
+            <p className="step-card__desc">Pra sabermos como você é, também o que quer, gosta e precisa</p>
           </div>
-          <p className="step-card__desc">Conta pra gente seu tamanho, estilo, cores favoritas e tipo de treino. Leva 2 minutos.</p>
         </div>
 
         <div className="step-card step-card--2">
-          <div className="step-card__circle circle-a"></div>
-          <div className="step-card__circle circle-b"></div>
-          <div className="step-card__circle circle-c"></div>
-          <div className="step-card__top">
+          <BlobSVG color="rgba(255,255,255,0.25)" style={{ width: '220px', top: '-60px', left: '-30px' }} />
+          <div className="step-card__content">
             <p className="step-card__num">2.</p>
-            <h3 className="step-card__title">Nossa IA encontra suas peças</h3>
+            <h3 className="step-card__title">Encontramos seu look perfeito</h3>
+            <p className="step-card__desc">Nossa IA cruza suas respostas com os produtos da nossa curadoria</p>
           </div>
-          <p className="step-card__desc">Uma inteligência treinada em moda fitness cruza seu perfil com as melhores peças pra você. Zero erro.</p>
         </div>
 
         <div className="step-card step-card--3">
-          <div className="step-card__circle circle-a"></div>
-          <div className="step-card__circle circle-b"></div>
-          <div className="step-card__circle circle-c"></div>
-          <div className="step-card__top">
+          <FlowerSVG color="rgba(255,90,95,0.85)" style={{ width: '200px', top: '-50px', left: '-50px', transform: 'rotate(10deg)' }} />
+          <div className="step-card__content">
             <p className="step-card__num">3.</p>
-            <h3 className="step-card__title">Escolha o plano e espere na porta</h3>
+            <h3 className="step-card__title">Sua box fit dos sonhos chega por aí</h3>
+            <p className="step-card__desc">Todo mês você recebe 4 novas peças para completar sua rotina de treino</p>
           </div>
-          <p className="step-card__desc">Assine, pague e receba todo mês peças que combinam com você de verdade. Sem surpresa ruim.</p>
         </div>
       </div>
 
@@ -103,9 +117,9 @@ export default function HowItWorks() {
         {[0, 1, 2].map((i) => (
           <button
             key={i}
-            className={`carousel-dot${activeIndex === i ? " active" : ""}`}
+            className={"carousel-dot" + (activeIndex === i ? " active" : "")}
             onClick={() => scrollToSlide(i)}
-            aria-label={`Passo ${i + 1}`}
+            aria-label={"Passo " + (i + 1)}
           />
         ))}
       </div>
