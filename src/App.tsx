@@ -11,6 +11,7 @@ import SmartCTA from './components/SmartCTA'
 import PerfilDeLook from './components/PerfilDeLook'
 import AuthPage from './components/AuthPage'
 import ClientArea from './components/ClientArea'
+import Checkout from './components/Checkout'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
@@ -53,13 +54,22 @@ export default function App() {
     return () => { obs.disconnect(); obsS.disconnect() }
   }, [hash])
 
+  // ── ROTA: Checkout (resumo do pedido) ──
+  if (hash.startsWith('#/checkout')) {
+    const params = new URLSearchParams(hash.split('?')[1] || '')
+    const plano = params.get('plano')
+    if (!plano) { window.location.hash = '#/'; return null }
+    if (!localStorage.getItem('vivefit_token')) {
+      window.location.hash = '#/cadastro'
+      return null
+    }
+    return <Checkout plano={plano} />
+  }
+
   // ── ROTA: Área da cliente ──
   if (hash === '#/minha-conta') {
     const token = localStorage.getItem('vivefit_token')
-    if (!token) {
-      window.location.hash = '#/login'
-      return null
-    }
+    if (!token) { window.location.hash = '#/login'; return null }
     return <ClientArea />
   }
 
@@ -71,13 +81,10 @@ export default function App() {
       <AuthPage
         planoPreSelecionado={plano}
         onAuth={() => {
-          // Após cadastro/login → quiz
           const fezQuiz = localStorage.getItem('vivefit_quiz_done')
           if (fezQuiz && plano) {
-            // Já fez quiz e tem plano → pagamento direto
-            window.location.hash = `#/perfil-de-look?plano=${plano}`
+            window.location.hash = `#/checkout?plano=${plano}`
           } else {
-            // Não fez quiz → vai pro quiz
             window.location.hash = '#/perfil-de-look'
           }
         }}
@@ -90,7 +97,6 @@ export default function App() {
     const params = new URLSearchParams(hash.split('?')[1] || '')
     const planoEscolhido = params.get('plano')
 
-    // Se não tá logado → cadastro primeiro
     if (!localStorage.getItem('vivefit_token')) {
       window.location.hash = '#/cadastro'
       return null

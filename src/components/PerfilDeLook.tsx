@@ -129,23 +129,6 @@ const PLAN_NAMES: Record<string, string> = {
   mensal: 'Plano Mensal',
 }
 
-async function criarCheckoutInfinitePay(plano: string): Promise<string | null> {
-  try {
-    const response = await fetch(API + '/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ plano }),
-    })
-    const data = await response.json()
-    if (data.url) return data.url
-    console.error('Erro:', data)
-    return null
-  } catch (err) {
-    console.error('Erro ao criar checkout:', err)
-    return null
-  }
-}
-
 async function salvarPerfilNoServidor(answers: Record<string, string | string[]>) {
   const token = localStorage.getItem('vivefit_token')
   if (!token) return
@@ -175,7 +158,6 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   const [current, setCurrent] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
   const [done, setDone] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   const step = STEPS[current]
   const total = STEPS.length
@@ -183,18 +165,6 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
 
   const veioDoPlano = !!planoPreSelecionado
   const nomePlano = planoPreSelecionado ? PLAN_NAMES[planoPreSelecionado] || planoPreSelecionado : ''
-
-  const irParaPagamento = async (plano: string) => {
-    setLoading(true)
-    const url = await criarCheckoutInfinitePay(plano)
-    setLoading(false)
-
-    if (url) {
-      window.location.href = url
-    } else {
-      alert('Não foi possível gerar o link de pagamento. Tente novamente ou entre em contato pelo WhatsApp.')
-    }
-  }
 
   const toggle = useCallback(
     (val: string) => {
@@ -255,42 +225,19 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
           <div className="done">
             <div className="done-ico">✨</div>
             <h2>Seu perfil de look tá pronto.</h2>
-            <p className="editorial">"Agora a gente cuida do resto."</p>
-
+            <p className="editorial">&quot;Agora a gente cuida do resto.&quot;</p>
             {veioDoPlano && planoPreSelecionado ? (
-              <>
+              <div>
                 <p>Tudo certo com o seu perfil. Agora é só finalizar o pagamento do <strong>{nomePlano}</strong>.</p>
-                <button
-                  className="btn btn-coral"
-                  style={btnStyle}
-                  onClick={() => irParaPagamento(planoPreSelecionado)}
-                  disabled={loading}
-                >
-                  {loading ? 'gerando link...' : 'ir pro pagamento'}
-                </button>
-              </>
+                <a href={`#/checkout?plano=${planoPreSelecionado}`} className="btn btn-coral" style={btnStyle}>continuar pro pagamento</a>
+              </div>
             ) : (
-              <>
+              <div>
                 <p>Com base nas suas escolhas, vamos selecionar peças que combinam com o seu estilo. Agora escolha seu plano.</p>
-                
-                  <a href="#/"
-                  className="btn btn-coral"
-                  style={btnStyle}
-                  onClick={() => {
-                    setTimeout(() => {
-                      const el = document.getElementById('planos')
-                      if (el) el.scrollIntoView({ behavior: 'smooth' })
-                    }, 100)
-                  }}
-                >
-                  escolher meu plano
-                </a>
-              </>
+                <a href="#/" className="btn btn-coral" style={btnStyle} onClick={() => { setTimeout(() => { const el = document.getElementById('planos'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }, 100) }}>escolher meu plano</a>
+              </div>
             )}
-
-            <p style={{ marginTop: '1rem', fontSize: '.72rem', color: 'var(--cinza-mudo)' }}>
-              Você pode alterar seu perfil a qualquer momento na sua área de assinante.
-            </p>
+            <p style={{ marginTop: '1rem', fontSize: '.72rem', color: 'var(--cinza-mudo)' }}>Você pode alterar seu perfil a qualquer momento na sua área de assinante.</p>
           </div>
         </div>
       </div>
@@ -396,7 +343,7 @@ const btnStyle: React.CSSProperties = {
   fontWeight: 700,
   fontSize: '.82rem',
   letterSpacing: '.06em',
-  textTransform: 'uppercase',
+  textTransform: 'uppercase' as const,
   padding: '.9rem 2.2rem',
   borderRadius: '60px',
   background: 'var(--coral)',

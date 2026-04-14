@@ -57,19 +57,17 @@ function handlePlanClick(planoId: string) {
   const fezQuiz = localStorage.getItem('vivefit_quiz_done')
 
   if (!token) {
-    // Não tem conta → cadastro → quiz → volta pros planos
     window.location.hash = '#/cadastro'
     return
   }
 
   if (!fezQuiz) {
-    // Tem conta mas não fez quiz → manda pro quiz com plano
     window.location.hash = `#/perfil-de-look?plano=${planoId}`
     return
   }
 
-  // Tem conta + fez quiz → pagamento direto
-  irParaPagamento(planoId)
+  // Tem conta + fez quiz → tela de checkout com frete
+  window.location.hash = `#/checkout?plano=${planoId}`
 }
 
 export default function Plans() {
