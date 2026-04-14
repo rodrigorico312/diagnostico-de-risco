@@ -111,9 +111,7 @@ export default function App() {
       <Header />
       <Hero />
 
-      <div className="reveal-glow">
-        <HowItWorks />
-      </div>
+     <HowItWorks />
 
       <div className="reveal">
         <Brands />
