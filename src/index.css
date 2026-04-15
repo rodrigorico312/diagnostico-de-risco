@@ -220,7 +220,7 @@ section { padding: 0; }
 
 /* ══════════════════════════════════════════ PERFIL DE LOOK (quiz) */
 .q-hdr { padding: 0; display: flex; align-items: center; justify-content: space-between; height: 52px; overflow: visible; }
-.q-hdr .q-logo img { height: 220px !important; max-height: none !important; margin-top: 10px !important; }
+.q-hdr .q-logo img { height: 200px !important; max-height: none !important; margin-top: 10px !important; }
 .q-hdr { padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; }
 .q-close { font-size: .75rem; color: var(--cinza-mudo); font-weight: 500; transition: color .3s; }
 .q-close:hover { color: var(--coral); }
