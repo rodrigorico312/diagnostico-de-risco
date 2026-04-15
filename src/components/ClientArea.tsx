@@ -12,7 +12,6 @@ interface UserData {
 }
 
 const TAMANHOS = ['36', '38', '40', '42', '44', '46']
-
 const CORES = [
   { val: 'preto', label: 'Preto', color: '#1E1E1C' },
   { val: 'branco', label: 'Branco', color: '#F0EDE8' },
@@ -31,11 +30,16 @@ const CORES = [
   { val: 'laranja', label: 'Laranja', color: '#F97316' },
   { val: 'lilas', label: 'Lilás', color: '#A78BFA' },
 ]
-
 const TREINOS = ['Musculação', 'Funcional', 'Yoga', 'Corrida', 'Pilates', 'CrossFit']
 const PECAS = ['Legging', 'Top', 'Short', 'Corta Vento', 'Body', 'Macaquinho', 'Cropped', 'Regata']
 const MODELAGENS = ['Cintura alta', 'Com compressão', 'Soltinho', 'Justo no corpo']
 const BLACKLIST_OPTS = ['Cores neon', 'Estampas', 'Shorts curtos', 'Transparência', 'Animal print', 'Tie-dye', 'Brilho / Glitter', 'Logos grandes', 'Rosa pink']
+
+const PLANOS_INFO: Record<string, { nome: string; valor: string; desc: string }> = {
+  mensal: { nome: 'Plano Mensal', valor: 'R$199,90/mês', desc: 'Recorrência mensal — cancele quando quiser' },
+  semestral: { nome: 'Plano Semestral', valor: 'R$189,90/mês', desc: '6 meses — economia de R$60' },
+  anual: { nome: 'Plano Anual', valor: 'R$179,90/mês', desc: '12 meses — maior economia' },
+}
 
 type TabType = 'perfil' | 'endereco' | 'box' | 'plano'
 
@@ -52,13 +56,20 @@ export default function ClientArea() {
   const [saving, setSaving] = useState(false)
   const [msg, setMsg] = useState('')
 
+  // Edit modes
+  const [editPerfil, setEditPerfil] = useState(false)
+  const [editEndereco, setEditEndereco] = useState(false)
+
+  // Perfil state
   const [tamanho, setTamanho] = useState('')
   const [treinos, setTreinos] = useState<string[]>([])
   const [cores, setCores] = useState<string[]>([])
   const [pecas, setPecas] = useState<string[]>([])
   const [modelagem, setModelagem] = useState<string[]>([])
   const [blacklist, setBlacklist] = useState<string[]>([])
+  const [perfilCarregado, setPerfilCarregado] = useState(false)
 
+  // Endereco state
   const [cep, setCep] = useState('')
   const [rua, setRua] = useState('')
   const [numero, setNumero] = useState('')
@@ -67,6 +78,11 @@ export default function ClientArea() {
   const [cidade, setCidade] = useState('')
   const [estado, setEstado] = useState('')
   const [buscandoCep, setBuscandoCep] = useState(false)
+  const [enderecoCarregado, setEnderecoCarregado] = useState(false)
+
+  // Plano
+  const [showTrocarPlano, setShowTrocarPlano] = useState(false)
+  const [showCancelar, setShowCancelar] = useState(false)
 
   const token = localStorage.getItem('vivefit_token')
   const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
@@ -86,6 +102,7 @@ export default function ClientArea() {
         setPecas(perfilData.perfil.pecas || [])
         setModelagem(perfilData.perfil.modelagem || [])
         setBlacklist(perfilData.perfil.blacklist || [])
+        setPerfilCarregado(true)
       }
       if (enderecoData.endereco) {
         const e = enderecoData.endereco
@@ -96,6 +113,7 @@ export default function ClientArea() {
         if (e.endereco_bairro) setBairro(e.endereco_bairro)
         if (e.endereco_cidade) setCidade(e.endereco_cidade)
         if (e.endereco_estado) setEstado(e.endereco_estado)
+        setEnderecoCarregado(true)
       }
       setLoading(false)
     }).catch(() => {
@@ -137,7 +155,7 @@ export default function ClientArea() {
     setMsg('')
     try {
       const res = await fetch(API + '/perfil', { method: 'PUT', headers, body: JSON.stringify({ tamanho, treinos, cores, pecas, modelagem, blacklist }) })
-      if (res.ok) { setMsg('Perfil atualizado!'); setTimeout(() => setMsg(''), 3000) }
+      if (res.ok) { setMsg('Perfil atualizado!'); setEditPerfil(false); setPerfilCarregado(true); setTimeout(() => setMsg(''), 3000) }
     } catch { setMsg('Erro ao salvar. Tente novamente.') }
     setSaving(false)
   }
@@ -153,7 +171,7 @@ export default function ClientArea() {
     setMsg('')
     try {
       const res = await fetch(API + '/endereco', { method: 'PUT', headers, body: JSON.stringify({ cep: cepLimpo, rua, numero, complemento, bairro, cidade, estado }) })
-      if (res.ok) { setMsg('Endereço salvo!'); setTimeout(() => setMsg(''), 3000) }
+      if (res.ok) { setMsg('Endereço salvo!'); setEditEndereco(false); setEnderecoCarregado(true); setTimeout(() => setMsg(''), 3000) }
     } catch { setMsg('Erro ao salvar. Tente novamente.') }
     setSaving(false)
   }
@@ -173,6 +191,9 @@ export default function ClientArea() {
     )
   }
 
+  const planoAtual = user?.plano ? PLANOS_INFO[user.plano] : null
+  const outrosPlanos = Object.entries(PLANOS_INFO).filter(([key]) => key !== user?.plano)
+
   return (
     <div style={{ minHeight: '100vh', background: 'var(--gelo)' }}>
       <div className="q-hdr" style={{ justifyContent: 'space-between' }}>
@@ -190,13 +211,13 @@ export default function ClientArea() {
           Olá, {user?.nome?.split(' ')[0]}
         </h2>
         <p style={{ fontSize: '.85rem', color: 'var(--cinza-mudo)', margin: '.2rem 0 0' }}>
-          {user?.plano ? 'Plano ' + user.plano : 'Nenhum plano ativo'}
+          {planoAtual ? planoAtual.nome : 'Nenhum plano ativo'}
         </p>
       </div>
 
       <div style={{ display: 'flex', gap: '0', maxWidth: '600px', margin: '1rem auto 0', padding: '0 5%', overflowX: 'auto' }}>
         {(['perfil', 'endereco', 'box', 'plano'] as const).map(t => (
-          <button key={t} onClick={() => setTab(t)} style={{
+          <button key={t} onClick={() => { setTab(t); setMsg('') }} style={{
             flex: 1, padding: '.6rem .3rem', fontSize: '.75rem', fontFamily: 'Montserrat, sans-serif',
             fontWeight: tab === t ? 700 : 400, letterSpacing: '.04em', textTransform: 'uppercase' as const,
             background: tab === t ? '#fff' : 'transparent', color: tab === t ? 'var(--azul-noite)' : 'var(--cinza-mudo)',
@@ -210,91 +231,137 @@ export default function ClientArea() {
 
       <div style={{ maxWidth: '600px', margin: '0 auto', padding: '1.5rem 5% 3rem' }}>
 
+        {/* ═══ TAB PERFIL ═══ */}
         {tab === 'perfil' && (
           <div>
-            <SectionTitle>Tamanho</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
-              {TAMANHOS.map(t => (
-                <Chip key={t} selected={tamanho === t} onClick={() => setTamanho(t)}>{t}</Chip>
-              ))}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
+              <SectionTitle style={{ margin: 0 }}>Meu perfil de look</SectionTitle>
+              {perfilCarregado && !editPerfil && (
+                <span onClick={() => setEditPerfil(true)} style={editLinkStyle}>editar</span>
+              )}
+              {editPerfil && (
+                <span onClick={() => setEditPerfil(false)} style={{ ...editLinkStyle, color: 'var(--cinza-mudo)' }}>cancelar</span>
+              )}
             </div>
 
-            <SectionTitle>Treinos</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
-              {TREINOS.map(t => (
-                <Chip key={t} selected={treinos.includes(t)} onClick={() => toggleArr(treinos, t, setTreinos)}>{t}</Chip>
-              ))}
-            </div>
-
-            <SectionTitle>Cores preferidas</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.7rem' }}>
-              {CORES.map(c => (
-                <div key={c.val} onClick={() => toggleArr(cores, c.val, setCores)} style={{ textAlign: 'center', cursor: 'pointer' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', flexShrink: 0, background: c.color, border: cores.includes(c.val) ? '3px solid var(--coral)' : '2px solid #ddd', transition: 'all .2s' }} />
-                  <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', display: 'block', marginTop: '.2rem' }}>{c.label}</span>
+            {!perfilCarregado && !editPerfil ? (
+              <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+                <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', marginBottom: '1rem' }}>Você ainda não preencheu seu perfil de look.</p>
+                <button onClick={() => setEditPerfil(true)} style={actionBtnStyle}>preencher perfil</button>
+              </div>
+            ) : !editPerfil ? (
+              <div>
+                <InfoRow label="Tamanho" value={tamanho || '—'} />
+                <InfoRow label="Treinos" value={treinos.length > 0 ? treinos.join(', ') : '—'} />
+                <InfoRow label="Cores" value={cores.length > 0 ? cores.map(c => CORES.find(x => x.val === c)?.label || c).join(', ') : '—'} />
+                <InfoRow label="Peças" value={pecas.length > 0 ? pecas.join(', ') : '—'} />
+                <InfoRow label="Modelagem" value={modelagem.length > 0 ? modelagem.join(', ') : '—'} />
+                <InfoRow label="Não quer receber" value={blacklist.length > 0 ? blacklist.join(', ') : 'Nenhuma restrição'} />
+              </div>
+            ) : (
+              <div>
+                <MiniTitle>Tamanho</MiniTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+                  {TAMANHOS.map(t => <Chip key={t} selected={tamanho === t} onClick={() => setTamanho(t)}>{t}</Chip>)}
                 </div>
-              ))}
-            </div>
 
-            <SectionTitle>Peças preferidas</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
-              {PECAS.map(p => (
-                <Chip key={p} selected={pecas.includes(p)} onClick={() => toggleArr(pecas, p, setPecas)}>{p}</Chip>
-              ))}
-            </div>
+                <MiniTitle>Treinos</MiniTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+                  {TREINOS.map(t => <Chip key={t} selected={treinos.includes(t)} onClick={() => toggleArr(treinos, t, setTreinos)}>{t}</Chip>)}
+                </div>
 
-            <SectionTitle>Modelagem</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
-              {MODELAGENS.map(m => (
-                <Chip key={m} selected={modelagem.includes(m)} onClick={() => toggleArr(modelagem, m, setModelagem)}>{m}</Chip>
-              ))}
-            </div>
+                <MiniTitle>Cores preferidas</MiniTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.7rem' }}>
+                  {CORES.map(c => (
+                    <div key={c.val} onClick={() => toggleArr(cores, c.val, setCores)} style={{ textAlign: 'center', cursor: 'pointer' }}>
+                      <div style={{ width: '48px', height: '48px', borderRadius: '50%', flexShrink: 0, background: c.color, border: cores.includes(c.val) ? '3px solid var(--coral)' : '2px solid #ddd', transition: 'all .2s' }} />
+                      <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', display: 'block', marginTop: '.2rem' }}>{c.label}</span>
+                    </div>
+                  ))}
+                </div>
 
-            <SectionTitle>Não quero receber</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
-              {BLACKLIST_OPTS.map(b => (
-                <Chip key={b} selected={blacklist.includes(b)} onClick={() => toggleArr(blacklist, b, setBlacklist)} variant="outline">{b}</Chip>
-              ))}
-            </div>
+                <MiniTitle>Peças preferidas</MiniTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+                  {PECAS.map(p => <Chip key={p} selected={pecas.includes(p)} onClick={() => toggleArr(pecas, p, setPecas)}>{p}</Chip>)}
+                </div>
 
-            {msg && tab === 'perfil' && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+                <MiniTitle>Modelagem</MiniTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+                  {MODELAGENS.map(m => <Chip key={m} selected={modelagem.includes(m)} onClick={() => toggleArr(modelagem, m, setModelagem)}>{m}</Chip>)}
+                </div>
 
-            <button onClick={salvarPerfil} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>
-              {saving ? 'salvando...' : 'salvar perfil'}
-            </button>
+                <MiniTitle>Não quero receber</MiniTitle>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+                  {BLACKLIST_OPTS.map(b => <Chip key={b} selected={blacklist.includes(b)} onClick={() => toggleArr(blacklist, b, setBlacklist)} variant="outline">{b}</Chip>)}
+                </div>
+
+                {msg && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+
+                <button onClick={salvarPerfil} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>
+                  {saving ? 'salvando...' : 'salvar perfil'}
+                </button>
+              </div>
+            )}
           </div>
         )}
 
+        {/* ═══ TAB ENDEREÇO ═══ */}
         {tab === 'endereco' && (
           <div>
-            <SectionTitle>Endereço de entrega</SectionTitle>
-            <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', marginBottom: '1rem' }}>Este é o endereço onde suas boxes serão entregues. Atualize sempre que mudar.</p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-              <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
-                <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
-                {buscandoCep && <span style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)' }}>buscando...</span>}
-              </div>
-              <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, background: rua ? '#fff' : '#f8f8f8' }} />
-              <div style={{ display: 'flex', gap: '.5rem' }}>
-                <input type="text" placeholder="Número" value={numero} onChange={e => setNumero(e.target.value)} style={{ ...inputStyle, width: '35%' }} />
-                <input type="text" placeholder="Complemento (opcional)" value={complemento} onChange={e => setComplemento(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
-              </div>
-              <input type="text" placeholder="Bairro" value={bairro} onChange={e => setBairro(e.target.value)} style={{ ...inputStyle, background: bairro ? '#fff' : '#f8f8f8' }} />
-              <div style={{ display: 'flex', gap: '.5rem' }}>
-                <input type="text" placeholder="Cidade" value={cidade} onChange={e => setCidade(e.target.value)} style={{ ...inputStyle, flex: 1, background: cidade ? '#fff' : '#f8f8f8' }} />
-                <input type="text" placeholder="UF" value={estado} onChange={e => setEstado(e.target.value)} maxLength={2} style={{ ...inputStyle, width: '60px', textAlign: 'center' as const, background: estado ? '#fff' : '#f8f8f8' }} />
-              </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
+              <SectionTitle style={{ margin: 0 }}>Endereço de entrega</SectionTitle>
+              {enderecoCarregado && !editEndereco && (
+                <span onClick={() => setEditEndereco(true)} style={editLinkStyle}>editar</span>
+              )}
+              {editEndereco && (
+                <span onClick={() => setEditEndereco(false)} style={{ ...editLinkStyle, color: 'var(--cinza-mudo)' }}>cancelar</span>
+              )}
             </div>
 
-            {msg && tab === 'endereco' && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') || msg.includes('Preencha') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+            <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', marginBottom: '1rem' }}>Endereço onde suas boxes serão entregues.</p>
 
-            <button onClick={salvarEndereco} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>
-              {saving ? 'salvando...' : 'salvar endereço'}
-            </button>
+            {!enderecoCarregado && !editEndereco ? (
+              <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+                <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', marginBottom: '1rem' }}>Você ainda não cadastrou seu endereço.</p>
+                <button onClick={() => setEditEndereco(true)} style={actionBtnStyle}>cadastrar endereço</button>
+              </div>
+            ) : !editEndereco ? (
+              <div style={{ background: '#fff', borderRadius: '14px', padding: '1.2rem', boxShadow: '0 1px 4px rgba(0,0,0,.05)' }}>
+                <p style={{ fontSize: '.9rem', color: 'var(--azul-noite)', margin: '0 0 .2rem', fontWeight: 600 }}>{rua}, {numero}{complemento ? ' — ' + complemento : ''}</p>
+                <p style={{ fontSize: '.85rem', color: 'var(--cinza-chumbo)', margin: '0 0 .2rem' }}>{bairro}</p>
+                <p style={{ fontSize: '.85rem', color: 'var(--cinza-chumbo)', margin: '0 0 .2rem' }}>{cidade} — {estado}</p>
+                <p style={{ fontSize: '.85rem', color: 'var(--cinza-chumbo)', margin: 0 }}>CEP: {cep}</p>
+              </div>
+            ) : (
+              <div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+                  <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+                    <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
+                    {buscandoCep && <span style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)' }}>buscando...</span>}
+                  </div>
+                  <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, background: rua ? '#fff' : '#f8f8f8' }} />
+                  <div style={{ display: 'flex', gap: '.5rem' }}>
+                    <input type="text" placeholder="Número" value={numero} onChange={e => setNumero(e.target.value)} style={{ ...inputStyle, width: '35%' }} />
+                    <input type="text" placeholder="Complemento (opcional)" value={complemento} onChange={e => setComplemento(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
+                  </div>
+                  <input type="text" placeholder="Bairro" value={bairro} onChange={e => setBairro(e.target.value)} style={{ ...inputStyle, background: bairro ? '#fff' : '#f8f8f8' }} />
+                  <div style={{ display: 'flex', gap: '.5rem' }}>
+                    <input type="text" placeholder="Cidade" value={cidade} onChange={e => setCidade(e.target.value)} style={{ ...inputStyle, flex: 1, background: cidade ? '#fff' : '#f8f8f8' }} />
+                    <input type="text" placeholder="UF" value={estado} onChange={e => setEstado(e.target.value)} maxLength={2} style={{ ...inputStyle, width: '60px', textAlign: 'center' as const, background: estado ? '#fff' : '#f8f8f8' }} />
+                  </div>
+                </div>
+
+                {msg && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') || msg.includes('Preencha') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+
+                <button onClick={salvarEndereco} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>
+                  {saving ? 'salvando...' : 'salvar endereço'}
+                </button>
+              </div>
+            )}
           </div>
         )}
 
+        {/* ═══ TAB BOX ═══ */}
         {tab === 'box' && (
           <div style={{ textAlign: 'center', padding: '3rem 0' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📦</div>
@@ -303,21 +370,75 @@ export default function ClientArea() {
           </div>
         )}
 
+        {/* ═══ TAB PLANO ═══ */}
         {tab === 'plano' && (
-          <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-            <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', boxShadow: '0 1px 4px rgba(0,0,0,.06)' }}>
-              <p style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)', textTransform: 'uppercase' as const, letterSpacing: '.06em', margin: '0 0 .5rem' }}>Plano atual</p>
-              <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.2rem', color: 'var(--azul-noite)', margin: '0 0 .3rem' }}>
-                {user?.plano ? 'Plano ' + user.plano.charAt(0).toUpperCase() + user.plano.slice(1) : 'Nenhum plano ativo'}
-              </h3>
-              <p style={{ fontSize: '.85rem', color: 'var(--cinza-mudo)' }}>4 peças por mês</p>
+          <div>
+            <SectionTitle>Plano atual</SectionTitle>
 
-              {!user?.plano && (
-                <a href="#/" style={{ display: 'inline-block', marginTop: '1rem', padding: '.7rem 1.5rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', fontSize: '.85rem', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, textDecoration: 'none', letterSpacing: '.05em', textTransform: 'uppercase' as const }} onClick={() => { setTimeout(() => { const el = document.getElementById('planos'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }, 100) }}>escolher plano</a>
-              )}
+            {planoAtual ? (
+              <div style={{ background: '#fff', borderRadius: '14px', padding: '1.2rem', boxShadow: '0 1px 4px rgba(0,0,0,.05)', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <p style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)', margin: '0 0 .2rem', fontFamily: 'Montserrat, sans-serif' }}>{planoAtual.nome}</p>
+                    <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', margin: 0 }}>4 peças por mês</p>
+                  </div>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.1rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{planoAtual.valor}</span>
+                </div>
+                <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)', margin: '.5rem 0 0' }}>{planoAtual.desc}</p>
+              </div>
+            ) : (
+              <div style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', boxShadow: '0 1px 4px rgba(0,0,0,.05)', textAlign: 'center', marginBottom: '1rem' }}>
+                <p style={{ fontSize: '.95rem', color: 'var(--cinza-mudo)', margin: '0 0 1rem' }}>Você ainda não tem um plano ativo.</p>
+                <a href="#/" style={{ ...actionBtnStyle, display: 'inline-flex', width: 'auto', textDecoration: 'none' }} onClick={() => { setTimeout(() => { const el = document.getElementById('planos'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }, 100) }}>escolher plano</a>
+              </div>
+            )}
 
-              <p style={{ fontSize: '.75rem', color: 'var(--cinza-mudo)', marginTop: '1rem' }}>Precisa de ajuda? Fale pelo WhatsApp</p>
-              <a href="https://wa.me/5593992101980" target="_blank" rel="noopener" style={{ fontSize: '.82rem', color: 'var(--turquesa)', textDecoration: 'none' }}>(93) 99210-1980</a>
+            {planoAtual && (
+              <div>
+                {/* Trocar plano */}
+                <button onClick={() => { setShowTrocarPlano(!showTrocarPlano); setShowCancelar(false) }} style={secondaryBtnStyle}>
+                  {showTrocarPlano ? 'fechar' : 'trocar de plano'}
+                </button>
+
+                {showTrocarPlano && (
+                  <div style={{ marginTop: '.8rem', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+                    <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', margin: '0 0 .3rem' }}>Escolha o novo plano:</p>
+                    {outrosPlanos.map(([key, info]) => (
+                      <div key={key} onClick={() => { window.location.hash = '#/checkout?plano=' + key }} style={{ background: '#fff', borderRadius: '12px', padding: '1rem', boxShadow: '0 1px 4px rgba(0,0,0,.05)', cursor: 'pointer', border: '1px solid #ddd', transition: 'all .2s' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div>
+                            <p style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--azul-noite)', margin: 0, fontFamily: 'Montserrat, sans-serif' }}>{info.nome}</p>
+                            <p style={{ fontSize: '.75rem', color: 'var(--cinza-mudo)', margin: '.1rem 0 0' }}>{info.desc}</p>
+                          </div>
+                          <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.9rem', fontWeight: 700, color: 'var(--coral)' }}>{info.valor}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Cancelar */}
+                <button onClick={() => { setShowCancelar(!showCancelar); setShowTrocarPlano(false) }} style={{ ...secondaryBtnStyle, color: 'var(--cinza-mudo)', borderColor: 'var(--cinza-mudo)', marginTop: '.5rem' }}>
+                  {showCancelar ? 'voltar' : 'cancelar assinatura'}
+                </button>
+
+                {showCancelar && (
+                  <div style={{ marginTop: '.8rem', background: '#FEF2F2', borderRadius: '12px', padding: '1.2rem', textAlign: 'center' }}>
+                    <p style={{ fontSize: '.9rem', color: 'var(--azul-noite)', fontWeight: 600, margin: '0 0 .5rem' }}>Tem certeza que deseja cancelar?</p>
+                    <p style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)', margin: '0 0 1rem' }}>Você pode reativar quando quiser. Sua box atual continua sendo enviada até o fim do período.</p>
+                    <div style={{ display: 'flex', gap: '.5rem', justifyContent: 'center' }}>
+                      <button onClick={() => setShowCancelar(false)} style={{ ...secondaryBtnStyle, flex: 1, margin: 0, fontSize: '.8rem' }}>manter plano</button>
+                      <a href="https://wa.me/5593992101980?text=Olá, gostaria de cancelar minha assinatura VIVE FIT BOX" target="_blank" rel="noopener" style={{ ...actionBtnStyle, flex: 1, margin: 0, fontSize: '.8rem', background: '#DC2626', textDecoration: 'none' }}>confirmar cancelamento</a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* WhatsApp */}
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)' }}>Precisa de ajuda? Fale pelo WhatsApp</p>
+              <a href="https://wa.me/5593992101980" target="_blank" rel="noopener" style={{ fontSize: '.85rem', color: 'var(--turquesa)', textDecoration: 'none', fontWeight: 600 }}>(93) 99210-1980</a>
             </div>
           </div>
         )}
@@ -326,8 +447,23 @@ export default function ClientArea() {
   )
 }
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)', margin: '1.5rem 0 .5rem' }}>{children}</h3>
+// ═══ Sub-components ═══
+
+function SectionTitle({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
+  return <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)', margin: '1.5rem 0 .5rem', ...style }}>{children}</h3>
+}
+
+function MiniTitle({ children }: { children: React.ReactNode }) {
+  return <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.88rem', fontWeight: 600, color: 'var(--azul-noite)', margin: '1.2rem 0 .4rem' }}>{children}</p>
+}
+
+function InfoRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '.6rem 0', borderBottom: '1px solid #f0f0f0' }}>
+      <span style={{ fontSize: '.85rem', color: 'var(--cinza-mudo)', fontFamily: 'Montserrat, sans-serif' }}>{label}</span>
+      <span style={{ fontSize: '.85rem', color: 'var(--azul-noite)', fontFamily: 'Montserrat, sans-serif', fontWeight: 500, textAlign: 'right' as const, maxWidth: '60%' }}>{value}</span>
+    </div>
+  )
 }
 
 function Chip({ children, selected, onClick, variant }: { children: React.ReactNode; selected: boolean; onClick: () => void; variant?: 'outline' }) {
@@ -337,6 +473,10 @@ function Chip({ children, selected, onClick, variant }: { children: React.ReactN
   )
 }
 
+const editLinkStyle: React.CSSProperties = { fontSize: '.82rem', color: 'var(--turquesa)', cursor: 'pointer', fontFamily: 'Montserrat, sans-serif', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '3px' }
+
 const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.88rem', fontFamily: 'Montserrat, sans-serif', background: '#fff', outline: 'none', boxSizing: 'border-box' as const, width: '100%' }
 
 const actionBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '.88rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '.9rem 2.2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', cursor: 'pointer', width: '100%', marginTop: '1.5rem' }
+
+const secondaryBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: '.82rem', letterSpacing: '.04em', textTransform: 'uppercase' as const, padding: '.7rem 1.5rem', borderRadius: '60px', background: 'transparent', color: 'var(--cobalto)', border: '1.5px solid var(--cobalto)', cursor: 'pointer', width: '100%', marginTop: '.8rem', transition: 'all .2s' }
