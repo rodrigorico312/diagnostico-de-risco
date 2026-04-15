@@ -11,7 +11,7 @@
   --turquesa: #06B6D4;
   --turquesa-soft: #CFFAFE;
   --areia: #E8D5B5;
-  --gelo: #F8FAFC;
+  --gelo: #FFFFFF;
   --branco: #FFFFFF;
   --cinza-fundo: #E2E8F0;
   --azul-noite: #0F172A;
@@ -25,12 +25,13 @@
   --radius: 14px;
   --radius-lg: 22px;
   --ease: cubic-bezier(.4, 0, .2, 1);
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
 }
 
 /* ══════════════════════════════════════════ RESET */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-body { font-family: var(--font-body); font-size: 15px; color: var(--azul-noite); background: var(--gelo); overflow-x: hidden; line-height: 1.6; }
+body { font-family: var(--font-body); font-size: 15px; color: var(--azul-noite); background: #FFFFFF; overflow-x: hidden; line-height: 1.6; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
@@ -121,30 +122,26 @@ section { padding: 0; }
 .perso-inner { position: relative; overflow: hidden; }
 @media (max-width: 768px) {
   .perso-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 70% center;
+     width: 100%;
+  height: auto;
+  display: block;
   }
   .perso-inner {
-    min-height: 320px;
-    position: relative;
+  position: relative;
+  overflow: hidden;
   }
 }
-.perso-inner::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, rgba(30, 58, 138, 0.85) 0%, rgba(30, 58, 138, 0.5) 35%, transparent 65%); }
+.perso-inner::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, transparent 70%); }
 .perso-text { position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 3; padding: 19px 20px; width: 60%; }
-.perso-repeat { font-family: Georgia, serif; font-size: clamp(24px, 3vw, 22px); font-weight: 700; line-height: 1.1; color: var(--gelo); margin: 0; text-transform: uppercase; white-space: nowrap; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
-.perso-title { font-family: Georgia, serif; font-size: clamp(22px, 4vw, 32px); font-weight: 700; color: var(--gelo); margin: 0 0 3px; text-transform: none; letter-spacing: 0; line-height: 1; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
-.perso-desc { font-family: 'DM Sans', sans-serif; font-size: clamp(16px, 2vw, 12px); font-weight: 300; color: rgba(248, 250, 252, 0.7); line-height: 1.3; max-width: 180px; margin-bottom: 8px; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
-.perso-link { font-family: Arial, sans-serif; font-size: clamp(14px, 2vw, 13px); font-weight: 600; color: var(--turquesa); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.perso-repeat { font-family: 'Montserrat', sans-serif; font-size: clamp(24px, 3vw, 22px); font-weight: 700; line-height: 1.1; color: var(--gelo); margin: 0; text-transform: uppercase; white-space: nowrap; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+.perso-title { font-family: 'Montserrat', sans-serif  ; font-size: clamp(22px, 4vw, 32px); font-weight: 700; color: #ff751f; margin: 0 0 3px; text-transform: uppercase; letter-spacing: 0; line-height: 1; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+.perso-desc { font-family: 'Montserrat', sans-serif; font-size: clamp(12px, 2vw, 14px); font-weight: 400; color: #FFFFFF; line-height: 1.4; max-width: 220px; margin-bottom: 12px; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.perso-link { font-family: Arial, sans-serif; font-size: clamp(13px, 2vw, 15px); font-weight: 600; color: #000000; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .perso-link:hover { color: var(--gelo); }
 
 /* ══════════════════════════════════════════ FRASE EDITORIAL */
-.editorial-break { padding: clamp(2rem, 4vw, 3rem) 0; background: var(--branco); text-align: center; }
-.editorial-break .editorial { font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--azul-noite); max-width: 500px; margin: 0 auto; line-height: 1.4; font-weight: 560; }
+.editorial-break { padding: clamp(2rem, 4vw, 3rem) 0; background: transparent; text-align: center; }
+.editorial-break .editorial { font-family: 'Montserrat', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--azul-noite); max-width: 500px; margin: 0 auto; line-height: 1.4; font-weight: 300; font-style: normal; }
 
 /* ══════════════════════════════════════════ PLANOS */
 .plans { background: var(--cobalto-soft); padding: 40px 20px 64px; border-radius: 32px 32px 0 0; margin-top: -32px; position: relative; z-index: 2; }

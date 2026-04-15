@@ -4,17 +4,19 @@
    ══════════════════════════════════════════ */
 
 .como-funciona {
-  padding: 1.5rem 4% 2rem;
+  padding: 2.5rem 4% 2rem;
   margin-top: -60px;
   border-radius: 32px 32px 0 0;
-  background: var(--gelo);
+  background: #FFFFFF;
+  position: relative;
+  z-index: 2;
 }
 
 .como-funciona__titulo {
   font-family: Georgia, serif;
   font-size: clamp(1.3rem, 2.8vw, 1.8rem);
   font-weight: 700;
-  text-align: center;
+  text-align: left;
   color: var(--azul-noite);
   margin-bottom: 1.2rem;
   text-transform: lowercase;
