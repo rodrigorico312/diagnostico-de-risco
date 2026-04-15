@@ -157,7 +157,7 @@ section { padding: 0; }
 .plan--pop .plan-old { color: rgba(248, 250, 252, 0.35); }
 .plan--pop .plan-btn { background: #E8521F; color: #FFFFFF; border-color: transparent; }
 .plan--pop .plan-btn:hover { background: #D14A1A; }
-.plan-badge { position: absolute; top: -14px; right: 20px; font-family: Arial, Inter, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: var(--turquesa); color: #E8521F; padding: 6px 16px; border-radius: 20px; }
+.plan-badge { position: absolute; top: -14px; right: 20px; font-family: Arial, Inter, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: var(--turquesa); color: #FFFFFF; padding: 6px 16px; border-radius: 20px; }
 .plan-name { font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 700; color: var(--azul-noite); margin-bottom: 4px; }
 .plan-sub { font-family: Arial, Inter, sans-serif; font-size: 13px; color: rgba(15, 23, 42, 0.45); margin-bottom: 20px; }
 .plan-pricing { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
