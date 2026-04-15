@@ -187,7 +187,7 @@ export default function ClientArea() {
     <div style={{ minHeight: '100vh', background: 'var(--gelo)' }}>
       <div className="q-hdr" style={{ justifyContent: 'space-between' }}>
         <span className="q-logo">
-          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '44px' }} />
+          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px' }} />
         </span>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <a href="#/" style={{ fontSize: '.72rem', color: 'var(--cinza-mudo)', textDecoration: 'none' }}>site</a>
@@ -248,7 +248,7 @@ export default function ClientArea() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
               {CORES.map(c => (
                 <div key={c.val} onClick={() => toggleArr(cores, c.val, setCores)} style={{ textAlign: 'center', cursor: 'pointer' }}>
-                  <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: c.color, border: cores.includes(c.val) ? '3px solid var(--coral)' : '2px solid #ddd', transition: 'all .2s' }} />
+                  <div style={{ width: '36px', height: '220px', borderRadius: '50%', background: c.color, border: cores.includes(c.val) ? '3px solid var(--coral)' : '2px solid #ddd', transition: 'all .2s' }} />
                   <span style={{ fontSize: '.55rem', color: 'var(--cinza-mudo)' }}>{c.label}</span>
                 </div>
               ))}

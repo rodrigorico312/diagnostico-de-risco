@@ -114,7 +114,7 @@ section { padding: 0; }
 .brands-track::-webkit-scrollbar { display: none; }
 .brands-track:active { cursor: grabbing; }
 .brand-item { flex-shrink: 0; scroll-snap-align: start; }
-.brand-item img { height: 36px; width: auto; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; }
+.brand-item img { height: 100px; width: auto; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; }
 .brand-item img:hover { filter: grayscale(0%); opacity: 1; }
 
 /* ══════════════════════════════════════════ PERSONALIZAÇÃO */

@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="ftr">
       <div className="ftr-in">
         <div className="ftr-logo">
-          <img src="https://i.postimg.cc/MKkR33Zt/logo-vivefit-branco.png" alt="VIVE FIT" style={{ height: '32px', display: 'block', margin: '0 auto' }} />
+          <img src="https://i.postimg.cc/MKkR33Zt/logo-vivefit-branco.png" alt="VIVE FIT" style={{ height: '220px', display: 'block', margin: '0 auto' }} />
         </div>
 
         <div className="ftr-links">
