@@ -27,11 +27,11 @@ const faqs = [
   },
   { 
     q: 'Quais são as formas de pagamento?', 
-    a: '[EDITAR, FORMAS DE PAGAMENTO]' 
+    a: 'Aceitamos Pix, boleto bancário e cartão de crédito. Pix e boleto são sempre à vista. No cartão, o plano semestral pode ser parcelado em até 6x e o anual em até 12x sem juros. O plano mensal funciona por recorrência automática no cartão.' 
   },
   { 
     q: 'Qual é o prazo de entrega?', 
-    a: '[EDITAR, PRAZO DE ENTREGA]' 
+    a: 'O prazo depende da sua região. No checkout, você digita seu CEP e vê as opções de frete com prazo exato. Em média, entre 3 e 12 dias úteis dependendo da transportadora. Despachamos de Santarém-PA para todo o Brasil.' 
   },
 ]
 

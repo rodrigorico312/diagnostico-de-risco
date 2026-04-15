@@ -155,15 +155,15 @@ section { padding: 0; }
 .plan--pop .plan-name, .plan--pop .plan-price { color: var(--gelo); }
 .plan--pop .plan-sub, .plan--pop .plan-per, .plan--pop .plan-desc { color: rgba(248, 250, 252, 0.6); }
 .plan--pop .plan-old { color: rgba(248, 250, 252, 0.35); }
-.plan--pop .plan-btn { background: var(--coral); color: #FFFFFF; border-color: transparent; }
-.plan--pop .plan-btn:hover { background: #e84e53; }
-.plan-badge { position: absolute; top: -14px; right: 20px; font-family: Arial, Inter, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: var(--turquesa); color: #FFFFFF; padding: 6px 16px; border-radius: 20px; }
-.plan-name { font-family: Georgia, serif; font-size: 22px; font-weight: 700; color: var(--azul-noite); margin-bottom: 4px; }
+.plan--pop .plan-btn { background: #E8521F; color: #FFFFFF; border-color: transparent; }
+.plan--pop .plan-btn:hover { background: #D14A1A; }
+.plan-badge { position: absolute; top: -14px; right: 20px; font-family: Arial, Inter, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: var(--turquesa); color: #E8521F; padding: 6px 16px; border-radius: 20px; }
+.plan-name { font-family: Montserrat, sans-serif; font-size: 22px; font-weight: 700; color: var(--azul-noite); margin-bottom: 4px; }
 .plan-sub { font-family: Arial, Inter, sans-serif; font-size: 13px; color: rgba(15, 23, 42, 0.45); margin-bottom: 20px; }
 .plan-pricing { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
 .plan-old { font-family: Arial, Inter, sans-serif; font-size: 14px; color: rgba(15, 23, 42, 0.28); text-decoration: line-through; }
 .plan-price { font-family: Arial, sans-serif; font-size: 36px; font-weight: 700; color: var(--azul-noite); line-height: 1; }
-.plan-per { font-family: Arial, Inter, sans-serif; font-size: 14px; color: rgba(15, 23, 42, 0.4); }
+.plan-per { font-family: Montserrat, sans-serif; font-size: 14px; color: rgba(15, 23, 42, 0.4); }
 .plan-desc { font-family: Arial, Inter, sans-serif; font-size: 13px; color: rgba(15, 23, 42, 0.45); margin-bottom: 28px; }
 .plan-btn { display: block; width: 100%; text-align: center; font-family: Arial, Inter, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 16px 24px; border-radius: 60px; transition: all 0.3s ease; margin-top: auto; background: transparent; color: var(--cobalto); border: 2px solid var(--cobalto); }
 .plan-btn:hover { background: var(--cobalto); color: #FFFFFF; }
