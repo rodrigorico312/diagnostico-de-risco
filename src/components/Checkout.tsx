@@ -186,7 +186,6 @@ export default function Checkout({ plano }: Props) {
   const cpfValido = cpf.replace(/\D/g, '').length === 11
   const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && metodo && !pagando
 
-  // Gera array de parcelas conforme o plano
   const opcoesParcelamento: number[] = []
   for (let i = 1; i <= info.maxParcelas; i++) opcoesParcelamento.push(i)
 
@@ -194,13 +193,13 @@ export default function Checkout({ plano }: Props) {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
       <div className="q-hdr">
         <span className="q-logo">
-          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '44px' }} />
+          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px' }} />
         </span>
         <a href="#/" className="q-close">voltar ao site</a>
       </div>
 
       <div style={{ flex: 1, padding: '1.5rem 5%', maxWidth: '500px', margin: '0 auto', width: '100%' }}>
-        <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: 'var(--azul-noite)', marginBottom: '.3rem' }}>Resumo do pedido</h2>
+        <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.3rem', color: 'var(--azul-noite)', marginBottom: '.3rem' }}>Resumo do pedido</h2>
         <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)', marginBottom: '1.5rem' }}>Confira seus dados antes de finalizar</p>
 
         <Card>
@@ -222,7 +221,7 @@ export default function Checkout({ plano }: Props) {
               <p style={{ ...dataText, fontWeight: 700 }}>{info.nome}</p>
               <p style={{ ...dataText, fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>4 peças por mês — {info.parcelas}</p>
             </div>
-            <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(info.valorTotal)}</span>
+            <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(info.valorTotal)}</span>
           </div>
         </Card>
 
@@ -316,8 +315,8 @@ export default function Checkout({ plano }: Props) {
                 <span>{formatBRL(freteTotal)}</span>
               </div>
               <div style={{ borderTop: '1px solid #eee', paddingTop: '.4rem', marginTop: '.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-heading)', fontSize: '.8rem', fontWeight: 700, color: 'var(--azul-noite)' }}>Total</span>
-                <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(total)}</span>
+                <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.8rem', fontWeight: 700, color: 'var(--azul-noite)' }}>Total</span>
+                <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(total)}</span>
               </div>
               {metodo === 'CREDIT_CARD' && !isMensal && parcelas > 1 && valorParcela && (
                 <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>{parcelas}x de {formatBRL(valorParcela)} sem juros</p>
@@ -351,11 +350,11 @@ function Card({ children }: { children: React.ReactNode }) {
 }
 
 function CardLabel({ children }: { children: React.ReactNode }) {
-  return <p style={{ fontSize: '.65rem', fontFamily: 'var(--font-heading)', textTransform: 'uppercase' as const, letterSpacing: '.06em', color: 'var(--cinza-mudo)', margin: '0 0 .3rem' }}>{children}</p>
+  return <p style={{ fontSize: '.65rem', fontFamily: 'Montserrat, sans-serif', textTransform: 'uppercase' as const, letterSpacing: '.06em', color: 'var(--cinza-mudo)', margin: '0 0 .3rem' }}>{children}</p>
 }
 
-const dataText: React.CSSProperties = { fontSize: '.82rem', color: 'var(--azul-noite)', margin: '.1rem 0', fontFamily: 'var(--font-body)' }
-const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'var(--font-body)', background: '#fff', outline: 'none', boxSizing: 'border-box' as const, width: '100%' }
-const calcBtnStyle: React.CSSProperties = { padding: '.7rem 1rem', borderRadius: '10px', border: 'none', background: 'var(--cobalto)', color: '#fff', fontSize: '.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: '.04em', textTransform: 'uppercase' as const, cursor: 'pointer' }
-const pagarBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '.82rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '1rem 2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', marginTop: '1rem', transition: 'all .3s' }
+const dataText: React.CSSProperties = { fontSize: '.82rem', color: 'var(--azul-noite)', margin: '.1rem 0', fontFamily: 'Montserrat, sans-serif' }
+const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'Montserrat, sans-serif', background: '#fff', outline: 'none', boxSizing: 'border-box' as const, width: '100%' }
+const calcBtnStyle: React.CSSProperties = { padding: '.7rem 1rem', borderRadius: '10px', border: 'none', background: 'var(--cobalto)', color: '#fff', fontSize: '.75rem', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, letterSpacing: '.04em', textTransform: 'uppercase' as const, cursor: 'pointer' }
+const pagarBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '.82rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '1rem 2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', marginTop: '1rem', transition: 'all .3s' }
 const erroStyle: React.CSSProperties = { fontSize: '.7rem', color: 'var(--coral)', marginTop: '.3rem' }

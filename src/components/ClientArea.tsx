@@ -52,7 +52,6 @@ export default function ClientArea() {
   const [saving, setSaving] = useState(false)
   const [msg, setMsg] = useState('')
 
-  // Perfil state
   const [tamanho, setTamanho] = useState('')
   const [treinos, setTreinos] = useState<string[]>([])
   const [cores, setCores] = useState<string[]>([])
@@ -60,7 +59,6 @@ export default function ClientArea() {
   const [modelagem, setModelagem] = useState<string[]>([])
   const [blacklist, setBlacklist] = useState<string[]>([])
 
-  // Endereco state
   const [cep, setCep] = useState('')
   const [rua, setRua] = useState('')
   const [numero, setNumero] = useState('')
@@ -138,11 +136,7 @@ export default function ClientArea() {
     setSaving(true)
     setMsg('')
     try {
-      const res = await fetch(API + '/perfil', {
-        method: 'PUT',
-        headers,
-        body: JSON.stringify({ tamanho, treinos, cores, pecas, modelagem, blacklist }),
-      })
+      const res = await fetch(API + '/perfil', { method: 'PUT', headers, body: JSON.stringify({ tamanho, treinos, cores, pecas, modelagem, blacklist }) })
       if (res.ok) { setMsg('Perfil atualizado!'); setTimeout(() => setMsg(''), 3000) }
     } catch { setMsg('Erro ao salvar. Tente novamente.') }
     setSaving(false)
@@ -158,11 +152,7 @@ export default function ClientArea() {
     setSaving(true)
     setMsg('')
     try {
-      const res = await fetch(API + '/endereco', {
-        method: 'PUT',
-        headers,
-        body: JSON.stringify({ cep: cepLimpo, rua, numero, complemento, bairro, cidade, estado }),
-      })
+      const res = await fetch(API + '/endereco', { method: 'PUT', headers, body: JSON.stringify({ cep: cepLimpo, rua, numero, complemento, bairro, cidade, estado }) })
       if (res.ok) { setMsg('Endereço salvo!'); setTimeout(() => setMsg(''), 3000) }
     } catch { setMsg('Erro ao salvar. Tente novamente.') }
     setSaving(false)
@@ -178,7 +168,7 @@ export default function ClientArea() {
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--gelo)' }}>
-        <p style={{ fontFamily: 'var(--font-body)', color: 'var(--cinza-mudo)' }}>Carregando...</p>
+        <p style={{ fontFamily: 'Montserrat, sans-serif', color: 'var(--cinza-mudo)' }}>Carregando...</p>
       </div>
     )
   }
@@ -190,36 +180,28 @@ export default function ClientArea() {
           <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px' }} />
         </span>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <a href="#/" style={{ fontSize: '.72rem', color: 'var(--cinza-mudo)', textDecoration: 'none' }}>site</a>
-          <span onClick={logout} style={{ fontSize: '.72rem', color: 'var(--coral)', cursor: 'pointer' }}>sair</span>
+          <a href="#/" style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', textDecoration: 'none' }}>site</a>
+          <span onClick={logout} style={{ fontSize: '.82rem', color: 'var(--coral)', cursor: 'pointer' }}>sair</span>
         </div>
       </div>
 
       <div style={{ padding: '1.5rem 5% .5rem', maxWidth: '600px', margin: '0 auto' }}>
-        <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: 'var(--azul-noite)', margin: 0 }}>
+        <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.4rem', color: 'var(--azul-noite)', margin: 0 }}>
           Olá, {user?.nome?.split(' ')[0]}
         </h2>
-        <p style={{ fontSize: '.75rem', color: 'var(--cinza-mudo)', margin: '.2rem 0 0' }}>
-          {user?.plano ? `Plano ${user.plano}` : 'Nenhum plano ativo'}
+        <p style={{ fontSize: '.85rem', color: 'var(--cinza-mudo)', margin: '.2rem 0 0' }}>
+          {user?.plano ? 'Plano ' + user.plano : 'Nenhum plano ativo'}
         </p>
       </div>
 
       <div style={{ display: 'flex', gap: '0', maxWidth: '600px', margin: '1rem auto 0', padding: '0 5%', overflowX: 'auto' }}>
         {(['perfil', 'endereco', 'box', 'plano'] as const).map(t => (
           <button key={t} onClick={() => setTab(t)} style={{
-            flex: 1,
-            padding: '.6rem .3rem',
-            fontSize: '.65rem',
-            fontFamily: 'var(--font-heading)',
-            fontWeight: tab === t ? 700 : 400,
-            letterSpacing: '.04em',
-            textTransform: 'uppercase' as const,
-            background: tab === t ? '#fff' : 'transparent',
-            color: tab === t ? 'var(--azul-noite)' : 'var(--cinza-mudo)',
-            border: 'none',
-            borderBottom: tab === t ? '2px solid var(--coral)' : '2px solid transparent',
-            cursor: 'pointer',
-            whiteSpace: 'nowrap' as const,
+            flex: 1, padding: '.6rem .3rem', fontSize: '.75rem', fontFamily: 'Montserrat, sans-serif',
+            fontWeight: tab === t ? 700 : 400, letterSpacing: '.04em', textTransform: 'uppercase' as const,
+            background: tab === t ? '#fff' : 'transparent', color: tab === t ? 'var(--azul-noite)' : 'var(--cinza-mudo)',
+            border: 'none', borderBottom: tab === t ? '2px solid var(--coral)' : '2px solid transparent',
+            cursor: 'pointer', whiteSpace: 'nowrap' as const,
           }}>
             {t === 'perfil' ? 'Meu Look' : t === 'endereco' ? 'Endereço' : t === 'box' ? 'Minha Box' : 'Meu Plano'}
           </button>
@@ -231,51 +213,51 @@ export default function ClientArea() {
         {tab === 'perfil' && (
           <div>
             <SectionTitle>Tamanho</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
               {TAMANHOS.map(t => (
                 <Chip key={t} selected={tamanho === t} onClick={() => setTamanho(t)}>{t}</Chip>
               ))}
             </div>
 
             <SectionTitle>Treinos</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
               {TREINOS.map(t => (
                 <Chip key={t} selected={treinos.includes(t)} onClick={() => toggleArr(treinos, t, setTreinos)}>{t}</Chip>
               ))}
             </div>
 
             <SectionTitle>Cores preferidas</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.7rem' }}>
               {CORES.map(c => (
                 <div key={c.val} onClick={() => toggleArr(cores, c.val, setCores)} style={{ textAlign: 'center', cursor: 'pointer' }}>
-                  <div style={{ width: '36px', height: '220px', borderRadius: '50%', background: c.color, border: cores.includes(c.val) ? '3px solid var(--coral)' : '2px solid #ddd', transition: 'all .2s' }} />
-                  <span style={{ fontSize: '.55rem', color: 'var(--cinza-mudo)' }}>{c.label}</span>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', flexShrink: 0, background: c.color, border: cores.includes(c.val) ? '3px solid var(--coral)' : '2px solid #ddd', transition: 'all .2s' }} />
+                  <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', display: 'block', marginTop: '.2rem' }}>{c.label}</span>
                 </div>
               ))}
             </div>
 
             <SectionTitle>Peças preferidas</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
               {PECAS.map(p => (
                 <Chip key={p} selected={pecas.includes(p)} onClick={() => toggleArr(pecas, p, setPecas)}>{p}</Chip>
               ))}
             </div>
 
             <SectionTitle>Modelagem</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
               {MODELAGENS.map(m => (
                 <Chip key={m} selected={modelagem.includes(m)} onClick={() => toggleArr(modelagem, m, setModelagem)}>{m}</Chip>
               ))}
             </div>
 
             <SectionTitle>Não quero receber</SectionTitle>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.4rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
               {BLACKLIST_OPTS.map(b => (
                 <Chip key={b} selected={blacklist.includes(b)} onClick={() => toggleArr(blacklist, b, setBlacklist)} variant="outline">{b}</Chip>
               ))}
             </div>
 
-            {msg && tab === 'perfil' && <p style={{ textAlign: 'center', fontSize: '.75rem', color: msg.includes('Erro') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+            {msg && tab === 'perfil' && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
 
             <button onClick={salvarPerfil} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>
               {saving ? 'salvando...' : 'salvar perfil'}
@@ -286,12 +268,12 @@ export default function ClientArea() {
         {tab === 'endereco' && (
           <div>
             <SectionTitle>Endereço de entrega</SectionTitle>
-            <p style={{ fontSize: '.72rem', color: 'var(--cinza-mudo)', marginBottom: '1rem' }}>Este é o endereço onde suas boxes serão entregues. Atualize sempre que mudar.</p>
+            <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', marginBottom: '1rem' }}>Este é o endereço onde suas boxes serão entregues. Atualize sempre que mudar.</p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
               <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
                 <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
-                {buscandoCep && <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)' }}>buscando...</span>}
+                {buscandoCep && <span style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)' }}>buscando...</span>}
               </div>
               <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, background: rua ? '#fff' : '#f8f8f8' }} />
               <div style={{ display: 'flex', gap: '.5rem' }}>
@@ -305,7 +287,7 @@ export default function ClientArea() {
               </div>
             </div>
 
-            {msg && tab === 'endereco' && <p style={{ textAlign: 'center', fontSize: '.75rem', color: msg.includes('Erro') || msg.includes('Preencha') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+            {msg && tab === 'endereco' && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') || msg.includes('Preencha') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
 
             <button onClick={salvarEndereco} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>
               {saving ? 'salvando...' : 'salvar endereço'}
@@ -316,26 +298,26 @@ export default function ClientArea() {
         {tab === 'box' && (
           <div style={{ textAlign: 'center', padding: '3rem 0' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📦</div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', color: 'var(--azul-noite)', fontSize: '1rem' }}>Sua box está sendo preparada</h3>
-            <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)', maxWidth: '300px', margin: '.5rem auto' }}>Quando enviarmos, o código de rastreio aparece aqui automaticamente.</p>
+            <h3 style={{ fontFamily: 'Montserrat, sans-serif', color: 'var(--azul-noite)', fontSize: '1.1rem' }}>Sua box está sendo preparada</h3>
+            <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '300px', margin: '.5rem auto' }}>Quando enviarmos, o código de rastreio aparece aqui automaticamente.</p>
           </div>
         )}
 
         {tab === 'plano' && (
           <div style={{ textAlign: 'center', padding: '2rem 0' }}>
             <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', boxShadow: '0 1px 4px rgba(0,0,0,.06)' }}>
-              <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', textTransform: 'uppercase' as const, letterSpacing: '.06em', margin: '0 0 .5rem' }}>Plano atual</p>
-              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', color: 'var(--azul-noite)', margin: '0 0 .3rem' }}>
+              <p style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)', textTransform: 'uppercase' as const, letterSpacing: '.06em', margin: '0 0 .5rem' }}>Plano atual</p>
+              <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.2rem', color: 'var(--azul-noite)', margin: '0 0 .3rem' }}>
                 {user?.plano ? 'Plano ' + user.plano.charAt(0).toUpperCase() + user.plano.slice(1) : 'Nenhum plano ativo'}
               </h3>
-              <p style={{ fontSize: '.75rem', color: 'var(--cinza-mudo)' }}>4 peças por mês</p>
+              <p style={{ fontSize: '.85rem', color: 'var(--cinza-mudo)' }}>4 peças por mês</p>
 
               {!user?.plano && (
-                <a href="#/" style={{ display: 'inline-block', marginTop: '1rem', padding: '.7rem 1.5rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', fontSize: '.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, textDecoration: 'none', letterSpacing: '.05em', textTransform: 'uppercase' as const }} onClick={() => { setTimeout(() => { const el = document.getElementById('planos'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }, 100) }}>escolher plano</a>
+                <a href="#/" style={{ display: 'inline-block', marginTop: '1rem', padding: '.7rem 1.5rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', fontSize: '.85rem', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, textDecoration: 'none', letterSpacing: '.05em', textTransform: 'uppercase' as const }} onClick={() => { setTimeout(() => { const el = document.getElementById('planos'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }, 100) }}>escolher plano</a>
               )}
 
-              <p style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1rem' }}>Precisa de ajuda? Fale pelo WhatsApp</p>
-              <a href="https://wa.me/5593992101980" target="_blank" rel="noopener" style={{ fontSize: '.72rem', color: 'var(--turquesa)', textDecoration: 'none' }}>(93) 99210-1980</a>
+              <p style={{ fontSize: '.75rem', color: 'var(--cinza-mudo)', marginTop: '1rem' }}>Precisa de ajuda? Fale pelo WhatsApp</p>
+              <a href="https://wa.me/5593992101980" target="_blank" rel="noopener" style={{ fontSize: '.82rem', color: 'var(--turquesa)', textDecoration: 'none' }}>(93) 99210-1980</a>
             </div>
           </div>
         )}
@@ -345,16 +327,16 @@ export default function ClientArea() {
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '.82rem', color: 'var(--azul-noite)', margin: '1.5rem 0 .5rem' }}>{children}</h3>
+  return <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)', margin: '1.5rem 0 .5rem' }}>{children}</h3>
 }
 
 function Chip({ children, selected, onClick, variant }: { children: React.ReactNode; selected: boolean; onClick: () => void; variant?: 'outline' }) {
   const isOutline = variant === 'outline'
   return (
-    <div onClick={onClick} style={{ padding: '.4rem .8rem', borderRadius: '20px', fontSize: '.72rem', fontFamily: 'var(--font-body)', cursor: 'pointer', transition: 'all .2s', background: selected ? (isOutline ? 'var(--coral)' : 'var(--cobalto)') : (isOutline ? 'transparent' : '#fff'), color: selected ? '#fff' : 'var(--azul-noite)', border: selected ? (isOutline ? '1px solid var(--coral)' : '1px solid var(--cobalto)') : '1px solid #ddd' }}>{children}</div>
+    <div onClick={onClick} style={{ padding: '.5rem 1rem', borderRadius: '20px', fontSize: '.85rem', fontFamily: 'Montserrat, sans-serif', cursor: 'pointer', transition: 'all .2s', background: selected ? (isOutline ? 'var(--coral)' : 'var(--cobalto)') : (isOutline ? 'transparent' : '#fff'), color: selected ? '#fff' : 'var(--azul-noite)', border: selected ? (isOutline ? '1px solid var(--coral)' : '1px solid var(--cobalto)') : '1px solid #ddd' }}>{children}</div>
   )
 }
 
-const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'var(--font-body)', background: '#fff', outline: 'none', boxSizing: 'border-box' as const, width: '100%' }
+const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.88rem', fontFamily: 'Montserrat, sans-serif', background: '#fff', outline: 'none', boxSizing: 'border-box' as const, width: '100%' }
 
-const actionBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '.82rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '.9rem 2.2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', cursor: 'pointer', width: '100%', marginTop: '1.5rem' }
+const actionBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '.88rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '.9rem 2.2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', cursor: 'pointer', width: '100%', marginTop: '1.5rem' }
