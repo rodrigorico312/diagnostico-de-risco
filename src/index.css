@@ -220,7 +220,8 @@ section { padding: 0; }
 
 /* ══════════════════════════════════════════ PERFIL DE LOOK (quiz) */
 .q-hdr { padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; }
-.q-logo { font-family: var(--font-heading); font-weight: 700; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cobalto); }
+.q-hdr .q-logo img { height: 120px !important; max-height: none !important; }
+.q-hdr { padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; }
 .q-close { font-size: .75rem; color: var(--cinza-mudo); font-weight: 500; transition: color .3s; }
 .q-close:hover { color: var(--coral); }
 .q-wrap { flex: 1; display: flex; flex-direction: column; width: min(92%, 480px); margin: 0 auto; padding: 0 0 6rem; }
