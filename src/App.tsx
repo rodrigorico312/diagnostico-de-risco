@@ -12,6 +12,7 @@ import PerfilDeLook from './components/PerfilDeLook'
 import AuthPage from './components/AuthPage'
 import ClientArea from './components/ClientArea'
 import Checkout from './components/Checkout'
+import Sucesso from './components/Sucesso'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
@@ -53,6 +54,15 @@ export default function App() {
 
     return () => { obs.disconnect(); obsS.disconnect() }
   }, [hash])
+
+  // ── ROTA: Sucesso (thank-you page pós-pagamento) ──
+  if (hash === '#/sucesso') {
+    if (!localStorage.getItem('vivefit_token')) {
+      window.location.hash = '#/'
+      return null
+    }
+    return <Sucesso />
+  }
 
   // ── ROTA: Checkout (resumo do pedido) ──
   if (hash.startsWith('#/checkout')) {
