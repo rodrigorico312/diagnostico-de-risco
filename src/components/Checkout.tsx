@@ -177,7 +177,12 @@ export default function Checkout({ plano }: Props) {
         body: JSON.stringify({ plano, frete: freteSelecionado.preco, cpf: cpfLimpo, metodoPagamento: metodo, parcelas: metodo === 'CREDIT_CARD' ? parcelas : 1 }),
       })
       const data = await res.json()
-      if (data.url) { window.location.href = data.url } else { setErroGeral(data.error || 'Erro ao gerar pagamento. Tente novamente.') }
+      if (data.url) {
+        window.open(data.url, '_blank')
+        window.location.hash = '#/sucesso'
+      } else {
+        setErroGeral(data.error || 'Erro ao gerar pagamento. Tente novamente.')
+      }
     } catch { setErroGeral('Erro de conexão. Tente novamente.') }
     setPagando(false)
   }
