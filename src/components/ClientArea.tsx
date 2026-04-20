@@ -390,29 +390,65 @@ export default function ClientArea() {
 function montarUrlRastreio(codigo: string, transportadora: string | null): string {
   if (!codigo) return ''
   const t = (transportadora || '').toLowerCase().trim()
+  const cod = encodeURIComponent(codigo)
 
-  if (t.includes('correio')) {
-    return `https://rastreamento.correios.com.br/app/index.php?codigo=${encodeURIComponent(codigo)}`
+  // Correios (inclui variacoes: ECT, sedex, pac)
+  if (t.includes('correio') || t === 'ect' || t.includes('sedex') || t.includes('pac')) {
+    return `https://rastreamento.correios.com.br/app/index.php?codigo=${cod}`
   }
-  if (t.includes('jadlog')) {
-    return `https://www.jadlog.com.br/tracking?cte=${encodeURIComponent(codigo)}`
+  // Jadlog
+  if (t.includes('jad')) {
+    return `https://www.jadlog.com.br/tracking?cte=${cod}`
   }
+  // Loggi
   if (t.includes('loggi')) {
-    return `https://www.loggi.com/rastreador/?code=${encodeURIComponent(codigo)}`
+    return `https://www.loggi.com/rastreador/?code=${cod}`
   }
+  // Azul (Azul Cargo, Azul Logistica, Azul Express)
+  if (t.includes('azul')) {
+    return `https://www.azulcargo.com.br/RasteioEncomendas?numero=${cod}`
+  }
+  // Sequoia
   if (t.includes('sequoia')) {
-    return `https://tracking.sequoialog.com.br/?codigo=${encodeURIComponent(codigo)}`
+    return `https://tracking.sequoialog.com.br/?codigo=${cod}`
   }
-  if (t.includes('azul') && t.includes('cargo')) {
-    return `https://www.azulcargo.com.br/RasteioEncomendas?numero=${encodeURIComponent(codigo)}`
+  // Total Express
+  if (t.includes('total')) {
+    return `https://tracking.totalexpress.com.br/poupup_track.php?reqTS=&pedWeb=${cod}`
   }
-  if (t.includes('total') && t.includes('express')) {
-    return `https://tracking.totalexpress.com.br/poupup_track.php?reqTS=&pedWeb=${encodeURIComponent(codigo)}`
+  // Latam Cargo
+  if (t.includes('latam')) {
+    return `https://www.latamcargo.com/en/track?awb=${cod}`
   }
-  if (t.includes('latam') && t.includes('cargo')) {
-    return `https://www.latamcargo.com/en/track?awb=${encodeURIComponent(codigo)}`
+  // Mercado Envios / Mercado Livre
+  if (t.includes('mercado') || t === 'ml' || t.includes('envios')) {
+    return `https://www.mercadolivre.com.br/gz/shipping-tracker/${cod}`
   }
-  // Fallback: pesquisa Google com o código + "rastreio"
+  // J&T Express
+  if (t.includes('j&t') || t.includes('jt ') || t === 'jt' || t.includes('jtexpress')) {
+    return `https://www.jtexpress.com.br/#/track?bills=${cod}`
+  }
+  // Braspress
+  if (t.includes('braspress')) {
+    return `https://www.braspress.com/rastreamento/?nro=${cod}`
+  }
+  // TNT (Mercurio)
+  if (t.includes('tnt') || t.includes('mercurio') || t.includes('mercúrio')) {
+    return `https://rastreamento.tntbrasil.com.br/?nfs=${cod}`
+  }
+  // DHL
+  if (t.includes('dhl')) {
+    return `https://www.dhl.com/br-pt/home/rastreamento.html?tracking-id=${cod}`
+  }
+  // FedEx
+  if (t.includes('fedex')) {
+    return `https://www.fedex.com/fedextrack/?tracknumbers=${cod}`
+  }
+  // Gol Log
+  if (t.includes('gol') && t.includes('log')) {
+    return `https://rastreio.gollog.com.br/?awb=${cod}`
+  }
+  // Fallback: pesquisa Google com o codigo + transportadora
   return `https://www.google.com/search?q=${encodeURIComponent(codigo + ' rastreio ' + (transportadora || ''))}`
 }
 
@@ -430,7 +466,12 @@ function BoxTimelineCard({ box }: { box: any }) {
   const formatarData = (dt: string | null) => {
     if (!dt) return null
     try {
-      const d = new Date(dt.replace(' ', 'T'))
+      // Backend retorna em UTC (CURRENT_TIMESTAMP do SQLite).
+      // Adiciona 'Z' pra forcar interpretacao como UTC;
+      // o navegador converte automaticamente pro fuso local da cliente.
+      const isoString = dt.includes('T') ? dt : dt.replace(' ', 'T')
+      const utcString = isoString.endsWith('Z') ? isoString : isoString + 'Z'
+      const d = new Date(utcString)
       const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
       return `${d.getDate()} ${meses[d.getMonth()]}`
     } catch { return null }
