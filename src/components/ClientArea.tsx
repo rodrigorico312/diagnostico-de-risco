@@ -312,105 +312,12 @@ export default function ClientArea() {
               <p style={{ textAlign: 'center', padding: '2rem 0', fontSize: '.85rem', color: 'var(--cinza-mudo)' }}>Carregando suas boxes...</p>
             ) : boxes.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '3rem 0' }}>
-                <h3 style={{ fontFamily: 'Montserrat, sans-serif', color: 'var(--azul-noite)', fontSize: '1.1rem', margin: '0 0 .5rem' }}>Sua box está sendo preparada</h3>
-                <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '300px', margin: '0 auto' }}>Quando enviarmos, o código de rastreio aparece aqui automaticamente.</p>
+                <h3 style={{ fontFamily: 'Georgia, serif', color: '#040861', fontSize: '1.3rem', margin: '0 0 .5rem', fontWeight: 400 }}>Sua box está sendo preparada</h3>
+                <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>Quando enviarmos, o código de rastreio aparece aqui automaticamente.</p>
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '.8rem' }}>
-                {boxes.map((b: any) => {
-                  const statusCor: Record<string, string> = {
-                    pendente: '#A78BFA',
-                    preparando: '#F97316',
-                    enviada: '#3B82F6',
-                    entregue: '#16A34A',
-                    cancelada: '#94A3B8',
-                  }
-                  const statusTexto: Record<string, string> = {
-                    pendente: 'Separando suas peças',
-                    preparando: 'Preparando sua box',
-                    enviada: 'Box enviada',
-                    entregue: 'Box entregue',
-                    cancelada: 'Cancelada',
-                  }
-                  const cor = statusCor[b.status] || '#94A3B8'
-                  const texto = statusTexto[b.status] || b.status
-
-                  const formatarMes = (mes: string) => {
-                    if (!mes) return ''
-                    const [ano, m] = mes.split('-')
-                    const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']
-                    const nomeM = meses[parseInt(m) - 1]
-                    return nomeM ? `${nomeM} ${ano}` : mes
-                  }
-
-                  return (
-                    <div key={b.id} style={{
-                      background: '#fff',
-                      borderRadius: '14px',
-                      padding: '1.2rem',
-                      boxShadow: '0 1px 4px rgba(0,0,0,.05)',
-                      borderLeft: '4px solid ' + cor,
-                      opacity: b.status === 'cancelada' ? 0.7 : 1,
-                    }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.6rem' }}>
-                        <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.95rem', fontWeight: 700, color: 'var(--azul-noite)', textTransform: 'capitalize' as const }}>
-                          Box de {formatarMes(b.mes_ref)}
-                        </span>
-                        <span style={{ fontSize: '.72rem', fontWeight: 600, color: cor, background: cor + '15', padding: '3px 10px', borderRadius: '20px', textTransform: 'uppercase' as const, letterSpacing: '.04em' }}>
-                          {texto}
-                        </span>
-                      </div>
-
-                      {b.rastreio && (
-                        <div style={{ background: 'rgba(6,182,212,.08)', borderRadius: '8px', padding: '.7rem .9rem', marginBottom: '.7rem' }}>
-                          <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', margin: '0 0 .2rem', letterSpacing: '.04em', textTransform: 'uppercase' as const }}>Código de rastreio</p>
-                          <p style={{ fontSize: '.9rem', fontWeight: 600, color: '#06B6D4', margin: 0, fontFamily: 'monospace' }}>{b.rastreio}</p>
-                          {b.transportadora && <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', margin: '.2rem 0 0' }}>via {b.transportadora}</p>}
-                        </div>
-                      )}
-
-                      {b.pecas && b.pecas.length > 0 && (
-                        <div style={{ marginTop: '.2rem' }}>
-                          <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', margin: '0 0 .5rem', textTransform: 'uppercase' as const, letterSpacing: '.06em', fontWeight: 600 }}>
-                            {b.pecas.length} {b.pecas.length === 1 ? 'peça' : 'peças'} desta box
-                          </p>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem' }}>
-                            {b.pecas.map((p: any, i: number) => (
-                              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '.7rem', background: '#F8FAFC', padding: '.5rem .7rem', borderRadius: '8px' }}>
-                                {p.foto_url && (
-                                  <img src={API + p.foto_url} alt="" style={{ width: '42px', height: '42px', borderRadius: '6px', objectFit: 'cover' as const, background: '#fff', flexShrink: 0 }} />
-                                )}
-                                <div style={{ flex: 1, minWidth: 0 }}>
-                                  <p style={{ fontSize: '.82rem', color: 'var(--azul-noite)', margin: 0, fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>{p.descricao}</p>
-                                  <div style={{ display: 'flex', alignItems: 'center', gap: '.4rem', marginTop: '.15rem' }}>
-                                    {p.cor_hex && <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: p.cor_hex, border: '1px solid rgba(0,0,0,.1)', flexShrink: 0 }} />}
-                                    <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', margin: 0 }}>
-                                      {[p.tipo_nome, p.tamanho_nome, p.marca_nome].filter(Boolean).join(' · ')}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {b.tem_brinde && (b.status === 'enviada' || b.status === 'entregue') && (
-                        <div style={{ marginTop: '.7rem', padding: '.6rem .8rem', background: 'linear-gradient(135deg, rgba(10,154,168,.08) 0%, rgba(12,187,204,.12) 100%)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-                          <span style={{ fontSize: '.8rem', fontWeight: 600, color: '#0A9AA8' }}>Inclui brinde surpresa</span>
-                        </div>
-                      )}
-
-                      {(b.status === 'pendente' || b.status === 'preparando') && !b.rastreio && (
-                        <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)', margin: '.6rem 0 0', fontStyle: 'italic' }}>
-                          {b.status === 'pendente'
-                            ? 'Separando suas peças especialmente pra você. Em breve começamos a preparar.'
-                            : 'Estamos selecionando e embalando sua box com carinho. O rastreio aparece assim que enviarmos.'}
-                        </p>
-                      )}
-                    </div>
-                  )
-                })}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {boxes.map((b: any) => <BoxTimelineCard key={b.id} box={b} />)}
               </div>
             )}
           </div>
@@ -476,6 +383,249 @@ export default function ClientArea() {
           </div>
         )}
       </div>
+    </div>
+  )
+}
+
+function montarUrlRastreio(codigo: string, transportadora: string | null): string {
+  if (!codigo) return ''
+  const t = (transportadora || '').toLowerCase().trim()
+
+  if (t.includes('correio')) {
+    return `https://rastreamento.correios.com.br/app/index.php?codigo=${encodeURIComponent(codigo)}`
+  }
+  if (t.includes('jadlog')) {
+    return `https://www.jadlog.com.br/tracking?cte=${encodeURIComponent(codigo)}`
+  }
+  if (t.includes('loggi')) {
+    return `https://www.loggi.com/rastreador/?code=${encodeURIComponent(codigo)}`
+  }
+  if (t.includes('sequoia')) {
+    return `https://tracking.sequoialog.com.br/?codigo=${encodeURIComponent(codigo)}`
+  }
+  if (t.includes('azul') && t.includes('cargo')) {
+    return `https://www.azulcargo.com.br/RasteioEncomendas?numero=${encodeURIComponent(codigo)}`
+  }
+  if (t.includes('total') && t.includes('express')) {
+    return `https://tracking.totalexpress.com.br/poupup_track.php?reqTS=&pedWeb=${encodeURIComponent(codigo)}`
+  }
+  if (t.includes('latam') && t.includes('cargo')) {
+    return `https://www.latamcargo.com/en/track?awb=${encodeURIComponent(codigo)}`
+  }
+  // Fallback: pesquisa Google com o código + "rastreio"
+  return `https://www.google.com/search?q=${encodeURIComponent(codigo + ' rastreio ' + (transportadora || ''))}`
+}
+
+function BoxTimelineCard({ box }: { box: any }) {
+  const API_URL = 'https://api.ogestordolucro.site'
+
+  const formatarMes = (mes: string) => {
+    if (!mes) return { mes: '', ano: '' }
+    const [ano, m] = mes.split('-')
+    const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    const nomeM = meses[parseInt(m) - 1]
+    return { mes: nomeM || mes, ano: ano || '' }
+  }
+
+  const formatarData = (dt: string | null) => {
+    if (!dt) return null
+    try {
+      const d = new Date(dt.replace(' ', 'T'))
+      const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+      return `${d.getDate()} ${meses[d.getMonth()]}`
+    } catch { return null }
+  }
+
+  const { mes, ano } = formatarMes(box.mes_ref)
+  const urlRastreio = box.rastreio ? montarUrlRastreio(box.rastreio, box.transportadora) : ''
+
+  const statusOrdem = ['pendente', 'preparando', 'enviada', 'entregue']
+  const statusAtual = box.status
+  const indiceAtual = statusOrdem.indexOf(statusAtual)
+  const cancelada = statusAtual === 'cancelada'
+
+  const passos = [
+    { key: 'pendente', label: 'Separando peças', data: formatarData(box.criado_em), subtexto: 'selecionando pra você' },
+    { key: 'preparando', label: 'Box preparada', data: formatarData(box.preparando_em), subtexto: 'embalada com cuidado' },
+    { key: 'enviada', label: 'Box enviada', data: formatarData(box.enviado_em), subtexto: 'a caminho da sua casa' },
+    { key: 'entregue', label: 'Box entregue', data: formatarData(box.entregue_em), subtexto: 'aproveite!' },
+  ]
+
+  const headerBg = cancelada
+    ? 'linear-gradient(135deg, #64748B 0%, #475569 100%)'
+    : 'linear-gradient(135deg, #040861 0%, #0A2171 100%)'
+
+  return (
+    <div style={{
+      background: '#fff',
+      border: '1px solid #E4E8EE',
+      borderRadius: '18px',
+      overflow: 'hidden',
+      opacity: cancelada ? 0.75 : 1,
+    }}>
+
+      {/* HEADER */}
+      <div style={{ padding: '1.1rem 1.3rem', background: headerBg, color: '#fff' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap' as const, gap: '.6rem' }}>
+          <div>
+            <div style={{ fontSize: '.58rem', letterSpacing: '.22em', textTransform: 'uppercase' as const, opacity: 0.75, fontWeight: 700, marginBottom: '.2rem' }}>Box</div>
+            <div style={{ fontFamily: 'Georgia, serif', fontSize: '1.5rem', lineHeight: 1, letterSpacing: '-.01em' }}>
+              {mes} <span style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic' as const, color: '#0CBBCC', fontWeight: 300 }}>{ano}</span>
+            </div>
+          </div>
+          <div style={{ textAlign: 'right' as const }}>
+            <div style={{ fontSize: '.58rem', opacity: 0.75, letterSpacing: '.14em', textTransform: 'uppercase' as const, marginBottom: '.15rem' }}>
+              {box.quantidade_pecas} {box.quantidade_pecas === 1 ? 'peça' : 'peças'}
+            </div>
+            {box.tem_brinde && !cancelada && (
+              <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic' as const, fontSize: '.78rem', color: '#0CBBCC' }}>+ surpresa</div>
+            )}
+            {cancelada && (
+              <div style={{ fontSize: '.68rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase' as const, color: '#fff' }}>cancelada</div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* TIMELINE */}
+      {!cancelada && (
+        <div style={{ padding: '1.1rem 1.3rem', borderBottom: '1px solid #F0F4F6' }}>
+          <div style={{ position: 'relative' as const, paddingLeft: '1.6rem' }}>
+
+            <div style={{
+              position: 'absolute' as const,
+              left: '7px',
+              top: '8px',
+              bottom: '8px',
+              width: '2px',
+              background: '#E4E8EE',
+            }} />
+
+            {indiceAtual > 0 && (
+              <div style={{
+                position: 'absolute' as const,
+                left: '7px',
+                top: '8px',
+                height: `${(indiceAtual / (statusOrdem.length - 1)) * 100}%`,
+                width: '2px',
+                background: 'linear-gradient(180deg, #16A34A 0%, #3B82F6 100%)',
+              }} />
+            )}
+
+            {passos.map((p, idx) => {
+              const concluido = idx < indiceAtual
+              const ativo = idx === indiceAtual
+              const futuro = idx > indiceAtual
+
+              const corBolinha = concluido ? '#16A34A' : ativo ? (p.key === 'enviada' ? '#3B82F6' : '#F97316') : '#fff'
+              const bordaBolinha = futuro ? '2px solid #E4E8EE' : '3px solid #fff'
+              const boxShadowBolinha = futuro ? 'none' : `0 0 0 2px ${corBolinha}`
+
+              return (
+                <div key={p.key} style={{ position: 'relative' as const, marginBottom: idx === passos.length - 1 ? 0 : '.9rem' }}>
+                  <div style={{
+                    position: 'absolute' as const,
+                    left: '-1.6rem',
+                    top: '2px',
+                    width: '16px',
+                    height: '16px',
+                    borderRadius: '50%',
+                    background: corBolinha,
+                    border: bordaBolinha,
+                    boxShadow: boxShadowBolinha,
+                  }} />
+                  <div style={{
+                    fontSize: '.78rem',
+                    color: futuro ? '#94A3B8' : '#040861',
+                    fontWeight: ativo ? 700 : 500,
+                    lineHeight: 1.2,
+                  }}>{p.label}</div>
+                  <div style={{
+                    fontSize: '.68rem',
+                    color: ativo ? (p.key === 'enviada' ? '#3B82F6' : '#F97316') : '#94A3B8',
+                    marginTop: '.15rem',
+                    fontWeight: ativo ? 600 : 400,
+                  }}>
+                    {p.data ? p.data : (ativo ? 'em andamento' : (concluido ? 'concluído' : 'aguardando'))}
+                    {ativo && p.subtexto && ` · ${p.subtexto}`}
+                  </div>
+
+                  {/* Rastreio clicavel dentro do passo "enviada" */}
+                  {p.key === 'enviada' && (concluido || ativo) && box.rastreio && (
+                    <a
+                      href={urlRastreio}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'block',
+                        marginTop: '.5rem',
+                        padding: '.7rem .9rem',
+                        background: 'rgba(6,182,212,.08)',
+                        borderRadius: '8px',
+                        textDecoration: 'none' as const,
+                        border: '1px solid rgba(6,182,212,.2)',
+                        transition: 'all .2s',
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,182,212,.14)' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,182,212,.08)' }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '.5rem' }}>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: '.58rem', color: '#64748B', letterSpacing: '.2em', textTransform: 'uppercase' as const, fontWeight: 700, marginBottom: '.2rem' }}>Rastreio · toque para rastrear</div>
+                          <div style={{ fontFamily: 'monospace', fontSize: '.82rem', color: '#0A9AA8', fontWeight: 700, overflow: 'hidden' as const, textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>{box.rastreio}</div>
+                          {box.transportadora && (
+                            <div style={{ fontSize: '.65rem', color: '#94A3B8', marginTop: '.15rem' }}>via {box.transportadora}</div>
+                          )}
+                        </div>
+                        <div style={{ color: '#0A9AA8', fontSize: '1.3rem', lineHeight: 1, flexShrink: 0 }}>›</div>
+                      </div>
+                    </a>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {cancelada && (
+        <div style={{ padding: '1rem 1.3rem', borderBottom: '1px solid #F0F4F6', textAlign: 'center' as const }}>
+          <p style={{ fontSize: '.82rem', color: '#64748B', margin: 0, fontStyle: 'italic' as const }}>
+            Esta box foi cancelada{box.cancelada_em ? ` em ${formatarData(box.cancelada_em)}` : ''}.
+          </p>
+        </div>
+      )}
+
+      {/* LISTA DE PEÇAS */}
+      {box.pecas && box.pecas.length > 0 && (
+        <div style={{ padding: '1rem 1.3rem' }}>
+          <div style={{ fontSize: '.58rem', color: '#040861', letterSpacing: '.22em', textTransform: 'uppercase' as const, fontWeight: 700, marginBottom: '.7rem' }}>
+            Nesta box
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+            {box.pecas.map((p: any, i: number) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '.7rem' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '6px', background: '#F0F4F6', border: '1px solid #E4E8EE', overflow: 'hidden' as const, flexShrink: 0 }}>
+                  {p.foto_url && <img src={API_URL + p.foto_url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' as const }} />}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontFamily: 'Georgia, serif', fontSize: '.85rem', color: '#040861', fontWeight: 500, lineHeight: 1.2, overflow: 'hidden' as const, textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>
+                    {p.descricao}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '.35rem', marginTop: '.15rem' }}>
+                    {p.cor_hex && <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: p.cor_hex, border: '1px solid rgba(0,0,0,.1)', flexShrink: 0 }} />}
+                    <span style={{ fontSize: '.68rem', color: '#64748B' }}>
+                      {[p.tipo_nome, p.tamanho_nome, p.marca_nome].filter(Boolean).join(' · ')}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }
