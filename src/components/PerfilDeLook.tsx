@@ -70,6 +70,7 @@ const STEPS: QuizStep[] = [
       { val: 'coral', label: 'Coral', color: '#FF5A5F' },
       { val: 'laranja', label: 'Laranja', color: '#F97316' },
       { val: 'lilas', label: 'Lilás', color: '#A78BFA' },
+      { val: 'outro', label: 'Outra' },
     ],
   },
   {
@@ -87,6 +88,7 @@ const STEPS: QuizStep[] = [
       { val: 'macaquinho', label: 'Macaquinho' },
       { val: 'cropped', label: 'Cropped' },
       { val: 'regata', label: 'Regata' },
+      { val: 'outro', label: 'Outra' },
     ],
   },
   {
@@ -292,6 +294,14 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
             ))}
           </div>
         )}
+        {step.id === 'pecas' && isSelected('outro') && (
+          <input
+            type="text"
+            placeholder="nome da peca"
+            style={{marginTop: 12, padding: '10px 16px', borderRadius: 60, border: '1.5px solid #CBD5E1', fontFamily: 'Arial, sans-serif', fontSize: 14, width: '100%', outline: 'none'}}
+            onChange={(e) => setAnswers(prev => ({...prev, peca_personalizada: e.target.value}))}
+          />
+        )}
 
         {step.style === 'swatch' && (
           <div className="swatches">
@@ -302,6 +312,14 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
               </div>
             ))}
           </div>
+        )}
+        {step.id === 'cores' && isSelected('outro') && (
+          <input
+            type="text"
+            placeholder="digite a cor"
+            style={{marginTop: 12, padding: '10px 16px', borderRadius: 60, border: '1.5px solid #CBD5E1', fontFamily: 'Arial, sans-serif', fontSize: 14, width: '100%', outline: 'none'}}
+            onChange={(e) => setAnswers(prev => ({...prev, cor_personalizada: e.target.value}))}
+          />
         )}
 
         {step.style === 'tag' && (
