@@ -135,6 +135,12 @@ async function salvarPerfilNoServidor(answers: Record<string, string | string[]>
   const token = localStorage.getItem('vivefit_token')
   if (!token) return
 
+  // Se a cliente não marcou "outro", garante que o texto livre vai como null
+  const coresArr = (answers.cores as string[]) || []
+  const pecasArr = (answers.pecas as string[]) || []
+  const corPers = coresArr.includes('outro') ? (answers.cor_personalizada as string) || null : null
+  const pecaPers = pecasArr.includes('outro') ? (answers.peca_personalizada as string) || null : null
+
   try {
     await fetch(API + '/perfil', {
       method: 'PUT',
@@ -145,10 +151,12 @@ async function salvarPerfilNoServidor(answers: Record<string, string | string[]>
       body: JSON.stringify({
         tamanho: answers.tamanho || null,
         treinos: answers.treino || [],
-        cores: answers.cores || [],
-        pecas: answers.pecas || [],
+        cores: coresArr,
+        pecas: pecasArr,
         modelagem: answers.modelagem || [],
         blacklist: answers.blacklist || [],
+        cor_personalizada: corPers,
+        peca_personalizada: pecaPers,
       }),
     })
   } catch (err) {
@@ -298,6 +306,7 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
           <input
             type="text"
             placeholder="nome da peca"
+            value={(answers.peca_personalizada as string) || ''}
             style={{marginTop: 12, padding: '10px 16px', borderRadius: 60, border: '1.5px solid #CBD5E1', fontFamily: 'Arial, sans-serif', fontSize: 14, width: '100%', outline: 'none'}}
             onChange={(e) => setAnswers(prev => ({...prev, peca_personalizada: e.target.value}))}
           />
@@ -317,6 +326,7 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
           <input
             type="text"
             placeholder="digite a cor"
+            value={(answers.cor_personalizada as string) || ''}
             style={{marginTop: 12, padding: '10px 16px', borderRadius: 60, border: '1.5px solid #CBD5E1', fontFamily: 'Arial, sans-serif', fontSize: 14, width: '100%', outline: 'none'}}
             onChange={(e) => setAnswers(prev => ({...prev, cor_personalizada: e.target.value}))}
           />
