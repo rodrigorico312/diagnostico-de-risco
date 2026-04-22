@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API = 'https://api.ogestordolucro.site'
+const API = 'https://api.vivefit.site'
 
 interface Props {
   plano: string

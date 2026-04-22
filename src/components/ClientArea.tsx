@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API = 'https://api.ogestordolucro.site'
+const API = 'https://api.vivefit.site'
 
 interface UserData {
   id: number
@@ -453,7 +453,7 @@ function montarUrlRastreio(codigo: string, transportadora: string | null): strin
 }
 
 function BoxTimelineCard({ box }: { box: any }) {
-  const API_URL = 'https://api.ogestordolucro.site'
+  const API_URL = 'https://api.vivefit.site'
 
   const formatarMes = (mes: string) => {
     if (!mes) return { mes: '', ano: '' }

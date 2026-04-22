@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-const API = 'https://api.ogestordolucro.site'
+const API = 'https://api.vivefit.site'
 
 interface Props {
   planoPreSelecionado?: string | null

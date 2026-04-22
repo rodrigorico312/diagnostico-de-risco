@@ -36,7 +36,7 @@ const plans = [
 
 async function irParaPagamento(plano: string) {
   try {
-    const res = await fetch('https://api.ogestordolucro.site/checkout', {
+    const res = await fetch('https://api.vivefit.site/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ plano }),
