@@ -370,7 +370,7 @@ export default function ClientArea() {
                     <p style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)', margin: '0 0 1rem' }}>Você pode reativar quando quiser. Sua box atual continua sendo enviada até o fim do período.</p>
                     <div style={{ display: 'flex', gap: '.5rem', justifyContent: 'center' }}>
                       <button onClick={() => setShowCancelar(false)} style={{ ...secondaryBtnStyle, flex: 1, margin: 0, fontSize: '.8rem' }}>manter plano</button>
-                      <a href="https://wa.me/5593992101980?text=Olá, gostaria de cancelar minha assinatura VIVE FIT BOX" target="_blank" rel="noopener" style={{ ...actionBtnStyle, flex: 1, margin: 0, fontSize: '.8rem', background: '#DC2626', textDecoration: 'none' }}>confirmar cancelamento</a>
+                      <a href="https://wa.me/5593991201035?text=Olá, gostaria de cancelar minha assinatura VIVE FIT BOX" target="_blank" rel="noopener" style={{ ...actionBtnStyle, flex: 1, margin: 0, fontSize: '.8rem', background: '#DC2626', textDecoration: 'none' }}>confirmar cancelamento</a>
                     </div>
                   </div>
                 )}
@@ -378,7 +378,7 @@ export default function ClientArea() {
             )}
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
               <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)' }}>Precisa de ajuda? Fale pelo WhatsApp</p>
-              <a href="https://wa.me/5593992101980" target="_blank" rel="noopener" style={{ fontSize: '.85rem', color: 'var(--turquesa)', textDecoration: 'none', fontWeight: 600 }}>(93) 99210-1980</a>
+              <a href="https://wa.me/5593991201035" target="_blank" rel="noopener" style={{ fontSize: '.85rem', color: 'var(--turquesa)', textDecoration: 'none', fontWeight: 600 }}>(93) 99120-1035</a>
             </div>
           </div>
         )}
