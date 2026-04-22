@@ -2,6 +2,16 @@ import { useState } from 'react'
 
 const API = 'https://api.vivefit.site'
 
+const mascaraTelefone = (v: string): string => {
+  const d = v.replace(/\D/g, '').slice(0, 11)
+  if (d.length <= 2) return d
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
+}
+
+const emailValido = (v: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+
 interface Props {
   onAuth: (token: string, nome: string) => void
   planoPreSelecionado?: string | null
@@ -20,13 +30,24 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
   const submit = async () => {
     setErro('')
     if (mode === 'register' && !nome.trim()) return setErro('Preencha seu nome')
+    if (mode === 'register' && nome.trim().length < 2) return setErro('Nome muito curto')
     if (!email.trim()) return setErro('Preencha seu e-mail')
+    if (!emailValido(email.trim())) return setErro('E-mail invalido')
+    if (mode === 'register' && !telefone.trim()) return setErro('Preencha seu WhatsApp')
+    if (mode === 'register') {
+      const telDigitos = telefone.replace(/\D/g, '')
+      if (telDigitos.length !== 10 && telDigitos.length !== 11) {
+        return setErro('WhatsApp invalido. Use DDD + numero')
+      }
+    }
     if (!senha || senha.length < 6) return setErro('Senha precisa ter pelo menos 6 caracteres')
 
     setLoading(true)
     try {
       const endpoint = mode === 'register' ? '/auth/register' : '/auth/login'
-      const body = mode === 'register' ? { nome, email, senha, telefone } : { email, senha }
+      const body = mode === 'register'
+        ? { nome: nome.trim(), email: email.trim().toLowerCase(), senha, telefone: telefone.replace(/\D/g, '') }
+        : { email: email.trim().toLowerCase(), senha }
 
       const res = await fetch(API + endpoint, {
         method: 'POST',
