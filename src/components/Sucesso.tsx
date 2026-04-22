@@ -124,8 +124,8 @@ export default function Sucesso() {
 
           <div className="sucesso-rodape">
             <div className="sucesso-rodape-label">Dúvidas?</div>
-            <a href="https://wa.me/5593991201035" target="_blank" rel="noopener noreferrer" className="sucesso-rodape-wpp">
-              WhatsApp (93) 99120-1035
+            <a href="https://wa.me/5593991201036" target="_blank" rel="noopener noreferrer" className="sucesso-rodape-wpp">
+              WhatsApp (93) 99120-1036
             </a>
           </div>
 
