@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import ModalTermos from './ModalTermos'
 
 const API = 'https://api.vivefit.site'
 
@@ -48,6 +49,8 @@ function filtrarFreteOpcoes(opcoes: FreteOpcao[]): FreteOpcao[] {
 }
 
 export default function Checkout({ plano }: Props) {
+  const [aceiteTermos, setAceiteTermos] = useState(false)
+  const [modalTermosAberto, setModalTermosAberto] = useState(false)
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
@@ -189,7 +192,7 @@ export default function Checkout({ plano }: Props) {
 
   const enderecoPreenchido = rua && numero && bairro && cidade && estado
   const cpfValido = cpf.replace(/\D/g, '').length === 11
-  const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && metodo && !pagando
+  const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && metodo && aceiteTermos && !pagando
 
   const opcoesParcelamento: number[] = []
   for (let i = 1; i <= info.maxParcelas; i++) opcoesParcelamento.push(i)
@@ -334,6 +337,33 @@ export default function Checkout({ plano }: Props) {
             </div>
           </Card>
         )}
+
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.6rem', padding: '.8rem 1rem', background: 'rgba(6,182,212,.06)', border: '1px solid rgba(6,182,212,.2)', borderRadius: '10px', marginBottom: '.8rem' }}>
+          <input
+            type="checkbox"
+            checked={aceiteTermos}
+            readOnly
+            onClick={(e) => { e.preventDefault(); if (!aceiteTermos) setModalTermosAberto(true) }}
+            style={{ marginTop: '.25rem', width: '18px', height: '18px', cursor: 'pointer', accentColor: 'var(--turquesa, #06B6D4)' }}
+          />
+          <label style={{ fontSize: '.82rem', color: '#334155', lineHeight: 1.5, cursor: 'pointer' }} onClick={() => { if (!aceiteTermos) setModalTermosAberto(true) }}>
+            Li e aceito os{' '}
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); setModalTermosAberto(true) }}
+              style={{ color: 'var(--turquesa, #06B6D4)', textDecoration: 'underline', fontWeight: 500 }}
+            >
+              Termos de uso
+            </a>{' '}
+            da VIVE FIT BOX.
+          </label>
+        </div>
+
+        <ModalTermos
+          aberto={modalTermosAberto}
+          onConfirmar={() => { setAceiteTermos(true); setModalTermosAberto(false) }}
+          onCancelar={() => setModalTermosAberto(false)}
+        />
 
         {erroGeral && <p style={{ textAlign: 'center', fontSize: '.75rem', color: 'var(--coral)', marginBottom: '.5rem' }}>{erroGeral}</p>}
 

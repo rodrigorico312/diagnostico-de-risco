@@ -10,7 +10,7 @@ export default function Footer() {
           <a href="#">Blog</a>
           <a href="#faq">Perguntas frequentes</a>
           <a href="https://api.whatsapp.com/send/?phone=5593991201036&text=Oi%2C+quero+saber+mais+sobre+a+VIVE+FIT+BOX&type=phone_number" target="_blank" rel="noopener">WhatsApp VIVE FIT</a>
-          <a href="#">Termos de uso</a>
+          <a href="#/termos">Termos de uso</a>
           <a href="#">Política de privacidade</a>
         </div>
 

@@ -13,6 +13,7 @@ import AuthPage from './components/AuthPage'
 import ClientArea from './components/ClientArea'
 import Checkout from './components/Checkout'
 import Sucesso from './components/Sucesso'
+import Termos from './components/Termos'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
@@ -54,6 +55,11 @@ export default function App() {
 
     return () => { obs.disconnect(); obsS.disconnect() }
   }, [hash])
+
+  // ── ROTA: Termos de uso (página pública) ──
+  if (hash === '#/termos') {
+    return <Termos />
+  }
 
   // ── ROTA: Sucesso (thank-you page pós-pagamento) ──
   if (hash === '#/sucesso') {
