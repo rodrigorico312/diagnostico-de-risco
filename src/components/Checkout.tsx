@@ -161,8 +161,41 @@ export default function Checkout({ plano }: Props) {
   }
 
   const freteTotal = freteSelecionado ? freteSelecionado.preco * info.meses : 0
-  const total = freteSelecionado ? info.valorTotal + freteTotal : null
+  const descontoCupom = cupomAplicado ? cupomAplicado.desconto : 0
+  const subtotal = freteSelecionado ? info.valorTotal + freteTotal : null
+  const total = subtotal !== null ? Math.max(0, subtotal - descontoCupom) : null
   const valorParcela = total && parcelas > 1 ? total / parcelas : null
+
+  async function validarCupom() {
+    if (!cupomInput.trim()) return
+    setValidandoCupom(true)
+    setCupomErro('')
+    try {
+      const r = await fetch(API + '/cupons/validar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codigo: cupomInput.trim(), plano, valor: info.valorTotal }),
+      })
+      const d = await r.json()
+      if (!d.valido) {
+        setCupomErro(d.erro || 'Cupom invalido')
+        setCupomAplicado(null)
+      } else {
+        setCupomAplicado(d)
+        setCupomErro('')
+      }
+    } catch (err) {
+      setCupomErro('Erro ao validar cupom')
+    } finally {
+      setValidandoCupom(false)
+    }
+  }
+
+  function removerCupom() {
+    setCupomAplicado(null)
+    setCupomInput('')
+    setCupomErro('')
+  }
 
   const irParaPagamento = async () => {
     setErroCpf('')
@@ -177,7 +210,7 @@ export default function Checkout({ plano }: Props) {
       const res = await fetch(API + '/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify({ plano, frete: freteSelecionado.preco, cpf: cpfLimpo, metodoPagamento: metodo, parcelas: metodo === 'CREDIT_CARD' ? parcelas : 1 }),
+        body: JSON.stringify({ plano, frete: freteSelecionado.preco, cpf: cpfLimpo, metodoPagamento: metodo, parcelas: metodo === 'CREDIT_CARD' ? parcelas : 1, cupom_id: cupomAplicado?.cupom?.id || null, desconto_cupom: descontoCupom }),
       })
       const data = await res.json()
       if (data.url) {
@@ -311,6 +344,40 @@ export default function Checkout({ plano }: Props) {
           </Card>
         )}
 
+        {freteSelecionado && metodo && (
+          <Card>
+            <p style={{ fontSize: '.72rem', color: 'var(--cinza-mudo)', margin: '0 0 .5rem', textTransform: 'uppercase', letterSpacing: '.04em', fontWeight: 600 }}>Cupom de desconto</p>
+            {!cupomAplicado ? (
+              <div style={{ display: 'flex', gap: '.5rem' }}>
+                <input
+                  type="text"
+                  value={cupomInput}
+                  onChange={e => { setCupomInput(e.target.value.toUpperCase()); setCupomErro('') }}
+                  onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); validarCupom() } }}
+                  placeholder="Digite seu cupom"
+                  style={{ flex: 1, padding: '.6rem .8rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '.85rem', fontFamily: 'inherit', textTransform: 'uppercase' }}
+                />
+                <button
+                  onClick={validarCupom}
+                  disabled={!cupomInput.trim() || validandoCupom}
+                  style={{ padding: '.6rem 1rem', borderRadius: '8px', border: '1px solid var(--coral)', background: 'var(--coral)', color: '#fff', cursor: cupomInput.trim() && !validandoCupom ? 'pointer' : 'not-allowed', fontSize: '.82rem', fontWeight: 600, opacity: cupomInput.trim() && !validandoCupom ? 1 : 0.5 }}
+                >
+                  {validandoCupom ? '...' : 'Aplicar'}
+                </button>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.6rem .8rem', background: 'rgba(22,163,74,.08)', border: '1px solid rgba(22,163,74,.3)', borderRadius: '8px' }}>
+                <div>
+                  <p style={{ fontSize: '.85rem', color: '#15803D', margin: 0, fontWeight: 600 }}>✓ {cupomAplicado.cupom.codigo} aplicado</p>
+                  <p style={{ fontSize: '.7rem', color: '#166534', margin: '.15rem 0 0' }}>Desconto de {formatBRL(descontoCupom)}</p>
+                </div>
+                <button onClick={removerCupom} style={{ padding: '.3rem .7rem', borderRadius: '6px', border: '1px solid #DC2626', background: 'transparent', color: '#DC2626', cursor: 'pointer', fontSize: '.75rem', fontWeight: 500 }}>remover</button>
+              </div>
+            )}
+            {cupomErro && <p style={{ fontSize: '.75rem', color: 'var(--coral)', margin: '.4rem 0 0' }}>{cupomErro}</p>}
+          </Card>
+        )}
+
         {freteSelecionado && total && metodo && (
           <Card>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem' }}>
@@ -322,6 +389,12 @@ export default function Checkout({ plano }: Props) {
                 <span>Frete ({freteSelecionado.empresa}) x {info.meses} {info.meses === 1 ? 'mês' : 'meses'}</span>
                 <span>{formatBRL(freteTotal)}</span>
               </div>
+              {cupomAplicado && descontoCupom > 0 && (
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.75rem', color: '#16a34a', fontWeight: 600 }}>
+                  <span>🎟️ Cupom {cupomAplicado.cupom.codigo}</span>
+                  <span>-{formatBRL(descontoCupom)}</span>
+                </div>
+              )}
               <div style={{ borderTop: '1px solid #eee', paddingTop: '.4rem', marginTop: '.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.8rem', fontWeight: 700, color: 'var(--azul-noite)' }}>Total</span>
                 <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(total)}</span>
