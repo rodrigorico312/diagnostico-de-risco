@@ -51,6 +51,10 @@ function filtrarFreteOpcoes(opcoes: FreteOpcao[]): FreteOpcao[] {
 export default function Checkout({ plano }: Props) {
   const [aceiteTermos, setAceiteTermos] = useState(false)
   const [modalTermosAberto, setModalTermosAberto] = useState(false)
+  const [cupomInput, setCupomInput] = useState('')
+  const [cupomAplicado, setCupomAplicado] = useState<any>(null)
+  const [cupomErro, setCupomErro] = useState('')
+  const [validandoCupom, setValidandoCupom] = useState(false)
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
