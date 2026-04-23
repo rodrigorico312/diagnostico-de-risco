@@ -70,10 +70,10 @@ export default function Termos() {
         </Secao>
 
         <Secao titulo="6. Cancelamento">
-          <ul style={ulStyle}>
-            <li><strong>Plano mensal:</strong> você pode cancelar a qualquer momento na sua área da assinante. O cancelamento vale para o próximo ciclo - a box do ciclo já pago será normalmente enviada</li>
-            <li><strong>Planos semestral e anual:</strong> por serem pagamentos antecipados, o cancelamento antes do término do período contratado não dá direito a reembolso proporcional, salvo nas hipóteses legais (art. 49 do CDC nos 7 primeiros dias)</li>
-          </ul>
+          <p>Para cancelar sua assinatura, acesse sua área da assinante e clique em "Cancelar assinatura". Você poderá informar o motivo do cancelamento, e nossa equipe processará sua solicitação em até 10 dias úteis.</p>
+          <p><strong>Plano mensal:</strong> o cancelamento vale para o próximo ciclo. A box do ciclo já pago será normalmente enviada.</p>
+          <p><strong>Planos semestral e anual:</strong> por serem pagamentos antecipados, o cancelamento antes do término do período contratado não dá direito a reembolso proporcional, salvo nas hipóteses legais (art. 49 do CDC nos 7 primeiros dias).</p>
+          <p>Durante o prazo de processamento, nossa equipe pode entrar em contato para entender sua experiência ou oferecer alternativas. Caso opte por manter o cancelamento, ele será efetivado automaticamente após o prazo.</p>
         </Secao>
 
         <Secao titulo="7. Endereço de Entrega">

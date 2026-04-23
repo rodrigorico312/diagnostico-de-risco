@@ -71,7 +71,8 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
           </ul>
 
           <h3 style={h3}>6. Cancelamento</h3>
-          <p style={paragraphStyle}><strong>Mensal:</strong> cancele a qualquer momento na área da assinante. Vale para o próximo ciclo. <strong>Semestral/Anual:</strong> sem reembolso proporcional após os 7 dias de arrependimento, salvo hipóteses legais.</p>
+          <p style={paragraphStyle}>Para cancelar, acesse sua área da assinante e clique em "Cancelar assinatura". Informe o motivo e nossa equipe processará em até 10 dias úteis - podemos entrar em contato para entender sua experiência.</p>
+          <p style={paragraphStyle}><strong>Mensal:</strong> cancelamento vale para o próximo ciclo, a box já paga será enviada. <strong>Semestral/Anual:</strong> sem reembolso proporcional após os 7 dias de arrependimento, salvo hipóteses legais.</p>
 
           <h3 style={h3}>7. Endereço de Entrega</h3>
           <p style={paragraphStyle}>É sua responsabilidade manter o endereço atualizado. Boxes devolvidas por endereço desatualizado só são reenviadas com cobrança de frete adicional.</p>
