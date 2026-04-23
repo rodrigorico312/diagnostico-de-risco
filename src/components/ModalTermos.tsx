@@ -48,26 +48,26 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
           <p style={paragraphStyle}>A VIVE FIT BOX é um clube de assinatura mensal que envia <strong>4 peças fitness femininas</strong> por mês, selecionadas com base no perfil de estilo preenchido por você no cadastro.</p>
 
           <h3 style={h3}>2. Como Funciona a Curadoria</h3>
-          <p style={paragraphStyle}>As peças enviadas são escolhidas pela equipe VIVE FIT com base no seu quiz de perfil. A curadoria é parte central da experiência — não é possível escolher peças específicas, o valor do produto está na surpresa.</p>
+          <p style={paragraphStyle}>As peças enviadas são escolhidas pela equipe VIVE FIT com base no seu quiz de perfil. A curadoria é parte central da experiência - não é possível escolher peças específicas, o valor do produto está na surpresa.</p>
           <p style={paragraphStyle}>Atualizações no perfil passam a valer para a <strong>próxima</strong> box, não para a box já em processamento.</p>
 
           <h3 style={h3}>3. Datas de Envio</h3>
           <ul style={ulStyle}>
             <li>Boxes enviadas <strong>uma vez por mês</strong>, em datas organizadas por região</li>
             <li>Código de rastreio enviado quando a box for despachada</li>
-            <li>Não é um serviço de entrega imediata — o prazo depende da sua região</li>
+            <li>Não é um serviço de entrega imediata - o prazo depende da sua região</li>
           </ul>
 
           <h3 style={h3}>4. Trocas e Devoluções</h3>
           <p style={paragraphStyle}><strong>4.1. Arrependimento em 7 dias (CDC Art. 49):</strong> você pode desistir em até 7 dias do recebimento. Peças devem estar sem uso, com etiquetas e embalagem originais. Frete de retorno é por conta da assinante. Reembolso em até 10 dias úteis após conferência.</p>
-          <p style={paragraphStyle}><strong>4.2. Defeito de fabricação (90 dias):</strong> costura solta, zíper quebrado, tecido rasgado ou mancha de tinta dão direito a troca. Enviar foto pelo e-mail contato@vivefit.site.</p>
+          <p style={paragraphStyle}><strong>4.2. Defeito de fabricação (30 dias):</strong> costura solta, zíper quebrado, tecido rasgado ou mancha de tinta dão direito a troca. Enviar foto pelo e-mail contato@vivefit.site.</p>
           <p style={paragraphStyle}><strong>4.3. Não é considerado defeito:</strong> não gostar da cor/modelagem, peça não servir por mudança de medidas, preferir peças diferentes, danos por uso indevido ou lavagem incorreta.</p>
 
           <h3 style={h3}>5. Planos</h3>
           <ul style={ulStyle}>
-            <li><strong>Mensal:</strong> R$ 199,90/mês — sem fidelidade</li>
-            <li><strong>Semestral:</strong> R$ 189,90/mês — pagamento antecipado</li>
-            <li><strong>Anual:</strong> R$ 179,90/mês — pagamento antecipado</li>
+            <li><strong>Mensal:</strong> R$ 199,90/mês - sem fidelidade</li>
+            <li><strong>Semestral:</strong> R$ 189,90/mês - pagamento antecipado</li>
+            <li><strong>Anual:</strong> R$ 179,90/mês - pagamento antecipado</li>
           </ul>
 
           <h3 style={h3}>6. Cancelamento</h3>
@@ -122,7 +122,7 @@ const closeBtnStyle: React.CSSProperties = {
   width: '32px', height: '32px', borderRadius: '50%',
 }
 const contentStyle: React.CSSProperties = {
-  padding: '1.5rem', overflowY: 'auto', flex: 1, fontSize: '.9rem', lineHeight: 1.6, color: '#334155',
+  padding: '1.5rem', overflowY: 'auto', flex: 1, fontSize: '.9rem', lineHeight: 1.6, color: '#334155', textAlign: 'justify',
 }
 const footerStyle: React.CSSProperties = {
   padding: '1rem 1.5rem', borderTop: '1px solid #e2e8f0',
