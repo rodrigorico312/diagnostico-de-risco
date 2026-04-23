@@ -361,7 +361,21 @@ export default function Checkout({ plano }: Props) {
 
         <ModalTermos
           aberto={modalTermosAberto}
-          onConfirmar={() => { setAceiteTermos(true); setModalTermosAberto(false) }}
+          onConfirmar={async () => {
+            try {
+              const token = localStorage.getItem('vivefit_token')
+              const r = await fetch(API + '/aceite-termos', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+              })
+              if (!r.ok) throw new Error('Falha ao registrar aceite')
+              setAceiteTermos(true)
+              setModalTermosAberto(false)
+            } catch (err) {
+              alert('Nao foi possivel registrar seu aceite. Tente novamente.')
+              console.error('[aceite-termos]', err)
+            }
+          }}
           onCancelar={() => setModalTermosAberto(false)}
         />
 
