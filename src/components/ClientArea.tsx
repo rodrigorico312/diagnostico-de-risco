@@ -637,35 +637,6 @@ function BoxTimelineCard({ box }: { box: any }) {
         </div>
       )}
 
-      {/* LISTA DE PEÇAS */}
-      {box.pecas && box.pecas.length > 0 && (
-        <div style={{ padding: '1rem 1.3rem' }}>
-          <div style={{ fontSize: '.58rem', color: '#040861', letterSpacing: '.22em', textTransform: 'uppercase' as const, fontWeight: 700, marginBottom: '.7rem' }}>
-            Nesta box
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-            {box.pecas.map((p: any, i: number) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '.7rem' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '6px', background: '#F0F4F6', border: '1px solid #E4E8EE', overflow: 'hidden' as const, flexShrink: 0 }}>
-                  {p.foto_url && <img src={API_URL + p.foto_url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' as const }} />}
-                </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontFamily: 'Georgia, serif', fontSize: '.85rem', color: '#040861', fontWeight: 500, lineHeight: 1.2, overflow: 'hidden' as const, textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>
-                    {p.descricao}
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '.35rem', marginTop: '.15rem' }}>
-                    {p.cor_hex && <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: p.cor_hex, border: '1px solid rgba(0,0,0,.1)', flexShrink: 0 }} />}
-                    <span style={{ fontSize: '.68rem', color: '#64748B' }}>
-                      {[p.tipo_nome, p.tamanho_nome, p.marca_nome].filter(Boolean).join(' · ')}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
     </div>
   )
