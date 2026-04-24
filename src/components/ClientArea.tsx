@@ -178,12 +178,7 @@ export default function ClientArea() {
 
   const logout = () => { localStorage.removeItem('vivefit_token'); localStorage.removeItem('vivefit_nome'); localStorage.removeItem('vivefit_quiz_done'); window.location.hash = '#/' }
 
-  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--gelo)' }}><p style={{ fontFamily: 'Montserrat, sans-serif', color: 'var(--cinza-mudo)' }}>Carregando...</p></div>
-
-  const planoAtual = user?.plano ? PLANOS_INFO[user.plano] : null
-  const outrosPlanos = Object.entries(PLANOS_INFO).filter(([key]) => key !== user?.plano)
-
-  // Carrega solicitacao de cancelamento ativa
+  // Carrega solicitacao de cancelamento ativa quando entra na aba plano
   useEffect(() => {
     const token = localStorage.getItem('vivefit_token')
     if (!token || tab !== 'plano') return
@@ -192,6 +187,11 @@ export default function ClientArea() {
       .then(d => setSolicitacaoAtiva(d.solicitacao))
       .catch(() => {})
   }, [tab])
+
+  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--gelo)' }}><p style={{ fontFamily: 'Montserrat, sans-serif', color: 'var(--cinza-mudo)' }}>Carregando...</p></div>
+
+  const planoAtual = user?.plano ? PLANOS_INFO[user.plano] : null
+  const outrosPlanos = Object.entries(PLANOS_INFO).filter(([key]) => key !== user?.plano)
 
   async function enviarCancelamento() {
     if (!motivoCancelar) return
