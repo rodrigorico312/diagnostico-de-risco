@@ -37,8 +37,8 @@ export default function Termos() {
           <ul style={ulStyle}>
             <li>Entrar em contato pelo e-mail <strong>contato@vivefit.site</strong> em até 7 dias</li>
             <li>Devolver as <strong>4 peças sem uso</strong>, com etiquetas originais, na embalagem original</li>
-            <li>O frete de retorno é de responsabilidade da assinante</li>
-            <li>Após recebermos e conferirmos as peças, o reembolso é processado em até 10 dias úteis</li>
+            <li><strong>O frete de retorno é por nossa conta</strong> - enviamos código de postagem para uso gratuito nos Correios</li>
+            <li>Após recebermos e conferirmos as peças, o reembolso é processado em até 10 dias úteis (incluindo o frete original que você pagou)</li>
           </ul>
 
           <h3 style={h3Style}>4.2. Defeito de Fabricação (30 dias)</h3>

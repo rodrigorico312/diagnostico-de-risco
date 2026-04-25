@@ -59,7 +59,7 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
           </ul>
 
           <h3 style={h3}>4. Trocas e Devoluções</h3>
-          <p style={paragraphStyle}><strong>4.1. Arrependimento em 7 dias (CDC Art. 49):</strong> você pode desistir em até 7 dias do recebimento. Peças devem estar sem uso, com etiquetas e embalagem originais. Frete de retorno é por conta da assinante. Reembolso em até 10 dias úteis após conferência.</p>
+          <p style={paragraphStyle}><strong>4.1. Arrependimento em 7 dias (CDC Art. 49):</strong> você pode desistir em até 7 dias do recebimento. Peças devem estar sem uso, com etiquetas e embalagem originais. <strong>Frete de retorno por nossa conta</strong> - enviamos código de postagem gratuito. Reembolso integral (incluindo frete original) em até 10 dias úteis após conferência.</p>
           <p style={paragraphStyle}><strong>4.2. Defeito de fabricação (30 dias):</strong> costura solta, zíper quebrado, tecido rasgado ou mancha de tinta dão direito a troca. Enviar foto pelo e-mail contato@vivefit.site.</p>
           <p style={paragraphStyle}><strong>4.3. Não é considerado defeito:</strong> não gostar da cor/modelagem, peça não servir por mudança de medidas, preferir peças diferentes, danos por uso indevido ou lavagem incorreta.</p>
 
