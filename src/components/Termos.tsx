@@ -70,10 +70,38 @@ export default function Termos() {
         </Secao>
 
         <Secao titulo="6. Cancelamento">
-          <p>Para cancelar sua assinatura, acesse sua área da assinante e clique em "Cancelar assinatura". Você poderá informar o motivo do cancelamento, e nossa equipe processará sua solicitação em até 10 dias úteis.</p>
-          <p><strong>Plano mensal:</strong> o cancelamento vale para o próximo ciclo. A box do ciclo já pago será normalmente enviada.</p>
-          <p><strong>Planos semestral e anual:</strong> por serem pagamentos antecipados, o cancelamento antes do término do período contratado não dá direito a reembolso proporcional, salvo nas hipóteses legais (art. 49 do CDC nos 7 primeiros dias).</p>
-          <p>Durante o prazo de processamento, nossa equipe pode entrar em contato para entender sua experiência ou oferecer alternativas. Caso opte por manter o cancelamento, ele será efetivado automaticamente após o prazo.</p>
+          <h3 style={h3Style}>6.1. Arrependimento Legal (até 7 dias)</h3>
+          <p>Conforme o <strong>Art. 49 do Código de Defesa do Consumidor</strong>, você pode desistir da assinatura em até <strong>7 (sete) dias corridos contados do recebimento da primeira box</strong>, sem precisar justificar.</p>
+          <p>Nesse caso, garantimos:</p>
+          <ul style={ulStyle}>
+            <li>Estorno integral do valor pago, incluindo frete e quaisquer taxas</li>
+            <li>Frete de devolução por nossa conta (enviamos código de postagem)</li>
+            <li>Cancelamento imediato da assinatura, sem multa</li>
+            <li>Reembolso processado em até 10 dias úteis após recebermos as peças</li>
+          </ul>
+          <p>Para exercer o direito de arrependimento, basta enviar e-mail para <strong>contato@vivefit.site</strong> ou WhatsApp <strong>(93) 99120-1036</strong> dentro do prazo de 7 dias.</p>
+
+          <h3 style={h3Style}>6.2. Cancelamento Plano Mensal (após 7 dias)</h3>
+          <p>Sem fidelidade. Cancele a qualquer momento na sua área da assinante. O cancelamento vale para o próximo ciclo - a box já paga será normalmente enviada. Sem multa.</p>
+
+          <h3 style={h3Style}>6.3. Cancelamento Plano Semestral / Anual (após 7 dias)</h3>
+          <p>Os planos semestral e anual são contratos com prazo determinado, com preço com desconto justamente porque você se compromete a manter a assinatura por 6 ou 12 meses.</p>
+          <p>Caso opte por cancelar antes do término do período contratado, será aplicada uma <strong>multa rescisória de 10% (dez por cento) sobre o valor das mensalidades restantes</strong>.</p>
+          <p>Exemplo prático:</p>
+          <ul style={ulStyle}>
+            <li>Plano Anual: R$ 179,90/mês (12x)</li>
+            <li>Cliente cancela após 4 meses já pagos</li>
+            <li>Saldo restante: 8 meses × R$ 179,90 = R$ 1.439,20</li>
+            <li>Multa: 10% × R$ 1.439,20 = <strong>R$ 143,92</strong></li>
+            <li>Reembolso devido: R$ 1.439,20 - R$ 143,92 = R$ 1.295,28</li>
+          </ul>
+          <p>A multa é descontada do valor a ser estornado.</p>
+
+          <h3 style={h3Style}>6.4. Falha do Serviço</h3>
+          <p>Se o cancelamento for motivado por falha grave da VIVE FIT BOX (atrasos recorrentes, peças com defeito reincidente, descumprimento contratual), <strong>não há multa</strong>, e o estorno é proporcional ao período não usufruído.</p>
+
+          <h3 style={h3Style}>6.5. Processamento</h3>
+          <p>Para cancelar, acesse sua área da assinante e clique em "Cancelar assinatura". Você poderá informar o motivo, e nossa equipe processará a solicitação em até 10 dias úteis. Durante esse prazo, podemos entrar em contato para entender sua experiência ou oferecer alternativas.</p>
         </Secao>
 
         <Secao titulo="7. Endereço de Entrega">

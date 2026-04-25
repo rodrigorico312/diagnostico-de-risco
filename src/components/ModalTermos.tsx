@@ -71,8 +71,11 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
           </ul>
 
           <h3 style={h3}>6. Cancelamento</h3>
-          <p style={paragraphStyle}>Para cancelar, acesse sua área da assinante e clique em "Cancelar assinatura". Informe o motivo e nossa equipe processará em até 10 dias úteis - podemos entrar em contato para entender sua experiência.</p>
-          <p style={paragraphStyle}><strong>Mensal:</strong> cancelamento vale para o próximo ciclo, a box já paga será enviada. <strong>Semestral/Anual:</strong> sem reembolso proporcional após os 7 dias de arrependimento, salvo hipóteses legais.</p>
+          <p style={paragraphStyle}><strong>6.1. Arrependimento (CDC art. 49):</strong> até 7 dias corridos do <strong>recebimento</strong> da primeira box, estorno integral (incluindo frete) e devolução por nossa conta. E-mail contato@vivefit.site ou WhatsApp (93) 99120-1036.</p>
+          <p style={paragraphStyle}><strong>6.2. Plano Mensal (após 7 dias):</strong> sem fidelidade, cancele a qualquer momento. Vale para o próximo ciclo, a box já paga é enviada. Sem multa.</p>
+          <p style={paragraphStyle}><strong>6.3. Plano Semestral/Anual (após 7 dias):</strong> multa rescisória de 10% sobre o saldo das mensalidades restantes. Exemplo: cancelou no anual após 4 meses, saldo R$ 1.439,20, multa R$ 143,92, estorno R$ 1.295,28.</p>
+          <p style={paragraphStyle}><strong>6.4. Falha da VIVE FIT:</strong> sem multa, estorno proporcional integral.</p>
+          <p style={paragraphStyle}><strong>6.5. Processamento:</strong> nossa equipe processa em até 10 dias úteis. Pode entrar em contato pra oferecer alternativas antes da efetivação.</p>
 
           <h3 style={h3}>7. Endereço de Entrega</h3>
           <p style={paragraphStyle}>É sua responsabilidade manter o endereço atualizado. Boxes devolvidas por endereço desatualizado só são reenviadas com cobrança de frete adicional.</p>
