@@ -96,11 +96,42 @@ export default function App() {
     return (
       <AuthPage
         planoPreSelecionado={plano}
-        onAuth={() => {
-          const fezQuiz = localStorage.getItem('vivefit_quiz_done')
-          if (fezQuiz && plano) {
-            window.location.hash = `#/checkout?plano=${plano}`
-          } else {
+        onAuth={async (token: string) => {
+          const API = 'https://api.vivefit.site'
+          try {
+            const [meRes, perfilRes] = await Promise.all([
+              fetch(API + '/auth/me', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()),
+              fetch(API + '/perfil', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()).catch(() => ({ perfil: null }))
+            ])
+            const status = meRes?.status
+            const temPerfil = !!(perfilRes?.perfil?.tamanho)
+
+            // Cliente ja tem assinatura (ou pendente) -> dashboard
+            if (status === 'ativo' || status === 'cortesia' || status === 'inadimplente') {
+              window.location.hash = '#/minha-conta'
+              return
+            }
+            // Esta no fluxo de compra com plano selecionado -> checkout
+            if (plano) {
+              if (temPerfil) {
+                window.location.hash = `#/checkout?plano=${plano}`
+              } else {
+                window.location.hash = `#/perfil-de-look?plano=${plano}`
+              }
+              return
+            }
+            // Sem plano selecionado: ja fez quiz -> ve planos / nao fez -> faz quiz
+            if (temPerfil) {
+              window.location.hash = '#/'
+              setTimeout(() => {
+                const el = document.getElementById('planos')
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+              }, 200)
+            } else {
+              window.location.hash = '#/perfil-de-look'
+            }
+          } catch (e) {
+            // Fallback se backend falhar: assume novo, vai pro quiz
             window.location.hash = '#/perfil-de-look'
           }
         }}
