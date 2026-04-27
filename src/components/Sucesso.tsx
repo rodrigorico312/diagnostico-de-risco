@@ -7,6 +7,8 @@ interface UserData {
   nome: string
   email: string
   telefone: string | null
+  status: string
+  plano: string | null
 }
 
 export default function Sucesso() {
@@ -14,6 +16,7 @@ export default function Sucesso() {
   const [loading, setLoading] = useState(true)
   const [temPerfil, setTemPerfil] = useState(false)
   const [copiado, setCopiado] = useState(false)
+  const [paymentUrl, setPaymentUrl] = useState<string | null>(null)
 
   const token = localStorage.getItem('vivefit_token')
   const primeiroNome = user?.nome?.split(' ')[0] || 'amiga'
@@ -23,16 +26,37 @@ export default function Sucesso() {
       window.location.hash = '#/'
       return
     }
-    Promise.all([
-      fetch(API + '/auth/me', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()),
-      fetch(API + '/perfil', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()).catch(() => ({ perfil: null })),
-    ]).then(([userData, perfilData]) => {
-      setUser(userData)
-      setTemPerfil(!!(perfilData?.perfil?.tamanho))
-      setLoading(false)
-    }).catch(() => {
-      setLoading(false)
-    })
+    // Recupera URL do checkout salvo
+    const storedUrl = localStorage.getItem('vivefit_payment_url')
+    setPaymentUrl(storedUrl)
+
+    const carregar = (mostraLoading: boolean) => {
+      if (mostraLoading) setLoading(true)
+      return Promise.all([
+        fetch(API + '/auth/me', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()),
+        fetch(API + '/perfil', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()).catch(() => ({ perfil: null })),
+      ]).then(([userData, perfilData]) => {
+        setUser(userData)
+        setTemPerfil(!!(perfilData?.perfil?.tamanho))
+        setLoading(false)
+        // Quando confirmou pagamento, limpa URL salva
+        if (userData?.status === 'ativo' && storedUrl) {
+          localStorage.removeItem('vivefit_payment_url')
+          localStorage.removeItem('vivefit_payment_at')
+        }
+        return userData
+      }).catch(() => {
+        setLoading(false)
+      })
+    }
+    carregar(true)
+    // Polling: enquanto status nao for ativo, checa a cada 8s
+    const interval = setInterval(() => {
+      carregar(false).then(u => {
+        if (u?.status === 'ativo') clearInterval(interval)
+      })
+    }, 8000)
+    return () => clearInterval(interval)
   }, [])
 
   const compartilhar = async () => {
@@ -57,6 +81,49 @@ export default function Sucesso() {
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff' }}>
         <div style={{ color: '#64748B', fontSize: '13px', fontFamily: 'Arial, sans-serif' }}>carregando...</div>
       </div>
+    )
+  }
+
+  // Estado: aguardando pagamento (status nao e 'ativo')
+  if (user && user.status !== 'ativo') {
+    return (
+      <>
+        <style>{css}</style>
+        <div className="sucesso-page">
+          <div className="sucesso-container">
+
+            <div className="sucesso-pill sucesso-pill-pendente">
+              <span className="sucesso-pill-dot sucesso-pill-dot-pendente"></span>
+              Aguardando pagamento
+            </div>
+
+            <h1 className="sucesso-h1-1">Quase la,</h1>
+            <h1 className="sucesso-h1-2">{primeiroNome}.</h1>
+
+            <p className="sucesso-desc">
+              Te enviamos o link no WhatsApp tambem. Quando voce pagar, a gente confirma aqui automaticamente.
+            </p>
+
+            {paymentUrl ? (
+              <a href={paymentUrl} target="_blank" rel="noopener noreferrer" className="sucesso-cta-pagar">
+                Pagar agora
+              </a>
+            ) : (
+              <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center', margin: '8px 0 24px' }}>
+                Verifique seu WhatsApp para o link de pagamento.
+              </p>
+            )}
+
+            <div className="sucesso-rodape">
+              <div className="sucesso-rodape-label">Duvidas?</div>
+              <a href="https://wa.me/5593991201036" target="_blank" rel="noopener noreferrer" className="sucesso-rodape-wpp">
+                WhatsApp (93) 99120-1036
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </>
     )
   }
 
@@ -149,6 +216,43 @@ const css = `
 .sucesso-container {
   width: 100%;
   max-width: 420px;
+}
+
+.sucesso-pill-pendente {
+  background: #FEF3C7;
+  color: #92400E;
+}
+.sucesso-pill-dot-pendente {
+  background: #92400E;
+}
+
+.sucesso-cta-pagar {
+  display: block;
+  text-align: center;
+  background: #FF5A5F;
+  color: #fff;
+  padding: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 60px;
+  box-shadow: 0 6px 20px rgba(255,90,95,.4), 0 2px 6px rgba(255,90,95,.25);
+  margin-bottom: 28px;
+  transition: transform .2s, box-shadow .2s;
+}
+.sucesso-cta-pagar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(255,90,95,.5), 0 2px 6px rgba(255,90,95,.25);
+}
+
+@media (min-width: 720px) {
+  .sucesso-cta-pagar {
+    padding: 18px;
+    font-size: 12px;
+    margin-bottom: 36px;
+  }
 }
 
 .sucesso-pill {

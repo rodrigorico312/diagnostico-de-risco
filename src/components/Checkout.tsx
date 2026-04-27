@@ -218,6 +218,9 @@ export default function Checkout({ plano }: Props) {
       })
       const data = await res.json()
       if (data.url) {
+        // Salva URL pra Sucesso.tsx oferecer 'pagar agora'
+        localStorage.setItem('vivefit_payment_url', data.url)
+        localStorage.setItem('vivefit_payment_at', String(Date.now()))
         window.open(data.url, '_blank')
         window.location.hash = '#/sucesso'
       } else {
