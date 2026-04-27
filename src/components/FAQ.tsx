@@ -31,7 +31,7 @@ const faqs = [
   },
   { 
     q: 'Qual é o prazo de entrega?', 
-    a: 'O prazo depende da sua região. No checkout, você digita seu CEP e vê as opções de frete com prazo exato. Em média, entre 3 e 12 dias úteis dependendo da transportadora. Despachamos de Santarém-PA para todo o Brasil.' 
+    a: 'O prazo depende da sua região e da transportadora escolhida no checkout. Em Santarém-PA, em média 3 a 7 dias úteis. Para outras regiões, você vê o prazo exato ao digitar seu CEP. Despachamos de Santarém-PA para todo o Brasil.' 
   },
 ]
 
