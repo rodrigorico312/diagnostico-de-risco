@@ -232,23 +232,29 @@ section { padding: 0; }
 .multi-hint::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--turquesa); }
 
 .opts { display: flex; flex-wrap: wrap; gap: .6rem; }
-.pill { padding: .65rem 1.4rem; border-radius: 60px; border: 1.5px solid var(--border); background: var(--branco); font-family: var(--font-body); font-size: .78rem; font-weight: 600; letter-spacing: .04em; color: var(--cinza-chumbo); cursor: pointer; transition: all .2s var(--ease); text-transform: uppercase; }
+.pill { padding: .5rem 1.1rem; border-radius: 60px; border: 1.5px solid var(--border); background: var(--branco); font-family: var(--font-body); font-size: .72rem; font-weight: 600; letter-spacing: .04em; color: var(--cinza-chumbo); cursor: pointer; transition: all .2s var(--ease); text-transform: uppercase; }
 .pill:hover { border-color: var(--cobalto); color: var(--cobalto); }
 .pill.sel { background: var(--cobalto); border-color: var(--cobalto); color: #fff; }
 
-.card-opt { flex: 1; min-width: 130px; padding: 1rem; border-radius: 16px; border: 1.5px solid var(--border); background: var(--branco); text-align: center; cursor: pointer; transition: all .2s var(--ease); }
+.card-opt { flex: 1; min-width: 100px; padding: .7rem .5rem; border-radius: 12px; border: 1.5px solid var(--border); background: var(--branco); text-align: center; cursor: pointer; transition: all .2s var(--ease); font-size: .78rem; }
 .card-opt:hover { border-color: var(--cobalto); transform: translateY(-1px); }
 .card-opt.sel { border-color: var(--cobalto); background: var(--cobalto-soft); }
 .card-ico { font-size: 1.5rem; margin-bottom: .4rem; }
 .card-label { font-family: var(--font-body); font-size: .7rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--cinza-chumbo); }
 .card-opt.sel .card-label { color: var(--cobalto); }
 
-.swatches { display: flex; flex-wrap: wrap; gap: .75rem; }
-.swatch { width: 52px; height: 52px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: all .2s var(--ease); }
+.swatches { display: flex; flex-wrap: wrap; gap: .55rem; }
+.swatch { width: 40px; height: 40px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: all .2s var(--ease); }
 .swatch:hover { transform: scale(1.08); }
 .swatch.sel { border-color: var(--cobalto); box-shadow: 0 0 0 2px var(--gelo), 0 0 0 4px var(--cobalto); }
 .swatch-wrap { display: flex; flex-direction: column; align-items: center; }
 .swatch-name { font-size: .5rem; text-align: center; color: var(--cinza-mudo); margin-top: .25rem; font-weight: 500; }
+.carousel { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .5rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.carousel::-webkit-scrollbar { height: 4px; }
+.carousel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.carousel-item { flex-shrink: 0; padding: .65rem 1.1rem; border-radius: 60px; border: 1.5px solid var(--border); background: var(--branco); font-family: var(--font-body); font-size: .75rem; font-weight: 600; letter-spacing: .04em; color: var(--cinza-chumbo); cursor: pointer; transition: all .2s var(--ease); text-transform: uppercase; scroll-snap-align: start; white-space: nowrap; }
+.carousel-item:hover { border-color: var(--cobalto); color: var(--cobalto); }
+.carousel-item.sel { background: var(--cobalto); border-color: var(--cobalto); color: #fff; }
 
 .tag { padding: .5rem 1rem; border-radius: 60px; border: 1.5px solid var(--border); background: var(--branco); font-family: var(--font-body); font-size: .75rem; font-weight: 500; color: var(--cinza-chumbo); cursor: pointer; transition: all .2s var(--ease); }
 .tag:hover { border-color: var(--coral); color: var(--coral); }

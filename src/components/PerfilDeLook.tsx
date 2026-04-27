@@ -78,7 +78,7 @@ const STEPS: QuizStep[] = [
     title: 'Que peças você mais usa?',
     sub: 'Pode marcar mais de uma',
     type: 'multi',
-    style: 'card',
+    style: 'carousel',
     options: [
       { val: 'legging', label: 'Legging' },
       { val: 'top', label: 'Top' },
@@ -312,6 +312,15 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
           />
         )}
 
+        {step.style === 'carousel' && (
+          <div className="carousel">
+            {step.options.map((o) => (
+              <div key={o.val} className={`carousel-item${isSelected(o.val) ? ' sel' : ''}`} onClick={() => toggle(o.val)}>
+                {o.label}
+              </div>
+            ))}
+          </div>
+        )}
         {step.style === 'swatch' && (
           <div className="swatches">
             {step.options.map((o) => (
