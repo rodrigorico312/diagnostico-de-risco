@@ -426,7 +426,7 @@ export default function ClientArea() {
             ) : (
               <div style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', boxShadow: '0 1px 4px rgba(0,0,0,.05)', textAlign: 'center', marginBottom: '1rem' }}>
                 <p style={{ fontSize: '.95rem', color: 'var(--cinza-mudo)', margin: '0 0 1rem' }}>Você ainda não tem um plano ativo.</p>
-                <a href="#/" style={{ ...actionBtnStyle, display: 'inline-flex', width: 'auto', textDecoration: 'none' }}>escolher plano</a>
+                <a href="#/" onClick={() => { setTimeout(() => { const el = document.getElementById('planos'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }, 100) }} style={{ ...actionBtnStyle, display: 'inline-flex', width: 'auto', textDecoration: 'none' }}>escolher plano</a>
               </div>
             )}
             {planoAtual && (
