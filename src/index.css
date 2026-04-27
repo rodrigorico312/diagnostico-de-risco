@@ -205,7 +205,7 @@ section { padding: 0; }
 .reveal.visible { opacity: 1; transform: none; }
 
 .reveal-glow { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 1s ease; }
-.reveal-glow.visible { opacity: 1; transform: none; box-shadow: 0 -8px 40px rgba(30, 58, 138, 0.15), 0 8px 40px rgba(30, 58, 138, 0.12); }
+.reveal-glow.visible { opacity: 1; transform: none; box-shadow: 0 4px 20px rgba(30, 58, 138, 0.06); }
 
 .reveal-surprise { opacity: 0; transform: translateY(50px) scale(0.97); transition: opacity 1s ease, transform 1s ease; }
 .reveal-surprise.visible { opacity: 1; transform: none; }
