@@ -497,7 +497,7 @@ export default function Checkout({ plano }: Props) {
             <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', lineHeight: 1.5, margin: '0 0 1.8rem', fontStyle: 'italic' }}>
               A cobrança aparece no nome de Débora Polla (CPF), nossa cofundadora — o CNPJ da VIVE FIT está em processo de abertura.
             </p>
-            
+            <a
               href={linkPagamento || '#'}
               target="_blank"
               rel="noopener noreferrer"
