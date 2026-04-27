@@ -55,18 +55,17 @@ async function irParaPagamento(plano: string) {
 function handlePlanClick(planoId: string) {
   const token = localStorage.getItem('vivefit_token')
   const fezQuiz = localStorage.getItem('vivefit_quiz_done')
-
+  // Salva intencao de plano pra rastrear ate o pagamento
+  localStorage.setItem('vivefit_plano_intencao', planoId)
   if (!token) {
-    window.location.hash = '#/cadastro'
+    window.location.hash = `#/cadastro?plano=${planoId}`
     return
   }
-
   if (!fezQuiz) {
     window.location.hash = `#/perfil-de-look?plano=${planoId}`
     return
   }
-
-  // Tem conta + fez quiz → tela de checkout com frete
+  // Tem conta e fez quiz - vai pro checkout
   window.location.hash = `#/checkout?plano=${planoId}`
 }
 

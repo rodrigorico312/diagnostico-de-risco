@@ -139,16 +139,17 @@ export default function App() {
     )
   }
 
-  // ── ROTA: Quiz Perfil de Look ──
+  // -- ROTA: Quiz Perfil de Look --
   if (hash.startsWith('#/perfil-de-look')) {
     const params = new URLSearchParams(hash.split('?')[1] || '')
-    const planoEscolhido = params.get('plano')
-
+    const planoUrl = params.get('plano')
+    // Fallback: se nao veio na URL, ve no localStorage (intencao salva)
+    const planoEscolhido = planoUrl || localStorage.getItem('vivefit_plano_intencao')
     if (!localStorage.getItem('vivefit_token')) {
-      window.location.hash = '#/cadastro'
+      const dest = planoEscolhido ? `#/cadastro?plano=${planoEscolhido}` : '#/cadastro'
+      window.location.hash = dest
       return null
     }
-
     return <PerfilDeLook planoPreSelecionado={planoEscolhido} />
   }
 
