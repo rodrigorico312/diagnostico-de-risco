@@ -75,6 +75,8 @@ export default function Checkout({ plano }: Props) {
   const [erroCpf, setErroCpf] = useState('')
   const [erroEndereco, setErroEndereco] = useState('')
   const [pagando, setPagando] = useState(false)
+  const [modalAberto, setModalAberto] = useState(false)
+  const [linkPagamento, setLinkPagamento] = useState<string | null>(null)
   const [erroGeral, setErroGeral] = useState('')
 
   const info = PLAN_INFO[plano] || PLAN_INFO.mensal
@@ -221,8 +223,8 @@ export default function Checkout({ plano }: Props) {
         // Salva URL pra Sucesso.tsx oferecer 'pagar agora'
         localStorage.setItem('vivefit_payment_url', data.url)
         localStorage.setItem('vivefit_payment_at', String(Date.now()))
-        window.open(data.url, '_blank')
-        window.location.hash = '#/sucesso'
+        setLinkPagamento(data.url)
+        setModalAberto(true)
       } else {
         setErroGeral(data.error || 'Erro ao gerar pagamento. Tente novamente.')
       }
@@ -483,6 +485,36 @@ export default function Checkout({ plano }: Props) {
 
         <p style={{ textAlign: 'center', fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1.5rem' }}>Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.</p>
       </div>
+
+      {modalAberto && (
+        <div onClick={() => setModalAberto(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 9999 }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: '20px', padding: '2rem 1.5rem', maxWidth: '420px', width: '100%', boxShadow: '0 20px 60px rgba(0,0,0,.3)', textAlign: 'center' }}>
+            <div style={{ fontSize: '2rem', marginBottom: '.5rem' }}>🎉</div>
+            <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: 'var(--azul-noite)', margin: '0 0 1rem', fontWeight: 400 }}>Tudo pronto.</h3>
+            <p style={{ fontSize: '.92rem', color: 'var(--cinza-mudo)', lineHeight: 1.6, margin: '0 0 .8rem' }}>
+              Por motivos de segurança, o link de pagamento também foi enviado pro seu WhatsApp.
+            </p>
+            <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', lineHeight: 1.5, margin: '0 0 1.8rem', fontStyle: 'italic' }}>
+              A cobrança aparece no nome de Débora Polla (CPF), nossa cofundadora — o CNPJ da VIVE FIT está em processo de abertura.
+            </p>
+            
+              href={linkPagamento || '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => { setTimeout(() => { window.location.hash = '#/sucesso' }, 300) }}
+              style={{ display: 'block', background: 'var(--coral)', color: '#fff', padding: '.95rem 1rem', borderRadius: '60px', textDecoration: 'none', fontFamily: 'Montserrat, sans-serif', fontSize: '.82rem', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: '.8rem', boxShadow: '0 6px 18px rgba(255,90,95,.35)' }}
+            >
+              Pagar agora
+            </a>
+            <button
+              onClick={() => setModalAberto(false)}
+              style={{ width: '100%', background: 'transparent', color: 'var(--cinza-mudo)', padding: '.7rem', border: '1px solid #ddd', borderRadius: '60px', fontFamily: 'Montserrat, sans-serif', fontSize: '.78rem', fontWeight: 600, letterSpacing: '.04em', textTransform: 'uppercase', cursor: 'pointer' }}
+            >
+              Voltar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
