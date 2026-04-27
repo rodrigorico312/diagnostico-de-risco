@@ -337,15 +337,28 @@ export default function Checkout({ plano }: Props) {
 
             {metodo === 'CREDIT_CARD' && !isMensal && info.maxParcelas > 1 && (
               <div style={{ marginTop: '.8rem' }}>
-                <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', marginBottom: '.4rem' }}>Parcelas sem juros:</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '.3rem' }}>
+                <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', marginBottom: '.4rem' }}>Em quantas vezes?</p>
+                <select
+                  value={parcelas}
+                  onChange={e => setParcelas(parseInt(e.target.value))}
+                  style={{
+                    width: '100%',
+                    padding: '.7rem .8rem',
+                    borderRadius: '8px',
+                    border: '1px solid #ddd',
+                    background: '#fff',
+                    fontSize: '.85rem',
+                    color: 'var(--azul-noite)',
+                    fontFamily: 'inherit',
+                    cursor: 'pointer'
+                  }}
+                >
                   {opcoesParcelamento.map(n => (
-                    <div key={n} onClick={() => setParcelas(n)} style={{ padding: '.45rem .3rem', borderRadius: '8px', border: parcelas === n ? '2px solid var(--coral)' : '1px solid #ddd', background: parcelas === n ? 'rgba(255,90,95,.05)' : '#fff', cursor: 'pointer', textAlign: 'center' as const, transition: 'all .2s' }}>
-                      <span style={{ fontSize: '.72rem', fontWeight: 600, color: parcelas === n ? 'var(--coral)' : 'var(--azul-noite)' }}>{n}x</span>
-                      <div style={{ fontSize: '.58rem', color: 'var(--cinza-mudo)' }}>{formatBRL(total / n)}</div>
-                    </div>
+                    <option key={n} value={n}>
+                      {n}x de {formatBRL(total / n)} sem juros
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
             )}
           </Card>
