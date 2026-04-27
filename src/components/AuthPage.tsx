@@ -88,17 +88,17 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
 
       {planoPreSelecionado && (
         <div style={{ textAlign: 'center', padding: '.4rem 5%', background: 'var(--cobalto-soft)', fontSize: '.68rem', color: 'var(--cobalto)', fontFamily: 'var(--font-heading)', letterSpacing: '.04em' }}>
-          Crie sua conta pra continuar com a assinatura
+          Pronta pra começar? Em poucos passos sua box é única
         </div>
       )}
 
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 5%' }}>
         <div style={{ width: '100%', maxWidth: '400px' }}>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', textAlign: 'center', marginBottom: '.3rem', color: 'var(--azul-noite)' }}>
-            {mode === 'register' ? 'Crie sua conta' : 'Entrar na minha conta'}
+            {mode === 'register' ? 'Pronta pra começar?' : 'Entrar na minha conta'}
           </h2>
           <p style={{ textAlign: 'center', fontSize: '.78rem', color: 'var(--cinza-mudo)', marginBottom: '1.5rem' }}>
-            {mode === 'register' ? 'Preencha seus dados pra começar' : 'Use o e-mail e senha do seu cadastro'}
+            {mode === 'register' ? 'Cadastro rápido, sua box é única' : 'Use o e-mail e senha do seu cadastro'}
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.7rem' }}>
