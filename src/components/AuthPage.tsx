@@ -33,7 +33,13 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
     if (mode === 'register' && nome.trim().length < 2) return setErro('Nome muito curto')
     if (!email.trim()) return setErro('Preencha seu e-mail')
     if (!emailValido(email.trim())) return setErro('E-mail invalido')
-    if (mode === 'register' && !telefone.trim()) return setErro('Preencha seu WhatsApp')
+    if (mode === 'register') {
+      if (!telefone.trim()) return setErro('Preencha seu WhatsApp')
+      const telDig = telefone.replace(/\D/g, '')
+      if (telDig.length !== 10 && telDig.length !== 11) return setErro('WhatsApp invalido. Digite com DDD (10 ou 11 digitos)')
+      const ddd = parseInt(telDig.substring(0, 2))
+      if (ddd < 11 || ddd > 99) return setErro('DDD invalido')
+    }
     if (mode === 'register') {
       const telDigitos = telefone.replace(/\D/g, '')
       if (telDigitos.length !== 10 && telDigitos.length !== 11) {
@@ -120,7 +126,7 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
             </div>
 
             {mode === 'register' && (
-              <input type="tel" placeholder="WhatsApp (opcional)" value={telefone} onChange={e => setTelefone(e.target.value)} style={inputStyle} />
+              <input type="tel" placeholder="WhatsApp com DDD *" value={telefone} onChange={e => setTelefone(e.target.value)} style={inputStyle} />
             )}
 
             {erro && <p style={{ color: 'var(--coral)', fontSize: '.75rem', textAlign: 'center', margin: 0 }}>{erro}</p>}
