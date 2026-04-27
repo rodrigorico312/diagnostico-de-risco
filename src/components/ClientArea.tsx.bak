@@ -78,11 +78,6 @@ export default function ClientArea() {
   const [enderecoCarregado, setEnderecoCarregado] = useState(false)
 
   const [showTrocarPlano, setShowTrocarPlano] = useState(false)
-  const [showModalCancelar, setShowModalCancelar] = useState(false)
-  const [motivoCancelar, setMotivoCancelar] = useState<string>('')
-  const [detalhesCancelar, setDetalhesCancelar] = useState('')
-  const [enviandoCancelar, setEnviandoCancelar] = useState(false)
-  const [solicitacaoAtiva, setSolicitacaoAtiva] = useState<any>(null)
   const [showCancelar, setShowCancelar] = useState(false)
 
   // BOXES
@@ -178,90 +173,10 @@ export default function ClientArea() {
 
   const logout = () => { localStorage.removeItem('vivefit_token'); localStorage.removeItem('vivefit_nome'); localStorage.removeItem('vivefit_quiz_done'); window.location.hash = '#/' }
 
-  // Carrega solicitacao de cancelamento ativa quando entra na aba plano
-  useEffect(() => {
-    const token = localStorage.getItem('vivefit_token')
-    if (!token || tab !== 'plano') return
-    fetch(API + '/minha-solicitacao-cancelamento', { headers: { Authorization: 'Bearer ' + token } })
-      .then(r => r.json())
-      .then(d => setSolicitacaoAtiva(d.solicitacao))
-      .catch(() => {})
-  }, [tab])
-
   if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--gelo)' }}><p style={{ fontFamily: 'Montserrat, sans-serif', color: 'var(--cinza-mudo)' }}>Carregando...</p></div>
 
-  const STATUS_COM_PLANO = ['ativo', 'cortesia', 'inadimplente']
-  const planoAtual = (user?.plano && STATUS_COM_PLANO.includes(user?.status)) ? PLANOS_INFO[user.plano] : null
+  const planoAtual = user?.plano ? PLANOS_INFO[user.plano] : null
   const outrosPlanos = Object.entries(PLANOS_INFO).filter(([key]) => key !== user?.plano)
-
-  async function enviarCancelamento() {
-    if (!motivoCancelar) return
-    setEnviandoCancelar(true)
-    try {
-      const token = localStorage.getItem('vivefit_token')
-      const r = await fetch(API + '/solicitar-cancelamento', {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ motivo: motivoCancelar, motivo_detalhes: detalhesCancelar || null }),
-      })
-      const d = await r.json()
-      if (!r.ok) throw new Error(d.error || 'Erro')
-      setShowModalCancelar(false)
-      setMotivoCancelar('')
-      setDetalhesCancelar('')
-      // Recarrega solicitacao ativa
-      const r2 = await fetch(API + '/minha-solicitacao-cancelamento', { headers: { Authorization: 'Bearer ' + token } })
-      const d2 = await r2.json()
-      setSolicitacaoAtiva(d2.solicitacao)
-      setMsg('Solicitação registrada! Nossa equipe processará em até 10 dias úteis.')
-    } catch (err: any) {
-      alert('Erro: ' + err.message)
-    } finally {
-      setEnviandoCancelar(false)
-    }
-  }
-
-  async function retirarCancelamento() {
-    if (!solicitacaoAtiva) return
-    if (!confirm('Tem certeza que deseja retirar sua solicitação de cancelamento?')) return
-    try {
-      const token = localStorage.getItem('vivefit_token')
-      const r = await fetch(API + '/minha-solicitacao-cancelamento/' + solicitacaoAtiva.id, {
-        method: 'DELETE',
-        headers: { Authorization: 'Bearer ' + token },
-      })
-      if (!r.ok) throw new Error('Erro')
-      setSolicitacaoAtiva(null)
-      setMsg('Solicitação retirada. Sua assinatura continua ativa.')
-    } catch (err: any) {
-      alert('Erro: ' + err.message)
-    }
-  }
-
-  function renderBotaoCancelar() {
-    if (solicitacaoAtiva && solicitacaoAtiva.status === 'pendente') {
-      return (
-        <div style={{ marginTop: '.8rem', background: '#FEF3C7', border: '1px solid #FBBF24', borderRadius: '12px', padding: '1rem' }}>
-          <p style={{ fontSize: '.85rem', color: '#92400E', fontWeight: 600, margin: '0 0 .4rem' }}>📋 Solicitação de cancelamento em andamento</p>
-          <p style={{ fontSize: '.75rem', color: '#78350F', margin: '0 0 .6rem', lineHeight: 1.5 }}>
-            Recebemos sua solicitação em {new Date(solicitacaoAtiva.solicitado_em).toLocaleDateString('pt-BR')}.
-            Nossa equipe processará em até 10 dias úteis e pode entrar em contato com você.
-          </p>
-          <button onClick={retirarCancelamento} style={{ ...secondaryBtnStyle, margin: 0, fontSize: '.8rem', borderColor: '#B45309', color: '#92400E' }}>
-            retirar solicitação
-          </button>
-        </div>
-      )
-    }
-    return (
-      <button
-        onClick={() => { setShowModalCancelar(true); setShowTrocarPlano(false) }}
-        style={{ ...secondaryBtnStyle, color: 'var(--cinza-mudo)', borderColor: 'var(--cinza-mudo)', marginTop: '.5rem' }}
-      >
-        cancelar assinatura
-      </button>
-    )
-  }
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--gelo)' }}>
@@ -448,59 +363,26 @@ export default function ClientArea() {
                     ))}
                   </div>
                 )}
-                {renderBotaoCancelar()}
+                <button onClick={() => { setShowCancelar(!showCancelar); setShowTrocarPlano(false) }} style={{ ...secondaryBtnStyle, color: 'var(--cinza-mudo)', borderColor: 'var(--cinza-mudo)', marginTop: '.5rem' }}>{showCancelar ? 'voltar' : 'cancelar assinatura'}</button>
+                {showCancelar && (
+                  <div style={{ marginTop: '.8rem', background: '#FEF2F2', borderRadius: '12px', padding: '1.2rem', textAlign: 'center' }}>
+                    <p style={{ fontSize: '.9rem', color: 'var(--azul-noite)', fontWeight: 600, margin: '0 0 .5rem' }}>Tem certeza que deseja cancelar?</p>
+                    <p style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)', margin: '0 0 1rem' }}>Você pode reativar quando quiser. Sua box atual continua sendo enviada até o fim do período.</p>
+                    <div style={{ display: 'flex', gap: '.5rem', justifyContent: 'center' }}>
+                      <button onClick={() => setShowCancelar(false)} style={{ ...secondaryBtnStyle, flex: 1, margin: 0, fontSize: '.8rem' }}>manter plano</button>
+                      <a href="https://wa.me/5593991201036?text=Olá, gostaria de cancelar minha assinatura VIVE FIT BOX" target="_blank" rel="noopener" style={{ ...actionBtnStyle, flex: 1, margin: 0, fontSize: '.8rem', background: '#DC2626', textDecoration: 'none' }}>confirmar cancelamento</a>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
               <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)' }}>Precisa de ajuda? Fale pelo WhatsApp</p>
-              <a href="https://wa.me/5593991129194" target="_blank" rel="noopener" style={{ fontSize: '.85rem', color: 'var(--turquesa)', textDecoration: 'none', fontWeight: 600 }}>(93) 99112-9194</a>
+              <a href="https://wa.me/5593991201036" target="_blank" rel="noopener" style={{ fontSize: '.85rem', color: 'var(--turquesa)', textDecoration: 'none', fontWeight: 600 }}>(93) 99120-1036</a>
             </div>
           </div>
         )}
       </div>
-
-      {showModalCancelar && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: '1rem' }} onClick={() => setShowModalCancelar(false)}>
-          <div style={{ background: '#fff', borderRadius: '14px', width: '100%', maxWidth: '460px', padding: '1.5rem', boxShadow: '0 20px 60px rgba(0,0,0,.3)' }} onClick={e => e.stopPropagation()}>
-            <h2 style={{ margin: '0 0 .4rem', fontFamily: 'Georgia, serif', fontSize: '1.3rem', color: 'var(--azul-noite)' }}>Antes de você ir...</h2>
-            <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', margin: '0 0 1rem', lineHeight: 1.5 }}>Nos conta o motivo? Às vezes a gente encontra uma solução que você nem sabia que tinha.</p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem', marginBottom: '1rem' }}>
-              {['Preço alto', 'Não gostei das peças', 'Problemas financeiros', 'Vou pausar por enquanto', 'Não uso mais', 'Outro motivo'].map(m => (
-                <label key={m} style={{ display: 'flex', alignItems: 'center', gap: '.6rem', padding: '.7rem .9rem', border: motivoCancelar === m ? '2px solid var(--coral)' : '1px solid #ddd', borderRadius: '10px', cursor: 'pointer', background: motivoCancelar === m ? 'rgba(255,90,95,.05)' : '#fff', transition: 'all .2s' }}>
-                  <input type="radio" name="motivo" value={m} checked={motivoCancelar === m} onChange={e => setMotivoCancelar(e.target.value)} style={{ accentColor: 'var(--coral)' }} />
-                  <span style={{ fontSize: '.88rem', color: 'var(--azul-noite)' }}>{m}</span>
-                </label>
-              ))}
-            </div>
-
-            {motivoCancelar === 'Outro motivo' && (
-              <textarea
-                value={detalhesCancelar}
-                onChange={e => setDetalhesCancelar(e.target.value)}
-                placeholder="Conta pra gente..."
-                rows={3}
-                style={{ width: '100%', padding: '.7rem', border: '1px solid #ddd', borderRadius: '8px', fontSize: '.88rem', fontFamily: 'inherit', resize: 'vertical', marginBottom: '1rem', boxSizing: 'border-box' }}
-              />
-            )}
-
-            <div style={{ padding: '.8rem 1rem', background: 'rgba(6,182,212,.06)', border: '1px solid rgba(6,182,212,.2)', borderRadius: '10px', marginBottom: '1rem' }}>
-              <p style={{ fontSize: '.78rem', color: '#334155', margin: 0, lineHeight: 1.5 }}>💬 Nossa equipe pode entrar em contato em até 10 dias úteis. Se você ainda quiser cancelar, é só aguardar — efetivaremos automaticamente.</p>
-            </div>
-
-            <div style={{ display: 'flex', gap: '.6rem', justifyContent: 'flex-end' }}>
-              <button onClick={() => setShowModalCancelar(false)} style={{ padding: '.7rem 1.2rem', borderRadius: '8px', border: '1px solid #cbd5e1', background: '#fff', color: 'var(--cinza-mudo)', cursor: 'pointer', fontSize: '.88rem', fontWeight: 500 }}>Continuar assinante</button>
-              <button
-                onClick={enviarCancelamento}
-                disabled={!motivoCancelar || enviandoCancelar}
-                style={{ padding: '.7rem 1.2rem', borderRadius: '8px', border: 'none', background: '#DC2626', color: '#fff', cursor: motivoCancelar && !enviandoCancelar ? 'pointer' : 'not-allowed', fontSize: '.88rem', fontWeight: 600, opacity: motivoCancelar && !enviandoCancelar ? 1 : 0.5 }}
-              >
-                {enviandoCancelar ? 'enviando...' : 'Solicitar cancelamento'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

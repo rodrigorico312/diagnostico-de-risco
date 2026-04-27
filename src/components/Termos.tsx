@@ -79,7 +79,7 @@ export default function Termos() {
             <li>Cancelamento imediato da assinatura, sem multa</li>
             <li>Reembolso processado em até 10 dias úteis após recebermos as peças</li>
           </ul>
-          <p>Para exercer o direito de arrependimento, basta enviar e-mail para <strong>contato@vivefit.site</strong> ou WhatsApp <strong>(93) 99120-1036</strong> dentro do prazo de 7 dias.</p>
+          <p>Para exercer o direito de arrependimento, basta enviar e-mail para <strong>contato@vivefit.site</strong> ou WhatsApp <strong>(93) 99112-9194</strong> dentro do prazo de 7 dias.</p>
 
           <h3 style={h3Style}>6.2. Cancelamento Plano Mensal (após 7 dias)</h3>
           <p>Sem fidelidade. Cancele a qualquer momento na sua área da assinante. O cancelamento vale para o próximo ciclo - a box já paga será normalmente enviada. Sem multa.</p>
@@ -119,7 +119,7 @@ export default function Termos() {
         <Secao titulo="10. Contato">
           <ul style={ulStyle}>
             <li>E-mail: <strong>contato@vivefit.site</strong></li>
-            <li>WhatsApp: <strong>(93) 99120-1036</strong></li>
+            <li>WhatsApp: <strong>(93) 99112-9194</strong></li>
           </ul>
         </Secao>
       </div>

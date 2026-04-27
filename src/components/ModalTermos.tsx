@@ -71,7 +71,7 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
           </ul>
 
           <h3 style={h3}>6. Cancelamento</h3>
-          <p style={paragraphStyle}><strong>6.1. Arrependimento (CDC art. 49):</strong> até 7 dias corridos do <strong>recebimento</strong> da primeira box, estorno integral (incluindo frete) e devolução por nossa conta. E-mail contato@vivefit.site ou WhatsApp (93) 99120-1036.</p>
+          <p style={paragraphStyle}><strong>6.1. Arrependimento (CDC art. 49):</strong> até 7 dias corridos do <strong>recebimento</strong> da primeira box, estorno integral (incluindo frete) e devolução por nossa conta. E-mail contato@vivefit.site ou WhatsApp (93) 99112-9194.</p>
           <p style={paragraphStyle}><strong>6.2. Plano Mensal (após 7 dias):</strong> sem fidelidade, cancele a qualquer momento. Vale para o próximo ciclo, a box já paga é enviada. Sem multa.</p>
           <p style={paragraphStyle}><strong>6.3. Plano Semestral/Anual (após 7 dias):</strong> multa rescisória de 10% sobre o saldo das mensalidades restantes. Exemplo: cancelou no anual após 4 meses, saldo R$ 1.439,20, multa R$ 143,92, estorno R$ 1.295,28.</p>
           <p style={paragraphStyle}><strong>6.4. Falha da VIVE FIT:</strong> sem multa, estorno proporcional integral.</p>
@@ -84,7 +84,7 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
           <p style={paragraphStyle}>Suas informações são tratadas conforme a Lei Geral de Proteção de Dados.</p>
 
           <h3 style={h3}>9. Contato</h3>
-          <p style={paragraphStyle}>E-mail: <strong>contato@vivefit.site</strong> · WhatsApp: <strong>(93) 99120-1036</strong></p>
+          <p style={paragraphStyle}>E-mail: <strong>contato@vivefit.site</strong> · WhatsApp: <strong>(93) 99112-9194</strong></p>
 
           <p style={{ ...paragraphStyle, marginTop: '2rem', fontSize: '.85rem', color: '#64748B', textAlign: 'center' }}>
             <em>Versão completa disponível em <a href="#/termos" target="_blank" rel="noopener" style={{ color: 'var(--turquesa, #06B6D4)' }}>vivefit.site/termos</a></em>
