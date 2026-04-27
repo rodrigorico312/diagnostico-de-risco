@@ -396,10 +396,24 @@ export default function ClientArea() {
             {loadingBoxes ? (
               <p style={{ textAlign: 'center', padding: '2rem 0', fontSize: '.85rem', color: 'var(--cinza-mudo)' }}>Carregando suas boxes...</p>
             ) : boxes.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '3rem 0' }}>
-                <h3 style={{ fontFamily: 'Georgia, serif', color: '#040861', fontSize: '1.3rem', margin: '0 0 .5rem', fontWeight: 400 }}>Sua box está sendo preparada</h3>
-                <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>Quando enviarmos, o código de rastreio aparece aqui automaticamente.</p>
-              </div>
+              user?.status === 'lead' || user?.status === 'pendente' ? (
+                <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+                  <h3 style={{ fontFamily: 'Georgia, serif', color: '#040861', fontSize: '1.3rem', margin: '0 0 .5rem', fontWeight: 400 }}>Você ainda não tem uma box</h3>
+                  <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '300px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>Quando você assinar um plano, sua primeira box começa a ser preparada.</p>
+                  <a href="#/" onClick={() => { setTimeout(() => { const el = document.getElementById('planos'); if (el) el.scrollIntoView({ behavior: 'smooth' }) }, 100) }} style={{ ...actionBtnStyle, display: 'inline-flex', width: 'auto', textDecoration: 'none' }}>escolher plano</a>
+                </div>
+              ) : user?.status === 'inadimplente' ? (
+                <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+                  <h3 style={{ fontFamily: 'Georgia, serif', color: '#040861', fontSize: '1.3rem', margin: '0 0 .5rem', fontWeight: 400 }}>Pagamento pendente</h3>
+                  <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '320px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>Estamos aguardando a confirmação do seu pagamento. Sua box começa a ser preparada assim que confirmar.</p>
+                  <a href="https://wa.me/5593991129194" target="_blank" rel="noopener" style={{ ...actionBtnStyle, display: 'inline-flex', width: 'auto', textDecoration: 'none', background: 'var(--coral)' }}>falar pelo WhatsApp</a>
+                </div>
+              ) : (
+                <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+                  <h3 style={{ fontFamily: 'Georgia, serif', color: '#040861', fontSize: '1.3rem', margin: '0 0 .5rem', fontWeight: 400 }}>Sua box está sendo preparada</h3>
+                  <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '300px', margin: '0 auto', lineHeight: 1.5 }}>Quando enviarmos, o código de rastreio aparece aqui automaticamente.</p>
+                </div>
+              )
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {boxes.map((b: any) => <BoxTimelineCard key={b.id} box={b} />)}
