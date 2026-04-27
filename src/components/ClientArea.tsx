@@ -190,7 +190,8 @@ export default function ClientArea() {
 
   if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--gelo)' }}><p style={{ fontFamily: 'Montserrat, sans-serif', color: 'var(--cinza-mudo)' }}>Carregando...</p></div>
 
-  const planoAtual = user?.plano ? PLANOS_INFO[user.plano] : null
+  const STATUS_COM_PLANO = ['ativo', 'cortesia', 'inadimplente']
+  const planoAtual = (user?.plano && STATUS_COM_PLANO.includes(user?.status)) ? PLANOS_INFO[user.plano] : null
   const outrosPlanos = Object.entries(PLANOS_INFO).filter(([key]) => key !== user?.plano)
 
   async function enviarCancelamento() {
