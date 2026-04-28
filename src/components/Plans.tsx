@@ -669,7 +669,6 @@ export default function Plans() {
           borderTopRightRadius: 32,
           position: 'relative',
           zIndex: 2,
-          boxShadow: '0 -4px 24px rgba(15, 23, 42, 0.04)',
         }}
       >
         {/* Header — Variação A: minimalista, sem eyebrow */}

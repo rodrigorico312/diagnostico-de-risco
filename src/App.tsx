@@ -171,7 +171,11 @@ export default function App() {
 
       <div className="reveal" style={{ paddingTop: '0.5rem', paddingBottom: '2.5rem' }}>
         <div className="editorial-break">
-          <p className="editorial">"Menos tempo escolhendo. Mais tempo treinando."</p>
+          <p className="editorial">
+            Quanto tempo você já perdeu procurando
+            <br />
+            <span style={{ color: '#1E3A8A', fontWeight: 600 }}>a roupa fitness certa?</span>
+          </p>
         </div>
       </div>
 
