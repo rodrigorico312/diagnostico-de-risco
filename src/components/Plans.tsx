@@ -5,6 +5,7 @@ const C = {
   cobalto: '#1E3A8A',
   cobaltoSoft: '#DBEAFE',
   cobaltoSofter: '#EFF4FE',
+  cobalto200: '#BFDBFE',
   coral: '#FF5A5F',
   coralDark: '#E53E47',
   gelo: '#F8FAFC',
@@ -657,7 +658,7 @@ export default function Plans() {
       <section
         id="planos"
         style={{
-          background: C.gelo,
+          background: C.cobalto200,
           paddingTop: 88,
           paddingBottom: 80,
           paddingLeft: 24,
