@@ -13,7 +13,7 @@
 }
 
 .como-funciona__titulo {
-  font-family: Georgia, serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.3rem, 2.8vw, 1.8rem);
   font-weight: 700;
   text-align: left;
@@ -96,7 +96,7 @@
 
 /* ── TIPOGRAFIA DOS CARDS ── */
 .step-card__num {
-  font-family: Georgia, serif;
+  font-family: var(--font-heading);
   font-size: clamp(2.5rem, 6vw, 3.5rem);
   font-weight: 700;
   line-height: 1;
@@ -104,7 +104,7 @@
 }
 
 .step-card__title {
-  font-family: Georgia, serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.3rem, 3.5vw, 1.7rem);
   font-weight: 700;
   line-height: 1.15;
@@ -113,7 +113,7 @@
 }
 
 .step-card__desc {
-  font-family: Arial, 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.85rem, 2vw, 1rem);
   font-weight: 400;
   line-height: 1.5;
