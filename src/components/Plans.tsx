@@ -652,28 +652,30 @@ export default function Plans() {
 
   return (
     <>
-      {/* Import Outfit do Google Fonts */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
-      `}</style>
 
       {/* Section Plans */}
       <section
         id="planos"
         style={{
           background: C.gelo,
-          paddingTop: 80,
+          paddingTop: 88,
           paddingBottom: 80,
           paddingLeft: 24,
           paddingRight: 24,
           fontFamily: FONT,
+          marginTop: -32,
+          borderTopLeftRadius: 32,
+          borderTopRightRadius: 32,
+          position: 'relative',
+          zIndex: 2,
+          boxShadow: '0 -4px 24px rgba(15, 23, 42, 0.04)',
         }}
       >
         {/* Header — Variação A: minimalista, sem eyebrow */}
         <div
           style={{
             maxWidth: 760,
-            margin: '0 auto 56px',
+            margin: '0 auto 36px',
             textAlign: 'center',
           }}
         >
