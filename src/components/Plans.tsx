@@ -8,7 +8,7 @@ const plans = [
     oldPrice: 'R$199,90',
     price: 'R$179,90',
     per: '/mês',
-    desc: 'Parcelamento Tradicional em 12',
+    desc: 'Parcelamento Tradicional em 12x',
     pop: true,
     badge: 'melhor opção',
   },
