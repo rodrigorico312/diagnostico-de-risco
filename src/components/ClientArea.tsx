@@ -11,7 +11,24 @@ interface UserData {
   status: string
 }
 
-const TAMANHOS = ['36', '38', '40', '42', '44', '46']
+// Opcoes do perfil — espelhadas EXATAMENTE da definicao do PerfilDeLook.tsx
+// State armazena .val, render mostra .label. Single source of truth.
+const TAMANHOS = [
+  { val: '36', label: '36' },
+  { val: '38', label: '38' },
+  { val: '40', label: '40' },
+  { val: '42', label: '42' },
+  { val: '44', label: '44' },
+  { val: '46', label: '46' },
+]
+const TREINOS = [
+  { val: 'musculacao', label: 'Musculação' },
+  { val: 'funcional', label: 'Funcional' },
+  { val: 'yoga', label: 'Yoga' },
+  { val: 'corrida', label: 'Corrida' },
+  { val: 'pilates', label: 'Pilates' },
+  { val: 'crossfit', label: 'CrossFit' },
+]
 const CORES = [
   { val: 'preto', label: 'Preto', color: '#1E1E1C' },
   { val: 'branco', label: 'Branco', color: '#F0EDE8' },
@@ -30,10 +47,37 @@ const CORES = [
   { val: 'laranja', label: 'Laranja', color: '#F97316' },
   { val: 'lilas', label: 'Lilás', color: '#A78BFA' },
 ]
-const TREINOS = ['Musculação', 'Funcional', 'Yoga', 'Corrida', 'Pilates', 'CrossFit']
-const PECAS = ['Legging', 'Top', 'Short', 'Corta Vento', 'Body', 'Macaquinho', 'Cropped', 'Regata']
-const MODELAGENS = ['Cintura alta', 'Com compressão', 'Soltinho', 'Justo no corpo']
-const BLACKLIST_OPTS = ['Cores neon', 'Estampas', 'Shorts curtos', 'Transparência', 'Animal print', 'Tie-dye', 'Brilho / Glitter', 'Logos grandes', 'Rosa pink']
+const PECAS = [
+  { val: 'legging', label: 'Legging' },
+  { val: 'top', label: 'Top' },
+  { val: 'short', label: 'Short' },
+  { val: 'jaqueta', label: 'Corta Vento' },
+  { val: 'body', label: 'Body' },
+  { val: 'macaquinho', label: 'Macaquinho' },
+  { val: 'cropped', label: 'Cropped' },
+  { val: 'regata', label: 'Regata' },
+]
+const MODELAGENS = [
+  { val: 'cintura-alta', label: 'Cintura alta' },
+  { val: 'compressao', label: 'Com compressão' },
+  { val: 'soltinho', label: 'Soltinho' },
+  { val: 'justo', label: 'Justo no corpo' },
+]
+const BLACKLIST_OPTS = [
+  { val: 'neon', label: 'Cores neon' },
+  { val: 'estampas', label: 'Estampas' },
+  { val: 'shorts-curtos', label: 'Shorts curtos' },
+  { val: 'transparencia', label: 'Transparência' },
+  { val: 'animal-print', label: 'Animal print' },
+  { val: 'tie-dye', label: 'Tie-dye' },
+  { val: 'brilho', label: 'Brilho / Glitter' },
+  { val: 'logos-grandes', label: 'Logos grandes' },
+  { val: 'rosa-pink', label: 'Rosa pink' },
+]
+
+// Helper: converte um array de vals em string "Label1, Label2, ..." via lookup
+const valsToLabels = (vals: string[], opts: { val: string; label: string }[]) =>
+  vals.map(v => opts.find(o => o.val === v)?.label || v).join(', ')
 
 const PLANOS_INFO: Record<string, { nome: string; valor: string; desc: string }> = {
   mensal: { nome: 'Plano Mensal', valor: 'R$199,90/mês', desc: 'Recorrência mensal — cancele quando quiser' },
@@ -160,7 +204,20 @@ export default function ClientArea() {
     setSaving(true); setMsg('')
     try {
       const res = await fetch(API + '/perfil', { method: 'PUT', headers, body: JSON.stringify({ tamanho, treinos, cores, pecas, modelagem, blacklist }) })
-      if (res.ok) { setMsg('Perfil atualizado!'); setEditPerfil(false); setPerfilCarregado(true); setTimeout(() => setMsg(''), 3000) }
+      if (res.ok) {
+        // Recarrega do backend pra garantir que o state local reflete o que foi gravado
+        const fresh = await fetch(API + '/perfil', { headers }).then(r => r.json())
+        if (fresh.perfil) {
+          setTamanho(fresh.perfil.tamanho || '')
+          setTreinos(fresh.perfil.treinos || [])
+          setCores(fresh.perfil.cores || [])
+          setPecas(fresh.perfil.pecas || [])
+          setModelagem(fresh.perfil.modelagem || [])
+          setBlacklist(fresh.perfil.blacklist || [])
+        }
+        setMsg('Perfil atualizado!'); setEditPerfil(false); setPerfilCarregado(true)
+        setTimeout(() => setMsg(''), 3000)
+      }
     } catch { setMsg('Erro ao salvar. Tente novamente.') }
     setSaving(false)
   }
@@ -294,7 +351,7 @@ export default function ClientArea() {
 
       <div style={{ maxWidth: '600px', margin: '0 auto', padding: '1.5rem 5% 3rem' }}>
 
-        {/* ═══ PERFIL ═══ */}
+        {/* PERFIL */}
         {tab === 'perfil' && (
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
@@ -309,19 +366,19 @@ export default function ClientArea() {
               </div>
             ) : !editPerfil ? (
               <div>
-                <InfoRow label="Tamanho" value={tamanho || '—'} />
-                <InfoRow label="Treinos" value={treinos.length > 0 ? treinos.join(', ') : '—'} />
-                <InfoRow label="Cores" value={cores.length > 0 ? cores.map(c => CORES.find(x => x.val === c)?.label || c).join(', ') : '—'} />
-                <InfoRow label="Peças" value={pecas.length > 0 ? pecas.join(', ') : '—'} />
-                <InfoRow label="Modelagem" value={modelagem.length > 0 ? modelagem.join(', ') : '—'} />
-                <InfoRow label="Não quer receber" value={blacklist.length > 0 ? blacklist.join(', ') : 'Nenhuma restrição'} />
+                <InfoRow label="Tamanho" value={tamanho ? (TAMANHOS.find(t => t.val === tamanho)?.label || tamanho) : '—'} />
+                <InfoRow label="Treinos" value={treinos.length > 0 ? valsToLabels(treinos, TREINOS) : '—'} />
+                <InfoRow label="Cores" value={cores.length > 0 ? valsToLabels(cores, CORES) : '—'} />
+                <InfoRow label="Peças" value={pecas.length > 0 ? valsToLabels(pecas, PECAS) : '—'} />
+                <InfoRow label="Modelagem" value={modelagem.length > 0 ? valsToLabels(modelagem, MODELAGENS) : '—'} />
+                <InfoRow label="Não quer receber" value={blacklist.length > 0 ? valsToLabels(blacklist, BLACKLIST_OPTS) : 'Nenhuma restrição'} />
               </div>
             ) : (
               <div>
                 <MiniTitle>Tamanho</MiniTitle>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{TAMANHOS.map(t => <Chip key={t} selected={tamanho === t} onClick={() => setTamanho(t)}>{t}</Chip>)}</div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{TAMANHOS.map(t => <Chip key={t.val} selected={tamanho === t.val} onClick={() => setTamanho(t.val)}>{t.label}</Chip>)}</div>
                 <MiniTitle>Treinos</MiniTitle>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{TREINOS.map(t => <Chip key={t} selected={treinos.includes(t)} onClick={() => toggleArr(treinos, t, setTreinos)}>{t}</Chip>)}</div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{TREINOS.map(t => <Chip key={t.val} selected={treinos.includes(t.val)} onClick={() => toggleArr(treinos, t.val, setTreinos)}>{t.label}</Chip>)}</div>
                 <MiniTitle>Cores preferidas</MiniTitle>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.7rem' }}>
                   {CORES.map(c => (
@@ -332,11 +389,11 @@ export default function ClientArea() {
                   ))}
                 </div>
                 <MiniTitle>Peças preferidas</MiniTitle>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{PECAS.map(p => <Chip key={p} selected={pecas.includes(p)} onClick={() => toggleArr(pecas, p, setPecas)}>{p}</Chip>)}</div>
+                <div className="carousel">{PECAS.map(p => <div key={p.val} className={`carousel-item${pecas.includes(p.val) ? ' sel' : ''}`} onClick={() => toggleArr(pecas, p.val, setPecas)}>{p.label}</div>)}</div>
                 <MiniTitle>Modelagem</MiniTitle>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{MODELAGENS.map(m => <Chip key={m} selected={modelagem.includes(m)} onClick={() => toggleArr(modelagem, m, setModelagem)}>{m}</Chip>)}</div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{MODELAGENS.map(m => <Chip key={m.val} selected={modelagem.includes(m.val)} onClick={() => toggleArr(modelagem, m.val, setModelagem)}>{m.label}</Chip>)}</div>
                 <MiniTitle>Não quero receber</MiniTitle>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{BLACKLIST_OPTS.map(b => <Chip key={b} selected={blacklist.includes(b)} onClick={() => toggleArr(blacklist, b, setBlacklist)} variant="outline">{b}</Chip>)}</div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{BLACKLIST_OPTS.map(b => <Chip key={b.val} selected={blacklist.includes(b.val)} onClick={() => toggleArr(blacklist, b.val, setBlacklist)} variant="outline">{b.label}</Chip>)}</div>
                 {msg && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
                 <button onClick={salvarPerfil} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>{saving ? 'salvando...' : 'salvar perfil'}</button>
               </div>
@@ -344,7 +401,7 @@ export default function ClientArea() {
           </div>
         )}
 
-        {/* ═══ ENDEREÇO ═══ */}
+        {/* ENDERECO */}
         {tab === 'endereco' && (
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.5rem' }}>
@@ -390,7 +447,7 @@ export default function ClientArea() {
           </div>
         )}
 
-        {/* ═══ MINHA BOX ═══ */}
+        {/* MINHA BOX */}
         {tab === 'box' && (
           <div>
             {loadingBoxes ? (
@@ -422,7 +479,7 @@ export default function ClientArea() {
           </div>
         )}
 
-        {/* ═══ PLANO ═══ */}
+        {/* PLANO */}
         {tab === 'plano' && (
           <div>
             <SectionTitle>Plano atual</SectionTitle>
@@ -585,8 +642,6 @@ function montarUrlRastreio(codigo: string, transportadora: string | null): strin
 }
 
 function BoxTimelineCard({ box }: { box: any }) {
-  const API_URL = 'https://api.vivefit.site'
-
   const formatarMes = (mes: string) => {
     if (!mes) return { mes: '', ano: '' }
     const [ano, m] = mes.split('-')
