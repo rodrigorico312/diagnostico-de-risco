@@ -389,7 +389,7 @@ export default function ClientArea() {
                   ))}
                 </div>
                 <MiniTitle>Peças preferidas</MiniTitle>
-                <div className="carousel">{PECAS.map(p => <div key={p.val} className={`carousel-item${pecas.includes(p.val) ? ' sel' : ''}`} onClick={() => toggleArr(pecas, p.val, setPecas)}>{p.label}</div>)}</div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{PECAS.map(p => <Chip key={p.val} selected={pecas.includes(p.val)} onClick={() => toggleArr(pecas, p.val, setPecas)}>{p.label}</Chip>)}</div>
                 <MiniTitle>Modelagem</MiniTitle>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{MODELAGENS.map(m => <Chip key={m.val} selected={modelagem.includes(m.val)} onClick={() => toggleArr(modelagem, m.val, setModelagem)}>{m.label}</Chip>)}</div>
                 <MiniTitle>Não quero receber</MiniTitle>
