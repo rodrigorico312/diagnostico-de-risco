@@ -16,10 +16,46 @@ interface FreteOpcao {
 
 type MetodoPagamento = 'PIX' | 'BOLETO' | 'CREDIT_CARD' | null
 
-const PLAN_INFO: Record<string, { nome: string; valorTotal: number; parcelas: string; meses: number; maxParcelas: number }> = {
-  mensal: { nome: 'Plano Mensal', valorTotal: 199.90, parcelas: 'recorrência mensal', meses: 1, maxParcelas: 1 },
-  semestral: { nome: 'Plano Semestral', valorTotal: 1139.40, parcelas: '6 meses', meses: 6, maxParcelas: 6 },
-  anual: { nome: 'Plano Anual', valorTotal: 2158.80, parcelas: '12 meses', meses: 12, maxParcelas: 12 },
+interface PlanInfo {
+  nome: string
+  valorPrimeira: number          // valor cobrado na primeira fatura (mensalidade no semestral, lump sum no anual)
+  meses: number                  // duracao em meses
+  maxParcelas: number            // para dropdown cartao (apenas anual usa)
+  metodosPermitidos: ('PIX' | 'BOLETO' | 'CREDIT_CARD')[]
+  modeloLabel: string            // texto curto explicativo no resumo
+}
+
+const PLAN_INFO: Record<string, PlanInfo> = {
+  mensal: {
+    nome: 'Plano Mensal',
+    valorPrimeira: 199.90,
+    meses: 1,
+    maxParcelas: 1,
+    metodosPermitidos: ['PIX', 'BOLETO', 'CREDIT_CARD'],
+    modeloLabel: 'avulso · sem fidelidade',
+  },
+  semestral: {
+    nome: 'Plano Semestral',
+    valorPrimeira: 189.90,
+    meses: 6,
+    maxParcelas: 1,
+    metodosPermitidos: ['CREDIT_CARD'],
+    modeloLabel: 'cobrança recorrente · 6 meses',
+  },
+  anual: {
+    nome: 'Plano Anual',
+    valorPrimeira: 2158.80,
+    meses: 12,
+    maxParcelas: 12,
+    metodosPermitidos: ['PIX', 'BOLETO', 'CREDIT_CARD'],
+    modeloLabel: 'pagamento único · até 12x no cartão',
+  },
+}
+
+const METODO_LABELS: Record<string, { label: string; sub: string }> = {
+  PIX: { label: 'Pix', sub: 'à vista' },
+  BOLETO: { label: 'Boleto', sub: 'à vista' },
+  CREDIT_CARD: { label: 'Cartão', sub: '' },
 }
 
 function formatBRL(val: number): string {
@@ -81,7 +117,15 @@ export default function Checkout({ plano }: Props) {
 
   const info = PLAN_INFO[plano] || PLAN_INFO.mensal
   const token = localStorage.getItem('vivefit_token')
-  const isMensal = plano === 'mensal'
+  const isSemestral = plano === 'semestral'
+  const isAnual = plano === 'anual'
+
+  // Auto-seleciona o metodo quando ha apenas uma opcao (ex: semestral)
+  useEffect(() => {
+    if (info.metodosPermitidos.length === 1) {
+      setMetodo(info.metodosPermitidos[0] as MetodoPagamento)
+    }
+  }, [plano])
 
   useEffect(() => {
     if (!token) return
@@ -166,9 +210,15 @@ export default function Checkout({ plano }: Props) {
     setBuscandoFrete(false)
   }
 
-  const freteTotal = freteSelecionado ? freteSelecionado.preco * info.meses : 0
+  // Calculo do total varia por plano:
+  // - mensal: valorPrimeira (199.90) + frete x 1 = primeira fatura
+  // - semestral: valorPrimeira (189.90) + frete x 1 = primeira mensalidade (cobrada x 6)
+  // - anual: valorPrimeira (2158.80) + frete x 12 = lump sum total
+  const freteTotal = freteSelecionado
+    ? freteSelecionado.preco * (isSemestral ? 1 : info.meses)
+    : 0
   const descontoCupom = cupomAplicado ? cupomAplicado.desconto : 0
-  const subtotal = freteSelecionado ? info.valorTotal + freteTotal : null
+  const subtotal = freteSelecionado ? info.valorPrimeira + freteTotal : null
   const total = subtotal !== null ? Math.max(0, subtotal - descontoCupom) : null
   const valorParcela = total && parcelas > 1 ? total / parcelas : null
 
@@ -180,7 +230,7 @@ export default function Checkout({ plano }: Props) {
       const r = await fetch(API + '/cupons/validar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ codigo: cupomInput.trim(), plano, valor: info.valorTotal }),
+        body: JSON.stringify({ codigo: cupomInput.trim(), plano, valor: info.valorPrimeira }),
       })
       const d = await r.json()
       if (!d.valido) {
@@ -212,15 +262,28 @@ export default function Checkout({ plano }: Props) {
     if (!rua || !numero || !bairro || !cidade || !estado) { setErroEndereco('Preencha o endereço completo'); return }
     if (!freteSelecionado || !token || !metodo) return
     setPagando(true)
+
+    // Body adaptado por plano:
+    // - parcelas so faz sentido em anual com cartao (1-12)
+    // - mensal/semestral: parcelas sempre 1
+    const parcelasEnvio = (isAnual && metodo === 'CREDIT_CARD') ? parcelas : 1
+
     try {
       const res = await fetch(API + '/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify({ plano, frete: freteSelecionado.preco, cpf: cpfLimpo, metodoPagamento: metodo, parcelas: metodo === 'CREDIT_CARD' ? parcelas : 1, cupom_id: cupomAplicado?.cupom?.id || null, desconto_cupom: descontoCupom }),
+        body: JSON.stringify({
+          plano,
+          frete: freteSelecionado.preco,
+          cpf: cpfLimpo,
+          metodoPagamento: metodo,
+          parcelas: parcelasEnvio,
+          cupom_id: cupomAplicado?.cupom?.id || null,
+          desconto_cupom: descontoCupom,
+        }),
       })
       const data = await res.json()
       if (data.url) {
-        // Salva URL pra Sucesso.tsx oferecer 'pagar agora'
         localStorage.setItem('vivefit_payment_url', data.url)
         localStorage.setItem('vivefit_payment_at', String(Date.now()))
         setLinkPagamento(data.url)
@@ -238,6 +301,16 @@ export default function Checkout({ plano }: Props) {
 
   const opcoesParcelamento: number[] = []
   for (let i = 1; i <= info.maxParcelas; i++) opcoesParcelamento.push(i)
+
+  // Helpers de label para cada metodo no contexto deste plano
+  function getMetodoSub(m: 'PIX' | 'BOLETO' | 'CREDIT_CARD'): string {
+    if (m === 'CREDIT_CARD') {
+      if (isSemestral) return 'recorrente'
+      if (isAnual) return 'até 12x'
+      return 'à vista'
+    }
+    return METODO_LABELS[m].sub
+  }
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
@@ -269,9 +342,11 @@ export default function Checkout({ plano }: Props) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <p style={{ ...dataText, fontWeight: 700 }}>{info.nome}</p>
-              <p style={{ ...dataText, fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>4 peças por mês — {info.parcelas}</p>
+              <p style={{ ...dataText, fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>4 peças por mês — {info.modeloLabel}</p>
             </div>
-            <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(info.valorTotal)}</span>
+            <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)' }}>
+              {formatBRL(info.valorPrimeira)}{isSemestral ? '/mês' : ''}
+            </span>
           </div>
         </Card>
 
@@ -319,25 +394,55 @@ export default function Checkout({ plano }: Props) {
           )}
         </Card>
 
-        {freteSelecionado && total && (
+        {freteSelecionado && total !== null && (
           <Card>
             <CardLabel>Forma de pagamento</CardLabel>
             <div style={{ display: 'flex', gap: '.4rem', marginTop: '.4rem' }}>
-              {([['PIX', 'Pix', 'à vista'], ['BOLETO', 'Boleto', 'à vista'], ['CREDIT_CARD', 'Cartão', isMensal ? 'recorrente' : 'até ' + info.maxParcelas + 'x']] as const).map(([val, label, sub]) => (
-                <div key={val} onClick={() => { setMetodo(val as MetodoPagamento); if (val !== 'CREDIT_CARD') setParcelas(1); else setParcelas(isMensal ? 1 : info.maxParcelas) }} style={{ flex: 1, padding: '.6rem .4rem', borderRadius: '10px', border: metodo === val ? '2px solid var(--coral)' : '1px solid #ddd', background: metodo === val ? 'rgba(255,90,95,.05)' : '#fff', cursor: 'pointer', textAlign: 'center' as const, transition: 'all .2s' }}>
-                  <span style={{ fontSize: '.75rem', fontWeight: 600, color: metodo === val ? 'var(--coral)' : 'var(--azul-noite)' }}>{label}</span>
-                  <div style={{ fontSize: '.6rem', color: 'var(--cinza-mudo)', marginTop: '.15rem' }}>{sub}</div>
-                </div>
-              ))}
+              {info.metodosPermitidos.map(val => {
+                const labelInfo = METODO_LABELS[val]
+                const sub = getMetodoSub(val)
+                return (
+                  <div
+                    key={val}
+                    onClick={() => {
+                      setMetodo(val as MetodoPagamento)
+                      if (val !== 'CREDIT_CARD') setParcelas(1)
+                      else setParcelas(isAnual ? info.maxParcelas : 1)
+                    }}
+                    style={{
+                      flex: 1,
+                      padding: '.6rem .4rem',
+                      borderRadius: '10px',
+                      border: metodo === val ? '2px solid var(--coral)' : '1px solid #ddd',
+                      background: metodo === val ? 'rgba(255,90,95,.05)' : '#fff',
+                      cursor: 'pointer',
+                      textAlign: 'center' as const,
+                      transition: 'all .2s',
+                    }}
+                  >
+                    <span style={{ fontSize: '.75rem', fontWeight: 600, color: metodo === val ? 'var(--coral)' : 'var(--azul-noite)' }}>{labelInfo.label}</span>
+                    <div style={{ fontSize: '.6rem', color: 'var(--cinza-mudo)', marginTop: '.15rem' }}>{sub}</div>
+                  </div>
+                )
+              })}
             </div>
 
-            {metodo === 'CREDIT_CARD' && isMensal && (
-              <div style={{ marginTop: '.6rem', padding: '.5rem .7rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)' }}>
-                Cobrança automática de {total ? formatBRL(total) : ''}/mês no cartão. Cancele quando quiser.
+            {/* Aviso semestral */}
+            {metodo === 'CREDIT_CARD' && isSemestral && (
+              <div style={{ marginTop: '.6rem', padding: '.5rem .7rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.4 }}>
+                Cobrança recorrente de {total ? formatBRL(total) : ''}/mês no cartão por 6 meses. O limite só é bloqueado mês a mês.
               </div>
             )}
 
-            {metodo === 'CREDIT_CARD' && !isMensal && info.maxParcelas > 1 && (
+            {/* Aviso mensal cartao (avulso) */}
+            {metodo === 'CREDIT_CARD' && plano === 'mensal' && (
+              <div style={{ marginTop: '.6rem', padding: '.5rem .7rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.4 }}>
+                Cobrança única no cartão. Próxima box você adquire quando quiser.
+              </div>
+            )}
+
+            {/* Select de parcelas (apenas anual cartao) */}
+            {metodo === 'CREDIT_CARD' && isAnual && info.maxParcelas > 1 && (
               <div style={{ marginTop: '.8rem' }}>
                 <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', marginBottom: '.4rem' }}>Em quantas vezes?</p>
                 <select
@@ -352,7 +457,7 @@ export default function Checkout({ plano }: Props) {
                     fontSize: '.85rem',
                     color: 'var(--azul-noite)',
                     fontFamily: 'inherit',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
                   }}
                 >
                   {opcoesParcelamento.map(n => (
@@ -400,15 +505,18 @@ export default function Checkout({ plano }: Props) {
           </Card>
         )}
 
-        {freteSelecionado && total && metodo && (
+        {freteSelecionado && total !== null && metodo && (
           <Card>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.75rem', color: 'var(--azul-noite)' }}>
-                <span>{info.nome}</span>
-                <span>{formatBRL(info.valorTotal)}</span>
+                <span>{info.nome}{isSemestral ? ' (mensalidade)' : ''}</span>
+                <span>{formatBRL(info.valorPrimeira)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.75rem', color: 'var(--azul-noite)' }}>
-                <span>Frete ({freteSelecionado.empresa}) x {info.meses} {info.meses === 1 ? 'mês' : 'meses'}</span>
+                <span>
+                  Frete ({freteSelecionado.empresa})
+                  {isSemestral ? ' (mensal)' : isAnual ? ' x 12 meses' : ''}
+                </span>
                 <span>{formatBRL(freteTotal)}</span>
               </div>
               {cupomAplicado && descontoCupom > 0 && (
@@ -418,17 +526,43 @@ export default function Checkout({ plano }: Props) {
                 </div>
               )}
               <div style={{ borderTop: '1px solid #eee', paddingTop: '.4rem', marginTop: '.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.8rem', fontWeight: 700, color: 'var(--azul-noite)' }}>Total</span>
+                <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.8rem', fontWeight: 700, color: 'var(--azul-noite)' }}>
+                  {isSemestral ? 'Por mês' : 'Total'}
+                </span>
                 <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(total)}</span>
               </div>
-              {metodo === 'CREDIT_CARD' && !isMensal && parcelas > 1 && valorParcela && (
-                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>{parcelas}x de {formatBRL(valorParcela)} sem juros</p>
+
+              {/* Texto explicativo abaixo do total, varia por plano/metodo */}
+              {isSemestral && (
+                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
+                  cobrado todo mês no cartão · 6 meses
+                </p>
               )}
-              {metodo === 'CREDIT_CARD' && isMensal && (
-                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>{formatBRL(total)}/mês no cartão (recorrente)</p>
+              {isAnual && metodo === 'CREDIT_CARD' && parcelas > 1 && valorParcela && (
+                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
+                  {parcelas}x de {formatBRL(valorParcela)} sem juros
+                </p>
               )}
-              {metodo === 'PIX' && <p style={{ fontSize: '.68rem', color: '#16a34a', textAlign: 'right' as const, margin: '.1rem 0 0' }}>Pagamento instantâneo via Pix</p>}
-              {metodo === 'BOLETO' && <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>Boleto à vista — vence em 3 dias úteis</p>}
+              {isAnual && metodo === 'CREDIT_CARD' && parcelas === 1 && (
+                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
+                  à vista no cartão
+                </p>
+              )}
+              {plano === 'mensal' && metodo === 'CREDIT_CARD' && (
+                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
+                  pagamento único no cartão
+                </p>
+              )}
+              {metodo === 'PIX' && (
+                <p style={{ fontSize: '.68rem', color: '#16a34a', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
+                  pagamento instantâneo via Pix
+                </p>
+              )}
+              {metodo === 'BOLETO' && (
+                <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
+                  boleto à vista — vence em 3 dias úteis
+                </p>
+              )}
             </div>
           </Card>
         )}
@@ -458,10 +592,10 @@ export default function Checkout({ plano }: Props) {
           aberto={modalTermosAberto}
           onConfirmar={async () => {
             try {
-              const token = localStorage.getItem('vivefit_token')
+              const t = localStorage.getItem('vivefit_token')
               const r = await fetch(API + '/aceite-termos', {
                 method: 'POST',
-                headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
               })
               if (!r.ok) throw new Error('Falha ao registrar aceite')
               setAceiteTermos(true)
@@ -483,7 +617,11 @@ export default function Checkout({ plano }: Props) {
         {!metodo && freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Escolha a forma de pagamento</p>}
         {!freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Preencha o endereço e calcule o frete</p>}
 
-        <p style={{ textAlign: 'center', fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1.5rem' }}>Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.</p>
+        <p style={{ textAlign: 'center', fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1.5rem' }}>
+          {plano === 'mensal' && 'Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.'}
+          {isSemestral && 'Pagamento seguro. Plano semestral: cancelamento antes de 6 meses tem multa de 10% sobre o saldo.'}
+          {isAnual && 'Pagamento seguro. Plano anual: cancelamento tem multa de 10% sobre o saldo restante.'}
+        </p>
       </div>
 
       {modalAberto && (
