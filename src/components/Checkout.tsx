@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import ModalTermos from './ModalTermos'
+import ModalContratoSemestral from './ModalContratoSemestral'
 
 const API = 'https://api.vivefit.site'
 
@@ -87,6 +88,9 @@ function filtrarFreteOpcoes(opcoes: FreteOpcao[]): FreteOpcao[] {
 export default function Checkout({ plano }: Props) {
   const [aceiteTermos, setAceiteTermos] = useState(false)
   const [modalTermosAberto, setModalTermosAberto] = useState(false)
+  const [aceiteContrato, setAceiteContrato] = useState(false)
+  const [modalContratoAberto, setModalContratoAberto] = useState(false)
+  const [contratoHash, setContratoHash] = useState('')
   const [cupomInput, setCupomInput] = useState('')
   const [cupomAplicado, setCupomAplicado] = useState<any>(null)
   const [cupomErro, setCupomErro] = useState('')
@@ -124,6 +128,13 @@ export default function Checkout({ plano }: Props) {
   useEffect(() => {
     if (info.metodosPermitidos.length === 1) {
       setMetodo(info.metodosPermitidos[0] as MetodoPagamento)
+    }
+  }, [plano])
+
+  // Busca hash do contrato semestral
+  useEffect(() => {
+    if (isSemestral) {
+      fetch(API + '/contrato-semestral/texto').then(r => r.json()).then(d => { if (d.hash) setContratoHash(d.hash) }).catch(() => {})
     }
   }, [plano])
 
@@ -297,7 +308,8 @@ export default function Checkout({ plano }: Props) {
 
   const enderecoPreenchido = rua && numero && bairro && cidade && estado
   const cpfValido = cpf.replace(/\D/g, '').length === 11
-  const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && metodo && aceiteTermos && !pagando
+  const aceiteOk = isSemestral ? aceiteContrato : aceiteTermos
+  const podePagar = freteSelecionado && cpfValido && enderecoPreenchido && metodo && aceiteOk && !pagando
 
   const opcoesParcelamento: number[] = []
   for (let i = 1; i <= info.maxParcelas; i++) opcoesParcelamento.push(i)
@@ -623,46 +635,86 @@ export default function Checkout({ plano }: Props) {
           </Card>
         )}
 
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.6rem', padding: '.8rem 1rem', background: 'rgba(6,182,212,.06)', border: '1px solid rgba(6,182,212,.2)', borderRadius: '10px', marginBottom: '.8rem' }}>
-          <input
-            type="checkbox"
-            checked={aceiteTermos}
-            readOnly
-            onClick={(e) => { e.preventDefault(); if (!aceiteTermos) setModalTermosAberto(true) }}
-            style={{ marginTop: '.25rem', width: '18px', height: '18px', cursor: 'pointer', accentColor: 'var(--turquesa, #06B6D4)' }}
-          />
-          <label style={{ fontSize: '.82rem', color: '#334155', lineHeight: 1.5, cursor: 'pointer' }} onClick={() => { if (!aceiteTermos) setModalTermosAberto(true) }}>
-            Li e aceito os{' '}
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); setModalTermosAberto(true) }}
-              style={{ color: 'var(--turquesa, #06B6D4)', textDecoration: 'underline', fontWeight: 500 }}
-            >
-              Termos de uso
-            </a>{' '}
-            da VIVE FIT BOX.
-          </label>
-        </div>
+        {/* Aceite: contrato semestral OU termos gerais */}
+        {isSemestral ? (
+          <>
+            <Card>
+              <CardLabel>Contrato do Plano Semestral</CardLabel>
+              <div style={{ fontSize: '.72rem', color: 'var(--azul-noite)', lineHeight: 1.6 }}>
+                <p style={{ margin: '0 0 .3rem' }}>Vigencia: 6 meses a partir da primeira cobranca</p>
+                <p style={{ margin: '0 0 .3rem' }}>Valor: R$ 189,90/mes + frete, cobrado mensalmente no cartao</p>
+                <p style={{ margin: '0 0 .3rem' }}>O limite do cartao e bloqueado apenas mes a mes</p>
+                <p style={{ margin: '0 0 .3rem' }}>Cancelamento: aviso previo de 30 dias</p>
+                <p style={{ margin: '0 0 .3rem' }}>Cupons valem apenas para a primeira cobranca</p>
+              </div>
+              <a href="#" onClick={(e: React.MouseEvent) => { e.preventDefault(); setModalContratoAberto(true) }} style={{ fontSize: '.72rem', color: 'var(--cobalto, #1E3A8A)', fontWeight: 600, textDecoration: 'underline', marginTop: '.5rem', display: 'inline-block' }}>
+                ver contrato completo
+              </a>
+            </Card>
 
-        <ModalTermos
-          aberto={modalTermosAberto}
-          onConfirmar={async () => {
-            try {
-              const t = localStorage.getItem('vivefit_token')
-              const r = await fetch(API + '/aceite-termos', {
-                method: 'POST',
-                headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
-              })
-              if (!r.ok) throw new Error('Falha ao registrar aceite')
-              setAceiteTermos(true)
-              setModalTermosAberto(false)
-            } catch (err) {
-              alert('Nao foi possivel registrar seu aceite. Tente novamente.')
-              console.error('[aceite-termos]', err)
-            }
-          }}
-          onCancelar={() => setModalTermosAberto(false)}
-        />
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.6rem', padding: '.8rem 1rem', background: 'rgba(30,58,138,.06)', border: '1px solid rgba(30,58,138,.25)', borderRadius: '10px', marginBottom: '.8rem' }}>
+              <input type="checkbox" checked={aceiteContrato} readOnly onClick={(e: React.MouseEvent) => { e.preventDefault(); if (!aceiteContrato) setModalContratoAberto(true) }} style={{ marginTop: '.25rem', width: '18px', height: '18px', cursor: 'pointer', accentColor: 'var(--cobalto, #1E3A8A)' }} />
+              <label style={{ fontSize: '.82rem', color: '#334155', lineHeight: 1.5, cursor: 'pointer' }} onClick={() => { if (!aceiteContrato) setModalContratoAberto(true) }}>
+                Li e aceito o{' '}
+                <a href="#" onClick={(e: React.MouseEvent) => { e.preventDefault(); setModalContratoAberto(true) }} style={{ color: 'var(--cobalto, #1E3A8A)', textDecoration: 'underline', fontWeight: 600 }}>
+                  Contrato VIVE FIT BOX - Plano Semestral
+                </a>
+              </label>
+            </div>
+
+            <ModalContratoSemestral
+              aberto={modalContratoAberto}
+              onConfirmar={async () => {
+                try {
+                  const t = localStorage.getItem('vivefit_token')
+                  const r = await fetch(API + '/aceite-contrato-semestral', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ texto_hash: contratoHash }),
+                  })
+                  if (!r.ok) throw new Error('Falha ao registrar aceite do contrato')
+                  setAceiteContrato(true)
+                  setModalContratoAberto(false)
+                } catch (err) {
+                  alert('Nao foi possivel registrar seu aceite. Tente novamente.')
+                  console.error('[aceite-contrato]', err)
+                }
+              }}
+              onCancelar={() => setModalContratoAberto(false)}
+            />
+          </>
+        ) : (
+          <>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '.6rem', padding: '.8rem 1rem', background: 'rgba(6,182,212,.06)', border: '1px solid rgba(6,182,212,.2)', borderRadius: '10px', marginBottom: '.8rem' }}>
+              <input type="checkbox" checked={aceiteTermos} readOnly onClick={(e: React.MouseEvent) => { e.preventDefault(); if (!aceiteTermos) setModalTermosAberto(true) }} style={{ marginTop: '.25rem', width: '18px', height: '18px', cursor: 'pointer', accentColor: 'var(--turquesa, #06B6D4)' }} />
+              <label style={{ fontSize: '.82rem', color: '#334155', lineHeight: 1.5, cursor: 'pointer' }} onClick={() => { if (!aceiteTermos) setModalTermosAberto(true) }}>
+                Li e aceito os{' '}
+                <a href="#" onClick={(e: React.MouseEvent) => { e.preventDefault(); setModalTermosAberto(true) }} style={{ color: 'var(--turquesa, #06B6D4)', textDecoration: 'underline', fontWeight: 500 }}>Termos de uso</a>{' '}
+                da VIVE FIT BOX.
+              </label>
+            </div>
+
+            <ModalTermos
+              aberto={modalTermosAberto}
+              onConfirmar={async () => {
+                try {
+                  const t = localStorage.getItem('vivefit_token')
+                  const r = await fetch(API + '/aceite-termos', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
+                  })
+                  if (!r.ok) throw new Error('Falha ao registrar aceite')
+                  setAceiteTermos(true)
+                  setModalTermosAberto(false)
+                } catch (err) {
+                  alert('Nao foi possivel registrar seu aceite. Tente novamente.')
+                  console.error('[aceite-termos]', err)
+                }
+              }}
+              onCancelar={() => setModalTermosAberto(false)}
+            />
+          </>
+        )}
 
         {erroGeral && <p style={{ textAlign: 'center', fontSize: '.75rem', color: 'var(--coral)', marginBottom: '.5rem' }}>{erroGeral}</p>}
 
