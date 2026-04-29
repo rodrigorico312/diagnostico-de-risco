@@ -30,26 +30,41 @@ const NUM = {
 // Lógica preservada — handlePlanClick com redirect real
 type PlanoId = 'mensal' | 'semestral' | 'anual';
 
-const handlePlanClick = (planoId: PlanoId): void => {
+const handlePlanClick = async (planoId: PlanoId): Promise<void> => {
   try {
     localStorage.setItem('vivefit_plano_intencao', planoId);
   } catch {
-    /* noop — modo privado/quota */
+    /* noop */
   }
 
-  // Roteamento por estado de autenticacao:
-  // - Deslogado              -> /cadastro (cria conta)
-  // - Logado SEM quiz feito  -> /perfil-de-look (faz quiz primeiro)
-  // - Logado COM quiz feito  -> /checkout (vai direto pagar)
   const token = (() => { try { return localStorage.getItem('vivefit_token'); } catch { return null; } })();
-  const quizDone = (() => { try { return localStorage.getItem('vivefit_quiz_done') === 'true'; } catch { return false; } })();
 
+  // Deslogado -> cadastro
   if (!token) {
     window.location.hash = `#/cadastro?plano=${planoId}`;
-  } else if (!quizDone) {
-    window.location.hash = `#/perfil-de-look?plano=${planoId}`;
-  } else {
-    window.location.hash = `#/checkout?plano=${planoId}`;
+    return;
+  }
+
+  // Logado: checa perfil no BANCO (fonte de verdade, nao depende de localStorage)
+  try {
+    const res = await fetch('https://api.vivefit.site/perfil', {
+      headers: { 'Authorization': 'Bearer ' + token },
+    });
+    const data = await res.json();
+    if (data.perfil && data.perfil.tamanho) {
+      // Perfil existe no banco -> checkout direto
+      try { localStorage.setItem('vivefit_quiz_done', 'true'); } catch {}
+      window.location.hash = `#/checkout?plano=${planoId}`;
+    } else {
+      // Sem perfil -> quiz primeiro
+      window.location.hash = `#/perfil-de-look?plano=${planoId}`;
+    }
+  } catch {
+    // Fallback se API falhar: usa localStorage
+    const quizDone = (() => { try { return localStorage.getItem('vivefit_quiz_done') === 'true'; } catch { return false; } })();
+    window.location.hash = quizDone
+      ? `#/checkout?plano=${planoId}`
+      : `#/perfil-de-look?plano=${planoId}`;
   }
 };
 
