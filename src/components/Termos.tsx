@@ -62,9 +62,9 @@ export default function Termos() {
 
         <Secao titulo="5. Planos e Pagamento">
           <ul style={ulStyle}>
-            <li><strong>Plano Mensal:</strong> R$ 199,90/mês - sem fidelidade</li>
-            <li><strong>Plano Semestral:</strong> R$ 189,90/mês (pagamento único antecipado)</li>
-            <li><strong>Plano Anual:</strong> R$ 179,90/mês (pagamento único antecipado)</li>
+            <li><strong>Plano Mensal:</strong> R$ 199,90/mês - sem fidelidade ou multa</li>
+            <li><strong>Plano Semestral:</strong> R$ 189,90/mês - Renovação mensal automática</li>
+            <li><strong>Plano Anual:</strong> R$ 179,90/mês Consome o limite total do cartão, com parcelamento tradicional em 12x</li>
           </ul>
           <p>Os pagamentos são processados via Asaas, nossa provedora de pagamentos.</p>
         </Secao>
