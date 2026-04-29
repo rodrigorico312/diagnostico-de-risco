@@ -344,9 +344,14 @@ export default function Checkout({ plano }: Props) {
               <p style={{ ...dataText, fontWeight: 700 }}>{info.nome}</p>
               <p style={{ ...dataText, fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>4 peças por mês — {info.modeloLabel}</p>
             </div>
-            <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)' }}>
-              {formatBRL(info.valorPrimeira)}{isSemestral ? '/mês' : ''}
-            </span>
+            <div style={{ textAlign: 'right' as const }}>
+              <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--azul-noite)', display: 'block' }}>
+                {formatBRL(info.valorPrimeira)}{isSemestral ? '/mês' : ''}
+              </span>
+              <span style={{ fontSize: '.62rem', color: 'var(--cinza-mudo)' }}>
+                {isSemestral ? 'mensalidade · sem frete' : isAnual ? 'plano · sem frete' : 'sem frete'}
+              </span>
+            </div>
           </div>
         </Card>
 
@@ -429,15 +434,51 @@ export default function Checkout({ plano }: Props) {
 
             {/* Aviso semestral */}
             {metodo === 'CREDIT_CARD' && isSemestral && (
-              <div style={{ marginTop: '.6rem', padding: '.5rem .7rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.4 }}>
-                Cobrança recorrente de {total ? formatBRL(total) : ''}/mês no cartão por 6 meses. O limite só é bloqueado mês a mês.
+              <div style={{ marginTop: '.6rem', padding: '.6rem .8rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.5 }}>
+                <div style={{ marginBottom: '.3rem' }}>
+                  <strong>Cobrança mensal recorrente no cartão por 6 meses.</strong>
+                </div>
+                {freteSelecionado && total ? (
+                  <div style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>
+                    Plano R$ {info.valorPrimeira.toFixed(2).replace('.', ',')} + Frete R$ {freteSelecionado.preco.toFixed(2).replace('.', ',')} = <strong style={{ color: 'var(--azul-noite)' }}>{formatBRL(total)}/mês</strong> no cartão
+                  </div>
+                ) : (
+                  <div style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>
+                    Mensalidade R$ {info.valorPrimeira.toFixed(2).replace('.', ',')} + frete (calcule acima).
+                  </div>
+                )}
+                <div style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '.3rem', fontStyle: 'italic' }}>
+                  O limite só é bloqueado mês a mês.
+                </div>
               </div>
             )}
 
             {/* Aviso mensal cartao (avulso) */}
             {metodo === 'CREDIT_CARD' && plano === 'mensal' && (
-              <div style={{ marginTop: '.6rem', padding: '.5rem .7rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.4 }}>
-                Cobrança única no cartão. Próxima box você adquire quando quiser.
+              <div style={{ marginTop: '.6rem', padding: '.6rem .8rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.5 }}>
+                <div style={{ marginBottom: '.3rem' }}>
+                  <strong>Cobrança única no cartão.</strong>
+                </div>
+                {freteSelecionado && total ? (
+                  <div style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>
+                    Plano R$ {info.valorPrimeira.toFixed(2).replace('.', ',')} + Frete R$ {freteSelecionado.preco.toFixed(2).replace('.', ',')} = <strong style={{ color: 'var(--azul-noite)' }}>{formatBRL(total)}</strong>
+                  </div>
+                ) : null}
+                <div style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '.3rem', fontStyle: 'italic' }}>
+                  Próxima box você adquire quando quiser.
+                </div>
+              </div>
+            )}
+
+            {/* Aviso anual cartao */}
+            {metodo === 'CREDIT_CARD' && isAnual && freteSelecionado && total && (
+              <div style={{ marginTop: '.6rem', padding: '.6rem .8rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.5 }}>
+                <div style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>
+                  Plano R$ {info.valorPrimeira.toFixed(2).replace('.', ',')} + Frete (12 meses) R$ {(freteSelecionado.preco * 12).toFixed(2).replace('.', ',')} = <strong style={{ color: 'var(--azul-noite)' }}>{formatBRL(total)}</strong>
+                </div>
+                <div style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '.3rem', fontStyle: 'italic' }}>
+                  Pagamento único no cartão{parcelas > 1 ? ` em ${parcelas}x` : ' à vista'}.
+                </div>
               </div>
             )}
 
