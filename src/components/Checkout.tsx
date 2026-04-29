@@ -574,7 +574,7 @@ export default function Checkout({ plano }: Props) {
               </div>
               {cupomAplicado && descontoCupom > 0 && (
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.75rem', color: '#16a34a', fontWeight: 600 }}>
-                  <span>🎟️ Cupom {cupomAplicado.cupom.codigo}</span>
+                  <span>Cupom {cupomAplicado.cupom.codigo}</span>
                   <span>-{formatBRL(descontoCupom)}</span>
                 </div>
               )}
@@ -644,7 +644,6 @@ export default function Checkout({ plano }: Props) {
                 <p style={{ margin: '0 0 .3rem' }}>Vigencia: 6 meses a partir da primeira cobranca</p>
                 <p style={{ margin: '0 0 .3rem' }}>Valor: R$ 189,90/mes + frete, cobrado mensalmente no cartao</p>
                 <p style={{ margin: '0 0 .3rem' }}>O limite do cartao e bloqueado apenas mes a mes</p>
-                <p style={{ margin: '0 0 .3rem' }}>Cancelamento: aviso previo de 30 dias</p>
                 <p style={{ margin: '0 0 .3rem' }}>Cupons valem apenas para a primeira cobranca</p>
               </div>
               <a href="#" onClick={(e: React.MouseEvent) => { e.preventDefault(); setModalContratoAberto(true) }} style={{ fontSize: '.72rem', color: 'var(--cobalto, #1E3A8A)', fontWeight: 600, textDecoration: 'underline', marginTop: '.5rem', display: 'inline-block' }}>
@@ -727,8 +726,8 @@ export default function Checkout({ plano }: Props) {
 
         <p style={{ textAlign: 'center', fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1.5rem' }}>
           {plano === 'mensal' && 'Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.'}
-          {isSemestral && 'Pagamento seguro. Plano semestral: cancelamento antes de 6 meses tem multa de 10% sobre o saldo.'}
-          {isAnual && 'Pagamento seguro. Plano anual: cancelamento tem multa de 10% sobre o saldo restante.'}
+          {isSemestral && 'Pagamento seguro. Consulte o contrato do plano semestral para ver as condicoes completas.'}
+          {isAnual && 'Pagamento seguro. Consulte os termos de uso para ver as condicoes completas.'}
         </p>
       </div>
 

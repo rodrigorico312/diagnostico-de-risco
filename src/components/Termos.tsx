@@ -62,9 +62,9 @@ export default function Termos() {
 
         <Secao titulo="5. Planos e Pagamento">
           <ul style={ulStyle}>
-            <li><strong>Plano Mensal:</strong> R$ 199,90/mês - sem fidelidade ou multa</li>
-            <li><strong>Plano Semestral:</strong> R$ 189,90/mês - Renovação mensal automática</li>
-            <li><strong>Plano Anual:</strong> R$ 179,90/mês Consome o limite total do cartão, com parcelamento tradicional em 12x</li>
+            <li><strong>Plano Mensal:</strong> R$ 199,90/m?s - sem fidelidade</li>
+            <li><strong>Plano Semestral:</strong> R$ 189,90/mes (cobranca mensal por 6 meses no cartao de credito)</li>
+            <li><strong>Plano Anual:</strong> R$ 2.158,80 (pagamento unico, PIX/Boleto a vista ou cartao de 1x a 12x)</li>
           </ul>
           <p>Os pagamentos são processados via Asaas, nossa provedora de pagamentos.</p>
         </Secao>
@@ -84,26 +84,26 @@ export default function Termos() {
           <h3 style={h3Style}>6.2. Cancelamento Plano Mensal (após 7 dias)</h3>
           <p>Sem fidelidade. Cancele a qualquer momento na sua área da assinante. O cancelamento vale para o próximo ciclo - a box já paga será normalmente enviada. Sem multa.</p>
 
-          <h3 style={h3Style}>6.3. Cancelamento Plano Semestral / Anual (após 7 dias)</h3>
-          <p>Os planos semestral e anual são contratos com prazo determinado, com preço com desconto justamente porque você se compromete a manter a assinatura por 6 ou 12 meses.</p>
-          <p>Caso opte por cancelar antes do término do período contratado, será aplicada uma <strong>multa rescisória de 10% (dez por cento) sobre o valor das mensalidades restantes</strong>.</p>
-          <p>Exemplo prático:</p>
+          <h3 style={h3Style}>6.3. Cancelamento Plano Semestral</h3>
+          <p>O plano semestral tem duracao de 6 meses e exige aviso previo minimo de 30 dias para cancelamento, sem multa. Durante esse periodo, as cobrancas permanecem ativas e as boxes continuam sendo enviadas normalmente. Voce pode desistir do cancelamento a qualquer momento durante o aviso previo.</p>
+
+          <h3 style={h3Style}>6.4. Cancelamento Plano Anual</h3>
+          <p>O plano anual tem duracao de 12 meses. Caso opte por cancelar antes do termino do periodo contratado, sera aplicada uma multa rescisoria de 10% (dez por cento) sobre o saldo remanescente.</p>
+          <p>Exemplo pratico:</p>
           <ul style={ulStyle}>
-            <li>Plano Anual: R$ 179,90/mês (12x)</li>
-            <li>Cliente cancela após 4 meses já pagos</li>
-            <li>Saldo restante: 8 meses × R$ 179,90 = R$ 1.439,20</li>
-            <li>Multa: 10% × R$ 1.439,20 = <strong>R$ 143,92</strong></li>
+            <li>Plano Anual: R$ 179,90/mes (12x)</li>
+            <li>Cliente cancela apos 4 meses ja pagos</li>
+            <li>Saldo restante: 8 meses x R$ 179,90 = R$ 1.439,20</li>
+            <li>Multa: 10% x R$ 1.439,20 = <strong>R$ 143,92</strong></li>
             <li>Reembolso devido: R$ 1.439,20 - R$ 143,92 = R$ 1.295,28</li>
           </ul>
-          <p>A multa é descontada do valor a ser estornado.</p>
+          <p>A multa e descontada do valor a ser estornado.</p>
 
-          <h3 style={h3Style}>6.4. Falha do Serviço</h3>
-          <p>Se o cancelamento for motivado por falha grave da VIVE FIT BOX (atrasos recorrentes, peças com defeito reincidente, descumprimento contratual), <strong>não há multa</strong>, e o estorno é proporcional ao período não usufruído.</p>
+          <h3 style={h3Style}>6.5. Falha do Servico</h3>
+          <p>Se o cancelamento for motivado por falha grave da VIVE FIT BOX (atrasos recorrentes, pecas com defeito reincidente, descumprimento contratual), <strong>nao ha multa</strong>, e o estorno e proporcional ao periodo nao usufruido.</p>
 
-          <h3 style={h3Style}>6.5. Processamento</h3>
-          <p>Para cancelar, acesse sua área da assinante e clique em "Cancelar assinatura". Você poderá informar o motivo, e nossa equipe processará a solicitação em até 10 dias úteis. Durante esse prazo, podemos entrar em contato para entender sua experiência ou oferecer alternativas.</p>
-        </Secao>
-
+          <h3 style={h3Style}>6.6. Processamento</h3>
+          <p>Para cancelar, acesse sua area da assinante e clique em "Cancelar assinatura". Voce podera informar o motivo, e nossa equipe processara a solicitacao em ate 10 dias uteis. Durante esse prazo, podemos entrar em contato para entender sua experiencia ou oferecer alternativas.</p>
         <Secao titulo="7. Endereço de Entrega">
           <p>É sua responsabilidade manter o endereço de entrega atualizado na sua área da assinante. Boxes enviadas a endereço desatualizado e devolvidas à nossa base só serão reenviadas com cobrança de frete adicional.</p>
         </Secao>
