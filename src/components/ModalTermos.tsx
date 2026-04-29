@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type Props = {
   aberto: boolean
@@ -7,15 +7,27 @@ type Props = {
 }
 
 export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) {
+  const [leuTudo, setLeuTudo] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (aberto && scrollRef.current) {
-      scrollRef.current.scrollTop = 0
+    if (aberto) {
+      setLeuTudo(false)
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = 0
+      }
     }
   }, [aberto])
 
   if (!aberto) return null
+
+  const handleScroll = () => {
+    const el = scrollRef.current
+    if (!el) return
+    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 20) {
+      setLeuTudo(true)
+    }
+  }
 
   return (
     <div style={overlayStyle} onClick={onCancelar}>
@@ -25,7 +37,7 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
           <button onClick={onCancelar} style={closeBtnStyle} aria-label="Fechar">x</button>
         </div>
 
-        <div ref={scrollRef} style={contentStyle}>
+        <div ref={scrollRef} onScroll={handleScroll} style={contentStyle}>
           <p style={{ fontSize: '.85rem', color: '#64748B', margin: '0 0 1.5rem' }}><em>Ultima atualizacao: abril de 2026</em></p>
 
           <p style={paragraphStyle}>Ao finalizar sua assinatura VIVE FIT BOX, voce concorda com os termos abaixo.</p>
@@ -92,7 +104,13 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
 
         <div style={footerStyle}>
           <button onClick={onCancelar} style={btnCancelarStyle}>Cancelar</button>
-          <button onClick={onConfirmar} style={btnConfirmarStyle}>Li e confirmo</button>
+          <button
+            onClick={onConfirmar}
+            disabled={!leuTudo}
+            style={{ ...btnConfirmarStyle, opacity: leuTudo ? 1 : 0.5, cursor: leuTudo ? 'pointer' : 'not-allowed' }}
+          >
+            {leuTudo ? 'Li e confirmo' : 'Role ate o fim'}
+          </button>
         </div>
       </div>
     </div>
