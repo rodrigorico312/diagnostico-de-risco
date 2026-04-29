@@ -568,13 +568,28 @@ export default function Checkout({ plano }: Props) {
               )}
               <div style={{ borderTop: '1px solid #eee', paddingTop: '.4rem', marginTop: '.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.8rem', fontWeight: 700, color: 'var(--azul-noite)' }}>
-                  {isSemestral ? 'Por mês' : 'Total'}
+                  {isSemestral
+                    ? (cupomAplicado && descontoCupom > 0 ? 'Primeira fatura' : 'Por mês')
+                    : 'Total'}
                 </span>
                 <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(total)}</span>
               </div>
 
+              {/* Demais 5 mensalidades quando tem cupom no semestral */}
+              {isSemestral && cupomAplicado && descontoCupom > 0 && subtotal !== null && (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '.3rem', fontSize: '.75rem', color: 'var(--cinza-mudo)' }}>
+                  <span>Demais 5 mensalidades</span>
+                  <span style={{ fontWeight: 600 }}>{formatBRL(subtotal)}/mês</span>
+                </div>
+              )}
+
               {/* Texto explicativo abaixo do total, varia por plano/metodo */}
-              {isSemestral && (
+              {isSemestral && cupomAplicado && descontoCupom > 0 && (
+                <p style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.4rem 0 0', fontStyle: 'italic' }}>
+                  cupom válido apenas na primeira cobrança
+                </p>
+              )}
+              {isSemestral && !(cupomAplicado && descontoCupom > 0) && (
                 <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
                   cobrado todo mês no cartão · 6 meses
                 </p>

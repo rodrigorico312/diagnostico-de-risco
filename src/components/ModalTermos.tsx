@@ -70,12 +70,20 @@ export default function ModalTermos({ aberto, onConfirmar, onCancelar }: Props) 
             <li><strong>Anual:</strong> R$ 179,90/mês - pagamento antecipado</li>
           </ul>
 
+          <h3 style={h3}>5.6. Cupons de Desconto</h3>
+          <p style={paragraphStyle}>Cupons de desconto, quando aplicados, são válidos apenas para a <strong>primeira cobrança</strong> da assinatura, salvo se especificado de outra forma na divulgação da promoção. As cobranças seguintes serão processadas pelo valor cheio do plano contratado.</p>
+
           <h3 style={h3}>6. Cancelamento</h3>
           <p style={paragraphStyle}><strong>6.1. Arrependimento (CDC art. 49):</strong> até 7 dias corridos do <strong>recebimento</strong> da primeira box, estorno integral (incluindo frete) e devolução por nossa conta. E-mail contato@vivefit.site ou WhatsApp (93) 99112-9194.</p>
           <p style={paragraphStyle}><strong>6.2. Plano Mensal (após 7 dias):</strong> sem fidelidade, cancele a qualquer momento. Vale para o próximo ciclo, a box já paga é enviada. Sem multa.</p>
-          <p style={paragraphStyle}><strong>6.3. Plano Semestral/Anual (após 7 dias):</strong> multa rescisória de 10% sobre o saldo das mensalidades restantes. Exemplo: cancelou no anual após 4 meses, saldo R$ 1.439,20, multa R$ 143,92, estorno R$ 1.295,28.</p>
-          <p style={paragraphStyle}><strong>6.4. Falha da VIVE FIT:</strong> sem multa, estorno proporcional integral.</p>
-          <p style={paragraphStyle}><strong>6.5. Processamento:</strong> nossa equipe processa em até 10 dias úteis. Pode entrar em contato pra oferecer alternativas antes da efetivação.</p>
+          <p style={paragraphStyle}><strong>6.3. Plano Semestral/Anual (após 7 dias):</strong> o cancelamento deve ser solicitado com antecedência mínima de <strong>30 dias</strong>. Durante esse período, as cobranças permanecem ativas e as boxes continuam sendo enviadas normalmente. Sem multa.</p>
+          <p style={paragraphStyle}><strong>6.4. Cancelamento imediato (sem aviso prévio):</strong> caso opte por cancelar imediatamente, será aplicada multa rescisória de 10%:</p>
+          <ul style={ulStyle}>
+            <li><strong>Semestral:</strong> 10% sobre o valor da próxima fatura (R$ 18,99).</li>
+            <li><strong>Anual:</strong> 10% sobre o saldo proporcional restante. Exemplo: cancelou no mês 4 de 12, saldo R$ 1.439,20, multa R$ 143,92.</li>
+          </ul>
+          <p style={paragraphStyle}><strong>6.5. Falha da VIVE FIT:</strong> sem multa, estorno proporcional integral.</p>
+          <p style={paragraphStyle}><strong>6.6. Processamento:</strong> a solicitação de cancelamento é confirmada automaticamente após o prazo de 30 dias do aviso prévio (ou imediatamente, em caso de cancelamento imediato com multa). Você pode desistir do cancelamento a qualquer momento durante o aviso prévio.</p>
 
           <h3 style={h3}>7. Endereço de Entrega</h3>
           <p style={paragraphStyle}>É sua responsabilidade manter o endereço atualizado. Boxes devolvidas por endereço desatualizado só são reenviadas com cobrança de frete adicional.</p>
