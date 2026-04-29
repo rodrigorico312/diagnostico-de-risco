@@ -36,7 +36,21 @@ const handlePlanClick = (planoId: PlanoId): void => {
   } catch {
     /* noop — modo privado/quota */
   }
-  window.location.hash = `#/cadastro?plano=${planoId}`;
+
+  // Roteamento por estado de autenticacao:
+  // - Deslogado              -> /cadastro (cria conta)
+  // - Logado SEM quiz feito  -> /perfil-de-look (faz quiz primeiro)
+  // - Logado COM quiz feito  -> /checkout (vai direto pagar)
+  const token = (() => { try { return localStorage.getItem('vivefit_token'); } catch { return null; } })();
+  const quizDone = (() => { try { return localStorage.getItem('vivefit_quiz_done') === 'true'; } catch { return false; } })();
+
+  if (!token) {
+    window.location.hash = `#/cadastro?plano=${planoId}`;
+  } else if (!quizDone) {
+    window.location.hash = `#/perfil-de-look?plano=${planoId}`;
+  } else {
+    window.location.hash = `#/checkout?plano=${planoId}`;
+  }
 };
 
 type IconProps = { color: string };
