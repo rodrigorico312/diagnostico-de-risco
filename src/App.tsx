@@ -14,11 +14,14 @@ import ClientArea from './components/ClientArea'
 import Checkout from './components/Checkout'
 import Sucesso from './components/Sucesso'
 import Termos from './components/Termos'
+import { trackMetaPixelPageView } from './lib/metaPixel'
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash)
 
   useEffect(() => {
+    trackMetaPixelPageView()
+
     const onChange = () => setHash(window.location.hash)
     window.addEventListener('hashchange', onChange)
     return () => window.removeEventListener('hashchange', onChange)
