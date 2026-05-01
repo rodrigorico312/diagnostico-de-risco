@@ -1,4 +1,4 @@
-const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID?.trim()
+const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID?.trim() || '1757524701885185'
 
 declare global {
   interface Window {
