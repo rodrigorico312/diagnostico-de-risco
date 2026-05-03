@@ -4,10 +4,10 @@ export default function Hero() {
       <picture className="hero-img">
         <source
           media="(max-width: 768px)"
-          srcSet="https://i.postimg.cc/43S3DnTw/HERO-VIVEFIT-mobile.png"
+          srcSet="https://i.postimg.cc/nhvmv4B9/HERO-VIVEFIT-mobile.webp"
         />
         <img
-          src="https://i.postimg.cc/CKQK3dVc/HERO-VIVEFIT-desktop.png"
+          src="https://i.postimg.cc/bvptLZ9d/HERO-VIVEFIT-desktop.webp"
           alt="VIVE FIT BOX - A vida fit comeca pelo look"
           className="hero-img"
         />
