@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 
 const API = 'https://api.vivefit.site'
+const ACCENT = '#040861'
+const ERROR = '#DC2626'
 
 interface UserData {
   id: number
@@ -326,7 +328,7 @@ export default function ClientArea() {
         <span className="q-logo"><img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px' }} /></span>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <a href="#/" style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', textDecoration: 'none' }}>site</a>
-          <span onClick={logout} style={{ fontSize: '.82rem', color: 'var(--coral)', cursor: 'pointer' }}>sair</span>
+          <span onClick={logout} style={{ fontSize: '.82rem', color: ACCENT, cursor: 'pointer' }}>sair</span>
         </div>
       </div>
 
@@ -341,7 +343,7 @@ export default function ClientArea() {
             flex: 1, padding: '.6rem .3rem', fontSize: '.75rem', fontFamily: 'Montserrat, sans-serif',
             fontWeight: tab === t ? 700 : 400, letterSpacing: '.04em', textTransform: 'uppercase' as const,
             background: tab === t ? '#fff' : 'transparent', color: tab === t ? 'var(--azul-noite)' : 'var(--cinza-mudo)',
-            border: 'none', borderBottom: tab === t ? '2px solid var(--coral)' : '2px solid transparent',
+            border: 'none', borderBottom: tab === t ? `2px solid ${ACCENT}` : '2px solid transparent',
             cursor: 'pointer', whiteSpace: 'nowrap' as const,
           }}>
             {t === 'perfil' ? 'Meu Look' : t === 'endereco' ? 'Endereço' : t === 'box' ? 'Minha Box' : 'Meu Plano'}
@@ -383,7 +385,7 @@ export default function ClientArea() {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.7rem' }}>
                   {CORES.map(c => (
                     <div key={c.val} onClick={() => toggleArr(cores, c.val, setCores)} style={{ textAlign: 'center', cursor: 'pointer' }}>
-                      <div style={{ width: '48px', height: '48px', borderRadius: '50%', flexShrink: 0, background: c.color, border: cores.includes(c.val) ? '3px solid var(--coral)' : '2px solid #ddd', transition: 'all .2s' }} />
+                      <div style={{ width: '48px', height: '48px', borderRadius: '50%', flexShrink: 0, background: c.color, border: cores.includes(c.val) ? `3px solid ${ACCENT}` : '2px solid #ddd', transition: 'all .2s' }} />
                       <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', display: 'block', marginTop: '.2rem' }}>{c.label}</span>
                     </div>
                   ))}
@@ -394,7 +396,7 @@ export default function ClientArea() {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{MODELAGENS.map(m => <Chip key={m.val} selected={modelagem.includes(m.val)} onClick={() => toggleArr(modelagem, m.val, setModelagem)}>{m.label}</Chip>)}</div>
                 <MiniTitle>Não quero receber</MiniTitle>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>{BLACKLIST_OPTS.map(b => <Chip key={b.val} selected={blacklist.includes(b.val)} onClick={() => toggleArr(blacklist, b.val, setBlacklist)} variant="outline">{b.label}</Chip>)}</div>
-                {msg && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+                {msg && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') ? ERROR : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
                 <button onClick={salvarPerfil} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>{saving ? 'salvando...' : 'salvar perfil'}</button>
               </div>
             )}
@@ -440,7 +442,7 @@ export default function ClientArea() {
                     <input type="text" placeholder="UF" value={estado} onChange={e => setEstado(e.target.value)} maxLength={2} style={{ ...inputStyle, width: '60px', textAlign: 'center' as const, background: estado ? '#fff' : '#f8f8f8' }} />
                   </div>
                 </div>
-                {msg && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') || msg.includes('Preencha') ? 'var(--coral)' : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
+                {msg && <p style={{ textAlign: 'center', fontSize: '.85rem', color: msg.includes('Erro') || msg.includes('Preencha') ? ERROR : '#16a34a', marginTop: '1rem' }}>{msg}</p>}
                 <button onClick={salvarEndereco} disabled={saving} style={{ ...actionBtnStyle, opacity: saving ? 0.6 : 1 }}>{saving ? 'salvando...' : 'salvar endereço'}</button>
               </div>
             )}
@@ -463,7 +465,7 @@ export default function ClientArea() {
                 <div style={{ textAlign: 'center', padding: '3rem 0' }}>
                   <h3 style={{ fontFamily: 'Georgia, serif', color: '#040861', fontSize: '1.3rem', margin: '0 0 .5rem', fontWeight: 400 }}>Pagamento pendente</h3>
                   <p style={{ fontSize: '.88rem', color: 'var(--cinza-mudo)', maxWidth: '320px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>Estamos aguardando a confirmação do seu pagamento. Sua box começa a ser preparada assim que confirmar.</p>
-                  <a href="https://wa.me/5593991129194" target="_blank" rel="noopener" style={{ ...actionBtnStyle, display: 'inline-flex', width: 'auto', textDecoration: 'none', background: 'var(--coral)' }}>falar pelo WhatsApp</a>
+                  <a href="https://wa.me/5593991129194" target="_blank" rel="noopener" style={{ ...actionBtnStyle, display: 'inline-flex', width: 'auto', textDecoration: 'none', background: ACCENT }}>falar pelo WhatsApp</a>
                 </div>
               ) : (
                 <div style={{ textAlign: 'center', padding: '3rem 0' }}>
@@ -513,7 +515,7 @@ export default function ClientArea() {
                             <p style={{ fontSize: '.9rem', fontWeight: 700, color: 'var(--azul-noite)', margin: 0, fontFamily: 'Montserrat, sans-serif' }}>{info.nome}</p>
                             <p style={{ fontSize: '.75rem', color: 'var(--cinza-mudo)', margin: '.1rem 0 0' }}>{info.desc}</p>
                           </div>
-                          <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.9rem', fontWeight: 700, color: 'var(--coral)' }}>{info.valor}</span>
+                      <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '.9rem', fontWeight: 700, color: ACCENT }}>{info.valor}</span>
                         </div>
                       </div>
                     ))}
@@ -538,8 +540,8 @@ export default function ClientArea() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem', marginBottom: '1rem' }}>
               {['Preço alto', 'Não gostei das peças', 'Problemas financeiros', 'Vou pausar por enquanto', 'Não uso mais', 'Outro motivo'].map(m => (
-                <label key={m} style={{ display: 'flex', alignItems: 'center', gap: '.6rem', padding: '.7rem .9rem', border: motivoCancelar === m ? '2px solid var(--coral)' : '1px solid #ddd', borderRadius: '10px', cursor: 'pointer', background: motivoCancelar === m ? 'rgba(255,90,95,.05)' : '#fff', transition: 'all .2s' }}>
-                  <input type="radio" name="motivo" value={m} checked={motivoCancelar === m} onChange={e => setMotivoCancelar(e.target.value)} style={{ accentColor: 'var(--coral)' }} />
+                <label key={m} style={{ display: 'flex', alignItems: 'center', gap: '.6rem', padding: '.7rem .9rem', border: motivoCancelar === m ? `2px solid ${ACCENT}` : '1px solid #ddd', borderRadius: '10px', cursor: 'pointer', background: motivoCancelar === m ? 'rgba(4,8,97,.05)' : '#fff', transition: 'all .2s' }}>
+                  <input type="radio" name="motivo" value={m} checked={motivoCancelar === m} onChange={e => setMotivoCancelar(e.target.value)} style={{ accentColor: ACCENT }} />
                   <span style={{ fontSize: '.88rem', color: 'var(--azul-noite)' }}>{m}</span>
                 </label>
               ))}
@@ -843,10 +845,10 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 }
 function Chip({ children, selected, onClick, variant }: { children: React.ReactNode; selected: boolean; onClick: () => void; variant?: 'outline' }) {
   const isOutline = variant === 'outline'
-  return <div onClick={onClick} style={{ padding: '.5rem 1rem', borderRadius: '20px', fontSize: '.85rem', fontFamily: 'Montserrat, sans-serif', cursor: 'pointer', transition: 'all .2s', background: selected ? (isOutline ? 'var(--coral)' : 'var(--cobalto)') : (isOutline ? 'transparent' : '#fff'), color: selected ? '#fff' : 'var(--azul-noite)', border: selected ? (isOutline ? '1px solid var(--coral)' : '1px solid var(--cobalto)') : '1px solid #ddd' }}>{children}</div>
+  return <div onClick={onClick} style={{ padding: '.5rem 1rem', borderRadius: '20px', fontSize: '.85rem', fontFamily: 'Montserrat, sans-serif', cursor: 'pointer', transition: 'all .2s', background: selected ? (isOutline ? ACCENT : 'var(--cobalto)') : (isOutline ? 'transparent' : '#fff'), color: selected ? '#fff' : 'var(--azul-noite)', border: selected ? (isOutline ? `1px solid ${ACCENT}` : '1px solid var(--cobalto)') : '1px solid #ddd' }}>{children}</div>
 }
 
 const editLinkStyle: React.CSSProperties = { fontSize: '.82rem', color: 'var(--turquesa)', cursor: 'pointer', fontFamily: 'Montserrat, sans-serif', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '3px' }
 const inputStyle: React.CSSProperties = { padding: '.65rem .8rem', borderRadius: '10px', border: '1px solid #ddd', fontSize: '.88rem', fontFamily: 'Montserrat, sans-serif', background: '#fff', outline: 'none', boxSizing: 'border-box' as const, width: '100%' }
-const actionBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '.88rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '.9rem 2.2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', cursor: 'pointer', width: '100%', marginTop: '1.5rem' }
+const actionBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '.88rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '.9rem 2.2rem', borderRadius: '60px', background: ACCENT, color: '#fff', boxShadow: '0 2px 12px rgba(4,8,97,.25)', border: 'none', cursor: 'pointer', width: '100%', marginTop: '1.5rem' }
 const secondaryBtnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: '.82rem', letterSpacing: '.04em', textTransform: 'uppercase' as const, padding: '.7rem 1.5rem', borderRadius: '60px', background: 'transparent', color: 'var(--cobalto)', border: '1.5px solid var(--cobalto)', cursor: 'pointer', width: '100%', marginTop: '.8rem', transition: 'all .2s' }

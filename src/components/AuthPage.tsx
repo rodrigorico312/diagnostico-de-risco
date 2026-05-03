@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 const API = 'https://api.vivefit.site'
+const ACCENT = '#040861'
+const ERROR = '#DC2626'
 
 const mascaraTelefone = (v: string): string => {
   const d = v.replace(/\D/g, '').slice(0, 11)
@@ -129,7 +131,7 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
               <input type="tel" placeholder="WhatsApp com DDD *" value={telefone} onChange={e => setTelefone(e.target.value)} style={inputStyle} />
             )}
 
-            {erro && <p style={{ color: 'var(--coral)', fontSize: '.75rem', textAlign: 'center', margin: 0 }}>{erro}</p>}
+            {erro && <p style={{ color: ERROR, fontSize: '.75rem', textAlign: 'center', margin: 0 }}>{erro}</p>}
 
             <button onClick={submit} disabled={loading} style={btnStyle}>{loading ? 'aguarde...' : mode === 'register' ? 'criar conta' : 'entrar'}</button>
           </div>
@@ -149,6 +151,6 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
 
 const inputStyle: React.CSSProperties = { width: '100%', padding: '.75rem 1rem', borderRadius: '12px', border: '1px solid #ddd', fontSize: '.82rem', fontFamily: 'var(--font-body)', background: '#fff', outline: 'none', boxSizing: 'border-box' as const }
 
-const btnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '.82rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '.9rem 2.2rem', borderRadius: '60px', background: 'var(--coral)', color: '#fff', boxShadow: '0 2px 12px rgba(255,90,95,.25)', border: 'none', cursor: 'pointer', width: '100%', marginTop: '.5rem' }
+const btnStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '.82rem', letterSpacing: '.06em', textTransform: 'uppercase' as const, padding: '.9rem 2.2rem', borderRadius: '60px', background: ACCENT, color: '#fff', boxShadow: '0 2px 12px rgba(4,8,97,.25)', border: 'none', cursor: 'pointer', width: '100%', marginTop: '.5rem' }
 
 const linkStyle: React.CSSProperties = { color: 'var(--turquesa)', cursor: 'pointer', textDecoration: 'underline' }
