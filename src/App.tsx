@@ -79,7 +79,7 @@ export default function App() {
     const plano = params.get('plano')
     if (!plano) { window.location.hash = '#/'; return null }
     if (!localStorage.getItem('vivefit_token')) {
-      window.location.hash = '#/cadastro'
+      window.location.hash = '#/cadastro?plano=' + plano
       return null
     }
     return <Checkout plano={plano} />
@@ -147,7 +147,7 @@ export default function App() {
     const params = new URLSearchParams(hash.split('?')[1] || '')
     const planoUrl = params.get('plano')
     // Fallback: se nao veio na URL, ve no localStorage (intencao salva)
-    const planoEscolhido = planoUrl || localStorage.getItem('vivefit_plano_intencao')
+    const planoEscolhido = planoUrl
     if (!localStorage.getItem('vivefit_token')) {
       const dest = planoEscolhido ? `#/cadastro?plano=${planoEscolhido}` : '#/cadastro'
       window.location.hash = dest
