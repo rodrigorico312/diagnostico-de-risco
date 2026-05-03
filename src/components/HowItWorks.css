@@ -60,26 +60,26 @@
 
 /* Card 1 — Coral/Laranja */
 .step-card--1 {
-  background: #E8521F;
+  background: #0A9AA8;
 }
 .step-card--1 .step-card__num,
 .step-card--1 .step-card__title {
-  color: #F5D5B0;
+  color: #FFFFFF;
 }
 .step-card--1 .step-card__desc {
-  color: rgba(245, 213, 176, 0.85);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Card 2 — Turquesa */
 .step-card--2 {
-  background: #0A9AA8;
+  background: #E8521F;
 }
 .step-card--2 .step-card__num,
 .step-card--2 .step-card__title {
-  color: #FFFFFF;
+  color: #F5D5B0;
 }
 .step-card--2 .step-card__desc {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(245, 213, 176, 0.85);
 }
 
 /* Card 3 — Areia/Bege */
