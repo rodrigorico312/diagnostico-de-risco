@@ -345,7 +345,7 @@ export default function Checkout({ plano }: Props) {
 
         <Card>
           <CardLabel>CPF</CardLabel>
-          <input type="text" placeholder="000.000.000-00" value={cpf} onChange={e => setCpf(formatCpf(e.target.value))} style={{ ...inputStyle, width: '100%', marginTop: '.3rem' }} />
+          <input type="tel" inputMode="numeric" autoComplete="off" placeholder="000.000.000-00" value={cpf} onChange={e => setCpf(formatCpf(e.target.value))} style={{ ...inputStyle, width: "100%", marginTop: ".3rem" }} />
           {erroCpf && <p style={erroStyle}>{erroCpf}</p>}
         </Card>
 
@@ -371,7 +371,7 @@ export default function Checkout({ plano }: Props) {
           <CardLabel>Endereço de entrega</CardLabel>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem', marginTop: '.3rem' }}>
             <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
-              <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
+              <input type="tel" inputMode="numeric" autoComplete="postal-code" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
               {buscandoCep && <span style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)' }}>buscando...</span>}
             </div>
             <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, background: rua ? '#fff' : '#f8f8f8' }} />

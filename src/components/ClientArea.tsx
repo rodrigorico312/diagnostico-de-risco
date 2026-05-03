@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { formatTelefoneBR } from '../lib/utils'
 
 const API = 'https://api.vivefit.site'
 const ACCENT = '#040861'
@@ -369,6 +370,7 @@ export default function ClientArea() {
             ) : !editPerfil ? (
               <div>
                 <InfoRow label="Tamanho" value={tamanho ? (TAMANHOS.find(t => t.val === tamanho)?.label || tamanho) : '—'} />
+                <InfoRow label="Telefone" value={user?.telefone ? formatTelefoneBR(user.telefone) : "-"} />
                 <InfoRow label="Treinos" value={treinos.length > 0 ? valsToLabels(treinos, TREINOS) : '—'} />
                 <InfoRow label="Cores" value={cores.length > 0 ? valsToLabels(cores, CORES) : '—'} />
                 <InfoRow label="Peças" value={pecas.length > 0 ? valsToLabels(pecas, PECAS) : '—'} />
@@ -428,7 +430,7 @@ export default function ClientArea() {
               <div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
                   <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
-                    <input type="text" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
+                    <input type="tel" inputMode="numeric" autoComplete="postal-code" placeholder="CEP" value={cep} onChange={e => handleCepChange(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
                     {buscandoCep && <span style={{ fontSize: '.8rem', color: 'var(--cinza-mudo)' }}>buscando...</span>}
                   </div>
                   <input type="text" placeholder="Rua / Avenida" value={rua} onChange={e => setRua(e.target.value)} style={{ ...inputStyle, background: rua ? '#fff' : '#f8f8f8' }} />

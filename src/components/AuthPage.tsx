@@ -1,16 +1,9 @@
 import { useState } from 'react'
+import { formatTelefoneLocal, normalizarTelefone } from '../lib/utils'
 
 const API = 'https://api.vivefit.site'
 const ACCENT = '#040861'
 const ERROR = '#DC2626'
-
-const mascaraTelefone = (v: string): string => {
-  const d = v.replace(/\D/g, '').slice(0, 11)
-  if (d.length <= 2) return d
-  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`
-  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
-  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
-}
 
 const emailValido = (v: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
@@ -37,16 +30,10 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
     if (!emailValido(email.trim())) return setErro('E-mail invalido')
     if (mode === 'register') {
       if (!telefone.trim()) return setErro('Preencha seu WhatsApp')
-      const telDig = telefone.replace(/\D/g, '')
+      const telDig = normalizarTelefone(telefone)
       if (telDig.length !== 10 && telDig.length !== 11) return setErro('WhatsApp invalido. Digite com DDD (10 ou 11 digitos)')
       const ddd = parseInt(telDig.substring(0, 2))
       if (ddd < 11 || ddd > 99) return setErro('DDD invalido')
-    }
-    if (mode === 'register') {
-      const telDigitos = telefone.replace(/\D/g, '')
-      if (telDigitos.length !== 10 && telDigitos.length !== 11) {
-        return setErro('WhatsApp invalido. Use DDD + numero')
-      }
     }
     if (!senha || senha.length < 6) return setErro('Senha precisa ter pelo menos 6 caracteres')
 
@@ -54,7 +41,7 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
     try {
       const endpoint = mode === 'register' ? '/auth/register' : '/auth/login'
       const body = mode === 'register'
-        ? { nome: nome.trim(), email: email.trim().toLowerCase(), senha, telefone: telefone.replace(/\D/g, '') }
+        ? { nome: nome.trim(), email: email.trim().toLowerCase(), senha, telefone: normalizarTelefone(telefone) }
         : { email: email.trim().toLowerCase(), senha }
 
       const res = await fetch(API + endpoint, {
@@ -128,7 +115,18 @@ export default function AuthPage({ onAuth, planoPreSelecionado }: Props) {
             </div>
 
             {mode === 'register' && (
-              <input type="tel" placeholder="WhatsApp com DDD *" value={telefone} onChange={e => setTelefone(e.target.value)} style={inputStyle} />
+              <div style={{ display: 'flex', width: '100%', alignItems: 'stretch' }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', padding: '.75rem .9rem', border: '1px solid #ddd', borderRight: 'none', borderRadius: '12px 0 0 12px', background: 'rgba(4,8,97,.04)', color: 'var(--azul-noite)', fontFamily: 'var(--font-heading)', fontSize: '.82rem', fontWeight: 700 }}>+55</span>
+                <input
+                  type="tel"
+                  inputMode="numeric"
+                  autoComplete="tel-national"
+                  placeholder="(93) 99210-1980"
+                  value={formatTelefoneLocal(telefone)}
+                  onChange={e => setTelefone(normalizarTelefone(e.target.value))}
+                  style={{ ...inputStyle, flex: 1, borderRadius: '0 12px 12px 0', borderLeft: 'none' }}
+                />
+              </div>
             )}
 
             {erro && <p style={{ color: ERROR, fontSize: '.75rem', textAlign: 'center', margin: 0 }}>{erro}</p>}
