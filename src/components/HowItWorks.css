@@ -4,7 +4,7 @@
    ══════════════════════════════════════════ */
 
 .como-funciona {
-  padding: 2.5rem 4% 2rem;
+  padding: clamp(4rem,8vw,6rem) 4%;
   margin-top: -60px;
   border-radius: 32px 32px 0 0;
   background: #FFFFFF;
@@ -42,14 +42,30 @@
   min-width: 280px;
   flex: 0 0 280px;
   scroll-snap-align: start;
-  border-radius: 24px;
+  border-radius: 20px;
   position: relative;
   overflow: hidden;
   min-height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
+
+.step-card--1{background:#E8D5B5}
+.step-card--2{background:#06B6D4}
+.step-card--3{background:#FF5A5F}
+
+.step-card--2 .step-card__num,
+.step-card--2 .step-card__title,
+.step-card--2 .step-card__desc,
+.step-card--3 .step-card__num,
+.step-card--3 .step-card__title,
+.step-card--3 .step-card__desc{color:#fff}
+
+.step-card--2 .step-card__num,
+.step-card--3 .step-card__num{color:rgba(255,255,255,0.6)}
 
 .step-card__content {
   position: relative;
@@ -58,47 +74,12 @@
   text-align: center;
 }
 
-/* Card 1 — Coral/Laranja */
-.step-card--1 {
-  background: #0A9AA8;
-}
-.step-card--1 .step-card__num,
-.step-card--1 .step-card__title {
-  color: #FFFFFF;
-}
-.step-card--1 .step-card__desc {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Card 2 — Turquesa */
-.step-card--2 {
-  background: #E8521F;
-}
-.step-card--2 .step-card__num,
-.step-card--2 .step-card__title {
-  color: #F5D5B0;
-}
-.step-card--2 .step-card__desc {
-  color: rgba(245, 213, 176, 0.85);
-}
-
-/* Card 3 — Areia/Bege */
-.step-card--3 {
-  background: #EDDCC3;
-}
-.step-card--3 .step-card__num,
-.step-card--3 .step-card__title {
-  color: #E8521F;
-}
-.step-card--3 .step-card__desc {
-  color: rgba(232, 82, 31, 0.7);
-}
-
 /* ── TIPOGRAFIA DOS CARDS ── */
 .step-card__num {
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 6vw, 3.5rem);
-  font-weight: 700;
+  font-weight: 800;
+  color: #FF5A5F;
   line-height: 1;
   margin-bottom: 0.8rem;
 }
@@ -107,6 +88,7 @@
   font-family: var(--font-heading);
   font-size: clamp(1.3rem, 3.5vw, 1.7rem);
   font-weight: 700;
+  color: #1E3A8A;
   line-height: 1.15;
   margin-bottom: 0.8rem;
   letter-spacing: -0.01em;
@@ -116,6 +98,7 @@
   font-family: var(--font-body);
   font-size: clamp(0.85rem, 2vw, 1rem);
   font-weight: 400;
+  color: #334155;
   line-height: 1.5;
   max-width: 260px;
   margin: 0 auto;

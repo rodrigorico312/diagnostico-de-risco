@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react'
+import VideoCarousel from './components/VideoCarousel'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import PainPoints from './components/PainPoints'
 import HowItWorks from './components/HowItWorks'
 import Brands from './components/Brands'
-import Personalization from './components/Personalization'
+import ValueStack from './components/ValueStack'
+import PriceAnchor from './components/PriceAnchor'
 import Plans from './components/Plans'
+import Objections from './components/Objections'
 import FAQ from './components/FAQ'
+import CTAFinal from './components/CTAFinal'
 import Footer from './components/Footer'
-import SmartCTA from './components/SmartCTA'
 import PerfilDeLook from './components/PerfilDeLook'
 import AuthPage from './components/AuthPage'
 import ClientArea from './components/ClientArea'
 import Checkout from './components/Checkout'
 import Sucesso from './components/Sucesso'
 import Termos from './components/Termos'
+
 import { trackMetaPixelPageView } from './lib/metaPixel'
 
 export default function App() {
@@ -21,7 +26,6 @@ export default function App() {
 
   useEffect(() => {
     trackMetaPixelPageView()
-
     const onChange = () => setHash(window.location.hash)
     window.addEventListener('hashchange', onChange)
     return () => window.removeEventListener('hashchange', onChange)
@@ -29,7 +33,6 @@ export default function App() {
 
   useEffect(() => {
     const els = document.querySelectorAll('.reveal, .reveal-glow, .reveal-surprise, .reveal-price')
-
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -38,7 +41,6 @@ export default function App() {
       },
       { threshold: 0.3 }
     )
-
     const obsS = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -47,7 +49,6 @@ export default function App() {
       },
       { threshold: 0.6 }
     )
-
     els.forEach((el) => {
       if (el.classList.contains('reveal-surprise')) {
         obsS.observe(el)
@@ -55,44 +56,30 @@ export default function App() {
         obs.observe(el)
       }
     })
-
     return () => { obs.disconnect(); obsS.disconnect() }
   }, [hash])
 
-  // ── ROTA: Termos de uso (página pública) ──
-  if (hash === '#/termos') {
-    return <Termos />
-  }
+  if (hash === '#/termos') return <Termos />
 
-  // ── ROTA: Sucesso (thank-you page pós-pagamento) ──
   if (hash === '#/sucesso') {
-    if (!localStorage.getItem('vivefit_token')) {
-      window.location.hash = '#/'
-      return null
-    }
+    if (!localStorage.getItem('vivefit_token')) { window.location.hash = '#/'; return null }
     return <Sucesso />
   }
 
-  // ── ROTA: Checkout (resumo do pedido) ──
   if (hash.startsWith('#/checkout')) {
     const params = new URLSearchParams(hash.split('?')[1] || '')
     const plano = params.get('plano')
     if (!plano) { window.location.hash = '#/'; return null }
-    if (!localStorage.getItem('vivefit_token')) {
-      window.location.hash = '#/cadastro?plano=' + plano
-      return null
-    }
+    if (!localStorage.getItem('vivefit_token')) { window.location.hash = '#/cadastro?plano=' + plano; return null }
     return <Checkout plano={plano} />
   }
 
-  // ── ROTA: Área da cliente ──
   if (hash === '#/minha-conta') {
     const token = localStorage.getItem('vivefit_token')
     if (!token) { window.location.hash = '#/login'; return null }
     return <ClientArea />
   }
 
-  // ── ROTA: Login/Cadastro ──
   if (hash.startsWith('#/login') || hash.startsWith('#/cadastro')) {
     const params = new URLSearchParams(hash.split('?')[1] || '')
     const plano = params.get('plano')
@@ -108,33 +95,19 @@ export default function App() {
             ])
             const status = meRes?.status
             const temPerfil = !!(perfilRes?.perfil?.tamanho)
-
-            // Cliente ja tem assinatura (ou pendente) -> dashboard
             if (status === 'ativo' || status === 'cortesia' || status === 'inadimplente') {
-              window.location.hash = '#/minha-conta'
-              return
+              window.location.hash = '#/minha-conta'; return
             }
-            // Esta no fluxo de compra com plano selecionado -> checkout
             if (plano) {
-              if (temPerfil) {
-                window.location.hash = `#/checkout?plano=${plano}`
-              } else {
-                window.location.hash = `#/perfil-de-look?plano=${plano}`
-              }
-              return
+              window.location.hash = temPerfil ? `#/checkout?plano=${plano}` : `#/perfil-de-look?plano=${plano}`; return
             }
-            // Sem plano selecionado: ja fez quiz -> ve planos / nao fez -> faz quiz
             if (temPerfil) {
               window.location.hash = '#/'
-              setTimeout(() => {
-                const el = document.getElementById('planos')
-                if (el) el.scrollIntoView({ behavior: 'smooth' })
-              }, 200)
+              setTimeout(() => { document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' }) }, 200)
             } else {
               window.location.hash = '#/perfil-de-look'
             }
-          } catch (e) {
-            // Fallback se backend falhar: assume novo, vai pro quiz
+          } catch {
             window.location.hash = '#/perfil-de-look'
           }
         }}
@@ -142,44 +115,58 @@ export default function App() {
     )
   }
 
-  // -- ROTA: Quiz Perfil de Look --
   if (hash.startsWith('#/perfil-de-look')) {
     const params = new URLSearchParams(hash.split('?')[1] || '')
-    const planoUrl = params.get('plano')
-    // Fallback: se nao veio na URL, ve no localStorage (intencao salva)
-    const planoEscolhido = planoUrl
+    const planoEscolhido = params.get('plano')
     if (!localStorage.getItem('vivefit_token')) {
-      const dest = planoEscolhido ? `#/cadastro?plano=${planoEscolhido}` : '#/cadastro'
-      window.location.hash = dest
+      window.location.hash = planoEscolhido ? `#/cadastro?plano=${planoEscolhido}` : '#/cadastro'
       return null
     }
     return <PerfilDeLook planoPreSelecionado={planoEscolhido} />
   }
 
-  // ── ROTA: Home ──
+  {/* ══════════════════════════════════════
+      ORDEM DAS SEÇÕES (manual de marketing):
+      1. O que é isso? → Hero
+      2. Por que eu preciso? → PAS (dor)
+      3. Como funciona? → Como Funciona
+      4. Isso é real? → Prova Social
+      5. O que eu recebo? → Stack de Valor + Marcas
+      6. Quanto custa? → Ancoragem + Planos
+      7. E se eu não gostar? → Garantia + Objeções
+      8. Tá, quero. → CTA Final
+      ══════════════════════════════════════ */}
+
   return (
     <>
       <Header />
+
+      {/* 1. O que é isso? */}
       <Hero />
 
-     <HowItWorks />
+      {/* 2. Por que eu preciso disso? */}
+      <PainPoints />
+
+      {/* 3. Como funciona? */}
+      <div className="reveal">
+        <HowItWorks />
+      </div>
+
+      {/* 4. Isso é real? */}
+      <VideoCarousel />
+
+            {/* 5. O que eu recebo? */}
+      <div className="reveal">
+        <ValueStack />
+      </div>
 
       <div className="reveal">
         <Brands />
       </div>
 
-      <div className="reveal-glow">
-        <Personalization />
-      </div>
-
-      <div className="reveal" style={{ paddingTop: '0.5rem', paddingBottom: '2.5rem' }}>
-        <div className="editorial-break">
-          <p className="editorial">
-            Quanto tempo você já perdeu procurando
-            <br />
-            <span style={{ color: '#1E3A8A', fontWeight: 600 }}>a roupa fitness certa?</span>
-          </p>
-        </div>
+      {/* 6. Quanto custa? */}
+      <div className="reveal">
+        <PriceAnchor />
       </div>
 
       <div className="reveal-price">
@@ -187,11 +174,17 @@ export default function App() {
       </div>
 
       <div className="reveal">
+        <Objections />
+      </div>
+
+      <div className="reveal">
         <FAQ />
       </div>
 
+      {/* 8. Tá, quero. */}
+      <CTAFinal />
+
       <Footer />
-      <SmartCTA />
     </>
   )
 }

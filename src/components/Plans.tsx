@@ -270,7 +270,7 @@ const CardMensal = ({ desktop }: CardProps) => (
             ...(i === 0 ? NUM : {}),
           }}
         >
-          <Check color={C.cobalto} />
+          <Check color="#FF5A5F" />
           <span>{b}</span>
         </li>
       ))}
@@ -302,7 +302,7 @@ const CardSemestral = ({ desktop }: CardProps) => (
     aria-labelledby="plano-semestral-title"
     className="transition-all duration-300 ease-out"
     style={{
-      background: C.cobalto,
+background: '#0F172A',
       borderRadius: 16,
       padding: desktop ? 26 : 24,
       paddingTop: desktop ? 34 : 32,
@@ -312,8 +312,8 @@ const CardSemestral = ({ desktop }: CardProps) => (
       display: 'flex',
       flexDirection: 'column',
       boxShadow: desktop
-        ? `0 12px 32px -8px ${C.cobalto}40, 0 2px 8px rgba(15, 23, 42, 0.08)`
-        : `0 8px 20px -6px ${C.cobalto}40`,
+        ? '0 12px 32px -8px rgba(15,23,42,0.5), 0 2px 8px rgba(15,23,42,0.15)'
+        : '0 8px 20px -6px rgba(15,23,42,0.5)',
       zIndex: 2,
     }}
     onMouseEnter={(e) => {
@@ -460,7 +460,7 @@ const CardSemestral = ({ desktop }: CardProps) => (
             fontWeight: b.emphasis ? 600 : 400,
           }}
         >
-          <Check color={C.coral} />
+          <Check color="#fff" />
           <span>{b.text}</span>
         </li>
       ))}
@@ -687,7 +687,7 @@ export default function Plans() {
       <section
         id="planos"
         style={{
-          background: C.cobalto200,
+          background: '#F8FAFC',
           paddingTop: 88,
           paddingBottom: 80,
           paddingLeft: 24,
@@ -711,18 +711,26 @@ export default function Plans() {
           <h2
             style={{
               fontFamily: FONT,
-              fontSize: viewport === 'mobile' ? 32 : 42,
-              fontWeight: 700,
-              color: C.azulNoite,
+              fontSize: viewport === 'mobile' ? 28 : 38,
+              fontWeight: 800,
+              color: C.cobalto,
               margin: 0,
               lineHeight: 1.1,
               letterSpacing: '-0.035em',
+              textTransform: 'uppercase',
             }}
           >
-            Escolha o plano certo
-            <br />
-            <span style={{ color: C.cobalto }}>pra você</span>
+            Escolha sua jornada VIVE FIT
           </h2>
+          <p style={{
+            fontFamily: FONT,
+            fontSize: 14,
+            color: C.cinzaChumbo,
+            marginTop: 12,
+            fontWeight: 400,
+          }}>
+            Escolha seu estilo e montamos sua box pra você.
+          </p>
         </div>
 
         {/* Cards */}
@@ -794,16 +802,16 @@ export default function Plans() {
                 marginRight: 4,
               }}
             >
-              Dúvida sobre o limite?
+              Dúvida sobre cobranças?
             </span>
             O Plano Semestral é o único com{' '}
             <strong style={{ color: C.cobalto, fontWeight: 700 }}>
               Assinatura Inteligente
             </strong>{' '}
-            que debita apenas o valor do mês, protegendo o limite do seu cartão.
+            que debita apenas o valor do mês, protegendo o limite do seu cartão. Não há cobrança única dos 6 meses no cartão.
           </p>
         </div>
-      </section>
+        </section>
     </>
   );
 }

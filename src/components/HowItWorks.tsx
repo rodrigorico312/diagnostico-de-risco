@@ -86,7 +86,7 @@ export default function HowItWorks() {
 
       <div className="carousel" ref={carouselRef}>
         <div className="step-card step-card--1">
-          <FlowerSVG color="rgba(232,213,181,0.7)" style={{ width: '180px', top: '-40px', left: '-40px', transform: 'rotate(-15deg)' }} />
+          <FlowerSVG color="rgba(160,120,60,0.4)" style={{ width: '180px', top: '-40px', left: '-40px', transform: 'rotate(-15deg)' }} />
           <div className="step-card__content">
             <p className="step-card__num">1.</p>
             <h3 className="step-card__title">Você preenche seu perfil de look</h3>
@@ -95,16 +95,16 @@ export default function HowItWorks() {
         </div>
 
         <div className="step-card step-card--2">
-          <BlobSVG color="rgba(255,255,255,0.25)" style={{ width: '220px', top: '-60px', left: '-30px' }} />
+          <BlobSVG color="rgba(255,255,255,0.2)" style={{ width: '220px', top: '-60px', left: '-30px' }} />
           <div className="step-card__content">
             <p className="step-card__num">2.</p>
             <h3 className="step-card__title">Encontramos seu look perfeito</h3>
-            <p className="step-card__desc">Nossa IA cruza suas respostas com os produtos da nossa curadoria</p>
+            <p className="step-card__desc">Nossa curadoria cruza suas respostas com os melhores produtos</p>
           </div>
         </div>
 
         <div className="step-card step-card--3">
-          <FlowerSVG color="rgba(255,90,95,0.85)" style={{ width: '200px', top: '-50px', left: '-50px', transform: 'rotate(10deg)' }} />
+          <FlowerSVG color="rgba(150,20,20,0.35)" style={{ width: '200px', top: '-50px', left: '-50px', transform: 'rotate(10deg)' }} />
           <div className="step-card__content">
             <p className="step-card__num">3.</p>
             <h3 className="step-card__title">Sua box fit dos sonhos chega por aí</h3>
