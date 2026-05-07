@@ -697,14 +697,14 @@ export default function Checkout({ plano }: Props) {
               Por motivos de segurança, o link de pagamento também foi enviado pro seu WhatsApp.
             </p>
             <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', lineHeight: 1.5, margin: '0 0 1.8rem', fontStyle: 'italic' }}>
-              A cobrança aparece no nome de Débora Polla (CPF), nossa cofundadora — o CNPJ da VIVE FIT está em processo de abertura.
+              O link de pagamento será gerado em nome da nossa empresa gestora.
             </p>
             <a
               href={linkPagamento || '#'}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => { setTimeout(() => { window.location.hash = '#/sucesso' }, 300) }}
-              style={{ display: 'block', background: 'var(--coral)', color: '#fff', padding: '.95rem 1rem', borderRadius: '60px', textDecoration: 'none', fontFamily: 'Montserrat, sans-serif', fontSize: '.82rem', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: '.8rem', boxShadow: '0 6px 18px rgba(255,90,95,.35)' }}
+              style={{ display: 'block', background: '#1E3A8A', color: '#fff', padding: '.95rem 1rem', borderRadius: '60px', textDecoration: 'none', fontFamily: 'Montserrat, sans-serif', fontSize: '.82rem', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: '.8rem', boxShadow: '0 6px 18px rgba(30,58,138,.35)' }}
             >
               Pagar agora
             </a>
