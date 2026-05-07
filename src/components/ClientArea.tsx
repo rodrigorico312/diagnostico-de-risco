@@ -677,10 +677,10 @@ function BoxTimelineCard({ box }: { box: any }) {
   const cancelada = statusAtual === 'cancelada'
 
   const passos = [
-    { key: 'pendente', label: 'Separando peças', data: formatarData(box.criado_em), subtexto: 'selecionando pra você' },
-    { key: 'preparando', label: 'Box preparada', data: formatarData(box.preparando_em), subtexto: 'embalada com cuidado' },
-    { key: 'enviada', label: 'Box enviada', data: formatarData(box.enviado_em), subtexto: 'a caminho da sua casa' },
-    { key: 'entregue', label: 'Box entregue', data: formatarData(box.entregue_em), subtexto: 'aproveite!' },
+    { key: 'pendente', label: 'Separando peças', data: formatarData(box.criado_em), subtexto: 'selecionando pra você', cor: '#DC2626' },
+    { key: 'preparando', label: 'Box preparada', data: formatarData(box.preparando_em), subtexto: 'embalada com cuidado', cor: '#F97316' },
+    { key: 'enviada', label: 'Box enviada', data: formatarData(box.enviado_em), subtexto: 'a caminho da sua casa', cor: '#3B82F6' },
+    { key: 'entregue', label: 'Box entregue', data: formatarData(box.entregue_em), subtexto: 'aproveite!', cor: '#16A34A' },
   ]
 
   const headerBg = cancelada
@@ -701,8 +701,8 @@ function BoxTimelineCard({ box }: { box: any }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap' as const, gap: '.6rem' }}>
           <div>
             <div style={{ fontSize: '.58rem', letterSpacing: '.22em', textTransform: 'uppercase' as const, opacity: 0.75, fontWeight: 700, marginBottom: '.2rem' }}>Box</div>
-            <div style={{ fontFamily: 'Georgia, serif', fontSize: '1.5rem', lineHeight: 1, letterSpacing: '-.01em' }}>
-              {mes} <span style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: 'italic' as const, color: '#0CBBCC', fontWeight: 300 }}>{ano}</span>
+            <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', lineHeight: 1, letterSpacing: '-.01em', fontWeight: 700 }}>
+              {mes} <span style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic' as const, color: '#0CBBCC', fontWeight: 300 }}>{ano}</span>
             </div>
           </div>
           <div style={{ textAlign: 'right' as const }}>
@@ -740,7 +740,7 @@ function BoxTimelineCard({ box }: { box: any }) {
                 top: '8px',
                 height: `${(indiceAtual / (statusOrdem.length - 1)) * 100}%`,
                 width: '2px',
-                background: 'linear-gradient(180deg, #16A34A 0%, #3B82F6 100%)',
+                background: 'linear-gradient(180deg, #DC2626 0%, #F97316 33%, #3B82F6 66%, #16A34A 100%)',
               }} />
             )}
 
@@ -749,7 +749,7 @@ function BoxTimelineCard({ box }: { box: any }) {
               const ativo = idx === indiceAtual
               const futuro = idx > indiceAtual
 
-              const corBolinha = concluido ? '#16A34A' : ativo ? (p.key === 'enviada' ? '#3B82F6' : '#F97316') : '#fff'
+              const corBolinha = futuro ? '#fff' : p.cor
               const bordaBolinha = futuro ? '2px solid #E4E8EE' : '3px solid #fff'
               const boxShadowBolinha = futuro ? 'none' : `0 0 0 2px ${corBolinha}`
 
@@ -774,7 +774,7 @@ function BoxTimelineCard({ box }: { box: any }) {
                   }}>{p.label}</div>
                   <div style={{
                     fontSize: '.68rem',
-                    color: ativo ? (p.key === 'enviada' ? '#3B82F6' : '#F97316') : '#94A3B8',
+                    color: ativo ? p.cor : '#94A3B8',
                     marginTop: '.15rem',
                     fontWeight: ativo ? 600 : 400,
                   }}>
