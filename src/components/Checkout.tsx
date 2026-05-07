@@ -19,11 +19,11 @@ type MetodoPagamento = 'PIX' | 'BOLETO' | 'CREDIT_CARD' | null
 
 interface PlanInfo {
   nome: string
-  valorPrimeira: number          // valor cobrado na primeira fatura (mensalidade no semestral, lump sum no anual)
-  meses: number                  // duracao em meses
-  maxParcelas: number            // para dropdown cartao (apenas anual usa)
+  valorPrimeira: number
+  meses: number
+  maxParcelas: number
   metodosPermitidos: ('PIX' | 'BOLETO' | 'CREDIT_CARD')[]
-  modeloLabel: string            // texto curto explicativo no resumo
+  modeloLabel: string
 }
 
 const PLAN_INFO: Record<string, PlanInfo> = {
@@ -123,18 +123,18 @@ export default function Checkout({ plano }: Props) {
   const token = localStorage.getItem('vivefit_token')
   const isSemestral = plano === 'semestral'
   const isAnual = plano === 'anual'
+  const isMensal = plano === 'mensal'
 
-  // Auto-seleciona o metodo quando ha apenas uma opcao (ex: semestral)
+  // Mensal: auto-seta metodo (InfinitePay decide na tela deles)
+  // Semestral: auto-seta CREDIT_CARD (unico permitido)
   useEffect(() => {
-    if (plano === 'mensal' || plano === 'anual') {
-      // InfinitePay: método é escolhido lá, aqui só seta um default pro fluxo não travar
+    if (isMensal) {
       setMetodo('CREDIT_CARD')
     } else if (info.metodosPermitidos.length === 1) {
       setMetodo(info.metodosPermitidos[0] as MetodoPagamento)
     }
   }, [plano])
 
-  // Busca hash do contrato semestral
   useEffect(() => {
     if (isSemestral) {
       fetch(API + '/contrato-semestral/texto').then(r => r.json()).then(d => { if (d.hash) setContratoHash(d.hash) }).catch(() => {})
@@ -224,10 +224,6 @@ export default function Checkout({ plano }: Props) {
     setBuscandoFrete(false)
   }
 
-  // Calculo do total varia por plano:
-  // - mensal: valorPrimeira (199.90) + frete x 1 = primeira fatura
-  // - semestral: valorPrimeira (189.90) + frete x 1 = primeira mensalidade (cobrada x 6)
-  // - anual: valorPrimeira (2158.80) + frete x 12 = lump sum total
   const freteTotal = freteSelecionado
     ? freteSelecionado.preco * (isSemestral ? 1 : info.meses)
     : 0
@@ -277,9 +273,6 @@ export default function Checkout({ plano }: Props) {
     if (!freteSelecionado || !token || !metodo) return
     setPagando(true)
 
-    // Body adaptado por plano:
-    // - parcelas so faz sentido em anual com cartao (1-12)
-    // - mensal/semestral: parcelas sempre 1
     const parcelasEnvio = (isAnual && metodo === 'CREDIT_CARD') ? parcelas : 1
 
     try {
@@ -317,7 +310,6 @@ export default function Checkout({ plano }: Props) {
   const opcoesParcelamento: number[] = []
   for (let i = 1; i <= info.maxParcelas; i++) opcoesParcelamento.push(i)
 
-  // Helpers de label para cada metodo no contexto deste plano
   function getMetodoSub(m: 'PIX' | 'BOLETO' | 'CREDIT_CARD'): string {
     if (m === 'CREDIT_CARD') {
       if (isSemestral) return 'recorrente'
@@ -414,8 +406,10 @@ export default function Checkout({ plano }: Props) {
           )}
         </Card>
 
-       {/* FORMA DE PAGAMENTO — semestral (Asaas): cards de seleção */}
-        {freteSelecionado && total !== null && isSemestral && (
+        {/* ══════════════════════════════════════════════════════════ */}
+        {/* FORMA DE PAGAMENTO — semestral e anual (Asaas): cards    */}
+        {/* ══════════════════════════════════════════════════════════ */}
+        {freteSelecionado && total !== null && !isMensal && (
           <Card>
             <CardLabel>Forma de pagamento</CardLabel>
             <div style={{ display: 'flex', gap: '.4rem', marginTop: '.4rem' }}>
@@ -448,7 +442,8 @@ export default function Checkout({ plano }: Props) {
               })}
             </div>
 
-            {metodo === 'CREDIT_CARD' && (
+            {/* Aviso semestral cartao */}
+            {metodo === 'CREDIT_CARD' && isSemestral && (
               <div style={{ marginTop: '.6rem', padding: '.6rem .8rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.5 }}>
                 <div style={{ marginBottom: '.3rem' }}>
                   <strong>Cobrança mensal recorrente no cartão por 6 meses.</strong>
@@ -467,11 +462,53 @@ export default function Checkout({ plano }: Props) {
                 </div>
               </div>
             )}
+
+            {/* Aviso anual cartao */}
+            {metodo === 'CREDIT_CARD' && isAnual && freteSelecionado && total && (
+              <div style={{ marginTop: '.6rem', padding: '.6rem .8rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.7rem', color: 'var(--azul-noite)', lineHeight: 1.5 }}>
+                <div style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)' }}>
+                  Plano R$ {info.valorPrimeira.toFixed(2).replace('.', ',')} + Frete (12 meses) R$ {(freteSelecionado.preco * 12).toFixed(2).replace('.', ',')} = <strong style={{ color: 'var(--azul-noite)' }}>{formatBRL(total)}</strong>
+                </div>
+                <div style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '.3rem', fontStyle: 'italic' }}>
+                  Pagamento único no cartão{parcelas > 1 ? ` em ${parcelas}x` : ' à vista'}.
+                </div>
+              </div>
+            )}
+
+            {/* Select de parcelas (apenas anual cartao) */}
+            {metodo === 'CREDIT_CARD' && isAnual && info.maxParcelas > 1 && (
+              <div style={{ marginTop: '.8rem' }}>
+                <p style={{ fontSize: '.7rem', color: 'var(--cinza-mudo)', marginBottom: '.4rem' }}>Em quantas vezes?</p>
+                <select
+                  value={parcelas}
+                  onChange={e => setParcelas(parseInt(e.target.value))}
+                  style={{
+                    width: '100%',
+                    padding: '.7rem .8rem',
+                    borderRadius: '8px',
+                    border: '1px solid #ddd',
+                    background: '#fff',
+                    fontSize: '.85rem',
+                    color: 'var(--azul-noite)',
+                    fontFamily: 'inherit',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {opcoesParcelamento.map(n => (
+                    <option key={n} value={n}>
+                      {n}x de {formatBRL(total! / n)} sem juros
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </Card>
         )}
 
-        {/* FORMA DE PAGAMENTO — mensal/anual (InfinitePay): card informativo */}
-        {freteSelecionado && total !== null && !isSemestral && (
+        {/* ══════════════════════════════════════════════════════════ */}
+        {/* FORMA DE PAGAMENTO — mensal (InfinitePay): informativo   */}
+        {/* ══════════════════════════════════════════════════════════ */}
+        {freteSelecionado && total !== null && isMensal && (
           <Card>
             <CardLabel>Forma de pagamento</CardLabel>
             <div style={{ padding: '.6rem .8rem', borderRadius: '8px', background: 'rgba(6,182,212,.08)', fontSize: '.78rem', color: 'var(--azul-noite)', lineHeight: 1.6 }}>
@@ -481,6 +518,9 @@ export default function Checkout({ plano }: Props) {
           </Card>
         )}
 
+        {/* ══════════════════════════════════════════════════════════ */}
+        {/* CUPOM DE DESCONTO                                        */}
+        {/* ══════════════════════════════════════════════════════════ */}
         {freteSelecionado && metodo && (
           <Card>
             <p style={{ fontSize: '.72rem', color: 'var(--cinza-mudo)', margin: '0 0 .5rem', textTransform: 'uppercase', letterSpacing: '.04em', fontWeight: 600 }}>Cupom de desconto</p>
@@ -515,6 +555,9 @@ export default function Checkout({ plano }: Props) {
           </Card>
         )}
 
+        {/* ══════════════════════════════════════════════════════════ */}
+        {/* RESUMO DO TOTAL                                          */}
+        {/* ══════════════════════════════════════════════════════════ */}
         {freteSelecionado && total !== null && metodo && (
           <Card>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.4rem' }}>
@@ -544,7 +587,7 @@ export default function Checkout({ plano }: Props) {
                 <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.2rem', fontWeight: 700, color: 'var(--azul-noite)' }}>{formatBRL(total)}</span>
               </div>
 
-              {/* Demais 5 mensalidades quando tem cupom no semestral */}
+              {/* Semestral: demais mensalidades quando tem cupom */}
               {isSemestral && cupomAplicado && descontoCupom > 0 && subtotal !== null && (
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '.3rem', fontSize: '.75rem', color: 'var(--cinza-mudo)' }}>
                   <span>Demais 5 mensalidades</span>
@@ -552,7 +595,8 @@ export default function Checkout({ plano }: Props) {
                 </div>
               )}
 
-              {/* Texto explicativo abaixo do total, varia por plano/metodo */}
+              {/* ── Textos explicativos por plano/metodo ── */}
+
               {isSemestral && cupomAplicado && descontoCupom > 0 && (
                 <p style={{ fontSize: '.65rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.4rem 0 0', fontStyle: 'italic' }}>
                   cupom válido apenas na primeira cobrança
@@ -563,27 +607,29 @@ export default function Checkout({ plano }: Props) {
                   cobrado todo mês no cartão · 6 meses
                 </p>
               )}
-              {plano === 'mensal' && !isSemestral && (
+
+              {isMensal && (
                 <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
                   Pix ou cartão — você escolhe na próxima tela
                 </p>
               )}
-              {isAnual && (
+
+              {isAnual && metodo === 'CREDIT_CARD' && parcelas > 1 && valorParcela && (
                 <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
-                  Pix ou cartão (até 12x) — você escolhe na próxima tela
+                  {parcelas}x de {formatBRL(valorParcela)} sem juros
                 </p>
               )}
-              {isSemestral && metodo === 'CREDIT_CARD' && (
+              {isAnual && metodo === 'CREDIT_CARD' && parcelas === 1 && (
                 <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
-                  cobrado todo mês no cartão · 6 meses
+                  à vista no cartão
                 </p>
               )}
-              {isSemestral && metodo === 'PIX' && (
+              {isAnual && metodo === 'PIX' && (
                 <p style={{ fontSize: '.68rem', color: '#16a34a', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
                   pagamento instantâneo via Pix
                 </p>
               )}
-              {isSemestral && metodo === 'BOLETO' && (
+              {isAnual && metodo === 'BOLETO' && (
                 <p style={{ fontSize: '.68rem', color: 'var(--cinza-mudo)', textAlign: 'right' as const, margin: '.1rem 0 0' }}>
                   boleto à vista — vence em 3 dias úteis
                 </p>
@@ -592,7 +638,9 @@ export default function Checkout({ plano }: Props) {
           </Card>
         )}
 
-        {/* Aceite: contrato semestral OU termos gerais */}
+        {/* ══════════════════════════════════════════════════════════ */}
+        {/* ACEITE: contrato semestral OU termos gerais              */}
+        {/* ══════════════════════════════════════════════════════════ */}
         {isSemestral ? (
           <>
             <Card>
@@ -682,12 +730,15 @@ export default function Checkout({ plano }: Props) {
         {!freteSelecionado && <p style={{ textAlign: 'center', fontSize: '.7rem', color: 'var(--cinza-mudo)', marginTop: '.5rem' }}>Preencha o endereço e calcule o frete</p>}
 
         <p style={{ textAlign: 'center', fontSize: '.65rem', color: 'var(--cinza-mudo)', marginTop: '1.5rem' }}>
-          {plano === 'mensal' && 'Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.'}
+          {isMensal && 'Pagamento seguro. Plano mensal sem fidelidade — cancele quando quiser.'}
           {isSemestral && 'Pagamento seguro. Consulte o contrato do plano semestral para ver as condicoes completas.'}
           {isAnual && 'Pagamento seguro. Consulte os termos de uso para ver as condicoes completas.'}
         </p>
       </div>
 
+      {/* ══════════════════════════════════════════════════════════ */}
+      {/* MODAL "TUDO PRONTO"                                      */}
+      {/* ══════════════════════════════════════════════════════════ */}
       {modalAberto && (
         <div onClick={() => setModalAberto(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 9999 }}>
           <div onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: '20px', padding: '2rem 1.5rem', maxWidth: '420px', width: '100%', boxShadow: '0 20px 60px rgba(0,0,0,.3)', textAlign: 'center' }}>
