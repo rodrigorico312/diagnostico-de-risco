@@ -748,7 +748,9 @@ export default function Checkout({ plano }: Props) {
               Por motivos de segurança, o link de pagamento também foi enviado pro seu WhatsApp.
             </p>
             <p style={{ fontSize: '.82rem', color: 'var(--cinza-mudo)', lineHeight: 1.5, margin: '0 0 1.8rem', fontStyle: 'italic' }}>
-              O link de pagamento será gerado em nome da nossa empresa gestora.
+              {isMensal
+                ? 'O link de pagamento será gerado em nome da nossa empresa gestora.'
+                : 'A cobrança aparece em nome da nossa co-fundadora.'}
             </p>
             <a
               href={linkPagamento || '#'}
