@@ -124,7 +124,7 @@ const overlayStyle: React.CSSProperties = {
 }
 const modalStyle: React.CSSProperties = {
   background: '#fff', borderRadius: '14px', width: '100%', maxWidth: '600px',
-  maxHeight: '85vh', display: 'flex', flexDirection: 'column',
+  maxHeight: 'calc(100dvh - 2rem)', display: 'flex', flexDirection: 'column',
   overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,.3)',
 }
 const headerStyle: React.CSSProperties = {

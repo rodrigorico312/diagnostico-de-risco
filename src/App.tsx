@@ -18,6 +18,7 @@ import ClientArea from './components/ClientArea'
 import Checkout from './components/Checkout'
 import Sucesso from './components/Sucesso'
 import Termos from './components/Termos'
+import ResetPassword from './components/ResetPassword'
 
 import { trackMetaPixelPageView } from './lib/metaPixel'
 
@@ -60,6 +61,8 @@ export default function App() {
   }, [hash])
 
   if (hash === '#/termos') return <Termos />
+
+  if (hash.startsWith('#/resetar-senha')) return <ResetPassword />
 
   if (hash === '#/sucesso') {
     if (!localStorage.getItem('vivefit_token')) { window.location.hash = '#/'; return null }

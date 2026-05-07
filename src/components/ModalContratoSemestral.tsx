@@ -94,7 +94,7 @@ export default function ModalContratoSemestral({ aberto, onConfirmar, onCancelar
 }
 
 const overlayStyle: React.CSSProperties = { position: 'fixed', inset: 0, background: 'rgba(15,23,42,.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: '1rem' }
-const modalStyle: React.CSSProperties = { background: '#fff', borderRadius: '14px', width: '100%', maxWidth: '600px', maxHeight: '85vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,.3)' }
+const modalStyle: React.CSSProperties = { background: '#fff', borderRadius: '14px', width: '100%', maxWidth: '600px', maxHeight: 'calc(100dvh - 2rem)', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,.3)' }
 const headerStyle: React.CSSProperties = { padding: '1.2rem 1.5rem', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }
 const closeBtnStyle: React.CSSProperties = { background: 'transparent', border: 'none', fontSize: '1.8rem', color: '#64748B', cursor: 'pointer', lineHeight: 1, width: '32px', height: '32px', borderRadius: '50%' }
 const contentStyle: React.CSSProperties = { padding: '1.5rem', overflowY: 'auto', flex: 1, fontSize: '.9rem', lineHeight: 1.6, color: '#334155', textAlign: 'justify' }

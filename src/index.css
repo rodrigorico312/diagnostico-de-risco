@@ -70,6 +70,8 @@ section { padding: 0; }
   height: 52px; 
   padding: 0 16px;
 }
+.hdr-logo { display: inline-flex; align-items: center; flex-shrink: 0; line-height: 0; }
+.hdr-logo img { height: 36px !important; max-height: 36px !important; width: auto !important; max-width: 140px; margin-top: 0 !important; object-fit: contain; }
 .nav-d { display: flex; gap: 1.4rem; align-items: center; }
 .nav-d a { font-family: var(--font-body); font-size: .6rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cinza-mudo); transition: color .3s; }
 .nav-d a:hover { color: var(--cobalto); }
@@ -689,8 +691,9 @@ section { padding: 0; }
 .reveal-price.visible { opacity: 1; transform: none; }
 
 /* ══════════════════════════════════════════ QUIZ — PERFIL DE LOOK */
+.q-hdr { padding: 0; display: flex; align-items: center; justify-content: space-between; height: 52px; overflow: visible; }
 .q-hdr { padding: 1rem 5%; display: flex; align-items: center; justify-content: space-between; }
-.q-hdr .q-logo img { height: 200px !important; max-height: none !important; margin-top: 10px !important; }
+.q-hdr .q-logo img { height: 36px !important; max-height: 36px !important; margin-top: 0 !important; object-fit: contain; }
 .q-close { font-size: .75rem; color: var(--cinza-mudo); font-weight: 500; transition: color .3s; }
 .q-close:hover { color: var(--coral); }
 .q-wrap { flex: 1; display: flex; flex-direction: column; width: min(92%, 480px); margin: 0 auto; padding: 0 0 6rem; }
@@ -733,6 +736,15 @@ section { padding: 0; }
 .q-footer-in { width: min(92%, 480px); margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
 .q-back { font-family: var(--font-body); font-size: .75rem; font-weight: 500; color: var(--cinza-mudo); padding: .5rem; transition: color .3s; }
 .q-back:hover { color: var(--cobalto); }
+
+/* Auth page specific overrides */
+.auth-hdr { height: auto; padding-top: .9rem; padding-bottom: .6rem; overflow: visible; }
+.auth-hdr .auth-logo { display: inline-flex; align-items: center; justify-content: flex-start; overflow: visible; }
+.auth-hdr .auth-logo img { height: 36px !important; max-height: 36px !important; margin-top: 0 !important; object-fit: contain; }
+@media (max-width: 480px) {
+  .auth-hdr { padding: .75rem 5% .35rem; }
+  .auth-hdr .auth-logo img { height: 36px !important; max-height: 36px !important; }
+}
 .q-back.hidden { visibility: hidden; }
 .q-progress { flex: 1; height: 4px; background: var(--cinza-fundo); border-radius: 4px; overflow: hidden; }
 .q-progress-bar { height: 100%; background: var(--cobalto); border-radius: 4px; transition: width .4s var(--ease); }

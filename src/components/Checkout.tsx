@@ -320,15 +320,15 @@ export default function Checkout({ plano }: Props) {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
+    <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)', overflow: 'auto' }}>
       <div className="q-hdr">
         <span className="q-logo">
-          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px' }} />
+          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" />
         </span>
         <a href="#/" className="q-close">voltar ao site</a>
       </div>
 
-      <div style={{ flex: 1, padding: '1.5rem 5%', maxWidth: '500px', margin: '0 auto', width: '100%' }}>
+      <div style={{ flex: 1, padding: '1.5rem 5%', maxWidth: '500px', margin: '0 auto', width: '100%', overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
         <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1.3rem', color: 'var(--azul-noite)', marginBottom: '.3rem' }}>Resumo do pedido</h2>
         <p style={{ fontSize: '.78rem', color: 'var(--cinza-mudo)', marginBottom: '1.5rem' }}>Confira seus dados antes de finalizar</p>
 

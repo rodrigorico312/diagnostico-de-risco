@@ -29,9 +29,13 @@ const faqs = [
     q: 'Quais são as formas de pagamento?', 
     a: 'No mensal, você pode pagar por Pix, boleto ou cartão. No semestral, o pagamento é só no cartão. No anual, aceitamos Pix, boleto a vista e cartão parcelado..' 
   },
-  { 
-    q: 'Qual é o prazo de entrega?', 
-    a: 'O prazo depende da sua região e da transportadora escolhida no checkout. Em Santarém-PA, em média 3 a 9 dias úteis. Para outras regiões, você vê o prazo exato ao digitar seu CEP. Despachamos de Santarém-PA para todo o Brasil.' 
+  {
+    q: 'E se eu quiser devolver?',
+    a: 'Se o pedido estiver dentro do direito de arrependimento, voce pode solicitar a devolucao em ate 7 dias corridos apos o recebimento da primeira box. A devolucao da box fica por nossa conta.',
+  },
+  {
+    q: 'Qual e o prazo de entrega?',
+    a: 'O prazo depende da sua regiao. No checkout, voce digita seu CEP e ve o frete com prazo certinho. Em Santarem-PA, o prazo estimado e de ate 9 dias uteis.',
   },
 ]
 

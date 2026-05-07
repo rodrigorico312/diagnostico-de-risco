@@ -30,43 +30,59 @@ const NUM = {
 // Lógica preservada — handlePlanClick com redirect real
 type PlanoId = 'mensal' | 'semestral' | 'anual';
 
-const handlePlanClick = async (planoId: PlanoId): Promise<void> => {
+const API = 'https://api.vivefit.site'
+
+async function handlePlanClick(planoId: PlanoId): Promise<void> {
   try {
-    localStorage.setItem('vivefit_plano_intencao', planoId);
+    localStorage.setItem('vivefit_plano_intencao', planoId)
   } catch {
-    /* noop */
+    // localStorage pode falhar em modo privado; o fluxo segue pelo hash.
   }
 
-  const token = (() => { try { return localStorage.getItem('vivefit_token'); } catch { return null; } })();
+  const token = (() => {
+    try {
+      return localStorage.getItem('vivefit_token')
+    } catch {
+      return null
+    }
+  })()
 
-  // Deslogado -> cadastro
   if (!token) {
-    window.location.hash = `#/cadastro?plano=${planoId}`;
-    return;
+    window.location.hash = `#/cadastro?plano=${planoId}`
+    return
   }
 
-  // Logado: checa perfil no BANCO (fonte de verdade, nao depende de localStorage)
   try {
-    const res = await fetch('https://api.vivefit.site/perfil', {
-      headers: { 'Authorization': 'Bearer ' + token },
-    });
-    const data = await res.json();
-    if (data.perfil && data.perfil.tamanho) {
-      // Perfil existe no banco -> checkout direto
-      try { localStorage.setItem('vivefit_quiz_done', 'true'); } catch {}
-      window.location.hash = `#/checkout?plano=${planoId}`;
-    } else {
-      // Sem perfil -> quiz primeiro
-      window.location.hash = `#/perfil-de-look?plano=${planoId}`;
+    const [meRes, perfilRes] = await Promise.all([
+      fetch(API + '/auth/me', { headers: { 'Authorization': 'Bearer ' + token } }),
+      fetch(API + '/perfil', { headers: { 'Authorization': 'Bearer ' + token } }).catch(() => null),
+    ])
+
+    if (!meRes.ok) {
+      try {
+        localStorage.removeItem('vivefit_token')
+        localStorage.removeItem('vivefit_nome')
+      } catch {}
+      window.location.hash = `#/cadastro?plano=${planoId}`
+      return
+    }
+
+    const perfilData = perfilRes?.ok ? await perfilRes.json() : { perfil: null }
+    const temPerfil = !!perfilData?.perfil?.tamanho
+
+    if (temPerfil) {
+      try {
+        localStorage.setItem('vivefit_quiz_done', 'true')
+      } catch {}
+      window.location.hash = `#/checkout?plano=${planoId}`
+      return
     }
   } catch {
-    // Fallback se API falhar: usa localStorage
-    const quizDone = (() => { try { return localStorage.getItem('vivefit_quiz_done') === 'true'; } catch { return false; } })();
-    window.location.hash = quizDone
-      ? `#/checkout?plano=${planoId}`
-      : `#/perfil-de-look?plano=${planoId}`;
+    // Se a checagem falhar, evita checkout sem curadoria salva no banco.
   }
-};
+
+  window.location.hash = `#/perfil-de-look?plano=${planoId}`
+}
 
 type IconProps = { color: string };
 

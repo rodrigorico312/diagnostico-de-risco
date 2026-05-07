@@ -225,13 +225,13 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
 
   if (done) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
+      <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)', overflow: 'auto' }}>
         <div className="q-hdr">
           <span className="q-logo">
-            <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px' }} />
+            <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" />
           </span>
         </div>
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 5%' }}>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 5%', overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
           <div className="done">
             <div className="done-ico">✨</div>
             <h2>Seu perfil de look tá pronto.</h2>
@@ -255,10 +255,10 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)' }}>
+    <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--gelo)', overflow: 'auto' }}>
       <div className="q-hdr">
         <span className="q-logo">
-          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px' }} />
+          <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" />
         </span>
         <a href="#/" className="q-close">voltar ao site</a>
       </div>
@@ -277,7 +277,7 @@ export default function PerfilDeLook({ planoPreSelecionado }: Props) {
         </div>
       )}
 
-      <div className="q-wrap">
+      <div className="q-wrap" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '7rem' }}>
         <h2 className="q-title">{step.title}</h2>
         <p className="q-sub">{step.sub}</p>
         {step.type === 'multi' && <div className="multi-hint">seleção múltipla</div>}

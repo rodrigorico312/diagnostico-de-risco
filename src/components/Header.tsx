@@ -30,8 +30,8 @@ export default function Header() {
     <>
       <header className={`hdr${hidden ? ' hide' : ''}`}>
         <div className="hdr-in">
-          <a href="#/">
-            <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" style={{ height: '220px', marginTop: '10px' }} />
+          <a href="#/" className="hdr-logo">
+            <img src="https://i.postimg.cc/CLyDrrMm/logo-vivefit-turquesa.png" alt="VIVE FIT" />
           </a>
           <nav className="nav-d">
             <a href="#como">Como funciona</a>
