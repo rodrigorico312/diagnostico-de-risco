@@ -31,11 +31,11 @@ const faqs = [
   },
   {
     q: 'E se eu quiser devolver?',
-    a: 'Se o pedido estiver dentro do direito de arrependimento, voce pode solicitar a devolucao em ate 7 dias corridos apos o recebimento da primeira box. A devolucao da box fica por nossa conta.',
+    a: 'Se o pedido estiver dentro do direito de arrependimento, você pode solicitar a devolução em até 7 dias corridos após o recebimento da primeira box. A devolução da box fica por nossa conta.',
   },
   {
-    q: 'Qual e o prazo de entrega?',
-    a: 'O prazo depende da sua regiao. No checkout, voce digita seu CEP e ve o frete com prazo certinho. Em Santarem-PA, o prazo estimado e de ate 9 dias uteis.',
+    q: 'Qual é o prazo de entrega?',
+    a: 'O prazo depende da sua região. No checkout, você digita seu CEP e vê o frete com prazo certinho. Em Santarém-PA, o prazo estimado é de até 9 dias úteis.',
   },
 ]
 

@@ -10,7 +10,7 @@ export default function Hero() {
         </h1>
         <p className="hero-sub">
           4 peças fitness na sua porta todo<br /> mês, escolhidas pro seu estilo.<br />
-          Por menos de R$ 6 por dia.
+          Por menos de R$ 7 por dia.
         </p>
         <div className="hero-features">
           <div className="hero-feat">
