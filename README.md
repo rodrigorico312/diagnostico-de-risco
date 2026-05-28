@@ -1,20 +1,28 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Contador em Santarém
 
-# Run and deploy your AI Studio app
+Landing page minimalista para um contador de Santarém-PA que atende empresas
+locais e de municípios próximos com contabilidade tributária e organização
+financeira.
 
-This contains everything you need to run your app locally.
+## Rodar localmente
 
-View your app in AI Studio: https://ai.studio/apps/2f28e0f5-9ee4-4497-aa66-513cf8624f34
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
+1. Instale as dependências:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+2. Rode em desenvolvimento:
    `npm run dev`
+3. Gere a versão de produção:
+   `npm run build`
+
+## Configuração
+
+O link de WhatsApp fica em `src/App.tsx`:
+
+```ts
+const WHATSAPP_NUMBER = "5599999999999";
+const WHATSAPP_MESSAGE =
+  "Olá, vim pelo site e quero falar sobre contabilidade e financeiro da minha empresa.";
+```
+
+A foto pessoal deve ser colocada em `public/foto-perfil.jpg`.
+
+Substitua os placeholders `[SEU NOME]` e `WHATSAPP_NUMBER` antes de publicar.
