@@ -104,13 +104,8 @@ p {
   font-weight: 650;
 }
 
-.hero__text {
-  margin-top: 22px;
-  font-size: 1.08rem;
-}
-
 .hero__local {
-  margin-top: 16px;
+  margin-top: 24px;
   color: #313943;
   font-weight: 650;
 }
@@ -180,6 +175,11 @@ p {
 .about__content p,
 .section__intro {
   margin-top: 18px;
+}
+
+.credential {
+  color: var(--text);
+  font-weight: 750;
 }
 
 .plain-note {

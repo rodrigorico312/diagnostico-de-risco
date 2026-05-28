@@ -1,8 +1,7 @@
-# Contador em Santarém
+# Rodrigo Coelho — Contador em Santarém
 
-Landing page minimalista para um contador de Santarém-PA que atende empresas
-locais e de municípios próximos com contabilidade tributária e organização
-financeira.
+Landing page minimalista para Rodrigo Coelho, contador CRC/PA 024335 em
+Santarém-PA.
 
 ## Rodar localmente
 
@@ -20,9 +19,7 @@ O link de WhatsApp fica em `src/App.tsx`:
 ```ts
 const WHATSAPP_NUMBER = "5593992191980";
 const WHATSAPP_MESSAGE =
-  "Olá, vim pelo site e quero falar sobre contabilidade e financeiro da minha empresa.";
+  "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
 ```
 
 A foto pessoal deve ser colocada em `public/foto-perfil.jpg`.
-
-Substitua o placeholder `[SEU NOME]` antes de publicar.

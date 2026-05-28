@@ -1,18 +1,18 @@
 const WHATSAPP_NUMBER = "5593992191980";
 const WHATSAPP_MESSAGE =
-  "Olá, vim pelo site e quero falar sobre contabilidade e financeiro da minha empresa.";
+  "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
 
 const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   WHATSAPP_MESSAGE,
 )}`;
 
 const services = [
-  "Contabilidade tributária",
-  "Obrigações e impostos em dia",
-  "Organização financeira",
+  "Imposto certo",
+  "Obrigações em dia",
+  "Documentos organizados",
   "Caixa acompanhado",
   "Separação entre pessoa física e empresa",
-  "Resposta clara quando você precisa decidir",
+  "Resposta direta quando precisa decidir",
 ];
 
 export default function App() {
@@ -26,22 +26,17 @@ export default function App() {
             Pra pagar imposto certo, cumprir obrigação e manter o financeiro
             organizado.
           </p>
-          <p className="hero__text">
-            Sou contador em Santarém-PA e trabalho com contabilidade tributária
-            e financeiro para empresas que precisam de um contador presente,
-            direto e sem enrolação.
-          </p>
           <p className="hero__local">
-            Atendimento para Santarém e municípios próximos.
+            Atendimento para empresas de Santarém e municípios próximos.
           </p>
           <a
             className="button"
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            aria-label="Chamar contador no WhatsApp"
+            aria-label="Falar com Rodrigo Coelho, contador em Santarém, no WhatsApp"
           >
-            Chamar no WhatsApp
+            Falar com o contador no WhatsApp
           </a>
         </div>
       </section>
@@ -52,19 +47,20 @@ export default function App() {
             <img
               className="about__image"
               src="/foto-perfil.jpg"
-              alt="Foto do contador responsável pelo atendimento em Santarém"
+              alt="Rodrigo Coelho, contador em Santarém-PA"
             />
           </div>
           <div className="about__content">
-            <p className="eyebrow">Apresentação</p>
-            <h2 id="apresentacao-title">Atendimento direto, de perto</h2>
+            <p className="eyebrow">Atendimento direto</p>
+            <h2 id="apresentacao-title">Rodrigo Coelho</h2>
+            <p className="credential">Contador CRC/PA 024335</p>
             <p>
-              Meu nome é [SEU NOME]. Sou contador em Santarém-PA e cuido da
-              parte contábil, tributária e financeira para empresários que não
-              têm tempo de acompanhar tudo sozinho.
+              Cuido da parte contábil, tributária e financeira para empresas
+              que precisam manter imposto, obrigação, documento e financeiro em
+              ordem.
             </p>
             <p className="plain-note">
-              Sem palestra. Sem promessa. Sem complicar o que já é chato.
+              Sem palestra. Sem promessa. Sem complicar o básico.
             </p>
           </div>
         </div>
@@ -94,8 +90,7 @@ export default function App() {
         <div className="container">
           <h2 id="publico-title">Para quem é</h2>
           <p className="section__intro">
-            Para empresários de Santarém e municípios próximos que vendem,
-            entregam, resolvem cliente, fornecedor e funcionário, mas não querem
+            Para empresários de Santarém e municípios próximos que não querem
             deixar imposto, documento e financeiro soltos.
           </p>
           <p className="plain-note">
@@ -119,7 +114,7 @@ export default function App() {
             rel="noreferrer"
             aria-label="Falar com o contador pelo WhatsApp"
           >
-            Falar comigo no WhatsApp
+            Falar com o contador no WhatsApp
           </a>
         </div>
       </section>
