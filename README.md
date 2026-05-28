@@ -18,11 +18,11 @@ financeira.
 O link de WhatsApp fica em `src/App.tsx`:
 
 ```ts
-const WHATSAPP_NUMBER = "5599999999999";
+const WHATSAPP_NUMBER = "5593992191980";
 const WHATSAPP_MESSAGE =
   "Olá, vim pelo site e quero falar sobre contabilidade e financeiro da minha empresa.";
 ```
 
 A foto pessoal deve ser colocada em `public/foto-perfil.jpg`.
 
-Substitua os placeholders `[SEU NOME]` e `WHATSAPP_NUMBER` antes de publicar.
+Substitua o placeholder `[SEU NOME]` antes de publicar.
