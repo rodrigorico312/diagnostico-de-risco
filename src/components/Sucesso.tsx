@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 
 const API = 'https://api.vivefit.site'
-const POLLING_INTERVAL_MS = 5000
-const POLLING_TIMEOUT_MS = 5 * 60 * 1000
 
 interface UserData {
   id: number
@@ -18,8 +16,7 @@ export default function Sucesso() {
   const [loading, setLoading] = useState(true)
   const [temPerfil, setTemPerfil] = useState(false)
   const [copiado, setCopiado] = useState(false)
-  const [pagamentoConfirmado, setPagamentoConfirmado] = useState(false)
-  const [pollingExpirado, setPollingExpirado] = useState(false)
+  const [paymentUrl, setPaymentUrl] = useState<string | null>(null)
 
   const token = localStorage.getItem('vivefit_token')
   const primeiroNome = user?.nome?.split(' ')[0] || 'amiga'
@@ -29,83 +26,42 @@ export default function Sucesso() {
       window.location.hash = '#/'
       return
     }
+    // Recupera URL do checkout salvo
+    const storedUrl = localStorage.getItem('vivefit_payment_url')
+    setPaymentUrl(storedUrl)
 
-    let cancelado = false
-    let intervalId: ReturnType<typeof setInterval> | undefined
-    let timeoutId: ReturnType<typeof setTimeout> | undefined
-
-    const pararPolling = () => {
-      if (intervalId) clearInterval(intervalId)
-      if (timeoutId) clearTimeout(timeoutId)
+    const carregar = (mostraLoading: boolean) => {
+      if (mostraLoading) setLoading(true)
+      return Promise.all([
+        fetch(API + '/auth/me', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()),
+        fetch(API + '/perfil', { headers: { 'Authorization': 'Bearer ' + token } }).then(r => r.json()).catch(() => ({ perfil: null })),
+      ]).then(([userData, perfilData]) => {
+        setUser(userData)
+        setTemPerfil(!!(perfilData?.perfil?.tamanho))
+        setLoading(false)
+        // Quando confirmou pagamento, limpa URL salva
+        if (userData?.status === 'ativo' && storedUrl) {
+          localStorage.removeItem('vivefit_payment_url')
+          localStorage.removeItem('vivefit_payment_at')
+        }
+        return userData
+      }).catch(() => {
+        setLoading(false)
+      })
     }
-
-    const tratarUsuario = (userData: UserData) => {
-      if (cancelado) return false
-      setUser(userData)
-
-      if (userData?.status === 'ativo') {
-        setPagamentoConfirmado(true)
-        setPollingExpirado(false)
-        localStorage.removeItem('vivefit_payment_url')
-        localStorage.removeItem('vivefit_payment_at')
-        pararPolling()
-        return true
-      }
-
-      return false
-    }
-
-    const buscarUsuario = async () => {
-      const res = await fetch(API + '/auth/me', { headers: { 'Authorization': 'Bearer ' + token } })
-      if (!res.ok) throw new Error('Falha ao carregar usuario')
-      return res.json() as Promise<UserData>
-    }
-
-    const carregarPerfil = async () => {
-      try {
-        const res = await fetch(API + '/perfil', { headers: { 'Authorization': 'Bearer ' + token } })
-        const data = await res.json()
-        if (!cancelado) setTemPerfil(!!(data?.perfil?.tamanho))
-      } catch (e) {
-        if (!cancelado) setTemPerfil(false)
-      }
-    }
-
-    const iniciar = async () => {
-      setLoading(true)
-      try {
-        const [userData] = await Promise.all([buscarUsuario(), carregarPerfil()])
-        const confirmado = tratarUsuario(userData)
-        if (!cancelado) setLoading(false)
-        if (confirmado || cancelado) return
-
-        intervalId = setInterval(() => {
-          buscarUsuario()
-            .then(tratarUsuario)
-            .catch(() => {})
-        }, POLLING_INTERVAL_MS)
-
-        timeoutId = setTimeout(() => {
-          if (cancelado || pagamentoConfirmado) return
-          setPollingExpirado(true)
-          if (intervalId) clearInterval(intervalId)
-        }, POLLING_TIMEOUT_MS)
-      } catch (e) {
-        if (!cancelado) setLoading(false)
-      }
-    }
-
-    iniciar()
-
-    return () => {
-      cancelado = true
-      pararPolling()
-    }
-  }, [token])
+    carregar(true)
+    // Polling: enquanto status nao for ativo, checa a cada 8s
+    const interval = setInterval(() => {
+      carregar(false).then(u => {
+        if (u?.status === 'ativo') clearInterval(interval)
+      })
+    }, 8000)
+    return () => clearInterval(interval)
+  }, [])
 
   const compartilhar = async () => {
     const url = 'https://vivefit.site'
-    const texto = 'Conhece a VIVE FIT? Clube de assinatura de moda fitness, peças selecionadas pra você todo mês'
+    const texto = 'Conhece a VIVE FIT? Clube de assinatura de moda fitness, peças selecionadas pra você todo mês 🩷'
 
     if (navigator.share) {
       try {
@@ -120,54 +76,6 @@ export default function Sucesso() {
     }
   }
 
-  const renderCards = (mostrarPerfil: boolean) => (
-    <div className="sucesso-cards">
-      {mostrarPerfil && !temPerfil && (
-        <div className="sucesso-card sucesso-card-perfil">
-          <div className="sucesso-card-label sucesso-card-label-marinho">Passo opcional</div>
-          <div className="sucesso-card-title sucesso-card-title-marinho">Complete seu perfil</div>
-          <div className="sucesso-card-sub">Pra box ficar ainda mais sua.</div>
-          <a href="#/perfil-de-look" className="sucesso-card-link sucesso-card-link-turquesa">
-            preencher agora
-          </a>
-        </div>
-      )}
-
-      <a href="https://instagram.com/vivefitstm" target="_blank" rel="noopener noreferrer" className="sucesso-card sucesso-card-insta">
-        <div className="sucesso-insta-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </div>
-        <div className="sucesso-insta-text">
-          <div className="sucesso-insta-label">Instagram</div>
-          <div className="sucesso-insta-user">Seguir @vivefitstm</div>
-        </div>
-        <div className="sucesso-insta-arrow">›</div>
-      </a>
-
-      <div className="sucesso-card sucesso-card-share">
-        <div className="sucesso-card-label">Compartilhe</div>
-        <div className="sucesso-card-title">Conta pra uma amiga</div>
-        <div className="sucesso-card-sub sucesso-card-sub-light">que também merece se cuidar</div>
-        <button onClick={compartilhar} className="sucesso-card-link sucesso-card-link-white">
-          {copiado ? 'link copiado ✓' : 'compartilhar link'}
-        </button>
-      </div>
-    </div>
-  )
-
-  const renderRodape = () => (
-    <div className="sucesso-rodape">
-      <div className="sucesso-rodape-label">Dúvidas?</div>
-      <a href="https://wa.me/5593991129194" target="_blank" rel="noopener noreferrer" className="sucesso-rodape-wpp">
-        WhatsApp (93) 99112-9194
-      </a>
-    </div>
-  )
-
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff' }}>
@@ -176,39 +84,43 @@ export default function Sucesso() {
     )
   }
 
-  if (!pagamentoConfirmado) {
+  // Estado: aguardando pagamento (status nao e 'ativo')
+  if (user && user.status !== 'ativo') {
     return (
       <>
         <style>{css}</style>
         <div className="sucesso-page">
           <div className="sucesso-container">
+
             <div className="sucesso-pill sucesso-pill-pendente">
               <span className="sucesso-pill-dot sucesso-pill-dot-pendente"></span>
-              AGUARDANDO PAGAMENTO
+              Aguardando pagamento
             </div>
 
-            <h1 className="sucesso-h1-1">Quase lá,</h1>
+            <h1 className="sucesso-h1-1">Quase la,</h1>
             <h1 className="sucesso-h1-2">{primeiroNome}.</h1>
 
             <p className="sucesso-desc">
-              Assim que o pagamento for confirmado, sua assinatura é ativada e começamos a preparar sua primeira box.
-            </p>
-            <p className="sucesso-desc sucesso-desc-secundario">
-              Se já pagou, aguarde alguns instantes — a confirmação pode levar até 2 minutos.
+              Te enviamos o link no WhatsApp tambem. Quando voce pagar, a gente confirma aqui automaticamente.
             </p>
 
-            {pollingExpirado && (
-              <p className="sucesso-timeout">
-                Não identificamos seu pagamento ainda. Se já pagou, pode levar alguns minutos. Se precisar de ajuda, fale pelo WhatsApp.
+            {paymentUrl ? (
+              <a href={paymentUrl} target="_blank" rel="noopener noreferrer" className="sucesso-cta-pagar">
+                Pagar agora
+              </a>
+            ) : (
+              <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center', margin: '8px 0 24px' }}>
+                Verifique seu WhatsApp para o link de pagamento.
               </p>
             )}
 
-            <a href="#/minha-conta" className="sucesso-cta-primary">
-              ACESSAR MINHA CONTA
-            </a>
+            <div className="sucesso-rodape">
+              <div className="sucesso-rodape-label">Duvidas?</div>
+              <a href="https://wa.me/5593991129194" target="_blank" rel="noopener noreferrer" className="sucesso-rodape-wpp">
+                WhatsApp (93) 99112-9194
+              </a>
+            </div>
 
-            {renderCards(false)}
-            {renderRodape()}
           </div>
         </div>
       </>
@@ -219,10 +131,12 @@ export default function Sucesso() {
     <>
       <style>{css}</style>
       <div className="sucesso-page">
+
         <div className="sucesso-container">
-          <div className="sucesso-pill sucesso-pill-confirmado">
-            <span className="sucesso-pill-dot sucesso-pill-dot-confirmado"></span>
-            PAGAMENTO CONFIRMADO
+
+          <div className="sucesso-pill">
+            <span className="sucesso-pill-dot"></span>
+            Pagamento confirmado
           </div>
 
           <h1 className="sucesso-h1-1">Bem-vinda,</h1>
@@ -233,12 +147,57 @@ export default function Sucesso() {
           </p>
 
           <a href="#/minha-conta" className="sucesso-cta-primary">
-            ACESSAR MINHA CONTA
+            Acessar minha conta
           </a>
 
-          {renderCards(true)}
-          {renderRodape()}
+          <div className="sucesso-cards">
+
+            {!temPerfil && (
+              <div className="sucesso-card sucesso-card-perfil">
+                <div className="sucesso-card-label sucesso-card-label-marinho">Passo opcional</div>
+                <div className="sucesso-card-title sucesso-card-title-marinho">Complete seu perfil</div>
+                <div className="sucesso-card-sub">Pra box ficar ainda mais sua.</div>
+                <a href="#/perfil-de-look" className="sucesso-card-link sucesso-card-link-turquesa">
+                  preencher agora
+                </a>
+              </div>
+            )}
+
+            <a href="https://instagram.com/vivefitstm" target="_blank" rel="noopener noreferrer" className="sucesso-card sucesso-card-insta">
+              <div className="sucesso-insta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </div>
+              <div className="sucesso-insta-text">
+                <div className="sucesso-insta-label">Instagram</div>
+                <div className="sucesso-insta-user">Seguir @vivefitstm</div>
+              </div>
+              <div className="sucesso-insta-arrow">›</div>
+            </a>
+
+            <div className="sucesso-card sucesso-card-share">
+              <div className="sucesso-card-label">Compartilhe</div>
+              <div className="sucesso-card-title">Conta pra uma amiga</div>
+              <div className="sucesso-card-sub sucesso-card-sub-light">que também merece se cuidar</div>
+              <button onClick={compartilhar} className="sucesso-card-link sucesso-card-link-white">
+                {copiado ? 'link copiado ✓' : 'compartilhar link'}
+              </button>
+            </div>
+
+          </div>
+
+          <div className="sucesso-rodape">
+            <div className="sucesso-rodape-label">Dúvidas?</div>
+            <a href="https://wa.me/5593991129194" target="_blank" rel="noopener noreferrer" className="sucesso-rodape-wpp">
+              WhatsApp (93) 99112-9194
+            </a>
+          </div>
+
         </div>
+
       </div>
     </>
   )
@@ -259,10 +218,49 @@ const css = `
   max-width: 420px;
 }
 
+.sucesso-pill-pendente {
+  background: #FEF3C7;
+  color: #92400E;
+}
+.sucesso-pill-dot-pendente {
+  background: #92400E;
+}
+
+.sucesso-cta-pagar {
+  display: block;
+  text-align: center;
+  background: #FF5A5F;
+  color: #fff;
+  padding: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 60px;
+  box-shadow: 0 6px 20px rgba(255,90,95,.4), 0 2px 6px rgba(255,90,95,.25);
+  margin-bottom: 28px;
+  transition: transform .2s, box-shadow .2s;
+}
+.sucesso-cta-pagar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(255,90,95,.5), 0 2px 6px rgba(255,90,95,.25);
+}
+
+@media (min-width: 720px) {
+  .sucesso-cta-pagar {
+    padding: 18px;
+    font-size: 12px;
+    margin-bottom: 36px;
+  }
+}
+
 .sucesso-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  background: #E6F7F8;
+  color: #0A9AA8;
   font-size: 9px;
   letter-spacing: .22em;
   text-transform: uppercase;
@@ -271,25 +269,12 @@ const css = `
   margin-bottom: 28px;
   font-weight: 700;
 }
-.sucesso-pill-pendente {
-  background: #E0F2FE;
-  color: #0369A1;
-}
-.sucesso-pill-confirmado {
-  background: #DCFCE7;
-  color: #15803D;
-}
 .sucesso-pill-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
+  background: #0A9AA8;
   display: inline-block;
-}
-.sucesso-pill-dot-pendente {
-  background: #0284C7;
-}
-.sucesso-pill-dot-confirmado {
-  background: #22C55E;
 }
 
 .sucesso-h1-1 {
@@ -298,7 +283,7 @@ const css = `
   font-weight: 400;
   color: #040861;
   margin: 0 0 4px;
-  letter-spacing: 0;
+  letter-spacing: -.03em;
   line-height: .92;
 }
 .sucesso-h1-2 {
@@ -308,7 +293,7 @@ const css = `
   font-weight: 300;
   color: #0A9AA8;
   margin: 0 0 24px;
-  letter-spacing: 0;
+  letter-spacing: -.02em;
   line-height: .9;
 }
 
@@ -317,22 +302,7 @@ const css = `
   font-size: 14px;
   color: #334155;
   line-height: 1.6;
-  margin: 0 0 16px;
-}
-.sucesso-desc-secundario {
-  color: #64748B;
-  font-size: 13px;
-  margin-bottom: 28px;
-}
-.sucesso-timeout {
-  color: #B45309;
-  background: #FEF3C7;
-  border: 1px solid #FDE68A;
-  border-radius: 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  padding: 12px 14px;
-  margin: 0 0 22px;
+  margin: 0 0 28px;
 }
 
 .sucesso-cta-primary {
@@ -523,9 +493,6 @@ const css = `
   }
   .sucesso-desc {
     font-size: 15px;
-  }
-  .sucesso-desc-secundario {
-    font-size: 14px;
     margin-bottom: 36px;
   }
   .sucesso-cta-primary {
