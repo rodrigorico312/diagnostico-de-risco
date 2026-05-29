@@ -14,24 +14,52 @@ const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   WHATSAPP_MESSAGE,
 )}`;
 
-const services = [
-  "Abertura de empresa",
-  "Legalização de empresa",
-  "Fechamento de empresa",
-  "Contabilidade básica",
-  "Contabilidade tributária",
-  "Obrigações e impostos em dia",
-  "Organização financeira",
-  "Análise de caixa",
-  "Análise de DRE",
-  "Plano de negócios",
-  "Viabilidade de negócios",
-  "Mapeamento patrimonial",
-  "Representação em órgãos fiscalizadores",
-  "Contabilidade forense",
+const serviceGroups = [
+  {
+    id: "legalizacao",
+    title: "Legalização de empresas",
+    description: "Abertura, regularização e encerramento de empresas.",
+    services: [
+      "Abertura de empresa",
+      "Legalização de empresa",
+      "Fechamento de empresa",
+      "Representação em órgãos fiscalizadores",
+    ],
+  },
+  {
+    id: "contabilidade",
+    title: "Contabilidade e rotina fiscal",
+    description: "Impostos, obrigações e rotina contábil em dia.",
+    services: [
+      "Contabilidade básica",
+      "Contabilidade tributária",
+      "Obrigações e impostos em dia",
+    ],
+  },
+  {
+    id: "financeiro",
+    title: "Financeiro e gestão dos números",
+    description: "Organização financeira para acompanhar a empresa de perto.",
+    services: ["Organização financeira", "Análise de caixa", "Análise de DRE"],
+  },
+  {
+    id: "planejamento",
+    title: "Planejamento e viabilidade",
+    description: "Análise para entender se o negócio está fazendo sentido.",
+    services: [
+      "Plano de negócios",
+      "Viabilidade de negócios",
+      "Mapeamento patrimonial",
+    ],
+  },
+  {
+    id: "analise",
+    title: "Análise técnica",
+    description:
+      "Análise contábil mais técnica quando a empresa precisa de clareza.",
+    services: ["Contabilidade forense"],
+  },
 ];
-
-const SERVICE_PREVIEW_COUNT = 6;
 
 const authorityFirstParagraph =
   "Contador que gera resultado não é aquele que fala que tem milhares de clientes. E sim o que sabe mostrar resultado real.";
@@ -45,12 +73,17 @@ const authorityMoreParagraphs = [
 
 export default function App() {
   const [isAuthorityOpen, setIsAuthorityOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [openServiceGroups, setOpenServiceGroups] = useState<string[]>([]);
   const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
   const aboutSectionRef = useRef<HTMLElement | null>(null);
-  const visibleServices = isServicesOpen
-    ? services
-    : services.slice(0, SERVICE_PREVIEW_COUNT);
+
+  const toggleServiceGroup = (groupId: string) => {
+    setOpenServiceGroups((currentGroups) =>
+      currentGroups.includes(groupId)
+        ? currentGroups.filter((currentGroup) => currentGroup !== groupId)
+        : [...currentGroups, groupId],
+    );
+  };
 
   useEffect(() => {
     const updateFloatingButton = () => {
@@ -152,23 +185,51 @@ export default function App() {
             manter a empresa regular, organizada e com informação clara para
             decidir.
           </p>
-          <ul className="service-list" id="servicos-lista">
-            {visibleServices.map((service) => (
-              <li key={service}>{service}</li>
-            ))}
-          </ul>
-          <button
-            className="read-more"
-            type="button"
-            aria-expanded={isServicesOpen}
-            aria-controls="servicos-lista"
-            onClick={() => setIsServicesOpen((open) => !open)}
-          >
-            {isServicesOpen ? "Ver menos" : "Ver mais"}
-          </button>
+          <div className="service-accordion">
+            {serviceGroups.map((group) => {
+              const isOpen = openServiceGroups.includes(group.id);
+              const contentId = `servicos-${group.id}`;
+
+              return (
+                <div className="service-group" key={group.id}>
+                  <button
+                    className="service-group__button"
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={contentId}
+                    onClick={() => toggleServiceGroup(group.id)}
+                  >
+                    <span>
+                      <span className="service-group__title">
+                        {group.title}
+                      </span>
+                      <span className="service-group__description">
+                        {group.description}
+                      </span>
+                    </span>
+                    <span
+                      className="service-group__chevron"
+                      aria-hidden="true"
+                    />
+                  </button>
+
+                  {isOpen && (
+                    <ul
+                      className="service-list service-list--inside"
+                      id={contentId}
+                    >
+                      {group.services.map((service) => (
+                        <li key={service}>{service}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
+          </div>
           <p className="plain-note">
-            A empresa segue rodando com a parte contábil, fiscal e financeira
-            acompanhada de perto.
+            O foco é simples: imposto certo, obrigação em dia, documento
+            organizado e financeiro acompanhado.
           </p>
         </div>
       </section>
