@@ -198,11 +198,31 @@ p {
 }
 
 .service-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
   padding: 17px 0;
   border-bottom: 1px solid var(--line);
   color: var(--text);
   font-size: 1.02rem;
   font-weight: 650;
+}
+
+.service-list li::before {
+  content: "✓";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 999px;
+  background: rgba(22, 131, 63, 0.1);
+  color: var(--green);
+  flex: 0 0 22px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .cta {
