@@ -59,9 +59,6 @@ export default function App() {
               que precisam manter imposto, obrigação, documento e financeiro em
               ordem.
             </p>
-            <p className="plain-note">
-              Sem palestra. Sem promessa. Sem complicar o básico.
-            </p>
           </div>
         </div>
       </section>
