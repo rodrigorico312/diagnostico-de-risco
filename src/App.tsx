@@ -31,6 +31,8 @@ const services = [
   "Contabilidade forense",
 ];
 
+const SERVICE_PREVIEW_COUNT = 6;
+
 const authorityFirstParagraph =
   "Contador que gera resultado não é aquele que fala que tem milhares de clientes. E sim o que sabe mostrar resultado real.";
 
@@ -43,8 +45,12 @@ const authorityMoreParagraphs = [
 
 export default function App() {
   const [isAuthorityOpen, setIsAuthorityOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
   const aboutSectionRef = useRef<HTMLElement | null>(null);
+  const visibleServices = isServicesOpen
+    ? services
+    : services.slice(0, SERVICE_PREVIEW_COUNT);
 
   useEffect(() => {
     const updateFloatingButton = () => {
@@ -146,11 +152,20 @@ export default function App() {
             manter a empresa regular, organizada e com informação clara para
             decidir.
           </p>
-          <ul className="service-list">
-            {services.map((service) => (
+          <ul className="service-list" id="servicos-lista">
+            {visibleServices.map((service) => (
               <li key={service}>{service}</li>
             ))}
           </ul>
+          <button
+            className="read-more"
+            type="button"
+            aria-expanded={isServicesOpen}
+            aria-controls="servicos-lista"
+            onClick={() => setIsServicesOpen((open) => !open)}
+          >
+            {isServicesOpen ? "Ver menos" : "Ver mais"}
+          </button>
           <p className="plain-note">
             A empresa segue rodando com a parte contábil, fiscal e financeira
             acompanhada de perto.
