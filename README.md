@@ -22,4 +22,12 @@ const WHATSAPP_MESSAGE =
   "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
 ```
 
-A foto pessoal deve ser colocada em `public/foto-perfil.jpg`.
+A imagem usada na apresentação fica em `public/rodrigo-coelho.png`.
+
+Atualize em `src/App.tsx`:
+
+```ts
+const INSTAGRAM_URL = "https://www.instagram.com/seu_instagram";
+const CNPJ = "[CNPJ]";
+const ADDRESS = "[ENDEREÇO]";
+```
