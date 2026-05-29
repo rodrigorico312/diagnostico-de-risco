@@ -35,7 +35,7 @@ const authorityFirstParagraph =
   "Contador que gera resultado não é aquele que fala que tem milhares de clientes. E sim o que sabe mostrar resultado real.";
 
 const authorityMoreParagraphs = [
-  "Tenho mais de 5 anos de experiência na rotina real de escritório contábil. Já estive na trincheira fazendo imposto, correndo contra prazos, obrigações, documentos atrasados, clientes precisando de respostas, financeiros misturados e empresas mal acompanhadas.",
+  "Tenho mais de 5 anos de experiência na rotina real de escritório contábil. Foi trabalhando na trincheira, com imposto, prazos, obrigações, documentos atrasados, clientes precisando de respostas e financeiros misturados, que percebi como muitas empresas acabam sendo mal acompanhadas.",
   "Foi nesse dia a dia que eu entendi que muita empresa acha que está sendo acompanhada de uma forma profissional, quando na prática só recebe guia e aviso de prazo.",
   "Eu decidi sair desse formato porque não queria fazer contabilidade como se cuidar de empresa fosse só emitir guia de imposto e mandar pro cliente.",
   "Hoje busco atender empresas que querem algo mais direto: imposto certo, obrigação em dia, documento organizado e financeiro acompanhado de verdade. Com métricas, resultados e muita organização.",
