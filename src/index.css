@@ -242,7 +242,7 @@ p {
 }
 
 .service-list li::before {
-  content: "✓";
+  content: "\2713";
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -288,6 +288,11 @@ p {
   gap: 6px;
 }
 
+.footer__link {
+  color: #ffffff;
+  text-underline-offset: 3px;
+}
+
 .footer__social {
   display: flex;
   gap: 10px;
@@ -303,6 +308,18 @@ p {
   border-radius: 8px;
   color: #ffffff;
   text-decoration: none;
+}
+
+.icon-link--whatsapp {
+  border-color: transparent;
+  background: #16833f;
+}
+
+.icon-link--instagram {
+  border-color: transparent;
+  background:
+    radial-gradient(circle at 30% 107%, #fdf497 0 12%, transparent 13%),
+    linear-gradient(135deg, #f58529, #dd2a7b 45%, #8134af 70%, #515bd4);
 }
 
 .icon-link:hover,
@@ -323,6 +340,45 @@ p {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.8;
+}
+
+.floating-whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: #6f9f8c;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(21, 24, 29, 0.18);
+}
+
+.floating-whatsapp:hover,
+.floating-whatsapp:focus-visible {
+  background: #16833f;
+  outline: none;
+}
+
+.floating-whatsapp:focus-visible {
+  box-shadow:
+    0 10px 24px rgba(21, 24, 29, 0.18),
+    0 0 0 4px rgba(22, 131, 63, 0.22);
+}
+
+.floating-whatsapp svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
 }
 
 @media (min-width: 560px) {

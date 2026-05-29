@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const WHATSAPP_NUMBER = "5593992191980";
+const WHATSAPP_NUMBER = "5593992101980";
 const WHATSAPP_MESSAGE =
   "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
-const INSTAGRAM_URL = "https://www.instagram.com/seu_instagram";
+const INSTAGRAM_URL = "https://www.instagram.com/rodrigospcoelho";
+const EMAIL = "rodrigorico312@gmail.com";
 const CNPJ = "[CNPJ]";
 const ADDRESS = "[ENDEREÇO]";
 
@@ -40,6 +41,26 @@ const authorityMoreParagraphs = [
 
 export default function App() {
   const [isAuthorityOpen, setIsAuthorityOpen] = useState(false);
+  const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
+  const aboutSectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const updateFloatingButton = () => {
+      const section = aboutSectionRef.current;
+      if (!section) return;
+
+      setShowFloatingWhatsapp(section.getBoundingClientRect().bottom < 0);
+    };
+
+    updateFloatingButton();
+    window.addEventListener("scroll", updateFloatingButton, { passive: true });
+    window.addEventListener("resize", updateFloatingButton);
+
+    return () => {
+      window.removeEventListener("scroll", updateFloatingButton);
+      window.removeEventListener("resize", updateFloatingButton);
+    };
+  }, []);
 
   return (
     <main className="site">
@@ -66,7 +87,11 @@ export default function App() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="apresentacao-title">
+      <section
+        className="section"
+        aria-labelledby="apresentacao-title"
+        ref={aboutSectionRef}
+      >
         <div className="container about">
           <div className="about__image-wrap">
             <img
@@ -180,12 +205,18 @@ export default function App() {
         <div className="container footer__inner">
           <div className="footer__info">
             <p>Rodrigo Coelho — Contador CRC/PA 024335</p>
+            <p>
+              Email:{" "}
+              <a className="footer__link" href={`mailto:${EMAIL}`}>
+                {EMAIL}
+              </a>
+            </p>
             <p>CNPJ: {CNPJ}</p>
             <p>Endereço: {ADDRESS}</p>
           </div>
           <nav className="footer__social" aria-label="Canais de contato">
             <a
-              className="icon-link"
+              className="icon-link icon-link--whatsapp"
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
@@ -197,7 +228,7 @@ export default function App() {
               </svg>
             </a>
             <a
-              className="icon-link"
+              className="icon-link icon-link--instagram"
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noreferrer"
@@ -212,6 +243,21 @@ export default function App() {
           </nav>
         </div>
       </footer>
+
+      {showFloatingWhatsapp && (
+        <a
+          className="floating-whatsapp"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Falar com Rodrigo Coelho no WhatsApp"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" />
+            <path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" />
+          </svg>
+        </a>
+      )}
     </main>
   );
 }
