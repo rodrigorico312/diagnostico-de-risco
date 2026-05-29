@@ -5,8 +5,10 @@ const WHATSAPP_MESSAGE =
   "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
 const INSTAGRAM_URL = "https://www.instagram.com/rodrigospcoelho";
 const EMAIL = "rodrigorico312@gmail.com";
-const CNPJ = "[CNPJ]";
-const ADDRESS = "[ENDEREÇO]";
+const COMPANY_NAME = "O GESTOR DO LUCRO CONSULTORIA LTDA";
+const CNPJ = "62.560.654/0001-27";
+const ADDRESS =
+  "Av. Plácido de Castro, 1505, Aparecida, Santarém-PA, CEP 68.040-090";
 
 const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   WHATSAPP_MESSAGE,
@@ -192,11 +194,12 @@ export default function App() {
       <section className="section section--local" aria-labelledby="local-title">
         <div className="container">
           <p className="eyebrow">Atendimento contábil</p>
-          <h2 id="local-title">Atendimento a partir de Santarém-PA</h2>
+          <h2 id="local-title">
+            Atendimento presencial em Santarém e em cidades vizinhas
+          </h2>
           <p className="section__intro">
-            Rodrigo Coelho é contador em Santarém-PA. O atendimento pode
-            acontecer pelo WhatsApp para empresas de Santarém e de outras
-            cidades.
+            O atendimento pode começar pelo WhatsApp e, quando necessário,
+            acontecer presencialmente em Santarém e em cidades vizinhas.
           </p>
         </div>
       </section>
@@ -204,6 +207,7 @@ export default function App() {
       <footer className="footer">
         <div className="container footer__inner">
           <div className="footer__info">
+            <p>{COMPANY_NAME}</p>
             <p>Rodrigo Coelho — Contador CRC/PA 024335</p>
             <p>
               Email:{" "}

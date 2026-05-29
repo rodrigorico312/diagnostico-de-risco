@@ -27,7 +27,10 @@ A imagem usada na apresentação fica em `public/rodrigo-coelho.png`.
 Atualize em `src/App.tsx`:
 
 ```ts
-const INSTAGRAM_URL = "https://www.instagram.com/seu_instagram";
-const CNPJ = "[CNPJ]";
-const ADDRESS = "[ENDEREÇO]";
+const INSTAGRAM_URL = "https://www.instagram.com/rodrigospcoelho";
+const EMAIL = "rodrigorico312@gmail.com";
+const COMPANY_NAME = "O GESTOR DO LUCRO CONSULTORIA LTDA";
+const CNPJ = "62.560.654/0001-27";
+const ADDRESS =
+  "Av. Plácido de Castro, 1505, Aparecida, Santarém-PA, CEP 68.040-090";
 ```
