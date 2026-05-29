@@ -151,6 +151,10 @@ export default function App() {
               <li key={service}>{service}</li>
             ))}
           </ul>
+          <p className="plain-note">
+            A empresa segue rodando com a parte contábil, fiscal e financeira
+            acompanhada de perto.
+          </p>
         </div>
       </section>
 
