@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const WHATSAPP_NUMBER = "5593992191980";
 const WHATSAPP_MESSAGE =
   "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
@@ -26,7 +28,19 @@ const services = [
   "Contabilidade forense",
 ];
 
+const authorityFirstParagraph =
+  "Contador que gera resultado não é aquele que fala que tem anos de experiência. E sim o que sabe mostrar resultado real.";
+
+const authorityMoreParagraphs = [
+  "Tenho mais de 5 anos de experiência na rotina real de escritório contábil. Já estive na trincheira fazendo imposto, correndo contra prazos, obrigações, documentos atrasados, clientes precisando de respostas, financeiros misturados e empresas mal acompanhadas.",
+  "Foi nesse dia a dia que eu entendi que muita empresa acha que está sendo acompanhada de uma forma profissional, quando na prática só recebe guia e aviso de prazo.",
+  "Eu decidi sair desse formato porque não queria fazer contabilidade como se cuidar de empresa fosse só emitir guia de imposto e mandar pro cliente.",
+  "Hoje busco atender empresas que querem algo mais direto: imposto certo, obrigação em dia, documento organizado e financeiro acompanhado de verdade. Com métricas, resultados e muita organização.",
+];
+
 export default function App() {
+  const [isAuthorityOpen, setIsAuthorityOpen] = useState(false);
+
   return (
     <main className="site">
       <section className="hero" aria-labelledby="hero-title">
@@ -71,6 +85,28 @@ export default function App() {
               ordem.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="autoridade-title">
+        <div className="container authority">
+          <h2 id="autoridade-title">Não é só ter contador</h2>
+          <div className="authority__text" id="autoridade-texto">
+            <p>{authorityFirstParagraph}</p>
+            {isAuthorityOpen &&
+              authorityMoreParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+          </div>
+          <button
+            className="read-more"
+            type="button"
+            aria-expanded={isAuthorityOpen}
+            aria-controls="autoridade-texto"
+            onClick={() => setIsAuthorityOpen((open) => !open)}
+          >
+            {isAuthorityOpen ? "Ver menos" : "Ver mais"}
+          </button>
         </div>
       </section>
 

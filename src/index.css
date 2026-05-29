@@ -182,6 +182,39 @@ p {
   font-weight: 750;
 }
 
+.authority {
+  max-width: 760px;
+}
+
+.authority__text {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.read-more {
+  margin-top: 22px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.read-more:hover,
+.read-more:focus-visible {
+  border-color: var(--green);
+  color: var(--green-dark);
+  outline: none;
+}
+
+.read-more:focus-visible {
+  box-shadow: 0 0 0 3px rgba(22, 131, 63, 0.14);
+}
+
 .plain-note {
   margin-top: 20px;
   color: var(--text);
