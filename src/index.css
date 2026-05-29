@@ -259,8 +259,7 @@ p {
   box-shadow: inset 0 0 0 3px rgba(22, 131, 63, 0.14);
 }
 
-.service-group__title,
-.service-group__description {
+.service-group__title {
   display: block;
 }
 
@@ -269,13 +268,6 @@ p {
   font-size: 1.05rem;
   font-weight: 750;
   line-height: 1.35;
-}
-
-.service-group__description {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.55;
 }
 
 .service-group__chevron {

@@ -18,7 +18,6 @@ const serviceGroups = [
   {
     id: "legalizacao",
     title: "Legalização de empresas",
-    description: "Abertura, regularização e encerramento de empresas.",
     services: [
       "Abertura de empresa",
       "Legalização de empresa",
@@ -29,7 +28,6 @@ const serviceGroups = [
   {
     id: "contabilidade",
     title: "Contabilidade e rotina fiscal",
-    description: "Impostos, obrigações e rotina contábil em dia.",
     services: [
       "Contabilidade básica",
       "Contabilidade tributária",
@@ -39,13 +37,11 @@ const serviceGroups = [
   {
     id: "financeiro",
     title: "Financeiro e gestão dos números",
-    description: "Organização financeira para acompanhar a empresa de perto.",
     services: ["Organização financeira", "Análise de caixa", "Análise de DRE"],
   },
   {
     id: "planejamento",
     title: "Planejamento e viabilidade",
-    description: "Análise para entender se o negócio está fazendo sentido.",
     services: [
       "Plano de negócios",
       "Viabilidade de negócios",
@@ -55,8 +51,6 @@ const serviceGroups = [
   {
     id: "analise",
     title: "Análise técnica",
-    description:
-      "Análise contábil mais técnica quando a empresa precisa de clareza.",
     services: ["Contabilidade forense"],
   },
 ];
@@ -202,9 +196,6 @@ export default function App() {
                     <span>
                       <span className="service-group__title">
                         {group.title}
-                      </span>
-                      <span className="service-group__description">
-                        {group.description}
                       </span>
                     </span>
                     <span
