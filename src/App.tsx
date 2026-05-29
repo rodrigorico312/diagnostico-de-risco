@@ -32,7 +32,7 @@ const services = [
 ];
 
 const authorityFirstParagraph =
-  "Contador que gera resultado não é aquele que fala que tem anos de experiência. E sim o que sabe mostrar resultado real.";
+  "Contador que gera resultado não é aquele que fala que tem milhares de clientes. E sim o que sabe mostrar resultado real.";
 
 const authorityMoreParagraphs = [
   "Tenho mais de 5 anos de experiência na rotina real de escritório contábil. Já estive na trincheira fazendo imposto, correndo contra prazos, obrigações, documentos atrasados, clientes precisando de respostas, financeiros misturados e empresas mal acompanhadas.",
