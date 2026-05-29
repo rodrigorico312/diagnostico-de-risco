@@ -10,12 +10,20 @@ const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
 )}`;
 
 const services = [
-  "Imposto certo",
-  "Obrigações em dia",
-  "Documentos organizados",
-  "Caixa acompanhado",
-  "Separação entre pessoa física e empresa",
-  "Resposta direta quando precisa decidir",
+  "Abertura de empresa",
+  "Legalização de empresa",
+  "Fechamento de empresa",
+  "Contabilidade básica",
+  "Contabilidade tributária",
+  "Obrigações e impostos em dia",
+  "Organização financeira",
+  "Análise de caixa",
+  "Análise de DRE",
+  "Plano de negócios",
+  "Viabilidade de negócios",
+  "Mapeamento patrimonial",
+  "Representação em órgãos fiscalizadores",
+  "Contabilidade forense",
 ];
 
 export default function App() {
@@ -69,12 +77,21 @@ export default function App() {
       <section className="section" aria-labelledby="servicos-title">
         <div className="container">
           <p className="eyebrow">Contabilidade e financeiro</p>
-          <h2 id="servicos-title">O que eu faço</h2>
+          <h2 id="servicos-title">O que eu acompanho</h2>
+          <p className="section__intro">
+            Da abertura da empresa à rotina fiscal e financeira, o foco é
+            manter a empresa regular, organizada e com informação clara para
+            decidir.
+          </p>
           <ul className="service-list">
             {services.map((service) => (
               <li key={service}>{service}</li>
             ))}
           </ul>
+          <p className="plain-note">
+            O foco é simples: imposto certo, obrigação em dia, documento
+            organizado e financeiro acompanhado.
+          </p>
         </div>
       </section>
 
