@@ -151,10 +151,6 @@ export default function App() {
               <li key={service}>{service}</li>
             ))}
           </ul>
-          <p className="plain-note">
-            O foco é simples: imposto certo, obrigação em dia, documento
-            organizado e financeiro acompanhado.
-          </p>
         </div>
       </section>
 
