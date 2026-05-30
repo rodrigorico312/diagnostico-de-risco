@@ -219,8 +219,8 @@ export default function App() {
             })}
           </div>
           <p className="plain-note">
-            O foco é simples: imposto certo, obrigação em dia, documento
-            organizado e financeiro acompanhado.
+            O foco é manter os impostos certos, as obrigações em dia,
+            documentos organizados e o financeiro bem estruturado.
           </p>
         </div>
       </section>
