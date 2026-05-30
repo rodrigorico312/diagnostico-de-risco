@@ -117,7 +117,7 @@ export default function App() {
             rel="noreferrer"
             aria-label="Falar com Rodrigo Coelho, contador em Santarém, no WhatsApp"
           >
-            Falar com o contador no WhatsApp
+            Conversar sobre minha empresa
           </a>
         </div>
       </section>
@@ -253,7 +253,7 @@ export default function App() {
             rel="noreferrer"
             aria-label="Falar com o contador pelo WhatsApp"
           >
-            Falar com o contador no WhatsApp
+            Conversar sobre minha empresa
           </a>
         </div>
       </section>
