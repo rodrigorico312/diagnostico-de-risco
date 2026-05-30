@@ -19,7 +19,7 @@ O link de WhatsApp fica em `src/App.tsx`:
 ```ts
 const WHATSAPP_NUMBER = "5593992101980";
 const WHATSAPP_MESSAGE =
-  "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
+  "Olá, vim pelo site e preciso falar com um contador para minha empresa";
 ```
 
 A imagem usada na apresentação fica em `public/rodrigo-coelho.png`.

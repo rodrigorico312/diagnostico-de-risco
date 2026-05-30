@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const WHATSAPP_NUMBER = "5593992101980";
 const WHATSAPP_MESSAGE =
-  "Olá, vim pelo site e preciso falar com um contador para minha empresa.";
+  "Olá, vim pelo site e preciso falar com um contador para minha empresa";
 const INSTAGRAM_URL = "https://www.instagram.com/rodrigospcoelho";
 const EMAIL = "rodrigorico312@gmail.com";
 const COMPANY_NAME = "O GESTOR DO LUCRO CONSULTORIA LTDA";
