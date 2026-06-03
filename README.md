@@ -1,7 +1,7 @@
 # Rodrigo Coelho — Contador em Santarém
 
 Landing page minimalista para Rodrigo Coelho, contador CRC/PA 024335 em
-Santarém-PA.
+Santarém-PA, com atendimento para empresas em todo o Pará.
 
 ## Rodar localmente
 

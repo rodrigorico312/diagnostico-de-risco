@@ -105,9 +105,25 @@ p {
 }
 
 .hero__local {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
   margin-top: 24px;
   color: #313943;
   font-weight: 650;
+}
+
+.para-flag {
+  width: 42px;
+  height: 28px;
+  border: 1px solid rgba(21, 24, 29, 0.16);
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.para-flag__star {
+  fill: #164a9b;
 }
 
 .button {

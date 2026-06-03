@@ -65,6 +65,25 @@ const authorityMoreParagraphs = [
   "Hoje busco atender empresas que querem algo mais direto: imposto certo, obrigação em dia, documento organizado e financeiro acompanhado de verdade. Com métricas, resultados e muita organização.",
 ];
 
+function ParaFlag() {
+  return (
+    <svg
+      className="para-flag"
+      role="img"
+      aria-label="Bandeira do Pará"
+      viewBox="0 0 48 32"
+    >
+      <title>Bandeira do Pará</title>
+      <rect width="48" height="32" fill="#c8102e" />
+      <polygon points="-8 0 4 0 56 32 44 32" fill="#ffffff" />
+      <polygon
+        className="para-flag__star"
+        points="24 11.5 25.3 14.2 28.2 14.6 26.1 16.7 26.6 19.6 24 18.2 21.4 19.6 21.9 16.7 19.8 14.6 22.7 14.2"
+      />
+    </svg>
+  );
+}
+
 export default function App() {
   const [isAuthorityOpen, setIsAuthorityOpen] = useState(false);
   const [openServiceGroups, setOpenServiceGroups] = useState<string[]>([]);
@@ -108,7 +127,8 @@ export default function App() {
             organizado.
           </p>
           <p className="hero__local">
-            Atendimento para empresas de Santarém-PA e de outras cidades.
+            <ParaFlag />
+            <span>Atendimento para empresas em todo o Pará.</span>
           </p>
           <a
             className="button"
@@ -260,13 +280,12 @@ export default function App() {
 
       <section className="section section--local" aria-labelledby="local-title">
         <div className="container">
-          <p className="eyebrow">Atendimento contábil</p>
-          <h2 id="local-title">
-            Atendimento presencial em Santarém e em cidades vizinhas
-          </h2>
+          <p className="eyebrow">Atendimento no Pará</p>
+          <h2 id="local-title">Atendimento em Santarém e em todo o Pará</h2>
           <p className="section__intro">
-            O atendimento pode começar pelo WhatsApp e, quando necessário,
-            acontecer presencialmente em Santarém e em cidades vizinhas.
+            Sou de Santarém-PA. Atendo presencialmente em Santarém e cidades
+            vizinhas, e também empresas de outras cidades do Pará pelo
+            WhatsApp.
           </p>
         </div>
       </section>
