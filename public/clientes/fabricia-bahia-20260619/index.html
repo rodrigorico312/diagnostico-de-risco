@@ -44,13 +44,60 @@
       background: linear-gradient(135deg, #10263f, #1c6ea4);
     }
 
-    .brand {
-      font-size: 13px;
-      letter-spacing: .14em;
-      font-weight: 700;
+    .report-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 26px;
+    }
+
+    .logo-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border: 2px solid rgba(255,255,255,.86);
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      background: rgba(255,255,255,.1);
+    }
+
+    .logo-name {
+      font-size: 15px;
+      letter-spacing: .12em;
+      font-weight: 800;
       text-transform: uppercase;
-      opacity: .92;
-      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .logo-sub {
+      margin-top: 3px;
+      font-size: 13px;
+      opacity: .82;
+    }
+
+    .responsible {
+      text-align: right;
+      font-size: 13px;
+      line-height: 1.35;
+      opacity: .94;
+    }
+
+    .responsible strong,
+    .responsible span {
+      display: block;
     }
 
     h1 {
@@ -289,6 +336,13 @@
 
     @media (max-width: 860px) {
       .meta, .grid { grid-template-columns: 1fr; }
+      .report-top {
+        display: block;
+      }
+      .responsible {
+        margin-top: 16px;
+        text-align: left;
+      }
       header, main, footer { padding-left: 20px; padding-right: 20px; }
       table { display: block; overflow-x: auto; }
     }
@@ -297,7 +351,19 @@
 <body>
   <div class="page">
     <header>
-      <div class="brand">NACIONAL CONTABILIDADE</div>
+      <div class="report-top">
+        <div class="logo-block" aria-label="Nacional Contabilidade">
+          <div class="logo-symbol">NC</div>
+          <div>
+            <div class="logo-name">Nacional Contabilidade</div>
+            <div class="logo-sub">Relatório fiscal e regularização</div>
+          </div>
+        </div>
+        <div class="responsible">
+          <strong>Rodrigo Coelho</strong>
+          <span>Contador CRC/PA 024335</span>
+        </div>
+      </div>
       <h1>Diagnóstico fiscal - Fabrícia Santos Reis</h1>
       <p class="subtitle">Entenda, em linguagem simples, o que aconteceu com o CNPJ, quais débitos já existem, quais pendências aparecem nos sistemas e qual será a estratégia: baixar este CNPJ, abrir um novo MEI e organizar os débitos que permanecerem.</p>
       <div class="meta">
@@ -528,7 +594,8 @@
     </main>
 
     <footer>
-      <strong>NACIONAL CONTABILIDADE</strong><br>
+      <strong>Nacional Contabilidade</strong><br>
+      Rodrigo Coelho - Contador CRC/PA 024335<br>
       Diagnóstico elaborado com base nos documentos disponibilizados e consultas de 19/06/2026. Os valores podem mudar com atualização de juros, multa, processamento de declarações, pagamento, parcelamento ou novos lançamentos.
     </footer>
   </div>
