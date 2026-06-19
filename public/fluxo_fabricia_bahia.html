@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fluxo - Fabrícia / Bahia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 32px;
+      color: #1f2933;
+      background: #ffffff;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 32px;
+      border-bottom: 1px solid #d9e2ec;
+      padding-bottom: 8px;
+    }
+    .note {
+      margin: 0 0 24px;
+      color: #52606d;
+      font-size: 14px;
+    }
+    .diagram {
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 18px;
+      margin-top: 12px;
+      overflow-x: auto;
+      background: #fbfcfd;
+    }
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+    @media print {
+      body {
+        margin: 0;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      h2 {
+        font-size: 15px;
+        margin-top: 18px;
+      }
+      .note {
+        font-size: 12px;
+        margin-bottom: 12px;
+      }
+      .diagram {
+        page-break-inside: avoid;
+        padding: 10px;
+        margin-top: 8px;
+      }
+      .mermaid svg {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    }
+  </style>
+  <script>
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod
+          ? n.callMethod.apply(n, arguments)
+          : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = true;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(
+      window,
+      document,
+      "script",
+      "https://connect.facebook.net/en_US/fbevents.js",
+    );
+    fbq("init", "1662572128063141");
+    fbq("track", "PageView");
+  </script>
+</head>
+<body>
+  <noscript>
+    <img
+      height="1"
+      width="1"
+      style="display: none"
+      alt=""
+      src="https://www.facebook.com/tr?id=1662572128063141&ev=PageView&noscript=1"
+    />
+  </noscript>
+
+  <h1>Fluxo Cronológico - Caso Fabrícia / Bahia</h1>
+  <p class="note">Diagnóstico montado com base nos documentos da Receita Federal, SEFAZ-BA e consulta de NF-e por destinatário.</p>
+
+  <h2>Linha do Tempo</h2>
+  <div class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    A["17/10/2014&lt;br/&gt;Abertura do MEI/CNPJ&lt;br/&gt;Enquadrada no Simples Nacional e SIMEI"] --> B["Até 2023&lt;br/&gt;DAS/obrigações ficaram em atraso"]
+    B --> C["31/12/2023&lt;br/&gt;Exclusão do Simples Nacional e do SIMEI"]
+    C --> D["01/01/2024&lt;br/&gt;Empresa passa a ser tratada como regime normal"]
+    D --> E["Durante 2024&lt;br/&gt;Nascem obrigações federais:&lt;br/&gt;DCTFWeb, ECF, PIS e COFINS"]
+    D --> F["Durante 2024&lt;br/&gt;Nasce obrigação estadual BA:&lt;br/&gt;EFD ICMS/IPI mensal"]
+    E --> G["14/06/2024&lt;br/&gt;Receita intima por omissão:&lt;br/&gt;DASN-SIMEI 2023 e DCTFWeb abr/2024"]
+    F --> H["03/06/2025&lt;br/&gt;SEFAZ-BA intima por omissão EFD:&lt;br/&gt;jan a dez/2024"]
+    H --> I["21/10/2025&lt;br/&gt;Alerta de alteração cadastral&lt;br/&gt;por omissão EFD"]
+    I --> J["29/10/2025&lt;br/&gt;IE BA torna-se INAPTA&lt;br/&gt;Art. 27, XIX, a"]
+    E --> K["05/03/2026&lt;br/&gt;Receita lança multas MAED&lt;br/&gt;11 x R$ 500"]
+    K --> L["20/03/2026&lt;br/&gt;Novo Termo de Exclusão do Simples&lt;br/&gt;por débitos"]
+    L --> M["01/01/2027&lt;br/&gt;Data prevista da nova exclusão&lt;br/&gt;se não regularizar"]
+    </pre>
+  </div>
+
+  <h2>Fluxo de Regularização</h2>
+  <div class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    A["Diagnóstico atual"] --> B["SEFAZ-BA&lt;br/&gt;Entregar EFD ICMS/IPI 2024"]
+    B --> C["Aguardar rotina automática&lt;br/&gt;para reativar IE"]
+    A --> D["Receita Federal&lt;br/&gt;Entregar DCTFWeb jan-nov/2024"]
+    A --> E["Receita Federal&lt;br/&gt;Entregar ECF ano-calendário 2024"]
+    A --> F["Simples/MEI&lt;br/&gt;Regularizar parcelamento com 6 parcelas em atraso"]
+    D --> G["Pagar ou parcelar débitos federais&lt;br/&gt;PIS/COFINS + MAED"]
+    E --> G
+    F --> G
+    G --> H["Conferir situação fiscal"]
+    H --> I["Verificar se Termo de Exclusão 2026&lt;br/&gt;fica sem efeito"]
+    C --> J["IE reativada"]
+    I --> K["Empresa regularizada para continuar no Simples em 2027"]
+    J --> K
+    </pre>
+  </div>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, securityLevel: "loose" });
+  </script>
+</body>
+</html>
