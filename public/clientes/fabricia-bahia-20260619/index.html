@@ -55,37 +55,21 @@
     .logo-block {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      color: white;
+      justify-content: center;
+      max-width: min(330px, 100%);
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(255,255,255,.46);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, .16);
       text-decoration: none;
     }
 
-    .logo-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 52px;
-      height: 52px;
-      border: 2px solid rgba(255,255,255,.86);
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: .04em;
-      background: rgba(255,255,255,.1);
-    }
-
-    .logo-name {
-      font-size: 15px;
-      letter-spacing: .12em;
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-
-    .logo-sub {
-      margin-top: 3px;
-      font-size: 13px;
-      opacity: .82;
+    .logo-image {
+      display: block;
+      width: 280px;
+      max-width: 100%;
+      height: auto;
     }
 
     .responsible {
@@ -346,6 +330,18 @@
       header, main, footer { padding-left: 20px; padding-right: 20px; }
       table { display: block; overflow-x: auto; }
     }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .page {
+        box-shadow: none;
+      }
+      .actions {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -353,11 +349,7 @@
     <header>
       <div class="report-top">
         <div class="logo-block" aria-label="Nacional Contabilidade">
-          <div class="logo-symbol">NC</div>
-          <div>
-            <div class="logo-name">Nacional Contabilidade</div>
-            <div class="logo-sub">Relatório fiscal e regularização</div>
-          </div>
+          <img class="logo-image" src="/nacional-contabilidade-logo.png" alt="Nacional Contabilidade">
         </div>
         <div class="responsible">
           <strong>Rodrigo Coelho</strong>
