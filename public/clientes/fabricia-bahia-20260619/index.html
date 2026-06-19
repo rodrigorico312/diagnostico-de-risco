@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagnóstico Fiscal - Fabrícia Santos Reis</title>
+  <style>
+    :root {
+      --navy: #16324f;
+      --blue: #1c6ea4;
+      --green: #1f8a4c;
+      --amber: #9a6700;
+      --red: #b42318;
+      --ink: #1f2937;
+      --muted: #5b6472;
+      --line: #d9e2ec;
+      --soft: #f5f8fb;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      background: #eef3f7;
+    }
+
+    a { color: var(--blue); }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: var(--paper);
+      min-height: 100vh;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+    }
+
+    header {
+      padding: 30px 34px 26px;
+      color: white;
+      background: linear-gradient(135deg, #10263f, #1c6ea4);
+    }
+
+    .brand {
+      font-size: 13px;
+      letter-spacing: .14em;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: .92;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      font-size: 17px;
+      opacity: .95;
+      margin: 0;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .meta div {
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.09);
+    }
+
+    .meta strong {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      opacity: .8;
+    }
+
+    main { padding: 28px 34px 40px; }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 7px;
+      background: var(--navy);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      background: #eaf2f8;
+      color: var(--navy);
+      border: 1px solid #cbdbea;
+    }
+
+    section {
+      margin: 0 0 28px;
+      padding: 0 0 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-child { border-bottom: 0; }
+
+    h2 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      color: #27364a;
+      font-size: 18px;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .lead {
+      font-size: 18px;
+      color: #223044;
+    }
+
+    .callout {
+      border-left: 5px solid var(--blue);
+      background: #eef7fd;
+      padding: 16px 18px;
+      border-radius: 8px;
+      margin: 14px 0;
+    }
+
+    .callout.warning {
+      border-left-color: var(--amber);
+      background: #fff8e6;
+    }
+
+    .callout.danger {
+      border-left-color: var(--red);
+      background: #fff1f0;
+    }
+
+    .callout.ok {
+      border-left-color: var(--green);
+      background: #edf9f1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .card strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #eaf2f8;
+      color: var(--navy);
+      margin: 0 6px 6px 0;
+    }
+
+    .tag.red { background: #fde8e6; color: var(--red); }
+    .tag.amber { background: #fff3cf; color: #7a4a00; }
+    .tag.green { background: #e4f7eb; color: #166534; }
+
+    .timeline {
+      position: relative;
+      margin-top: 16px;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: #cdd9e5;
+    }
+
+    .event {
+      position: relative;
+      margin: 0 0 18px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px #e8f3fb;
+    }
+
+    .event time {
+      display: block;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 11px;
+    }
+
+    th {
+      background: #eaf2f8;
+      color: var(--navy);
+    }
+
+    .amount {
+      font-weight: 800;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .muted { color: var(--muted); }
+
+    ol, ul { padding-left: 21px; }
+    li { margin-bottom: 8px; }
+
+    .sources li { word-break: break-word; }
+
+    footer {
+      padding: 22px 34px 34px;
+      color: #526071;
+      font-size: 13px;
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 860px) {
+      .meta, .grid { grid-template-columns: 1fr; }
+      header, main, footer { padding-left: 20px; padding-right: 20px; }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">NACIONAL CONTABILIDADE</div>
+      <h1>Diagnóstico fiscal - Fabrícia Santos Reis</h1>
+      <p class="subtitle">Entenda, em linguagem simples, o que aconteceu com o CNPJ, quais débitos já existem, quais pendências aparecem nos sistemas e qual será a estratégia: baixar este CNPJ, abrir um novo MEI e organizar os débitos que permanecerem.</p>
+      <div class="meta">
+        <div><strong>Cliente</strong>21.250.159 Fabrícia Santos Reis</div>
+        <div><strong>CNPJ</strong>21.250.159/0001-34</div>
+        <div><strong>Inscrição BA</strong>120.343.980 ME</div>
+        <div><strong>Base</strong>Documentos de 19/06/2026</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="actions">
+        <a class="btn" href="fluxo_fabricia_bahia_regularizacao.pdf">Baixar PDF</a>
+        <a class="btn secondary" href="#plano">Ver estratégia</a>
+      </div>
+
+      <section>
+        <h2>1. Resumo em português claro</h2>
+        <p class="lead">O problema principal aconteceu porque o CNPJ ficou fora do Simples Nacional/SIMEI durante o ano de 2024. Quando isso ocorre, a empresa passa a ter obrigações fiscais mais complexas, como empresas de regime normal.</p>
+        <div class="grid">
+          <div class="card">
+            <strong>Débitos federais</strong>
+            Já existem débitos de PIS/COFINS de 2024 e multas MAED de DCTF lançadas nos sistemas da Receita Federal.
+          </div>
+          <div class="card">
+            <strong>Pendências federais</strong>
+            O relatório fiscal aponta ECF 2024 omissa e DCTFWeb de janeiro a novembro de 2024 pendente/sem recibo confirmado.
+          </div>
+          <div class="card">
+            <strong>Pendência estadual</strong>
+            Na Bahia, a inscrição estadual está inapta por omissão de EFD ICMS/IPI de janeiro a dezembro de 2024.
+          </div>
+        </div>
+        <div class="callout ok">
+          <strong>Estratégia escolhida:</strong> baixar este CNPJ, abrir um novo MEI para voltar a operar e organizar os débitos que já existem. A EFD da Bahia do CNPJ antigo não será transmitida neste momento, porque não há débito estadual lançado hoje e a regularização pode materializar risco de multa.
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Estratégia definida</h2>
+        <p class="lead">A baixa do CNPJ MEI pode ser feita mesmo com débitos e obrigações em aberto. Isso permite encerrar o CNPJ antigo e abrir um novo MEI, mas não apaga os débitos e não impede cobranças futuras referentes ao período em que o CNPJ antigo existiu.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Medida</th>
+              <th>O que será feito</th>
+              <th>O que permanece</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Baixa do CNPJ atual</td>
+              <td>Encerrar o CNPJ 21.250.159/0001-34 e guardar o comprovante de baixa.</td>
+              <td>Débitos, multas e obrigações de períodos anteriores podem continuar sendo cobrados.</td>
+            </tr>
+            <tr>
+              <td>Novo MEI</td>
+              <td>Abrir um novo CNPJ MEI, com novo nome, desde que a titular cumpra as regras do MEI.</td>
+              <td>O novo MEI não herda a inscrição estadual antiga, mas o CPF continua responsável pelos débitos do CNPJ baixado.</td>
+            </tr>
+            <tr>
+              <td>Débitos federais</td>
+              <td>Organizar por pagamento ou parcelamento.</td>
+              <td>Não desaparecem com a baixa.</td>
+            </tr>
+            <tr>
+              <td>EFD Bahia 2024</td>
+              <td>Não transmitir neste momento.</td>
+              <td>A omissão continua existindo. Hoje não há débito lançado, mas a SEFAZ-BA pode autuar futuramente.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout warning">
+          <strong>Risco assumido sobre a EFD:</strong> se as EFDs de 2024 forem transmitidas em atraso, pode surgir cobrança/autuação estadual. A referência divulgada pela SEFAZ-BA é multa de R$ 1.380,00 por mês omisso. Como são 12 meses, o risco estimado é de até <span class="amount">R$ 16.560,00</span>, antes de juros, atualização ou eventual discussão.
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Linha do tempo do CNPJ</h2>
+        <div class="timeline">
+          <div class="event">
+            <time>17/10/2014</time>
+            <strong>Abertura do CNPJ</strong>
+            <p>Empresa aberta como Empresário Individual, enquadrada no Simples Nacional/SIMEI.</p>
+          </div>
+          <div class="event">
+            <time>17/10/2014 a 31/12/2023</time>
+            <strong>Período dentro do Simples Nacional e SIMEI</strong>
+            <p>Enquanto estava nesse regime, as obrigações eram simplificadas.</p>
+          </div>
+          <div class="event">
+            <time>01/01/2024 a 31/12/2024</time>
+            <strong>Ano crítico: fora do Simples/SIMEI</strong>
+            <p>Em 2024, o CNPJ passou a ter obrigações de regime normal. Daí nasceram as pendências de DCTF, DCTFWeb, ECF e EFD Bahia.</p>
+            <span class="tag red">Ano com pendências</span>
+          </div>
+          <div class="event">
+            <time>01/01/2025</time>
+            <strong>Retorno ao Simples/SIMEI</strong>
+            <p>O retorno ao regime simplificado não apaga as obrigações e débitos gerados em 2024.</p>
+          </div>
+          <div class="event">
+            <time>16/01/2025</time>
+            <strong>Parcelamento MEI feito</strong>
+            <p>Foi feito parcelamento MEI de R$ 1.689,46 em 33 parcelas de R$ 51,20, com primeira parcela vencendo em 20/01/2025.</p>
+          </div>
+          <div class="event">
+            <time>29/10/2025</time>
+            <strong>Inscrição estadual ficou inapta</strong>
+            <p>A SEFAZ-BA tornou a inscrição inapta por omissão de EFD de dois ou mais meses.</p>
+          </div>
+          <div class="event">
+            <time>20/03/2026</time>
+            <strong>Termo de exclusão do Simples por débitos</strong>
+            <p>A Receita emitiu termo de exclusão com efeito previsto para 01/01/2027 se os débitos não forem regularizados.</p>
+          </div>
+          <div class="event">
+            <time>19/06/2026</time>
+            <strong>Diagnóstico atual</strong>
+            <p>Foram identificados débitos federais, parcelamento MEI com atraso, ECF 2024 pendente, DCTFWeb 2024 pendente no relatório e EFD Bahia 2024 omissa.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>4. O que significa cada termo</h2>
+        <h3>DCTF</h3>
+        <p>DCTF é uma declaração federal usada para confessar débitos de tributos federais. Neste caso, já existem débitos de PIS/COFINS de 2024 vinculados à DCTF, além de multas por atraso na entrega da DCTF.</p>
+
+        <h3>DCTFWeb</h3>
+        <p>DCTFWeb é outra declaração federal. Ela não é a mesma coisa que DCTF. O relatório fiscal mostra DCTFWeb pendente de janeiro a novembro de 2024, mas antes de qualquer transmissão é necessário conferir no e-CAC se há recibos, retificadoras em andamento ou situação que dispense a entrega.</p>
+
+        <h3>MAED</h3>
+        <p>MAED significa Multa por Atraso na Entrega de Declaração. As multas de R$ 500,00 que aparecem no relatório são identificadas como <strong>MAED - DCTF</strong>. Portanto, elas não devem ser confundidas automaticamente com multa de DCTFWeb.</p>
+
+        <h3>ECF</h3>
+        <p>ECF é uma escrituração federal anual. Como o CNPJ ficou fora do Simples em 2024, o relatório fiscal aponta omissão da ECF do ano-calendário 2024.</p>
+
+        <h3>EFD ICMS/IPI Bahia</h3>
+        <p>EFD é uma escrituração fiscal digital estadual. A Bahia aponta omissão de janeiro a dezembro de 2024. Hoje, essa omissão deixou a inscrição estadual inapta, mas não apareceu como débito lançado no extrato estadual consultado.</p>
+      </section>
+
+      <section>
+        <h2>5. Valores já identificados</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Origem</th>
+              <th>O que é</th>
+              <th>Valor/condição</th>
+              <th>Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Receita Federal</td>
+              <td>Dívida DCTF: PIS/COFINS 2024 + multas e encargos consolidados.</td>
+              <td><span class="amount">R$ 8.652,54</span><br>Principal: R$ 2.128,36<br>Multa: R$ 5.925,60<br>Juros: R$ 598,58</td>
+              <td>Simulação de parcelamento em 17 parcelas de <span class="amount">R$ 508,97</span>.</td>
+            </tr>
+            <tr>
+              <td>Receita Federal / MEI</td>
+              <td>Parcelamento MEI aderido em 16/01/2025.</td>
+              <td><span class="amount">R$ 1.689,46</span><br>33 parcelas de R$ 51,20.</td>
+              <td>Relatório atual apontou 6 parcelas em atraso. Precisa regularizar para não perder o parcelamento.</td>
+            </tr>
+            <tr>
+              <td>SEFAZ-BA</td>
+              <td>Extrato de débito estadual.</td>
+              <td><span class="amount">R$ 0,00 lançado</span> no extrato consultado.</td>
+              <td>Não constam débitos estaduais lançados até a consulta.</td>
+            </tr>
+            <tr>
+              <td>SEFAZ-BA</td>
+              <td>Risco de EFD omissa.</td>
+              <td>Referência de risco: <span class="amount">R$ 1.380,00 por mês</span>.<br>12 meses: <span class="amount">R$ 16.560,00</span>.</td>
+              <td>Não lançado hoje. Pode aparecer se houver transmissão/regularização processada ou autuação futura.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>6. DCTF e DCTFWeb: separação importante</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>DCTF</strong>
+            Já há débitos de PIS/COFINS e MAED - DCTF lançados. Essa parte já virou dívida federal visível.
+          </div>
+          <div class="card">
+            <strong>DCTFWeb</strong>
+            O relatório aponta pendência de janeiro a novembro de 2024, mas isso precisa ser conferido antes de transmitir.
+          </div>
+          <div class="card">
+            <strong>Multas de R$ 500,00</strong>
+            As multas encontradas no relatório são MAED - DCTF. Elas não provam, por si só, que já houve multa de DCTFWeb.
+          </div>
+        </div>
+        <div class="callout warning">
+          <strong>Conduta sobre DCTFWeb:</strong> não transmitir automaticamente. Primeiro conferir se existia obrigação efetiva, se há recibo, se existe retificadora em andamento ou se era caso de sem movimento/dispensa. A ideia é evitar entrega desnecessária ou geração de nova multa indevida.
+        </div>
+      </section>
+
+      <section id="plano">
+        <h2>7. Plano de execução</h2>
+        <ol>
+          <li><strong>Baixar o CNPJ MEI atual.</strong> Emitir e guardar o comprovante de baixa.</li>
+          <li><strong>Entregar a DASN-SIMEI de baixa/situação especial.</strong> A baixa do MEI exige essa declaração final.</li>
+          <li><strong>Abrir um novo MEI.</strong> Usar novo nome e conferir se a atividade escolhida é permitida para MEI.</li>
+          <li><strong>Organizar a dívida federal DCTF.</strong> A simulação encontrada é de R$ 8.652,54 em 17 parcelas de R$ 508,97.</li>
+          <li><strong>Regularizar o parcelamento MEI já existente.</strong> O recibo mostra parcelamento de R$ 1.689,46 em 33 parcelas, mas o relatório atual aponta 6 parcelas em atraso.</li>
+          <li><strong>Conferir DCTFWeb antes de qualquer envio.</strong> O relatório aponta pendência, mas as multas vistas são de DCTF. Não misturar as duas coisas.</li>
+          <li><strong>Não transmitir a EFD Bahia agora.</strong> Como o CNPJ será baixado e não há débito estadual lançado hoje, a estratégia é não provocar a regularização estadual neste momento, assumindo o risco residual de autuação futura.</li>
+          <li><strong>Monitorar depois da baixa.</strong> Reconsultar Receita Federal, PGFN, Simples Nacional e SEFAZ-BA para confirmar se surgiu novo lançamento.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>8. Base legal e fontes</h2>
+        <ul class="sources">
+          <li><strong>Baixa do MEI:</strong> o gov.br informa que débitos e obrigações em aberto não impedem a baixa, mas a baixa sem quitação não impede cobrança posterior no CPF. Fonte: <a href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/baixa-de-mei/o-que-fazer-apos-a-baixa-1">O que fazer após a baixa - gov.br</a>.</li>
+          <li><strong>Declarações federais e MAED:</strong> o portal gov.br informa regras de declaração de débitos e cobrança de multa por atraso quando aplicável. Fonte: <a href="https://www.gov.br/pt-br/servicos/declarar-debitos-e-creditos-tributarios-federais">Declarar débitos e créditos tributários federais - gov.br</a>.</li>
+          <li><strong>DCTFWeb sem movimento:</strong> a Receita informou que a DCTFWeb deixou de gerar MAED em diversas situações de sem movimento desde 24/10/2022. Fonte: <a href="https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2022/novembro/receita-federal-cancela-maed-geradas-a-partir-da-transmissao-de-dctfweb-sem-movimento">Receita Federal - DCTFWeb sem movimento</a>.</li>
+          <li><strong>EFD Bahia:</strong> a SEFAZ-BA informa que a EFD é mensal e que omissão pode gerar multa de R$ 1.380,00 por mês e inaptidão com dois meses de omissão. Fonte: <a href="https://www.sefaz.ba.gov.br/noticias/empresas-omissas-com-a-efd-estao-na-malha-da-sefaz-ba/">SEFAZ-BA - Empresas omissas com EFD</a>.</li>
+          <li><strong>Termo de exclusão do Simples 2026:</strong> a Receita informa prazo de 90 dias para regularizar débitos e evitar exclusão a partir de 01/01/2027. Fonte: <a href="https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/marco/receita-federal-emite-termo-de-exclusao-para-devedores-do-simples-nacional-incluindo-mei">Receita Federal - Termo de Exclusão 2026</a>.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <strong>NACIONAL CONTABILIDADE</strong><br>
+      Diagnóstico elaborado com base nos documentos disponibilizados e consultas de 19/06/2026. Os valores podem mudar com atualização de juros, multa, processamento de declarações, pagamento, parcelamento ou novos lançamentos.
+    </footer>
+  </div>
+</body>
+</html>
