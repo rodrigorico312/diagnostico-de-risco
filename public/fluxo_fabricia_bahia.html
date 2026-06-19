@@ -21,10 +21,61 @@
       border-bottom: 1px solid #d9e2ec;
       padding-bottom: 8px;
     }
+    h3 {
+      font-size: 15px;
+      margin: 0 0 8px;
+    }
+    p {
+      line-height: 1.55;
+      margin: 0 0 12px;
+    }
     .note {
       margin: 0 0 24px;
       color: #52606d;
       font-size: 14px;
+    }
+    .intro {
+      max-width: 980px;
+      margin-top: 24px;
+      padding: 18px;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      background: #fbfcfd;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .item {
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 14px;
+      background: #ffffff;
+    }
+    .item p {
+      margin-bottom: 10px;
+      color: #52606d;
+      font-size: 14px;
+    }
+    .item p:last-child {
+      margin-bottom: 0;
+    }
+    .item strong {
+      color: #1f2933;
+    }
+    .reading {
+      max-width: 980px;
+      margin-top: 12px;
+    }
+    .reading ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+    .reading li {
+      margin-bottom: 8px;
+      line-height: 1.55;
     }
     .diagram {
       border: 1px solid #d9e2ec;
@@ -52,6 +103,10 @@
       .note {
         font-size: 12px;
         margin-bottom: 12px;
+      }
+      .intro,
+      .item {
+        padding: 10px;
       }
       .diagram {
         page-break-inside: avoid;
@@ -106,6 +161,78 @@
   <h1>Fluxo Cronológico - Caso Fabrícia / Bahia</h1>
   <p class="note">Diagnóstico montado com base nos documentos da Receita Federal, SEFAZ-BA e consulta de NF-e por destinatário.</p>
 
+  <section class="intro">
+    <h2>Antes do fluxo: o que está sendo analisado</h2>
+    <p>
+      O ponto central do caso é que a empresa nasceu como MEI, mas acumulou pendências e foi excluída do Simples Nacional e do SIMEI em 31/12/2023.
+      A partir de 01/01/2024, ela passou a ser tratada como empresa fora do MEI, com obrigações federais e estaduais mais pesadas.
+    </p>
+    <p>
+      Por isso o diagnóstico não olha só boleto em atraso. Ele separa obrigação federal, obrigação estadual, situação da Inscrição Estadual,
+      multas por atraso e risco de nova exclusão do Simples.
+    </p>
+  </section>
+
+  <h2>O que cada obrigação significa</h2>
+  <div class="grid">
+    <div class="item">
+      <h3>DASN-SIMEI</h3>
+      <p><strong>O que é:</strong> declaração anual do MEI, usada para informar o faturamento do ano anterior e confirmar se a empresa teve empregado.</p>
+      <p><strong>No caso:</strong> enquanto a empresa esteve como MEI, essa obrigação continuava existindo. A omissão da DASN-SIMEI 2023 entrou na cobrança da Receita.</p>
+    </div>
+    <div class="item">
+      <h3>DCTFWeb</h3>
+      <p><strong>O que é:</strong> declaração federal usada para confessar débitos gerados por sistemas como eSocial e EFD-Reinf, principalmente contribuições previdenciárias.</p>
+      <p><strong>No caso:</strong> a Receita apontou omissão de DCTFWeb de abril/2024. Depois da saída do MEI, também precisa conferir as competências de 2024.</p>
+    </div>
+    <div class="item">
+      <h3>DCTF</h3>
+      <p><strong>O que é:</strong> declaração federal de débitos e créditos tributários. Ela não é a mesma coisa que DCTFWeb.</p>
+      <p><strong>No caso:</strong> precisa levantar mês a mês se houve PIS, COFINS, IRPJ, CSLL ou outros débitos federais a declarar em 2024, porque a empresa saiu do MEI.</p>
+    </div>
+    <div class="item">
+      <h3>ECF</h3>
+      <p><strong>O que é:</strong> Escrituração Contábil Fiscal. É uma obrigação anual que reúne informações contábeis e fiscais usadas na apuração de IRPJ e CSLL.</p>
+      <p><strong>No caso:</strong> como a empresa deixou de ser MEI em 01/01/2024, a ECF do ano-calendário 2024 precisa ser analisada e entregue se aplicável ao regime.</p>
+    </div>
+    <div class="item">
+      <h3>EFD ICMS/IPI</h3>
+      <p><strong>O que é:</strong> escrituração fiscal digital ligada ao ICMS e ao IPI. Ela registra entradas, saídas, documentos fiscais e apuração do imposto.</p>
+      <p><strong>No caso:</strong> a SEFAZ-BA apontou omissão das EFD de janeiro a dezembro de 2024. Essa omissão levou ao problema na Inscrição Estadual.</p>
+    </div>
+    <div class="item">
+      <h3>MAED</h3>
+      <p><strong>O que é:</strong> multa por atraso na entrega de declaração. Ela pode ser lançada mesmo antes da empresa pagar o imposto principal.</p>
+      <p><strong>No caso:</strong> aparecem multas federais lançadas pela Receita por obrigações entregues fora do prazo ou ainda não entregues.</p>
+    </div>
+    <div class="item">
+      <h3>Inscrição Estadual inapta</h3>
+      <p><strong>O que é:</strong> situação cadastral irregular no Estado. Quando a Inscrição Estadual fica inapta, a empresa passa a ter problema para operar corretamente no âmbito do ICMS.</p>
+      <p><strong>No caso:</strong> o motivo indicado foi omissão de EFD. A regularização passa por entregar as escriturações pendentes e aguardar o processamento da SEFAZ-BA.</p>
+    </div>
+    <div class="item">
+      <h3>Termo de Exclusão do Simples</h3>
+      <p><strong>O que é:</strong> aviso formal de que a empresa pode ser excluída do Simples Nacional se não regularizar os débitos apontados.</p>
+      <p><strong>No caso:</strong> existe termo com data prevista de exclusão em 01/01/2027. O parcelamento e os débitos precisam ser acompanhados antes dessa data.</p>
+    </div>
+  </div>
+
+  <h2>Leitura prática do caso</h2>
+  <div class="reading">
+    <p>
+      A empresa não tem apenas um problema de pagamento. Ela tem três frentes de regularização ao mesmo tempo:
+    </p>
+    <ul>
+      <li><strong>Federal:</strong> levantar e entregar DASN-SIMEI, DCTFWeb, DCTF e ECF, além de apurar PIS, COFINS, multas MAED e demais débitos federais.</li>
+      <li><strong>Estadual:</strong> entregar as EFD ICMS/IPI de 2024 para resolver a omissão que levou à inaptidão da Inscrição Estadual na Bahia.</li>
+      <li><strong>Simples/MEI:</strong> regularizar o parcelamento em atraso e acompanhar o Termo de Exclusão para evitar nova saída do Simples em 2027.</li>
+    </ul>
+    <p>
+      A ordem correta é organizar as obrigações, transmitir o que está pendente, esperar os sistemas processarem e só depois confirmar se a situação fiscal
+      e cadastral ficou limpa.
+    </p>
+  </div>
+
   <h2>Linha do Tempo</h2>
   <div class="diagram">
     <pre class="mermaid">
@@ -113,7 +240,7 @@ flowchart TD
     A["17/10/2014&lt;br/&gt;Abertura do MEI/CNPJ&lt;br/&gt;Enquadrada no Simples Nacional e SIMEI"] --> B["Até 2023&lt;br/&gt;DAS/obrigações ficaram em atraso"]
     B --> C["31/12/2023&lt;br/&gt;Exclusão do Simples Nacional e do SIMEI"]
     C --> D["01/01/2024&lt;br/&gt;Empresa passa a ser tratada como regime normal"]
-    D --> E["Durante 2024&lt;br/&gt;Nascem obrigações federais:&lt;br/&gt;DCTFWeb, ECF, PIS e COFINS"]
+    D --> E["Durante 2024&lt;br/&gt;Nascem obrigações federais:&lt;br/&gt;DCTFWeb, DCTF, ECF, PIS e COFINS"]
     D --> F["Durante 2024&lt;br/&gt;Nasce obrigação estadual BA:&lt;br/&gt;EFD ICMS/IPI mensal"]
     E --> G["14/06/2024&lt;br/&gt;Receita intima por omissão:&lt;br/&gt;DASN-SIMEI 2023 e DCTFWeb abr/2024"]
     F --> H["03/06/2025&lt;br/&gt;SEFAZ-BA intima por omissão EFD:&lt;br/&gt;jan a dez/2024"]
@@ -132,16 +259,18 @@ flowchart TD
     A["Diagnóstico atual"] --> B["SEFAZ-BA&lt;br/&gt;Entregar EFD ICMS/IPI 2024"]
     B --> C["Aguardar rotina automática&lt;br/&gt;para reativar IE"]
     A --> D["Receita Federal&lt;br/&gt;Entregar DCTFWeb jan-nov/2024"]
-    A --> E["Receita Federal&lt;br/&gt;Entregar ECF ano-calendário 2024"]
-    A --> F["Simples/MEI&lt;br/&gt;Regularizar parcelamento com 6 parcelas em atraso"]
-    D --> G["Pagar ou parcelar débitos federais&lt;br/&gt;PIS/COFINS + MAED"]
-    E --> G
-    F --> G
-    G --> H["Conferir situação fiscal"]
-    H --> I["Verificar se Termo de Exclusão 2026&lt;br/&gt;fica sem efeito"]
-    C --> J["IE reativada"]
-    I --> K["Empresa regularizada para continuar no Simples em 2027"]
-    J --> K
+    A --> E["Receita Federal&lt;br/&gt;Levantar e entregar DCTF 2024&lt;br/&gt;quando houver débitos federais a declarar"]
+    A --> F["Receita Federal&lt;br/&gt;Entregar ECF ano-calendário 2024"]
+    A --> G["Simples/MEI&lt;br/&gt;Regularizar parcelamento com 6 parcelas em atraso"]
+    D --> H["Pagar ou parcelar débitos federais&lt;br/&gt;PIS/COFINS + MAED"]
+    E --> H
+    F --> H
+    G --> H
+    H --> I["Conferir situação fiscal"]
+    I --> J["Verificar se Termo de Exclusão 2026&lt;br/&gt;fica sem efeito"]
+    C --> K["IE reativada"]
+    J --> L["Empresa regularizada para continuar no Simples em 2027"]
+    K --> L
     </pre>
   </div>
 
