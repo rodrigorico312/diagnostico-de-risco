@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fluxo Financeiro e IRPF 2025 - Ubiracy</title>
+  <style>
+    :root {
+      --navy: #16324f;
+      --blue: #1c6ea4;
+      --green: #1f8a4c;
+      --amber: #9a6700;
+      --red: #b42318;
+      --ink: #1f2937;
+      --muted: #5b6472;
+      --line: #d9e2ec;
+      --soft: #f5f8fb;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      background: #eef3f7;
+    }
+
+    a { color: var(--blue); }
+
+    .page {
+      max-width: 1120px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, .12);
+    }
+
+    header {
+      padding: 30px 34px 30px;
+      color: white;
+      background: linear-gradient(135deg, #10263f, #1c6ea4);
+    }
+
+    .report-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .logo-block {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: min(330px, 100%);
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.46);
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, .16);
+    }
+
+    .logo-image {
+      display: block;
+      width: 280px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .responsible {
+      text-align: right;
+      font-size: 13px;
+      line-height: 1.35;
+      opacity: .94;
+    }
+
+    .responsible strong,
+    .responsible span {
+      display: block;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 910px;
+      margin: 0;
+      font-size: 17px;
+      opacity: .95;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .meta div {
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 8px;
+      background: rgba(255,255,255,.09);
+    }
+
+    .meta strong {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      opacity: .8;
+    }
+
+    main {
+      padding: 28px 34px 40px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 7px;
+      color: white;
+      background: var(--navy);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      color: var(--navy);
+      background: #eaf2f8;
+      border: 1px solid #cbdbea;
+    }
+
+    section {
+      margin: 0 0 28px;
+      padding: 0 0 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-child { border-bottom: 0; }
+
+    h2 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      color: #27364a;
+      font-size: 18px;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .lead {
+      color: #223044;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .callout {
+      margin: 14px 0;
+      padding: 16px 18px;
+      border-left: 5px solid var(--blue);
+      border-radius: 8px;
+      background: #eef7fd;
+    }
+
+    .callout.ok {
+      border-left-color: var(--green);
+      background: #edf9f1;
+    }
+
+    .callout.warning {
+      border-left-color: var(--amber);
+      background: #fff8e6;
+    }
+
+    .callout.danger {
+      border-left-color: var(--red);
+      background: #fff1f0;
+    }
+
+    .amount {
+      color: var(--navy);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    table {
+      width: 100%;
+      margin: 12px 0 18px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--navy);
+      background: #eaf2f8;
+    }
+
+    ol,
+    ul {
+      padding-left: 21px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 6px 6px 0;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: #eaf2f8;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tag.red { color: var(--red); background: #fde8e6; }
+    .tag.amber { color: #7a4a00; background: #fff3cf; }
+    .tag.green { color: #166534; background: #e4f7eb; }
+
+    .diagram {
+      margin-top: 14px;
+      padding: 18px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfd;
+    }
+
+    .sources li {
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 22px 34px 34px;
+      color: #526071;
+      font-size: 13px;
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 860px) {
+      .report-top {
+        display: block;
+      }
+
+      .responsible {
+        margin-top: 16px;
+        text-align: left;
+      }
+
+      .meta,
+      .grid,
+      .grid.two {
+        grid-template-columns: 1fr;
+      }
+
+      header,
+      main,
+      footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="report-top">
+        <div class="logo-block" aria-label="Nacional Contabilidade">
+          <img class="logo-image" src="/nacional-contabilidade-logo.png" alt="Nacional Contabilidade">
+        </div>
+        <div class="responsible">
+          <strong>Rodrigo Coelho</strong>
+          <span>Contador CRC/PA 024335</span>
+        </div>
+      </div>
+
+      <h1>Fluxo financeiro e IRPF 2025 - Ubiracy</h1>
+      <p class="subtitle">Leitura organizada das entradas financeiras, contas utilizadas, transferências próprias, valores de terceiros, MEI, empréstimos e pontos que precisam ser validados antes da conclusão do IRPF.</p>
+
+      <div class="meta">
+        <div><strong>Cliente</strong>Ubiracy Jorge Correa Camargo Filho</div>
+        <div><strong>CPF</strong>***.260.802-**</div>
+        <div><strong>Ano-calendário</strong>2025</div>
+        <div><strong>Base</strong>Documentos de 21/06/2026</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="actions">
+        <a class="btn" href="#plano">Ver plano de organização</a>
+        <a class="btn secondary" href="#perguntas">Ver perguntas ao cliente</a>
+      </div>
+
+      <section>
+        <h2>1. Resumo em português claro</h2>
+        <p class="lead">O ponto principal é simples: entrada no banco não é, automaticamente, renda. Parte do dinheiro que aparece nas contas é transferência entre contas próprias, parte é empréstimo, parte é valor de terceiro que precisa ser explicado e parte pode ser receita ligada ao MEI ou ao trabalho autônomo.</p>
+
+        <div class="grid">
+          <div class="card">
+            <strong>Não somar tudo como renda</strong>
+            Banco Inter, Nubank, Mercado Pago, BV e Pan têm dinheiro circulando entre contas. Se somar tudo bruto, a renda fica inflada.
+          </div>
+          <div class="card">
+            <strong>MEI separado da pessoa física</strong>
+            A conta InfinitePay/Cloudwalk está ligada ao CNPJ MEI da sorveteria. Essa parte deve conversar com a DASN-SIMEI.
+          </div>
+          <div class="card">
+            <strong>Terceiros precisam de explicação</strong>
+            Entradas de Maria de Fátima, Ana Carolina, Odinea, Leonardo, Fernandes/Ferreira e outros precisam de natureza definida.
+          </div>
+        </div>
+
+        <div class="callout ok">
+          <strong>Leitura correta:</strong> o trabalho não é transformar toda movimentação em imposto. O trabalho é separar o que realmente é renda, o que é dinheiro próprio circulando, o que é empréstimo e o que precisa de justificativa.
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Números principais encontrados</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Valor</th>
+              <th>Leitura prática</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DASN-SIMEI declarada</td>
+              <td><span class="amount">R$ 8.100,00</span></td>
+              <td>Valor tratado como faturamento do MEI no ano.</td>
+            </tr>
+            <tr>
+              <td>Lucro isento MEI</td>
+              <td><span class="amount">R$ 571,10</span></td>
+              <td>Parcela isenta calculada a partir da DASN, conforme critério usado no estudo.</td>
+            </tr>
+            <tr>
+              <td>Rendimento tributável MEI</td>
+              <td><span class="amount">R$ 7.528,90</span></td>
+              <td>Parcela tributável vinculada ao MEI depois da separação do lucro isento.</td>
+            </tr>
+            <tr>
+              <td>Autônomo informado</td>
+              <td><span class="amount">R$ 19.200,00</span></td>
+              <td>Base prática informada pelo relato, não soma linha a linha das contas.</td>
+            </tr>
+            <tr>
+              <td>Rendimentos financeiros</td>
+              <td><span class="amount">R$ 5,96</span></td>
+              <td>Mercado Pago R$ 5,95 e Nubank R$ 0,01, conforme informes.</td>
+            </tr>
+            <tr>
+              <td>Mercado Pago - saldo em 31/12/2025</td>
+              <td><span class="amount">R$ 1.019,30</span></td>
+              <td>Valor a considerar em bens e direitos, conforme informe.</td>
+            </tr>
+            <tr>
+              <td>Consórcio Hilux</td>
+              <td><span class="amount">R$ 4.212,64</span> estimado</td>
+              <td>Precisa confirmar parcelas efetivamente pagas até 31/12/2025.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>3. O mapa do dinheiro</h2>
+        <p>O fluxo abaixo mostra por onde o dinheiro passou. Ele ajuda a separar receita, transferência própria, empréstimo e entrada de terceiro.</p>
+
+        <div class="diagram">
+          <pre class="mermaid">
+flowchart TD
+    CLIENTES[Clientes da sorveteria] --> PJ[InfinitePay / Cloudwalk PJ]
+    MARIA[Maria de Fatima] --> INTER[Banco Inter PF]
+    MARIA --> MP[Mercado Pago PF]
+    ANA[Ana Carolina] --> MP
+    ODINEA[Odinea / CIA Ltda] --> INTER
+    LEONARDO[Leonardo Camargo] --> INTER
+    FERN[Fernandes/Ferreira Comercio] --> INTER
+    FERN --> MP
+    ZOOP[Zoop Tecnologia] --> NUB[Nubank PF]
+    QI[QI Sociedade de Credito] --> NUB
+    EMP[Emprestimo Nubank] --> NUB
+    INTER -. transferencia propria .-> NUB
+    INTER -. transferencia propria .-> MP
+    MP -. transferencia propria .-> NUB
+    BV[Banco BV / Pan] -. transferencia propria .-> NUB
+    PJ --> DASN[DASN/MEI]
+    NUB --> FATURA[Faturas / emprestimos / despesas]
+    INTER --> FATURA
+    MP --> FATURA
+    INTER --> RF[Receita Federal]
+    MP --> RF
+          </pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>4. Leitura fiscal do fluxo</h2>
+        <p>Para o IRPF, a classificação importa mais que o volume bruto de entradas. O mesmo dinheiro pode aparecer em duas ou três contas diferentes.</p>
+
+        <div class="diagram">
+          <pre class="mermaid">
+flowchart TD
+    ENTRADAS[Entradas brutas nas contas] --> CLASS[Classificacao por origem]
+    CLASS --> PROPRIA[Transferencia propria: nao e renda]
+    CLASS --> EMPRESTIMO[Emprestimo/credito: nao e renda]
+    CLASS --> MEI[Receita MEI / CNPJ]
+    CLASS --> TERCEIRO[Terceiros PF/PJ]
+    MEI --> DASN[DASN R$ 8.100,00]
+    DASN --> ISENTO[Lucro isento R$ 571,10]
+    DASN --> TRIBPJ[Tributavel PJ R$ 7.528,90]
+    TERCEIRO --> AUT[Autonomo informado R$ 19.200,00]
+          </pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. O que significa cada tipo de entrada</h2>
+        <div class="grid two">
+          <div class="card">
+            <strong>Transferência própria</strong>
+            Dinheiro saindo de uma conta do próprio Ubiracy e entrando em outra. Não é renda nova, mas precisa estar identificado para não duplicar.
+          </div>
+          <div class="card">
+            <strong>Empréstimo ou crédito</strong>
+            Entrada de dinheiro de banco ou financeira. Em regra, não é renda, mas precisa ter suporte: contrato, extrato ou comprovante.
+          </div>
+          <div class="card">
+            <strong>Receita MEI</strong>
+            Valor ligado à atividade do CNPJ. Deve conversar com a DASN-SIMEI e com a conta PJ usada pela sorveteria.
+          </div>
+          <div class="card">
+            <strong>Trabalho autônomo</strong>
+            Renda de pessoa física por serviço. A base informada no estudo é R$ 19.200,00, mas não deve ser confundida com soma bruta das contas.
+          </div>
+          <div class="card">
+            <strong>Entrada de terceiro</strong>
+            Dinheiro recebido de outra pessoa ou empresa. Pode ser renda, ajuda, reembolso, empréstimo informal ou valor ligado ao MEI. Precisa explicar.
+          </div>
+          <div class="card">
+            <strong>Rendimento financeiro</strong>
+            Valor pequeno informado por banco ou instituição financeira, como Mercado Pago e Nubank. Vai em tributação exclusiva quando aplicável.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. Entradas classificadas na matriz</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Grupo</th>
+              <th>Quantidade</th>
+              <th>Valor mapeado</th>
+              <th>Como ler</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Risco alto</td>
+              <td>22 entradas</td>
+              <td><span class="amount">R$ 19.301,47</span></td>
+              <td>Não é renda automaticamente. É o grupo que mais precisa de explicação documental.</td>
+            </tr>
+            <tr>
+              <td>Risco médio</td>
+              <td>6 entradas</td>
+              <td><span class="amount">R$ 1.550,00</span></td>
+              <td>Tem alguma dúvida de origem ou enquadramento, mas com menor peso financeiro.</td>
+            </tr>
+            <tr>
+              <td>Risco baixo</td>
+              <td>27 entradas</td>
+              <td><span class="amount">R$ 17.892,67</span></td>
+              <td>Principalmente transferência própria, empréstimo ou ajuste com explicação mais objetiva.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warning">
+          <strong>Ponto importante:</strong> o grupo de risco alto não significa imposto automático. Significa que, se a origem não for explicada, a Receita pode tratar como renda omitida.
+        </div>
+      </section>
+
+      <section>
+        <h2>7. Pontos de risco</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Ponto</th>
+              <th>Nível</th>
+              <th>Providência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>R1</td>
+              <td>Entradas de terceiros em contas PF</td>
+              <td><span class="tag red">Alta</span></td>
+              <td>Definir se cada entrada foi serviço, ajuda familiar, reembolso, empréstimo ou venda ligada ao MEI.</td>
+            </tr>
+            <tr>
+              <td>R2</td>
+              <td>Mistura entre pessoa física e MEI</td>
+              <td><span class="tag red">Alta</span></td>
+              <td>Separar receitas do CNPJ das contas PF para não confundir faturamento, retirada e dinheiro pessoal.</td>
+            </tr>
+            <tr>
+              <td>R3</td>
+              <td>DASN inferior ao fluxo real identificado</td>
+              <td><span class="tag red">Alta</span></td>
+              <td>Documentar a decisão adotada e validar com o cliente antes de fechar a declaração.</td>
+            </tr>
+            <tr>
+              <td>R4</td>
+              <td>Empréstimos confundidos com renda</td>
+              <td><span class="tag amber">Média</span></td>
+              <td>Guardar contrato, extrato e comprovantes do empréstimo Nubank de R$ 6.000,00.</td>
+            </tr>
+            <tr>
+              <td>R5</td>
+              <td>Transferências próprias duplicadas</td>
+              <td><span class="tag amber">Média</span></td>
+              <td>Marcar transferências entre Banco Inter, Nubank, Mercado Pago, BV e Pan para não somar duas vezes.</td>
+            </tr>
+            <tr>
+              <td>R6</td>
+              <td>Consórcio com documentos parciais</td>
+              <td><span class="tag amber">Média</span></td>
+              <td>Confirmar parcelas pagas até 31/12/2025 antes de fechar bens e direitos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="plano">
+        <h2>8. Plano de organização</h2>
+        <ol>
+          <li><strong>Separar conta do MEI e conta pessoal.</strong> Vendas da sorveteria devem entrar preferencialmente na conta PJ ou em fluxo identificado como MEI.</li>
+          <li><strong>Marcar transferências próprias.</strong> Toda movimentação entre contas do próprio Ubiracy deve ser classificada para não virar renda duplicada.</li>
+          <li><strong>Explicar entradas de terceiros.</strong> Cada pessoa ou empresa que transferiu dinheiro precisa ter uma natureza definida.</li>
+          <li><strong>Guardar suporte de empréstimos.</strong> Entrada de crédito não é renda, mas precisa de documento para sustentar a classificação.</li>
+          <li><strong>Conferir DASN x fluxo real do MEI.</strong> A receita declarada no MEI precisa ser validada contra o que entrou na operação.</li>
+          <li><strong>Confirmar o consórcio.</strong> Usar apenas parcelas efetivamente pagas até 31/12/2025.</li>
+          <li><strong>Fechar a IRPF por categorias.</strong> MEI, autônomo, rendimentos financeiros, bens e direitos, empréstimos e transferências próprias devem ficar separados.</li>
+          <li><strong>Criar rotina mensal.</strong> No fim de cada mês, salvar extrato, marcar entradas, separar fatura, empréstimos, receitas MEI e valores pessoais.</li>
+        </ol>
+      </section>
+
+      <section id="perguntas">
+        <h2>9. Perguntas que precisam de resposta</h2>
+        <p>Essas respostas reduzem risco e evitam classificar dinheiro errado no IRPF.</p>
+        <ul>
+          <li>Os valores recebidos de Maria de Fátima foram ajuda familiar, reembolso, empréstimo ou serviço?</li>
+          <li>As entradas de Ana Carolina foram pessoais, da sorveteria, reembolso ou outro motivo?</li>
+          <li>Os valores de Odinea / CIA Ltda têm relação com atividade, família, reembolso ou venda?</li>
+          <li>O valor de Leonardo Camargo de R$ 2.000,00 foi empréstimo, ajuda, serviço ou outro fato?</li>
+          <li>As entradas de Fernandes/Ferreira Comércio são ligadas à atividade, serviço, compra, reembolso ou venda?</li>
+          <li>Caramello Confetteria e Sorveteria aparece como origem ligada à atividade. O valor entrou por qual motivo?</li>
+          <li>O empréstimo Nubank de R$ 6.000,00 tem contrato ou comprovante salvo?</li>
+          <li>Quais parcelas do consórcio Hilux foram pagas até 31/12/2025?</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>10. Conclusão</h2>
+        <p>O caso não deve ser tratado como uma soma simples de entradas bancárias. Existe uma rede de contas e passagem de dinheiro. A conclusão segura vem da separação por origem: MEI, pessoa física, terceiro, empréstimo, transferência própria e rendimento financeiro.</p>
+        <div class="callout ok">
+          <strong>Caminho correto:</strong> classificar antes de declarar. Depois de cada origem validada, fica mais fácil decidir o que entra como rendimento tributável, o que vai em bens e direitos, o que é isento, o que é tributação exclusiva e o que não é renda.
+        </div>
+      </section>
+
+      <section>
+        <h2>11. Documentos considerados</h2>
+        <ul class="sources">
+          <li>Dossiê de estudo - fluxo financeiro e IRPF 2025.</li>
+          <li>Matriz de transações 2025.</li>
+          <li>Mapas Mermaid de fluxo financeiro.</li>
+          <li>Extratos Banco Inter, Nubank e Mercado Pago analisados no material-base.</li>
+          <li>Informes de rendimentos Nubank, Mercado Pago, Banco BV e Banco Pan.</li>
+          <li>Documentos do consórcio Simpala/Hilux, pendentes de confirmação final quanto aos pagamentos de 2025.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Nacional Contabilidade</strong><br>
+      Rodrigo Coelho - Contador CRC/PA 024335<br>
+      Estudo elaborado com base nos documentos disponibilizados. A classificação final depende da validação das informações pelo cliente e da decisão profissional antes da entrega da declaração.
+    </footer>
+  </div>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, securityLevel: "loose" });
+  </script>
+</body>
+</html>
