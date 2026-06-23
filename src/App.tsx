@@ -372,7 +372,340 @@ const toolGroups = [
   },
 ];
 
-const blogPosts = [
+type BlogSection = {
+  heading: string;
+  body?: string;
+  paragraphs?: string[];
+  bullets?: string[];
+};
+
+type BlogSource = {
+  title: string;
+  href: string;
+};
+
+type BlogPost = {
+  slug: string;
+  category: string;
+  readTime: string;
+  title: string;
+  excerpt: string;
+  intro: string;
+  sections: BlogSection[];
+  checklist: string[];
+  sources?: BlogSource[];
+};
+
+const blogPosts: BlogPost[] = [
+  {
+    slug: "mapa-economia-tributaria",
+    category: "Economia tributária",
+    readTime: "7 min",
+    title: "Existem formas legais de pagar menos imposto. O problema é saber onde procurar.",
+    excerpt:
+      "Um mapa direto de oportunidades fiscais que dependem de enquadramento, documentação e apuração bem feita.",
+    intro:
+      "Quando se fala em economia tributária, muita gente pensa em jeitinho. Mas a economia mais forte costuma estar no lugar mais simples: na própria legislação.",
+    sections: [
+      {
+        heading: "Não existe regra única para todo CNPJ",
+        body:
+          "O que existe é um mapa de oportunidades. Cada empresa precisa ser testada contra faturamento, regime tributário, CNAE, notas fiscais, mercadorias, município, inscrição estadual e forma de apuração.",
+      },
+      {
+        heading: "ICMS no DAS para comércio pequeno no Pará",
+        paragraphs: [
+          "Essa é uma das oportunidades mais interessantes para empresas pequenas do Simples Nacional no Pará. O RICMS/PA prevê isenção da parcela mensal do ICMS dentro do Simples para contribuintes com volume de negócios de até R$ 120.000,00 nos últimos 12 meses.",
+          "O detalhe importante é que o benefício não elimina todo o DAS. Ele atinge a parcela estadual do ICMS. Mesmo assim, para uma empresa comercial pequena, essa parcela pode representar economia real no mês.",
+        ],
+      },
+      {
+        heading: "Regimes diferenciados de ICMS no Pará",
+        paragraphs: [
+          "A SEFA/PA possui Regimes Tributários Diferenciados, conhecidos como RTD. Eles não são automáticos: a empresa precisa atender requisitos, pedir concessão ou renovação e manter regularidade fiscal.",
+          "A própria SEFA/PA lista regimes para transporte rodoviário de cargas, transporte autônomo, palmito, couro wet blue, produtos farmacêuticos, medicamentos e produtos de informática.",
+        ],
+      },
+      {
+        heading: "Fator R no Simples Nacional",
+        body:
+          "Para algumas atividades de serviço, a folha de pagamento pode mudar o anexo de tributação no Simples Nacional. O ponto central é conferir pró-labore, salários, encargos, receita bruta e anexo correto.",
+      },
+      {
+        heading: "Lucro Presumido: transporte de cargas não é serviço comum",
+        body:
+          "No Lucro Presumido, uma diferença pequena no enquadramento muda muito imposto. Transporte de cargas, por exemplo, não deve ser tratado como serviço genérico de 32% para todas as bases.",
+      },
+      {
+        heading: "Créditos de PIS e COFINS no Lucro Real",
+        body:
+          "No regime não cumulativo, empresas no Lucro Real podem ter direito a créditos de PIS e COFINS sobre custos e despesas ligados à atividade. Aqui o cuidado precisa ser alto, porque crédito indevido também gera risco.",
+      },
+      {
+        heading: "O imposto certo começa com diagnóstico",
+        body:
+          "Antes de pedir restituição, alterar apuração ou prometer economia, é preciso testar a empresa contra as regras. O diagnóstico começa pelos documentos e pela operação real.",
+      },
+    ],
+    checklist: [
+      "Notas fiscais dos últimos 12 meses",
+      "DAS e extratos do PGDAS-D",
+      "EFD, entradas e saídas",
+      "CNAEs e regime tributário",
+      "Situação fiscal e cadastral",
+      "Produtos, NCMs e tipo de operação",
+    ],
+    sources: [
+      {
+        title: "Decreto PA nº 1.773/2017 - SEFA/PA",
+        href: "https://antigo.sefa.pa.gov.br/legislacao/interna/decreto/dc2017_01773.pdf",
+      },
+      {
+        title: "SEFA/PA - Regimes Tributários Diferenciados do ICMS",
+        href: "https://antigo.sefa.pa.gov.br/38-orientacoes/12163-ii-regimes-tributarios-diferenciados-rtd-do-icms",
+      },
+      {
+        title: "Lei Complementar nº 123/2006 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm",
+      },
+      {
+        title: "Solução de Consulta Cosit nº 232/2024 - Receita Federal",
+        href: "https://normas.receita.fazenda.gov.br/sijut2consulta/anexoOutros.action?idArquivoBinario=75134",
+      },
+      {
+        title: "Lei nº 10.833/2003 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.833.htm",
+      },
+    ],
+  },
+  {
+    slug: "icms-simples-para",
+    category: "ICMS Pará",
+    readTime: "5 min",
+    title: "Empresas de comércio podem estar pagando ICMS a mais no DAS",
+    excerpt:
+      "No Pará, existe uma regra estadual que pode zerar a parcela do ICMS no DAS para empresas do Simples com baixo volume de negócios.",
+    intro:
+      "Muita empresa pequena paga o DAS todo mês sem separar o que é imposto federal, municipal e estadual. Dentro do DAS também pode existir parcela de ICMS.",
+    sections: [
+      {
+        heading: "Qual é a regra?",
+        paragraphs: [
+          "O RICMS/PA prevê isenção da parcela mensal do ICMS apurada dentro do Simples Nacional para contribuintes que tenham volume de negócios de até R$ 120.000,00 nos últimos 12 meses, incluindo o próprio mês de apuração.",
+          "Na prática, isso pode atingir empresas de comércio que vendem mercadorias, emitem nota fiscal, são optantes pelo Simples Nacional e ainda estão dentro desse limite de movimento.",
+        ],
+      },
+      {
+        heading: "Não é isenção de todos os impostos",
+        body:
+          "É uma possível dispensa da parcela do ICMS que estaria dentro do DAS. Impostos federais, ISS, ICMS-ST, antecipação, diferencial de alíquota e outras cobranças podem continuar existindo conforme o caso.",
+      },
+      {
+        heading: "Por que aparece a ideia de economizar até 34%?",
+        body:
+          "Em empresas comerciais no Simples Nacional, o DAS é dividido entre tributos. Uma parte pode ser destinada ao ICMS. Em determinadas faixas e atividades de comércio, essa fatia estadual pode representar parcela relevante do DAS.",
+      },
+      {
+        heading: "Quem precisa olhar isso com atenção?",
+        bullets: [
+          "Comércios pequenos que vendem mercadorias no Pará e estão no Simples Nacional.",
+          "Negócios com volume próximo ou abaixo de R$ 120 mil nos últimos 12 meses.",
+          "Empresas que pagam DAS todo mês, mas nunca revisaram a composição do imposto.",
+          "Empresas que emitem nota corretamente e conseguem comprovar receitas e entradas.",
+        ],
+      },
+      {
+        heading: "Quando a regra pode não servir?",
+        bullets: [
+          "Operações com ICMS-ST, antecipação, diferencial de alíquota ou importação.",
+          "Empresas que usam regime de caixa, quando a própria norma excluir essa hipótese.",
+          "Empresas com entradas maiores que as receitas, pois a regra manda observar também o volume de entradas em certas situações.",
+          "Atividades que não tenham ICMS como tributo principal, como serviços sujeitos apenas ao ISS.",
+          "Empresas com situação fiscal, cadastral ou documental inconsistente.",
+        ],
+      },
+      {
+        heading: "Resumo técnico",
+        body:
+          "A regra está no RICMS/PA, Anexo I, art. 230-E, inserido pelo Decreto Estadual nº 1.773/2017. A aplicação depende de documentos, atividade, regime, volume de negócios e tipo de operação.",
+      },
+    ],
+    checklist: [
+      "DAS e extratos do PGDAS-D dos últimos 12 meses",
+      "Notas fiscais de saída e faturamento mensal",
+      "Notas fiscais de entrada",
+      "CNAEs, atividades e regime da empresa",
+      "ICMS-ST, antecipação, DIFAL ou cobrança fora do DAS",
+      "Situação cadastral e fiscal na SEFA/PA",
+    ],
+    sources: [
+      {
+        title: "Decreto PA nº 1.773/2017 - SEFA/PA",
+        href: "https://antigo.sefa.pa.gov.br/legislacao/interna/decreto/dc2017_01773.pdf",
+      },
+      {
+        title: "Lei Complementar nº 123/2006 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm",
+      },
+      {
+        title: "PGFN - Do Simples Nacional",
+        href: "https://www.gov.br/pgfn/pt-br/servicos/orgaos-publicos-e-parceiros/convenio-simples-nacional/do-simples-nacional",
+      },
+    ],
+  },
+  {
+    slug: "fator-r-simples-nacional",
+    category: "Simples Nacional",
+    readTime: "6 min",
+    title: "Empresas de serviço podem pagar mais DAS por não olhar o Fator R",
+    excerpt:
+      "Uma regra do Simples pode mudar a empresa do Anexo V para o Anexo III, quando a folha e a atividade permitem.",
+    intro:
+      "Muita empresa de serviço paga o DAS como se estivesse presa ao Anexo V. Só que, dependendo da folha de pagamento, ela pode ser tributada pelo Anexo III.",
+    sections: [
+      {
+        heading: "O que é o Fator R?",
+        paragraphs: [
+          "O Fator R é uma comparação entre a folha de salários e a receita bruta da empresa nos últimos 12 meses. Ele serve para definir se determinadas atividades de serviço serão tributadas pelo Anexo III ou pelo Anexo V do Simples Nacional.",
+          "Regra prática: se o Fator R for igual ou superior a 28%, a empresa pode ser tributada pelo Anexo III. Se for inferior a 28%, tende a ficar no Anexo V.",
+        ],
+      },
+      {
+        heading: "Por que isso dá economia?",
+        body:
+          "A primeira faixa do Anexo III começa em 6%, enquanto a primeira faixa do Anexo V começa em 15,5%. O cálculo efetivo depende da receita acumulada e da parcela a deduzir, mas a diferença entre os anexos pode ser grande.",
+      },
+      {
+        heading: "Exemplo simples",
+        body:
+          "Uma empresa de serviço com receita acumulada de R$ 180.000,00 nos últimos 12 meses e folha de R$ 54.000,00 teria Fator R de 30%. Se a atividade estiver sujeita ao Fator R, ela pode sair do Anexo V e ser tributada pelo Anexo III.",
+      },
+      {
+        heading: "Quem costuma precisar dessa análise?",
+        bullets: [
+          "Clínicas, saúde, medicina, odontologia, psicologia, fisioterapia e terapias.",
+          "Consultorias, administração, gestão, organização e controle.",
+          "Tecnologia, desenvolvimento, banco de dados e suporte.",
+          "Engenharia, arquitetura, perícia, avaliação e serviços especializados.",
+        ],
+      },
+      {
+        heading: "O que entra na conta?",
+        body:
+          "A análise usa os últimos 12 meses. Em regra, entram valores como folha de salários, pró-labore, contribuição patronal previdenciária e FGTS, conforme a regra aplicável ao Simples Nacional.",
+      },
+      {
+        heading: "Quando não adianta?",
+        bullets: [
+          "Quando a atividade não é sujeita ao Fator R e já tem anexo definido por outra regra.",
+          "Quando a folha dos últimos 12 meses não chega a 28% da receita bruta.",
+          "Quando a empresa informa pró-labore, folha ou receita de forma inconsistente.",
+          "Quando há mistura de atividades e as receitas não são separadas corretamente no PGDAS-D.",
+          "Quando o planejamento tenta criar folha artificial, sem lastro real, apenas para reduzir imposto.",
+        ],
+      },
+    ],
+    checklist: [
+      "Extratos do PGDAS-D dos últimos 12 meses",
+      "Folha de pagamento e pró-labore",
+      "Guias de INSS e FGTS",
+      "CNAE e objeto social",
+      "Notas fiscais de serviço",
+      "Separação de receitas por atividade",
+    ],
+    sources: [
+      {
+        title: "Lei Complementar nº 123/2006 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm",
+      },
+      {
+        title: "Lei Complementar nº 155/2016 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/lcp/Lcp155.htm",
+      },
+      {
+        title: "Portal do Simples Nacional - regra dos 28%",
+        href: "https://www8.receita.fazenda.gov.br/simplesnacional/noticias/NoticiaCompleta.aspx?id=415ad600-7d43-4e55-971b-55df99e95ef3",
+      },
+      {
+        title: "Manual do PGDAS-D e DEFIS",
+        href: "https://www8.receita.fazenda.gov.br/simplesnacional/arquivos/manual/manual_pgdas-d_2018_v4.pdf",
+      },
+    ],
+  },
+  {
+    slug: "clinica-estetica-economia-tributaria",
+    category: "Clínicas",
+    readTime: "7 min",
+    title: "Clínica de estética pode pagar imposto a mais por estar no enquadramento errado",
+    excerpt:
+      "A economia pode aparecer no anexo correto, na separação entre serviço e produto e na revisão de mercadorias monofásicas.",
+    intro:
+      "Tem oportunidade tributária para clínica de estética, sim. Mas o segredo é separar bem o que a empresa faz: estética e beleza pura, procedimento de saúde, venda de cosméticos ou uma mistura de tudo isso.",
+    sections: [
+      {
+        heading: "Estética e beleza pura pode ser Anexo III",
+        paragraphs: [
+          "A Receita Federal já se manifestou no sentido de que empresa optante pelo Simples Nacional cuja única atividade seja prestação de serviços de estética e cuidados com a beleza deve tributar essas receitas pelo Anexo III da LC nº 123/2006.",
+          "Isso é importante porque o Anexo III começa em 6%. Então, se a clínica está pagando como se fosse Anexo V sem necessidade, pode haver imposto maior do que o devido.",
+        ],
+      },
+      {
+        heading: "Procedimento de saúde pode mudar a conversa",
+        body:
+          "Nem toda clínica que se chama estética é tributada igual. Se ela faz procedimentos de saúde, atua com profissional habilitado ou exerce atividades técnicas, pode entrar em discussão de Anexo V com aplicação do Fator R.",
+      },
+      {
+        heading: "Venda de cosméticos precisa ser separada do serviço",
+        body:
+          "Muitas clínicas vendem produtos depois do procedimento. Quando existe venda de mercadoria, a receita precisa ser segregada no Simples Nacional. Alguns produtos de perfumaria, toucador, higiene pessoal e cosméticos podem estar sujeitos à tributação monofásica de PIS/COFINS.",
+      },
+      {
+        heading: "ISS é municipal, mas também precisa estar certo",
+        body:
+          "Serviços de estética e cuidados pessoais estão no campo do ISS, conforme a lista de serviços da LC nº 116/2003. No Simples Nacional, normalmente o ISS entra dentro do DAS, mas a regra municipal ainda importa para cadastro, nota fiscal, retenção e local de incidência.",
+      },
+      {
+        heading: "Onde pode estar a economia?",
+        bullets: [
+          "Anexo III direto para estética e beleza pura, quando a atividade real permite.",
+          "Fator R para atividades técnicas ou de saúde, quando a folha alcança o percentual necessário.",
+          "Segregação de receitas de venda de produtos.",
+          "Revisão de produtos monofásicos de PIS/COFINS.",
+          "Correção de ISS retido ou informado de forma errada.",
+        ],
+      },
+    ],
+    checklist: [
+      "Extratos do PGDAS-D dos últimos 12 meses",
+      "Notas fiscais de serviço e de venda de produtos",
+      "CNAEs, contrato social e alvará ou licença sanitária",
+      "Folha, pró-labore, INSS e FGTS dos últimos 12 meses",
+      "Relatório de produtos vendidos com NCM",
+      "Comprovantes de ISS retido, quando existir",
+    ],
+    sources: [
+      {
+        title: "Receita Federal - consulta de normas",
+        href: "https://normas.receita.fazenda.gov.br/sijut2consulta/consulta.action?termoBusca=LC+123%2F2006&tipoData=2",
+      },
+      {
+        title: "Lei Complementar nº 123/2006 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm",
+      },
+      {
+        title: "Lei Complementar nº 116/2003 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp116.htm",
+      },
+      {
+        title: "Lei nº 10.147/2000 - Planalto",
+        href: "https://www.planalto.gov.br/ccivil_03/leis/l10147.htm",
+      },
+      {
+        title: "Solução de Consulta Cosit nº 225/2017 - Receita Federal",
+        href: "https://normas.receita.fazenda.gov.br/sijut2consulta/anexoOutros.action?idArquivoBinario=43866",
+      },
+    ],
+  },
   {
     slug: "cnpj-regular",
     category: "Regularidade",
@@ -939,7 +1272,19 @@ function BlogPage({ slug }: { slug?: string }) {
             {post.sections.map((section) => (
               <section className="blog-section" key={section.heading}>
                 <h2>{section.heading}</h2>
-                <p>{section.body}</p>
+                {section.body ? <p>{section.body}</p> : null}
+                {section.paragraphs?.map((paragraph, index) => (
+                  <p key={`${section.heading}-paragraph-${index}`}>
+                    {paragraph}
+                  </p>
+                ))}
+                {section.bullets ? (
+                  <ul className="blog-bullets">
+                    {section.bullets.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
               </section>
             ))}
 
@@ -947,6 +1292,25 @@ function BlogPage({ slug }: { slug?: string }) {
               <h2 id="blog-checklist-title">Checklist rápido</h2>
               <CheckList items={post.checklist} />
             </section>
+
+            {post.sources ? (
+              <section className="blog-sources" aria-labelledby="blog-sources-title">
+                <h2 id="blog-sources-title">Fontes oficiais</h2>
+                <ul>
+                  {post.sources.map((source) => (
+                    <li key={source.href}>
+                      <a href={source.href} target="_blank" rel="noreferrer">
+                        {source.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <p>
+                  Conteúdo informativo. A aplicação depende da análise
+                  individual da empresa, documentos fiscais e enquadramento.
+                </p>
+              </section>
+            ) : null}
 
             <div className="blog-cta">
               <h2>Quer olhar isso na sua empresa?</h2>
