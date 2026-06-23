@@ -9,6 +9,16 @@ const requiredFields = [
   "pendencias",
 ];
 
+const leadTitles = {
+  troca_contador: "Novo lead - Troca de contador",
+  contabilidade_empresas: "Novo lead - Contabilidade para empresas",
+};
+
+const whatsappSubjects = {
+  troca_contador: "troca de contador",
+  contabilidade_empresas: "contabilidade para empresas",
+};
+
 function readBody(request) {
   if (request.body && typeof request.body === "object") {
     return request.body;
@@ -33,9 +43,16 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;");
 }
 
+function pushOptionalLine(lines, label, value) {
+  if (clean(value)) {
+    lines.push(`<b>${label}:</b> ${escapeHtml(value)}`);
+  }
+}
+
 function formatTelegramMessage(lead) {
+  const title = leadTitles[lead.tipo] || "Novo lead - Nacional Contabilidade";
   const lines = [
-    "<b>Novo lead - Troca de contador</b>",
+    `<b>${title}</b>`,
     "",
     `<b>Nome:</b> ${escapeHtml(lead.nome)}`,
     `<b>WhatsApp:</b> ${escapeHtml(lead.whatsapp)}`,
@@ -47,6 +64,11 @@ function formatTelegramMessage(lead) {
     `<b>Pendência fiscal:</b> ${escapeHtml(lead.pendencias)}`,
     `<b>Motivo:</b> ${escapeHtml(lead.motivo)}`,
   ];
+
+  pushOptionalLine(lines, "Sócios", lead.socios);
+  pushOptionalLine(lines, "Notas fiscais", lead.notas);
+  pushOptionalLine(lines, "Funcionários", lead.funcionarios);
+  pushOptionalLine(lines, "Necessidade", lead.necessidade);
 
   if (clean(lead.observacao)) {
     lines.push("", `<b>Observação:</b> ${escapeHtml(lead.observacao)}`);
@@ -81,7 +103,8 @@ function buildWhatsappUrl(lead) {
     return "";
   }
 
-  const message = `Ola, ${clean(lead.nome)}. Recebi seu formulario sobre troca de contador pela Nacional Contabilidade.`;
+  const subject = whatsappSubjects[lead.tipo] || "atendimento";
+  const message = `Olá, ${clean(lead.nome)}. Recebi seu formulário sobre ${subject} pela Nacional Contabilidade.`;
 
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
@@ -149,7 +172,7 @@ async function sendGoogleSheets(lead) {
     },
     body: JSON.stringify({
       secret: process.env.GOOGLE_SHEETS_WEBHOOK_SECRET || "",
-      tipo: "troca_contador",
+      tipo: lead.tipo || "troca_contador",
       recebidoEm: new Date().toISOString(),
       ...lead,
     }),
@@ -182,6 +205,7 @@ export default async function handler(request, response) {
   }
 
   const lead = {
+    tipo: clean(body.tipo) || "troca_contador",
     nome: clean(body.nome),
     whatsapp: clean(body.whatsapp),
     cidade: clean(body.cidade),
@@ -191,6 +215,10 @@ export default async function handler(request, response) {
     faturamento: clean(body.faturamento),
     motivo: clean(body.motivo),
     pendencias: clean(body.pendencias),
+    socios: clean(body.socios),
+    notas: clean(body.notas),
+    funcionarios: clean(body.funcionarios),
+    necessidade: clean(body.necessidade),
     observacao: clean(body.observacao),
     origem: clean(body.origem),
     pagina: clean(body.pagina),

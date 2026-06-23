@@ -67,11 +67,8 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Contabilidade para empresas",
     text: "Impostos, obrigações, notas e rotina fiscal",
-    href: buildWhatsappUrl(
-      "Olá, vim pelo link e quero falar sobre contabilidade mensal para minha empresa.",
-    ),
+    href: "/contabilidade-empresas",
     kind: "accounting",
-    external: true,
   },
   {
     title: "Planejamento tributário",
@@ -148,6 +145,10 @@ type SwitchAccountantFormData = {
   faturamento: string;
   motivo: string;
   pendencias: string;
+  socios: string;
+  notas: string;
+  funcionarios: string;
+  necessidade: string;
   observacao: string;
   website: string;
 };
@@ -162,6 +163,10 @@ const initialSwitchAccountantForm: SwitchAccountantFormData = {
   faturamento: "",
   motivo: "",
   pendencias: "",
+  socios: "",
+  notas: "",
+  funcionarios: "",
+  necessidade: "",
   observacao: "",
   website: "",
 };
@@ -204,6 +209,39 @@ const switchReasonOptions = [
 ];
 
 const pendingOptions = ["Sim", "Não", "Não sei"];
+
+const partnerOptions = [
+  "Sem sócios",
+  "2 sócios",
+  "3 sócios",
+  "4 ou mais sócios",
+  "Ainda vou definir",
+];
+
+const invoiceOptions = [
+  "Já emite nota fiscal",
+  "Precisa começar a emitir",
+  "Emite pouco",
+  "Não emite nota ainda",
+  "Não sei informar",
+];
+
+const employeeOptions = [
+  "Não tem funcionários",
+  "1 a 3 funcionários",
+  "4 a 10 funcionários",
+  "Mais de 10 funcionários",
+  "Pretende contratar",
+];
+
+const accountingNeedOptions = [
+  "Quero iniciar contabilidade mensal",
+  "Preciso organizar impostos e obrigações",
+  "Preciso emitir nota e manter CNPJ em dia",
+  "Quero entender melhor caixa, lucro e retirada",
+  "Tenho pendências e preciso regularizar",
+  "Outro ponto",
+];
 
 function formatBrazilPhone(value: string) {
   const digits = value.replace(/\D/g, "").slice(0, 11);
@@ -888,15 +926,346 @@ function SwitchAccountantPage() {
   );
 }
 
+function BusinessAccountingPage() {
+  const [form, setForm] = useState<SwitchAccountantFormData>(
+    initialSwitchAccountantForm,
+  );
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    document.title = "Contabilidade para empresas | Nacional Contabilidade";
+  }, []);
+
+  const updateField = (
+    field: keyof SwitchAccountantFormData,
+    value: string,
+  ) => {
+    setForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitStatus("sending");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/troca-contador", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          tipo: "contabilidade_empresas",
+          motivo: form.necessidade,
+          origem: "Formulario contabilidade para empresas",
+          pagina: window.location.href,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Não foi possível enviar o formulário.");
+      }
+
+      setSubmitStatus("success");
+      setForm(initialSwitchAccountantForm);
+    } catch (error) {
+      setSubmitStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Não foi possível enviar o formulário.",
+      );
+    }
+  };
+
+  return (
+    <main className="lead-page">
+      <section className="lead-shell" aria-labelledby="contabilidade-empresas-title">
+        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
+          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+        </a>
+
+        <div className="lead-heading">
+          <p className="lead-kicker">Contabilidade para empresas</p>
+          <h1 id="contabilidade-empresas-title">
+            Vamos entender a rotina da sua empresa.
+          </h1>
+          <p>
+            Responda o checklist abaixo. Com essas informações, nossa equipe
+            consegue conversar com mais clareza sobre impostos, obrigações,
+            notas e acompanhamento contábil.
+          </p>
+        </div>
+
+        <form className="lead-form" onSubmit={handleSubmit}>
+          <div className="form-grid">
+            <label>
+              <span>Seu nome</span>
+              <input
+                required
+                autoComplete="name"
+                type="text"
+                value={form.nome}
+                onChange={(event) => updateField("nome", event.target.value)}
+                placeholder="Nome completo"
+              />
+            </label>
+
+            <label>
+              <span>WhatsApp</span>
+              <input
+                required
+                autoComplete="tel-national"
+                inputMode="numeric"
+                pattern="[\d\s()+-]{14,15}"
+                type="tel"
+                value={form.whatsapp}
+                onChange={(event) =>
+                  updateField("whatsapp", formatBrazilPhone(event.target.value))
+                }
+                placeholder="(93) 99210-1980"
+              />
+            </label>
+
+            <label>
+              <span>Cidade/UF</span>
+              <input
+                required
+                autoComplete="address-level2"
+                type="text"
+                value={form.cidade}
+                onChange={(event) => updateField("cidade", event.target.value)}
+                placeholder="Ex: Santarém/PA"
+              />
+            </label>
+
+            <label>
+              <span>Nome da empresa</span>
+              <input
+                type="text"
+                value={form.empresa}
+                onChange={(event) => updateField("empresa", event.target.value)}
+                placeholder="Opcional"
+              />
+            </label>
+
+            <label>
+              <span>Regime tributário</span>
+              <select
+                required
+                value={form.regime}
+                onChange={(event) => updateField("regime", event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {taxRegimeOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Segmento da empresa</span>
+              <select
+                required
+                value={form.segmento}
+                onChange={(event) =>
+                  updateField("segmento", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {segmentOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Faturamento aproximado</span>
+              <select
+                required
+                value={form.faturamento}
+                onChange={(event) =>
+                  updateField("faturamento", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {revenueOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Quantidade de sócios</span>
+              <select
+                value={form.socios}
+                onChange={(event) => updateField("socios", event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {partnerOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Notas fiscais</span>
+              <select
+                value={form.notas}
+                onChange={(event) => updateField("notas", event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {invoiceOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Funcionários</span>
+              <select
+                value={form.funcionarios}
+                onChange={(event) =>
+                  updateField("funcionarios", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {employeeOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Tem pendência fiscal?</span>
+              <select
+                required
+                value={form.pendencias}
+                onChange={(event) =>
+                  updateField("pendencias", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {pendingOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>O que você precisa agora?</span>
+              <select
+                required
+                value={form.necessidade}
+                onChange={(event) =>
+                  updateField("necessidade", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {accountingNeedOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span>Quer explicar algo?</span>
+            <textarea
+              value={form.observacao}
+              onChange={(event) =>
+                updateField("observacao", event.target.value)
+              }
+              placeholder="Conte rapidamente o que está acontecendo. Opcional."
+              rows={4}
+            />
+          </label>
+
+          <label className="form-honeypot">
+            <span>Site</span>
+            <input
+              tabIndex={-1}
+              autoComplete="off"
+              type="text"
+              value={form.website}
+              onChange={(event) => updateField("website", event.target.value)}
+            />
+          </label>
+
+          {submitStatus === "success" && (
+            <p className="form-alert form-alert--success" role="status">
+              Recebemos suas informações. A Nacional Contabilidade vai entrar em
+              contato pelo WhatsApp informado. Se preferir, você também pode
+              chamar a gente agora.
+            </p>
+          )}
+
+          {submitStatus === "error" && (
+            <p className="form-alert form-alert--error" role="alert">
+              {errorMessage} Se preferir, fale direto pelo WhatsApp.
+            </p>
+          )}
+
+          <div className="lead-actions">
+            <button
+              className="button"
+              type="submit"
+              disabled={submitStatus === "sending"}
+            >
+              {submitStatus === "sending" ? "Enviando..." : "Enviar checklist"}
+            </button>
+            <a
+              className="button button--secondary"
+              href={buildWhatsappUrl(
+                "Olá, vim pelo checklist de contabilidade para empresas e quero falar com a Nacional Contabilidade.",
+              )}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Chamar no WhatsApp
+            </a>
+          </div>
+        </form>
+
+        <p className="lead-note">
+          Seus dados serão usados apenas para contato e avaliação inicial da
+          contabilidade da empresa.
+        </p>
+      </section>
+    </main>
+  );
+}
+
 export default function App() {
   const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
   const isLinksPage = normalizedPath === "/links";
   const isSwitchAccountantPage = normalizedPath === "/trocar-contador";
+  const isBusinessAccountingPage = normalizedPath === "/contabilidade-empresas";
   const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (isLinksPage || isSwitchAccountantPage) return;
+    if (isLinksPage || isSwitchAccountantPage || isBusinessAccountingPage) return;
 
     const updateFloatingButton = () => {
       const section = heroSectionRef.current;
@@ -913,7 +1282,7 @@ export default function App() {
       window.removeEventListener("scroll", updateFloatingButton);
       window.removeEventListener("resize", updateFloatingButton);
     };
-  }, [isLinksPage, isSwitchAccountantPage]);
+  }, [isLinksPage, isSwitchAccountantPage, isBusinessAccountingPage]);
 
   if (isLinksPage) {
     return <LinksPage />;
@@ -921,6 +1290,10 @@ export default function App() {
 
   if (isSwitchAccountantPage) {
     return <SwitchAccountantPage />;
+  }
+
+  if (isBusinessAccountingPage) {
+    return <BusinessAccountingPage />;
   }
 
   return (

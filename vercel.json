@@ -15,6 +15,14 @@
     {
       "source": "/trocar-contador/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/contabilidade-empresas",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contabilidade-empresas/",
+      "destination": "/index.html"
     }
   ]
 }
