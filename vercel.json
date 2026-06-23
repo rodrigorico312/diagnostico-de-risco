@@ -23,6 +23,14 @@
     {
       "source": "/contabilidade-empresas/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/ferramentas",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ferramentas/",
+      "destination": "/index.html"
     }
   ]
 }

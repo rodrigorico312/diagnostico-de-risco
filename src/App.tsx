@@ -27,6 +27,7 @@ type LinkKind =
   | "address"
   | "correspondent"
   | "solutions"
+  | "tools"
   | "site";
 
 type LinkItem = {
@@ -69,6 +70,12 @@ const linkTreeItems: LinkItem[] = [
     text: "Impostos, obrigações, notas e rotina fiscal",
     href: "/contabilidade-empresas",
     kind: "accounting",
+  },
+  {
+    title: "Central do empresário",
+    text: "Atalhos, consultas, certidões e ferramentas úteis",
+    href: "/ferramentas",
+    kind: "tools",
   },
   {
     title: "Planejamento tributário",
@@ -260,6 +267,142 @@ function formatBrazilPhone(value: string) {
 
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 }
+
+const toolActions = [
+  {
+    title: "Checklist de contabilidade",
+    text: "Para empresas que querem orçamento, análise ou acompanhamento mensal.",
+    href: "/contabilidade-empresas",
+  },
+  {
+    title: "Trocar de contador",
+    text: "Para quem já tem CNPJ e quer organizar a migração contábil.",
+    href: "/trocar-contador",
+  },
+  {
+    title: "Abrir, alterar ou baixar CNPJ",
+    text: "Para abertura, alteração contratual, regularização ou encerramento.",
+    href: buildWhatsappUrl(
+      "Olá, vim pela Central do Empresário e quero falar sobre abertura, alteração ou baixa de CNPJ.",
+    ),
+    external: true,
+  },
+  {
+    title: "Assessoria para contadores",
+    text: "Apoio técnico em demandas fiscais, tributárias e empresariais.",
+    href: buildWhatsappUrl(
+      "Olá, vim pela Central do Empresário e quero falar sobre assessoria para contadores.",
+    ),
+    external: true,
+  },
+];
+
+const toolGroups = [
+  {
+    title: "CNPJ, Receita Federal e abertura de empresa",
+    text: "Atalhos para consulta cadastral, regularidade federal e processos ligados ao CNPJ.",
+    links: [
+      {
+        title: "Consulta CNPJ",
+        text: "Comprovante de inscrição e situação cadastral.",
+        href: "https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp",
+      },
+      {
+        title: "e-CAC",
+        text: "Acesso a pendências, procurações, situação fiscal e serviços da Receita.",
+        href: "https://cav.receita.fazenda.gov.br/autenticacao/login",
+      },
+      {
+        title: "Certidão federal",
+        text: "Emissão e consulta de regularidade fiscal na Receita Federal/PGFN.",
+        href: "https://www.gov.br/receitafederal/pt-br/servicos/certidoes/emitir-certidao",
+      },
+      {
+        title: "REDESIM",
+        text: "Abertura, alteração, baixa e serviços integrados do CNPJ.",
+        href: "https://www.gov.br/empresas-e-negocios/pt-br/redesim",
+      },
+      {
+        title: "JUCEPA",
+        text: "Junta Comercial do Estado do Pará.",
+        href: "https://www.jucepa.pa.gov.br/",
+      },
+    ],
+  },
+  {
+    title: "Simples Nacional e MEI",
+    text: "Consultas e serviços usados na rotina de empresas optantes pelo Simples e MEIs.",
+    links: [
+      {
+        title: "Portal do Simples Nacional",
+        text: "Página principal com serviços públicos, manuais, notícias e agenda.",
+        href: "https://www8.receita.fazenda.gov.br/SimplesNacional/",
+      },
+      {
+        title: "Consulta optantes",
+        text: "Consulta se a empresa está no Simples Nacional ou no SIMEI.",
+        href: "https://www8.receita.fazenda.gov.br/SimplesNacional/aplicacoes.aspx?id=21",
+      },
+      {
+        title: "PGMEI",
+        text: "Geração do DAS mensal do MEI.",
+        href: "https://www8.receita.fazenda.gov.br/SimplesNacional/Aplicacoes/ATSPO/pgmei.app/Identificacao",
+      },
+      {
+        title: "DASN-SIMEI",
+        text: "Declaração anual do MEI.",
+        href: "https://www8.receita.fazenda.gov.br/SimplesNacional/Aplicacoes/ATSPO/dasnsimei.app/Identificacao",
+      },
+      {
+        title: "Portal do Empreendedor",
+        text: "Serviços e orientações oficiais para MEI.",
+        href: "https://www.gov.br/empresas-e-negocios/pt-br/empreendedor",
+      },
+    ],
+  },
+  {
+    title: "Fiscal, notas e atendimento no Pará",
+    text: "Links úteis para emissão, consulta e rotina fiscal estadual ou municipal.",
+    links: [
+      {
+        title: "SEFA Pará",
+        text: "Serviços da Secretaria de Estado da Fazenda do Pará.",
+        href: "https://www.sefa.pa.gov.br/",
+      },
+      {
+        title: "Prefeitura de Santarém",
+        text: "Portal de serviços, tributos municipais e nota fiscal.",
+        href: "https://santarem.pa.gov.br/",
+      },
+      {
+        title: "ISS Santarém",
+        text: "Portal municipal de gestão de ISS e nota fiscal de serviço.",
+        href: "https://siapsistemas.com.br/santarempgiss/servlet/mainsantarem",
+      },
+      {
+        title: "Emissor Nacional NFS-e",
+        text: "Acesso ao ambiente nacional de nota fiscal de serviço.",
+        href: "https://www.nfse.gov.br/EmissorNacional/",
+      },
+    ],
+  },
+  {
+    title: "Folha, trabalhista e obrigações com funcionários",
+    text: "Atalhos para rotinas que aparecem quando a empresa tem empregado ou pretende contratar.",
+    links: [
+      {
+        title: "eSocial",
+        text: "Portal oficial para eventos trabalhistas, previdenciários e fiscais.",
+        href: "https://www.gov.br/esocial/pt-br",
+      },
+      {
+        title: "FGTS Digital",
+        text: "Portal oficial para recolhimento e gestão do FGTS.",
+        href: "https://www.gov.br/trabalho-e-emprego/pt-br/servicos/empregador/fgtsdigital",
+      },
+    ],
+  },
+];
 
 const heroHighlights = [
   "CNPJ em dia",
@@ -575,6 +718,19 @@ function LinkIcon({ kind }: { kind: LinkKind }) {
     );
   }
 
+  if (kind === "tools") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M5 5.5h14" />
+        <path d="M5 10.5h14" />
+        <path d="M5 15.5h8" />
+        <path d="M17 14.5v5" />
+        <path d="M14.5 17h5" />
+        <path d="M8 19h4" />
+      </svg>
+    );
+  }
+
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24">
       <path d="M5 5h6v6H5Z" />
@@ -582,6 +738,110 @@ function LinkIcon({ kind }: { kind: LinkKind }) {
       <path d="M5 13h6v6H5Z" />
       <path d="M13 13h6v6h-6Z" />
     </svg>
+  );
+}
+
+function ToolsPage() {
+  useEffect(() => {
+    document.title = "Central do empresário | Nacional Contabilidade";
+  }, []);
+
+  return (
+    <main className="tools-page">
+      <section className="tools-shell" aria-labelledby="tools-title">
+        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
+          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+        </a>
+
+        <div className="tools-hero">
+          <p className="lead-kicker">Central do empresário</p>
+          <h1 id="tools-title">Atalhos para resolver a rotina da empresa.</h1>
+          <p>
+            Consultas, certidões, notas, Simples Nacional, MEI e caminhos para
+            falar com a Nacional quando precisar organizar essa parte com apoio
+            contábil.
+          </p>
+        </div>
+
+        <div className="tools-actions" aria-label="Caminhos rápidos">
+          {toolActions.map((action) => (
+            <a
+              className="tools-action"
+              href={action.href}
+              key={action.title}
+              target={action.external ? "_blank" : undefined}
+              rel={action.external ? "noreferrer" : undefined}
+            >
+              <strong>{action.title}</strong>
+              <span>{action.text}</span>
+            </a>
+          ))}
+        </div>
+
+        <div className="tools-note">
+          <strong>Atenção simples:</strong>
+          <span>
+            esses atalhos ajudam na consulta. Se aparecer pendência, débito,
+            bloqueio ou dúvida de enquadramento, vale conferir antes de enviar
+            qualquer declaração ou pagamento.
+          </span>
+        </div>
+
+        <div className="tools-groups">
+          {toolGroups.map((group, index) => {
+            const headingId = `tool-group-${index + 1}`;
+
+            return (
+              <section className="tool-group" key={group.title} aria-labelledby={headingId}>
+                <div className="tool-group__heading">
+                  <h2 id={headingId}>{group.title}</h2>
+                  <p>{group.text}</p>
+                </div>
+
+                <div className="tool-links">
+                  {group.links.map((link) => (
+                    <a
+                      className="tool-link"
+                      href={link.href}
+                      key={link.title}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <span>
+                        <strong>{link.title}</strong>
+                        <small>{link.text}</small>
+                      </span>
+                      <svg aria-hidden="true" viewBox="0 0 24 24">
+                        <path d="M7 17 17 7" />
+                        <path d="M9 7h8v8" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
+
+        <div className="tools-final">
+          <h2>Quer que a gente olhe com você?</h2>
+          <p>
+            Se a consulta apontou pendência ou se você não sabe qual caminho
+            seguir, chame a Nacional e explique a situação da empresa.
+          </p>
+          <a
+            className="button"
+            href={buildWhatsappUrl(
+              "Olá, vim pela Central do Empresário e preciso de ajuda com a situação da minha empresa.",
+            )}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Falar com a Nacional
+          </a>
+        </div>
+      </section>
+    </main>
   );
 }
 
@@ -1261,11 +1521,19 @@ export default function App() {
   const isLinksPage = normalizedPath === "/links";
   const isSwitchAccountantPage = normalizedPath === "/trocar-contador";
   const isBusinessAccountingPage = normalizedPath === "/contabilidade-empresas";
+  const isToolsPage = normalizedPath === "/ferramentas";
   const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (isLinksPage || isSwitchAccountantPage || isBusinessAccountingPage) return;
+    if (
+      isLinksPage ||
+      isSwitchAccountantPage ||
+      isBusinessAccountingPage ||
+      isToolsPage
+    ) {
+      return;
+    }
 
     const updateFloatingButton = () => {
       const section = heroSectionRef.current;
@@ -1282,7 +1550,7 @@ export default function App() {
       window.removeEventListener("scroll", updateFloatingButton);
       window.removeEventListener("resize", updateFloatingButton);
     };
-  }, [isLinksPage, isSwitchAccountantPage, isBusinessAccountingPage]);
+  }, [isLinksPage, isSwitchAccountantPage, isBusinessAccountingPage, isToolsPage]);
 
   if (isLinksPage) {
     return <LinksPage />;
@@ -1296,6 +1564,10 @@ export default function App() {
     return <BusinessAccountingPage />;
   }
 
+  if (isToolsPage) {
+    return <ToolsPage />;
+  }
+
   return (
     <main className="site">
       <header className="topbar">
@@ -1307,6 +1579,7 @@ export default function App() {
           </a>
           <nav className="topbar__nav" aria-label="Navegação principal">
             <a href="#servicos">Serviços</a>
+            <a href="/ferramentas">Ferramentas</a>
             <a href="#como-funciona">Como funciona</a>
             <a
               className="topbar__cta"
@@ -1479,6 +1752,32 @@ export default function App() {
                 <p>{item.text}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--soft" aria-labelledby="central-title">
+        <div className="container split-section">
+          <div className="section-heading">
+            <h2 id="central-title">Central do empresário</h2>
+            <p>
+              Reunimos atalhos para CNPJ, Simples Nacional, MEI, certidões,
+              notas fiscais, SEFA Pará, Prefeitura de Santarém, eSocial e FGTS
+              Digital.
+            </p>
+            <a className="button button--inline" href="/ferramentas">
+              Acessar ferramentas
+            </a>
+          </div>
+          <div>
+            <CheckList
+              items={[
+                "Consultas e portais oficiais em um só lugar",
+                "Caminhos rápidos para checklists e atendimento",
+                "Links úteis para empresários e contadores",
+                "Apoio da Nacional quando aparecer pendência",
+              ]}
+            />
           </div>
         </div>
       </section>
