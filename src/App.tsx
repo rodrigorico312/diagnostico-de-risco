@@ -10,9 +10,136 @@ const CNPJ = "62.560.654/0001-27";
 const ADDRESS =
   "Av. Plácido de Castro, 1505, Aparecida, Santarém-PA, CEP 68.040-090";
 
-const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  WHATSAPP_MESSAGE,
-)}`;
+const buildWhatsappUrl = (message = WHATSAPP_MESSAGE) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+const whatsappUrl = buildWhatsappUrl();
+
+type LinkKind =
+  | "whatsapp"
+  | "instagram"
+  | "email"
+  | "switch"
+  | "company"
+  | "accounting"
+  | "tax"
+  | "advisor"
+  | "address"
+  | "correspondent"
+  | "solutions"
+  | "site";
+
+type LinkItem = {
+  title: string;
+  text: string;
+  href: string;
+  kind: LinkKind;
+  external?: boolean;
+  featured?: boolean;
+  ariaLabel?: string;
+};
+
+const linkTreeItems: LinkItem[] = [
+  {
+    title: "Falar no WhatsApp",
+    text: "Atendimento com a Nacional Contabilidade",
+    href: whatsappUrl,
+    kind: "whatsapp",
+    external: true,
+    featured: true,
+    ariaLabel: "Falar com a Nacional Contabilidade no WhatsApp",
+  },
+  {
+    title: "Trocar de contador",
+    text: "Migração contábil, documentos, acessos e pendências",
+    href: buildWhatsappUrl(
+      "Olá, vim pelo link e quero falar sobre troca de contador.",
+    ),
+    kind: "switch",
+    external: true,
+  },
+  {
+    title: "Abrir, alterar ou baixar CNPJ",
+    text: "Constituição, alteração contratual, regularização e baixa",
+    href: buildWhatsappUrl(
+      "Olá, vim pelo link e quero falar sobre abertura, alteração ou baixa de CNPJ.",
+    ),
+    kind: "company",
+    external: true,
+  },
+  {
+    title: "Contabilidade para empresas",
+    text: "Impostos, obrigações, notas e rotina fiscal",
+    href: buildWhatsappUrl(
+      "Olá, vim pelo link e quero falar sobre contabilidade mensal para minha empresa.",
+    ),
+    kind: "accounting",
+    external: true,
+  },
+  {
+    title: "Planejamento tributário",
+    text: "Análise de regime, operação, riscos e oportunidades",
+    href: buildWhatsappUrl(
+      "Olá, vim pelo link e quero falar sobre planejamento tributário.",
+    ),
+    kind: "tax",
+    external: true,
+  },
+  {
+    title: "Assessoria para contadores",
+    text: "Apoio técnico, rotina, mentoria e análise de casos",
+    href: buildWhatsappUrl(
+      "Olá, vim pelo link e sou contador. Quero falar sobre assessoria e apoio técnico.",
+    ),
+    kind: "advisor",
+    external: true,
+  },
+  {
+    title: "Endereço fiscal em Santarém",
+    text: "Endereço fiscal para empresas que precisam de base local",
+    href: buildWhatsappUrl(
+      "Olá, vim pelo link e quero falar sobre endereço fiscal em Santarém.",
+    ),
+    kind: "address",
+    external: true,
+  },
+  {
+    title: "Correspondente empresarial",
+    text: "Apoio local em Santarém para demandas empresariais",
+    href: buildWhatsappUrl(
+      "Olá, vim pelo link e quero falar sobre correspondente empresarial em Santarém.",
+    ),
+    kind: "correspondent",
+    external: true,
+  },
+  {
+    title: "Ver soluções",
+    text: "Serviços contábeis, fiscais, tributários e financeiros",
+    href: "/#servicos",
+    kind: "solutions",
+  },
+  {
+    title: "Site da Nacional",
+    text: "Conheça a Nacional Contabilidade",
+    href: "/",
+    kind: "site",
+  },
+  {
+    title: "Instagram",
+    text: "@rodrigospcoelho",
+    href: INSTAGRAM_URL,
+    kind: "instagram",
+    external: true,
+    ariaLabel: "Abrir Instagram de Rodrigo Coelho",
+  },
+  {
+    title: "Email",
+    text: EMAIL,
+    href: `mailto:${EMAIL}`,
+    kind: "email",
+    ariaLabel: "Enviar email para a Nacional Contabilidade",
+  },
+];
 
 const heroHighlights = [
   "CNPJ em dia",
@@ -202,11 +329,207 @@ function CheckList({ items }: { items: string[] }) {
   );
 }
 
+function LinkIcon({ kind }: { kind: LinkKind }) {
+  if (kind === "whatsapp") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" />
+        <path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" />
+      </svg>
+    );
+  }
+
+  if (kind === "instagram") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="5" />
+        <circle cx="12" cy="12" r="3.5" />
+        <circle cx="16.8" cy="7.2" r="0.8" />
+      </svg>
+    );
+  }
+
+  if (kind === "email") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <rect x="4" y="6" width="16" height="12" rx="2" />
+        <path d="m5 8 7 5 7-5" />
+      </svg>
+    );
+  }
+
+  if (kind === "site") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8" />
+        <path d="M4.5 12h15" />
+        <path d="M12 4c2.1 2.2 3.2 4.8 3.2 8S14.1 17.8 12 20" />
+        <path d="M12 4c-2.1 2.2-3.2 4.8-3.2 8S9.9 17.8 12 20" />
+      </svg>
+    );
+  }
+
+  if (kind === "switch") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M7 7h9" />
+        <path d="m13 4 3 3-3 3" />
+        <path d="M17 17H8" />
+        <path d="m11 14-3 3 3 3" />
+      </svg>
+    );
+  }
+
+  if (kind === "company") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M6 20V5.8A1.8 1.8 0 0 1 7.8 4h8.4A1.8 1.8 0 0 1 18 5.8V20" />
+        <path d="M4 20h16" />
+        <path d="M9 8h1.5" />
+        <path d="M13.5 8H15" />
+        <path d="M9 12h1.5" />
+        <path d="M13.5 12H15" />
+        <path d="M10 20v-4h4v4" />
+      </svg>
+    );
+  }
+
+  if (kind === "accounting") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <rect x="6" y="3.5" width="12" height="17" rx="2" />
+        <path d="M9 7.5h6" />
+        <path d="M9 11h.1" />
+        <path d="M12 11h.1" />
+        <path d="M15 11h.1" />
+        <path d="M9 14.5h.1" />
+        <path d="M12 14.5h.1" />
+        <path d="M15 14.5h.1" />
+        <path d="M9 18h6" />
+      </svg>
+    );
+  }
+
+  if (kind === "tax") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M5 19h14" />
+        <path d="M7 16.5v-4" />
+        <path d="M12 16.5v-8" />
+        <path d="M17 16.5v-6" />
+        <path d="M6.5 8.5 10 5l3 3 4.5-4" />
+        <path d="M16 4h1.5v1.5" />
+      </svg>
+    );
+  }
+
+  if (kind === "advisor") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M8.5 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+        <path d="M4 19a4.5 4.5 0 0 1 9 0" />
+        <path d="M15 7.5h4" />
+        <path d="M15 11.5h4" />
+        <path d="M15 15.5h3" />
+      </svg>
+    );
+  }
+
+  if (kind === "address") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M12 21s6-5.2 6-11a6 6 0 0 0-12 0c0 5.8 6 11 6 11Z" />
+        <circle cx="12" cy="10" r="2.2" />
+      </svg>
+    );
+  }
+
+  if (kind === "correspondent") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M6 15.5 9.5 19l8-8" />
+        <path d="M4 11.5 7.5 15" />
+        <path d="M12 15.5 20 7.5" />
+        <path d="M15 7.5h5v5" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M5 5h6v6H5Z" />
+      <path d="M13 5h6v6h-6Z" />
+      <path d="M5 13h6v6H5Z" />
+      <path d="M13 13h6v6h-6Z" />
+    </svg>
+  );
+}
+
+function LinksPage() {
+  useEffect(() => {
+    document.title = "Links | Nacional Contabilidade";
+  }, []);
+
+  return (
+    <main className="links-page">
+      <section className="links-shell" aria-label="Links da Nacional Contabilidade">
+        <div className="links-profile">
+          <a className="links-logo" href="/" aria-label="Ir para o site da Nacional Contabilidade">
+            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+          </a>
+          <div className="links-flags" aria-label="Atendimento no Pará e em todo o Brasil">
+            <ParaFlag />
+            <BrazilFlag />
+            <span>Atendimento no Pará e em todo o Brasil</span>
+          </div>
+          <p>
+            Contabilidade, regularização de CNPJ, endereço fiscal, assessoria
+            para contadores e apoio empresarial em Santarém e no Brasil.
+          </p>
+        </div>
+
+        <div className="links-stack" aria-label="Links da Nacional Contabilidade">
+          {linkTreeItems.map((item) => (
+            <a
+              className={`links-item${item.featured ? " links-item--featured" : ""} links-item--${item.kind}`}
+              href={item.href}
+              key={item.title}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noreferrer" : undefined}
+              aria-label={item.ariaLabel}
+            >
+              <span className="links-item__icon">
+                <LinkIcon kind={item.kind} />
+              </span>
+              <span className="links-item__text">
+                <strong>{item.title}</strong>
+                <small>{item.text}</small>
+              </span>
+              <span className="links-item__arrow" aria-hidden="true">
+                ›
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <footer className="links-footer">
+          <p>{COMPANY_NAME}</p>
+          <p>CNPJ: {CNPJ}</p>
+        </footer>
+      </section>
+    </main>
+  );
+}
+
 export default function App() {
+  const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
+  const isLinksPage = normalizedPath === "/links";
   const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    if (isLinksPage) return;
+
     const updateFloatingButton = () => {
       const section = heroSectionRef.current;
       if (!section) return;
@@ -222,7 +545,11 @@ export default function App() {
       window.removeEventListener("scroll", updateFloatingButton);
       window.removeEventListener("resize", updateFloatingButton);
     };
-  }, []);
+  }, [isLinksPage]);
+
+  if (isLinksPage) {
+    return <LinksPage />;
+  }
 
   return (
     <main className="site">
