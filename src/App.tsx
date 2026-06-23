@@ -317,16 +317,6 @@ const toolGroups = [
         text: "Emissão e consulta de regularidade fiscal na Receita Federal/PGFN.",
         href: "https://www.gov.br/receitafederal/pt-br/servicos/certidoes/emitir-certidao",
       },
-      {
-        title: "REDESIM",
-        text: "Abertura, alteração, baixa e serviços integrados do CNPJ.",
-        href: "https://www.gov.br/empresas-e-negocios/pt-br/redesim",
-      },
-      {
-        title: "JUCEPA",
-        text: "Junta Comercial do Estado do Pará.",
-        href: "https://www.jucepa.pa.gov.br/",
-      },
     ],
   },
   {
