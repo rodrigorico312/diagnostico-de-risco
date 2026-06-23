@@ -28,6 +28,7 @@ type LinkKind =
   | "correspondent"
   | "solutions"
   | "tools"
+  | "blog"
   | "site";
 
 type LinkItem = {
@@ -76,6 +77,12 @@ const linkTreeItems: LinkItem[] = [
     text: "Atalhos, consultas, certidões e ferramentas úteis",
     href: "/ferramentas",
     kind: "tools",
+  },
+  {
+    title: "Blog da Nacional",
+    text: "Conteúdos sobre CNPJ, impostos e rotina da empresa",
+    href: "/blog",
+    kind: "blog",
   },
   {
     title: "Planejamento tributário",
@@ -361,6 +368,165 @@ const toolGroups = [
         text: "Portal oficial para recolhimento e gestão do FGTS.",
         href: "https://www.gov.br/trabalho-e-emprego/pt-br/servicos/empregador/fgtsdigital",
       },
+    ],
+  },
+];
+
+const blogPosts = [
+  {
+    slug: "cnpj-regular",
+    category: "Regularidade",
+    readTime: "3 min",
+    title: "CNPJ regular: o que acompanhar antes de virar problema",
+    excerpt:
+      "Situação cadastral, certidões, débitos e declarações precisam ser vistos como rotina, não só quando a empresa precisa resolver algo urgente.",
+    intro:
+      "Ter CNPJ aberto não significa que a empresa está regular. A regularidade depende de cadastro, obrigações, impostos, declarações e documentos andando juntos.",
+    sections: [
+      {
+        heading: "O que olhar primeiro",
+        body: "A consulta começa pela situação cadastral do CNPJ, mas não para ali. Também é importante verificar certidões, pendências fiscais, declarações em atraso e débitos que possam impedir a empresa de emitir documentos, contratar ou comprovar regularidade.",
+      },
+      {
+        heading: "Por que isso importa",
+        body: "Quando a empresa só olha essa parte no susto, normalmente descobre o problema tarde: certidão travada, declaração pendente, guia esquecida ou cadastro desatualizado. A rotina contábil serve justamente para reduzir esse improviso.",
+      },
+    ],
+    checklist: [
+      "Consultar situação cadastral do CNPJ",
+      "Verificar certidões e pendências",
+      "Conferir declarações em atraso",
+      "Separar documentos básicos da empresa",
+    ],
+  },
+  {
+    slug: "trocar-de-contador",
+    category: "Rotina contábil",
+    readTime: "3 min",
+    title: "Quando faz sentido trocar de contador",
+    excerpt:
+      "Trocar de contador não é só trocar quem gera guia. A empresa precisa entender documentos, acessos, pendências e rotina antes da migração.",
+    intro:
+      "A troca de contador faz sentido quando a empresa sente que perdeu clareza sobre impostos, obrigações, documentos ou atendimento. Antes de mudar, é preciso organizar a transição.",
+    sections: [
+      {
+        heading: "O que precisa ser conferido",
+        body: "A migração deve levantar acessos, documentos enviados, declarações entregues, impostos apurados, pendências abertas e situação do CNPJ. Sem isso, a empresa troca de escritório carregando a bagunça junto.",
+      },
+      {
+        heading: "O objetivo da troca",
+        body: "A troca precisa melhorar a rotina: resposta mais clara, documentos mais organizados, obrigações acompanhadas e informação suficiente para o empresário decidir sem ficar no escuro.",
+      },
+    ],
+    checklist: [
+      "Listar acessos e procurações",
+      "Conferir impostos e declarações",
+      "Verificar pendências do CNPJ",
+      "Organizar documentos antes da migração",
+    ],
+  },
+  {
+    slug: "abrir-empresa",
+    category: "Abertura",
+    readTime: "3 min",
+    title: "Antes de abrir empresa, ajuste estas decisões",
+    excerpt:
+      "Abertura de CNPJ envolve atividade, regime, endereço, sócios e forma de operação. Começar errado pode gerar ajuste depois.",
+    intro:
+      "Abrir empresa parece simples, mas algumas decisões tomadas no início influenciam impostos, notas fiscais, obrigações e rotina operacional.",
+    sections: [
+      {
+        heading: "Decisões que vêm antes do CNPJ",
+        body: "É preciso entender o que a empresa vai vender, como vai receber, onde vai operar, se terá sócios, se terá funcionários e qual será a rotina de notas. Essas respostas ajudam a definir caminho cadastral e tributário.",
+      },
+      {
+        heading: "O que evitar",
+        body: "O erro comum é abrir o CNPJ olhando apenas para rapidez. Depois aparecem atividade mal escolhida, endereço inadequado, regime que não conversa com a operação ou falta de preparo para emitir nota.",
+      },
+    ],
+    checklist: [
+      "Definir atividade principal",
+      "Entender faturamento esperado",
+      "Verificar necessidade de nota fiscal",
+      "Organizar documentos dos sócios",
+    ],
+  },
+  {
+    slug: "financeiro-organizado",
+    category: "Financeiro",
+    readTime: "4 min",
+    title: "Financeiro organizado começa separando empresa e pessoa física",
+    excerpt:
+      "Misturar conta da empresa com conta pessoal dificulta caixa, lucro, retirada e comprovação de renda.",
+    intro:
+      "Uma empresa pode vender bem e ainda assim não saber se está dando lucro. Isso acontece muito quando dinheiro da pessoa física e da empresa se mistura sem controle.",
+    sections: [
+      {
+        heading: "O problema da mistura",
+        body: "Quando tudo passa pela mesma conta, fica difícil saber o que é venda, despesa, retirada, investimento, empréstimo ou pagamento pessoal. A contabilidade perde qualidade e o empresário perde leitura do resultado.",
+      },
+      {
+        heading: "O básico que resolve muita coisa",
+        body: "Separar contas, registrar entradas e saídas, definir retirada dos sócios e acompanhar caixa já muda a conversa. A empresa passa a ter número para decidir, não só saldo no banco.",
+      },
+    ],
+    checklist: [
+      "Separar conta pessoal e conta da empresa",
+      "Registrar entradas e saídas",
+      "Definir retirada dos sócios",
+      "Acompanhar caixa com frequência",
+    ],
+  },
+  {
+    slug: "nota-fiscal-imposto",
+    category: "Fiscal",
+    readTime: "3 min",
+    title: "Emitir nota fiscal não é só apertar um botão",
+    excerpt:
+      "Antes de emitir nota, a empresa precisa entender atividade, tributação, município, estado e dados do serviço ou produto.",
+    intro:
+      "A nota fiscal faz parte da rotina, mas ela não anda sozinha. Cada emissão conversa com cadastro, impostos e obrigações da empresa.",
+    sections: [
+      {
+        heading: "O que precisa estar alinhado",
+        body: "A empresa precisa conferir atividade, enquadramento, dados do cliente, descrição, município ou estado envolvido e tipo de operação. Uma nota emitida de qualquer jeito pode criar inconsistência depois.",
+      },
+      {
+        heading: "Onde a contabilidade entra",
+        body: "A contabilidade ajuda a manter a emissão coerente com a operação e com a apuração dos impostos. Não é para complicar, é para evitar que a rotina fiscal fique solta.",
+      },
+    ],
+    checklist: [
+      "Conferir cadastro da empresa",
+      "Entender serviço ou produto vendido",
+      "Guardar notas e comprovantes",
+      "Acompanhar impostos gerados pela rotina",
+    ],
+  },
+  {
+    slug: "mei-simples-nacional",
+    category: "MEI e Simples",
+    readTime: "3 min",
+    title: "MEI e Simples Nacional: cuidado com o básico",
+    excerpt:
+      "Mesmo regimes mais simples exigem rotina. DAS, declaração, faturamento e atividade precisam ser acompanhados.",
+    intro:
+      "MEI e Simples Nacional facilitam a vida de muitas empresas, mas facilidade não significa ausência de obrigação. O básico precisa estar em dia.",
+    sections: [
+      {
+        heading: "O que acompanhar",
+        body: "É importante olhar pagamentos, declaração anual, faturamento, atividade exercida, emissão de notas e eventuais pendências. Se a empresa cresce ou muda de operação, o enquadramento também precisa ser revisto.",
+      },
+      {
+        heading: "Quando pedir ajuda",
+        body: "Quando o empresário não sabe se está pagando certo, se pode emitir nota, se passou do limite ou se tem declaração pendente, é melhor conferir antes de deixar acumular.",
+      },
+    ],
+    checklist: [
+      "Acompanhar pagamento mensal",
+      "Conferir faturamento",
+      "Entregar declarações necessárias",
+      "Revisar atividade e enquadramento",
     ],
   },
 ];
@@ -692,6 +858,18 @@ function LinkIcon({ kind }: { kind: LinkKind }) {
     );
   }
 
+  if (kind === "blog") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M6 4.5h9.5L18 7v12.5H6Z" />
+        <path d="M15 4.5V8h3" />
+        <path d="M9 10h6" />
+        <path d="M9 13.5h6" />
+        <path d="M9 17h4" />
+      </svg>
+    );
+  }
+
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24">
       <path d="M5 5h6v6H5Z" />
@@ -699,6 +877,170 @@ function LinkIcon({ kind }: { kind: LinkKind }) {
       <path d="M5 13h6v6H5Z" />
       <path d="M13 13h6v6h-6Z" />
     </svg>
+  );
+}
+
+function BlogPage({ slug }: { slug?: string }) {
+  const post = slug
+    ? blogPosts.find((item) => item.slug === slug)
+    : undefined;
+  const relatedPosts = post
+    ? blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3)
+    : blogPosts;
+
+  useEffect(() => {
+    document.title = post
+      ? `${post.title} | Blog Nacional Contabilidade`
+      : "Blog | Nacional Contabilidade";
+  }, [post]);
+
+  if (slug && !post) {
+    return (
+      <main className="blog-page">
+        <section className="blog-shell" aria-labelledby="blog-not-found-title">
+          <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
+            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+          </a>
+          <div className="blog-hero">
+            <p className="lead-kicker">Blog</p>
+            <h1 id="blog-not-found-title">Conteúdo não encontrado.</h1>
+            <p>
+              Esse artigo não está disponível. Volte para o blog e escolha outro
+              conteúdo.
+            </p>
+          </div>
+          <a className="button button--inline" href="/blog">
+            Ver blog
+          </a>
+        </section>
+      </main>
+    );
+  }
+
+  if (post) {
+    return (
+      <main className="blog-page">
+        <article className="blog-shell blog-article" aria-labelledby="blog-post-title">
+          <a className="lead-logo" href="/blog" aria-label="Voltar para o blog da Nacional">
+            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+          </a>
+
+          <header className="blog-hero">
+            <p className="lead-kicker">{post.category}</p>
+            <h1 id="blog-post-title">{post.title}</h1>
+            <p>{post.intro}</p>
+            <div className="blog-meta">
+              <span>{post.readTime} de leitura</span>
+              <span>Conteúdo da Nacional Contabilidade</span>
+            </div>
+          </header>
+
+          <div className="blog-content">
+            {post.sections.map((section) => (
+              <section className="blog-section" key={section.heading}>
+                <h2>{section.heading}</h2>
+                <p>{section.body}</p>
+              </section>
+            ))}
+
+            <section className="blog-checklist" aria-labelledby="blog-checklist-title">
+              <h2 id="blog-checklist-title">Checklist rápido</h2>
+              <CheckList items={post.checklist} />
+            </section>
+
+            <div className="blog-cta">
+              <h2>Quer olhar isso na sua empresa?</h2>
+              <p>
+                Explique a situação no WhatsApp. A Nacional entende o contexto
+                e indica o melhor caminho para organizar essa parte.
+              </p>
+              <a
+                className="button"
+                href={buildWhatsappUrl(
+                  `Olá, vim pelo blog da Nacional e quero falar sobre: ${post.title}.`,
+                )}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Falar com a Nacional
+              </a>
+            </div>
+          </div>
+
+          <aside className="blog-related" aria-labelledby="blog-related-title">
+            <h2 id="blog-related-title">Outros conteúdos</h2>
+            <div className="blog-grid blog-grid--compact">
+              {relatedPosts.map((item) => (
+                <a className="blog-card" href={`/blog/${item.slug}`} key={item.slug}>
+                  <span>{item.category}</span>
+                  <strong>{item.title}</strong>
+                  <small>{item.excerpt}</small>
+                </a>
+              ))}
+            </div>
+          </aside>
+        </article>
+      </main>
+    );
+  }
+
+  return (
+    <main className="blog-page">
+      <section className="blog-shell" aria-labelledby="blog-title">
+        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
+          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+        </a>
+
+        <div className="blog-hero">
+          <p className="lead-kicker">Blog</p>
+          <h1 id="blog-title">Conteúdos para cuidar melhor da empresa.</h1>
+          <p>
+            Textos diretos sobre CNPJ, impostos, notas, financeiro e rotina
+            contábil. Sem enrolar e sem prometer milagre.
+          </p>
+        </div>
+
+        <div className="blog-featured">
+          <div>
+            <span>Leitura principal</span>
+            <h2>{blogPosts[0].title}</h2>
+            <p>{blogPosts[0].excerpt}</p>
+          </div>
+          <a className="button button--inline" href={`/blog/${blogPosts[0].slug}`}>
+            Ler conteúdo
+          </a>
+        </div>
+
+        <div className="blog-grid" aria-label="Lista de conteúdos do blog">
+          {blogPosts.map((item) => (
+            <a className="blog-card" href={`/blog/${item.slug}`} key={item.slug}>
+              <span>{item.category}</span>
+              <strong>{item.title}</strong>
+              <small>{item.excerpt}</small>
+              <em>{item.readTime} de leitura</em>
+            </a>
+          ))}
+        </div>
+
+        <div className="blog-cta blog-cta--index">
+          <h2>Tem uma dúvida que daria um bom conteúdo?</h2>
+          <p>
+            Manda no WhatsApp. Se for algo comum na rotina das empresas, pode
+            virar pauta do blog e também atendimento para o seu caso.
+          </p>
+          <a
+            className="button"
+            href={buildWhatsappUrl(
+              "Olá, vim pelo blog da Nacional e quero tirar uma dúvida sobre minha empresa.",
+            )}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Enviar dúvida
+          </a>
+        </div>
+      </section>
+    </main>
   );
 }
 
@@ -1468,6 +1810,10 @@ export default function App() {
   const isSwitchAccountantPage = normalizedPath === "/trocar-contador";
   const isBusinessAccountingPage = normalizedPath === "/contabilidade-empresas";
   const isToolsPage = normalizedPath === "/ferramentas";
+  const isBlogPage = normalizedPath === "/blog" || normalizedPath.startsWith("/blog/");
+  const blogSlug = normalizedPath.startsWith("/blog/")
+    ? normalizedPath.replace("/blog/", "")
+    : undefined;
   const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
@@ -1476,7 +1822,8 @@ export default function App() {
       isLinksPage ||
       isSwitchAccountantPage ||
       isBusinessAccountingPage ||
-      isToolsPage
+      isToolsPage ||
+      isBlogPage
     ) {
       return;
     }
@@ -1496,7 +1843,13 @@ export default function App() {
       window.removeEventListener("scroll", updateFloatingButton);
       window.removeEventListener("resize", updateFloatingButton);
     };
-  }, [isLinksPage, isSwitchAccountantPage, isBusinessAccountingPage, isToolsPage]);
+  }, [
+    isLinksPage,
+    isSwitchAccountantPage,
+    isBusinessAccountingPage,
+    isToolsPage,
+    isBlogPage,
+  ]);
 
   if (isLinksPage) {
     return <LinksPage />;
@@ -1514,6 +1867,10 @@ export default function App() {
     return <ToolsPage />;
   }
 
+  if (isBlogPage) {
+    return <BlogPage slug={blogSlug} />;
+  }
+
   return (
     <main className="site">
       <header className="topbar">
@@ -1526,6 +1883,7 @@ export default function App() {
           <nav className="topbar__nav" aria-label="Navegação principal">
             <a href="#servicos">Serviços</a>
             <a href="/ferramentas">Ferramentas</a>
+            <a href="/blog">Blog</a>
             <a href="#como-funciona">Como funciona</a>
             <a
               className="topbar__cta"
@@ -1724,6 +2082,36 @@ export default function App() {
                 "Apoio da Nacional quando aparecer pendência",
               ]}
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="blog-home-title">
+        <div className="container">
+          <div className="section-heading">
+            <h2 id="blog-home-title">Conteúdos para empresários</h2>
+            <p>
+              Leituras rápidas sobre CNPJ, impostos, notas, financeiro e rotina
+              contábil.
+            </p>
+          </div>
+          <div className="blog-grid blog-grid--home">
+            {blogPosts.slice(0, 3).map((item) => (
+              <a className="blog-card" href={`/blog/${item.slug}`} key={item.slug}>
+                <span>{item.category}</span>
+                <strong>{item.title}</strong>
+                <small>{item.excerpt}</small>
+              </a>
+            ))}
+          </div>
+          <div className="inline-cta">
+            <div>
+              <strong>Quer ver todos os conteúdos?</strong>
+              <p>Acesse a área de blog da Nacional Contabilidade.</p>
+            </div>
+            <a className="button button--inline" href="/blog">
+              Ver blog
+            </a>
           </div>
         </div>
       </section>
