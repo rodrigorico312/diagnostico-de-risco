@@ -268,35 +268,6 @@ function formatBrazilPhone(value: string) {
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 }
 
-const toolActions = [
-  {
-    title: "Checklist de contabilidade",
-    text: "Para empresas que querem orçamento, análise ou acompanhamento mensal.",
-    href: "/contabilidade-empresas",
-  },
-  {
-    title: "Trocar de contador",
-    text: "Para quem já tem CNPJ e quer organizar a migração contábil.",
-    href: "/trocar-contador",
-  },
-  {
-    title: "Abrir, alterar ou baixar CNPJ",
-    text: "Para abertura, alteração contratual, regularização ou encerramento.",
-    href: buildWhatsappUrl(
-      "Olá, vim pela Central do Empresário e quero falar sobre abertura, alteração ou baixa de CNPJ.",
-    ),
-    external: true,
-  },
-  {
-    title: "Assessoria para contadores",
-    text: "Apoio técnico em demandas fiscais, tributárias e empresariais.",
-    href: buildWhatsappUrl(
-      "Olá, vim pela Central do Empresário e quero falar sobre assessoria para contadores.",
-    ),
-    external: true,
-  },
-];
-
 const toolGroups = [
   {
     title: "CNPJ, Receita Federal e abertura de empresa",
@@ -751,21 +722,6 @@ function ToolsPage() {
             falar com a Nacional quando precisar organizar essa parte com apoio
             contábil.
           </p>
-        </div>
-
-        <div className="tools-actions" aria-label="Caminhos rápidos">
-          {toolActions.map((action) => (
-            <a
-              className="tools-action"
-              href={action.href}
-              key={action.title}
-              target={action.external ? "_blank" : undefined}
-              rel={action.external ? "noreferrer" : undefined}
-            >
-              <strong>{action.title}</strong>
-              <span>{action.text}</span>
-            </a>
-          ))}
         </div>
 
         <div className="tools-note">
