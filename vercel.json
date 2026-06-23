@@ -7,6 +7,14 @@
     {
       "source": "/links/",
       "destination": "/index.html"
+    },
+    {
+      "source": "/trocar-contador",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/trocar-contador/",
+      "destination": "/index.html"
     }
   ]
 }

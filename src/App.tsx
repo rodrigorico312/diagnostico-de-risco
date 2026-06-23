@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 
 const WHATSAPP_NUMBER = "5593992101980";
 const WHATSAPP_MESSAGE =
@@ -52,11 +52,8 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Trocar de contador",
     text: "Migração contábil, documentos, acessos e pendências",
-    href: buildWhatsappUrl(
-      "Olá, vim pelo link e quero falar sobre troca de contador.",
-    ),
+    href: "/trocar-contador",
     kind: "switch",
-    external: true,
   },
   {
     title: "Abrir, alterar ou baixar CNPJ",
@@ -140,6 +137,91 @@ const linkTreeItems: LinkItem[] = [
     ariaLabel: "Enviar email para a Nacional Contabilidade",
   },
 ];
+
+type SwitchAccountantFormData = {
+  nome: string;
+  whatsapp: string;
+  cidade: string;
+  empresa: string;
+  regime: string;
+  segmento: string;
+  faturamento: string;
+  motivo: string;
+  pendencias: string;
+  observacao: string;
+  website: string;
+};
+
+const initialSwitchAccountantForm: SwitchAccountantFormData = {
+  nome: "",
+  whatsapp: "",
+  cidade: "",
+  empresa: "",
+  regime: "",
+  segmento: "",
+  faturamento: "",
+  motivo: "",
+  pendencias: "",
+  observacao: "",
+  website: "",
+};
+
+const taxRegimeOptions = [
+  "MEI",
+  "Simples Nacional",
+  "Lucro Presumido",
+  "Lucro Real",
+  "Não sei informar",
+];
+
+const segmentOptions = [
+  "Comércio",
+  "Prestação de serviços",
+  "Alimentação",
+  "Saúde, estética ou bem-estar",
+  "Construção ou obras",
+  "Transporte ou logística",
+  "Negócio digital",
+  "Outro segmento",
+];
+
+const revenueOptions = [
+  "Até R$ 10 mil por mês",
+  "De R$ 10 mil a R$ 30 mil por mês",
+  "De R$ 30 mil a R$ 80 mil por mês",
+  "De R$ 80 mil a R$ 180 mil por mês",
+  "Acima de R$ 180 mil por mês",
+  "Prefiro falar no atendimento",
+];
+
+const switchReasonOptions = [
+  "Quero mais retorno e acompanhamento",
+  "Tenho pendências ou documentos atrasados",
+  "A empresa cresceu e preciso organizar melhor",
+  "Tenho dificuldade para falar com o contador atual",
+  "Quero revisar impostos, notas ou obrigações",
+  "Outro motivo",
+];
+
+const pendingOptions = ["Sim", "Não", "Não sei"];
+
+function formatBrazilPhone(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+
+  if (digits.length <= 2) {
+    return digits;
+  }
+
+  if (digits.length <= 6) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  }
+
+  if (digits.length <= 10) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  }
+
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
 
 const heroHighlights = [
   "CNPJ em dia",
@@ -521,14 +603,290 @@ function LinksPage() {
   );
 }
 
+function SwitchAccountantPage() {
+  const [form, setForm] = useState<SwitchAccountantFormData>(
+    initialSwitchAccountantForm,
+  );
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    document.title = "Trocar de contador | Nacional Contabilidade";
+  }, []);
+
+  const updateField = (
+    field: keyof SwitchAccountantFormData,
+    value: string,
+  ) => {
+    setForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitStatus("sending");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/troca-contador", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          origem: "Formulario troca de contador",
+          pagina: window.location.href,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Não foi possível enviar o formulário.");
+      }
+
+      setSubmitStatus("success");
+      setForm(initialSwitchAccountantForm);
+    } catch (error) {
+      setSubmitStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Não foi possível enviar o formulário.",
+      );
+    }
+  };
+
+  return (
+    <main className="lead-page">
+      <section className="lead-shell" aria-labelledby="troca-contador-title">
+        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
+          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+        </a>
+
+        <div className="lead-heading">
+          <p className="lead-kicker">Troca de contador</p>
+          <h1 id="troca-contador-title">
+            Quer trocar de contador sem bagunçar a empresa?
+          </h1>
+          <p>
+            Preencha as informações principais. Nossa equipe analisa sua
+            situação e entra em contato para entender o melhor caminho.
+          </p>
+        </div>
+
+        <form className="lead-form" onSubmit={handleSubmit}>
+          <div className="form-grid">
+            <label>
+              <span>Seu nome</span>
+              <input
+                required
+                autoComplete="name"
+                type="text"
+                value={form.nome}
+                onChange={(event) => updateField("nome", event.target.value)}
+                placeholder="Nome completo"
+              />
+            </label>
+
+            <label>
+              <span>WhatsApp</span>
+              <input
+                required
+                autoComplete="tel-national"
+                inputMode="numeric"
+                pattern="[\d\s()+-]{14,15}"
+                type="tel"
+                value={form.whatsapp}
+                onChange={(event) =>
+                  updateField("whatsapp", formatBrazilPhone(event.target.value))
+                }
+                placeholder="(93) 99210-1980"
+              />
+            </label>
+
+            <label>
+              <span>Cidade/UF</span>
+              <input
+                required
+                autoComplete="address-level2"
+                type="text"
+                value={form.cidade}
+                onChange={(event) => updateField("cidade", event.target.value)}
+                placeholder="Ex: Santarém/PA"
+              />
+            </label>
+
+            <label>
+              <span>Nome da empresa</span>
+              <input
+                type="text"
+                value={form.empresa}
+                onChange={(event) => updateField("empresa", event.target.value)}
+                placeholder="Opcional"
+              />
+            </label>
+
+            <label>
+              <span>Regime tributário</span>
+              <select
+                required
+                value={form.regime}
+                onChange={(event) => updateField("regime", event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {taxRegimeOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Segmento da empresa</span>
+              <select
+                required
+                value={form.segmento}
+                onChange={(event) =>
+                  updateField("segmento", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {segmentOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Faturamento aproximado</span>
+              <select
+                required
+                value={form.faturamento}
+                onChange={(event) =>
+                  updateField("faturamento", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {revenueOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Tem pendência fiscal?</span>
+              <select
+                required
+                value={form.pendencias}
+                onChange={(event) =>
+                  updateField("pendencias", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {pendingOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span>Principal motivo da troca</span>
+            <select
+              required
+              value={form.motivo}
+              onChange={(event) => updateField("motivo", event.target.value)}
+            >
+              <option value="">Selecione</option>
+              {switchReasonOptions.map((option) => (
+                <option value={option} key={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            <span>Quer explicar algo?</span>
+            <textarea
+              value={form.observacao}
+              onChange={(event) =>
+                updateField("observacao", event.target.value)
+              }
+              placeholder="Conte rapidamente o que está acontecendo. Opcional."
+              rows={4}
+            />
+          </label>
+
+          <label className="form-honeypot">
+            <span>Site</span>
+            <input
+              tabIndex={-1}
+              autoComplete="off"
+              type="text"
+              value={form.website}
+              onChange={(event) => updateField("website", event.target.value)}
+            />
+          </label>
+
+          {submitStatus === "success" && (
+            <p className="form-alert form-alert--success" role="status">
+              Recebemos suas informações. A Nacional Contabilidade vai entrar em
+              contato pelo WhatsApp informado.
+            </p>
+          )}
+
+          {submitStatus === "error" && (
+            <p className="form-alert form-alert--error" role="alert">
+              {errorMessage} Se preferir, fale direto pelo WhatsApp.
+            </p>
+          )}
+
+          <div className="lead-actions">
+            <button
+              className="button"
+              type="submit"
+              disabled={submitStatus === "sending"}
+            >
+              {submitStatus === "sending" ? "Enviando..." : "Enviar análise"}
+            </button>
+            <a
+              className="button button--secondary"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Falar no WhatsApp
+            </a>
+          </div>
+        </form>
+
+        <p className="lead-note">
+          Seus dados serão usados apenas para contato e avaliação inicial da
+          troca de contador.
+        </p>
+      </section>
+    </main>
+  );
+}
+
 export default function App() {
   const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
   const isLinksPage = normalizedPath === "/links";
+  const isSwitchAccountantPage = normalizedPath === "/trocar-contador";
   const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (isLinksPage) return;
+    if (isLinksPage || isSwitchAccountantPage) return;
 
     const updateFloatingButton = () => {
       const section = heroSectionRef.current;
@@ -545,10 +903,14 @@ export default function App() {
       window.removeEventListener("scroll", updateFloatingButton);
       window.removeEventListener("resize", updateFloatingButton);
     };
-  }, [isLinksPage]);
+  }, [isLinksPage, isSwitchAccountantPage]);
 
   if (isLinksPage) {
     return <LinksPage />;
+  }
+
+  if (isSwitchAccountantPage) {
+    return <SwitchAccountantPage />;
   }
 
   return (
@@ -876,7 +1238,6 @@ export default function App() {
         <div className="container footer__inner">
           <div className="footer__info">
             <p>{COMPANY_NAME}</p>
-            <p>Rodrigo Coelho - Contador CRC/PA 024335</p>
             <p>
               Email:{" "}
               <a className="footer__link" href={`mailto:${EMAIL}`}>

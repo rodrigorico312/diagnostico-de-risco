@@ -1,36 +1,102 @@
-# Rodrigo Coelho — Contador em Santarém
+# Nacional Contabilidade
 
-Landing page minimalista para Rodrigo Coelho, contador CRC/PA 024335 em
-Santarém-PA, com atendimento para empresas em todo o Pará.
+Site institucional da Nacional Contabilidade, com landing page principal,
+pagina de links e formulario de lead para troca de contador.
 
 ## Rodar localmente
 
-1. Instale as dependências:
+1. Instale as dependencias:
    `npm install`
 2. Rode em desenvolvimento:
    `npm run dev`
-3. Gere a versão de produção:
+3. Gere a versao de producao:
    `npm run build`
 
-## Configuração
+## Rotas
+
+- `/`: landing page principal
+- `/links`: pagina de links
+- `/trocar-contador`: formulario para lead de troca de contador
+
+## Configuracao do WhatsApp
 
 O link de WhatsApp fica em `src/App.tsx`:
 
 ```ts
 const WHATSAPP_NUMBER = "5593992101980";
 const WHATSAPP_MESSAGE =
-  "Olá, vim pelo site e preciso falar com um contador para minha empresa";
+  "Ola, vim pelo site e quero falar com a Nacional Contabilidade sobre minha empresa.";
 ```
 
-A imagem usada na apresentação fica em `public/rodrigo-coelho.png`.
+## API de leads
 
-Atualize em `src/App.tsx`:
+O formulario de `/trocar-contador` envia os dados para:
 
-```ts
-const INSTAGRAM_URL = "https://www.instagram.com/rodrigospcoelho";
-const EMAIL = "rodrigorico312@gmail.com";
-const COMPANY_NAME = "O GESTOR DO LUCRO CONSULTORIA LTDA";
-const CNPJ = "62.560.654/0001-27";
-const ADDRESS =
-  "Av. Plácido de Castro, 1505, Aparecida, Santarém-PA, CEP 68.040-090";
+`/api/troca-contador`
+
+Configure as variaveis abaixo na Vercel:
+
+```env
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+GOOGLE_SHEETS_WEBHOOK_URL=
+GOOGLE_SHEETS_WEBHOOK_SECRET=
 ```
+
+Nao coloque token do Telegram direto no codigo.
+
+## Telegram
+
+1. Adicione o bot ao grupo de leads.
+2. Envie uma mensagem qualquer no grupo, como `teste`.
+3. Consulte os updates do bot pela API do Telegram.
+4. Use o `chat.id` do grupo como `TELEGRAM_CHAT_ID`.
+
+O `TELEGRAM_CHAT_ID` normalmente comeca com `-100` em grupos.
+
+## Google Sheets
+
+Uma forma simples de gravar os leads na planilha e criar um Apps Script com
+um webhook publicado como Web App. O endpoint publicado entra em
+`GOOGLE_SHEETS_WEBHOOK_URL`.
+
+Exemplo de Apps Script:
+
+```js
+const SECRET = "troque-esta-chave";
+
+function doPost(e) {
+  const payload = JSON.parse(e.postData.contents);
+
+  if (payload.secret !== SECRET) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Leads");
+
+  sheet.appendRow([
+    new Date(),
+    payload.tipo,
+    payload.nome,
+    payload.whatsapp,
+    payload.cidade,
+    payload.empresa,
+    payload.regime,
+    payload.segmento,
+    payload.faturamento,
+    payload.pendencias,
+    payload.motivo,
+    payload.observacao,
+    payload.pagina,
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+Na Vercel, use o mesmo valor de `SECRET` em
+`GOOGLE_SHEETS_WEBHOOK_SECRET`.
