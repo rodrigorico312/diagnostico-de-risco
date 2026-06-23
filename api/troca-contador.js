@@ -56,6 +56,55 @@ function formatTelegramMessage(lead) {
   return lines.join("\n");
 }
 
+function getWhatsappNumber(value) {
+  const digits = clean(value).replace(/\D/g, "");
+
+  if (!digits) {
+    return "";
+  }
+
+  if (digits.startsWith("55") && digits.length >= 12) {
+    return digits;
+  }
+
+  if (digits.length === 10 || digits.length === 11) {
+    return `55${digits}`;
+  }
+
+  return digits;
+}
+
+function buildWhatsappUrl(lead) {
+  const number = getWhatsappNumber(lead.whatsapp);
+
+  if (!number) {
+    return "";
+  }
+
+  const message = `Ola, ${clean(lead.nome)}. Recebi seu formulario sobre troca de contador pela Nacional Contabilidade.`;
+
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+}
+
+function buildTelegramReplyMarkup(lead) {
+  const whatsappUrl = buildWhatsappUrl(lead);
+
+  if (!whatsappUrl) {
+    return undefined;
+  }
+
+  return {
+    inline_keyboard: [
+      [
+        {
+          text: "Chamar no WhatsApp",
+          url: whatsappUrl,
+        },
+      ],
+    ],
+  };
+}
+
 async function sendTelegram(lead) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -74,6 +123,7 @@ async function sendTelegram(lead) {
       text: formatTelegramMessage(lead),
       parse_mode: "HTML",
       disable_web_page_preview: true,
+      reply_markup: buildTelegramReplyMarkup(lead),
     }),
   });
 
