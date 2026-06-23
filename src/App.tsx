@@ -556,18 +556,24 @@ function LinksPage() {
     <main className="links-page">
       <section className="links-shell" aria-label="Links da Nacional Contabilidade">
         <div className="links-profile">
-          <a className="links-logo" href="/" aria-label="Ir para o site da Nacional Contabilidade">
-            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-          </a>
+          <img
+            className="links-avatar"
+            src="/rodrigo-coelho.png"
+            alt="Rodrigo Coelho"
+          />
+          <h1>Rodrigo Coelho</h1>
+          <p className="links-profile__bio">
+            Contabilidade, regularização de CNPJ, endereço fiscal e apoio
+            empresarial.
+          </p>
           <div className="links-flags" aria-label="Atendimento no Pará e em todo o Brasil">
             <ParaFlag />
             <BrazilFlag />
             <span>Atendimento no Pará e em todo o Brasil</span>
           </div>
-          <p>
-            Contabilidade, regularização de CNPJ, endereço fiscal, assessoria
-            para contadores e apoio empresarial em Santarém e no Brasil.
-          </p>
+          <a className="links-logo" href="/" aria-label="Ir para o site da Nacional Contabilidade">
+            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+          </a>
         </div>
 
         <div className="links-stack" aria-label="Links da Nacional Contabilidade">
@@ -587,8 +593,12 @@ function LinksPage() {
                 <strong>{item.title}</strong>
                 <small>{item.text}</small>
               </span>
-              <span className="links-item__arrow" aria-hidden="true">
-                ›
+              <span className="links-item__more" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="5" r="1.5" />
+                  <circle cx="12" cy="12" r="1.5" />
+                  <circle cx="12" cy="19" r="1.5" />
+                </svg>
               </span>
             </a>
           ))}
