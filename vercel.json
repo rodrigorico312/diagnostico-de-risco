@@ -53,6 +53,10 @@
       "destination": "http://31.97.253.234:3003/barbearia-dashboard/"
     },
     {
+      "source": "/barbearia-dashboard/",
+      "destination": "http://31.97.253.234:3003/barbearia-dashboard/"
+    },
+    {
       "source": "/barbearia-dashboard/:path*",
       "destination": "http://31.97.253.234:3003/barbearia-dashboard/:path*"
     }
