@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Bank LM — Crédito com Garantia de Imóvel | Taxas a partir de 0,99% a.m.</title>
+<meta name="description" content="Empréstimo com garantia de imóvel de R$50 mil a R$3 milhões. Taxas a partir de 0,99% a.m. Comparamos 15+ bancos. Seu imóvel continua sendo seu. Simule grátis.">
+<meta property="og:title" content="Personal Bank LM — Crédito com Garantia de Imóvel">
+<meta property="og:description" content="Taxas a partir de 0,99% a.m. De R$50 mil a R$3 milhões. Comparamos 15+ bancos pra encontrar a menor taxa pra você.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0C2340">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230C2340'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%2300A86B' font-family='Georgia'>P</text></svg>">
+<style>
+/* ═══════════════════════════════════════
+   VARIÁVEIS & RESET
+   ═══════════════════════════════════════ */
+:root {
+  --principal: #0C2340;
+  --principal-light: #1A3A5C;
+  --principal-soft: #E8EEF4;
+  --destaque: #00A86B;
+  --destaque-hover: #008F5B;
+  --destaque-soft: #E6F9F0;
+  --dourado: #C59A3E;
+  --fundo: #F7F9FC;
+  --branco: #FFFFFF;
+  --texto: #0C2340;
+  --texto-sec: #5A6B7F;
+  --borda: #D1D9E0;
+  --vermelho: #DC2626;
+  --vermelho-soft: #FEE2E2;
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body: Arial, "Helvetica Neue", -apple-system, sans-serif;
+  --radius: 22px;
+  --radius-btn: 60px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--texto);
+  background: var(--fundo);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* TIPOGRAFIA */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+h1 { font-size: clamp(26px, 5vw, 44px); }
+h2 { font-size: clamp(22px, 3.5vw, 34px); }
+h3 { font-size: clamp(18px, 2.5vw, 24px); }
+p { color: var(--texto-sec); max-width: 580px; line-height: 1.7; }
+
+/* LAYOUT */
+.wrap { width: min(92%, 960px); margin: 0 auto; }
+section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
+
+.section-overlap {
+  margin-top: -32px;
+  border-radius: 32px 32px 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* TAG / BADGE */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border-radius: 40px;
+  background: var(--destaque-soft);
+  color: var(--destaque);
+}
+
+/* CARROSSEL MOBILE */
+.card-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 4%;
+}
+.card-track::-webkit-scrollbar { display: none; }
+.card {
+  min-width: 280px;
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  border-radius: var(--radius);
+  padding: 24px;
+  background: var(--branco);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+@media (min-width: 769px) {
+  .card-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+    padding: 0;
+    gap: 16px;
+  }
+  .card { min-width: 0; }
+}
+
+/* BOTÕES */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 16px 32px;
+  border-radius: var(--radius-btn);
+  transition: all 0.3s var(--ease);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+.btn-destaque {
+  background: var(--destaque);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,168,107,0.25);
+}
+.btn-destaque:hover {
+  background: var(--destaque-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,168,107,0.35);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--destaque);
+  border: 2px solid var(--destaque);
+}
+.btn-outline:hover {
+  background: var(--destaque);
+  color: #fff;
+}
+.btn-white {
+  background: #fff;
+  color: var(--principal);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 480px) {
+  .btn { width: 100%; font-size: 15px; padding: 18px; }
+}
+
+/* ═══════════════════════════════════════
+   1. HEADER FIXO
+   ═══════════════════════════════════════ */
+.hdr {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(247,249,252,0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  height: 56px;
+}
+.hdr .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.hdr-logo {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--principal);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hdr-logo .logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--principal);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--destaque);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+}
+.hdr .btn {
+  padding: 10px 20px;
+  font-size: 13px;
+}
+
+/* ═══════════════════════════════════════
+   2. HERO
+   ═══════════════════════════════════════ */
+.hero {
+  padding-top: 80px;
+  padding-bottom: 0;
+  background: linear-gradient(175deg, var(--principal) 0%, #0a1c33 55%, #0d2844 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0,168,107,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero .wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-bottom: 48px;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero h1 {
+  color: #fff;
+  margin-bottom: 16px;
+  max-width: 600px;
+}
+.hero h1 span { color: var(--destaque); }
+.hero-sub {
+  color: rgba(255,255,255,0.75);
+  font-size: clamp(15px, 2vw, 17px);
+  max-width: 520px;
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+.hero-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+}
+.hero-stat strong {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3vw, 30px);
+  color: var(--destaque);
+  line-height: 1;
+}
+.hero-stat small {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* SIMULADOR */
+.sim-card {
+  background: var(--branco);
+  border-radius: 28px;
+  padding: clamp(24px, 4vw, 36px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 3;
+  max-width: 420px;
+  width: 100%;
+}
+.sim-card h3 {
+  color: var(--texto);
+  margin-bottom: 4px;
+  font-size: clamp(17px, 2.5vw, 20px);
+}
+.sim-card .sim-sub {
+  color: var(--texto-sec);
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.sim-field {
+  margin-bottom: 14px;
+}
+.sim-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto-sec);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.sim-field input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--borda);
+  border-radius: 14px;
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: var(--texto);
+  background: var(--fundo);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.sim-field input:focus {
+  border-color: var(--destaque);
+  box-shadow: 0 0 0 3px rgba(0,168,107,0.1);
+}
+.sim-field input::placeholder { color: var(--borda); }
+.sim-card .btn {
+  width: 100%;
+  margin-top: 6px;
+  font-size: 16px;
+  padding: 18px;
+}
+.sim-trust {
+  text-align: center;
+  font-size: 12px;
+  color: var(--texto-sec);
+  margin-top: 12px;
+}
+.sim-trust svg { vertical-align: middle; margin-right: 4px; }
+
+@media (min-width: 769px) {
+  .hero .wrap {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 64px;
+  }
+  .hero-content { flex: 1; }
+  .sim-card { flex: 0 0 400px; margin-top: 0; }
+}
+
+/* ═══════════════════════════════════════
+   3. LOGOS BANCOS
+   ═══════════════════════════════════════ */
+.logos-section {
+  background: var(--branco);
+  text-align: center;
+  padding: 28px 0;
+}
+.logos-section p {
+  margin: 0 auto 16px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--texto-sec);
+}
+.logos-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+  padding: 0 4%;
+}
+.logo-banco {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(13px, 2vw, 16px);
+  color: var(--borda);
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+.logo-banco:hover { opacity: 1; }
+
+/* ═══════════════════════════════════════
+   4. ESPELHO DA DOR (PAS)
+   ═══════════════════════════════════════ */
+.dor-section {
+  background: var(--principal-soft);
+}
+.dor-section .tag { margin-bottom: 16px; }
+.dor-section h2 { margin-bottom: 20px; }
+.dor-section h2 span { color: var(--vermelho); }
+.dor-text {
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.8;
+  color: var(--texto-sec);
+  max-width: 640px;
+  margin-bottom: 24px;
+}
+.dor-text strong { color: var(--texto); }
+.dor-destaque {
+  background: var(--branco);
+  border-left: 4px solid var(--destaque);
+  border-radius: 0 16px 16px 0;
+  padding: 20px 24px;
+  margin: 24px 0;
+  max-width: 640px;
+}
+.dor-destaque p {
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 15px;
+  max-width: none;
+}
+
+/* ═══════════════════════════════════════
+   5. COMPARATIVO DE TAXAS
+   ═══════════════════════════════════════ */
+.comparativo-section {
+  background: var(--branco);
+}
+.comparativo-section .wrap { text-align: center; }
+.comparativo-section h2 { margin-bottom: 8px; }
+.comparativo-section > .wrap > p {
+  margin: 0 auto 32px;
+}
+
+.taxa-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  text-align: left;
+  font-size: 14px;
+}
+.taxa-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-sec);
+  padding: 8px 12px;
+  font-weight: 600;
+}
+.taxa-table td {
+  padding: 14px 12px;
+  vertical-align: middle;
+}
+.taxa-table .row-bad td {
+  background: var(--vermelho-soft);
+  color: var(--vermelho);
+  font-weight: 600;
+}
+.taxa-table .row-bad td:first-child { border-radius: 12px 0 0 12px; }
+.taxa-table .row-bad td:last-child { border-radius: 0 12px 12px 0; }
+.taxa-table .row-good td {
+  background: var(--destaque-soft);
+  color: var(--destaque-hover);
+  font-weight: 700;
+  font-size: 15px;
+}
+.taxa-table .row-good td:first-child { border-radius: 12px 0 0 12px; }
+.taxa-table .row-good td:last-child { border-radius: 0 12px 12px 0; }
+.taxa-table .row-good .badge-he {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--destaque);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+.comparativo-frase {
+  margin: 28px auto 0;
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--texto);
+  font-weight: 700;
+  max-width: 580px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .taxa-table { font-size: 12px; }
+  .taxa-table th, .taxa-table td { padding: 10px 8px; }
+  .taxa-table .hide-mobile { display: none; }
+}
+
+/* ═══════════════════════════════════════
+   6. COMO FUNCIONA
+   ═══════════════════════════════════════ */
+.como-section {
+  background: var(--principal);
+  color: #fff;
+}
+.como-section h2 { color: #fff; margin-bottom: 8px; text-align: center; }
+.como-section > .wrap > p { color: rgba(255,255,255,0.6); text-align: center; margin: 0 auto 36px; }
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.step-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
+}
+.step-num {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--destaque);
+  opacity: 0.4;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.step-card h4 {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+.step-card p {
+  color: rgba(255,255,255,0.55);
+  font-size: 13px;
+  max-width: none;
+  line-height: 1.6;
+}
+.como-badge {
+  text-align: center;
+  margin-top: 28px;
+  padding: 14px 24px;
+  background: rgba(0,168,107,0.12);
+  border-radius: 16px;
+  color: var(--destaque);
+  font-weight: 700;
+  font-size: 14px;
+}
+.como-badge svg { vertical-align: middle; margin-right: 6px; }
+
+@media (min-width: 769px) {
+  .steps-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ═══════════════════════════════════════
+   7. PRA QUE USAR
+   ═══════════════════════════════════════ */
+.usos-section {
+  background: var(--fundo);
+}
+.usos-section h2 { text-align: center; margin-bottom: 8px; }
+.usos-section > .wrap > p { text-align: center; margin: 0 auto 28px; }
+.uso-card {
+  text-align: center;
+  padding: 28px 20px;
+}
+.uso-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--destaque-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 24px;
+}
+.uso-card h4 {
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: var(--texto);
+}
+.uso-card p {
+  font-size: 13px;
+  color: var(--texto-sec);
+  max-width: none;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   8. OBJEÇÕES
+   ═══════════════════════════════════════ */
+.objecoes-section {
+  background: var(--branco);
+}
+.objecoes-section h2 { text-align: center; margin-bottom: 8px; }
+.objecoes-section > .wrap > p { text-align: center; margin: 0 auto 32px; }
+.obj-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.obj-card {
+  background: var(--fundo);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--borda);
+}
+.obj-card .obj-q {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.obj-card .obj-q::before {
+  content: '?';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--destaque-soft);
+  color: var(--destaque);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--font-body);
+}
+.obj-card .obj-a {
+  color: var(--texto-sec);
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: none;
+  padding-left: 38px;
+}
+.obj-highlight {
+  border: 2px solid var(--destaque);
+  background: var(--destaque-soft);
+}
+.obj-highlight .obj-q::before {
+  background: var(--destaque);
+  color: #fff;
+}
+
+@media (min-width: 769px) {
+  .obj-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ═══════════════════════════════════════
+   9. DEPOIMENTOS
+   ═══════════════════════════════════════ */
+.depo-section {
+  background: var(--principal-soft);
+}
+.depo-section h2 { text-align: center; margin-bottom: 8px; }
+.depo-section > .wrap > p { text-align: center; margin: 0 auto 28px; }
+.depo-card {
+  padding: 28px 24px;
+  position: relative;
+}
+.depo-card::before {
+  content: '"';
+  font-family: var(--font-heading);
+  font-size: 48px;
+  color: var(--destaque);
+  opacity: 0.3;
+  line-height: 1;
+  position: absolute;
+  top: 16px;
+  left: 20px;
+}
+.depo-fase {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.depo-fase.antes { color: var(--vermelho); }
+.depo-fase.virada { color: var(--dourado); }
+.depo-fase.depois { color: var(--destaque); }
+.depo-text {
+  font-size: 14px;
+  color: var(--texto);
+  max-width: none;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+.depo-nome {
+  font-size: 12px;
+  color: var(--texto-sec);
+  font-weight: 600;
+  margin-top: 14px;
+}
+.depo-economia {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--destaque-soft);
+  color: var(--destaque);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+/* ═══════════════════════════════════════
+   10. STACK DE VALOR
+   ═══════════════════════════════════════ */
+.stack-section {
+  background: var(--destaque-soft);
+}
+.stack-section h2 { text-align: center; margin-bottom: 24px; }
+.stack-list {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stack-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--branco);
+  padding: 16px 20px;
+  border-radius: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.stack-check {
+  min-width: 24px;
+  height: 24px;
+  background: var(--destaque);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.stack-item p {
+  color: var(--texto);
+  font-size: 14px;
+  font-weight: 600;
+  max-width: none;
+  line-height: 1.5;
+}
+.stack-item p span { color: var(--texto-sec); font-weight: 400; }
+
+/* ═══════════════════════════════════════
+   11. SIMULADOR REPETIDO
+   ═══════════════════════════════════════ */
+.sim-repeat {
+  background: linear-gradient(175deg, var(--principal) 0%, #0a1c33 100%);
+  color: #fff;
+  text-align: center;
+}
+.sim-repeat h2 { color: #fff; margin-bottom: 8px; }
+.sim-repeat > .wrap > p { color: rgba(255,255,255,0.6); margin: 0 auto 28px; text-align: center; }
+.sim-repeat .sim-card { margin: 0 auto; }
+
+/* ═══════════════════════════════════════
+   12. FAQ ACORDEÃO
+   ═══════════════════════════════════════ */
+.faq-section {
+  background: var(--fundo);
+}
+.faq-section h2 { text-align: center; margin-bottom: 28px; }
+.faq-list {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.faq-item {
+  background: var(--branco);
+  border-radius: 16px;
+  border: 1px solid var(--borda);
+  overflow: hidden;
+}
+.faq-q {
+  padding: 18px 20px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--texto);
+  user-select: none;
+}
+.faq-q::after {
+  content: '+';
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--destaque);
+  transition: transform 0.3s var(--ease);
+  flex-shrink: 0;
+}
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s var(--ease), padding 0.35s;
+}
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding: 0 20px 18px;
+}
+.faq-a p {
+  font-size: 14px;
+  color: var(--texto-sec);
+  line-height: 1.7;
+  max-width: none;
+}
+
+/* ═══════════════════════════════════════
+   13. CTA FINAL
+   ═══════════════════════════════════════ */
+.cta-final {
+  background: var(--branco);
+  text-align: center;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+.cta-final h2 { margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.cta-final > .wrap > p { margin: 0 auto 24px; text-align: center; }
+.cta-final .btn { font-size: 16px; padding: 20px 40px; }
+.cta-final .cta-sub {
+  font-size: 13px;
+  color: var(--texto-sec);
+  margin-top: 14px;
+}
+
+/* ═══════════════════════════════════════
+   14. FOOTER
+   ═══════════════════════════════════════ */
+.footer {
+  background: var(--principal);
+  color: rgba(255,255,255,0.5);
+  padding: 40px 0 24px;
+  font-size: 13px;
+}
+.footer .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--destaque); }
+.footer-disclaimer {
+  max-width: 600px;
+  line-height: 1.6;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ═══════════════════════════════════════
+   WHATSAPP FLUTUANTE
+   ═══════════════════════════════════════ */
+.wpp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+  z-index: 99;
+  transition: transform 0.3s var(--ease);
+}
+.wpp-float:hover { transform: scale(1.1); }
+.wpp-float svg { width: 28px; height: 28px; fill: #fff; }
+
+/* ═══════════════════════════════════════
+   REVEAL ANIMATION
+   ═══════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* SECTION LABEL */
+.section-label {
+  text-align: center;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER FIXO
+     ═══════════════════════════════════════ -->
+<header class="hdr">
+  <div class="wrap">
+    <a href="#" class="hdr-logo">
+      <span class="logo-icon">P</span>
+      Personal Bank
+    </a>
+    <a href="#simulador" class="btn btn-destaque">Simular agora</a>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="tag" style="margin-bottom:18px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Crédito seguro &middot; Seu imóvel continua seu
+      </div>
+      <h1>Seu imóvel vale dinheiro.<br><span>Use ele sem sair de casa.</span></h1>
+      <p class="hero-sub">Crédito de R$50 mil a R$3 milhões com as menores taxas do Brasil. Comparamos 15+ bancos e encontramos a melhor condição pra você.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>0,99%</strong>
+          <small>a.m. a partir de</small>
+        </div>
+        <div class="hero-stat">
+          <strong>R$3mi</strong>
+          <small>valor máximo</small>
+        </div>
+        <div class="hero-stat">
+          <strong>240x</strong>
+          <small>até 20 anos</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIMULADOR -->
+    <div class="sim-card" id="simulador">
+      <h3>Simule seu crédito em 2 minutos</h3>
+      <p class="sim-sub">Descubra quanto seu imóvel pode liberar.</p>
+      <form id="simForm" onsubmit="return enviarSimulacao(event)">
+        <div class="sim-field">
+          <label>Valor aproximado do imóvel</label>
+          <input type="text" id="valorImovel" placeholder="R$ 400.000" inputmode="numeric" required>
+        </div>
+        <div class="sim-field">
+          <label>Quanto você precisa</label>
+          <input type="text" id="valorCredito" placeholder="R$ 150.000" inputmode="numeric" required>
+        </div>
+        <div class="sim-field">
+          <label>Seu WhatsApp</label>
+          <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" required>
+        </div>
+        <button type="submit" class="btn btn-destaque">
+          Simular agora
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+      <p class="sim-trust">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Simulação gratuita &middot; Sem compromisso &middot; 100% seguro
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     LOGOS DOS BANCOS
+     ═══════════════════════════════════════ -->
+<div class="logos-section section-overlap">
+  <p>Encontramos a menor taxa entre os maiores bancos</p>
+  <div class="logos-track">
+    <span class="logo-banco">Itaú</span>
+    <span class="logo-banco">Bradesco</span>
+    <span class="logo-banco">Santander</span>
+    <span class="logo-banco">C6 Bank</span>
+    <span class="logo-banco">Bari</span>
+    <span class="logo-banco">CashMe</span>
+    <span class="logo-banco">Creditas</span>
+    <span class="logo-banco">Inter</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     ESPELHO DA DOR (PAS)
+     ═══════════════════════════════════════ -->
+<section class="dor-section section-overlap reveal">
+  <div class="wrap">
+    <div class="tag">Você se identifica?</div>
+    <h2>Pagando juros de <span>8% ao mês</span><br>enquanto seu imóvel rende 0%?</h2>
+    <p class="dor-text">
+      Você paga R$800 de mínimo no cartão e a dívida só cresce. Pega empréstimo pra pagar empréstimo. O cheque especial come seu salário todo mês.
+    </p>
+    <p class="dor-text">
+      Enquanto isso, <strong>seu imóvel está lá, parado, valendo R$400 mil</strong> — e você pagando 8% de juros por mês em dívidas que poderiam custar <strong>menos de 1%</strong>.
+    </p>
+
+    <div class="dor-destaque">
+      <p>Se você tem imóvel, você tem acesso ao crédito mais barato do Brasil. A maioria das pessoas não sabe disso. E a cada mês pagando juros altos, está literalmente jogando dinheiro fora.</p>
+    </div>
+
+    <p class="dor-text" style="font-weight:600;color:var(--texto);">
+      Não precisa ser assim. Existe um caminho pra trocar dívidas caras por uma parcela que cabe no bolso — usando o que você já tem.
+    </p>
+
+    <a href="#simulador" class="btn btn-destaque" style="margin-top:8px;">
+      Quero pagar menos juros
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     COMPARATIVO DE TAXAS
+     ═══════════════════════════════════════ -->
+<section class="comparativo-section section-overlap reveal">
+  <div class="wrap">
+    <div class="tag" style="margin-bottom:12px;">Prova com números</div>
+    <h2>A diferença que ninguém te mostrou</h2>
+    <p>Veja quanto cada modalidade cobra por R$100 mil em 5 anos.</p>
+
+    <table class="taxa-table">
+      <thead>
+        <tr>
+          <th>Modalidade</th>
+          <th>Taxa/mês</th>
+          <th class="hide-mobile">Custo em 5 anos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-bad">
+          <td>Cartão de crédito</td>
+          <td>14% a.m.</td>
+          <td class="hide-mobile">R$1.200.000+</td>
+        </tr>
+        <tr class="row-bad">
+          <td>Cheque especial</td>
+          <td>8% a.m.</td>
+          <td class="hide-mobile">R$680.000+</td>
+        </tr>
+        <tr class="row-bad">
+          <td>Empréstimo pessoal</td>
+          <td>5% a.m.</td>
+          <td class="hide-mobile">R$340.000</td>
+        </tr>
+        <tr class="row-bad" style="opacity:.65;">
+          <td>Consignado</td>
+          <td>2% a.m.</td>
+          <td class="hide-mobile">R$180.000</td>
+        </tr>
+        <tr class="row-good">
+          <td>
+            <span class="badge-he">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              HOME EQUITY
+            </span>
+          </td>
+          <td>0,99% a.m.</td>
+          <td class="hide-mobile">R$135.000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="comparativo-frase">
+      A diferença entre 1% e 8% ao mês em R$100 mil são mais de <strong style="color:var(--destaque);">R$500 mil em 5 anos</strong>.<br>Leia de novo.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     COMO FUNCIONA
+     ═══════════════════════════════════════ -->
+<section class="como-section reveal">
+  <div class="wrap">
+    <div class="tag" style="background:rgba(0,168,107,0.15);color:var(--destaque);margin-bottom:12px;display:flex;justify-content:center;">Simples e rápido</div>
+    <h2>Como funciona</h2>
+    <p>Do primeiro clique ao dinheiro na conta — sem burocracia.</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h4>Simule online</h4>
+        <p>Preencha 3 campos e descubra quanto seu imóvel libera. Leva 2 minutos.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h4>Comparamos 15+ bancos</h4>
+        <p>Buscamos a menor taxa entre Itaú, Bradesco, Santander, C6, Bari, CashMe, Creditas e outros.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h4>Escolha a melhor proposta</h4>
+        <p>Apresentamos as opções com transparência total: taxa, CET, prazo e parcela.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h4>Crédito na sua conta</h4>
+        <p>Processo 100% digital. Em média 20 a 45 dias o dinheiro está na sua conta.</p>
+      </div>
+    </div>
+
+    <div class="como-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Todo o processo é digital — você não precisa ir a nenhum banco
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PRA QUE USAR
+     ═══════════════════════════════════════ -->
+<section class="usos-section section-overlap reveal">
+  <div class="wrap">
+    <div class="section-label"><div class="tag">Uso livre</div></div>
+    <h2>O dinheiro é seu. Use como quiser.</h2>
+    <p>O crédito cai na sua conta e você decide.</p>
+
+    <div class="card-track">
+      <div class="card uso-card">
+        <div class="uso-icon">💳</div>
+        <h4>Quitar dívidas caras</h4>
+        <p>Troque cartão, cheque especial e empréstimos por uma parcela que cabe no bolso.</p>
+      </div>
+      <div class="card uso-card">
+        <div class="uso-icon">🏢</div>
+        <h4>Capital de giro</h4>
+        <p>Injete capital no seu negócio com a taxa mais barata do mercado.</p>
+      </div>
+      <div class="card uso-card">
+        <div class="uso-icon">📈</div>
+        <h4>Investir</h4>
+        <p>Pega a 1% a.m., aplica a 1,5%+. Arbitragem inteligente de taxa.</p>
+      </div>
+      <div class="card uso-card">
+        <div class="uso-icon">🏠</div>
+        <h4>Reformar</h4>
+        <p>Valorize seu imóvel com reforma financiada a longo prazo.</p>
+      </div>
+      <div class="card uso-card">
+        <div class="uso-icon">🎓</div>
+        <h4>Educação</h4>
+        <p>Faculdade, MBA, intercâmbio — invista no futuro com parcelas acessíveis.</p>
+      </div>
+      <div class="card uso-card">
+        <div class="uso-icon">✨</div>
+        <h4>Projeto pessoal</h4>
+        <p>Casamento, viagem, procedimento médico — realize sem apertar o orçamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     OBJEÇÕES
+     ═══════════════════════════════════════ -->
+<section class="objecoes-section section-overlap reveal">
+  <div class="wrap">
+    <div class="section-label"><div class="tag">Tire suas dúvidas</div></div>
+    <h2>O que todo mundo pergunta</h2>
+    <p>Respostas diretas, sem enrolação.</p>
+
+    <div class="obj-grid">
+      <div class="obj-card obj-highlight">
+        <div class="obj-q">"Vou perder meu imóvel?"</div>
+        <p class="obj-a">Não. Você continua morando, alugando e usando seu imóvel normalmente. A garantia é apenas um registro em cartório — quando quitar, sai automaticamente. É igual financiamento de carro: você usa o carro, só não vende até pagar. <strong>E pensa: se você NÃO usar o Home Equity e continuar pagando 8% no cheque especial, o risco de perder o imóvel por endividamento é MUITO maior.</strong></p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">"Meu imóvel ainda está financiado, posso usar?"</div>
+        <p class="obj-a">Sim! Muitos bancos aceitam. O Home Equity quita o saldo devedor e libera a diferença pra você. Exemplo: imóvel de R$500 mil com R$100 mil de saldo → libera até R$200 mil.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">"Demora muito?"</div>
+        <p class="obj-a">O processo leva em média 20 a 45 dias do início ao crédito na conta. Todo digital — você não precisa ir ao banco nem ao cartório pessoalmente.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">"Tenho nome sujo, consigo?"</div>
+        <p class="obj-a">Sim, é possível! Como o imóvel é a garantia, muitas instituições aprovam mesmo com restrições no CPF. As condições variam, mas vale simular — não custa nada.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">"Qual banco tem a melhor taxa?"</div>
+        <p class="obj-a">Depende do seu perfil. Por isso a Personal Bank compara mais de 15 bancos automaticamente — Itaú, Bradesco, Santander, C6, Bari, CashMe, Creditas e outros — e te apresenta a melhor opção. Você não precisa ir em banco nenhum.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">"É seguro?"</div>
+        <p class="obj-a">100%. O processo é regulamentado pelo Banco Central, usa alienação fiduciária (Lei 9.514/97) e é a mesma operação feita por milhões de brasileiros. O mercado de Home Equity cresceu 41% só no primeiro semestre de 2024.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:28px;">
+      <a href="#simulador" class="btn btn-destaque">
+        Simular sem compromisso
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     DEPOIMENTOS
+     ═══════════════════════════════════════ -->
+<section class="depo-section reveal">
+  <div class="wrap">
+    <div class="section-label"><div class="tag">Resultados reais</div></div>
+    <h2>Quem usou, não volta atrás</h2>
+    <p>Histórias de quem trocou dívida cara por parcela inteligente.</p>
+
+    <div class="card-track">
+      <div class="card depo-card">
+        <div class="depo-fase antes">ANTES</div>
+        <p class="depo-text">R$180 mil em dívidas espalhadas em 4 bancos. Quase R$6 mil por mês em parcelas.</p>
+        <div class="depo-fase virada">VIRADA</div>
+        <p class="depo-text">Usou o Home Equity do apartamento — liberou R$200 mil a 1,09% a.m.</p>
+        <div class="depo-fase depois">DEPOIS</div>
+        <p class="depo-text">Quitou TUDO. Agora paga UMA parcela de R$2.800.</p>
+        <p class="depo-nome">Carlos M. — São Paulo, SP</p>
+        <div class="depo-economia">↓ Economia de R$3.200/mês</div>
+      </div>
+
+      <div class="card depo-card">
+        <div class="depo-fase antes">ANTES</div>
+        <p class="depo-text">Precisava de R$150 mil pra expandir a loja. Banco queria 3,5% a.m. no capital de giro.</p>
+        <div class="depo-fase virada">VIRADA</div>
+        <p class="depo-text">Home Equity da casa dos pais — liberou R$150 mil a 1,2% a.m.</p>
+        <div class="depo-fase depois">DEPOIS</div>
+        <p class="depo-text">Loja expandida, faturamento dobrou em 8 meses.</p>
+        <p class="depo-nome">Fernanda L. — Belo Horizonte, MG</p>
+        <div class="depo-economia">↓ Economia de R$40 mil/ano em juros</div>
+      </div>
+
+      <div class="card depo-card">
+        <div class="depo-fase antes">ANTES</div>
+        <p class="depo-text">Imóvel de R$700 mil parado. Pagando 2,5% a.m. em empréstimo pessoal de R$80 mil.</p>
+        <div class="depo-fase virada">VIRADA</div>
+        <p class="depo-text">Migrou pro Home Equity a 1,05% a.m. e ainda liberou R$50 mil extra.</p>
+        <div class="depo-fase depois">DEPOIS</div>
+        <p class="depo-text">Parcela caiu de R$3.400 pra R$1.600. Usou o extra pra investir.</p>
+        <p class="depo-nome">Ricardo S. — Rio de Janeiro, RJ</p>
+        <div class="depo-economia">↓ Economia de R$1.800/mês</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     STACK DE VALOR
+     ═══════════════════════════════════════ -->
+<section class="stack-section section-overlap reveal">
+  <div class="wrap">
+    <h2>Tudo que você ganha com a Personal Bank</h2>
+    <div class="stack-list">
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Taxas a partir de 0,99% a.m. <span>— as menores do Brasil</span></p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Até 60% do valor do imóvel liberado</p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Prazo de até 20 anos <span>(240 meses)</span></p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Uso livre <span>— faça o que quiser com o dinheiro</span></p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Imóvel continua sendo seu <span>— mora, aluga, reforma</span></p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Aceita imóvel de terceiros <span>— pais, filhos, cônjuge</span></p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Processo 100% digital <span>— sem sair de casa</span></p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Comparação automática entre 15+ bancos <span>— menor taxa garantida</span></p>
+      </div>
+      <div class="stack-item">
+        <div class="stack-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Consultoria gratuita e personalizada <span>— do início ao crédito na conta</span></p>
+      </div>
+      <div class="stack-item" style="border:2px solid var(--dourado);background:linear-gradient(135deg,#FFFBF0,#FFF8E8);">
+        <div class="stack-check" style="background:var(--dourado);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p style="color:var(--dourado);">Bônus: atendimento prioritário com consultor dedicado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SIMULADOR REPETIDO
+     ═══════════════════════════════════════ -->
+<section class="sim-repeat" id="simular">
+  <div class="wrap">
+    <h2>Ainda não simulou?</h2>
+    <p>Descubra em 2 minutos quanto seu imóvel pode liberar.</p>
+
+    <div class="sim-card" id="simulador2">
+      <h3>Simule seu crédito agora</h3>
+      <p class="sim-sub">Sem compromisso. 100% gratuito.</p>
+      <form onsubmit="return enviarSimulacao2(event)">
+        <div class="sim-field">
+          <label>Valor aproximado do imóvel</label>
+          <input type="text" id="valorImovel2" placeholder="R$ 400.000" inputmode="numeric" required>
+        </div>
+        <div class="sim-field">
+          <label>Quanto você precisa</label>
+          <input type="text" id="valorCredito2" placeholder="R$ 150.000" inputmode="numeric" required>
+        </div>
+        <div class="sim-field">
+          <label>Seu WhatsApp</label>
+          <input type="tel" id="whatsapp2" placeholder="(11) 99999-9999" required>
+        </div>
+        <button type="submit" class="btn btn-destaque">
+          Simular agora
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+      <p class="sim-trust">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Seus dados estão protegidos
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FAQ
+     ═══════════════════════════════════════ -->
+<section class="faq-section section-overlap reveal">
+  <div class="wrap">
+    <h2>Perguntas frequentes</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quais tipos de imóvel são aceitos?</div>
+        <div class="faq-a"><p>Casa, apartamento, sala comercial e terreno em condomínio urbano. O imóvel precisa ter matrícula em cartório e estar regularizado.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Qual o valor mínimo e máximo?</div>
+        <div class="faq-a"><p>O crédito vai de R$50 mil a R$3 milhões, liberando até 60% do valor de avaliação do imóvel.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Qual o prazo de pagamento?</div>
+        <div class="faq-a"><p>Até 240 meses (20 anos), com parcelas que cabem no seu orçamento. Algumas instituições oferecem carência de até 90 dias pra começar a pagar.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Posso usar imóvel de outra pessoa?</div>
+        <div class="faq-a"><p>Sim! Aceitamos imóvel de terceiros — pais, filhos, cônjuge. A pessoa dona do imóvel participa como interveniente garantidor.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quais documentos preciso?</div>
+        <div class="faq-a"><p>Documento de identidade, comprovante de renda, comprovante de residência, matrícula do imóvel e IPTU. Nosso consultor te guia em cada etapa.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">E se eu quiser quitar antes?</div>
+        <div class="faq-a"><p>Você pode quitar antecipadamente a qualquer momento, com desconto proporcional dos juros. Quando quitar, o registro de garantia sai automaticamente do cartório.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">A Personal Bank é confiável?</div>
+        <div class="faq-a"><p>Somos correspondentes bancários autorizados via Franq, plataforma multibanco regulamentada pelo Banco Central. Não operamos o crédito — conectamos você ao banco com a melhor condição.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quanto tempo pra liberar o crédito?</div>
+        <div class="faq-a"><p>Em média 20 a 45 dias do início ao crédito na conta. O prazo varia conforme o banco e a documentação do imóvel.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CTA FINAL
+     ═══════════════════════════════════════ -->
+<section class="cta-final reveal">
+  <div class="wrap">
+    <h2>Seu patrimônio está parado.<br>Seu dinheiro não precisa estar.</h2>
+    <p>Você já fez sua parte — comprou o imóvel, pagou as prestações, construiu patrimônio. Agora é hora dele trabalhar por você.</p>
+    <a href="#simulador" class="btn btn-destaque">
+      Descobrir quanto meu imóvel libera
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <p class="cta-sub">Simulação gratuita &middot; Sem compromisso &middot; O imóvel continua sendo seu</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-logo">Personal Bank LM</div>
+    <p style="color:rgba(255,255,255,0.5);margin:0;">Correspondente bancário autorizado via Franq</p>
+    <div class="footer-links">
+      <a href="https://api.whatsapp.com/send/?phone=55XXXXXXXXXXX&text=Olá! Vim pelo site e quero saber mais sobre Home Equity." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://instagram.com/ARROBA" target="_blank" rel="noopener">Instagram</a>
+      <a href="#simulador">Simular agora</a>
+    </div>
+    <p class="footer-disclaimer">
+      Crédito sujeito à análise de crédito e avaliação do imóvel pela instituição financeira. As taxas, prazos e condições podem variar conforme o perfil do cliente, valor e localização do imóvel. A Personal Bank LM atua como correspondente bancário e não é uma instituição financeira. Operação de alienação fiduciária regulamentada pela Lei 9.514/97. As imagens e valores apresentados são meramente ilustrativos.
+    </p>
+    <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:4px;">© 2026 Personal Bank LM. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     WHATSAPP FLUTUANTE
+     ═══════════════════════════════════════ -->
+<a href="https://api.whatsapp.com/send/?phone=55XXXXXXXXXXX&text=Olá! Vim pelo site e quero saber mais sobre Home Equity." target="_blank" rel="noopener" class="wpp-float" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════ -->
+<script>
+// ── MÁSCARA DE MOEDA ──
+function maskMoney(input) {
+  input.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (!v) { this.value = ''; return; }
+    v = (parseInt(v) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    this.value = v;
+  });
+}
+
+// ── MÁSCARA DE TELEFONE ──
+function maskPhone(input) {
+  input.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.slice(0, 11);
+    if (v.length > 6) {
+      this.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+    } else if (v.length > 2) {
+      this.value = `(${v.slice(0,2)}) ${v.slice(2)}`;
+    } else if (v.length > 0) {
+      this.value = `(${v}`;
+    }
+  });
+}
+
+// Aplicar máscaras
+document.querySelectorAll('#valorImovel, #valorImovel2, #valorCredito, #valorCredito2').forEach(maskMoney);
+document.querySelectorAll('#whatsapp, #whatsapp2').forEach(maskPhone);
+
+// ── ENVIAR SIMULAÇÃO (HERO) ──
+function enviarSimulacao(e) {
+  e.preventDefault();
+  const imovel = document.getElementById('valorImovel').value;
+  const credito = document.getElementById('valorCredito').value;
+  const wpp = document.getElementById('whatsapp').value;
+
+  if (!imovel || !credito || !wpp) return false;
+
+  const msg = `Olá! Quero simular Home Equity.%0A%0A🏠 Valor do imóvel: ${encodeURIComponent(imovel)}%0A💰 Valor que preciso: ${encodeURIComponent(credito)}%0A📱 Meu WhatsApp: ${encodeURIComponent(wpp)}`;
+  window.open(`https://api.whatsapp.com/send/?phone=55XXXXXXXXXXX&text=${msg}`, '_blank');
+  return false;
+}
+
+// ── ENVIAR SIMULAÇÃO (REPETIDO) ──
+function enviarSimulacao2(e) {
+  e.preventDefault();
+  const imovel = document.getElementById('valorImovel2').value;
+  const credito = document.getElementById('valorCredito2').value;
+  const wpp = document.getElementById('whatsapp2').value;
+
+  if (!imovel || !credito || !wpp) return false;
+
+  const msg = `Olá! Quero simular Home Equity.%0A%0A🏠 Valor do imóvel: ${encodeURIComponent(imovel)}%0A💰 Valor que preciso: ${encodeURIComponent(credito)}%0A📱 Meu WhatsApp: ${encodeURIComponent(wpp)}`;
+  window.open(`https://api.whatsapp.com/send/?phone=55XXXXXXXXXXX&text=${msg}`, '_blank');
+  return false;
+}
+
+// ── FAQ ACORDEÃO ──
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  // Fechar todos
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  // Abrir o clicado (se não estava aberto)
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ── REVEAL ON SCROLL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── HEADER SHADOW ON SCROLL ──
+const hdr = document.querySelector('.hdr');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 10) {
+    hdr.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)';
+  } else {
+    hdr.style.boxShadow = 'none';
+  }
+}, { passive: true });
+
+// ── SMOOTH SCROLL PARA LINKS INTERNOS ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

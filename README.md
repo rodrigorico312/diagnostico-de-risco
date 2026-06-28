@@ -17,6 +17,7 @@ pagina de links e formulario de lead para troca de contador.
 - `/`: landing page principal
 - `/links`: pagina de links
 - `/trocar-contador`: formulario para lead de troca de contador
+- `/credito-com-garantia`: landing page Personal Bank LM
 
 ## Configuracao do WhatsApp
 
