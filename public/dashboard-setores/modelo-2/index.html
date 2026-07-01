@@ -10,17 +10,24 @@
         theme: {
           extend: {
             colors: {
-              ink: "#172033",
+              graphite: "#111827",
+              graphite2: "#172033",
+              graphite3: "#202b3d",
+              paper: "#f8fafc",
+              ink: "#0f172a",
               muted: "#64748b",
-              line: "#d9e1ea",
-              fiscal: "#2563eb",
-              rh: "#0f766e",
-              risk: "#b91c1c",
-              warn: "#b45309",
-              ok: "#15803d",
+              line: "#d7dee8",
+              fiscal: "#3b82f6",
+              rh: "#14b8a6",
+              gold: "#f59e0b",
+              bronze: "#f97316",
+              risk: "#dc2626",
+              warn: "#d97706",
+              ok: "#16a34a",
             },
             boxShadow: {
-              panel: "0 12px 28px rgba(15, 23, 42, 0.08)",
+              executive: "0 18px 45px rgba(2, 6, 23, 0.22)",
+              soft: "0 14px 34px rgba(15, 23, 42, 0.10)",
             },
           },
         },
@@ -33,53 +40,85 @@
 
       body {
         letter-spacing: 0;
+        background:
+          linear-gradient(180deg, #101522 0%, #192233 45%, #eef2f7 45%, #eef2f7 100%);
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .soft-card {
+        background: rgba(248, 250, 252, 0.98);
+        border: 1px solid rgba(215, 222, 232, 0.9);
+        color: #0f172a;
+      }
+
+      .ring {
+        --angle: 0deg;
+        --ring-color: #3b82f6;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: conic-gradient(var(--ring-color) var(--angle), rgba(148, 163, 184, 0.22) 0);
+        position: relative;
+      }
+
+      .ring::before {
+        content: "";
+        position: absolute;
+        inset: 9px;
+        border-radius: inherit;
+        background: #111827;
+      }
+
+      .ring > span {
+        position: relative;
+        z-index: 1;
       }
 
       .donut {
+        --fiscal-angle: 312deg;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
         background:
-          radial-gradient(circle at center, #fff 0 48%, transparent 49%),
-          conic-gradient(#2563eb 0deg 312deg, #0f766e 312deg 360deg);
+          radial-gradient(circle at center, #111827 0 48%, transparent 49%),
+          conic-gradient(#3b82f6 0deg var(--fiscal-angle), #14b8a6 var(--fiscal-angle) 360deg);
       }
 
-      .radial-fiscal {
-        background:
-          radial-gradient(circle at center, #fff 0 57%, transparent 58%),
-          conic-gradient(#2563eb 0deg 39.6deg, #e5eaf1 39.6deg 360deg);
+      .bar-track {
+        background: rgba(148, 163, 184, 0.22);
+        border-radius: 999px;
+        overflow: hidden;
       }
 
-      .radial-rh {
-        background:
-          radial-gradient(circle at center, #fff 0 57%, transparent 58%),
-          conic-gradient(#0f766e 0deg 54deg, #e5eaf1 54deg 360deg);
-      }
-
-      .radial-geral {
-        background:
-          radial-gradient(circle at center, #fff 0 57%, transparent 58%),
-          conic-gradient(#b45309 0deg 39.6deg, #e5eaf1 39.6deg 360deg);
+      .bar-fill {
+        width: var(--width, 0%);
+        border-radius: inherit;
       }
 
       @keyframes goldPulse {
         0%,
         100% {
+          transform: translateY(-1rem) scale(1.035);
           box-shadow:
-            0 18px 42px rgba(202, 138, 4, 0.22),
-            0 0 0 0 rgba(245, 158, 11, 0.34);
-          transform: translateY(-1rem) scale(1.02);
+            0 24px 54px rgba(245, 158, 11, 0.26),
+            0 0 0 0 rgba(245, 158, 11, 0.22);
         }
 
         50% {
+          transform: translateY(-1.18rem) scale(1.05);
           box-shadow:
-            0 24px 58px rgba(202, 138, 4, 0.32),
+            0 30px 70px rgba(245, 158, 11, 0.36),
             0 0 0 12px rgba(245, 158, 11, 0);
-          transform: translateY(-1.15rem) scale(1.035);
         }
       }
 
       @media (min-width: 1024px) {
         .podium-gold {
-          animation: goldPulse 2.6s ease-in-out infinite;
-          transform: translateY(-1rem) scale(1.02);
+          animation: goldPulse 2.8s ease-in-out infinite;
         }
       }
 
@@ -90,437 +129,530 @@
       }
     </style>
   </head>
-  <body class="min-h-screen bg-slate-100 text-ink antialiased">
-    <main class="mx-auto w-full max-w-7xl px-3 py-4 sm:px-6 sm:py-6 lg:px-8">
-      <header class="mb-4 flex flex-col gap-3 sm:mb-5 sm:gap-4 lg:flex-row lg:items-end lg:justify-between">
+  <body class="min-h-screen text-slate-100 antialiased">
+    <main class="mx-auto w-full max-w-7xl px-3 py-4 sm:px-6 sm:py-7 lg:px-8">
+      <header class="mb-5 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
-          <p class="text-xs font-semibold uppercase text-fiscal sm:text-sm">Competência 06/2026</p>
-          <h1 class="mt-1 text-2xl font-bold leading-tight sm:text-4xl">Painel executivo de produtividade</h1>
-          <p class="mt-2 max-w-3xl text-xs text-muted sm:text-sm">
-            Visão de gestão por setor, gargalos principais e avanço das obrigações.
+          <p class="text-xs font-medium uppercase tracking-wide text-sky-300">Competência 06/2026</p>
+          <h1 class="mt-2 max-w-4xl text-2xl font-medium leading-tight sm:text-4xl">
+            Painel executivo de produtividade
+          </h1>
+          <p class="mt-2 max-w-3xl text-sm font-normal text-slate-300">
+            Visão por setor, gargalos operacionais e ranking da equipe em atualização automática.
           </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          <span class="rounded-lg border border-line bg-white px-3 py-2 text-xs font-semibold text-muted shadow-sm sm:px-4 sm:text-sm">
+          <span
+            id="sync-status"
+            class="rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-xs font-medium text-slate-200"
+          >
+            Atualizando dados...
+          </span>
+          <span class="rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-xs font-medium text-slate-300">
             Snapshot em 01/07/2026
           </span>
         </div>
       </header>
 
       <section class="grid gap-3 md:grid-cols-3">
-        <article class="rounded-lg border border-line bg-white p-4 shadow-panel sm:p-5">
+        <article class="glass-panel rounded-lg p-4 shadow-executive sm:p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <p class="text-xs font-semibold uppercase text-muted sm:text-sm">Geral</p>
-              <p class="mt-2 text-3xl font-bold sm:mt-3 sm:text-4xl">11%</p>
+              <p class="text-xs font-medium uppercase text-slate-400">Geral</p>
+              <p id="total-percent" class="mt-2 text-3xl font-medium sm:text-4xl">11%</p>
             </div>
-            <div class="radial-geral grid h-16 w-16 place-items-center rounded-full text-xs font-bold sm:h-20 sm:w-20 sm:text-sm">436</div>
+            <div id="total-ring" class="ring h-16 w-16 text-xs font-medium sm:h-20 sm:w-20" style="--ring-color: #f59e0b; --angle: 39.6deg">
+              <span id="total-completed">436</span>
+            </div>
           </div>
-          <p class="mt-3 text-xs text-muted sm:mt-4 sm:text-sm">436 concluídas de 3.860 etapas</p>
-          <div class="mt-3 h-2 rounded-full bg-slate-200 sm:mt-4">
-            <div class="h-2 w-[11%] rounded-full bg-warn"></div>
+          <p id="total-summary" class="mt-3 text-xs font-normal text-slate-300 sm:text-sm">
+            436 concluídas de 3.860 etapas
+          </p>
+          <div class="bar-track mt-4 h-2">
+            <div id="total-bar" class="bar-fill h-2 bg-gold" style="--width: 11%"></div>
           </div>
         </article>
 
-        <article class="rounded-lg border border-line bg-white p-4 shadow-panel sm:p-5">
+        <article class="glass-panel rounded-lg p-4 shadow-executive sm:p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <p class="text-xs font-semibold uppercase text-muted sm:text-sm">Fiscal</p>
-              <p class="mt-2 text-3xl font-bold sm:mt-3 sm:text-4xl">11%</p>
+              <p class="text-xs font-medium uppercase text-slate-400">Fiscal</p>
+              <p id="fiscal-percent" class="mt-2 text-3xl font-medium sm:text-4xl">11%</p>
             </div>
-            <div class="radial-fiscal grid h-16 w-16 place-items-center rounded-full text-xs font-bold sm:h-20 sm:w-20 sm:text-sm">357</div>
+            <div id="fiscal-ring" class="ring h-16 w-16 text-xs font-medium sm:h-20 sm:w-20" style="--ring-color: #3b82f6; --angle: 39.6deg">
+              <span id="fiscal-completed">357</span>
+            </div>
           </div>
-          <p class="mt-3 text-xs text-muted sm:mt-4 sm:text-sm">2.963 pendentes em 3.320 etapas</p>
-          <div class="mt-3 h-2 rounded-full bg-slate-200 sm:mt-4">
-            <div class="h-2 w-[11%] rounded-full bg-fiscal"></div>
+          <p id="fiscal-summary" class="mt-3 text-xs font-normal text-slate-300 sm:text-sm">
+            2.963 pendentes em 3.320 etapas
+          </p>
+          <div class="bar-track mt-4 h-2">
+            <div id="fiscal-bar" class="bar-fill h-2 bg-fiscal" style="--width: 11%"></div>
           </div>
         </article>
 
-        <article class="rounded-lg border border-line bg-white p-4 shadow-panel sm:p-5">
+        <article class="glass-panel rounded-lg p-4 shadow-executive sm:p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <p class="text-xs font-semibold uppercase text-muted sm:text-sm">RH</p>
-              <p class="mt-2 text-3xl font-bold sm:mt-3 sm:text-4xl">15%</p>
+              <p class="text-xs font-medium uppercase text-slate-400">RH</p>
+              <p id="rh-percent" class="mt-2 text-3xl font-medium sm:text-4xl">15%</p>
             </div>
-            <div class="radial-rh grid h-16 w-16 place-items-center rounded-full text-xs font-bold sm:h-20 sm:w-20 sm:text-sm">79</div>
+            <div id="rh-ring" class="ring h-16 w-16 text-xs font-medium sm:h-20 sm:w-20" style="--ring-color: #14b8a6; --angle: 54deg">
+              <span id="rh-completed">79</span>
+            </div>
           </div>
-          <p class="mt-3 text-xs text-muted sm:mt-4 sm:text-sm">461 pendentes em 540 etapas</p>
-          <div class="mt-3 h-2 rounded-full bg-slate-200 sm:mt-4">
-            <div class="h-2 w-[15%] rounded-full bg-rh"></div>
+          <p id="rh-summary" class="mt-3 text-xs font-normal text-slate-300 sm:text-sm">
+            461 pendentes em 540 etapas
+          </p>
+          <div class="bar-track mt-4 h-2">
+            <div id="rh-bar" class="bar-fill h-2 bg-rh" style="--width: 15%"></div>
           </div>
         </article>
       </section>
 
-      <section class="mt-3 grid gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-[0.95fr_1.25fr]">
-        <article class="rounded-lg border border-line bg-white p-4 shadow-panel sm:p-5">
-          <div class="flex items-center justify-between gap-3">
+      <section class="mt-3 grid gap-3 sm:mt-4 lg:grid-cols-[0.88fr_1.32fr]">
+        <article class="rounded-lg bg-graphite p-4 text-slate-100 shadow-executive sm:p-5">
+          <div class="flex items-start justify-between gap-3">
             <div>
-              <h2 class="text-base font-bold sm:text-lg">Pendências por setor</h2>
-              <p class="mt-1 text-xs text-muted sm:text-sm">3.424 pendências abertas</p>
+              <h2 class="text-base font-medium sm:text-lg">Pendências por setor</h2>
+              <p id="pending-total" class="mt-1 text-xs font-normal text-slate-400 sm:text-sm">3.424 pendências abertas</p>
             </div>
-            <span class="rounded-lg bg-slate-100 px-3 py-1 text-xs font-semibold text-muted">Donut</span>
+            <span class="rounded-lg bg-white/10 px-3 py-1 text-xs font-medium text-slate-300">Donut</span>
           </div>
 
-          <div class="mt-4 grid gap-4 sm:mt-6 sm:grid-cols-[180px_1fr] sm:items-center sm:gap-6">
-            <div class="donut mx-auto grid h-36 w-36 place-items-center rounded-full sm:h-44 sm:w-44">
+          <div class="mt-5 grid gap-5 sm:grid-cols-[170px_1fr] sm:items-center">
+            <div id="sector-donut" class="donut mx-auto h-36 w-36 sm:h-44 sm:w-44" style="--fiscal-angle: 312deg">
               <div class="text-center">
-                <p class="text-2xl font-bold sm:text-3xl">3.424</p>
-                <p class="text-xs font-semibold uppercase text-muted">pendentes</p>
+                <p id="donut-pending" class="text-2xl font-medium sm:text-3xl">3.424</p>
+                <p class="text-[11px] font-medium uppercase text-slate-400">pendentes</p>
               </div>
             </div>
 
             <div class="space-y-4">
               <div>
                 <div class="flex items-center justify-between gap-3 text-sm">
-                  <span class="font-semibold text-fiscal">Fiscal</span>
-                  <span class="font-bold">2.963 · 87%</span>
+                  <span class="font-medium text-sky-300">Fiscal</span>
+                  <span id="fiscal-pending-share" class="font-medium text-slate-200">2.963 · 87%</span>
                 </div>
-                <div class="mt-2 h-2 rounded-full bg-slate-200">
-                  <div class="h-2 w-[87%] rounded-full bg-fiscal"></div>
+                <div class="bar-track mt-2 h-2">
+                  <div id="fiscal-pending-bar" class="bar-fill h-2 bg-fiscal" style="--width: 87%"></div>
                 </div>
               </div>
               <div>
                 <div class="flex items-center justify-between gap-3 text-sm">
-                  <span class="font-semibold text-rh">RH</span>
-                  <span class="font-bold">461 · 13%</span>
+                  <span class="font-medium text-teal-300">RH</span>
+                  <span id="rh-pending-share" class="font-medium text-slate-200">461 · 13%</span>
                 </div>
-                <div class="mt-2 h-2 rounded-full bg-slate-200">
-                  <div class="h-2 w-[13%] rounded-full bg-rh"></div>
+                <div class="bar-track mt-2 h-2">
+                  <div id="rh-pending-bar" class="bar-fill h-2 bg-rh" style="--width: 13%"></div>
                 </div>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="rounded-lg border border-line bg-white p-4 shadow-panel sm:p-5">
-          <div class="flex items-center justify-between gap-3">
+        <article class="rounded-lg bg-graphite p-4 text-slate-100 shadow-executive sm:p-5">
+          <div class="flex items-start justify-between gap-3">
             <div>
-              <h2 class="text-base font-bold sm:text-lg">Maiores gargalos</h2>
-              <p class="mt-1 text-xs text-muted sm:text-sm">Abas com mais pendências abertas</p>
+              <h2 class="text-base font-medium sm:text-lg">Maiores gargalos</h2>
+              <p class="mt-1 text-xs font-normal text-slate-400 sm:text-sm">Abas com mais pendências abertas</p>
             </div>
-            <span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-semibold text-risk">Prioridade</span>
+            <span class="rounded-lg bg-red-500/12 px-3 py-1 text-xs font-medium text-red-300">Prioridade</span>
           </div>
 
-          <div class="mt-4 space-y-3 sm:mt-5 sm:space-y-4">
-            <div>
-              <div class="flex items-center justify-between gap-3 text-[11px] sm:text-sm">
-                <span class="font-semibold">ESCRITURAÇÃO_PREFEITURA</span>
-                <span class="font-bold">860</span>
-              </div>
-              <div class="mt-2 h-2 rounded-full bg-slate-200 sm:h-3">
-                <div class="h-2 w-full rounded-full bg-risk sm:h-3"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between gap-3 text-[11px] sm:text-sm">
-                <span class="font-semibold">ESCRITURAÇÃO_SEFA</span>
-                <span class="font-bold">756</span>
-              </div>
-              <div class="mt-2 h-2 rounded-full bg-slate-200 sm:h-3">
-                <div class="h-2 w-[88%] rounded-full bg-risk sm:h-3"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between gap-3 text-[11px] sm:text-sm">
-                <span class="font-semibold">CND</span>
-                <span class="font-bold">605</span>
-              </div>
-              <div class="mt-2 h-2 rounded-full bg-slate-200 sm:h-3">
-                <div class="h-2 w-[70%] rounded-full bg-warn sm:h-3"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between gap-3 text-[11px] sm:text-sm">
-                <span class="font-semibold">ESCRITURAÇÃO</span>
-                <span class="font-bold">552</span>
-              </div>
-              <div class="mt-2 h-2 rounded-full bg-slate-200 sm:h-3">
-                <div class="h-2 w-[64%] rounded-full bg-warn sm:h-3"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex items-center justify-between gap-3 text-[11px] sm:text-sm">
-                <span class="font-semibold">FUNCIONARIOS</span>
-                <span class="font-bold">360</span>
-              </div>
-              <div class="mt-2 h-2 rounded-full bg-slate-200 sm:h-3">
-                <div class="h-2 w-[42%] rounded-full bg-rh sm:h-3"></div>
-              </div>
-            </div>
-          </div>
+          <div id="bottlenecks" class="mt-5 space-y-4"></div>
         </article>
       </section>
 
-      <section class="mt-3 overflow-hidden rounded-lg border border-yellow-100 bg-white shadow-panel sm:mt-4">
-        <div class="border-b border-yellow-100 bg-[linear-gradient(135deg,#fff7ed_0%,#ffffff_48%,#eff6ff_100%)] p-4 sm:p-5">
-          <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex items-start gap-3 sm:gap-4">
-              <div class="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-yellow-200 bg-yellow-50 text-yellow-700 sm:h-12 sm:w-12">
+      <section class="mt-3 overflow-hidden rounded-lg bg-paper text-ink shadow-soft sm:mt-4">
+        <div class="border-b border-line bg-white p-4 sm:p-5">
+          <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div class="flex items-start gap-3">
+              <div class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-amber-100 text-amber-700 sm:h-12 sm:w-12">
                 <svg class="h-6 w-6 sm:h-7 sm:w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M5 17.5 3.3 7.3l5.3 3.3L12 4l3.4 6.6 5.3-3.3L19 17.5H5Zm.7 2.5h12.6v-1.5H5.7V20Z" />
                 </svg>
               </div>
               <div>
-                <p class="text-xs font-bold uppercase text-yellow-700">Placar da galera</p>
-                <h2 class="mt-1 text-lg font-bold sm:text-xl">Ranking coroado da produtividade</h2>
-                <p class="mt-1 max-w-2xl text-xs text-muted sm:text-sm">
-                  Top 3 por colaborador nomeado. O registro "sem colaborador" fica fora da disputa.
-                </p>
+                <p class="text-xs font-medium uppercase text-amber-700">Placar da galera</p>
+                <h2 class="mt-1 text-lg font-medium sm:text-xl">Ranking coroado da produtividade</h2>
+                <p class="mt-1 text-xs font-normal text-muted sm:text-sm">Top 3 por colaborador nomeado, sem contar “sem colaborador”.</p>
               </div>
             </div>
-            <div class="grid gap-2 text-[11px] font-bold sm:grid-cols-2 sm:text-xs lg:w-[360px]">
-              <span class="rounded-lg border border-yellow-200 bg-white px-3 py-2 text-yellow-800">Critério atual: carteira atribuída</span>
-              <span class="rounded-lg border border-blue-100 bg-white px-3 py-2 text-fiscal">Depois: % concluído</span>
-            </div>
+            <span id="ranking-rule" class="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-medium text-amber-800">
+              Ranking por % concluído e volume entregue
+            </span>
           </div>
         </div>
 
         <div class="p-3 sm:p-5">
-          <div class="grid gap-3 sm:gap-4 lg:grid-cols-[0.94fr_1.28fr_0.94fr] lg:items-end">
-            <article class="order-2 flex h-full flex-col justify-between rounded-lg border border-slate-200 bg-slate-50 p-4 sm:p-5 lg:order-1">
-              <div>
-                <div class="flex items-start justify-between gap-3">
-                  <div>
-                    <span class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-bold text-slate-700 sm:h-9 sm:min-w-12 sm:text-sm" aria-label="Segundo lugar">
-                      2º
-                    </span>
-                    <h3 class="mt-3 text-xl font-bold sm:mt-4 sm:text-2xl">Lorenza</h3>
-                  </div>
-                  <div class="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-slate-100 to-slate-400 text-slate-800 shadow-sm sm:h-14 sm:w-14">
-                    <svg class="h-5 w-5 sm:h-7 sm:w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
-                    </svg>
-                  </div>
+          <div class="grid gap-3 lg:grid-cols-[0.82fr_1.36fr_0.82fr] lg:items-end">
+            <article id="podium-second" class="order-2 rounded-lg border border-slate-200 bg-slate-50 p-4 lg:order-1 lg:min-h-[260px]">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <span class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-medium text-slate-700">2º</span>
+                  <h3 data-rank-name class="mt-3 text-xl font-medium">Lorenza</h3>
                 </div>
-                <div class="mt-4 grid grid-cols-2 gap-2 sm:mt-5 lg:grid-cols-1 xl:grid-cols-2">
-                  <div class="rounded-lg bg-white p-2.5 sm:p-3">
-                    <p class="text-[10px] font-bold uppercase text-muted sm:text-xs">Produtividade</p>
-                    <p class="mt-1 text-2xl font-bold sm:text-3xl">0%</p>
-                  </div>
-                  <div class="rounded-lg bg-white p-2.5 sm:p-3">
-                    <p class="text-[10px] font-bold uppercase text-muted sm:text-xs">Carteira</p>
-                    <p class="mt-1 text-2xl font-bold sm:text-3xl">140</p>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs text-muted sm:text-sm">0 concluídas de 140 etapas atribuídas</p>
-                <div class="mt-3 h-2 rounded-full bg-slate-200 sm:mt-4">
-                  <div class="h-2 w-0 rounded-full bg-slate-400"></div>
+                <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-slate-100 to-slate-400 text-slate-700">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
+                  </svg>
                 </div>
               </div>
-              <p class="mt-5 hidden rounded-lg bg-white p-3 text-xs font-semibold text-muted sm:block">Aguardando primeiras entregas confirmadas no recorte.</p>
+              <div class="mt-4 grid grid-cols-2 gap-2">
+                <div class="rounded-lg bg-white p-3">
+                  <p class="text-[10px] font-medium uppercase text-muted">Produtividade</p>
+                  <p data-rank-percent class="mt-1 text-2xl font-medium">0%</p>
+                </div>
+                <div class="rounded-lg bg-white p-3">
+                  <p class="text-[10px] font-medium uppercase text-muted">Carteira</p>
+                  <p data-rank-planned class="mt-1 text-2xl font-medium">140</p>
+                </div>
+              </div>
+              <p data-rank-summary class="mt-3 text-xs font-normal text-muted">0 concluídas de 140 etapas atribuídas</p>
+              <div class="bar-track mt-3 h-2 bg-slate-200">
+                <div data-rank-bar class="bar-fill h-2 bg-slate-400" style="--width: 0%"></div>
+              </div>
             </article>
 
-            <article class="podium-gold relative order-1 overflow-hidden rounded-lg border border-amber-400 bg-[linear-gradient(180deg,#facc15_0%,#fde047_44%,#fef08a_100%)] p-4 shadow-panel sm:p-5 lg:order-2">
-              <div class="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-amber-200 via-amber-400 to-yellow-600 text-xl font-bold text-yellow-950 shadow-sm sm:right-5 sm:top-5 sm:h-16 sm:w-16 sm:text-2xl">
+            <article id="podium-first" class="podium-gold relative order-1 overflow-hidden rounded-lg border border-amber-400 bg-[linear-gradient(180deg,#fbbf24_0%,#f59e0b_100%)] p-4 text-amber-950 shadow-executive sm:p-5 lg:order-2 lg:min-h-[330px]">
+              <div class="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-full bg-amber-100 text-xl font-semibold shadow-soft sm:h-16 sm:w-16 sm:text-2xl">
                 1º
               </div>
-              <div class="pr-16 sm:pr-20">
-                <span class="inline-grid h-8 w-10 place-items-center rounded-lg bg-white/90 text-yellow-800 sm:h-9 sm:w-12" aria-label="Primeiro lugar">
+              <div class="pr-16">
+                <span class="inline-grid h-8 w-10 place-items-center rounded-lg bg-white/75 text-amber-800">
                   <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M5 17.5 3.3 7.3l5.3 3.3L12 4l3.4 6.6 5.3-3.3L19 17.5H5Zm.7 2.5h12.6v-1.5H5.7V20Z" />
                   </svg>
                 </span>
-                <h3 class="mt-3 text-2xl font-bold sm:mt-4 sm:text-3xl">Gabriel</h3>
+                <h3 data-rank-name class="mt-4 text-2xl font-medium sm:text-3xl">Gabriel</h3>
               </div>
-              <div class="mt-4 rounded-lg border border-yellow-300 bg-white/75 p-3 sm:mt-5 sm:p-4">
-                <p class="text-[10px] font-bold uppercase text-yellow-800 sm:text-xs">Coroa do recorte atual</p>
-                <p class="mt-1 text-xs text-muted sm:text-sm">Maior carteira atribuída entre os colaboradores nomeados.</p>
+              <div class="mt-5 rounded-lg border border-amber-300 bg-white/70 p-4">
+                <p class="text-[10px] font-medium uppercase text-amber-800">Liderança atual</p>
+                <p data-rank-summary class="mt-1 text-xs font-normal text-slate-700 sm:text-sm">0 concluídas de 296 etapas atribuídas</p>
               </div>
-              <div class="mt-3 grid grid-cols-3 gap-2 sm:mt-4">
-                <div class="rounded-lg bg-white/75 p-2.5 sm:p-3">
-                  <p class="text-[10px] font-bold uppercase text-muted sm:text-xs">Produtividade</p>
-                  <p class="mt-1 text-2xl font-bold sm:text-4xl">0%</p>
+              <div class="mt-3 grid grid-cols-3 gap-2">
+                <div class="rounded-lg bg-white/70 p-3">
+                  <p class="text-[10px] font-medium uppercase text-slate-600">Produtividade</p>
+                  <p data-rank-percent class="mt-1 text-2xl font-medium sm:text-4xl">0%</p>
                 </div>
-                <div class="rounded-lg bg-white/75 p-2.5 sm:p-3">
-                  <p class="text-[10px] font-bold uppercase text-muted sm:text-xs">Carteira</p>
-                  <p class="mt-1 text-2xl font-bold sm:text-4xl">296</p>
+                <div class="rounded-lg bg-white/70 p-3">
+                  <p class="text-[10px] font-medium uppercase text-slate-600">Carteira</p>
+                  <p data-rank-planned class="mt-1 text-2xl font-medium sm:text-4xl">296</p>
                 </div>
-                <div class="rounded-lg bg-white/75 p-2.5 sm:p-3">
-                  <p class="text-[10px] font-bold uppercase text-muted sm:text-xs">Entregues</p>
-                  <p class="mt-1 text-2xl font-bold sm:text-4xl">0</p>
+                <div class="rounded-lg bg-white/70 p-3">
+                  <p class="text-[10px] font-medium uppercase text-slate-600">Entregues</p>
+                  <p data-rank-completed class="mt-1 text-2xl font-medium sm:text-4xl">0</p>
                 </div>
               </div>
-              <p class="mt-3 text-xs text-muted sm:text-sm">0 concluídas de 296 etapas atribuídas</p>
-              <div class="mt-3 h-2 rounded-full bg-yellow-200 sm:mt-4">
-                <div class="h-2 w-0 rounded-full bg-yellow-500"></div>
+              <div class="bar-track mt-4 h-2 bg-amber-200">
+                <div data-rank-bar class="bar-fill h-2 bg-amber-700" style="--width: 0%"></div>
               </div>
             </article>
 
-            <article class="order-3 flex h-full flex-col justify-between rounded-lg border border-orange-200 bg-orange-50 p-4 sm:p-5">
-              <div>
-                <div class="flex items-start justify-between gap-3">
-                  <div>
-                    <span class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-bold text-orange-700 sm:h-9 sm:min-w-12 sm:text-sm" aria-label="Terceiro lugar">
-                      3º
-                    </span>
-                    <h3 class="mt-3 text-xl font-bold sm:mt-4 sm:text-2xl">Mara</h3>
-                  </div>
-                  <div class="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-orange-200 to-orange-600 text-orange-950 shadow-sm sm:h-14 sm:w-14">
-                    <svg class="h-5 w-5 sm:h-7 sm:w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
-                    </svg>
-                  </div>
+            <article id="podium-third" class="order-3 rounded-lg border border-orange-200 bg-orange-50 p-4 lg:min-h-[260px]">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <span class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-medium text-orange-700">3º</span>
+                  <h3 data-rank-name class="mt-3 text-xl font-medium">Mara</h3>
                 </div>
-                <div class="mt-4 grid grid-cols-2 gap-2 sm:mt-5 lg:grid-cols-1 xl:grid-cols-2">
-                  <div class="rounded-lg bg-white p-2.5 sm:p-3">
-                    <p class="text-[10px] font-bold uppercase text-muted sm:text-xs">Produtividade</p>
-                    <p class="mt-1 text-2xl font-bold sm:text-3xl">0%</p>
-                  </div>
-                  <div class="rounded-lg bg-white p-2.5 sm:p-3">
-                    <p class="text-[10px] font-bold uppercase text-muted sm:text-xs">Carteira</p>
-                    <p class="mt-1 text-2xl font-bold sm:text-3xl">120</p>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs text-muted sm:text-sm">0 concluídas de 120 etapas atribuídas</p>
-                <div class="mt-3 h-2 rounded-full bg-orange-200 sm:mt-4">
-                  <div class="h-2 w-0 rounded-full bg-orange-500"></div>
+                <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-orange-200 to-orange-600 text-orange-950">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
+                  </svg>
                 </div>
               </div>
-              <p class="mt-5 hidden rounded-lg bg-white p-3 text-xs font-semibold text-muted sm:block">Fecha o pódio no recorte atual de produtividade.</p>
+              <div class="mt-4 grid grid-cols-2 gap-2">
+                <div class="rounded-lg bg-white p-3">
+                  <p class="text-[10px] font-medium uppercase text-muted">Produtividade</p>
+                  <p data-rank-percent class="mt-1 text-2xl font-medium">0%</p>
+                </div>
+                <div class="rounded-lg bg-white p-3">
+                  <p class="text-[10px] font-medium uppercase text-muted">Carteira</p>
+                  <p data-rank-planned class="mt-1 text-2xl font-medium">120</p>
+                </div>
+              </div>
+              <p data-rank-summary class="mt-3 text-xs font-normal text-muted">0 concluídas de 120 etapas atribuídas</p>
+              <div class="bar-track mt-3 h-2 bg-orange-200">
+                <div data-rank-bar class="bar-fill h-2 bg-bronze" style="--width: 0%"></div>
+              </div>
             </article>
-          </div>
-
-          <div class="mt-4 rounded-lg border border-line bg-slate-50 p-3 text-xs text-muted sm:mt-5 sm:p-4 sm:text-sm">
-            <span class="font-bold text-ink">Empate técnico:</span> no recorte atual, os colaboradores nomeados ainda não têm etapas concluídas nas abas consideradas. O desempate temporário usa carteira atribuída; quando os status começarem a ser preenchidos, o pódio deve ser ordenado por percentual concluído e depois por volume entregue.
           </div>
         </div>
       </section>
 
-      <section class="mt-3 grid gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-        <article class="min-w-0 overflow-hidden rounded-lg border border-line bg-white shadow-panel">
-          <div class="border-b border-line bg-slate-50 px-4 py-3 sm:px-5 sm:py-4">
-            <h2 class="text-base font-bold sm:text-lg">Leitura executiva por aba</h2>
+      <section class="mt-3 grid gap-3 sm:mt-4 lg:grid-cols-[1.18fr_0.82fr]">
+        <article class="soft-card overflow-hidden rounded-lg shadow-soft">
+          <div class="border-b border-line bg-white px-4 py-3 sm:px-5 sm:py-4">
+            <h2 class="text-base font-medium text-ink sm:text-lg">Leitura executiva por aba</h2>
           </div>
 
-          <div class="grid gap-2 p-3 sm:hidden">
-            <div class="rounded-lg border border-line bg-white p-3">
-              <div class="flex items-center justify-between gap-2">
-                <span class="rounded-lg bg-blue-50 px-2 py-1 text-[11px] font-bold text-fiscal">Fiscal</span>
-                <span class="text-lg font-bold">83%</span>
-              </div>
-              <p class="mt-2 text-sm font-semibold">ALVARÁ</p>
-              <div class="mt-2 flex items-center justify-between text-xs text-muted">
-                <span>65 pendentes</span>
-                <span class="rounded-lg bg-green-50 px-2 py-1 font-bold text-ok">avançado</span>
-              </div>
-            </div>
-            <div class="rounded-lg border border-line bg-white p-3">
-              <div class="flex items-center justify-between gap-2">
-                <span class="rounded-lg bg-teal-50 px-2 py-1 text-[11px] font-bold text-rh">RH</span>
-                <span class="text-lg font-bold">66%</span>
-              </div>
-              <p class="mt-2 text-sm font-semibold">RH SemMOV</p>
-              <div class="mt-2 flex items-center justify-between text-xs text-muted">
-                <span>41 pendentes</span>
-                <span class="rounded-lg bg-amber-50 px-2 py-1 font-bold text-warn">atenção</span>
-              </div>
-            </div>
-            <div class="rounded-lg border border-line bg-white p-3">
-              <div class="flex items-center justify-between gap-2">
-                <span class="rounded-lg bg-blue-50 px-2 py-1 text-[11px] font-bold text-fiscal">Fiscal</span>
-                <span class="text-lg font-bold">22%</span>
-              </div>
-              <p class="mt-2 text-sm font-semibold">EMISSÃO_PARCELAMENTOS</p>
-              <div class="mt-2 flex items-center justify-between text-xs text-muted">
-                <span>70 pendentes</span>
-                <span class="rounded-lg bg-red-50 px-2 py-1 font-bold text-risk">baixo avanço</span>
-              </div>
-            </div>
-            <div class="rounded-lg border border-line bg-white p-3">
-              <div class="flex items-center justify-between gap-2">
-                <span class="rounded-lg bg-blue-50 px-2 py-1 text-[11px] font-bold text-fiscal">Fiscal</span>
-                <span class="text-lg font-bold">3%</span>
-              </div>
-              <p class="mt-2 text-sm font-semibold">ESCRITURAÇÃO_PREFEITURA</p>
-              <div class="mt-2 flex items-center justify-between text-xs text-muted">
-                <span>860 pendentes</span>
-                <span class="rounded-lg bg-red-50 px-2 py-1 font-bold text-risk">crítico</span>
-              </div>
-            </div>
-            <div class="rounded-lg border border-line bg-white p-3">
-              <div class="flex items-center justify-between gap-2">
-                <span class="rounded-lg bg-teal-50 px-2 py-1 text-[11px] font-bold text-rh">RH</span>
-                <span class="text-lg font-bold">0%</span>
-              </div>
-              <p class="mt-2 text-sm font-semibold">FUNCIONARIOS</p>
-              <div class="mt-2 flex items-center justify-between text-xs text-muted">
-                <span>360 pendentes</span>
-                <span class="rounded-lg bg-red-50 px-2 py-1 font-bold text-risk">crítico</span>
-              </div>
-            </div>
-          </div>
+          <div id="tab-cards" class="grid gap-2 p-3 sm:hidden"></div>
 
           <div class="hidden overflow-x-auto sm:block">
             <table class="w-full min-w-[640px] border-collapse text-sm">
-              <thead class="bg-white text-xs uppercase text-muted">
+              <thead class="bg-slate-50 text-xs uppercase text-muted">
                 <tr>
-                  <th class="px-4 py-3 text-left">Setor</th>
-                  <th class="px-4 py-3 text-left">Aba</th>
-                  <th class="px-4 py-3 text-right">Pendentes</th>
-                  <th class="px-4 py-3 text-left">Status</th>
-                  <th class="px-4 py-3 text-right">% concluído</th>
+                  <th class="px-4 py-3 text-left font-medium">Setor</th>
+                  <th class="px-4 py-3 text-left font-medium">Aba</th>
+                  <th class="px-4 py-3 text-right font-medium">Pendentes</th>
+                  <th class="px-4 py-3 text-left font-medium">Status</th>
+                  <th class="px-4 py-3 text-right font-medium">% concluído</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-line">
-                <tr>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-fiscal">Fiscal</span></td>
-                  <td class="px-4 py-3 font-semibold">ALVARÁ</td>
-                  <td class="px-4 py-3 text-right">65</td>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-green-50 px-3 py-1 text-xs font-bold text-ok">avançado</span></td>
-                  <td class="px-4 py-3 text-right font-bold">83%</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-teal-50 px-3 py-1 text-xs font-bold text-rh">RH</span></td>
-                  <td class="px-4 py-3 font-semibold">RH SemMOV</td>
-                  <td class="px-4 py-3 text-right">41</td>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-amber-50 px-3 py-1 text-xs font-bold text-warn">atenção</span></td>
-                  <td class="px-4 py-3 text-right font-bold">66%</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-fiscal">Fiscal</span></td>
-                  <td class="px-4 py-3 font-semibold">EMISSÃO_PARCELAMENTOS</td>
-                  <td class="px-4 py-3 text-right">70</td>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-risk">baixo avanço</span></td>
-                  <td class="px-4 py-3 text-right font-bold">22%</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-fiscal">Fiscal</span></td>
-                  <td class="px-4 py-3 font-semibold">ESCRITURAÇÃO_PREFEITURA</td>
-                  <td class="px-4 py-3 text-right">860</td>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-risk">crítico</span></td>
-                  <td class="px-4 py-3 text-right font-bold">3%</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-teal-50 px-3 py-1 text-xs font-bold text-rh">RH</span></td>
-                  <td class="px-4 py-3 font-semibold">FUNCIONARIOS</td>
-                  <td class="px-4 py-3 text-right">360</td>
-                  <td class="px-4 py-3"><span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-risk">crítico</span></td>
-                  <td class="px-4 py-3 text-right font-bold">0%</td>
-                </tr>
-              </tbody>
+              <tbody id="tab-table" class="divide-y divide-line"></tbody>
             </table>
           </div>
         </article>
 
-        <aside class="rounded-lg border border-line bg-white p-4 shadow-panel sm:p-5">
-          <h2 class="text-base font-bold sm:text-lg">Ações sugeridas</h2>
-          <div class="mt-4 space-y-3 sm:mt-5 sm:space-y-4">
-            <div class="rounded-lg border border-red-100 bg-red-50 p-3 sm:p-4">
-              <p class="text-xs font-bold text-risk sm:text-sm">Prioridade 1</p>
-              <p class="mt-1 text-xs text-ink sm:text-sm">Atacar Prefeitura e SEFA antes das abas menores.</p>
+        <aside class="soft-card rounded-lg p-4 shadow-soft sm:p-5">
+          <h2 class="text-base font-medium text-ink sm:text-lg">Ações sugeridas</h2>
+          <div class="mt-4 space-y-3">
+            <div class="rounded-lg border border-red-100 bg-red-50 p-3">
+              <p class="text-xs font-semibold text-risk sm:text-sm">Prioridade 1</p>
+              <p class="mt-1 text-xs font-normal text-ink sm:text-sm">Atacar Prefeitura e SEFA antes das abas menores.</p>
             </div>
-            <div class="rounded-lg border border-amber-100 bg-amber-50 p-3 sm:p-4">
-              <p class="text-xs font-bold text-warn sm:text-sm">Prioridade 2</p>
-              <p class="mt-1 text-xs text-ink sm:text-sm">Adicionar responsável nas abas sem coluna de colaborador.</p>
+            <div class="rounded-lg border border-amber-100 bg-amber-50 p-3">
+              <p class="text-xs font-semibold text-warn sm:text-sm">Prioridade 2</p>
+              <p class="mt-1 text-xs font-normal text-ink sm:text-sm">Adicionar responsável nas abas sem coluna de colaborador.</p>
             </div>
-            <div class="rounded-lg border border-teal-100 bg-teal-50 p-3 sm:p-4">
-              <p class="text-xs font-bold text-rh sm:text-sm">Prioridade 3</p>
-              <p class="mt-1 text-xs text-ink sm:text-sm">Separar 13º em painel sazonal quando entrar na rotina.</p>
+            <div class="rounded-lg border border-teal-100 bg-teal-50 p-3">
+              <p class="text-xs font-semibold text-rh sm:text-sm">Prioridade 3</p>
+              <p class="mt-1 text-xs font-normal text-ink sm:text-sm">Separar 13º em painel sazonal quando entrar na rotina.</p>
             </div>
           </div>
         </aside>
       </section>
     </main>
+
+    <script>
+      const fallbackData = {
+        live: false,
+        source: "snapshot",
+        updatedAt: "2026-07-01T00:00:00.000Z",
+        totals: { planned: 3860, completed: 436, pending: 3424, percent: 11 },
+        sectors: [
+          { name: "Fiscal", planned: 3320, completed: 357, pending: 2963, percent: 11 },
+          { name: "RH", planned: 540, completed: 79, pending: 461, percent: 15 },
+        ],
+        tabs: [
+          { sector: "Fiscal", name: "ESCRITURAÇÃO_PREFEITURA", pending: 860, percent: 3, status: "crítico" },
+          { sector: "Fiscal", name: "ESCRITURAÇÃO_SEFA", pending: 756, percent: 0, status: "crítico" },
+          { sector: "Fiscal", name: "CND", pending: 605, percent: 0, status: "crítico" },
+          { sector: "Fiscal", name: "ESCRITURAÇÃO", pending: 552, percent: 0, status: "crítico" },
+          { sector: "RH", name: "FUNCIONARIOS", pending: 360, percent: 0, status: "crítico" },
+          { sector: "Fiscal", name: "ALVARÁ", pending: 65, percent: 83, status: "avançado" },
+        ],
+        ranking: [
+          { name: "Gabriel", planned: 296, completed: 0, pending: 296, percent: 0 },
+          { name: "Lorenza", planned: 140, completed: 0, pending: 140, percent: 0 },
+          { name: "Mara", planned: 120, completed: 0, pending: 120, percent: 0 },
+        ],
+      };
+
+      const formatter = new Intl.NumberFormat("pt-BR");
+      const statusClasses = {
+        "avançado": "bg-green-50 text-ok",
+        "atenção": "bg-amber-50 text-warn",
+        "baixo avanço": "bg-red-50 text-risk",
+        "crítico": "bg-red-50 text-risk",
+      };
+
+      function fmt(value) {
+        return formatter.format(Number(value || 0));
+      }
+
+      function pct(value) {
+        return `${Math.round(Number(value || 0))}%`;
+      }
+
+      function angle(percent) {
+        return `${Math.max(0, Math.min(100, Number(percent || 0))) * 3.6}deg`;
+      }
+
+      function setText(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+      }
+
+      function setWidth(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.style.setProperty("--width", pct(value));
+      }
+
+      function setRing(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.style.setProperty("--angle", angle(value));
+      }
+
+      function getSector(data, name) {
+        return data.sectors.find((sector) => sector.name === name) || { planned: 0, completed: 0, pending: 0, percent: 0 };
+      }
+
+      function renderSummary(data) {
+        const fiscal = getSector(data, "Fiscal");
+        const rh = getSector(data, "RH");
+        const total = data.totals;
+
+        setText("total-percent", pct(total.percent));
+        setText("total-completed", fmt(total.completed));
+        setText("total-summary", `${fmt(total.completed)} concluídas de ${fmt(total.planned)} etapas`);
+        setRing("total-ring", total.percent);
+        setWidth("total-bar", total.percent);
+
+        setText("fiscal-percent", pct(fiscal.percent));
+        setText("fiscal-completed", fmt(fiscal.completed));
+        setText("fiscal-summary", `${fmt(fiscal.pending)} pendentes em ${fmt(fiscal.planned)} etapas`);
+        setRing("fiscal-ring", fiscal.percent);
+        setWidth("fiscal-bar", fiscal.percent);
+
+        setText("rh-percent", pct(rh.percent));
+        setText("rh-completed", fmt(rh.completed));
+        setText("rh-summary", `${fmt(rh.pending)} pendentes em ${fmt(rh.planned)} etapas`);
+        setRing("rh-ring", rh.percent);
+        setWidth("rh-bar", rh.percent);
+
+        const pendingTotal = Math.max(total.pending || 0, 1);
+        const fiscalShare = Math.round((fiscal.pending / pendingTotal) * 100);
+        const rhShare = Math.round((rh.pending / pendingTotal) * 100);
+
+        setText("pending-total", `${fmt(total.pending)} pendências abertas`);
+        setText("donut-pending", fmt(total.pending));
+        setText("fiscal-pending-share", `${fmt(fiscal.pending)} · ${fiscalShare}%`);
+        setText("rh-pending-share", `${fmt(rh.pending)} · ${rhShare}%`);
+        setWidth("fiscal-pending-bar", fiscalShare);
+        setWidth("rh-pending-bar", rhShare);
+
+        const donut = document.getElementById("sector-donut");
+        if (donut) donut.style.setProperty("--fiscal-angle", angle(fiscalShare));
+      }
+
+      function renderBottlenecks(data) {
+        const container = document.getElementById("bottlenecks");
+        const topTabs = [...(data.tabs || fallbackData.tabs)].sort((a, b) => b.pending - a.pending).slice(0, 5);
+        const maxPending = Math.max(...topTabs.map((tab) => tab.pending), 1);
+
+        container.innerHTML = topTabs
+          .map((tab) => {
+            const width = Math.round((tab.pending / maxPending) * 100);
+            const color = tab.sector === "RH" ? "bg-rh" : tab.pending >= maxPending * 0.7 ? "bg-risk" : "bg-warn";
+            return `
+              <div>
+                <div class="flex items-center justify-between gap-3 text-xs sm:text-sm">
+                  <span class="truncate font-medium text-slate-200">${tab.name}</span>
+                  <span class="font-medium text-slate-100">${fmt(tab.pending)}</span>
+                </div>
+                <div class="bar-track mt-2 h-2.5">
+                  <div class="bar-fill h-2.5 ${color}" style="--width: ${width}%"></div>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderRanking(data) {
+        const fallback = fallbackData.ranking;
+        const sourceRanking = data.ranking || [];
+        const ranking = [sourceRanking[0] || fallback[0], sourceRanking[1] || fallback[1], sourceRanking[2] || fallback[2]];
+        const cards = [
+          document.getElementById("podium-first"),
+          document.getElementById("podium-second"),
+          document.getElementById("podium-third"),
+        ];
+
+        cards.forEach((card, index) => {
+          const item = ranking[index];
+          if (!card || !item) return;
+
+          card.querySelector("[data-rank-name]").textContent = item.name;
+          card.querySelector("[data-rank-percent]").textContent = pct(item.percent);
+          card.querySelector("[data-rank-planned]").textContent = fmt(item.planned);
+          const completed = card.querySelector("[data-rank-completed]");
+          if (completed) completed.textContent = fmt(item.completed);
+          card.querySelector("[data-rank-summary]").textContent = `${fmt(item.completed)} concluídas de ${fmt(item.planned)} etapas atribuídas`;
+          card.querySelector("[data-rank-bar]").style.setProperty("--width", pct(item.percent));
+        });
+      }
+
+      function renderTabs(data) {
+        const tabs = [...(data.tabs || fallbackData.tabs)].sort((a, b) => b.pending - a.pending).slice(0, 6);
+        const table = document.getElementById("tab-table");
+        const cards = document.getElementById("tab-cards");
+
+        table.innerHTML = tabs
+          .map((tab) => {
+            const sectorClass = tab.sector === "RH" ? "bg-teal-50 text-rh" : "bg-blue-50 text-fiscal";
+            const statusClass = statusClasses[tab.status] || "bg-slate-100 text-muted";
+            return `
+              <tr>
+                <td class="px-4 py-3"><span class="rounded-lg ${sectorClass} px-3 py-1 text-xs font-medium">${tab.sector}</span></td>
+                <td class="px-4 py-3 font-medium">${tab.name}</td>
+                <td class="px-4 py-3 text-right">${fmt(tab.pending)}</td>
+                <td class="px-4 py-3"><span class="rounded-lg ${statusClass} px-3 py-1 text-xs font-medium">${tab.status}</span></td>
+                <td class="px-4 py-3 text-right font-medium">${pct(tab.percent)}</td>
+              </tr>
+            `;
+          })
+          .join("");
+
+        cards.innerHTML = tabs
+          .map((tab) => {
+            const sectorClass = tab.sector === "RH" ? "bg-teal-50 text-rh" : "bg-blue-50 text-fiscal";
+            const statusClass = statusClasses[tab.status] || "bg-slate-100 text-muted";
+            return `
+              <div class="rounded-lg border border-line bg-white p-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="rounded-lg ${sectorClass} px-2 py-1 text-[11px] font-medium">${tab.sector}</span>
+                  <span class="text-lg font-semibold">${pct(tab.percent)}</span>
+                </div>
+                <p class="mt-2 text-sm font-medium">${tab.name}</p>
+                <div class="mt-2 flex items-center justify-between gap-2 text-xs text-muted">
+                  <span>${fmt(tab.pending)} pendentes</span>
+                  <span class="rounded-lg ${statusClass} px-2 py-1 font-medium">${tab.status}</span>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderSyncStatus(data) {
+        const status = document.getElementById("sync-status");
+        if (!status) return;
+
+        const time = data.updatedAt
+          ? new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit" }).format(new Date(data.updatedAt))
+          : "";
+
+        status.textContent = data.live ? `Ao vivo · ${time}` : "Snapshot · aguardando integração";
+        status.className = data.live
+          ? "rounded-lg border border-teal-300/30 bg-teal-400/15 px-3 py-2 text-xs font-medium text-teal-100"
+          : "rounded-lg border border-amber-300/30 bg-amber-400/15 px-3 py-2 text-xs font-medium text-amber-100";
+      }
+
+      function renderDashboard(data) {
+        renderSummary(data);
+        renderBottlenecks(data);
+        renderRanking(data);
+        renderTabs(data);
+        renderSyncStatus(data);
+      }
+
+      async function refreshDashboard() {
+        try {
+          const response = await fetch(`/api/dashboard-setores?ts=${Date.now()}`, { cache: "no-store" });
+          const data = await response.json();
+          renderDashboard(data.ok ? data : fallbackData);
+        } catch {
+          renderDashboard(fallbackData);
+        }
+      }
+
+      renderDashboard(fallbackData);
+      refreshDashboard();
+      window.setInterval(refreshDashboard, 60000);
+    </script>
   </body>
 </html>
