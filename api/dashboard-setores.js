@@ -309,7 +309,7 @@ export default async function handler(request, response) {
     return response.status(405).json({ ok: false, error: "Método não permitido" });
   }
 
-  response.setHeader("Cache-Control", "s-maxage=30, stale-while-revalidate=120");
+  response.setHeader("Cache-Control", "s-maxage=2, stale-while-revalidate=8");
 
   try {
     const bridgeData = await fetchWithBridge();
