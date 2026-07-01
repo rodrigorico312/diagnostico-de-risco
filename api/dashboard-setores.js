@@ -17,6 +17,18 @@ const TAB_CONFIGS = [
   { sector: "RH", sheet: "FUNCIONARIOS", statusCols: [3, 4, 5, 6, 7, 8], collaboratorCol: 2 },
 ];
 
+const TEAM_MEMBERS = [
+  { key: "RODNEI", name: "Rodnei", aliases: ["RODNEI"] },
+  { key: "ROGER", name: "Roger", aliases: ["ROGER"] },
+  { key: "ROMULO", name: "Romulo", aliases: ["ROMULO"] },
+  { key: "GABRIEL", name: "Gabriel", aliases: ["GABRIEL"] },
+  { key: "YNAIA", name: "Ynaia", aliases: ["YNAIA"] },
+  { key: "LORENZA", name: "Lorenza", aliases: ["LORENZA"] },
+  { key: "MARA", name: "Mara", aliases: ["MARA"] },
+];
+
+const RANK_TIERS = ["Diamante", "Ouro", "Prata", "Bronze", "Aço", "Ferro", "Plástico"];
+
 const FALLBACK_DATA = {
   live: false,
   source: "snapshot",
@@ -38,9 +50,13 @@ const FALLBACK_DATA = {
     { sector: "Fiscal", name: "EMISSÃO_PARCELAMENTOS", planned: 90, completed: 20, pending: 70, percent: 22, status: "baixo avanço" },
   ],
   ranking: [
-    { name: "Gabriel", planned: 296, completed: 0, pending: 296, percent: 0 },
-    { name: "Lorenza", planned: 140, completed: 0, pending: 140, percent: 0 },
-    { name: "Mara", planned: 120, completed: 0, pending: 120, percent: 0 },
+    { name: "Gabriel", planned: 296, completed: 0, pending: 296, percent: 0, rank: 1, tier: "Diamante" },
+    { name: "Lorenza", planned: 140, completed: 0, pending: 140, percent: 0, rank: 2, tier: "Ouro" },
+    { name: "Mara", planned: 120, completed: 0, pending: 120, percent: 0, rank: 3, tier: "Prata" },
+    { name: "Rodnei", planned: 0, completed: 0, pending: 0, percent: 0, rank: 4, tier: "Bronze" },
+    { name: "Roger", planned: 0, completed: 0, pending: 0, percent: 0, rank: 5, tier: "Aço" },
+    { name: "Romulo", planned: 0, completed: 0, pending: 0, percent: 0, rank: 6, tier: "Ferro" },
+    { name: "Ynaia", planned: 0, completed: 0, pending: 0, percent: 0, rank: 7, tier: "Plástico" },
   ],
 };
 
@@ -82,20 +98,33 @@ function searchableName(value) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-function isValidCollaboratorName(value) {
-  const name = searchableName(value);
-
-  if (!name || name.includes("SEM COLABORADOR")) return false;
-  if (BLOCKED_COLLABORATOR_NAMES.has(name)) return false;
-  if (/[0-9#@]/.test(name)) return false;
-
-  return /[A-Z]/.test(name) && name.length >= 3;
+function collaboratorTokens(value) {
+  return searchableName(value)
+    .split(/[^A-Z]+/)
+    .filter(Boolean);
 }
 
-function titleName(value) {
-  return normalizeName(value)
-    .toLowerCase()
-    .replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
+function canonicalCollaborator(value) {
+  const name = searchableName(value);
+
+  if (!name || name.includes("SEM COLABORADOR")) return null;
+  if (BLOCKED_COLLABORATOR_NAMES.has(name)) return null;
+  if (/[0-9#@]/.test(name)) return null;
+
+  const tokens = collaboratorTokens(value);
+  return TEAM_MEMBERS.find((member) => member.aliases.some((alias) => tokens.includes(alias))) || null;
+}
+
+function emptyCollaborator(member, teamOrder) {
+  return {
+    key: member.key,
+    name: member.name,
+    planned: 0,
+    completed: 0,
+    pending: 0,
+    percent: 0,
+    teamOrder,
+  };
 }
 
 function percent(completed, planned) {
@@ -127,20 +156,15 @@ function summarizeTab(config, values, collaborators) {
 
     if (!config.collaboratorCol) return;
 
-    if (!isValidCollaboratorName(row[config.collaboratorCol - 1])) return;
+    const member = canonicalCollaborator(row[config.collaboratorCol - 1]);
 
-    const name = normalizeName(row[config.collaboratorCol - 1]);
-    const current = collaborators.get(name) || {
-      name,
-      planned: 0,
-      completed: 0,
-      pending: 0,
-      percent: 0,
-    };
+    if (!member) return;
+
+    const current = collaborators.get(member.key) || emptyCollaborator(member, TEAM_MEMBERS.findIndex((item) => item.key === member.key));
 
     current.planned += config.statusCols.length;
     current.completed += rowCompleted;
-    collaborators.set(name, current);
+    collaborators.set(member.key, current);
   });
 
   const planned = rows.length * config.statusCols.length;
@@ -158,7 +182,7 @@ function summarizeTab(config, values, collaborators) {
 }
 
 function buildDashboard(valuesBySheet, source) {
-  const collaborators = new Map();
+  const collaborators = new Map(TEAM_MEMBERS.map((member, index) => [member.key, emptyCollaborator(member, index)]));
   const tabs = TAB_CONFIGS.map((config) =>
     summarizeTab(config, valuesBySheet[config.sheet] || [], collaborators),
   );
@@ -185,11 +209,17 @@ function buildDashboard(valuesBySheet, source) {
       ...item,
       pending: Math.max(item.planned - item.completed, 0),
       percent: percent(item.completed, item.planned),
-      name: titleName(item.name),
     }))
-    .filter((item) => item.planned > 0 && !item.name.toUpperCase().includes("SEM COLABORADOR"))
-    .sort((a, b) => b.percent - a.percent || b.completed - a.completed || b.planned - a.planned || a.name.localeCompare(b.name))
-    .slice(0, 3);
+    .sort((a, b) => b.percent - a.percent || b.completed - a.completed || b.planned - a.planned || a.teamOrder - b.teamOrder)
+    .map((item, index) => ({
+      name: item.name,
+      planned: item.planned,
+      completed: item.completed,
+      pending: item.pending,
+      percent: item.percent,
+      rank: index + 1,
+      tier: RANK_TIERS[index] || "Base",
+    }));
 
   return {
     live: true,

@@ -309,24 +309,25 @@
               <div>
                 <p class="text-xs font-medium uppercase text-amber-700">Placar da galera</p>
                 <h2 class="mt-1 text-lg font-medium sm:text-xl">Ranking coroado da produtividade</h2>
-                <p class="mt-1 text-xs font-normal text-muted sm:text-sm">Top 3 por colaborador nomeado, sem contar “sem colaborador”.</p>
+                <p class="mt-1 text-xs font-normal text-muted sm:text-sm">Equipe completa, com pódio e liga de produtividade.</p>
               </div>
             </div>
             <span id="ranking-rule" class="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-medium text-amber-800">
-              Ranking por % concluído e volume entregue
+              Diamante, Ouro, Prata, Bronze, Aço, Ferro e Plástico
             </span>
           </div>
         </div>
 
         <div class="p-3 sm:p-5">
           <div class="grid gap-3 lg:grid-cols-[0.82fr_1.36fr_0.82fr] lg:items-end">
-            <article id="podium-second" class="order-2 rounded-lg border border-slate-200 bg-slate-50 p-4 lg:order-1 lg:min-h-[260px]">
+            <article id="podium-second" class="order-2 rounded-lg border border-amber-200 bg-amber-50 p-4 lg:order-1 lg:min-h-[260px]">
               <div class="flex items-start justify-between gap-3">
                 <div>
-                  <span class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-medium text-slate-700">2º</span>
+                  <span data-rank-position class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-medium text-amber-700">2º</span>
                   <h3 data-rank-name class="mt-3 text-xl font-medium">Lorenza</h3>
+                  <p data-rank-tier class="mt-1 text-xs font-medium uppercase text-amber-700">Ouro</p>
                 </div>
-                <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-slate-100 to-slate-400 text-slate-700">
+                <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-200 to-amber-500 text-amber-950">
                   <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
                   </svg>
@@ -343,25 +344,26 @@
                 </div>
               </div>
               <p data-rank-summary class="mt-3 text-xs font-normal text-muted">0 concluídas de 140 etapas atribuídas</p>
-              <div class="bar-track mt-3 h-2 bg-slate-200">
-                <div data-rank-bar class="bar-fill h-2 bg-slate-400" style="--width: 0%"></div>
+              <div class="bar-track mt-3 h-2 bg-amber-100">
+                <div data-rank-bar class="bar-fill h-2 bg-amber-500" style="--width: 0%"></div>
               </div>
             </article>
 
-            <article id="podium-first" class="podium-gold relative order-1 overflow-hidden rounded-lg border border-amber-400 bg-[linear-gradient(180deg,#fbbf24_0%,#f59e0b_100%)] p-4 text-amber-950 shadow-executive sm:p-5 lg:order-2 lg:min-h-[330px]">
-              <div class="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-full bg-amber-100 text-xl font-semibold shadow-soft sm:h-16 sm:w-16 sm:text-2xl">
+            <article id="podium-first" class="podium-gold relative order-1 overflow-hidden rounded-lg border border-cyan-300 bg-[linear-gradient(180deg,#e0f7ff_0%,#67e8f9_45%,#38bdf8_100%)] p-4 text-slate-950 shadow-executive sm:p-5 lg:order-2 lg:min-h-[330px]">
+              <div data-rank-position class="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-full bg-white/80 text-xl font-semibold text-cyan-900 shadow-soft sm:h-16 sm:w-16 sm:text-2xl">
                 1º
               </div>
               <div class="pr-16">
-                <span class="inline-grid h-8 w-10 place-items-center rounded-lg bg-white/75 text-amber-800">
+                <span class="inline-grid h-8 w-10 place-items-center rounded-lg bg-white/75 text-cyan-800">
                   <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M5 17.5 3.3 7.3l5.3 3.3L12 4l3.4 6.6 5.3-3.3L19 17.5H5Zm.7 2.5h12.6v-1.5H5.7V20Z" />
                   </svg>
                 </span>
                 <h3 data-rank-name class="mt-4 text-2xl font-medium sm:text-3xl">Gabriel</h3>
+                <p data-rank-tier class="mt-1 text-xs font-semibold uppercase text-cyan-900">Diamante</p>
               </div>
-              <div class="mt-5 rounded-lg border border-amber-300 bg-white/70 p-4">
-                <p class="text-[10px] font-medium uppercase text-amber-800">Liderança atual</p>
+              <div class="mt-5 rounded-lg border border-cyan-200 bg-white/70 p-4">
+                <p class="text-[10px] font-medium uppercase text-cyan-900">Liderança atual</p>
                 <p data-rank-summary class="mt-1 text-xs font-normal text-slate-700 sm:text-sm">0 concluídas de 296 etapas atribuídas</p>
               </div>
               <div class="mt-3 grid grid-cols-3 gap-2">
@@ -378,18 +380,19 @@
                   <p data-rank-completed class="mt-1 text-2xl font-medium sm:text-4xl">0</p>
                 </div>
               </div>
-              <div class="bar-track mt-4 h-2 bg-amber-200">
-                <div data-rank-bar class="bar-fill h-2 bg-amber-700" style="--width: 0%"></div>
+              <div class="bar-track mt-4 h-2 bg-cyan-100">
+                <div data-rank-bar class="bar-fill h-2 bg-cyan-600" style="--width: 0%"></div>
               </div>
             </article>
 
-            <article id="podium-third" class="order-3 rounded-lg border border-orange-200 bg-orange-50 p-4 lg:min-h-[260px]">
+            <article id="podium-third" class="order-3 rounded-lg border border-slate-200 bg-slate-50 p-4 lg:min-h-[260px]">
               <div class="flex items-start justify-between gap-3">
                 <div>
-                  <span class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-medium text-orange-700">3º</span>
+                  <span data-rank-position class="inline-grid h-8 min-w-10 place-items-center rounded-lg bg-white px-3 text-xs font-medium text-slate-700">3º</span>
                   <h3 data-rank-name class="mt-3 text-xl font-medium">Mara</h3>
+                  <p data-rank-tier class="mt-1 text-xs font-medium uppercase text-slate-600">Prata</p>
                 </div>
-                <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-orange-200 to-orange-600 text-orange-950">
+                <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-slate-100 to-slate-400 text-slate-700">
                   <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
                   </svg>
@@ -406,10 +409,18 @@
                 </div>
               </div>
               <p data-rank-summary class="mt-3 text-xs font-normal text-muted">0 concluídas de 120 etapas atribuídas</p>
-              <div class="bar-track mt-3 h-2 bg-orange-200">
-                <div data-rank-bar class="bar-fill h-2 bg-bronze" style="--width: 0%"></div>
+              <div class="bar-track mt-3 h-2 bg-slate-200">
+                <div data-rank-bar class="bar-fill h-2 bg-slate-400" style="--width: 0%"></div>
               </div>
             </article>
+          </div>
+
+          <div class="mt-4 overflow-hidden rounded-lg border border-line bg-white">
+            <div class="flex flex-col gap-1 border-b border-line px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <h3 class="text-sm font-medium text-ink">Classificação completa da equipe</h3>
+              <span class="text-xs font-normal text-muted">7 colaboradores no placar</span>
+            </div>
+            <div id="ranking-list" class="divide-y divide-line"></div>
           </div>
         </div>
       </section>
@@ -477,9 +488,13 @@
           { sector: "Fiscal", name: "ALVARÁ", pending: 65, percent: 83, status: "avançado" },
         ],
         ranking: [
-          { name: "Gabriel", planned: 296, completed: 0, pending: 296, percent: 0 },
-          { name: "Lorenza", planned: 140, completed: 0, pending: 140, percent: 0 },
-          { name: "Mara", planned: 120, completed: 0, pending: 120, percent: 0 },
+          { name: "Gabriel", planned: 296, completed: 0, pending: 296, percent: 0, rank: 1, tier: "Diamante" },
+          { name: "Lorenza", planned: 140, completed: 0, pending: 140, percent: 0, rank: 2, tier: "Ouro" },
+          { name: "Mara", planned: 120, completed: 0, pending: 120, percent: 0, rank: 3, tier: "Prata" },
+          { name: "Rodnei", planned: 0, completed: 0, pending: 0, percent: 0, rank: 4, tier: "Bronze" },
+          { name: "Roger", planned: 0, completed: 0, pending: 0, percent: 0, rank: 5, tier: "Aço" },
+          { name: "Romulo", planned: 0, completed: 0, pending: 0, percent: 0, rank: 6, tier: "Ferro" },
+          { name: "Ynaia", planned: 0, completed: 0, pending: 0, percent: 0, rank: 7, tier: "Plástico" },
         ],
       };
 
@@ -491,12 +506,35 @@
         "crítico": "bg-red-50 text-risk",
       };
 
+      const rankTiers = [
+        { label: "Diamante", badge: "border-cyan-200 bg-cyan-50 text-cyan-800", bar: "bg-cyan-500" },
+        { label: "Ouro", badge: "border-amber-200 bg-amber-50 text-amber-800", bar: "bg-amber-500" },
+        { label: "Prata", badge: "border-slate-200 bg-slate-50 text-slate-700", bar: "bg-slate-400" },
+        { label: "Bronze", badge: "border-orange-200 bg-orange-50 text-orange-800", bar: "bg-orange-500" },
+        { label: "Aço", badge: "border-zinc-200 bg-zinc-50 text-zinc-700", bar: "bg-zinc-500" },
+        { label: "Ferro", badge: "border-stone-200 bg-stone-50 text-stone-700", bar: "bg-stone-500" },
+        { label: "Plástico", badge: "border-rose-200 bg-rose-50 text-rose-700", bar: "bg-rose-400" },
+      ];
+
       function fmt(value) {
         return formatter.format(Number(value || 0));
       }
 
       function pct(value) {
         return `${Math.round(Number(value || 0))}%`;
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function getRankTier(rank) {
+        return rankTiers[Math.max(0, Number(rank || 1) - 1)] || rankTiers[rankTiers.length - 1];
       }
 
       function angle(percent) {
@@ -586,8 +624,13 @@
 
       function renderRanking(data) {
         const fallback = fallbackData.ranking;
-        const sourceRanking = data.ranking || [];
-        const ranking = [sourceRanking[0] || fallback[0], sourceRanking[1] || fallback[1], sourceRanking[2] || fallback[2]];
+        const sourceRanking = data.ranking?.length ? data.ranking : fallback;
+        const ranking = sourceRanking.map((item, index) => ({
+          ...item,
+          rank: item.rank || index + 1,
+          tier: item.tier || getRankTier(index + 1).label,
+        }));
+        const podium = [ranking[0] || fallback[0], ranking[1] || fallback[1], ranking[2] || fallback[2]];
         const cards = [
           document.getElementById("podium-first"),
           document.getElementById("podium-second"),
@@ -595,9 +638,15 @@
         ];
 
         cards.forEach((card, index) => {
-          const item = ranking[index];
+          const item = podium[index];
           if (!card || !item) return;
 
+          const tier = getRankTier(item.rank || index + 1);
+          const position = card.querySelector("[data-rank-position]");
+          const tierLabel = card.querySelector("[data-rank-tier]");
+
+          if (position) position.textContent = `${item.rank || index + 1}º`;
+          if (tierLabel) tierLabel.textContent = item.tier || tier.label;
           card.querySelector("[data-rank-name]").textContent = item.name;
           card.querySelector("[data-rank-percent]").textContent = pct(item.percent);
           card.querySelector("[data-rank-planned]").textContent = fmt(item.planned);
@@ -606,6 +655,47 @@
           card.querySelector("[data-rank-summary]").textContent = `${fmt(item.completed)} concluídas de ${fmt(item.planned)} etapas atribuídas`;
           card.querySelector("[data-rank-bar]").style.setProperty("--width", pct(item.percent));
         });
+
+        renderRankingList(ranking);
+      }
+
+      function renderRankingList(ranking) {
+        const container = document.getElementById("ranking-list");
+        if (!container) return;
+
+        container.innerHTML = ranking
+          .map((item) => {
+            const tier = getRankTier(item.rank);
+            const summary = item.planned
+              ? `${fmt(item.completed)} concluídas de ${fmt(item.planned)} etapas`
+              : "sem tarefas atribuídas nesta competência";
+
+            return `
+              <div class="grid gap-3 px-4 py-3 text-sm sm:grid-cols-[4rem_8rem_1fr_7rem] sm:items-center">
+                <div class="flex items-center gap-2">
+                  <span class="inline-grid h-8 w-10 place-items-center rounded-lg bg-slate-100 text-xs font-medium text-slate-700">${item.rank}º</span>
+                </div>
+                <span class="inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs font-medium ${tier.badge}">
+                  ${escapeHtml(item.tier || tier.label)}
+                </span>
+                <div>
+                  <div class="flex items-center justify-between gap-3">
+                    <p class="font-medium text-ink">${escapeHtml(item.name)}</p>
+                    <p class="font-medium text-ink sm:hidden">${pct(item.percent)}</p>
+                  </div>
+                  <p class="mt-1 text-xs font-normal text-muted">${summary}</p>
+                  <div class="bar-track mt-2 h-2 bg-slate-100">
+                    <div class="bar-fill h-2 ${tier.bar}" style="--width: ${pct(item.percent)}"></div>
+                  </div>
+                </div>
+                <div class="hidden text-right sm:block">
+                  <p class="text-lg font-medium text-ink">${pct(item.percent)}</p>
+                  <p class="text-xs font-normal text-muted">${fmt(item.completed)}/${fmt(item.planned)}</p>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
       }
 
       function renderTabs(data) {
