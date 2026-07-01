@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Executivo | Setores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#172033",
+              muted: "#64748b",
+              line: "#d9e1ea",
+              fiscal: "#2563eb",
+              rh: "#0f766e",
+              risk: "#b91c1c",
+              warn: "#b45309",
+              ok: "#15803d",
+            },
+            boxShadow: {
+              panel: "0 12px 28px rgba(15, 23, 42, 0.08)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        letter-spacing: 0;
+      }
+
+      .donut {
+        background:
+          radial-gradient(circle at center, #fff 0 48%, transparent 49%),
+          conic-gradient(#2563eb 0deg 312deg, #0f766e 312deg 360deg);
+      }
+
+      .radial-fiscal {
+        background:
+          radial-gradient(circle at center, #fff 0 57%, transparent 58%),
+          conic-gradient(#2563eb 0deg 39.6deg, #e5eaf1 39.6deg 360deg);
+      }
+
+      .radial-rh {
+        background:
+          radial-gradient(circle at center, #fff 0 57%, transparent 58%),
+          conic-gradient(#0f766e 0deg 54deg, #e5eaf1 54deg 360deg);
+      }
+
+      .radial-geral {
+        background:
+          radial-gradient(circle at center, #fff 0 57%, transparent 58%),
+          conic-gradient(#b45309 0deg 39.6deg, #e5eaf1 39.6deg 360deg);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-slate-100 text-ink antialiased">
+    <main class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <header class="mb-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase text-fiscal">Competência 06/2026</p>
+          <h1 class="mt-1 text-3xl font-bold sm:text-4xl">Painel executivo de produtividade</h1>
+          <p class="mt-2 max-w-3xl text-sm text-muted">
+            Visão de gestão por setor, gargalos principais e avanço das obrigações.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <a
+            class="rounded-lg border border-line bg-white px-4 py-2 text-sm font-semibold text-ink shadow-sm transition hover:border-fiscal"
+            href="/dashboard-setores/"
+          >
+            Ver modelo operacional
+          </a>
+          <span class="rounded-lg border border-line bg-white px-4 py-2 text-sm font-semibold text-muted shadow-sm">
+            Snapshot em 01/07/2026
+          </span>
+        </div>
+      </header>
+
+      <section class="grid gap-3 md:grid-cols-3">
+        <article class="rounded-lg border border-line bg-white p-5 shadow-panel">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="text-sm font-semibold uppercase text-muted">Geral</p>
+              <p class="mt-3 text-4xl font-bold">11%</p>
+            </div>
+            <div class="radial-geral grid h-20 w-20 place-items-center rounded-full text-sm font-bold">436</div>
+          </div>
+          <p class="mt-4 text-sm text-muted">436 concluídas de 3.860 etapas</p>
+          <div class="mt-4 h-2 rounded-full bg-slate-200">
+            <div class="h-2 w-[11%] rounded-full bg-warn"></div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-line bg-white p-5 shadow-panel">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="text-sm font-semibold uppercase text-muted">Fiscal</p>
+              <p class="mt-3 text-4xl font-bold">11%</p>
+            </div>
+            <div class="radial-fiscal grid h-20 w-20 place-items-center rounded-full text-sm font-bold">357</div>
+          </div>
+          <p class="mt-4 text-sm text-muted">2.963 pendentes em 3.320 etapas</p>
+          <div class="mt-4 h-2 rounded-full bg-slate-200">
+            <div class="h-2 w-[11%] rounded-full bg-fiscal"></div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-line bg-white p-5 shadow-panel">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="text-sm font-semibold uppercase text-muted">RH</p>
+              <p class="mt-3 text-4xl font-bold">15%</p>
+            </div>
+            <div class="radial-rh grid h-20 w-20 place-items-center rounded-full text-sm font-bold">79</div>
+          </div>
+          <p class="mt-4 text-sm text-muted">461 pendentes em 540 etapas</p>
+          <div class="mt-4 h-2 rounded-full bg-slate-200">
+            <div class="h-2 w-[15%] rounded-full bg-rh"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="mt-4 grid gap-4 lg:grid-cols-[0.95fr_1.25fr]">
+        <article class="rounded-lg border border-line bg-white p-5 shadow-panel">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-bold">Pendências por setor</h2>
+              <p class="mt-1 text-sm text-muted">3.424 pendências abertas</p>
+            </div>
+            <span class="rounded-lg bg-slate-100 px-3 py-1 text-xs font-semibold text-muted">Donut</span>
+          </div>
+
+          <div class="mt-6 grid gap-6 sm:grid-cols-[180px_1fr] sm:items-center">
+            <div class="donut mx-auto grid h-44 w-44 place-items-center rounded-full">
+              <div class="text-center">
+                <p class="text-3xl font-bold">3.424</p>
+                <p class="text-xs font-semibold uppercase text-muted">pendentes</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <div class="flex items-center justify-between gap-3 text-sm">
+                  <span class="font-semibold text-fiscal">Fiscal</span>
+                  <span class="font-bold">2.963 · 87%</span>
+                </div>
+                <div class="mt-2 h-2 rounded-full bg-slate-200">
+                  <div class="h-2 w-[87%] rounded-full bg-fiscal"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center justify-between gap-3 text-sm">
+                  <span class="font-semibold text-rh">RH</span>
+                  <span class="font-bold">461 · 13%</span>
+                </div>
+                <div class="mt-2 h-2 rounded-full bg-slate-200">
+                  <div class="h-2 w-[13%] rounded-full bg-rh"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-line bg-white p-5 shadow-panel">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-bold">Maiores gargalos</h2>
+              <p class="mt-1 text-sm text-muted">Abas com mais pendências abertas</p>
+            </div>
+            <span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-semibold text-risk">Prioridade</span>
+          </div>
+
+          <div class="mt-5 space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-3 text-sm">
+                <span class="font-semibold">ESCRITURAÇÃO_PREFEITURA</span>
+                <span class="font-bold">860</span>
+              </div>
+              <div class="mt-2 h-3 rounded-full bg-slate-200">
+                <div class="h-3 w-full rounded-full bg-risk"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between gap-3 text-sm">
+                <span class="font-semibold">ESCRITURAÇÃO_SEFA</span>
+                <span class="font-bold">756</span>
+              </div>
+              <div class="mt-2 h-3 rounded-full bg-slate-200">
+                <div class="h-3 w-[88%] rounded-full bg-risk"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between gap-3 text-sm">
+                <span class="font-semibold">CND</span>
+                <span class="font-bold">605</span>
+              </div>
+              <div class="mt-2 h-3 rounded-full bg-slate-200">
+                <div class="h-3 w-[70%] rounded-full bg-warn"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between gap-3 text-sm">
+                <span class="font-semibold">ESCRITURAÇÃO</span>
+                <span class="font-bold">552</span>
+              </div>
+              <div class="mt-2 h-3 rounded-full bg-slate-200">
+                <div class="h-3 w-[64%] rounded-full bg-warn"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between gap-3 text-sm">
+                <span class="font-semibold">FUNCIONARIOS</span>
+                <span class="font-bold">360</span>
+              </div>
+              <div class="mt-2 h-3 rounded-full bg-slate-200">
+                <div class="h-3 w-[42%] rounded-full bg-rh"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="mt-4 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+        <article class="min-w-0 overflow-hidden rounded-lg border border-line bg-white shadow-panel">
+          <div class="border-b border-line bg-slate-50 px-5 py-4">
+            <h2 class="text-lg font-bold">Leitura executiva por aba</h2>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[760px] border-collapse text-sm">
+              <thead class="bg-white text-xs uppercase text-muted">
+                <tr>
+                  <th class="px-5 py-3 text-left">Setor</th>
+                  <th class="px-5 py-3 text-left">Aba</th>
+                  <th class="px-5 py-3 text-right">Pendentes</th>
+                  <th class="px-5 py-3 text-left">Status</th>
+                  <th class="px-5 py-3 text-right">% concluído</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-line">
+                <tr>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-fiscal">Fiscal</span></td>
+                  <td class="px-5 py-3 font-semibold">ALVARÁ</td>
+                  <td class="px-5 py-3 text-right">65</td>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-green-50 px-3 py-1 text-xs font-bold text-ok">avançado</span></td>
+                  <td class="px-5 py-3 text-right font-bold">83%</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-teal-50 px-3 py-1 text-xs font-bold text-rh">RH</span></td>
+                  <td class="px-5 py-3 font-semibold">RH SemMOV</td>
+                  <td class="px-5 py-3 text-right">41</td>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-amber-50 px-3 py-1 text-xs font-bold text-warn">atenção</span></td>
+                  <td class="px-5 py-3 text-right font-bold">66%</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-fiscal">Fiscal</span></td>
+                  <td class="px-5 py-3 font-semibold">EMISSÃO_PARCELAMENTOS</td>
+                  <td class="px-5 py-3 text-right">70</td>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-risk">baixo avanço</span></td>
+                  <td class="px-5 py-3 text-right font-bold">22%</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-fiscal">Fiscal</span></td>
+                  <td class="px-5 py-3 font-semibold">ESCRITURAÇÃO_PREFEITURA</td>
+                  <td class="px-5 py-3 text-right">860</td>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-risk">crítico</span></td>
+                  <td class="px-5 py-3 text-right font-bold">3%</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-teal-50 px-3 py-1 text-xs font-bold text-rh">RH</span></td>
+                  <td class="px-5 py-3 font-semibold">FUNCIONARIOS</td>
+                  <td class="px-5 py-3 text-right">360</td>
+                  <td class="px-5 py-3"><span class="rounded-lg bg-red-50 px-3 py-1 text-xs font-bold text-risk">crítico</span></td>
+                  <td class="px-5 py-3 text-right font-bold">0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <aside class="rounded-lg border border-line bg-white p-5 shadow-panel">
+          <h2 class="text-lg font-bold">Ações sugeridas</h2>
+          <div class="mt-5 space-y-4">
+            <div class="rounded-lg border border-red-100 bg-red-50 p-4">
+              <p class="text-sm font-bold text-risk">Prioridade 1</p>
+              <p class="mt-1 text-sm text-ink">Atacar Prefeitura e SEFA antes das abas menores.</p>
+            </div>
+            <div class="rounded-lg border border-amber-100 bg-amber-50 p-4">
+              <p class="text-sm font-bold text-warn">Prioridade 2</p>
+              <p class="mt-1 text-sm text-ink">Adicionar responsável nas abas sem coluna de colaborador.</p>
+            </div>
+            <div class="rounded-lg border border-teal-100 bg-teal-50 p-4">
+              <p class="text-sm font-bold text-rh">Prioridade 3</p>
+              <p class="mt-1 text-sm text-ink">Separar 13º em painel sazonal quando entrar na rotina.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>
