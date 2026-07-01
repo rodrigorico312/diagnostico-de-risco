@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/dashboard-setores",
+      "destination": "/dashboard-setores/index.html"
+    },
+    {
+      "source": "/dashboard-setores/",
+      "destination": "/dashboard-setores/index.html"
+    },
+    {
       "source": "/links",
       "destination": "/index.html"
     },
