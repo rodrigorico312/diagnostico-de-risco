@@ -44,6 +44,27 @@ const FALLBACK_DATA = {
   ],
 };
 
+const BLOCKED_COLLABORATOR_NAMES = new Set([
+  "NAO",
+  "NAO EMITIR",
+  "N",
+  "SIM",
+  "S",
+  "ATIVO",
+  "INATIVO",
+  "COMERCIO",
+  "SERVICO",
+  "COMERCIO/SERVICO",
+  "ESCRITORIO",
+  "VERIFICAR",
+  "FEITO",
+  "ENCERRADO",
+  "COLABO",
+  "COLABORADOR",
+  "SIMPLES NACIONAL",
+  "LUCRO PRESUMIDO",
+]);
+
 function clean(value) {
   return String(value ?? "").replace(/\u00a0/g, " ").trim();
 }
@@ -53,6 +74,22 @@ function normalizeName(value) {
     .replace(/[💙]/g, "")
     .replace(/\s+/g, " ")
     .toUpperCase();
+}
+
+function searchableName(value) {
+  return normalizeName(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function isValidCollaboratorName(value) {
+  const name = searchableName(value);
+
+  if (!name || name.includes("SEM COLABORADOR")) return false;
+  if (BLOCKED_COLLABORATOR_NAMES.has(name)) return false;
+  if (/[0-9#@]/.test(name)) return false;
+
+  return /[A-Z]/.test(name) && name.length >= 3;
 }
 
 function titleName(value) {
@@ -90,7 +127,9 @@ function summarizeTab(config, values, collaborators) {
 
     if (!config.collaboratorCol) return;
 
-    const name = normalizeName(row[config.collaboratorCol - 1]) || "(SEM COLABORADOR)";
+    if (!isValidCollaboratorName(row[config.collaboratorCol - 1])) return;
+
+    const name = normalizeName(row[config.collaboratorCol - 1]);
     const current = collaborators.get(name) || {
       name,
       planned: 0,
