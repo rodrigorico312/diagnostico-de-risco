@@ -102,28 +102,57 @@
       @keyframes goldPulse {
         0%,
         100% {
-          transform: translateY(-1rem) scale(1.035);
-          box-shadow:
-            0 24px 54px rgba(245, 158, 11, 0.26),
-            0 0 0 0 rgba(245, 158, 11, 0.22);
+          transform: translate3d(0, -0.85rem, 0) scale(1.025);
         }
 
         50% {
-          transform: translateY(-1.18rem) scale(1.05);
-          box-shadow:
-            0 30px 70px rgba(245, 158, 11, 0.36),
-            0 0 0 12px rgba(245, 158, 11, 0);
+          transform: translate3d(0, -1.08rem, 0) scale(1.055);
         }
+      }
+
+      @keyframes goldGlow {
+        0%,
+        100% {
+          opacity: 0.18;
+          transform: scale(0.98);
+        }
+
+        50% {
+          opacity: 0.34;
+          transform: scale(1.06);
+        }
+      }
+
+      .podium-gold {
+        transform-origin: center;
+        will-change: transform;
+      }
+
+      .podium-gold::before {
+        content: "";
+        position: absolute;
+        inset: -20%;
+        pointer-events: none;
+        background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0) 48%);
+        mix-blend-mode: soft-light;
+        opacity: 0.22;
+        transform: scale(1);
+        will-change: opacity, transform;
       }
 
       @media (min-width: 1024px) {
         .podium-gold {
-          animation: goldPulse 2.8s ease-in-out infinite;
+          animation: goldPulse 1.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .podium-gold::before {
+          animation: goldGlow 1.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .podium-gold {
+        .podium-gold,
+        .podium-gold::before {
           animation: none;
         }
       }
