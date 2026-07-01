@@ -228,80 +228,141 @@
         </article>
       </section>
 
-      <section class="mt-4 rounded-lg border border-line bg-white p-5 shadow-panel">
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 class="text-lg font-bold">Ranking coroado da produtividade</h2>
-            <p class="mt-1 text-sm text-muted">
-              Pódio por colaborador nomeado. O registro “sem colaborador” fica fora da disputa.
-            </p>
+      <section class="mt-4 overflow-hidden rounded-lg border border-yellow-100 bg-white shadow-panel">
+        <div class="border-b border-yellow-100 bg-[linear-gradient(135deg,#fff7ed_0%,#ffffff_48%,#eff6ff_100%)] p-5">
+          <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div class="flex items-start gap-4">
+              <div class="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-yellow-200 bg-yellow-50 text-yellow-700">
+                <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M5 17.5 3.3 7.3l5.3 3.3L12 4l3.4 6.6 5.3-3.3L19 17.5H5Zm.7 2.5h12.6v-1.5H5.7V20Z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs font-bold uppercase text-yellow-700">Placar da galera</p>
+                <h2 class="mt-1 text-xl font-black">Ranking coroado da produtividade</h2>
+                <p class="mt-1 max-w-2xl text-sm text-muted">
+                  Top 3 por colaborador nomeado. O registro "sem colaborador" fica fora da disputa.
+                </p>
+              </div>
+            </div>
+            <div class="grid gap-2 text-xs font-bold sm:grid-cols-2 lg:w-[360px]">
+              <span class="rounded-lg border border-yellow-200 bg-white px-3 py-2 text-yellow-800">Critério atual: carteira atribuída</span>
+              <span class="rounded-lg border border-blue-100 bg-white px-3 py-2 text-fiscal">Depois: % concluído</span>
+            </div>
           </div>
-          <span class="rounded-lg bg-yellow-50 px-3 py-1 text-xs font-bold text-yellow-700">
-            Ouro · Prata · Bronze
-          </span>
         </div>
 
-        <div class="mt-5 grid gap-3 lg:grid-cols-3 lg:items-end">
-          <article class="order-2 rounded-lg border border-slate-200 bg-slate-50 p-5 lg:order-1">
-            <div class="flex items-start justify-between gap-3">
+        <div class="p-5">
+          <div class="grid gap-4 lg:grid-cols-[1fr_1.16fr_1fr] lg:items-end">
+            <article class="order-2 flex h-full flex-col justify-between rounded-lg border border-slate-200 bg-slate-50 p-5 lg:order-1">
               <div>
-                <p class="text-xs font-bold uppercase text-slate-500">Prata</p>
-                <h3 class="mt-2 text-2xl font-bold">Lorenza</h3>
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <span class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-xs font-black uppercase text-slate-600">
+                      <span class="grid h-5 w-5 place-items-center rounded-full bg-slate-300 text-[11px] text-slate-900">2º</span>
+                      Prata
+                    </span>
+                    <h3 class="mt-4 text-2xl font-black">Lorenza</h3>
+                  </div>
+                  <div class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-slate-100 to-slate-400 text-slate-800 shadow-sm">
+                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  <div class="rounded-lg bg-white p-3">
+                    <p class="text-xs font-bold uppercase text-muted">Produtividade</p>
+                    <p class="mt-1 text-3xl font-black">0%</p>
+                  </div>
+                  <div class="rounded-lg bg-white p-3">
+                    <p class="text-xs font-bold uppercase text-muted">Carteira</p>
+                    <p class="mt-1 text-3xl font-black">140</p>
+                  </div>
+                </div>
+                <p class="mt-3 text-sm text-muted">0 concluídas de 140 etapas atribuídas</p>
+                <div class="mt-4 h-2 rounded-full bg-slate-200">
+                  <div class="h-2 w-0 rounded-full bg-slate-400"></div>
+                </div>
               </div>
-              <div class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-slate-100 to-slate-400 text-xl font-black text-slate-800">
-                2º
-              </div>
-            </div>
-            <p class="mt-5 text-4xl font-black">0%</p>
-            <p class="mt-1 text-sm text-muted">0 concluídas de 140 etapas atribuídas</p>
-            <div class="mt-4 h-2 rounded-full bg-slate-200">
-              <div class="h-2 w-0 rounded-full bg-slate-400"></div>
-            </div>
-          </article>
+              <p class="mt-5 rounded-lg bg-white p-3 text-xs font-semibold text-muted">Aguardando primeiras entregas confirmadas no recorte.</p>
+            </article>
 
-          <article class="order-1 rounded-lg border border-yellow-200 bg-yellow-50 p-5 shadow-panel lg:order-2 lg:-translate-y-3">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <p class="text-xs font-bold uppercase text-yellow-700">Ouro</p>
-                <h3 class="mt-2 text-2xl font-bold">Gabriel</h3>
-              </div>
-              <div class="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-600 text-2xl font-black text-yellow-950">
+            <article class="relative order-1 overflow-hidden rounded-lg border border-yellow-300 bg-[linear-gradient(180deg,#fffbe6_0%,#fff7c2_100%)] p-5 shadow-panel lg:order-2 lg:-translate-y-4">
+              <div class="absolute right-5 top-5 grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-600 text-2xl font-black text-yellow-950 shadow-sm">
                 1º
               </div>
-            </div>
-            <div class="mt-4 inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-xs font-bold text-yellow-800">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M5 17.5 3.3 7.3l5.3 3.3L12 4l3.4 6.6 5.3-3.3L19 17.5H5Zm.7 2.5h12.6v-1.5H5.7V20Z" />
-              </svg>
-              Coroa do recorte atual
-            </div>
-            <p class="mt-4 text-5xl font-black">0%</p>
-            <p class="mt-1 text-sm text-muted">0 concluídas de 296 etapas atribuídas</p>
-            <div class="mt-4 h-2 rounded-full bg-yellow-200">
-              <div class="h-2 w-0 rounded-full bg-yellow-500"></div>
-            </div>
-          </article>
+              <div class="pr-20">
+                <span class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-xs font-black uppercase text-yellow-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M5 17.5 3.3 7.3l5.3 3.3L12 4l3.4 6.6 5.3-3.3L19 17.5H5Zm.7 2.5h12.6v-1.5H5.7V20Z" />
+                  </svg>
+                  Ouro
+                </span>
+                <h3 class="mt-4 text-3xl font-black">Gabriel</h3>
+              </div>
+              <div class="mt-5 rounded-lg border border-yellow-200 bg-white/80 p-4">
+                <p class="text-xs font-bold uppercase text-yellow-800">Coroa do recorte atual</p>
+                <p class="mt-1 text-sm text-muted">Maior carteira atribuída entre os colaboradores nomeados.</p>
+              </div>
+              <div class="mt-4 grid gap-2 sm:grid-cols-3">
+                <div class="rounded-lg bg-white/80 p-3">
+                  <p class="text-xs font-bold uppercase text-muted">Produtividade</p>
+                  <p class="mt-1 text-4xl font-black">0%</p>
+                </div>
+                <div class="rounded-lg bg-white/80 p-3">
+                  <p class="text-xs font-bold uppercase text-muted">Carteira</p>
+                  <p class="mt-1 text-4xl font-black">296</p>
+                </div>
+                <div class="rounded-lg bg-white/80 p-3">
+                  <p class="text-xs font-bold uppercase text-muted">Entregues</p>
+                  <p class="mt-1 text-4xl font-black">0</p>
+                </div>
+              </div>
+              <p class="mt-3 text-sm text-muted">0 concluídas de 296 etapas atribuídas</p>
+              <div class="mt-4 h-2 rounded-full bg-yellow-200">
+                <div class="h-2 w-0 rounded-full bg-yellow-500"></div>
+              </div>
+            </article>
 
-          <article class="order-3 rounded-lg border border-orange-200 bg-orange-50 p-5">
-            <div class="flex items-start justify-between gap-3">
+            <article class="order-3 flex h-full flex-col justify-between rounded-lg border border-orange-200 bg-orange-50 p-5">
               <div>
-                <p class="text-xs font-bold uppercase text-orange-700">Bronze</p>
-                <h3 class="mt-2 text-2xl font-bold">Mara</h3>
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <span class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-xs font-black uppercase text-orange-700">
+                      <span class="grid h-5 w-5 place-items-center rounded-full bg-orange-300 text-[11px] text-orange-950">3º</span>
+                      Bronze
+                    </span>
+                    <h3 class="mt-4 text-2xl font-black">Mara</h3>
+                  </div>
+                  <div class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-orange-200 to-orange-600 text-orange-950 shadow-sm">
+                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 2a6 6 0 0 1 3.6 10.8L17 22l-5-2.5L7 22l1.4-9.2A6 6 0 0 1 12 2Zm0 2.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  <div class="rounded-lg bg-white p-3">
+                    <p class="text-xs font-bold uppercase text-muted">Produtividade</p>
+                    <p class="mt-1 text-3xl font-black">0%</p>
+                  </div>
+                  <div class="rounded-lg bg-white p-3">
+                    <p class="text-xs font-bold uppercase text-muted">Carteira</p>
+                    <p class="mt-1 text-3xl font-black">120</p>
+                  </div>
+                </div>
+                <p class="mt-3 text-sm text-muted">0 concluídas de 120 etapas atribuídas</p>
+                <div class="mt-4 h-2 rounded-full bg-orange-200">
+                  <div class="h-2 w-0 rounded-full bg-orange-500"></div>
+                </div>
               </div>
-              <div class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-orange-200 to-orange-600 text-xl font-black text-orange-950">
-                3º
-              </div>
-            </div>
-            <p class="mt-5 text-4xl font-black">0%</p>
-            <p class="mt-1 text-sm text-muted">0 concluídas de 120 etapas atribuídas</p>
-            <div class="mt-4 h-2 rounded-full bg-orange-200">
-              <div class="h-2 w-0 rounded-full bg-orange-500"></div>
-            </div>
-          </article>
-        </div>
+              <p class="mt-5 rounded-lg bg-white p-3 text-xs font-semibold text-muted">Fecha o pódio no recorte atual de produtividade.</p>
+            </article>
+          </div>
 
-        <div class="mt-5 rounded-lg border border-line bg-slate-50 p-4 text-sm text-muted">
-          Empate técnico em produtividade: no recorte atual, os colaboradores nomeados ainda não têm etapas concluídas nas abas consideradas. O desempate temporário usa carteira atribuída; quando os status começarem a ser preenchidos, o pódio deve ser ordenado por percentual concluído e depois por volume entregue.
+          <div class="mt-5 rounded-lg border border-line bg-slate-50 p-4 text-sm text-muted">
+            <span class="font-bold text-ink">Empate técnico:</span> no recorte atual, os colaboradores nomeados ainda não têm etapas concluídas nas abas consideradas. O desempate temporário usa carteira atribuída; quando os status começarem a ser preenchidos, o pódio deve ser ordenado por percentual concluído e depois por volume entregue.
+          </div>
         </div>
       </section>
 
