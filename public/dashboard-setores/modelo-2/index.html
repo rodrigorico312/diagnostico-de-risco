@@ -58,6 +58,36 @@
           radial-gradient(circle at center, #fff 0 57%, transparent 58%),
           conic-gradient(#b45309 0deg 39.6deg, #e5eaf1 39.6deg 360deg);
       }
+
+      @keyframes goldPulse {
+        0%,
+        100% {
+          box-shadow:
+            0 18px 42px rgba(202, 138, 4, 0.22),
+            0 0 0 0 rgba(245, 158, 11, 0.34);
+          transform: translateY(-1rem) scale(1.02);
+        }
+
+        50% {
+          box-shadow:
+            0 24px 58px rgba(202, 138, 4, 0.32),
+            0 0 0 12px rgba(245, 158, 11, 0);
+          transform: translateY(-1.15rem) scale(1.035);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .podium-gold {
+          animation: goldPulse 2.6s ease-in-out infinite;
+          transform: translateY(-1rem) scale(1.02);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .podium-gold {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body class="min-h-screen bg-slate-100 text-ink antialiased">
@@ -239,7 +269,7 @@
               </div>
               <div>
                 <p class="text-xs font-bold uppercase text-yellow-700">Placar da galera</p>
-                <h2 class="mt-1 text-xl font-black">Ranking coroado da produtividade</h2>
+                <h2 class="mt-1 text-xl font-bold">Ranking coroado da produtividade</h2>
                 <p class="mt-1 max-w-2xl text-sm text-muted">
                   Top 3 por colaborador nomeado. O registro "sem colaborador" fica fora da disputa.
                 </p>
@@ -253,16 +283,15 @@
         </div>
 
         <div class="p-5">
-          <div class="grid gap-4 lg:grid-cols-[1fr_1.16fr_1fr] lg:items-end">
+          <div class="grid gap-4 lg:grid-cols-[0.94fr_1.28fr_0.94fr] lg:items-end">
             <article class="order-2 flex h-full flex-col justify-between rounded-lg border border-slate-200 bg-slate-50 p-5 lg:order-1">
               <div>
                 <div class="flex items-start justify-between gap-3">
                   <div>
-                    <span class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-xs font-black uppercase text-slate-600">
-                      <span class="grid h-5 w-5 place-items-center rounded-full bg-slate-300 text-[11px] text-slate-900">2º</span>
-                      Prata
+                    <span class="inline-grid h-9 min-w-12 place-items-center rounded-lg bg-white px-3 text-sm font-bold text-slate-700" aria-label="Segundo lugar">
+                      2º
                     </span>
-                    <h3 class="mt-4 text-2xl font-black">Lorenza</h3>
+                    <h3 class="mt-4 text-2xl font-bold">Lorenza</h3>
                   </div>
                   <div class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-slate-100 to-slate-400 text-slate-800 shadow-sm">
                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -273,11 +302,11 @@
                 <div class="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                   <div class="rounded-lg bg-white p-3">
                     <p class="text-xs font-bold uppercase text-muted">Produtividade</p>
-                    <p class="mt-1 text-3xl font-black">0%</p>
+                    <p class="mt-1 text-3xl font-bold">0%</p>
                   </div>
                   <div class="rounded-lg bg-white p-3">
                     <p class="text-xs font-bold uppercase text-muted">Carteira</p>
-                    <p class="mt-1 text-3xl font-black">140</p>
+                    <p class="mt-1 text-3xl font-bold">140</p>
                   </div>
                 </div>
                 <p class="mt-3 text-sm text-muted">0 concluídas de 140 etapas atribuídas</p>
@@ -288,35 +317,34 @@
               <p class="mt-5 rounded-lg bg-white p-3 text-xs font-semibold text-muted">Aguardando primeiras entregas confirmadas no recorte.</p>
             </article>
 
-            <article class="relative order-1 overflow-hidden rounded-lg border border-yellow-300 bg-[linear-gradient(180deg,#fffbe6_0%,#fff7c2_100%)] p-5 shadow-panel lg:order-2 lg:-translate-y-4">
-              <div class="absolute right-5 top-5 grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-600 text-2xl font-black text-yellow-950 shadow-sm">
+            <article class="podium-gold relative order-1 overflow-hidden rounded-lg border border-amber-400 bg-[linear-gradient(180deg,#facc15_0%,#fde047_44%,#fef08a_100%)] p-5 shadow-panel lg:order-2">
+              <div class="absolute right-5 top-5 grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-amber-200 via-amber-400 to-yellow-600 text-2xl font-bold text-yellow-950 shadow-sm">
                 1º
               </div>
               <div class="pr-20">
-                <span class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-xs font-black uppercase text-yellow-800">
+                <span class="inline-grid h-9 w-12 place-items-center rounded-lg bg-white/90 text-yellow-800" aria-label="Primeiro lugar">
                   <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M5 17.5 3.3 7.3l5.3 3.3L12 4l3.4 6.6 5.3-3.3L19 17.5H5Zm.7 2.5h12.6v-1.5H5.7V20Z" />
                   </svg>
-                  Ouro
                 </span>
-                <h3 class="mt-4 text-3xl font-black">Gabriel</h3>
+                <h3 class="mt-4 text-3xl font-bold">Gabriel</h3>
               </div>
-              <div class="mt-5 rounded-lg border border-yellow-200 bg-white/80 p-4">
+              <div class="mt-5 rounded-lg border border-yellow-300 bg-white/75 p-4">
                 <p class="text-xs font-bold uppercase text-yellow-800">Coroa do recorte atual</p>
                 <p class="mt-1 text-sm text-muted">Maior carteira atribuída entre os colaboradores nomeados.</p>
               </div>
               <div class="mt-4 grid gap-2 sm:grid-cols-3">
-                <div class="rounded-lg bg-white/80 p-3">
+                <div class="rounded-lg bg-white/75 p-3">
                   <p class="text-xs font-bold uppercase text-muted">Produtividade</p>
-                  <p class="mt-1 text-4xl font-black">0%</p>
+                  <p class="mt-1 text-4xl font-bold">0%</p>
                 </div>
-                <div class="rounded-lg bg-white/80 p-3">
+                <div class="rounded-lg bg-white/75 p-3">
                   <p class="text-xs font-bold uppercase text-muted">Carteira</p>
-                  <p class="mt-1 text-4xl font-black">296</p>
+                  <p class="mt-1 text-4xl font-bold">296</p>
                 </div>
-                <div class="rounded-lg bg-white/80 p-3">
+                <div class="rounded-lg bg-white/75 p-3">
                   <p class="text-xs font-bold uppercase text-muted">Entregues</p>
-                  <p class="mt-1 text-4xl font-black">0</p>
+                  <p class="mt-1 text-4xl font-bold">0</p>
                 </div>
               </div>
               <p class="mt-3 text-sm text-muted">0 concluídas de 296 etapas atribuídas</p>
@@ -329,11 +357,10 @@
               <div>
                 <div class="flex items-start justify-between gap-3">
                   <div>
-                    <span class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-xs font-black uppercase text-orange-700">
-                      <span class="grid h-5 w-5 place-items-center rounded-full bg-orange-300 text-[11px] text-orange-950">3º</span>
-                      Bronze
+                    <span class="inline-grid h-9 min-w-12 place-items-center rounded-lg bg-white px-3 text-sm font-bold text-orange-700" aria-label="Terceiro lugar">
+                      3º
                     </span>
-                    <h3 class="mt-4 text-2xl font-black">Mara</h3>
+                    <h3 class="mt-4 text-2xl font-bold">Mara</h3>
                   </div>
                   <div class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-orange-200 to-orange-600 text-orange-950 shadow-sm">
                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -344,11 +371,11 @@
                 <div class="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                   <div class="rounded-lg bg-white p-3">
                     <p class="text-xs font-bold uppercase text-muted">Produtividade</p>
-                    <p class="mt-1 text-3xl font-black">0%</p>
+                    <p class="mt-1 text-3xl font-bold">0%</p>
                   </div>
                   <div class="rounded-lg bg-white p-3">
                     <p class="text-xs font-bold uppercase text-muted">Carteira</p>
-                    <p class="mt-1 text-3xl font-black">120</p>
+                    <p class="mt-1 text-3xl font-bold">120</p>
                   </div>
                 </div>
                 <p class="mt-3 text-sm text-muted">0 concluídas de 120 etapas atribuídas</p>
