@@ -178,8 +178,11 @@
           >
             Atualizando dados...
           </span>
-          <span class="rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-xs font-medium text-slate-300">
-            Snapshot em 01/07/2026
+          <span
+            id="refresh-status"
+            class="rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-xs font-medium text-slate-300"
+          >
+            Atualiza a cada 2s
           </span>
         </div>
       </header>
@@ -649,6 +652,7 @@
 
       function renderSyncStatus(data) {
         const status = document.getElementById("sync-status");
+        const refresh = document.getElementById("refresh-status");
         if (!status) return;
 
         const time = data.updatedAt
@@ -659,6 +663,10 @@
         status.className = data.live
           ? "rounded-lg border border-teal-300/30 bg-teal-400/15 px-3 py-2 text-xs font-medium text-teal-100"
           : "rounded-lg border border-amber-300/30 bg-amber-400/15 px-3 py-2 text-xs font-medium text-amber-100";
+
+        if (refresh) {
+          refresh.textContent = data.live ? "Atualiza a cada 2s" : "Modo snapshot";
+        }
       }
 
       function renderDashboard(data) {
