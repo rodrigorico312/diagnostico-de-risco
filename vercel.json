@@ -1,14 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/dashboard-setores",
-      "destination": "/dashboard-setores/index.html"
-    },
-    {
-      "source": "/dashboard-setores/",
-      "destination": "/dashboard-setores/index.html"
-    },
-    {
       "source": "/dashboard-setores/modelo-2",
       "destination": "/dashboard-setores/modelo-2/index.html"
     },
