@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/orientacao/abertura-cnpj-psicologia",
+      "destination": "/orientacao/abertura-cnpj-psicologia/index.html"
+    },
+    {
+      "source": "/orientacao/abertura-cnpj-psicologia/",
+      "destination": "/orientacao/abertura-cnpj-psicologia/index.html"
+    },
+    {
       "source": "/dashboard-setores/modelo-2",
       "destination": "/dashboard-setores/modelo-2/index.html"
     },

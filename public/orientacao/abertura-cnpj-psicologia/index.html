@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abertura de CNPJ para Psicologia | Nacional Contabilidade</title>
+    <meta
+      name="description"
+      content="Orientação clara sobre abertura de CNPJ para serviços de Psicologia, pró-labore, Fator R, impostos, documentos, custos e acompanhamento contábil."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Abertura de CNPJ para Psicologia" />
+    <meta
+      property="og:description"
+      content="Entenda a legalização, o pró-labore, o Fator R, os impostos e os custos da empresa."
+    />
+    <meta property="og:url" content="https://www.nacionalcon.com/orientacao/abertura-cnpj-psicologia" />
+    <meta property="og:image" content="https://www.nacionalcon.com/orientacao/abertura-cnpj-psicologia/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Abertura de CNPJ para Psicologia — Nacional Contabilidade" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#003070" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <style>
+      :root {
+        color: #18212d;
+        background: #f5f3ee;
+        font-family: "DM Sans", system-ui, sans-serif;
+        font-synthesis: none;
+        --blue: #003070;
+        --blue-dark: #07172d;
+        --blue-soft: #eaf0f8;
+        --gold: #d0a020;
+        --gold-soft: #fbf5e4;
+        --text: #18212d;
+        --muted: #5a6675;
+        --line: #d9dee6;
+        --surface: #ffffff;
+        --green: #16833f;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; min-width: 320px; background: #f5f3ee; color: var(--text); }
+      img { display: block; max-width: 100%; }
+      a { color: inherit; }
+      button { font: inherit; }
+
+      .topbar {
+        border-bottom: 4px solid var(--gold);
+        background: var(--blue-dark);
+        color: #fff;
+      }
+
+      .topbar__inner {
+        width: min(calc(100% - 40px), 1180px);
+        min-height: 116px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 20px 0;
+      }
+
+      .brand { width: min(360px, 52vw); flex: 0 1 360px; }
+      .brand img { width: 100%; height: auto; }
+
+      .topbar__label { text-align: right; }
+      .topbar__label strong { display: block; font-size: .92rem; letter-spacing: .08em; text-transform: uppercase; }
+      .topbar__label span { display: block; margin-top: 4px; color: #d8e2f1; font-size: .86rem; }
+
+      .hero {
+        background:
+          radial-gradient(circle at 88% 12%, rgba(208, 160, 32, .16), transparent 30%),
+          linear-gradient(180deg, #fff, #f5f3ee);
+      }
+
+      .hero__inner {
+        width: min(calc(100% - 40px), 1120px);
+        margin: 0 auto;
+        display: grid;
+        gap: 42px;
+        padding: 70px 0 62px;
+      }
+
+      .eyebrow { margin: 0 0 14px; color: var(--blue); font-size: .86rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 820px; margin-bottom: 22px; color: var(--blue-dark); font-size: clamp(2.45rem, 6.3vw, 5rem); line-height: .98; letter-spacing: -.045em; }
+      .hero__lead { max-width: 780px; margin-bottom: 0; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.3rem); line-height: 1.62; }
+
+      .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+      .button {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        background: var(--blue);
+        color: #fff;
+        cursor: pointer;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .button:hover, .button:focus-visible { background: var(--blue-dark); outline: 3px solid rgba(0, 48, 112, .15); }
+      .button--secondary { border-color: var(--line); background: #fff; color: var(--blue); }
+      .button--whatsapp { background: var(--green); }
+
+      .summary {
+        display: grid;
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--line);
+        box-shadow: 0 18px 45px rgba(7, 23, 45, .08);
+      }
+      .summary__intro { padding: 24px; background: var(--blue); color: #fff; }
+      .summary__intro span { display: block; color: #bfcde0; font-size: .82rem; font-weight: 700; text-transform: uppercase; }
+      .summary__intro strong { display: block; margin-top: 8px; font-size: 1.35rem; }
+      .summary__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); }
+      .summary__item { padding: 20px 22px; background: #fff; }
+      .summary__item span { display: block; color: var(--muted); font-size: .82rem; }
+      .summary__item strong { display: block; margin-top: 5px; color: var(--blue-dark); font-size: 1.16rem; }
+
+      .jumpnav { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
+      .jumpnav__inner { width: min(calc(100% - 40px), 1120px); margin: 0 auto; display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; scrollbar-width: thin; }
+      .jumpnav a { flex: 0 0 auto; padding: 9px 12px; border-radius: 999px; color: var(--blue); font-size: .88rem; font-weight: 700; text-decoration: none; }
+      .jumpnav a:hover, .jumpnav a:focus-visible { background: var(--blue-soft); outline: none; }
+
+      .content { width: min(calc(100% - 40px), 960px); margin: 0 auto; padding: 62px 0 74px; }
+      .section { scroll-margin-top: 24px; padding: 46px 0; border-bottom: 1px solid var(--line); }
+      .section:first-child { padding-top: 0; }
+      .section:last-child { border-bottom: 0; }
+      .section__number { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; margin-bottom: 15px; border-radius: 50%; background: var(--blue); color: #fff; font-size: .9rem; font-weight: 800; }
+      h2 { margin-bottom: 18px; color: var(--blue-dark); font-size: clamp(1.75rem, 4vw, 2.65rem); line-height: 1.08; letter-spacing: -.025em; }
+      h3 { margin-bottom: 10px; color: var(--blue-dark); font-size: 1.16rem; line-height: 1.3; }
+      .section p, .section li { color: var(--muted); font-size: 1.02rem; line-height: 1.68; }
+      .section p { max-width: 850px; }
+      .section strong { color: var(--text); }
+
+      .note { margin: 24px 0 0; padding: 20px 22px; border-left: 4px solid var(--gold); border-radius: 8px; background: var(--gold-soft); }
+      .note strong { display: block; margin-bottom: 6px; color: #765800; }
+      .note p { margin-bottom: 0; color: #554a2c; }
+
+      .cards { display: grid; gap: 14px; margin-top: 24px; }
+      .card { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+      .card p { margin-bottom: 0; font-size: .96rem; }
+      .card--blue { border-color: rgba(0, 48, 112, .2); background: var(--blue-soft); }
+      .card--gold { border-color: rgba(208, 160, 32, .35); background: var(--gold-soft); }
+
+      .steps { display: grid; gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: step; }
+      .steps li { position: relative; min-height: 48px; padding: 10px 12px 10px 58px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+      .steps li::before { counter-increment: step; content: counter(step); position: absolute; top: 9px; left: 12px; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: #fff; font-size: .85rem; font-weight: 800; }
+
+      .checklist { display: grid; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+      .checklist li { position: relative; padding-left: 28px; }
+      .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 900; }
+
+      .table-wrap { margin-top: 24px; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+      table { width: 100%; border-collapse: collapse; min-width: 580px; }
+      th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; }
+      th { background: #eef1f5; color: var(--blue-dark); font-size: .88rem; }
+      td { color: var(--muted); }
+      tr:last-child td { border-bottom: 0; }
+      th:last-child, td:last-child { text-align: right; }
+      .total td { background: var(--blue-soft); color: var(--blue-dark); font-weight: 800; }
+
+      .factor-grid { display: grid; gap: 14px; margin-top: 24px; }
+      .factor { padding: 24px; border-radius: 12px; color: #fff; }
+      .factor span { display: block; font-size: .84rem; font-weight: 800; text-transform: uppercase; }
+      .factor strong { display: block; margin-top: 8px; color: #fff; font-size: 1.55rem; }
+      .factor p { margin: 8px 0 0; color: rgba(255,255,255,.82); font-size: .94rem; }
+      .factor--three { background: var(--blue); }
+      .factor--five { background: #4a5564; }
+
+      .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 16px 0 18px; }
+      .price strong { color: var(--blue); font-size: 2.4rem; letter-spacing: -.04em; }
+      .price span { color: var(--muted); }
+
+      .sources { display: grid; gap: 10px; padding: 0; list-style: none; }
+      .sources a { color: var(--blue); font-weight: 700; text-underline-offset: 3px; }
+
+      .closing { padding: 34px; border-radius: 16px; background: var(--blue-dark); color: #fff; }
+      .closing h2 { color: #fff; }
+      .closing p { color: #d4dce8; }
+      .closing__identity { display: grid; gap: 4px; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); }
+      .closing__identity strong { color: #fff; }
+      .closing__identity span { color: #bfc9d8; font-size: .92rem; line-height: 1.5; }
+
+      .page-footer { padding: 26px 20px; background: #041125; color: #bfc9d8; text-align: center; font-size: .82rem; line-height: 1.5; }
+
+      @media (min-width: 780px) {
+        .hero__inner { grid-template-columns: minmax(0, 1.2fr) minmax(330px, .8fr); align-items: end; }
+        .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .factor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (max-width: 620px) {
+        .topbar__inner { min-height: 94px; padding: 16px 0; }
+        .brand { width: min(270px, 72vw); }
+        .topbar__label { display: none; }
+        .hero__inner, .content { width: min(calc(100% - 28px), 1120px); }
+        .hero__inner { padding: 46px 0 42px; }
+        .summary__grid { grid-template-columns: 1fr; }
+        .closing { padding: 24px; }
+      }
+
+      @media print {
+        @page { margin: 14mm; }
+        body { background: #fff; }
+        .topbar { border-bottom-width: 2px; }
+        .topbar__inner { min-height: 80px; }
+        .brand { width: 260px; }
+        .topbar__label, .jumpnav, .hero__actions, .page-footer { display: none; }
+        .hero__inner { display: block; padding: 34px 0 24px; }
+        h1 { font-size: 3rem; }
+        .summary { margin-top: 28px; box-shadow: none; }
+        .content { width: 100%; padding: 20px 0; }
+        .section { break-inside: avoid; padding: 26px 0; }
+        .closing { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="brand" href="/" aria-label="Ir para o site da Nacional Contabilidade">
+          <img src="/nacional-contabilidade-logo.png" alt="Nacional Contabilidade" />
+        </a>
+        <div class="topbar__label">
+          <strong>Orientação profissional</strong>
+          <span>Abertura de CNPJ • Psicologia</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero__inner">
+          <div>
+            <p class="eyebrow">Guia de abertura e acompanhamento</p>
+            <h1 id="page-title">CNPJ para serviços de Psicologia</h1>
+            <p class="hero__lead">
+              Uma explicação simples e direta sobre a empresa necessária para emitir nota fiscal ao plano de saúde,
+              receber pelos serviços prestados e manter impostos e documentos organizados.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--whatsapp" href="https://wa.me/5593992101980?text=Ol%C3%A1%2C%20li%20a%20orienta%C3%A7%C3%A3o%20sobre%20CNPJ%20para%20Psicologia%20e%20quero%20conversar." target="_blank" rel="noreferrer">Conversar no WhatsApp</a>
+              <button class="button button--secondary" type="button" onclick="window.print()">Imprimir ou salvar</button>
+            </div>
+          </div>
+
+          <aside class="summary" aria-label="Resumo da simulação">
+            <div class="summary__intro">
+              <span>Simulação de referência</span>
+              <strong>Faturamento mensal de R$ 3.850,00</strong>
+            </div>
+            <div class="summary__grid">
+              <div class="summary__item"><span>Pró-labore utilizado</span><strong>R$ 1.621,00</strong></div>
+              <div class="summary__item"><span>Fator R estimado</span><strong>42,10%</strong></div>
+              <div class="summary__item"><span>DAS estimado</span><strong>R$ 231,00</strong></div>
+              <div class="summary__item"><span>INSS estimado</span><strong>R$ 178,31</strong></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <nav class="jumpnav" aria-label="Navegação do relatório">
+        <div class="jumpnav__inner">
+          <a href="#empresa">A empresa</a>
+          <a href="#legalizacao">Legalização</a>
+          <a href="#rotina">Rotina mensal</a>
+          <a href="#pro-labore">Pró-labore</a>
+          <a href="#fator-r">Fator R</a>
+          <a href="#custos">Custos</a>
+          <a href="#acompanhamento">Acompanhamento</a>
+        </div>
+      </nav>
+
+      <div class="content">
+        <section class="section" id="empresa">
+          <span class="section__number">1</span>
+          <h2>Para que servirá o CNPJ?</h2>
+          <p>
+            O CNPJ será a identificação da atividade profissional como empresa. Ele permitirá emitir a própria nota
+            fiscal de Psicologia para o plano de saúde e receber o pagamento diretamente em nome da empresa.
+          </p>
+          <p>
+            Os recebimentos, impostos e documentos passarão a ficar vinculados ao trabalho realmente realizado.
+            Dessa forma, deixa de ser necessário utilizar o CNPJ de outra pessoa para emitir as notas.
+          </p>
+          <div class="note">
+            <strong>Em resumo</strong>
+            <p>O serviço continua sendo o mesmo. A diferença é que ele passa a ser faturado de forma regular, com nota fiscal e recebimento pelo próprio CNPJ.</p>
+          </div>
+        </section>
+
+        <section class="section" id="legalizacao">
+          <span class="section__number">2</span>
+          <h2>Como a atividade será registrada?</h2>
+          <p>
+            Perante a Receita Federal e os demais órgãos, a atividade econômica principal será o
+            <strong>CNAE 8650-0/03 — Atividades de psicologia e psicanálise</strong>.
+          </p>
+          <div class="cards">
+            <article class="card">
+              <h3>Forma da empresa</h3>
+              <p>A Psicologia não pode ser enquadrada como MEI. Para atuação individual, uma possibilidade usual é a Sociedade Limitada Unipessoal — SLU.</p>
+            </article>
+            <article class="card">
+              <h3>Conselho profissional</h3>
+              <p>Como a Psicologia será a atividade principal, a pessoa jurídica deverá ser registrada no CRP competente e indicar a psicóloga como responsável técnica.</p>
+            </article>
+          </div>
+
+          <h3 style="margin-top: 30px">Ordem prática da legalização</h3>
+          <ol class="steps">
+            <li>Reunir os documentos pessoais, profissionais e do endereço.</li>
+            <li>Definir a forma jurídica e preparar o ato de constituição.</li>
+            <li>Registrar a empresa e obter o CNPJ.</li>
+            <li>Solicitar a opção pelo Simples Nacional, quando permitida.</li>
+            <li>Providenciar inscrição municipal, acesso à NFS-e e licenças.</li>
+            <li>Realizar o registro da pessoa jurídica no CRP.</li>
+            <li>Organizar conta bancária, acessos digitais e rotina contábil.</li>
+          </ol>
+
+          <h3 style="margin-top: 30px">Documentos iniciais</h3>
+          <ul class="checklist">
+            <li>Documento de identificação e CPF.</li>
+            <li>Comprovante de endereço e informações de estado civil.</li>
+            <li>Dados do endereço onde a atividade será registrada.</li>
+            <li>Número e comprovante de regularidade do CRP.</li>
+            <li>Telefone, e-mail e informações necessárias ao cadastro.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="rotina">
+          <span class="section__number">3</span>
+          <h2>O que acontecerá todos os meses?</h2>
+          <p>Mesmo sendo uma empresa pequena e sem empregados, o CNPJ passa a ter uma rotina fiscal, contábil e previdenciária.</p>
+          <div class="cards">
+            <article class="card">
+              <h3>Parte fiscal</h3>
+              <p>Emissão e escrituração das notas, apuração do Simples Nacional, emissão do DAS e entrega das obrigações exigidas.</p>
+            </article>
+            <article class="card">
+              <h3>Parte contábil</h3>
+              <p>Registro dos recebimentos, despesas e impostos, escrituração completa, Balanço Patrimonial, DRE e apuração do lucro.</p>
+            </article>
+            <article class="card">
+              <h3>Pró-labore e INSS</h3>
+              <p>Cálculo mensal da remuneração da titular, informação no eSocial e DCTFWeb, emissão do INSS e análise de eventual IRRF.</p>
+            </article>
+            <article class="card">
+              <h3>Regularidade</h3>
+              <p>Acompanhamento de pendências, certidões, cadastros, documentos anuais e mudanças aplicáveis da Reforma Tributária.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="pro-labore">
+          <span class="section__number">4</span>
+          <h2>O que é pró-labore?</h2>
+          <p>
+            Pró-labore é a remuneração oficial da proprietária pelo trabalho realizado na própria empresa. O valor é
+            transferido da conta da empresa para a titular e deve ser informado corretamente na rotina contábil e previdenciária.
+          </p>
+          <p>
+            Sobre essa remuneração existe contribuição ao INSS e poderá existir Imposto de Renda, conforme o valor e as
+            regras aplicáveis. Na simulação foi adotado pró-labore de <strong>R$ 1.621,00</strong>, com desconto previdenciário estimado de <strong>11%, equivalente a R$ 178,31</strong>.
+          </p>
+          <div class="note">
+            <strong>Separação importante</strong>
+            <p>O pagamento pelo plano de saúde deve entrar na conta da empresa. A retirada para a titular precisa ser identificada como pró-labore, reembolso ou distribuição de lucros.</p>
+          </div>
+        </section>
+
+        <section class="section" id="fator-r">
+          <span class="section__number">5</span>
+          <h2>Como funciona o imposto da Psicologia?</h2>
+          <p>
+            No Simples Nacional, os serviços de Psicologia ficam sujeitos ao <strong>Fator R</strong>. A regra compara a
+            folha considerada pela legislação — incluindo o pró-labore — com o faturamento acumulado aplicável.
+          </p>
+          <div class="factor-grid">
+            <article class="factor factor--three">
+              <span>Fator R igual ou superior a 28%</span>
+              <strong>Anexo III • 6% inicial</strong>
+              <p>É o cenário utilizado na simulação apresentada nesta orientação.</p>
+            </article>
+            <article class="factor factor--five">
+              <span>Fator R inferior a 28%</span>
+              <strong>Anexo V • 15,5% inicial</strong>
+              <p>A carga inicial do DAS é maior quando a proporção não alcança 28%.</p>
+            </article>
+          </div>
+
+          <div class="table-wrap" role="region" aria-label="Simulação tributária" tabindex="0">
+            <table>
+              <thead><tr><th>Cálculo com faturamento de R$ 3.850,00</th><th>Resultado</th></tr></thead>
+              <tbody>
+                <tr><td>Pró-labore utilizado</td><td>R$ 1.621,00</td></tr>
+                <tr><td>Fator R estimado: 1.621 ÷ 3.850</td><td>42,10%</td></tr>
+                <tr><td>DAS no Anexo III: 3.850 × 6%</td><td>R$ 231,00</td></tr>
+                <tr><td>INSS: 1.621 × 11%</td><td>R$ 178,31</td></tr>
+                <tr class="total"><td>Total estimado de DAS e INSS</td><td>R$ 409,31</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note">
+            <strong>Por que o cálculo será acompanhado todos os meses?</strong>
+            <p>A regra oficial considera valores acumulados e possui tratamento próprio no início da atividade. A simulação é uma referência inicial, não uma alíquota garantida para todos os períodos.</p>
+          </div>
+        </section>
+
+        <section class="section" id="custos">
+          <span class="section__number">6</span>
+          <h2>Custos para abertura e funcionamento</h2>
+          <div class="table-wrap" role="region" aria-label="Custos para abertura" tabindex="0">
+            <table>
+              <thead><tr><th>Item</th><th>Valor</th></tr></thead>
+              <tbody>
+                <tr><td>Honorários para abertura da empresa</td><td>R$ 500,00</td></tr>
+                <tr><td>Taxa já informada</td><td>R$ 249,00</td></tr>
+                <tr><td>Alvará e licenças municipais</td><td>A confirmar</td></tr>
+                <tr><td>Procedimento e eventuais taxas do CRP</td><td>A confirmar</td></tr>
+                <tr class="total"><td>Total inicial já conhecido</td><td>R$ 749,00</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 style="margin-top: 34px">Estimativa mensal</h3>
+          <div class="table-wrap" role="region" aria-label="Custos mensais" tabindex="0">
+            <table>
+              <thead><tr><th>Item</th><th>Valor estimado</th></tr></thead>
+              <tbody>
+                <tr><td>DAS do Simples Nacional</td><td>R$ 231,00</td></tr>
+                <tr><td>INSS sobre o pró-labore</td><td>R$ 178,31</td></tr>
+                <tr><td>Acompanhamento contábil</td><td>R$ 500,00</td></tr>
+                <tr class="total"><td>Total conhecido</td><td>R$ 909,31</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top: 16px">
+            O pró-labore de R$ 1.621,00 não está somado ao total porque será transferido para a titular como remuneração.
+            O custo previdenciário considerado é o INSS de R$ 178,31.
+          </p>
+        </section>
+
+        <section class="section" id="acompanhamento">
+          <span class="section__number">7</span>
+          <h2>Acompanhamento contábil mensal</h2>
+          <div class="price"><strong>R$ 500,00</strong><span>por mês</span></div>
+          <p>O acompanhamento começa após a abertura e reúne as rotinas necessárias para manter a empresa organizada e regular.</p>
+          <ul class="checklist">
+            <li>Emissão e escrituração das notas fiscais de serviço.</li>
+            <li>Apuração dos impostos, emissão das guias e obrigações fiscais.</li>
+            <li>Planejamento tributário mensal e acompanhamento do Fator R.</li>
+            <li>Pró-labore, eSocial, DCTFWeb e guia do INSS.</li>
+            <li>Escrituração contábil completa e organização documental.</li>
+            <li>Balanço Patrimonial, DRE e fechamento contábil.</li>
+            <li>Apuração e orientação para distribuição de lucros.</li>
+            <li>Acompanhamento de pendências, certidões e regularidade cadastral.</li>
+            <li>Documentos bancários e declarações de faturamento.</li>
+            <li>Acompanhamento das mudanças da Reforma Tributária.</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <span class="section__number">8</span>
+          <h2>Próximos passos</h2>
+          <ol class="steps">
+            <li>Confirmar endereço, município de registro e forma de atendimento.</li>
+            <li>Enviar os documentos pessoais e profissionais solicitados.</li>
+            <li>Confirmar os valores do alvará e do procedimento no CRP.</li>
+            <li>Aprovar a abertura e assinar os documentos de constituição.</li>
+            <li>Concluir os cadastros para emissão de nota ao plano de saúde.</li>
+          </ol>
+        </section>
+
+        <section class="section">
+          <h2>Base da orientação</h2>
+          <p>As referências abaixo são oficiais e sustentam a atividade econômica, o registro profissional e a simulação tributária apresentada.</p>
+          <ul class="sources">
+            <li><a href="https://concla.ibge.gov.br/busca-online-cnae.html?classe=86500&view=classe" target="_blank" rel="noreferrer">CNAE/CONCLA 8650-0/03 — IBGE</a></li>
+            <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm" target="_blank" rel="noreferrer">Lei Complementar nº 123/2006 — Simples Nacional</a></li>
+            <li><a href="https://normas.receita.fazenda.gov.br/sijut2consulta/link.action?idAto=92278&naoPublicado=&visao=compilado" target="_blank" rel="noreferrer">Resolução CGSN nº 140/2018 — Fator R</a></li>
+            <li><a href="https://site.cfp.org.br/cfp-publica-nova-resolucao-sobre-pessoa-juridica/" target="_blank" rel="noreferrer">Resolução CFP nº 16/2019 — Pessoa Jurídica</a></li>
+            <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm" target="_blank" rel="noreferrer">Decreto nº 12.797/2025 — salário mínimo de 2026</a></li>
+          </ul>
+          <div class="note">
+            <strong>Data-base: agosto de 2026</strong>
+            <p>Valores, regras e exigências serão confirmados antes da abertura e revistos durante o acompanhamento mensal, inclusive em razão da Reforma Tributária.</p>
+          </div>
+        </section>
+
+        <section class="closing" aria-labelledby="closing-title">
+          <p class="eyebrow" style="color:#d0a020">Nacional Contabilidade</p>
+          <h2 id="closing-title">Empresa regular, imposto calculado e documentos organizados.</h2>
+          <p>Ao final da abertura, o CNPJ estará estruturado para emitir nota fiscal de Psicologia, receber do plano de saúde e iniciar a rotina contábil mensal.</p>
+          <div class="hero__actions">
+            <a class="button button--whatsapp" href="https://wa.me/5593992101980?text=Ol%C3%A1%2C%20li%20a%20orienta%C3%A7%C3%A3o%20sobre%20CNPJ%20para%20Psicologia%20e%20quero%20conversar." target="_blank" rel="noreferrer">Falar com Rodrigo Coelho</a>
+          </div>
+          <div class="closing__identity">
+            <strong>Rodrigo Silva Polla Coelho • Contador • CRC/PA 024335</strong>
+            <span>O Gestor do Lucro Consultoria Ltda. • CNPJ 62.560.654/0001-27</span>
+            <span>Av. Plácido de Castro, 1505 • Aparecida • Santarém-PA • CEP 68.040-090</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      Nacional Contabilidade • Rodrigo Coelho • CRC/PA 024335 • CNPJ 62.560.654/0001-27
+    </footer>
+  </body>
+</html>
