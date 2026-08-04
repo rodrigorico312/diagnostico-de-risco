@@ -579,6 +579,147 @@
         .section { border-color: #d9dee6; }
       }
     </style>
+    <style>
+      .calculator {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+      }
+
+      .calculator__header {
+        padding: 18px;
+        background: linear-gradient(135deg, #17384b 0%, #24566e 100%);
+        color: #fff;
+      }
+
+      .calculator__header > span {
+        display: block;
+        color: rgba(255, 255, 255, .72);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .11em;
+        text-transform: uppercase;
+      }
+
+      .calculator__header strong {
+        display: block;
+        margin-top: 6px;
+        color: #fff;
+        font-family: "Lora Local", Georgia, serif;
+        font-size: 1.3rem;
+        font-weight: 550;
+      }
+
+      .calculator__field { margin-top: 16px; }
+      .calculator__field label {
+        display: block;
+        margin-bottom: 7px;
+        color: rgba(255, 255, 255, .82);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .money-input {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        min-height: 54px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, .34);
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .money-input span {
+        padding-left: 16px;
+        color: #6b7585;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .money-input input {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 16px 12px 8px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--blue);
+        font-family: "Lora Local", Georgia, serif;
+        font-size: 1.45rem;
+      }
+
+      .money-input:focus-within {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, .2);
+      }
+
+      .calculator__hint {
+        margin: 8px 0 0;
+        color: rgba(255, 255, 255, .72);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .calculator__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .calculator__metric { padding: 16px; background: #fff; }
+      .calculator__metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      .calculator__metric strong {
+        display: block;
+        margin-top: 5px;
+        color: var(--blue);
+        font-family: "Lora Local", Georgia, serif;
+        font-size: 1.08rem;
+        font-weight: 550;
+      }
+
+      .calculator__comparison {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 15px 16px;
+        border-top: 1px solid var(--line);
+        background: #f7f9fb;
+      }
+      .calculator__comparison span { color: var(--muted); font-size: 12px; line-height: 1.4; }
+      .calculator__comparison strong { flex: 0 0 auto; color: #2f765d; font-size: 1rem; }
+      .calculator__comparison strong.is-negative { color: #a94c4c; }
+
+      .calculator__message {
+        margin: 0;
+        padding: 12px 16px;
+        border-top: 1px solid var(--line);
+        color: #5b6574;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .calculator__message.is-warning { background: #fff7df; color: #6e5714; }
+      .calculator__message.is-error { background: #fff0f0; color: #8a3535; }
+
+      @media (max-width: 620px) {
+        .calculator__grid { grid-template-columns: 1fr 1fr; }
+        .calculator__comparison { align-items: flex-start; flex-direction: column; gap: 5px; }
+      }
+
+      @media print {
+        .calculator { margin-top: 28px; }
+        .money-input input { font-size: 1.2rem; }
+      }
+    </style>
   </head>
   <body>
     <div class="report-shell">
@@ -610,17 +751,30 @@
             </div>
           </div>
 
-          <aside class="summary" aria-label="Resumo da simulação">
-            <div class="summary__intro">
-              <span>Simulação de referência</span>
-              <strong>Faturamento mensal de R$ 3.850,00</strong>
+          <aside class="calculator" aria-label="Calculadora simplificada do Fator R">
+            <div class="calculator__header">
+              <span>Faça a sua simulação</span>
+              <strong>Informe o faturamento mensal</strong>
+              <div class="calculator__field">
+                <label for="monthly-revenue">Quanto a empresa pretende faturar por mês?</label>
+                <div class="money-input">
+                  <span>R$</span>
+                  <input id="monthly-revenue" type="text" inputmode="decimal" value="3.850,00" autocomplete="off" aria-describedby="calculator-hint calculator-message" />
+                </div>
+                <p class="calculator__hint" id="calculator-hint">Os valores abaixo são atualizados automaticamente.</p>
+              </div>
             </div>
-            <div class="summary__grid">
-              <div class="summary__item"><span>Pró-labore utilizado</span><strong>R$ 1.621,00</strong></div>
-              <div class="summary__item"><span>Fator R estimado</span><strong>42,10%</strong></div>
-              <div class="summary__item"><span>DAS estimado</span><strong>R$ 231,00</strong></div>
-              <div class="summary__item"><span>INSS estimado</span><strong>R$ 178,31</strong></div>
+            <div class="calculator__grid" aria-live="polite">
+              <div class="calculator__metric"><span>Pró-labore recomendado</span><strong id="calc-prolabore">R$ 1.621,00</strong></div>
+              <div class="calculator__metric"><span>Fator R estimado</span><strong id="calc-factor">42,10%</strong></div>
+              <div class="calculator__metric"><span>DAS no Anexo III</span><strong id="calc-das3">R$ 231,00</strong></div>
+              <div class="calculator__metric"><span>INSS estimado</span><strong id="calc-inss">R$ 178,31</strong></div>
             </div>
+            <div class="calculator__comparison">
+              <span id="calc-difference-label">Economia estimada em relação ao Anexo V</span>
+              <strong id="calc-difference">R$ 187,44</strong>
+            </div>
+            <p class="calculator__message" id="calculator-message">Estimativa mensal simplificada. O cálculo oficial considera o histórico acumulado da empresa.</p>
           </aside>
         </div>
       </section>
@@ -727,7 +881,7 @@
           </p>
           <p>
             Sobre essa remuneração existe contribuição ao INSS e poderá existir Imposto de Renda, conforme o valor e as
-            regras aplicáveis. Na simulação foi adotado pró-labore de <strong>R$ 1.621,00</strong>, com desconto previdenciário estimado de <strong>11%, equivalente a R$ 178,31</strong>.
+            regras aplicáveis. Na simulação, o pró-labore recomendado é de <strong id="calc-text-prolabore">R$ 1.621,00</strong>, com desconto previdenciário estimado de <strong>11%, equivalente a <span id="calc-text-inss">R$ 178,31</span></strong>.
           </p>
           <div class="note">
             <strong>Separação importante</strong>
@@ -757,13 +911,14 @@
 
           <div class="table-wrap" role="region" aria-label="Simulação tributária" tabindex="0">
             <table>
-              <thead><tr><th>Cálculo com faturamento de R$ 3.850,00</th><th>Resultado</th></tr></thead>
+              <thead><tr><th id="calc-table-heading">Cálculo com faturamento de R$ 3.850,00</th><th>Resultado</th></tr></thead>
               <tbody>
-                <tr><td>Pró-labore utilizado</td><td>R$ 1.621,00</td></tr>
-                <tr><td>Fator R estimado: 1.621 ÷ 3.850</td><td>42,10%</td></tr>
-                <tr><td>DAS no Anexo III: 3.850 × 6%</td><td>R$ 231,00</td></tr>
-                <tr><td>INSS: 1.621 × 11%</td><td>R$ 178,31</td></tr>
-                <tr class="total"><td>Total estimado de DAS e INSS</td><td>R$ 409,31</td></tr>
+                <tr><td>Pró-labore recomendado</td><td id="calc-table-prolabore">R$ 1.621,00</td></tr>
+                <tr><td id="calc-table-factor-formula">Fator R estimado: 1.621 ÷ 3.850</td><td id="calc-table-factor">42,10%</td></tr>
+                <tr><td id="calc-table-das3-formula">DAS no Anexo III: 3.850 × 6%</td><td id="calc-table-das3">R$ 231,00</td></tr>
+                <tr><td id="calc-table-inss-formula">INSS: 1.621 × 11%</td><td id="calc-table-inss">R$ 178,31</td></tr>
+                <tr><td>DAS estimado no Anexo V: faturamento × 15,5%</td><td id="calc-table-das5">R$ 596,75</td></tr>
+                <tr class="total"><td>Total estimado de DAS e INSS</td><td id="calc-table-total">R$ 409,31</td></tr>
               </tbody>
             </table>
           </div>
@@ -794,16 +949,16 @@
             <table>
               <thead><tr><th>Item</th><th>Valor estimado</th></tr></thead>
               <tbody>
-                <tr><td>DAS do Simples Nacional</td><td>R$ 231,00</td></tr>
-                <tr><td>INSS sobre o pró-labore</td><td>R$ 178,31</td></tr>
+                <tr><td>DAS do Simples Nacional</td><td id="calc-cost-das">R$ 231,00</td></tr>
+                <tr><td>INSS sobre o pró-labore</td><td id="calc-cost-inss">R$ 178,31</td></tr>
                 <tr><td>Acompanhamento contábil</td><td>R$ 500,00</td></tr>
-                <tr class="total"><td>Total conhecido</td><td>R$ 909,31</td></tr>
+                <tr class="total"><td>Total conhecido</td><td id="calc-cost-total">R$ 909,31</td></tr>
               </tbody>
             </table>
           </div>
           <p style="margin-top: 16px">
-            O pró-labore de R$ 1.621,00 não está somado ao total porque será transferido para a titular como remuneração.
-            O custo previdenciário considerado é o INSS de R$ 178,31.
+            O pró-labore recomendado não está somado ao total porque será transferido para a titular como remuneração.
+            O custo previdenciário considerado é somente o INSS calculado acima.
           </p>
         </section>
 
@@ -874,5 +1029,106 @@
       Nacional Contabilidade • Rodrigo Coelho • CRC/PA 024335 • CNPJ 62.560.654/0001-27
     </footer>
     </div>
+    <script>
+      (() => {
+        const SALARIO_MINIMO = 1621;
+        const FATOR_R = 0.28;
+        const ALIQUOTA_ANEXO_III = 0.06;
+        const ALIQUOTA_ANEXO_V = 0.155;
+        const ALIQUOTA_INSS = 0.11;
+        const HONORARIOS = 500;
+
+        const input = document.getElementById("monthly-revenue");
+        const message = document.getElementById("calculator-message");
+        const difference = document.getElementById("calc-difference");
+        const differenceLabel = document.getElementById("calc-difference-label");
+        const currency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+        const number = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+        const setText = (id, value) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = value;
+        };
+
+        const parseMoney = (value) => {
+          let cleaned = String(value).replace(/[^\d,.-]/g, "");
+          if (cleaned.includes(",")) {
+            cleaned = cleaned.replace(/\./g, "").replace(",", ".");
+          } else if (/^\d{1,3}(\.\d{3})+$/.test(cleaned)) {
+            cleaned = cleaned.replace(/\./g, "");
+          }
+          return Number.parseFloat(cleaned);
+        };
+
+        const updateCalculator = () => {
+          const revenue = parseMoney(input.value);
+
+          if (!Number.isFinite(revenue) || revenue <= 0) {
+            message.textContent = "Digite um faturamento mensal maior que zero para fazer a simulação.";
+            message.className = "calculator__message is-error";
+            return;
+          }
+
+          const proLabore = Math.max(revenue * FATOR_R, SALARIO_MINIMO);
+          const factor = (proLabore / revenue) * 100;
+          const das3 = revenue * ALIQUOTA_ANEXO_III;
+          const inss = proLabore * ALIQUOTA_INSS;
+          const totalWithFactor = das3 + inss;
+          const das5 = revenue * ALIQUOTA_ANEXO_V;
+          const saving = das5 - totalWithFactor;
+          const monthlyKnownCost = totalWithFactor + HONORARIOS;
+
+          setText("calc-prolabore", currency.format(proLabore));
+          setText("calc-factor", `${factor.toFixed(2).replace(".", ",")}%`);
+          setText("calc-das3", currency.format(das3));
+          setText("calc-inss", currency.format(inss));
+          setText("calc-table-heading", `Cálculo com faturamento de ${currency.format(revenue)}`);
+          setText("calc-table-prolabore", currency.format(proLabore));
+          setText("calc-table-factor-formula", `Fator R estimado: ${number.format(proLabore)} ÷ ${number.format(revenue)}`);
+          setText("calc-table-factor", `${factor.toFixed(2).replace(".", ",")}%`);
+          setText("calc-table-das3-formula", `DAS no Anexo III: ${number.format(revenue)} × 6%`);
+          setText("calc-table-das3", currency.format(das3));
+          setText("calc-table-inss-formula", `INSS: ${number.format(proLabore)} × 11%`);
+          setText("calc-table-inss", currency.format(inss));
+          setText("calc-table-das5", currency.format(das5));
+          setText("calc-table-total", currency.format(totalWithFactor));
+          setText("calc-cost-das", currency.format(das3));
+          setText("calc-cost-inss", currency.format(inss));
+          setText("calc-cost-total", currency.format(monthlyKnownCost));
+          setText("calc-text-prolabore", currency.format(proLabore));
+          setText("calc-text-inss", currency.format(inss));
+
+          if (saving >= 0) {
+            differenceLabel.textContent = "Economia estimada em relação ao Anexo V";
+            difference.textContent = currency.format(saving);
+            difference.classList.remove("is-negative");
+          } else {
+            differenceLabel.textContent = "Custo adicional estimado em relação ao Anexo V";
+            difference.textContent = currency.format(Math.abs(saving));
+            difference.classList.add("is-negative");
+          }
+
+          message.className = "calculator__message";
+          message.textContent = "Estimativa mensal simplificada. O cálculo oficial considera o histórico acumulado da empresa.";
+
+          if (revenue < SALARIO_MINIMO) {
+            message.className = "calculator__message is-warning";
+            message.textContent = "Atenção: neste faturamento, o pró-labore mínimo de referência supera a receita. A viabilidade precisa ser analisada individualmente.";
+          } else if (revenue > 15000) {
+            message.className = "calculator__message is-warning";
+            message.textContent = "Atenção: acima de R$ 15.000 mensais, as alíquotas fixas desta comparação deixam de ser uma boa referência. O cálculo completo deverá considerar a receita acumulada.";
+          }
+        };
+
+        input.addEventListener("input", updateCalculator);
+        input.addEventListener("blur", () => {
+          const revenue = parseMoney(input.value);
+          if (Number.isFinite(revenue) && revenue > 0) input.value = number.format(revenue);
+          updateCalculator();
+        });
+
+        updateCalculator();
+      })();
+    </script>
   </body>
 </html>
