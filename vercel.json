@@ -1,11 +1,27 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/orientacao/abertura-cnpj-psicologia",
-      "destination": "/orientacao/abertura-cnpj-psicologia/index.html"
+      "destination": "/blog/cnpj-para-psicologos",
+      "permanent": true
     },
     {
       "source": "/orientacao/abertura-cnpj-psicologia/",
+      "destination": "/blog/cnpj-para-psicologos",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/calculadora-psicologia",
+      "destination": "https://api.ogestordolucro.site/nacionalcon-calculator/v1/psychology-simulate"
+    },
+    {
+      "source": "/blog/cnpj-para-psicologos",
+      "destination": "/orientacao/abertura-cnpj-psicologia/index.html"
+    },
+    {
+      "source": "/blog/cnpj-para-psicologos/",
       "destination": "/orientacao/abertura-cnpj-psicologia/index.html"
     },
     {

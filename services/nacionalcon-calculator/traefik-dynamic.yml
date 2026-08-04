@@ -1,0 +1,24 @@
+http:
+  routers:
+    nacionalcon-calculator:
+      rule: "(Host(`api.ogestordolucro.site`) || Host(`api.vivefit.site`)) && PathPrefix(`/nacionalcon-calculator`)"
+      priority: 100
+      entryPoints:
+        - websecure
+      middlewares:
+        - nacionalcon-calculator-strip
+      service: nacionalcon-calculator
+      tls:
+        certResolver: letsencrypt
+
+  middlewares:
+    nacionalcon-calculator-strip:
+      stripPrefix:
+        prefixes:
+          - /nacionalcon-calculator
+
+  services:
+    nacionalcon-calculator:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:3334"
