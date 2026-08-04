@@ -581,6 +581,9 @@
     </style>
     <style>
       .calculator {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
         overflow: hidden;
         border: 1px solid var(--line);
         border-radius: 16px;
@@ -611,16 +614,21 @@
         font-weight: 550;
       }
 
-      .calculator__field { margin-top: 16px; }
+      .calculator__field { width: 100%; min-width: 0; margin-top: 16px; }
       .calculator__field label {
         display: block;
         margin-bottom: 7px;
         color: rgba(255, 255, 255, .82);
         font-size: 12px;
         font-weight: 700;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
       }
 
       .money-input {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
         display: grid;
         grid-template-columns: auto 1fr;
         align-items: center;
@@ -641,6 +649,7 @@
       .money-input input {
         width: 100%;
         min-width: 0;
+        max-width: 100%;
         padding: 12px 16px 12px 8px;
         border: 0;
         outline: 0;
@@ -711,8 +720,45 @@
       .calculator__message.is-error { background: #fff0f0; color: #8a3535; }
 
       @media (max-width: 620px) {
+        html,
+        body {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+          overflow-x: hidden;
+        }
+
+        .report-shell,
+        .hero,
+        .hero__inner,
+        .hero__inner > *,
+        .calculator,
+        .calculator__header,
+        .calculator__field,
+        .money-input {
+          min-width: 0;
+          max-width: 100%;
+        }
+
+        .hero__inner {
+          display: block;
+          width: 100%;
+          padding-right: 12px;
+          padding-left: 12px;
+        }
+
+        .calculator { margin-top: 26px; }
+        .calculator__header { padding: 16px; }
+        .money-input input { font-size: 1.3rem; }
         .calculator__grid { grid-template-columns: 1fr 1fr; }
+        .calculator__metric { min-width: 0; padding: 14px 12px; }
+        .calculator__metric span { font-size: 9px; overflow-wrap: anywhere; }
+        .calculator__metric strong { font-size: 1rem; overflow-wrap: anywhere; }
         .calculator__comparison { align-items: flex-start; flex-direction: column; gap: 5px; }
+      }
+
+      @media (max-width: 360px) {
+        .calculator__grid { grid-template-columns: 1fr; }
       }
 
       @media print {
@@ -759,7 +805,7 @@
                 <label for="monthly-revenue">Quanto a empresa pretende faturar por mês?</label>
                 <div class="money-input">
                   <span>R$</span>
-                  <input id="monthly-revenue" type="text" inputmode="decimal" value="3.850,00" autocomplete="off" aria-describedby="calculator-hint calculator-message" />
+                  <input id="monthly-revenue" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" value="3.850,00" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="calculator-hint calculator-message" aria-label="Faturamento mensal em reais" />
                 </div>
                 <p class="calculator__hint" id="calculator-hint">Os valores abaixo são atualizados automaticamente.</p>
               </div>
@@ -1044,6 +1090,8 @@
         const differenceLabel = document.getElementById("calc-difference-label");
         const currency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
         const number = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+        const moneyInput = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const moneyWhileTyping = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 2 });
 
         const setText = (id, value) => {
           const element = document.getElementById(id);
@@ -1120,10 +1168,35 @@
           }
         };
 
-        input.addEventListener("input", updateCalculator);
+        input.addEventListener("focus", () => {
+          const revenue = parseMoney(input.value);
+          if (Number.isFinite(revenue) && revenue > 0) input.value = moneyWhileTyping.format(revenue);
+          input.select();
+        });
+
+        input.addEventListener("input", () => {
+          const rawValue = input.value;
+          let revenue;
+
+          if (rawValue.includes(",")) {
+            revenue = parseMoney(rawValue);
+          } else {
+            const digits = rawValue.replace(/\D/g, "").replace(/^0+(?=\d)/, "");
+            revenue = digits ? Number(digits) : Number.NaN;
+          }
+
+          if (Number.isFinite(revenue)) {
+            input.value = moneyWhileTyping.format(revenue);
+            const cursorPosition = input.value.length;
+            requestAnimationFrame(() => input.setSelectionRange(cursorPosition, cursorPosition));
+          }
+
+          updateCalculator();
+        });
+
         input.addEventListener("blur", () => {
           const revenue = parseMoney(input.value);
-          if (Number.isFinite(revenue) && revenue > 0) input.value = number.format(revenue);
+          if (Number.isFinite(revenue) && revenue > 0) input.value = moneyInput.format(revenue);
           updateCalculator();
         });
 
