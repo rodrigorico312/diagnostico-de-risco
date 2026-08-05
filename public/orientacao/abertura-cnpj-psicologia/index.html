@@ -116,9 +116,10 @@
       .card { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
       .card p { margin-bottom: 0; font-size: 14px; }
       .card--soft { background: #f6f8fa; }
-      .note { margin-top: 22px; padding: 19px 21px; border-left: 4px solid var(--gold); border-radius: 10px; background: var(--gold-soft); }
-      .note strong { display: block; margin-bottom: 5px; color: #765800; }
-      .note p { margin-bottom: 0; color: #5d5130; font-size: 14px; }
+      .note { position: relative; margin-top: 26px; padding: 20px 0 0 22px; border-top: 1px solid var(--line); background: transparent; }
+      .note::before { content: ""; position: absolute; top: 20px; bottom: 1px; left: 0; width: 3px; border-radius: 99px; background: var(--blue); }
+      .note strong { display: block; margin-bottom: 6px; color: var(--blue); font-size: 13px; letter-spacing: .02em; }
+      .note p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
 
       .factor-grid { display: grid; gap: 14px; margin-top: 24px; }
       .factor { min-height: 180px; padding: 24px; border-radius: 16px; color: #fff; }
@@ -279,7 +280,6 @@
           </a>
           <div class="topbar__meta">
             <strong>Guia para psicólogos</strong>
-            <span>Atualizado em agosto de 2026</span>
           </div>
         </div>
       </header>
