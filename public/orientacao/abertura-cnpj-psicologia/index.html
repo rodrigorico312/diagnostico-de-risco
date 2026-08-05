@@ -92,6 +92,10 @@
       .button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 11px 18px; border: 1px solid transparent; border-radius: 10px; background: var(--blue); color: #fff; font-size: 13px; font-weight: 800; text-decoration: none; cursor: pointer; }
       .button:hover, .button:focus-visible { background: #102f40; outline: 3px solid rgba(23, 56, 75, .16); }
       .button--secondary { border-color: var(--line); background: #fff; color: var(--blue); }
+      .button--simulator { position: relative; gap: 9px; box-shadow: 0 9px 24px rgba(23, 56, 75, .2); isolation: isolate; }
+      .button--simulator::before { content: ""; position: absolute; z-index: -1; inset: -2px; border: 2px solid rgba(199, 154, 77, .5); border-radius: inherit; pointer-events: none; animation: simulator-pulse 2.8s ease-out infinite; }
+      .button--simulator .button__arrow { font-size: 17px; line-height: 1; transition: transform .18s ease; }
+      .button--simulator:hover .button__arrow, .button--simulator:focus-visible .button__arrow { transform: translateX(3px); }
       .guide-card { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
       .guide-card h2 { margin-bottom: 14px; font-size: 22px; }
       .guide-card ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
@@ -131,6 +135,8 @@
       .factor p { margin: 10px 0 0; opacity: .88; font-size: 14px; }
 
       .calculator-section { padding: 0; overflow: hidden; background: linear-gradient(135deg, #102f40, #24566e); color: #fff; }
+      .calculator-section.is-guided { animation: calculator-arrival 1.25s ease both; }
+      .calculator-section.is-guided .money-input { animation: calculator-field-guide 1.65s ease both; }
       .calculator-copy { padding: 34px 34px 0; }
       .calculator-copy h2, .calculator-copy p { color: #fff; }
       .calculator-copy p { max-width: 800px; opacity: .8; }
@@ -154,6 +160,22 @@
       .comparison strong { display: block; margin-top: 6px; color: var(--green); font-family: "Lora Local", Georgia, serif; font-size: 22px; }
       .comparison strong.is-negative { color: #a14545; }
       .calculator__disclaimer { margin: 0; padding: 17px 24px 22px; border-top: 1px solid var(--line); background: #fff; color: #667085; font-size: 11px; line-height: 1.55; }
+
+      @keyframes simulator-pulse {
+        0%, 58% { opacity: 0; transform: scale(1); }
+        68% { opacity: .58; }
+        100% { opacity: 0; transform: scale(1.12, 1.3); }
+      }
+
+      @keyframes calculator-arrival {
+        0%, 100% { box-shadow: none; }
+        36% { box-shadow: 0 0 0 5px rgba(199, 154, 77, .45), 0 18px 42px rgba(23, 56, 75, .2); }
+      }
+
+      @keyframes calculator-field-guide {
+        0%, 100% { box-shadow: none; transform: translateY(0); }
+        28%, 62% { box-shadow: 0 0 0 6px rgba(217, 181, 111, .38), 0 12px 28px rgba(0, 0, 0, .16); transform: translateY(-2px); }
+      }
 
       .steps { display: grid; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; counter-reset: steps; }
       .steps li { position: relative; min-height: 50px; padding: 12px 14px 12px 58px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
@@ -210,6 +232,12 @@
         .metric { padding: 17px 18px; }
         .money-input input { font-size: 24px; }
         .closing { padding: 27px 22px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .button--simulator::before, .calculator-section.is-guided, .calculator-section.is-guided .money-input { animation: none; }
+        .button--simulator { box-shadow: 0 0 0 2px rgba(199, 154, 77, .45), 0 9px 24px rgba(23, 56, 75, .2); }
       }
 
       @media print {
@@ -293,7 +321,7 @@
                 <h1>CNPJ para psicólogos: como abrir, pagar impostos e trabalhar com segurança</h1>
                 <p class="hero__lead">Um guia para quem atende em consultório, trabalha online, recebe de planos de saúde, presta serviços para clínicas ou está estruturando a própria equipe.</p>
                 <div class="hero__actions">
-                  <a class="button" href="#calculadora">Simular impostos e custos</a>
+                  <a class="button button--simulator" href="#calculadora" data-calculator-link>Simular impostos e custos <span class="button__arrow" aria-hidden="true">→</span></a>
                   <a class="button button--secondary" href="https://wa.me/5593992101980?text=Ol%C3%A1%2C%20li%20o%20guia%20sobre%20CNPJ%20para%20Psic%C3%B3logos%20e%20quero%20uma%20orienta%C3%A7%C3%A3o." target="_blank" rel="noreferrer">Falar com um contador</a>
                 </div>
               </div>
@@ -507,6 +535,9 @@
         const endpoint = "/api/calculadora-psicologia";
         const input = document.getElementById("monthly-revenue");
         const status = document.getElementById("calculator-status");
+        const calculatorSection = document.getElementById("calculadora");
+        const calculatorLinks = document.querySelectorAll("[data-calculator-link]");
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
         const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
         const moneyInput = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const moneyTyping = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 2 });
@@ -529,6 +560,25 @@
         const clearResults = () => {
           ["result-annual", "result-prolabore", "result-factor", "result-rate-iii", "result-das-iii", "result-inss", "result-fee", "result-total", "result-das-v", "result-savings"].forEach((id) => setText(id, "—"));
           setText("result-bracket-iii", "Faixa —");
+        };
+
+        const guideToCalculator = (event) => {
+          event.preventDefault();
+          history.replaceState(null, "", "#calculadora");
+          calculatorSection.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
+
+          const arrivalDelay = reducedMotion.matches ? 0 : 520;
+          window.setTimeout(() => {
+            calculatorSection.classList.remove("is-guided");
+            void calculatorSection.offsetWidth;
+            calculatorSection.classList.add("is-guided");
+
+            if (!reducedMotion.matches && window.innerWidth > 820) {
+              input.focus({ preventScroll: true });
+            }
+
+            window.setTimeout(() => calculatorSection.classList.remove("is-guided"), 1900);
+          }, arrivalDelay);
         };
 
         const render = (data) => {
@@ -612,6 +662,8 @@
           const value = parseMoney(input.value);
           if (Number.isFinite(value) && value > 0) input.value = moneyInput.format(value);
         });
+
+        calculatorLinks.forEach((link) => link.addEventListener("click", guideToCalculator));
 
         simulate();
       })();
