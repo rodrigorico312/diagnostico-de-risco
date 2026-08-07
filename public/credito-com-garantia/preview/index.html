@@ -72,12 +72,13 @@
     .hero .text-link { color: var(--white); border-color: rgba(255,255,255,.55); }
     .hero__note { max-width: 620px; margin-top: 54px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.58); font-size: .78rem; letter-spacing: .02em; }
     .portrait { position: relative; min-height: 850px; background: linear-gradient(145deg, #425348, #1c3027); overflow: hidden; }
-    .portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,39,31,.5), transparent 42%), linear-gradient(0deg, rgba(16,39,31,.72), transparent 45%); }
-    .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(.78) contrast(1.03); }
+    .portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,39,31,.58), transparent 52%), linear-gradient(0deg, rgba(16,39,31,.78), transparent 55%); }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 58% center; filter: saturate(.72) contrast(1.04); }
     .portrait__fallback { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at 65% 25%, #506559, #1a3329 70%); color: rgba(255,255,255,.7); font-family: var(--serif); font-size: clamp(5rem, 12vw, 10rem); letter-spacing: -.06em; }
     .portrait__caption { position: absolute; z-index: 2; right: 38px; bottom: 38px; left: 38px; display: flex; justify-content: space-between; gap: 24px; align-items: end; color: var(--white); }
     .portrait__caption strong { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 500; }
     .portrait__caption span { color: rgba(255,255,255,.65); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; }
+    .photo-note { display: inline-flex; margin-top: 10px; padding: 6px 9px; color: rgba(255,255,255,.72); background: rgba(7,19,15,.72); border: 1px solid rgba(255,255,255,.18); font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 
     .principles { background: var(--white); border-bottom: 1px solid var(--line); }
     .principles__grid { display: grid; grid-template-columns: repeat(3, 1fr); }
@@ -91,6 +92,15 @@
     .section__intro .lede { max-width: 720px; }
     .about__body { margin-top: 34px; display: grid; gap: 18px; color: var(--muted); }
     .signature { margin-top: 28px; color: var(--forest); font-family: var(--serif); font-size: 1.28rem; }
+
+    .editorial { padding: 0 0 clamp(80px, 10vw, 140px); }
+    .editorial__frame { display: grid; grid-template-columns: 1.18fr .82fr; min-height: 540px; background: var(--forest); color: var(--white); overflow: hidden; }
+    .editorial__image { position: relative; min-height: 540px; overflow: hidden; }
+    .editorial__image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 55%, rgba(16,39,31,.62)); }
+    .editorial__image img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) contrast(1.03); }
+    .editorial__copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(38px, 6vw, 80px); }
+    .editorial__copy blockquote { margin: 0; font-family: var(--serif); font-size: clamp(2rem, 3.4vw, 3.35rem); line-height: 1.08; letter-spacing: -.025em; }
+    .editorial__copy p { margin-top: 28px; color: rgba(255,255,255,.66); font-size: .92rem; }
 
     .use-cases { background: var(--white); border-block: 1px solid var(--line); }
     .cases { margin-top: 66px; border-top: 1px solid var(--line); }
@@ -117,7 +127,12 @@
     .transparency__item span { display: block; margin-top: 5px; color: var(--muted); font-size: .84rem; }
 
     .analysis { background: var(--white); border-block: 1px solid var(--line); }
-    .analysis__grid { margin-top: 64px; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .analysis__layout { margin-top: 64px; display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(28px, 5vw, 70px); align-items: stretch; }
+    .analysis__photo { position: relative; min-height: 500px; overflow: hidden; background: var(--paper-2); }
+    .analysis__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(16,39,31,.55), transparent 48%); }
+    .analysis__photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.7) contrast(1.04); }
+    .analysis__photo .photo-note { position: absolute; z-index: 2; right: 20px; bottom: 20px; left: 20px; width: max-content; max-width: calc(100% - 40px); }
+    .analysis__grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
     .analysis__item { min-height: 190px; padding: 26px 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .analysis__item small { color: var(--accent); font-family: var(--serif); }
     .analysis__item h3 { margin-top: 46px; font-size: 1.14rem; line-height: 1.25; }
@@ -156,7 +171,9 @@
       .portrait { min-height: 620px; }
       .principles__grid { grid-template-columns: 1fr; }
       .principle { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-      .section__intro, .transparency__panel, .faq__grid, .contact__grid { grid-template-columns: 1fr; }
+      .section__intro, .transparency__panel, .faq__grid, .contact__grid, .editorial__frame, .analysis__layout { grid-template-columns: 1fr; }
+      .editorial__image { min-height: 460px; }
+      .editorial__image::after { background: linear-gradient(0deg, rgba(16,39,31,.55), transparent 45%); }
       .case { grid-template-columns: 60px 1fr; }
       .case p { grid-column: 2; }
       .steps { grid-template-columns: repeat(2, 1fr); }
@@ -183,6 +200,9 @@
       .step { min-height: auto; padding: 27px 22px 32px; border-right: 1px solid rgba(255,255,255,.19); border-bottom: 1px solid rgba(255,255,255,.19); }
       .step h3 { margin-top: 34px; }
       .transparency__panel { padding: 34px 22px; }
+      .editorial__image { min-height: 360px; }
+      .editorial__copy { padding: 44px 24px; }
+      .analysis__photo { min-height: 360px; }
       .analysis__grid { grid-template-columns: 1fr; }
       .analysis__item { min-height: 150px; }
       .analysis__item h3 { margin-top: 30px; }
@@ -224,10 +244,9 @@
           </div>
           <p class="hero__note">Crédito sujeito à análise da instituição financeira, avaliação do imóvel e condições vigentes. A primeira conversa não gera compromisso de contratação.</p>
         </div>
-        <div class="portrait" aria-label="Retrato profissional de Luiz Márcio">
-          <div class="portrait__fallback" aria-hidden="true">LM</div>
-          <img src="assets/luiz-marcio-principal.webp" alt="Luiz Márcio, consultor de crédito" onerror="this.style.display='none'">
-          <div class="portrait__caption"><div><strong>Luiz Márcio</strong><span>Atendimento direto e pessoal</span></div></div>
+        <div class="portrait" aria-label="Conversa de atendimento em ambiente profissional">
+          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&amp;fit=crop&amp;w=1500&amp;q=84" alt="Pessoas conversando em uma mesa de trabalho">
+          <div class="portrait__caption"><div><strong>Conversa antes da proposta</strong><span>Atendimento direto e pessoal</span><small class="photo-note">Imagem provisória de composição</small></div></div>
         </div>
       </div>
     </section>
@@ -250,6 +269,20 @@
             <p>Antes de avançar, analisamos objetivo, renda, valor do imóvel, compromissos atuais e margem de segurança. Se a operação não fizer sentido, a conversa precisa deixar isso claro.</p>
           </div>
           <p class="signature">— Luiz Márcio</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="editorial" aria-label="Direção de atendimento">
+      <div class="container editorial__frame">
+        <div class="editorial__image">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&amp;fit=crop&amp;w=1500&amp;q=84" alt="Conversa profissional com anotações e computador sobre a mesa" loading="lazy">
+        </div>
+        <div class="editorial__copy">
+          <p class="eyebrow">Presença de verdade</p>
+          <blockquote>“Menos promessa. Mais contexto para decidir.”</blockquote>
+          <p>A proposta da página é mostrar o consultor no trabalho real: ouvindo, comparando e explicando. A fotografia definitiva deve seguir esse caminho, usando o rosto e a rotina do Luiz.</p>
+          <small class="photo-note">Imagem provisória de composição</small>
         </div>
       </div>
     </section>
@@ -295,12 +328,19 @@
     <section class="section analysis">
       <div class="container">
         <div class="section__intro"><div><p class="eyebrow">Antes das propostas</p><h2>O que entra na análise.</h2></div><p class="lede">Uma conversa produtiva começa com informações reais. Estes são os principais pontos usados para orientar o próximo passo.</p></div>
-        <div class="analysis__grid">
-          <div class="analysis__item"><small>01</small><h3>Objetivo e valor necessário</h3></div>
-          <div class="analysis__item"><small>02</small><h3>Renda e compromissos mensais</h3></div>
-          <div class="analysis__item"><small>03</small><h3>Tipo, valor e situação do imóvel</h3></div>
-          <div class="analysis__item"><small>04</small><h3>Saldo de financiamento existente</h3></div>
-          <div class="analysis__item"><small>05</small><h3>Documentação e prazo desejado</h3></div>
+        <div class="analysis__layout">
+          <div class="analysis__photo">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&amp;fit=crop&amp;w=1200&amp;q=84" alt="Pessoas analisando documentos financeiros em uma mesa" loading="lazy">
+            <small class="photo-note">Imagem provisória de composição</small>
+          </div>
+          <div class="analysis__grid">
+            <div class="analysis__item"><small>01</small><h3>Objetivo e valor necessário</h3></div>
+            <div class="analysis__item"><small>02</small><h3>Renda e compromissos mensais</h3></div>
+            <div class="analysis__item"><small>03</small><h3>Tipo, valor e situação do imóvel</h3></div>
+            <div class="analysis__item"><small>04</small><h3>Saldo de financiamento existente</h3></div>
+            <div class="analysis__item"><small>05</small><h3>Documentação e prazo desejado</h3></div>
+            <div class="analysis__item"><small>06</small><h3>Custo total, risco e margem de segurança</h3></div>
+          </div>
         </div>
       </div>
     </section>
@@ -333,7 +373,7 @@
         <a class="brand" href="#inicio"><span class="brand__mark" aria-hidden="true">LM</span><span class="brand__text"><strong>Luiz Márcio</strong><small>Personal Banking</small></span></a>
         <div class="footer__links"><a class="js-instagram" href="#">Instagram</a><a href="#duvidas">Perguntas frequentes</a><a href="[URL-POLITICA-DE-PRIVACIDADE]">Privacidade</a></div>
       </div>
-      <div class="footer__legal">[RAZÃO SOCIAL] · CNPJ [CNPJ] · [CANAL OFICIAL]. Atendimento e intermediação sujeitos às regras e à disponibilidade das instituições parceiras. Crédito sujeito à análise, avaliação do imóvel e aprovação. Taxas, prazos, custos e condições variam conforme perfil, imóvel, instituição e momento da contratação. Em caso de inadimplência, o imóvel dado em garantia pode ser executado. Consulte o CET e os documentos da operação. © <span id="year"></span> Luiz Márcio.</div>
+      <div class="footer__legal">[RAZÃO SOCIAL] · CNPJ [CNPJ] · [CANAL OFICIAL]. Atendimento e intermediação sujeitos às regras e à disponibilidade das instituições parceiras. Crédito sujeito à análise, avaliação do imóvel e aprovação. Taxas, prazos, custos e condições variam conforme perfil, imóvel, instituição e momento da contratação. Em caso de inadimplência, o imóvel dado em garantia pode ser executado. Consulte o CET e os documentos da operação. Fotografias provisórias: Dylan Gillis, Headway e Scott Graham/Unsplash — substituir pela produção oficial do Luiz antes da publicação final. © <span id="year"></span> Luiz Márcio.</div>
     </div>
   </footer>
 
@@ -372,4 +412,3 @@
   </script>
 </body>
 </html>
-
