@@ -1,4 +1,18 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
+import PreviewHomePage from "./PreviewHomePage";
+import PrivacyPolicyPage from "./PrivacyPolicyPage";
+import SolutionDetailPage, { solutionPages } from "./SolutionDetailPage";
+import AccessPortalPage from "./AccessPortalPage";
+import AccessRequestPage from "./AccessRequestPage";
+import FiscalAddressPage from "./FiscalAddressPage";
+import SearchLandingPage, { searchLandingPages } from "./SearchLandingPage";
+import { usePageSeo } from "./usePageSeo";
+import { installLeadTracking } from "./analytics";
+import { SiteFooter, SiteHeader } from "./SiteChrome";
+import "./editorial-blog.css";
+import "./tools-editorial.css";
+import "./mobile-compact.css";
+import "./site-refinement.css";
 
 const WHATSAPP_NUMBER = "5593992101980";
 const WHATSAPP_MESSAGE =
@@ -1213,6 +1227,58 @@ function LinkIcon({ kind }: { kind: LinkKind }) {
   );
 }
 
+function ResponsiveArticleSection({
+  section,
+  index,
+}: {
+  section: BlogSection;
+  index: number;
+}) {
+  const mobileQuery = "(max-width: 760px)";
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia(mobileQuery).matches);
+  const [open, setOpen] = useState(() => !window.matchMedia(mobileQuery).matches || index === 0);
+
+  useEffect(() => {
+    const media = window.matchMedia(mobileQuery);
+    const update = () => {
+      setIsMobile(media.matches);
+      setOpen(!media.matches || index === 0);
+    };
+
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [index]);
+
+  return (
+    <details
+      className="editorial-article-section"
+      id={`artigo-secao-${index + 1}`}
+      open={open}
+      onToggle={(event) => {
+        if (isMobile) setOpen(event.currentTarget.open);
+      }}
+    >
+      <summary>
+        <span className="editorial-section-number">{String(index + 1).padStart(2, "0")}</span>
+        <h2>{section.heading}</h2>
+        <span className="editorial-article-section__toggle" aria-hidden="true" />
+      </summary>
+      <div className="editorial-article-section__content">
+        {section.body ? <p>{section.body}</p> : null}
+        {section.paragraphs?.map((paragraph, paragraphIndex) => (
+          <p key={`${section.heading}-paragraph-${paragraphIndex}`}>{paragraph}</p>
+        ))}
+        {section.bullets ? (
+          <ul>
+            {section.bullets.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        ) : null}
+      </div>
+    </details>
+  );
+}
+
 function BlogPage({ slug }: { slug?: string }) {
   const post = slug
     ? blogPosts.find((item) => item.slug === slug)
@@ -1221,453 +1287,457 @@ function BlogPage({ slug }: { slug?: string }) {
     ? blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3)
     : blogPosts;
 
-  useEffect(() => {
-    document.title = post
-      ? `${post.title} | Blog Nacional Contabilidade`
-      : "Blog | Nacional Contabilidade";
-  }, [post]);
+  usePageSeo({
+    title: post ? `${post.title} | Blog Nacional Contabilidade` : "Blog | Nacional Contabilidade",
+    description: post
+      ? post.intro
+      : "Análises da Nacional Contabilidade sobre impostos, Simples Nacional, ICMS, CNPJ e decisões empresariais.",
+    path: post ? `/blog/${post.slug}` : "/blog",
+  });
 
   if (slug && !post) {
     return (
-      <main className="blog-page">
-        <section className="blog-shell" aria-labelledby="blog-not-found-title">
-          <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
-            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-          </a>
-          <div className="blog-hero">
-            <p className="lead-kicker">Blog</p>
-            <h1 id="blog-not-found-title">Conteúdo não encontrado.</h1>
-            <p>
-              Esse artigo não está disponível. Volte para o blog e escolha outro
-              conteúdo.
-            </p>
+      <main className="preview-home editorial-blog">
+        <SiteHeader navigationId="blog-not-found-navigation" />
+        <section className="editorial-empty" aria-labelledby="blog-not-found-title">
+          <div className="preview-container">
+            <p className="preview-kicker">Blog Nacional</p>
+            <h1 id="blog-not-found-title">Este conteúdo não foi encontrado.</h1>
+            <p>Volte ao blog para consultar as análises disponíveis.</p>
+            <a className="preview-button preview-button--primary" href="/blog">Ver todos os conteúdos</a>
           </div>
-          <a className="button button--inline" href="/blog">
-            Ver blog
-          </a>
         </section>
+        <SiteFooter />
       </main>
     );
   }
 
   if (post) {
     return (
-      <main className="blog-page">
-        <article className="blog-shell blog-article" aria-labelledby="blog-post-title">
-          <a className="lead-logo" href="/blog" aria-label="Voltar para o blog da Nacional">
-            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-          </a>
+      <main className="preview-home editorial-blog editorial-blog--article">
+        <SiteHeader navigationId="blog-article-navigation" />
 
-          <header className="blog-hero">
-            <p className="lead-kicker">{post.category}</p>
-            <h1 id="blog-post-title">{post.title}</h1>
-            <p>{post.intro}</p>
-            <div className="blog-meta">
-              <span>{post.readTime} de leitura</span>
-              <span>Conteúdo da Nacional Contabilidade</span>
+        <article aria-labelledby="blog-post-title">
+          <header className="editorial-article-hero">
+            <div className="preview-container">
+              <a className="editorial-breadcrumb" href="/blog">← Voltar ao blog</a>
+              <p className="preview-kicker">{post.category}</p>
+              <h1 id="blog-post-title">{post.title}</h1>
+              <p className="editorial-article-hero__lead">{post.intro}</p>
+              <div className="editorial-meta">
+                <span>{post.readTime} de leitura</span>
+                <span>Análise da Nacional Contabilidade</span>
+              </div>
             </div>
           </header>
 
-          <div className="blog-content">
-            {post.sections.map((section) => (
-              <section className="blog-section" key={section.heading}>
-                <h2>{section.heading}</h2>
-                {section.body ? <p>{section.body}</p> : null}
-                {section.paragraphs?.map((paragraph, index) => (
-                  <p key={`${section.heading}-paragraph-${index}`}>
-                    {paragraph}
-                  </p>
+          <div className="preview-container editorial-article-layout">
+            <aside className="editorial-article-index" aria-label="Neste conteúdo">
+              <strong>Neste conteúdo</strong>
+              <nav>
+                {post.sections.map((section, index) => (
+                  <a href={`#artigo-secao-${index + 1}`} key={section.heading}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    {section.heading}
+                  </a>
                 ))}
-                {section.bullets ? (
-                  <ul className="blog-bullets">
-                    {section.bullets.map((item) => (
-                      <li key={item}>{item}</li>
+              </nav>
+            </aside>
+
+            <div className="editorial-article-body">
+              {post.sections.map((section, sectionIndex) => (
+                <ResponsiveArticleSection
+                  section={section}
+                  index={sectionIndex}
+                  key={section.heading}
+                />
+              ))}
+
+              <section className="editorial-checklist" aria-labelledby="blog-checklist-title">
+                <p className="preview-kicker">Antes de decidir</p>
+                <h2 id="blog-checklist-title">O que precisa ser conferido</h2>
+                <CheckList items={post.checklist} />
+              </section>
+
+              {post.sources ? (
+                <section className="editorial-sources" aria-labelledby="blog-sources-title">
+                  <h2 id="blog-sources-title">Fontes oficiais</h2>
+                  <ul>
+                    {post.sources.map((source) => (
+                      <li key={source.href}>
+                        <a href={source.href} target="_blank" rel="noreferrer">{source.title}</a>
+                      </li>
                     ))}
                   </ul>
-                ) : null}
-              </section>
-            ))}
-
-            <section className="blog-checklist" aria-labelledby="blog-checklist-title">
-              <h2 id="blog-checklist-title">Checklist rápido</h2>
-              <CheckList items={post.checklist} />
-            </section>
-
-            {post.sources ? (
-              <section className="blog-sources" aria-labelledby="blog-sources-title">
-                <h2 id="blog-sources-title">Fontes oficiais</h2>
-                <ul>
-                  {post.sources.map((source) => (
-                    <li key={source.href}>
-                      <a href={source.href} target="_blank" rel="noreferrer">
-                        {source.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                <p>
-                  Conteúdo informativo. A aplicação depende da análise
-                  individual da empresa, documentos fiscais e enquadramento.
-                </p>
-              </section>
-            ) : null}
-
-            <div className="blog-cta">
-              <h2>Quer olhar isso na sua empresa?</h2>
-              <p>
-                Explique a situação no WhatsApp. A Nacional entende o contexto
-                e indica o melhor caminho para organizar essa parte.
-              </p>
-              <a
-                className="button"
-                href={buildWhatsappUrl(
-                  `Olá, vim pelo blog da Nacional e quero falar sobre: ${post.title}.`,
-                )}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Falar com a Nacional
-              </a>
+                  <p>
+                    Conteúdo informativo. A aplicação depende da análise individual da
+                    empresa, dos documentos fiscais e do enquadramento correto.
+                  </p>
+                </section>
+              ) : null}
             </div>
           </div>
 
-          <aside className="blog-related" aria-labelledby="blog-related-title">
-            <h2 id="blog-related-title">Outros conteúdos</h2>
-            <div className="blog-grid blog-grid--compact">
-              {relatedPosts.map((item) => (
-                <a className="blog-card" href={`/blog/${item.slug}`} key={item.slug}>
-                  <span>{item.category}</span>
-                  <strong>{item.title}</strong>
-                  <small>{item.excerpt}</small>
+          <section className="editorial-article-cta">
+            <div className="preview-container editorial-article-cta__grid">
+              <div>
+                <p className="preview-kicker">Análise aplicada</p>
+                <h2>Quer entender como essa regra funciona na sua empresa?</h2>
+              </div>
+              <div>
+                <p>A Nacional analisa o contexto antes de indicar qualquer caminho tributário.</p>
+                <a
+                  className="preview-button preview-button--light"
+                  href={buildWhatsappUrl(`Olá, vim pelo blog da Nacional e quero falar sobre: ${post.title}.`)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Agendar uma conversa
                 </a>
-              ))}
+              </div>
+            </div>
+          </section>
+
+          <aside className="editorial-related" aria-labelledby="blog-related-title">
+            <div className="preview-container">
+              <div className="editorial-related__heading">
+                <p className="preview-kicker">Continue explorando</p>
+                <h2 id="blog-related-title">Outras análises</h2>
+              </div>
+              <div className="editorial-card-grid">
+                {relatedPosts.map((item, index) => (
+                  <a className="editorial-card" href={`/blog/${item.slug}`} key={item.slug}>
+                    <span className="editorial-card__number">{String(index + 1).padStart(2, "0")}</span>
+                    <small>{item.category}</small>
+                    <strong>{item.title}</strong>
+                    <p>{item.excerpt}</p>
+                    <em>Ler análise →</em>
+                  </a>
+                ))}
+              </div>
             </div>
           </aside>
         </article>
+
+        <SiteFooter />
       </main>
     );
   }
 
   return (
-    <main className="blog-page">
-      <section className="blog-shell" aria-labelledby="blog-title">
-        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
-          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-        </a>
+    <main className="preview-home editorial-blog">
+      <SiteHeader navigationId="blog-navigation" />
 
-        <div className="blog-hero">
-          <p className="lead-kicker">Blog</p>
-          <h1 id="blog-title">Conteúdos para cuidar melhor da empresa.</h1>
-          <p>
-            Textos diretos sobre CNPJ, impostos, notas, financeiro e rotina
-            contábil. Sem enrolar e sem prometer milagre.
-          </p>
-        </div>
-
-        <div className="blog-featured">
+      <section className="editorial-blog-hero" aria-labelledby="blog-title">
+        <div className="preview-container editorial-blog-hero__grid">
           <div>
-            <span>Leitura principal</span>
-            <h2>{blogPosts[0].title}</h2>
-            <p>{blogPosts[0].excerpt}</p>
+            <p className="preview-kicker">Blog Nacional</p>
+            <h1 id="blog-title">Impostos explicados para quem precisa decidir.</h1>
           </div>
-          <a className="button button--inline" href={`/blog/${blogPosts[0].slug}`}>
-            Ler conteúdo
-          </a>
-        </div>
-
-        <div className="blog-grid" aria-label="Lista de conteúdos do blog">
-          {blogPosts.map((item) => (
-            <a className="blog-card" href={`/blog/${item.slug}`} key={item.slug}>
-              <span>{item.category}</span>
-              <strong>{item.title}</strong>
-              <small>{item.excerpt}</small>
-              <em>{item.readTime} de leitura</em>
-            </a>
-          ))}
-        </div>
-
-        <div className="blog-cta blog-cta--index">
-          <h2>Tem uma dúvida que daria um bom conteúdo?</h2>
           <p>
-            Manda no WhatsApp. Se for algo comum na rotina das empresas, pode
-            virar pauta do blog e também atendimento para o seu caso.
+            Conteúdo direto sobre CNPJ, Simples Nacional, ICMS e organização empresarial.
           </p>
-          <a
-            className="button"
-            href={buildWhatsappUrl(
-              "Olá, vim pelo blog da Nacional e quero tirar uma dúvida sobre minha empresa.",
-            )}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Enviar dúvida
-          </a>
         </div>
       </section>
+
+      <section className="editorial-featured" aria-labelledby="featured-title">
+        <div className="preview-container editorial-featured__grid">
+          <div className="editorial-featured__copy">
+            <p className="preview-kicker">Mapa tributário</p>
+            <h2 id="featured-title">{blogPosts[0].title}</h2>
+            <p>{blogPosts[0].excerpt}</p>
+            <a className="preview-button preview-button--light" href={`/blog/${blogPosts[0].slug}`}>
+              Explorar o mapa
+            </a>
+          </div>
+          <div className="editorial-featured__mark" aria-hidden="true">
+            <span>01</span>
+            <strong>Economia<br />tributária</strong>
+          </div>
+        </div>
+      </section>
+
+      <section className="editorial-library" aria-labelledby="library-title">
+        <div className="preview-container">
+          <div className="editorial-library__heading">
+            <div>
+              <p className="preview-kicker">Biblioteca Nacional</p>
+              <h2 id="library-title">Análises para diferentes momentos da empresa.</h2>
+            </div>
+            <p>Escolha um tema e entenda os pontos que precisam ser verificados antes de tomar uma decisão.</p>
+          </div>
+
+          <div className="editorial-card-grid" aria-label="Lista de conteúdos do blog">
+            {blogPosts.slice(1).map((item, index) => (
+              <a className="editorial-card" href={`/blog/${item.slug}`} key={item.slug}>
+                <span className="editorial-card__number">{String(index + 2).padStart(2, "0")}</span>
+                <small>{item.category}</small>
+                <strong>{item.title}</strong>
+                <p>{item.excerpt}</p>
+                <em>{item.readTime} de leitura →</em>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="editorial-blog-final">
+        <div className="preview-container editorial-blog-final__grid">
+          <h2>Uma regra tributária só vira oportunidade quando faz sentido para a operação real.</h2>
+          <div>
+            <p>A Nacional analisa documentos, atividade e contexto antes de indicar qualquer mudança.</p>
+            <a
+              className="preview-button preview-button--primary"
+              href={buildWhatsappUrl("Olá, vim pelo blog da Nacional e quero analisar a situação tributária da minha empresa.")}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Agendar uma conversa
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter />
     </main>
   );
 }
 
-function ToolsPage() {
+type ToolGroup = (typeof toolGroups)[number];
+
+function ResponsiveToolGroup({ group, index }: { group: ToolGroup; index: number }) {
+  const mobileQuery = "(max-width: 760px)";
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia(mobileQuery).matches);
+  const [open, setOpen] = useState(() => !window.matchMedia(mobileQuery).matches);
+  const headingId = `tool-group-${index + 1}`;
+
   useEffect(() => {
-    document.title = "Central do empresário | Nacional Contabilidade";
+    const media = window.matchMedia(mobileQuery);
+    const update = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+      setOpen(!event.matches);
+    };
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
   }, []);
 
   return (
-    <main className="tools-page">
-      <section className="tools-shell" aria-labelledby="tools-title">
-        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
-          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-        </a>
-
-        <div className="tools-hero">
-          <p className="lead-kicker">Central do empresário</p>
-          <h1 id="tools-title">Atalhos para resolver a rotina da empresa.</h1>
-          <p>
-            Consultas, certidões, notas, Simples Nacional, MEI e caminhos para
-            falar com a Nacional quando precisar organizar essa parte com apoio
-            contábil.
-          </p>
+    <details
+      className="tools-editorial-group"
+      id={`ferramentas-${index + 1}`}
+      open={open}
+      onToggle={(event) => {
+        if (isMobile) setOpen(event.currentTarget.open);
+      }}
+      onClick={(event) => {
+        if (!isMobile) event.preventDefault();
+      }}
+    >
+      <summary className="tools-editorial-group__summary">
+        <div className="tools-editorial-group__heading">
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <h3 id={headingId}>{group.title}</h3>
+            <p>{group.text}</p>
+          </div>
         </div>
+        <span className="tools-editorial-group__toggle" aria-hidden="true" />
+      </summary>
 
-        <div className="tools-note">
-          <strong>Atenção simples:</strong>
-          <span>
-            esses atalhos ajudam na consulta. Se aparecer pendência, débito,
-            bloqueio ou dúvida de enquadramento, vale conferir antes de enviar
-            qualquer declaração ou pagamento.
-          </span>
-        </div>
-
-        <div className="tools-groups">
-          {toolGroups.map((group, index) => {
-            const headingId = `tool-group-${index + 1}`;
-
-            return (
-              <section className="tool-group" key={group.title} aria-labelledby={headingId}>
-                <div className="tool-group__heading">
-                  <h2 id={headingId}>{group.title}</h2>
-                  <p>{group.text}</p>
-                </div>
-
-                <div className="tool-links">
-                  {group.links.map((link) => (
-                    <a
-                      className="tool-link"
-                      href={link.href}
-                      key={link.title}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <span>
-                        <strong>{link.title}</strong>
-                        <small>{link.text}</small>
-                      </span>
-                      <svg aria-hidden="true" viewBox="0 0 24 24">
-                        <path d="M7 17 17 7" />
-                        <path d="M9 7h8v8" />
-                      </svg>
-                    </a>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </div>
-
-        <div className="tools-final">
-          <h2>Quer que a gente olhe com você?</h2>
-          <p>
-            Se a consulta apontou pendência ou se você não sabe qual caminho
-            seguir, chame a Nacional e explique a situação da empresa.
-          </p>
-          <a
-            className="button"
-            href={buildWhatsappUrl(
-              "Olá, vim pela Central do Empresário e preciso de ajuda com a situação da minha empresa.",
-            )}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Falar com a Nacional
+      <div className="tools-editorial-links">
+        {group.links.map((link, linkIndex) => (
+          <a href={link.href} target="_blank" rel="noreferrer" key={link.title}>
+            <span>{String(linkIndex + 1).padStart(2, "0")}</span>
+            <div>
+              <strong>{link.title}</strong>
+              <small>{link.text}</small>
+            </div>
+            <em aria-hidden="true">↗</em>
           </a>
+        ))}
+      </div>
+    </details>
+  );
+}
+
+function ToolsPage() {
+  usePageSeo({
+    title: "Central do empresário | Nacional Contabilidade",
+    description: "Acesse consultas oficiais de CNPJ, Receita Federal, Simples Nacional, MEI, notas fiscais, SEFA Pará, eSocial e FGTS Digital.",
+    path: "/ferramentas",
+  });
+
+  const featuredTools = [
+    toolGroups[0].links[1],
+    toolGroups[1].links[0],
+    toolGroups[2].links[3],
+  ];
+  const totalTools = toolGroups.reduce((total, group) => total + group.links.length, 0);
+  const toolsContactUrl = buildWhatsappUrl(
+    "Olá, vim pela Central do Empresário e preciso de ajuda com a situação da minha empresa.",
+  );
+
+  return (
+    <main className="preview-home tools-editorial">
+      <SiteHeader contactUrl={toolsContactUrl} navigationId="tools-navigation" />
+
+      <section className="tools-editorial-hero" aria-labelledby="tools-title">
+        <div className="preview-container tools-editorial-hero__grid">
+          <div>
+            <p className="preview-kicker">Central do empresário</p>
+            <h1 id="tools-title">Acessos oficiais para cuidar da rotina da empresa.</h1>
+          </div>
+          <div className="tools-editorial-hero__summary">
+            <strong>{String(totalTools).padStart(2, "0")}</strong>
+            <span>atalhos organizados</span>
+            <p>
+              Receita Federal, Simples Nacional, MEI, notas fiscais, SEFA Pará
+              e obrigações trabalhistas em um só lugar.
+            </p>
+          </div>
         </div>
       </section>
+
+      <section className="tools-featured" aria-labelledby="tools-featured-title">
+        <div className="preview-container">
+          <div className="tools-section-heading">
+            <div>
+              <p className="preview-kicker">Uso recorrente</p>
+              <h2 id="tools-featured-title">Os acessos mais procurados.</h2>
+            </div>
+            <p>Entre diretamente nos ambientes oficiais. Os links abrem em uma nova aba.</p>
+          </div>
+
+          <div className="tools-featured__grid">
+            {featuredTools.map((link, index) => (
+              <a href={link.href} target="_blank" rel="noreferrer" key={link.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <small>Acesso oficial</small>
+                <strong>{link.title}</strong>
+                <p>{link.text}</p>
+                <em>Abrir plataforma ↗</em>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="tools-directory" aria-labelledby="tools-directory-title">
+        <div className="preview-container">
+          <div className="tools-directory__intro">
+            <p className="preview-kicker">Diretório completo</p>
+            <h2 id="tools-directory-title">Encontre o acesso pela necessidade.</h2>
+          </div>
+
+          <nav className="tools-directory__nav" aria-label="Categorias de ferramentas">
+            {toolGroups.map((group, index) => (
+              <a href={`#ferramentas-${index + 1}`} key={group.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {group.title}
+              </a>
+            ))}
+          </nav>
+
+          <div className="tools-editorial-groups">
+            {toolGroups.map((group, groupIndex) => (
+              <ResponsiveToolGroup group={group} index={groupIndex} key={group.title} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="tools-guidance">
+        <div className="preview-container tools-guidance__grid">
+          <div>
+            <p className="preview-kicker">Antes de enviar ou pagar</p>
+            <h2>Uma consulta mostra a situação. A análise explica o que fazer.</h2>
+          </div>
+          <p>
+            Se aparecer pendência, débito, bloqueio ou dúvida de enquadramento,
+            confirme a origem e o período antes de transmitir declarações,
+            parcelar valores ou realizar pagamentos.
+          </p>
+        </div>
+      </section>
+
+      <section className="tools-editorial-final">
+        <div className="preview-container tools-editorial-final__grid">
+          <div>
+            <p className="preview-kicker">Apoio da Nacional</p>
+            <h2>Encontrou uma pendência e não sabe o próximo passo?</h2>
+          </div>
+          <div>
+            <p>Explique a situação. A Nacional organiza o diagnóstico antes de indicar qualquer correção.</p>
+            <a className="preview-button preview-button--light" href={toolsContactUrl} target="_blank" rel="noreferrer">
+              Agendar uma conversa
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter contactUrl={toolsContactUrl} />
     </main>
   );
 }
 
 function LinksPage() {
-  const whatsappLink = linkTreeItems.find((item) => item.kind === "whatsapp")!;
-  const switchLink = linkTreeItems.find((item) => item.kind === "switch")!;
-  const featuredLinks = [
-    {
-      ...linkTreeItems.find((item) => item.kind === "company")!,
-      title: "Abrir ou regularizar CNPJ",
-    },
-    linkTreeItems.find((item) => item.kind === "accounting")!,
-    linkTreeItems.find((item) => item.kind === "tax")!,
-    linkTreeItems.find((item) => item.kind === "address")!,
-  ];
-  const moreLinks = [
-    linkTreeItems.find((item) => item.kind === "correspondent")!,
-    linkTreeItems.find((item) => item.kind === "advisor")!,
-    linkTreeItems.find((item) => item.kind === "solutions")!,
-  ];
-  const resourceLinks = [
-    linkTreeItems.find((item) => item.kind === "tools")!,
-    linkTreeItems.find((item) => item.kind === "blog")!,
-  ];
-  const footerLinks = [
-    linkTreeItems.find((item) => item.kind === "site")!,
-    linkTreeItems.find((item) => item.kind === "instagram")!,
-    linkTreeItems.find((item) => item.kind === "email")!,
-  ];
-
   useEffect(() => {
-    document.title = "Rodrigo Coelho | Nacional Contabilidade";
+    document.title = "Links | Nacional Contabilidade";
   }, []);
 
   return (
     <main className="links-page">
       <section className="links-shell" aria-label="Links da Nacional Contabilidade">
-        <div className="links-arcs" aria-hidden="true" />
-
-        <header className="links-profile">
+        <div className="links-profile">
+          <img
+            className="links-avatar"
+            src="/rodrigo-coelho.png"
+            alt="Rodrigo Coelho"
+          />
+          <h1>Rodrigo Coelho</h1>
+          <p className="links-profile__bio">
+            Contabilidade, regularização de CNPJ, endereço fiscal e apoio
+            empresarial.
+          </p>
+          <div className="links-flags" aria-label="Atendimento no Pará e em todo o Brasil">
+            <ParaFlag />
+            <BrazilFlag />
+            <span>Atendimento no Pará e em todo o Brasil</span>
+          </div>
           <a className="links-logo" href="/" aria-label="Ir para o site da Nacional Contabilidade">
             <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
           </a>
+        </div>
 
-          <div className="links-avatar-frame">
-            <img
-              className="links-avatar"
-              src="/rodrigo-coelho.png"
-              alt="Rodrigo Coelho"
-            />
-          </div>
-          <p className="links-kicker">Contabilidade estratégica</p>
-          <h1>Rodrigo Coelho</h1>
-          <p className="links-profile__bio">
-            Contabilidade para empresas que querem <strong>crescer com segurança.</strong>
-          </p>
-          <div className="links-location" aria-label="Atendimento no Pará e em todo o Brasil">
-            <LinkIcon kind="address" />
-            <span>Pará · Atendimento nacional</span>
-          </div>
-        </header>
-
-        <nav className="links-primary" aria-label="Atalhos principais">
-          {[whatsappLink, switchLink].map((item) => (
+        <div className="links-stack" aria-label="Links da Nacional Contabilidade">
+          {linkTreeItems.map((item) => (
             <a
-              className={`links-primary__item links-primary__item--${item.kind}`}
+              className={`links-item${item.featured ? " links-item--featured" : ""} links-item--${item.kind}`}
               href={item.href}
               key={item.title}
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noreferrer" : undefined}
               aria-label={item.ariaLabel}
             >
-              <span className="links-primary__icon">
+              <span className="links-item__icon">
                 <LinkIcon kind={item.kind} />
               </span>
-              <span className="links-primary__text">
+              <span className="links-item__text">
                 <strong>{item.title}</strong>
-                <small>
-                  {item.kind === "whatsapp" ? "Resposta rápida e direta" : "Migração fácil e segura"}
-                </small>
+                <small>{item.text}</small>
+              </span>
+              <span className="links-item__more" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="5" r="1.5" />
+                  <circle cx="12" cy="12" r="1.5" />
+                  <circle cx="12" cy="19" r="1.5" />
+                </svg>
               </span>
             </a>
           ))}
-        </nav>
-
-        <section className="links-section" aria-labelledby="links-featured-title">
-          <div className="links-section__heading">
-            <span aria-hidden="true" />
-            <h2 id="links-featured-title">Soluções mais procuradas</h2>
-            <span aria-hidden="true" />
-          </div>
-
-          <div className="links-service-grid">
-            {featuredLinks.map((item) => (
-              <a
-                className="links-service-card"
-                href={item.href}
-                key={item.kind}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noreferrer" : undefined}
-              >
-                <span className="links-service-card__icon">
-                  <LinkIcon kind={item.kind} />
-                </span>
-                <strong>{item.title}</strong>
-                <span className="links-chevron" aria-hidden="true">›</span>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="links-section" aria-labelledby="links-more-title">
-          <div className="links-section__heading">
-            <span aria-hidden="true" />
-            <h2 id="links-more-title">Mais soluções</h2>
-            <span aria-hidden="true" />
-          </div>
-
-          <div className="links-compact-list">
-            {moreLinks.map((item) => (
-              <a
-                className="links-compact-card"
-                href={item.href}
-                key={item.kind}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noreferrer" : undefined}
-              >
-                <span className="links-compact-card__icon">
-                  <LinkIcon kind={item.kind} />
-                </span>
-                <span className="links-compact-card__text">
-                  <strong>{item.title}</strong>
-                  <small>{item.text}</small>
-                </span>
-                <span className="links-chevron" aria-hidden="true">›</span>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="links-section" aria-labelledby="links-resources-title">
-          <div className="links-section__heading">
-            <span aria-hidden="true" />
-            <h2 id="links-resources-title">Conteúdos e ferramentas</h2>
-            <span aria-hidden="true" />
-          </div>
-
-          <div className="links-resource-grid">
-            {resourceLinks.map((item) => (
-              <a className="links-resource-card" href={item.href} key={item.kind}>
-                <span className="links-service-card__icon">
-                  <LinkIcon kind={item.kind} />
-                </span>
-                <strong>{item.kind === "blog" ? "Blog" : item.title}</strong>
-                <span className="links-chevron" aria-hidden="true">›</span>
-              </a>
-            ))}
-          </div>
-        </section>
+        </div>
 
         <footer className="links-footer">
-          <nav className="links-footer__nav" aria-label="Outros canais da Nacional">
-            {footerLinks.map((item) => (
-              <a
-                href={item.href}
-                key={item.kind}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noreferrer" : undefined}
-              >
-                <LinkIcon kind={item.kind} />
-                <span>{item.kind === "email" ? "E-mail" : item.title}</span>
-              </a>
-            ))}
-          </nav>
           <p>{COMPANY_NAME}</p>
           <p>CNPJ: {CNPJ}</p>
         </footer>
@@ -1680,12 +1750,10 @@ function SwitchAccountantPage() {
   const [form, setForm] = useState<SwitchAccountantFormData>(
     initialSwitchAccountantForm,
   );
-  const [currentStep, setCurrentStep] = useState(1);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [stepError, setStepError] = useState("");
 
   useEffect(() => {
     document.title = "Trocar de contador | Nacional Contabilidade";
@@ -1696,44 +1764,10 @@ function SwitchAccountantPage() {
     value: string,
   ) => {
     setForm((current) => ({ ...current, [field]: value }));
-    setStepError("");
-  };
-
-  const goToNextStep = () => {
-    const firstStepIsValid =
-      form.nome.trim() &&
-      form.whatsapp.replace(/\D/g, "").length >= 10 &&
-      form.cidade.trim();
-    const secondStepIsValid =
-      form.regime && form.segmento && form.faturamento && form.pendencias;
-
-    if (currentStep === 1 && !firstStepIsValid) {
-      setStepError("Preencha nome, WhatsApp e cidade para continuar.");
-      return;
-    }
-
-    if (currentStep === 2 && !secondStepIsValid) {
-      setStepError("Selecione todas as informações desta etapa.");
-      return;
-    }
-
-    setStepError("");
-    setCurrentStep((step) => Math.min(step + 1, 3));
-  };
-
-  const goToPreviousStep = () => {
-    setStepError("");
-    setCurrentStep((step) => Math.max(step - 1, 1));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (currentStep < 3) {
-      goToNextStep();
-      return;
-    }
-
     setSubmitStatus("sending");
     setErrorMessage("");
 
@@ -1756,7 +1790,6 @@ function SwitchAccountantPage() {
 
       setSubmitStatus("success");
       setForm(initialSwitchAccountantForm);
-      setCurrentStep(3);
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(
@@ -1768,176 +1801,221 @@ function SwitchAccountantPage() {
   };
 
   return (
-    <main className="lead-page lead-page--switch">
-      <section className="switch-layout" aria-labelledby="troca-contador-title">
-        <div className="switch-intro">
-          <a className="switch-logo" href="/links" aria-label="Voltar para os links da Nacional">
-            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-          </a>
+    <main className="lead-page">
+      <section className="lead-shell" aria-labelledby="troca-contador-title">
+        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
+          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+        </a>
 
-          <div className="switch-copy">
-            <h1 id="troca-contador-title">
-              Troque de contador sem parar a rotina da sua empresa.
-            </h1>
-            <p className="switch-summary">
-              Conte o que está acontecendo. A Nacional analisa documentos,
-              acessos e possíveis pendências para orientar uma transição organizada.
-            </p>
-          </div>
-
-          <ul className="switch-assurances" aria-label="Diferenciais do atendimento">
-            <li><span aria-hidden="true">✓</span> Atendimento humano</li>
-            <li><span aria-hidden="true">✓</span> Pará e todo o Brasil</li>
-            <li><span aria-hidden="true">✓</span> Análise inicial sem compromisso</li>
-          </ul>
-
-          <div className="switch-how">
-            <p>Como funciona</p>
-            <ol>
-              <li><span>1</span> Você conta a situação</li>
-              <li><span>2</span> Nossa equipe analisa</li>
-              <li><span>3</span> Falamos com você no WhatsApp</li>
-            </ol>
-          </div>
+        <div className="lead-heading">
+          <p className="lead-kicker">Troca de contador</p>
+          <h1 id="troca-contador-title">
+            Quer trocar de contador sem bagunçar a empresa?
+          </h1>
+          <p>
+            Preencha as informações principais. Nossa equipe analisa sua
+            situação e entra em contato para entender o melhor caminho.
+          </p>
         </div>
 
-        <div className="switch-form-column">
-          <form className="lead-form switch-form" onSubmit={handleSubmit}>
-            <div className="switch-form-header">
-              <div>
-                <p>Etapa {currentStep} de 3</p>
-                <h2>
-                  {currentStep === 1 && "Vamos começar por você"}
-                  {currentStep === 2 && "Agora, sobre a empresa"}
-                  {currentStep === 3 && "O que motivou a troca?"}
-                </h2>
-              </div>
-              <span className="switch-time">Leva 2 minutos</span>
-            </div>
+        <form className="lead-form" onSubmit={handleSubmit}>
+          <div className="form-grid">
+            <label>
+              <span>Seu nome</span>
+              <input
+                required
+                autoComplete="name"
+                type="text"
+                value={form.nome}
+                onChange={(event) => updateField("nome", event.target.value)}
+                placeholder="Nome completo"
+              />
+            </label>
 
-            <div className="switch-progress" aria-label={`Etapa ${currentStep} de 3`}>
-              {[1, 2, 3].map((step) => (
-                <span className={step <= currentStep ? "is-active" : ""} key={step} />
+            <label>
+              <span>WhatsApp</span>
+              <input
+                required
+                autoComplete="tel-national"
+                inputMode="numeric"
+                pattern="[\d\s()+-]{14,15}"
+                type="tel"
+                value={form.whatsapp}
+                onChange={(event) =>
+                  updateField("whatsapp", formatBrazilPhone(event.target.value))
+                }
+                placeholder="(93) 99210-1980"
+              />
+            </label>
+
+            <label>
+              <span>Cidade/UF</span>
+              <input
+                required
+                autoComplete="address-level2"
+                type="text"
+                value={form.cidade}
+                onChange={(event) => updateField("cidade", event.target.value)}
+                placeholder="Ex: Santarém/PA"
+              />
+            </label>
+
+            <label>
+              <span>Nome da empresa</span>
+              <input
+                type="text"
+                value={form.empresa}
+                onChange={(event) => updateField("empresa", event.target.value)}
+                placeholder="Opcional"
+              />
+            </label>
+
+            <label>
+              <span>Regime tributário</span>
+              <select
+                required
+                value={form.regime}
+                onChange={(event) => updateField("regime", event.target.value)}
+              >
+                <option value="">Selecione</option>
+                {taxRegimeOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Segmento da empresa</span>
+              <select
+                required
+                value={form.segmento}
+                onChange={(event) =>
+                  updateField("segmento", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {segmentOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Faturamento aproximado</span>
+              <select
+                required
+                value={form.faturamento}
+                onChange={(event) =>
+                  updateField("faturamento", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {revenueOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Tem pendência fiscal?</span>
+              <select
+                required
+                value={form.pendencias}
+                onChange={(event) =>
+                  updateField("pendencias", event.target.value)
+                }
+              >
+                <option value="">Selecione</option>
+                {pendingOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span>Principal motivo da troca</span>
+            <select
+              required
+              value={form.motivo}
+              onChange={(event) => updateField("motivo", event.target.value)}
+            >
+              <option value="">Selecione</option>
+              {switchReasonOptions.map((option) => (
+                <option value={option} key={option}>
+                  {option}
+                </option>
               ))}
-            </div>
+            </select>
+          </label>
 
-            {submitStatus === "success" ? (
-              <div className="switch-success" role="status">
-                <span aria-hidden="true">✓</span>
-                <h3>Informações recebidas.</h3>
-                <p>
-                  A equipe da Nacional vai analisar sua situação e entrar em
-                  contato pelo WhatsApp informado.
-                </p>
-                <a className="button button--secondary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                  Falar agora no WhatsApp
-                </a>
-              </div>
-            ) : (
-              <>
-                {currentStep === 1 && (
-                  <div className="form-grid switch-fields">
-                    <label>
-                      <span>Seu nome</span>
-                      <input autoFocus autoComplete="name" type="text" value={form.nome} onChange={(event) => updateField("nome", event.target.value)} placeholder="Nome completo" />
-                    </label>
-                    <label>
-                      <span>WhatsApp</span>
-                      <input autoComplete="tel-national" inputMode="numeric" type="tel" value={form.whatsapp} onChange={(event) => updateField("whatsapp", formatBrazilPhone(event.target.value))} placeholder="(93) 99210-1980" />
-                    </label>
-                    <label>
-                      <span>Cidade/UF</span>
-                      <input autoComplete="address-level2" type="text" value={form.cidade} onChange={(event) => updateField("cidade", event.target.value)} placeholder="Ex: Santarém/PA" />
-                    </label>
-                    <label>
-                      <span>Nome da empresa</span>
-                      <input type="text" value={form.empresa} onChange={(event) => updateField("empresa", event.target.value)} placeholder="Opcional" />
-                    </label>
-                  </div>
-                )}
+          <label>
+            <span>Quer explicar algo?</span>
+            <textarea
+              value={form.observacao}
+              onChange={(event) =>
+                updateField("observacao", event.target.value)
+              }
+              placeholder="Conte rapidamente o que está acontecendo. Opcional."
+              rows={4}
+            />
+          </label>
 
-                {currentStep === 2 && (
-                  <div className="form-grid switch-fields">
-                    <label>
-                      <span>Regime tributário</span>
-                      <select autoFocus value={form.regime} onChange={(event) => updateField("regime", event.target.value)}>
-                        <option value="">Selecione</option>
-                        {taxRegimeOptions.map((option) => <option value={option} key={option}>{option}</option>)}
-                      </select>
-                    </label>
-                    <label>
-                      <span>Segmento da empresa</span>
-                      <select value={form.segmento} onChange={(event) => updateField("segmento", event.target.value)}>
-                        <option value="">Selecione</option>
-                        {segmentOptions.map((option) => <option value={option} key={option}>{option}</option>)}
-                      </select>
-                    </label>
-                    <label>
-                      <span>Faturamento aproximado</span>
-                      <select value={form.faturamento} onChange={(event) => updateField("faturamento", event.target.value)}>
-                        <option value="">Selecione</option>
-                        {revenueOptions.map((option) => <option value={option} key={option}>{option}</option>)}
-                      </select>
-                    </label>
-                    <label>
-                      <span>Tem pendência fiscal?</span>
-                      <select value={form.pendencias} onChange={(event) => updateField("pendencias", event.target.value)}>
-                        <option value="">Selecione</option>
-                        {pendingOptions.map((option) => <option value={option} key={option}>{option}</option>)}
-                      </select>
-                    </label>
-                  </div>
-                )}
+          <label className="form-honeypot">
+            <span>Site</span>
+            <input
+              tabIndex={-1}
+              autoComplete="off"
+              type="text"
+              value={form.website}
+              onChange={(event) => updateField("website", event.target.value)}
+            />
+          </label>
 
-                {currentStep === 3 && (
-                  <div className="switch-fields switch-fields--final">
-                    <label>
-                      <span>Principal motivo da troca</span>
-                      <select autoFocus required value={form.motivo} onChange={(event) => updateField("motivo", event.target.value)}>
-                        <option value="">Selecione</option>
-                        {switchReasonOptions.map((option) => <option value={option} key={option}>{option}</option>)}
-                      </select>
-                    </label>
-                    <label>
-                      <span>Quer explicar algo?</span>
-                      <textarea value={form.observacao} onChange={(event) => updateField("observacao", event.target.value)} placeholder="Conte rapidamente o que está acontecendo. Opcional." rows={4} />
-                    </label>
-                  </div>
-                )}
+          {submitStatus === "success" && (
+            <p className="form-alert form-alert--success" role="status">
+              Recebemos suas informações. A Nacional Contabilidade vai entrar em
+              contato pelo WhatsApp informado.
+            </p>
+          )}
 
-                <label className="form-honeypot">
-                  <span>Site</span>
-                  <input tabIndex={-1} autoComplete="off" type="text" value={form.website} onChange={(event) => updateField("website", event.target.value)} />
-                </label>
+          {submitStatus === "error" && (
+            <p className="form-alert form-alert--error" role="alert">
+              {errorMessage} Se preferir, fale direto pelo WhatsApp.
+            </p>
+          )}
 
-                {stepError && <p className="form-alert form-alert--error" role="alert">{stepError}</p>}
-                {submitStatus === "error" && (
-                  <p className="form-alert form-alert--error" role="alert">
-                    {errorMessage} Se preferir, fale direto pelo WhatsApp.
-                  </p>
-                )}
+          <div className="lead-actions">
+            <button
+              className="button"
+              type="submit"
+              disabled={submitStatus === "sending"}
+            >
+              {submitStatus === "sending" ? "Enviando..." : "Enviar análise"}
+            </button>
+            <a
+              className="button button--secondary"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Falar no WhatsApp
+            </a>
+          </div>
+        </form>
 
-                <div className="switch-form-actions">
-                  {currentStep > 1 && <button className="switch-back" type="button" onClick={goToPreviousStep}>Voltar</button>}
-                  {currentStep < 3 ? (
-                    <button className="button switch-next" type="button" onClick={goToNextStep}>Continuar <span aria-hidden="true">→</span></button>
-                  ) : (
-                    <button className="button switch-next" type="submit" disabled={submitStatus === "sending"}>
-                      {submitStatus === "sending" ? "Enviando..." : "Enviar para análise"}
-                    </button>
-                  )}
-                </div>
-              </>
-            )}
-
-            <p className="switch-privacy">Seus dados serão usados apenas para esta análise e contato.</p>
-          </form>
-
-          <a className="switch-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
-            <span aria-hidden="true">◉</span>
-            Prefere conversar agora? <strong>Chame no WhatsApp</strong>
-          </a>
-        </div>
+        <p className="lead-note">
+          Seus dados serão usados apenas para contato e avaliação inicial da
+          troca de contador.
+        </p>
       </section>
     </main>
   );
@@ -2275,10 +2353,26 @@ function BusinessAccountingPage() {
 
 export default function App() {
   const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
+  const isOfficialHomePage = normalizedPath === "/";
+  const isPreviewHomePage = normalizedPath === "/preview/nova-home";
+  const isPrivacyPolicyPage = normalizedPath === "/politica-de-privacidade";
+  const solutionSlug = normalizedPath.startsWith("/solucoes/")
+    ? normalizedPath.replace("/solucoes/", "")
+    : undefined;
+  const isSolutionPage = Boolean(solutionSlug && solutionPages[solutionSlug]);
   const isLinksPage = normalizedPath === "/links";
   const isSwitchAccountantPage = normalizedPath === "/trocar-contador";
   const isBusinessAccountingPage = normalizedPath === "/contabilidade-empresas";
   const isToolsPage = normalizedPath === "/ferramentas";
+  const accessPortal = normalizedPath === "/area-do-cliente"
+    ? "cliente"
+    : normalizedPath === "/area-da-equipe"
+      ? "equipe"
+      : undefined;
+  const isAccessPage = Boolean(accessPortal);
+  const isAccessRequestPage = normalizedPath === "/solicitar-acesso";
+  const isFiscalAddressPage = normalizedPath === "/endereco-fiscal-santarem";
+  const isSearchLandingPage = Boolean(searchLandingPages[normalizedPath]);
   const isBlogPage = normalizedPath === "/blog" || normalizedPath.startsWith("/blog/");
   const blogSlug = normalizedPath.startsWith("/blog/")
     ? normalizedPath.replace("/blog/", "")
@@ -2289,9 +2383,17 @@ export default function App() {
   useEffect(() => {
     if (
       isLinksPage ||
+      isOfficialHomePage ||
+      isPreviewHomePage ||
+      isPrivacyPolicyPage ||
+      isSolutionPage ||
       isSwitchAccountantPage ||
       isBusinessAccountingPage ||
       isToolsPage ||
+      isAccessPage ||
+      isAccessRequestPage ||
+      isFiscalAddressPage ||
+      isSearchLandingPage ||
       isBlogPage
     ) {
       return;
@@ -2314,14 +2416,36 @@ export default function App() {
     };
   }, [
     isLinksPage,
+    isOfficialHomePage,
+    isPreviewHomePage,
+    isPrivacyPolicyPage,
+    isSolutionPage,
     isSwitchAccountantPage,
     isBusinessAccountingPage,
     isToolsPage,
+    isAccessPage,
+    isAccessRequestPage,
+    isFiscalAddressPage,
+    isSearchLandingPage,
     isBlogPage,
   ]);
 
+  useEffect(() => installLeadTracking(), []);
+
   if (isLinksPage) {
     return <LinksPage />;
+  }
+
+  if (isOfficialHomePage || isPreviewHomePage) {
+    return <PreviewHomePage previewMode={isPreviewHomePage} />;
+  }
+
+  if (isPrivacyPolicyPage) {
+    return <PrivacyPolicyPage />;
+  }
+
+  if (isSolutionPage && solutionSlug) {
+    return <SolutionDetailPage slug={solutionSlug} />;
   }
 
   if (isSwitchAccountantPage) {
@@ -2334,6 +2458,22 @@ export default function App() {
 
   if (isToolsPage) {
     return <ToolsPage />;
+  }
+
+  if (isAccessPage && accessPortal) {
+    return <AccessPortalPage portal={accessPortal} />;
+  }
+
+  if (isAccessRequestPage) {
+    return <AccessRequestPage />;
+  }
+
+  if (isFiscalAddressPage) {
+    return <FiscalAddressPage />;
+  }
+
+  if (isSearchLandingPage) {
+    return <SearchLandingPage path={normalizedPath} />;
   }
 
   if (isBlogPage) {
@@ -2422,8 +2562,8 @@ export default function App() {
               ))}
             </div>
             <p>
-              Começamos pelo básico bem feito e aprofundamos onde existe risco,
-              desorganização ou decisão importante pela frente.
+              Organizamos a rotina contábil e fiscal e avançamos sobre riscos,
+              inconsistências e decisões que exigem análise.
             </p>
           </aside>
         </div>
@@ -2488,9 +2628,9 @@ export default function App() {
               Depois, organizamos a rotina contábil, fiscal e tributária
             </h2>
             <p>
-              A entrega muda conforme a empresa. Algumas precisam resolver o
-              básico. Outras precisam revisar operação, tributação, produtos,
-              caixa e resultado.
+              A entrega acompanha a complexidade real da empresa e pode envolver
+              rotina contábil, revisão da operação, tributação, produtos, caixa
+              e resultado.
             </p>
           </div>
           <div className="service-columns">
@@ -2654,14 +2794,10 @@ export default function App() {
               o Brasil.
             </p>
             <p>
-              Nosso trabalho começa pelo básico bem feito: CNPJ regular,
-              impostos apurados, obrigações entregues e documentos organizados.
-            </p>
-            <p>
-              Quando a empresa precisa de uma análise mais completa, também
-              atuamos com revisão tributária, classificação fiscal, organização
-              financeira, pró-labore, distribuição de lucros e leitura de
-              resultados.
+              Nosso trabalho integra regularidade cadastral, apuração de
+              impostos, obrigações, demonstrações contábeis, revisão tributária,
+              organização financeira, pró-labore, distribuição de lucros e
+              leitura de resultados.
             </p>
           </div>
         </div>

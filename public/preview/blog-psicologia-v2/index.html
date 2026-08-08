@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>CNPJ para psicólogos: Fator R, impostos e pró-labore</title>
+    <meta name="description" content="Entenda quando um psicólogo precisa de CNPJ, por que o imposto pode começar em 6% ou 15,5% e simule o Fator R, o pró-labore e os custos mensais." />
+    <meta name="author" content="Rodrigo Coelho — Nacional Contabilidade" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#071b36" />
+    <link rel="canonical" href="https://www.nacionalcon.com/blog/cnpj-para-psicologos" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/preview/blog-psicologia-v2/styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Nacional Contabilidade" />
+    <meta property="og:title" content="CNPJ para psicólogos: como funciona o Fator R?" />
+    <meta property="og:description" content="Guia prático com simulador para entender a diferença entre os Anexos III e V do Simples Nacional." />
+    <meta property="og:url" content="https://www.nacionalcon.com/blog/cnpj-para-psicologos" />
+    <meta property="og:image" content="https://www.nacionalcon.com/orientacao/abertura-cnpj-psicologia/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            "headline": "CNPJ para psicólogos: como funciona o Fator R?",
+            "description": "Guia prático para psicólogos sobre CNPJ, Simples Nacional, Fator R, pró-labore e custos mensais.",
+            "mainEntityOfPage": "https://www.nacionalcon.com/blog/cnpj-para-psicologos",
+            "author": { "@type": "Person", "name": "Rodrigo Coelho" },
+            "publisher": { "@type": "Organization", "name": "Nacional Contabilidade", "url": "https://www.nacionalcon.com" },
+            "image": "https://www.nacionalcon.com/orientacao/abertura-cnpj-psicologia/og.png"
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Psicólogo pode ser MEI?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Não. Psicologia é uma profissão regulamentada e não está entre as ocupações permitidas ao MEI." }
+              },
+              {
+                "@type": "Question",
+                "name": "Psicólogo paga 6% ou 15,5% no Simples Nacional?",
+                "acceptedAnswer": { "@type": "Answer", "text": "A atividade pode ser tributada pelo Anexo III ou pelo Anexo V. A definição depende do Fator R, calculado com base na folha e na receita bruta do período aplicável." }
+              },
+              {
+                "@type": "Question",
+                "name": "Preciso ter funcionário para alcançar o Fator R?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Não necessariamente. O pró-labore do sócio integra a folha considerada no Fator R. Quando existem colaboradores, a folha elegível também influencia o cálculo." }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Nacional Contabilidade — página inicial">
+          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+        </a>
+        <nav class="desktop-nav" id="psychology-navigation" aria-label="Navegação principal">
+          <a class="is-active" href="/blog">Blog</a>
+          <a href="/ferramentas">Ferramentas</a>
+          <a href="/area-do-cliente">Área do cliente</a>
+          <a href="/area-da-equipe">Área da equipe</a>
+          <a href="/#sobre">Sobre</a>
+        </nav>
+        <button class="mobile-menu" type="button" aria-label="Abrir menu" aria-controls="psychology-navigation" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <a class="button button--nav" href="https://wa.me/5593992101980?text=Ol%C3%A1%2C%20li%20o%20guia%20para%20psic%C3%B3logos%20e%20quero%20falar%20sobre%20meu%20caso." target="_blank" rel="noreferrer">Agendar reunião</a>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="hero">
+        <div class="hero__texture" aria-hidden="true"></div>
+        <div class="shell hero__grid">
+          <div class="hero__copy">
+            <nav class="breadcrumbs" aria-label="Trilha de navegação">
+              <a href="/blog">Blog</a><span>/</span><span>Psicologia</span><span>/</span><span>Planejamento tributário</span>
+            </nav>
+            <h1>CNPJ para psicólogos:<br />como funciona o Fator R?</h1>
+            <p class="hero__lead">Entenda quando abrir uma empresa, por que a tributação pode começar em <strong>6%</strong> ou <strong>15,5%</strong> e como o pró-labore influencia esse cálculo.</p>
+            <div class="hero__meta" aria-label="Informações do conteúdo">
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3-.7 5.7.1 8 2.2 2.3-2.1 5-2.9 8-2.2v13c-3-.7-5.7.1-8 2.2-2.3-2.1-5-2.9-8-2.2z"/></svg>Guia prático</span>
+              <i aria-hidden="true"></i>
+              <span>Leitura de 8 minutos</span>
+            </div>
+          </div>
+
+          <div class="hero-illustration" aria-hidden="true">
+            <svg viewBox="0 0 520 360" role="img">
+              <path class="hero-line" d="M183 302c-4-34 13-58 41-74-31-17-47-50-40-83 8-41 46-70 88-67 34 2 64 26 73 59l13 39 31 21-25 18-2 69" />
+              <path class="hero-line" d="M257 305v-49c0-21 17-38 38-38h28M198 305h168" />
+              <path class="hero-line" d="M163 197c-18 0-33 15-33 33s15 33 33 33h19" />
+              <path class="hero-line" d="M246 112l28 36m-57 11 57-11m-39 61 39-61m0 0 42-26m-42 26 54 28m-54-28 2-55" />
+              <g class="hero-nodes">
+                <circle cx="246" cy="112" r="7"/><circle cx="217" cy="159" r="7"/><circle cx="235" cy="209" r="7"/><circle cx="274" cy="148" r="8"/><circle cx="276" cy="93" r="7"/><circle cx="316" cy="122" r="7"/><circle cx="328" cy="176" r="7"/>
+              </g>
+              <path class="hero-line" d="M380 300v-46h30v46m14 0v-82h30v82m-61-99 62-71m0 0-2 32m2-32-32 3" />
+              <text x="295" y="232" class="hero-percent">%</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <div class="shell article-layout">
+        <aside class="guide-nav" aria-label="Neste guia">
+          <strong>Neste guia</strong>
+          <a href="#quando-abrir">Quando abrir um CNPJ</a>
+          <a href="#fator-r">Como funciona o Fator R</a>
+          <a href="#pro-labore">Pró-labore e colaboradores</a>
+          <a href="#calculadora">Faça sua simulação</a>
+          <a href="#proximos-passos">Próximos passos</a>
+        </aside>
+
+        <article class="article">
+          <details class="content-section content-disclosure" id="quando-abrir" open>
+            <summary><h2><span>1.</span> Quando um psicólogo precisa de CNPJ?</h2><i aria-hidden="true"></i></summary>
+            <p>Abrir um CNPJ é um passo para quem deseja emitir notas em nome próprio, atender clínicas ou empresas e organizar a atividade profissional com mais segurança.</p>
+            <p>O cadastro da empresa identifica oficialmente a atividade perante a Receita Federal. Para psicologia, o CNAE normalmente utilizado é o <strong>8650-0/03 — Atividades de psicologia e psicanálise</strong>.</p>
+
+            <div class="benefits">
+              <div class="benefit">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 3h13l5 5v21H7zM20 3v6h6M11 15h10M11 20h10M11 25h7"/></svg>
+                <div><strong>Emitir notas fiscais</strong><p>Formalize seus serviços e receba de clínicas, empresas e pacientes.</p></div>
+              </div>
+              <div class="benefit">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 29V10h10v19M19 29V4h10v25M7 15h2m-2 5h2m-2 5h2m16-15h2m-2 5h2m-2 5h2M1 29h30"/></svg>
+                <div><strong>Atender clínicas e empresas</strong><p>Tenha CNPJ e documentação fiscal quando a contratação exigir.</p></div>
+              </div>
+              <div class="benefit">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="10" r="6"/><path d="M4 29c1-8 5-12 12-12s11 4 12 12"/></svg>
+                <div><strong>Organizar a atividade</strong><p>Separe finanças e acompanhe impostos, retiradas e resultado.</p></div>
+              </div>
+            </div>
+
+            <div class="plain-note"><strong>Psicólogo não pode ser MEI.</strong><span>Como a psicologia é uma profissão regulamentada, o formato mais comum para atuação individual é uma empresa no Simples Nacional, definida conforme o caso.</span></div>
+          </details>
+
+          <details class="content-section content-disclosure" id="fator-r" open>
+            <summary><h2><span>2.</span> Por que a psicologia pode pagar 6% ou 15,5%?</h2><i aria-hidden="true"></i></summary>
+            <p>A psicologia está entre as atividades sujeitas ao <strong>Fator R</strong>. Ele compara a folha considerada pela legislação com a receita bruta acumulada no período aplicável.</p>
+
+            <div class="annex-grid">
+              <article class="annex-card">
+                <span class="pill">Anexo III</span>
+                <p class="annex-rate"><strong>6%</strong> inicial</p>
+                <p>Fator R igual ou superior a <strong>28%</strong></p>
+                <div>Tributação inicial mais vantajosa para a atividade.</div>
+              </article>
+              <article class="annex-card">
+                <span class="pill">Anexo V</span>
+                <p class="annex-rate"><strong>15,5%</strong> inicial</p>
+                <p>Fator R inferior a <strong>28%</strong></p>
+                <div>Tributação inicial padrão para serviços profissionais.</div>
+              </article>
+            </div>
+
+            <p class="emphasis">A diferença depende da relação entre faturamento, pró-labore e folha de colaboradores. As alíquotas acima são nominais iniciais; a apuração real considera a receita acumulada dos últimos 12 meses.</p>
+          </details>
+
+          <details class="content-section content-disclosure" id="pro-labore" open>
+            <summary><h2><span>3.</span> O que o pró-labore e os colaboradores mudam?</h2><i aria-hidden="true"></i></summary>
+            <p><strong>Pró-labore</strong> é a remuneração do sócio que trabalha na empresa. Ele não é um imposto nem uma despesa “perdida”: é a retirada formal pelo trabalho do próprio psicólogo e normalmente possui contribuição ao INSS.</p>
+            <div class="concept-grid">
+              <article><span>01</span><h3>Atuação individual</h3><p>Quando o psicólogo trabalha sozinho, o pró-labore costuma ser a principal parcela da folha usada no Fator R.</p></article>
+              <article><span>02</span><h3>Com colaboradores</h3><p>Salários e encargos elegíveis também entram na análise e podem reduzir o pró-labore necessário para alcançar 28%.</p></article>
+              <article><span>03</span><h3>Acompanhamento mensal</h3><p>O cálculo deve ser revisto porque faturamento e folha variam, e a regra oficial usa valores acumulados.</p></article>
+            </div>
+          </details>
+
+          <section class="calculator-intro" id="calculadora">
+            <p class="eyebrow">Agora aplique ao seu cenário</p>
+            <h2>Simule o Fator R da sua empresa</h2>
+            <p>Informe o faturamento e veja uma estimativa do pró-labore necessário, dos impostos e da possível economia.</p>
+          </section>
+
+          <section class="calculator-card" aria-labelledby="calculator-title">
+            <div class="calculator-form">
+              <h3 id="calculator-title"><span>1.</span> Informe seus dados</h3>
+
+              <label for="monthly-revenue">Faturamento mensal</label>
+              <div class="money-field">
+                <span>R$</span>
+                <input id="monthly-revenue" type="text" inputmode="decimal" enterkeyhint="done" value="3.850,00" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="calculator-status" />
+              </div>
+
+              <fieldset class="toggle-field">
+                <legend>Você possui colaboradores?</legend>
+                <div class="segmented-control">
+                  <input type="radio" name="has-employees" id="employees-no" value="no" checked />
+                  <label for="employees-no">Não, atuo sozinho</label>
+                  <input type="radio" name="has-employees" id="employees-yes" value="yes" />
+                  <label for="employees-yes">Sim</label>
+                </div>
+              </fieldset>
+
+              <div class="employee-payroll is-hidden" id="employee-payroll-wrap">
+                <label for="employee-payroll">Folha mensal elegível de colaboradores</label>
+                <div class="money-field money-field--small">
+                  <span>R$</span>
+                  <input id="employee-payroll" type="text" inputmode="decimal" enterkeyhint="done" value="0,00" autocomplete="off" aria-describedby="payroll-help" />
+                </div>
+                <small id="payroll-help">Informe salários e encargos que compõem o Fator R. Na dúvida, use somente os salários.</small>
+              </div>
+
+              <button class="button button--calculate" id="calculate-button" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2m-8 4h2m4 0h2m-8 4h2m4 0h2"/></svg>
+                Calcular meu cenário
+              </button>
+              <p class="privacy-note"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="10" width="12" height="10" rx="2"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>Seus dados não são armazenados.</p>
+            </div>
+
+            <div class="calculator-result" aria-live="polite">
+              <h3><span>2.</span> Resultado estimado</h3>
+
+              <div class="result-overview">
+                <div class="factor-ring" id="factor-ring"><strong id="result-factor">—</strong></div>
+                <div><span>Fator R projetado</span><small id="factor-detail">Meta mínima de 28%</small></div>
+                <span class="annex-badge" id="result-annex">—</span>
+              </div>
+
+              <div class="prolabore-result">
+                <span>Pró-labore recomendado</span>
+                <strong id="result-prolabore">—</strong>
+              </div>
+
+              <div class="metrics-grid">
+                <div class="result-metric"><span>DAS estimado</span><strong id="result-das-iii">—</strong><small id="result-rate-iii">—</small></div>
+                <div class="result-metric"><span>INSS sobre pró-labore</span><strong id="result-inss">—</strong><small>alíquota de referência</small></div>
+                <div class="result-metric result-metric--accent"><span>Economia tributária</span><strong id="result-savings">—</strong><small>comparação com Anexo V</small></div>
+                <div class="result-metric"><span>Acompanhamento</span><strong id="result-fee">—</strong><small>estimativa mensal</small></div>
+              </div>
+
+              <div class="comparison-bars">
+                <div><span>Com Fator R</span><i><b id="bar-factor"></b></i><strong id="comparison-factor">—</strong></div>
+                <div><span>Sem Fator R</span><i><b id="bar-no-factor"></b></i><strong id="comparison-no-factor">—</strong></div>
+                <p id="result-summary">Informe seus dados para comparar os cenários.</p>
+              </div>
+
+              <p class="calculator-status" id="calculator-status" role="status">Calculando estimativa...</p>
+            </div>
+          </section>
+
+          <p class="calculator-disclaimer"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.5"/></svg>A simulação é informativa. O cálculo definitivo considera o histórico da receita e da folha, as regras de início de atividade, retenções, município e análise contábil da empresa.</p>
+
+          <details class="content-section content-disclosure interpretation" id="proximos-passos" open>
+            <summary><h2><span>4.</span> Como interpretar a simulação</h2><i aria-hidden="true"></i></summary>
+            <div class="interpretation-grid">
+              <article><b>1</b><div><h3>Enquadramento tributário</h3><p>O Fator R indica se a atividade pode ser tributada pelo Anexo III ou se permanece no Anexo V.</p></div></article>
+              <article><b>2</b><div><h3>Pró-labore recomendado</h3><p>É uma referência para formar a folha necessária, não uma promessa de economia nem um valor definitivo.</p></div></article>
+              <article><b>3</b><div><h3>Planejamento mensal</h3><p>A diferença entre os cenários precisa ser acompanhada junto com o INSS, a folha e a receita acumulada.</p></div></article>
+            </div>
+          </details>
+
+          <section class="next-steps">
+            <div>
+              <p class="eyebrow">Para manter o CNPJ regular</p>
+              <h2>O que acontece depois da abertura?</h2>
+              <p>Além de emitir notas, a empresa precisa calcular o DAS, registrar o pró-labore, enviar obrigações, organizar documentos e acompanhar o resultado contábil.</p>
+            </div>
+            <ul>
+              <li>Emissão e escrituração de notas fiscais</li>
+              <li>Apuração e envio dos impostos</li>
+              <li>Pró-labore, folha e obrigações correspondentes</li>
+              <li>Balanço, DRE e distribuição de lucros</li>
+              <li>Acompanhamento do Fator R e da reforma tributária</li>
+            </ul>
+          </section>
+
+          <section class="author-card" id="sobre">
+            <img src="/rodrigo-coelho.png" alt="Rodrigo Coelho, contador da Nacional Contabilidade" />
+            <div><p class="eyebrow">Quem preparou este guia</p><h2>Rodrigo Coelho</h2><p>Contador, CRC/PA 024335, à frente da Nacional Contabilidade. Atua com organização contábil, fiscal, tributária e financeira para empresas de Santarém e de todo o Brasil.</p></div>
+          </section>
+
+          <section class="faq" aria-labelledby="faq-title">
+            <p class="eyebrow">Dúvidas frequentes</p>
+            <h2 id="faq-title">Respostas diretas antes de abrir o CNPJ</h2>
+            <details><summary>Psicólogo pode ser MEI?</summary><p>Não. Psicologia é uma profissão regulamentada e não faz parte das ocupações permitidas ao MEI.</p></details>
+            <details><summary>O pró-labore é dinheiro que eu perco?</summary><p>Não. É a remuneração formal do sócio pelo trabalho realizado na empresa. Sobre esse valor normalmente existe contribuição previdenciária e, conforme a faixa, pode existir IRRF.</p></details>
+            <details><summary>Preciso ter funcionário para alcançar 28%?</summary><p>Não necessariamente. O pró-labore integra a folha considerada no Fator R. Se houver colaboradores, a folha elegível também influencia a análise.</p></details>
+            <details><summary>O valor da calculadora é definitivo?</summary><p>Não. É uma projeção educativa. A apuração oficial depende do histórico real da empresa e deve ser confirmada pela contabilidade.</p></details>
+          </section>
+
+          <section class="closing">
+            <div class="closing__icon" aria-hidden="true"><svg viewBox="0 0 48 56"><path d="M24 3 42 10v16c0 12-7 21-18 27C13 47 6 38 6 26V10z"/><path d="m15 27 6 6 13-15"/></svg></div>
+            <div><h2>Quer analisar seu caso com segurança?</h2><p>A Nacional Contabilidade acompanha a abertura, o planejamento tributário e a rotina contábil de psicólogos e clínicas.</p></div>
+            <a class="button button--outline-gold" href="https://wa.me/5593992101980?text=Ol%C3%A1%2C%20fiz%20a%20simula%C3%A7%C3%A3o%20de%20Fator%20R%20e%20quero%20analisar%20meu%20caso." target="_blank" rel="noreferrer">Solicitar diagnóstico <span>→</span></a>
+            <div class="closing__signature"><strong>Rodrigo Coelho</strong><i></i><span>Contador</span><i></i><span>CRC/PA 024335</span></div>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div class="footer-brand"><img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" /><p>Contabilidade consultiva para profissionais da psicologia e empresas que desejam crescer com segurança e estratégia.</p></div>
+        <div><strong>Soluções</strong><a href="/#servicos">Abertura de empresa</a><a href="/#servicos">Planejamento tributário</a><a href="/#servicos">Contabilidade mensal</a><a href="/#servicos">Consultoria financeira</a></div>
+        <div><strong>Conteúdos</strong><a href="/blog">Blog</a><a href="/ferramentas">Guias e materiais</a><a href="#calculadora">Calculadora do Fator R</a><a href="#faq-title">Perguntas frequentes</a></div>
+        <div><strong>Institucional</strong><a href="/#sobre">Sobre a Nacional</a><a href="/area-do-cliente">Área do cliente</a><a href="/area-da-equipe">Área da equipe</a><a href="/politica-de-privacidade">Política de Privacidade</a></div>
+        <div><strong>Atendimento</strong><span>100% online</span><span>Reuniões somente com agendamento</span><a href="https://wa.me/5593992101980" target="_blank" rel="noreferrer">Agendar reunião</a></div>
+      </div>
+      <div class="shell footer-bottom"><span>© Nacional Contabilidade. Todos os direitos reservados.</span><span>CRC/PA 024335 • CNPJ 62.560.654/0001-27</span></div>
+    </footer>
+
+    <script src="/preview/blog-psicologia-v2/app.js" defer></script>
+  </body>
+</html>

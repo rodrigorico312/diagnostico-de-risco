@@ -1,0 +1,601 @@
+.fiscal-address-page {
+  --fiscal-dark: #0e2a3b;
+  background: var(--preview-ivory);
+}
+
+.fiscal-address-page h1,
+.fiscal-address-page h2 {
+  font-family: "Poppins", "DM Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.fiscal-address-hero {
+  position: relative;
+  min-height: 650px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--preview-line);
+  background:
+    linear-gradient(90deg, rgba(247, 245, 240, 0.99) 0%, rgba(247, 245, 240, 0.93) 44%, rgba(247, 245, 240, 0.56) 100%),
+    url("/preview-home-ledger.png") right center / 60% auto no-repeat;
+}
+
+.fiscal-address-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 850px);
+  align-items: center;
+  min-height: 650px;
+  padding-block: 70px;
+}
+
+.fiscal-address-breadcrumb {
+  display: inline-block;
+  margin-bottom: 52px;
+  color: var(--preview-muted) !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.fiscal-address-breadcrumb:hover,
+.fiscal-address-breadcrumb:focus-visible {
+  color: var(--preview-blue) !important;
+}
+
+.fiscal-address-hero h1 {
+  max-width: 850px;
+  margin: 0;
+  font-size: clamp(3.4rem, 5.8vw, 6rem);
+  line-height: 0.96;
+}
+
+.fiscal-address-hero__lead {
+  max-width: 720px !important;
+  margin: 28px 0 0;
+  color: #3f4e5a;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.72;
+}
+
+.fiscal-address-intro,
+.fiscal-address-pricing,
+.fiscal-address-process,
+.fiscal-address-faq {
+  padding: 104px 0;
+  border-bottom: 1px solid var(--preview-line);
+}
+
+.fiscal-address-intro {
+  background: #f7f5f0;
+}
+
+.fiscal-address-intro__layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(54px, 7vw, 110px);
+  align-items: start;
+}
+
+.fiscal-address-intro__heading {
+  position: relative;
+  padding-top: 10px;
+}
+
+.fiscal-address-process__heading {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.4fr) minmax(0, 1.3fr);
+  gap: clamp(54px, 8vw, 120px);
+  align-items: start;
+  margin-bottom: 58px;
+}
+
+.fiscal-address-intro__heading h2 {
+  max-width: 490px;
+  margin: 18px 0 0;
+  font-size: clamp(2.35rem, 3.8vw, 3.75rem);
+  line-height: 1.02;
+}
+
+.fiscal-address-intro__rule {
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 28px;
+  background: var(--preview-gold);
+}
+
+.fiscal-address-process__heading h2 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(2.8rem, 4.8vw, 4.7rem);
+  line-height: 1;
+}
+
+.fiscal-address-use-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.fiscal-address-use-grid article {
+  min-height: 214px;
+  padding: 27px 28px 26px;
+  border: 1px solid rgba(14, 42, 59, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 14px 34px rgba(14, 42, 59, 0.045);
+}
+
+.fiscal-address-process__steps span {
+  color: var(--preview-gold);
+  font-family: "Poppins", "DM Sans", sans-serif;
+  font-size: 1.25rem;
+}
+
+.fiscal-address-use-grid span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(190, 145, 35, 0.5);
+  border-radius: 50%;
+  color: #9d7616;
+  font-family: "Poppins", "DM Sans", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.fiscal-address-use-grid h3 {
+  max-width: 260px;
+  margin: 30px 0 11px;
+  color: var(--preview-ink);
+  font-family: "Poppins", "DM Sans", sans-serif;
+  font-size: 1.13rem;
+  line-height: 1.25;
+}
+
+.fiscal-address-use-grid p {
+  max-width: 280px;
+  margin: 0;
+  color: var(--preview-muted);
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+.fiscal-address-pricing {
+  scroll-margin-top: 86px;
+  background: var(--preview-ivory);
+}
+
+.fiscal-address-pricing__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.5fr);
+  gap: clamp(60px, 9vw, 130px);
+  align-items: end;
+  margin-bottom: 54px;
+}
+
+.fiscal-address-pricing__heading h2 {
+  max-width: 780px;
+  margin: 15px 0 0;
+  font-size: clamp(2.8rem, 4.8vw, 4.7rem);
+  line-height: 1;
+}
+
+.fiscal-address-pricing__heading > p {
+  margin: 0;
+  color: var(--preview-muted);
+  line-height: 1.7;
+}
+
+.fiscal-pricing-groups {
+  display: grid;
+  gap: 34px;
+}
+
+.fiscal-pricing-group {
+  padding: clamp(28px, 4vw, 48px);
+  border: 1px solid var(--preview-line);
+  background: #fff;
+}
+
+.fiscal-pricing-group__heading {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.62fr) minmax(320px, 0.9fr);
+  gap: 8px 52px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.fiscal-pricing-group__heading > p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--preview-blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.fiscal-pricing-group__heading h3 {
+  margin: 0;
+  color: var(--preview-ink);
+  font-family: "Poppins", "DM Sans", sans-serif;
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.fiscal-pricing-group__heading > span {
+  color: var(--preview-muted);
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
+.fiscal-plan-grid {
+  display: grid;
+  margin-bottom: 28px;
+  border-top: 1px solid var(--preview-ink);
+  border-bottom: 1px solid var(--preview-line);
+}
+
+.fiscal-plan-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fiscal-plan-grid--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fiscal-plan {
+  position: relative;
+  min-height: 226px;
+  padding: 25px 24px;
+  border-right: 1px solid var(--preview-line);
+}
+
+.fiscal-plan:last-child {
+  border-right: 0;
+}
+
+.fiscal-plan--featured::before {
+  position: absolute;
+  top: -1px;
+  right: 20px;
+  width: 42px;
+  height: 3px;
+  background: var(--preview-gold);
+  content: "";
+}
+
+.fiscal-plan > span {
+  display: block;
+  color: var(--preview-blue);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fiscal-plan strong {
+  display: inline-block;
+  margin-top: 32px;
+  color: var(--preview-ink);
+  font-family: "Poppins", "DM Sans", sans-serif;
+  font-size: clamp(2.1rem, 3vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.fiscal-plan small {
+  margin-left: 5px;
+  color: var(--preview-muted);
+  font-size: 0.72rem;
+}
+
+.fiscal-plan p,
+.fiscal-plan em {
+  display: block;
+  margin: 20px 0 0;
+  color: var(--preview-ink);
+  font-size: 0.82rem;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.fiscal-plan em {
+  margin-top: 5px;
+  color: var(--preview-muted);
+  font-size: 0.72rem;
+}
+
+.fiscal-pricing-group > .preview-button {
+  width: fit-content;
+}
+
+.fiscal-pricing-note {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 24px;
+  margin-top: 32px;
+  padding: 22px 0 0 24px;
+  border-top: 1px solid var(--preview-line);
+  border-left: 2px solid var(--preview-gold);
+}
+
+.fiscal-pricing-note strong {
+  color: var(--preview-ink);
+}
+
+.fiscal-pricing-note p {
+  margin: 0;
+  color: var(--preview-muted);
+  font-size: 0.83rem;
+  line-height: 1.65;
+}
+
+.fiscal-address-process {
+  background: var(--fiscal-dark);
+  color: #fff;
+}
+
+.fiscal-address-process .preview-kicker,
+.fiscal-address-final .preview-kicker {
+  color: #dfbb60;
+}
+
+.fiscal-address-process__heading h2 {
+  color: #fff;
+}
+
+.fiscal-address-process__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.fiscal-address-process__steps article {
+  min-height: 250px;
+  padding: 28px 28px 28px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.fiscal-address-process__steps article + article {
+  padding-left: 28px;
+}
+
+.fiscal-address-process__steps article:last-child {
+  border-right: 0;
+}
+
+.fiscal-address-process__steps h3 {
+  margin: 52px 0 14px;
+  color: #fff;
+  font-size: 1.18rem;
+}
+
+.fiscal-address-process__steps p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.fiscal-address-faq {
+  background: #fff;
+}
+
+.fiscal-address-faq__grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.55fr) minmax(0, 1fr);
+  gap: clamp(60px, 10vw, 145px);
+}
+
+.fiscal-address-faq h2 {
+  margin: 16px 0 0;
+  font-size: clamp(2.8rem, 4.6vw, 4.4rem);
+  line-height: 1;
+}
+
+.fiscal-address-faq details {
+  border-top: 1px solid var(--preview-line);
+}
+
+.fiscal-address-faq details:last-child {
+  border-bottom: 1px solid var(--preview-line);
+}
+
+.fiscal-address-faq summary {
+  position: relative;
+  padding: 26px 48px 26px 0;
+  color: var(--preview-ink);
+  font-family: "Poppins", "DM Sans", sans-serif;
+  font-size: 1.28rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.fiscal-address-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.fiscal-address-faq summary::after {
+  position: absolute;
+  right: 4px;
+  color: var(--preview-gold);
+  content: "+";
+  font-family: "DM Sans", sans-serif;
+}
+
+.fiscal-address-faq details[open] summary::after {
+  content: "−";
+}
+
+.fiscal-address-faq details p {
+  max-width: 780px !important;
+  margin: -3px 0 0;
+  padding: 0 0 28px;
+  color: var(--preview-muted);
+  line-height: 1.7;
+}
+
+.fiscal-address-final {
+  padding: 100px 0;
+  background: var(--preview-blue);
+  color: #fff;
+}
+
+.fiscal-address-final__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.52fr);
+  gap: clamp(60px, 10vw, 140px);
+  align-items: end;
+}
+
+.fiscal-address-final h2 {
+  max-width: 760px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  line-height: 0.98;
+}
+
+.fiscal-address-final__grid > div:last-child > p {
+  margin: 0 0 28px;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.7;
+}
+
+@media (max-width: 1050px) {
+  .fiscal-address-hero__grid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .fiscal-address-intro__layout {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .fiscal-address-intro__heading h2 {
+    max-width: 720px;
+  }
+
+  .fiscal-address-process__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fiscal-address-process__steps article:nth-child(2) {
+    border-right: 0;
+  }
+
+  .fiscal-address-process__steps article:nth-child(n + 3) {
+    border-top: 1px solid var(--preview-line);
+  }
+
+  .fiscal-plan-grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fiscal-plan-grid--4 .fiscal-plan:nth-child(2) {
+    border-right: 0;
+  }
+
+  .fiscal-plan-grid--4 .fiscal-plan:nth-child(n + 3) {
+    border-top: 1px solid var(--preview-line);
+  }
+}
+
+@media (max-width: 700px) {
+  .fiscal-address-hero {
+    min-height: 0;
+    background:
+      linear-gradient(180deg, rgba(247, 245, 240, 0.76), var(--preview-ivory) 52%),
+      url("/preview-home-ledger.png") 68% top / auto 450px no-repeat;
+  }
+
+  .fiscal-address-hero__grid {
+    min-height: 0;
+    padding-block: 52px 70px;
+  }
+
+  .fiscal-address-breadcrumb {
+    margin-bottom: 40px;
+  }
+
+  .fiscal-address-hero h1 {
+    font-size: clamp(2.75rem, 13vw, 4rem);
+  }
+
+  .fiscal-address-intro,
+  .fiscal-address-pricing,
+  .fiscal-address-process,
+  .fiscal-address-faq {
+    padding: 76px 0;
+  }
+
+  .fiscal-address-intro__heading,
+  .fiscal-address-intro__layout,
+  .fiscal-address-pricing__heading,
+  .fiscal-address-process__heading,
+  .fiscal-address-faq__grid,
+  .fiscal-address-final__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .fiscal-address-use-grid,
+  .fiscal-address-process__steps,
+  .fiscal-plan-grid--3,
+  .fiscal-plan-grid--4,
+  .fiscal-pricing-group__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .fiscal-address-use-grid article,
+  .fiscal-address-use-grid article + article {
+    min-height: 0;
+    padding: 23px 22px 22px;
+  }
+
+  .fiscal-address-process__steps article,
+  .fiscal-address-process__steps article + article {
+    min-height: 0;
+    padding: 23px 22px 22px;
+    border-right: 0;
+  }
+
+  .fiscal-address-use-grid h3 {
+    margin-top: 22px;
+  }
+
+  .fiscal-address-process__steps h3 {
+    margin-top: 30px;
+  }
+
+  .fiscal-pricing-group {
+    padding: 26px 18px;
+  }
+
+  .fiscal-plan,
+  .fiscal-plan-grid--4 .fiscal-plan:nth-child(n + 3) {
+    min-height: 0;
+    padding: 22px 4px 26px;
+    border-top: 1px solid var(--preview-line);
+    border-right: 0;
+  }
+
+  .fiscal-plan strong {
+    margin-top: 22px;
+  }
+
+  .fiscal-pricing-note {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .fiscal-address-final {
+    padding: 82px 0;
+  }
+}

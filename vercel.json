@@ -1,4 +1,87 @@
 {
+  "headers": [
+    {
+      "source": "/preview/nova-home",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview/nova-home/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview/blog-psicologia-v2",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview/blog-psicologia-v2/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview/clinica-estetica",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/preview/clinica-estetica/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/area-do-cliente(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/area-da-equipe(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/solicitar-acesso(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/orientacao/abertura-cnpj-psicologia",
@@ -13,24 +96,112 @@
   ],
   "rewrites": [
     {
-      "source": "/credito-com-garantia/preview",
-      "destination": "/personal-banking-luiz-marcio.html"
+      "source": "/preview/clinica-estetica",
+      "destination": "/preview/clinica-estetica/index.html"
     },
     {
-      "source": "/credito-com-garantia/preview/",
-      "destination": "/personal-banking-luiz-marcio.html"
+      "source": "/preview/clinica-estetica/",
+      "destination": "/preview/clinica-estetica/index.html"
+    },
+    {
+      "source": "/preview/blog-psicologia-v2",
+      "destination": "/preview/blog-psicologia-v2/index.html"
+    },
+    {
+      "source": "/preview/blog-psicologia-v2/",
+      "destination": "/preview/blog-psicologia-v2/index.html"
+    },
+    {
+      "source": "/preview/nova-home",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/preview/nova-home/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/politica-de-privacidade",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/politica-de-privacidade/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/area-do-cliente",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/area-do-cliente/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/area-da-equipe",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/area-da-equipe/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solicitar-acesso",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solicitar-acesso/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-santarem",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-santarem/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contabilidade-em-santarem(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/abrir-empresa-em-santarem(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-para-prestadores-de-servicos(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-para-ecommerce(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-com-inscricao-estadual-para(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solucoes/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solucoes/:slug/",
+      "destination": "/index.html"
     },
     {
       "source": "/api/calculadora-psicologia",
       "destination": "https://api.ogestordolucro.site/nacionalcon-calculator/v1/psychology-simulate"
     },
     {
+      "source": "/api/calculadora-estetica",
+      "destination": "https://api.ogestordolucro.site/nacionalcon-calculator/v1/aesthetics-simulate"
+    },
+    {
       "source": "/blog/cnpj-para-psicologos",
-      "destination": "/orientacao/abertura-cnpj-psicologia/index.html"
+      "destination": "/preview/blog-psicologia-v2/index.html"
     },
     {
       "source": "/blog/cnpj-para-psicologos/",
-      "destination": "/orientacao/abertura-cnpj-psicologia/index.html"
+      "destination": "/preview/blog-psicologia-v2/index.html"
     },
     {
       "source": "/dashboard-setores/modelo-2",

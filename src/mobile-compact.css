@@ -1,0 +1,216 @@
+@media (max-width: 700px) {
+  body { font-size: 15px; }
+  p { font-size: 0.94rem; line-height: 1.58; }
+
+  .preview-header__inner { min-height: 70px; }
+  .preview-brand { width: 168px; }
+
+  .preview-section,
+  .solution-section,
+  .fiscal-address-intro,
+  .fiscal-address-pricing,
+  .fiscal-address-process,
+  .fiscal-address-faq { padding: 54px 0; }
+
+  .preview-hero__copy {
+    min-height: 510px;
+    padding: 34px 0 70px;
+  }
+
+  .preview-hero__desktop-line { display: none !important; }
+  .preview-hero__mobile-title { display: block !important; }
+  .preview-gold-rule { margin: 17px 0 18px; }
+  .preview-hero__lead { font-size: 0.94rem; line-height: 1.5; }
+  .preview-hero .preview-actions { margin-top: 18px; }
+  .preview-hero .preview-button--text { display: none; }
+
+  .preview-hero h1,
+  .solution-hero h1,
+  .fiscal-address-hero h1,
+  .editorial-blog-hero h1,
+  .editorial-article-hero h1,
+  .access-hero h1,
+  .access-request-hero h1,
+  .privacy-hero h1 {
+    font-size: clamp(2.15rem, 9.5vw, 2.85rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+
+  .solution-hero h1,
+  .fiscal-address-hero h1,
+  .editorial-blog-hero h1,
+  .editorial-article-hero h1,
+  .access-hero h1,
+  .access-request-hero h1 {
+    font-size: clamp(2rem, 8.8vw, 2.65rem);
+  }
+
+  .preview-heading h2,
+  .preview-about h2,
+  .preview-final h2,
+  .solution-section__heading h2,
+  .solution-address-bridge h2,
+  .solution-final h2,
+  .fiscal-address-intro__heading h2,
+  .fiscal-address-pricing__heading h2,
+  .fiscal-address-process__heading h2,
+  .fiscal-address-faq h2,
+  .fiscal-address-final h2,
+  .editorial-featured h2,
+  .editorial-library__heading h2,
+  .editorial-related__heading h2,
+  .editorial-blog-final h2,
+  .editorial-article-cta h2 {
+    font-size: clamp(1.8rem, 8vw, 2.35rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .preview-heading,
+  .solution-section__heading,
+  .fiscal-address-intro__heading,
+  .fiscal-address-pricing__heading,
+  .fiscal-address-process__heading { margin-bottom: 28px; }
+
+  .preview-heading--split > p:last-child,
+  .preview-heading--light > p:last-child,
+  .preview-heading--situations > p,
+  .preview-heading--editorial > p:last-child,
+  .solution-section__heading > p,
+  .fiscal-address-pricing__heading > p:not(.preview-kicker),
+  .fiscal-address-process__heading > p:not(.preview-kicker) { display: none; }
+
+  .solution-hero__grid,
+  .fiscal-address-hero__grid {
+    gap: 20px;
+    padding-block: 36px 48px;
+  }
+
+  .solution-breadcrumb,
+  .fiscal-address-breadcrumb,
+  .editorial-breadcrumb { margin-bottom: 26px; }
+
+  .solution-hero__lead,
+  .fiscal-address-hero__lead {
+    margin-top: 18px;
+    font-size: 0.96rem;
+    line-height: 1.58;
+  }
+
+  .solution-hero__aside { display: none; }
+
+  .solution-signal-list article,
+  .solution-signal-list article:nth-child(even) {
+    grid-template-columns: 34px 1fr;
+    gap: 10px;
+    padding: 16px 0;
+  }
+
+  .solution-signal-list span { font-size: 0.98rem; }
+  .solution-signal-list p { font-size: 0.94rem; line-height: 1.5; }
+  .solution-address-bridge { padding: 48px 0; }
+  .solution-final,
+  .fiscal-address-final { padding: 56px 0; }
+
+  .solution-faq summary,
+  .fiscal-address-faq summary {
+    padding-block: 18px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .solution-faq details p,
+  .fiscal-address-faq details p {
+    padding-bottom: 20px;
+    font-size: 0.91rem;
+    line-height: 1.58;
+  }
+
+  .search-related { padding: 52px 0; }
+  .search-related__grid a,
+  .search-related__grid a + a { padding: 18px 0; }
+  .search-related__grid span { font-size: 1.05rem; }
+  .search-related__grid p {
+    display: -webkit-box;
+    margin: 8px 0 14px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 0.9rem;
+  }
+
+  .preview-situation { padding: 18px 0; }
+  .preview-situation p { display: none; }
+  .preview-method__item,
+  .preview-method__item + .preview-method__item { padding: 18px 0 20px; }
+  .preview-method__item h3 { margin: 18px 0 8px; }
+  .preview-method__item p { font-size: 0.9rem; line-height: 1.5; }
+  .preview-diagnostic { min-height: 0; padding: 20px; }
+  .preview-diagnostic h3 { margin-top: 24px; }
+  .preview-diagnostic p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .preview-content__list p { display: none; }
+  .preview-about__content p:nth-of-type(n + 3) { display: none; }
+  .preview-final { padding: 58px 0 76px; }
+
+  .fiscal-address-process__steps article,
+  .fiscal-address-process__steps article + article { padding: 18px 0 20px; }
+  .fiscal-address-process__steps h3 { margin-top: 18px; }
+  .fiscal-address-intro__heading { margin-bottom: 0; }
+  .fiscal-address-use-grid article,
+  .fiscal-address-use-grid article + article {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 6px 14px;
+    align-items: start;
+    padding: 18px;
+  }
+  .fiscal-address-use-grid article span { grid-row: 1 / span 2; }
+  .fiscal-address-use-grid h3 { margin: 1px 0 4px; }
+  .fiscal-address-use-grid article p {
+    display: block;
+    grid-column: 2;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .fiscal-pricing-group { padding: 20px 15px; }
+  .fiscal-plan,
+  .fiscal-plan-grid--4 .fiscal-plan:nth-child(n + 3) { padding: 16px 2px 18px; }
+  .fiscal-plan strong { margin-top: 12px; }
+
+  .editorial-blog-hero,
+  .editorial-article-hero { padding: 44px 0 48px; }
+  .editorial-featured,
+  .editorial-library,
+  .editorial-related,
+  .editorial-blog-final,
+  .editorial-article-cta { padding: 52px 0; }
+  .editorial-blog-hero__grid,
+  .editorial-featured__grid { gap: 26px; }
+  .editorial-featured__mark { min-height: 180px; }
+  .editorial-card { min-height: 0; padding: 20px 18px; }
+  .editorial-card__number { margin-bottom: 18px; }
+  .editorial-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  .editorial-article-layout { padding-top: 44px; padding-bottom: 58px; }
+  .editorial-article-index { margin-bottom: 34px; }
+  .editorial-article-body p { font-size: 0.96rem; line-height: 1.68; }
+
+  .access-page { padding: 44px 0 64px; }
+  .access-request-page { padding: 42px 0 62px; }
+  .access-card,
+  .access-request-card { padding: 20px 17px; }
+  .access-trust { display: none; }
+
+  .privacy-hero { padding: 48px 0 44px; }
+  .privacy-content { padding: 50px 0 66px; }
+}
