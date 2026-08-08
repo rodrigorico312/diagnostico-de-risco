@@ -14,7 +14,7 @@
   overflow-x: hidden;
   background: var(--home-paper);
   color: var(--home-text);
-  font-family: "DM Sans", sans-serif;
+  font-family: "Inter", "DM Sans", sans-serif;
 }
 
 .approved-home *,
@@ -175,11 +175,11 @@
   max-width: 720px;
   margin: 20px 0 0;
   color: var(--home-navy-deep);
-  font-family: "Poppins", sans-serif;
-  font-size: clamp(3.3rem, 5.9vw, 5.65rem);
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: clamp(3.15rem, 5.35vw, 5.15rem);
   font-weight: 700;
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  letter-spacing: -0.047em;
+  line-height: 1.01;
 }
 
 .approved-home-hero h1 span {
@@ -375,7 +375,7 @@
 .approved-home-final h2 {
   margin: 0;
   color: var(--home-navy-deep);
-  font-family: "Poppins", sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-size: clamp(2.25rem, 4.2vw, 4rem);
   font-weight: 700;
   letter-spacing: -0.045em;
@@ -442,7 +442,7 @@
   max-width: 420px;
   margin: 23px 0 0;
   color: var(--home-navy);
-  font-family: "Poppins", sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-size: clamp(1.35rem, 2.2vw, 1.72rem);
   letter-spacing: -0.025em;
   line-height: 1.12;
@@ -559,7 +559,7 @@
 .approved-home-process h3 {
   margin: 40px 0 0;
   color: #fff;
-  font-family: "Poppins", sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-size: 1.25rem;
 }
 
@@ -833,7 +833,7 @@
   }
 
   .approved-home-hero h1 {
-    font-size: clamp(2.75rem, 12.7vw, 4.25rem);
+    font-size: clamp(2.65rem, 10.8vw, 3.7rem);
   }
 
   .approved-home-portrait {
@@ -935,8 +935,8 @@
 
   .approved-home-hero h1 {
     margin-top: 15px;
-    font-size: clamp(2.45rem, 12.4vw, 3.3rem);
-    line-height: 1;
+    font-size: clamp(2.4rem, 10.7vw, 3rem);
+    line-height: 1.03;
   }
 
   .approved-home-hero__lead {
