@@ -1757,28 +1757,9 @@ p {
   margin-top: clamp(50px, 7vh, 86px);
 }
 
-.switch-kicker {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  color: #e4c77f;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
-
-.switch-kicker::before {
-  width: 30px;
-  height: 1px;
-  background: #d2aa51;
-  content: "";
-}
-
 .switch-copy h1 {
   max-width: 560px;
-  margin-top: 18px;
+  margin-top: 0;
   color: #ffffff;
   font-size: clamp(2.35rem, 4.5vw, 4.6rem);
   font-weight: 750;
@@ -2146,7 +2127,7 @@ p {
   }
 
   .switch-copy h1 {
-    margin-top: 13px;
+    margin-top: 0;
     font-size: clamp(2.15rem, 11.2vw, 3.05rem);
   }
 

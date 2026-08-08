@@ -1776,7 +1776,6 @@ function SwitchAccountantPage() {
           </a>
 
           <div className="switch-copy">
-            <p className="switch-kicker">Troca de contador</p>
             <h1 id="troca-contador-title">
               Troque de contador sem parar a rotina da sua empresa.
             </h1>
