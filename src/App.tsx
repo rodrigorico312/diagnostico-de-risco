@@ -1680,10 +1680,12 @@ function SwitchAccountantPage() {
   const [form, setForm] = useState<SwitchAccountantFormData>(
     initialSwitchAccountantForm,
   );
+  const [currentStep, setCurrentStep] = useState(1);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [stepError, setStepError] = useState("");
 
   useEffect(() => {
     document.title = "Trocar de contador | Nacional Contabilidade";
@@ -1694,10 +1696,44 @@ function SwitchAccountantPage() {
     value: string,
   ) => {
     setForm((current) => ({ ...current, [field]: value }));
+    setStepError("");
+  };
+
+  const goToNextStep = () => {
+    const firstStepIsValid =
+      form.nome.trim() &&
+      form.whatsapp.replace(/\D/g, "").length >= 10 &&
+      form.cidade.trim();
+    const secondStepIsValid =
+      form.regime && form.segmento && form.faturamento && form.pendencias;
+
+    if (currentStep === 1 && !firstStepIsValid) {
+      setStepError("Preencha nome, WhatsApp e cidade para continuar.");
+      return;
+    }
+
+    if (currentStep === 2 && !secondStepIsValid) {
+      setStepError("Selecione todas as informações desta etapa.");
+      return;
+    }
+
+    setStepError("");
+    setCurrentStep((step) => Math.min(step + 1, 3));
+  };
+
+  const goToPreviousStep = () => {
+    setStepError("");
+    setCurrentStep((step) => Math.max(step - 1, 1));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (currentStep < 3) {
+      goToNextStep();
+      return;
+    }
+
     setSubmitStatus("sending");
     setErrorMessage("");
 
@@ -1720,6 +1756,7 @@ function SwitchAccountantPage() {
 
       setSubmitStatus("success");
       setForm(initialSwitchAccountantForm);
+      setCurrentStep(3);
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(
@@ -1731,221 +1768,177 @@ function SwitchAccountantPage() {
   };
 
   return (
-    <main className="lead-page">
-      <section className="lead-shell" aria-labelledby="troca-contador-title">
-        <a className="lead-logo" href="/links" aria-label="Voltar para os links da Nacional">
-          <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-        </a>
+    <main className="lead-page lead-page--switch">
+      <section className="switch-layout" aria-labelledby="troca-contador-title">
+        <div className="switch-intro">
+          <a className="switch-logo" href="/links" aria-label="Voltar para os links da Nacional">
+            <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
+          </a>
 
-        <div className="lead-heading">
-          <p className="lead-kicker">Troca de contador</p>
-          <h1 id="troca-contador-title">
-            Quer trocar de contador sem bagunçar a empresa?
-          </h1>
-          <p>
-            Preencha as informações principais. Nossa equipe analisa sua
-            situação e entra em contato para entender o melhor caminho.
-          </p>
+          <div className="switch-copy">
+            <p className="switch-kicker">Troca de contador</p>
+            <h1 id="troca-contador-title">
+              Troque de contador sem parar a rotina da sua empresa.
+            </h1>
+            <p className="switch-summary">
+              Conte o que está acontecendo. A Nacional analisa documentos,
+              acessos e possíveis pendências para orientar uma transição organizada.
+            </p>
+          </div>
+
+          <ul className="switch-assurances" aria-label="Diferenciais do atendimento">
+            <li><span aria-hidden="true">✓</span> Atendimento humano</li>
+            <li><span aria-hidden="true">✓</span> Pará e todo o Brasil</li>
+            <li><span aria-hidden="true">✓</span> Análise inicial sem compromisso</li>
+          </ul>
+
+          <div className="switch-how">
+            <p>Como funciona</p>
+            <ol>
+              <li><span>1</span> Você conta a situação</li>
+              <li><span>2</span> Nossa equipe analisa</li>
+              <li><span>3</span> Falamos com você no WhatsApp</li>
+            </ol>
+          </div>
         </div>
 
-        <form className="lead-form" onSubmit={handleSubmit}>
-          <div className="form-grid">
-            <label>
-              <span>Seu nome</span>
-              <input
-                required
-                autoComplete="name"
-                type="text"
-                value={form.nome}
-                onChange={(event) => updateField("nome", event.target.value)}
-                placeholder="Nome completo"
-              />
-            </label>
+        <div className="switch-form-column">
+          <form className="lead-form switch-form" onSubmit={handleSubmit}>
+            <div className="switch-form-header">
+              <div>
+                <p>Etapa {currentStep} de 3</p>
+                <h2>
+                  {currentStep === 1 && "Vamos começar por você"}
+                  {currentStep === 2 && "Agora, sobre a empresa"}
+                  {currentStep === 3 && "O que motivou a troca?"}
+                </h2>
+              </div>
+              <span className="switch-time">Leva 2 minutos</span>
+            </div>
 
-            <label>
-              <span>WhatsApp</span>
-              <input
-                required
-                autoComplete="tel-national"
-                inputMode="numeric"
-                pattern="[\d\s()+-]{14,15}"
-                type="tel"
-                value={form.whatsapp}
-                onChange={(event) =>
-                  updateField("whatsapp", formatBrazilPhone(event.target.value))
-                }
-                placeholder="(93) 99210-1980"
-              />
-            </label>
-
-            <label>
-              <span>Cidade/UF</span>
-              <input
-                required
-                autoComplete="address-level2"
-                type="text"
-                value={form.cidade}
-                onChange={(event) => updateField("cidade", event.target.value)}
-                placeholder="Ex: Santarém/PA"
-              />
-            </label>
-
-            <label>
-              <span>Nome da empresa</span>
-              <input
-                type="text"
-                value={form.empresa}
-                onChange={(event) => updateField("empresa", event.target.value)}
-                placeholder="Opcional"
-              />
-            </label>
-
-            <label>
-              <span>Regime tributário</span>
-              <select
-                required
-                value={form.regime}
-                onChange={(event) => updateField("regime", event.target.value)}
-              >
-                <option value="">Selecione</option>
-                {taxRegimeOptions.map((option) => (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              <span>Segmento da empresa</span>
-              <select
-                required
-                value={form.segmento}
-                onChange={(event) =>
-                  updateField("segmento", event.target.value)
-                }
-              >
-                <option value="">Selecione</option>
-                {segmentOptions.map((option) => (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              <span>Faturamento aproximado</span>
-              <select
-                required
-                value={form.faturamento}
-                onChange={(event) =>
-                  updateField("faturamento", event.target.value)
-                }
-              >
-                <option value="">Selecione</option>
-                {revenueOptions.map((option) => (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              <span>Tem pendência fiscal?</span>
-              <select
-                required
-                value={form.pendencias}
-                onChange={(event) =>
-                  updateField("pendencias", event.target.value)
-                }
-              >
-                <option value="">Selecione</option>
-                {pendingOptions.map((option) => (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-
-          <label>
-            <span>Principal motivo da troca</span>
-            <select
-              required
-              value={form.motivo}
-              onChange={(event) => updateField("motivo", event.target.value)}
-            >
-              <option value="">Selecione</option>
-              {switchReasonOptions.map((option) => (
-                <option value={option} key={option}>
-                  {option}
-                </option>
+            <div className="switch-progress" aria-label={`Etapa ${currentStep} de 3`}>
+              {[1, 2, 3].map((step) => (
+                <span className={step <= currentStep ? "is-active" : ""} key={step} />
               ))}
-            </select>
-          </label>
+            </div>
 
-          <label>
-            <span>Quer explicar algo?</span>
-            <textarea
-              value={form.observacao}
-              onChange={(event) =>
-                updateField("observacao", event.target.value)
-              }
-              placeholder="Conte rapidamente o que está acontecendo. Opcional."
-              rows={4}
-            />
-          </label>
+            {submitStatus === "success" ? (
+              <div className="switch-success" role="status">
+                <span aria-hidden="true">✓</span>
+                <h3>Informações recebidas.</h3>
+                <p>
+                  A equipe da Nacional vai analisar sua situação e entrar em
+                  contato pelo WhatsApp informado.
+                </p>
+                <a className="button button--secondary" href={whatsappUrl} target="_blank" rel="noreferrer">
+                  Falar agora no WhatsApp
+                </a>
+              </div>
+            ) : (
+              <>
+                {currentStep === 1 && (
+                  <div className="form-grid switch-fields">
+                    <label>
+                      <span>Seu nome</span>
+                      <input autoFocus autoComplete="name" type="text" value={form.nome} onChange={(event) => updateField("nome", event.target.value)} placeholder="Nome completo" />
+                    </label>
+                    <label>
+                      <span>WhatsApp</span>
+                      <input autoComplete="tel-national" inputMode="numeric" type="tel" value={form.whatsapp} onChange={(event) => updateField("whatsapp", formatBrazilPhone(event.target.value))} placeholder="(93) 99210-1980" />
+                    </label>
+                    <label>
+                      <span>Cidade/UF</span>
+                      <input autoComplete="address-level2" type="text" value={form.cidade} onChange={(event) => updateField("cidade", event.target.value)} placeholder="Ex: Santarém/PA" />
+                    </label>
+                    <label>
+                      <span>Nome da empresa</span>
+                      <input type="text" value={form.empresa} onChange={(event) => updateField("empresa", event.target.value)} placeholder="Opcional" />
+                    </label>
+                  </div>
+                )}
 
-          <label className="form-honeypot">
-            <span>Site</span>
-            <input
-              tabIndex={-1}
-              autoComplete="off"
-              type="text"
-              value={form.website}
-              onChange={(event) => updateField("website", event.target.value)}
-            />
-          </label>
+                {currentStep === 2 && (
+                  <div className="form-grid switch-fields">
+                    <label>
+                      <span>Regime tributário</span>
+                      <select autoFocus value={form.regime} onChange={(event) => updateField("regime", event.target.value)}>
+                        <option value="">Selecione</option>
+                        {taxRegimeOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+                      </select>
+                    </label>
+                    <label>
+                      <span>Segmento da empresa</span>
+                      <select value={form.segmento} onChange={(event) => updateField("segmento", event.target.value)}>
+                        <option value="">Selecione</option>
+                        {segmentOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+                      </select>
+                    </label>
+                    <label>
+                      <span>Faturamento aproximado</span>
+                      <select value={form.faturamento} onChange={(event) => updateField("faturamento", event.target.value)}>
+                        <option value="">Selecione</option>
+                        {revenueOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+                      </select>
+                    </label>
+                    <label>
+                      <span>Tem pendência fiscal?</span>
+                      <select value={form.pendencias} onChange={(event) => updateField("pendencias", event.target.value)}>
+                        <option value="">Selecione</option>
+                        {pendingOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+                      </select>
+                    </label>
+                  </div>
+                )}
 
-          {submitStatus === "success" && (
-            <p className="form-alert form-alert--success" role="status">
-              Recebemos suas informações. A Nacional Contabilidade vai entrar em
-              contato pelo WhatsApp informado.
-            </p>
-          )}
+                {currentStep === 3 && (
+                  <div className="switch-fields switch-fields--final">
+                    <label>
+                      <span>Principal motivo da troca</span>
+                      <select autoFocus required value={form.motivo} onChange={(event) => updateField("motivo", event.target.value)}>
+                        <option value="">Selecione</option>
+                        {switchReasonOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+                      </select>
+                    </label>
+                    <label>
+                      <span>Quer explicar algo?</span>
+                      <textarea value={form.observacao} onChange={(event) => updateField("observacao", event.target.value)} placeholder="Conte rapidamente o que está acontecendo. Opcional." rows={4} />
+                    </label>
+                  </div>
+                )}
 
-          {submitStatus === "error" && (
-            <p className="form-alert form-alert--error" role="alert">
-              {errorMessage} Se preferir, fale direto pelo WhatsApp.
-            </p>
-          )}
+                <label className="form-honeypot">
+                  <span>Site</span>
+                  <input tabIndex={-1} autoComplete="off" type="text" value={form.website} onChange={(event) => updateField("website", event.target.value)} />
+                </label>
 
-          <div className="lead-actions">
-            <button
-              className="button"
-              type="submit"
-              disabled={submitStatus === "sending"}
-            >
-              {submitStatus === "sending" ? "Enviando..." : "Enviar análise"}
-            </button>
-            <a
-              className="button button--secondary"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Falar no WhatsApp
-            </a>
-          </div>
-        </form>
+                {stepError && <p className="form-alert form-alert--error" role="alert">{stepError}</p>}
+                {submitStatus === "error" && (
+                  <p className="form-alert form-alert--error" role="alert">
+                    {errorMessage} Se preferir, fale direto pelo WhatsApp.
+                  </p>
+                )}
 
-        <p className="lead-note">
-          Seus dados serão usados apenas para contato e avaliação inicial da
-          troca de contador.
-        </p>
+                <div className="switch-form-actions">
+                  {currentStep > 1 && <button className="switch-back" type="button" onClick={goToPreviousStep}>Voltar</button>}
+                  {currentStep < 3 ? (
+                    <button className="button switch-next" type="button" onClick={goToNextStep}>Continuar <span aria-hidden="true">→</span></button>
+                  ) : (
+                    <button className="button switch-next" type="submit" disabled={submitStatus === "sending"}>
+                      {submitStatus === "sending" ? "Enviando..." : "Enviar para análise"}
+                    </button>
+                  )}
+                </div>
+              </>
+            )}
+
+            <p className="switch-privacy">Seus dados serão usados apenas para esta análise e contato.</p>
+          </form>
+
+          <a className="switch-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
+            <span aria-hidden="true">◉</span>
+            Prefere conversar agora? <strong>Chame no WhatsApp</strong>
+          </a>
+        </div>
       </section>
     </main>
   );
