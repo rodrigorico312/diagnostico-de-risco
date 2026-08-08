@@ -13,6 +13,7 @@ import "./editorial-blog.css";
 import "./tools-editorial.css";
 import "./mobile-compact.css";
 import "./site-refinement.css";
+import "./links-page.css";
 
 const WHATSAPP_NUMBER = "5593992101980";
 const WHATSAPP_MESSAGE =
@@ -68,22 +69,19 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Trocar de contador",
     text: "Migração contábil, documentos, acessos e pendências",
-    href: "/trocar-contador",
+    href: "/solucoes/trocar-de-contador",
     kind: "switch",
   },
   {
     title: "Abrir, alterar ou baixar CNPJ",
     text: "Constituição, alteração contratual, regularização e baixa",
-    href: buildWhatsappUrl(
-      "Olá, vim pelo link e quero falar sobre abertura, alteração ou baixa de CNPJ.",
-    ),
+    href: "/solucoes/abrir-ou-regularizar-empresa",
     kind: "company",
-    external: true,
   },
   {
     title: "Contabilidade para empresas",
     text: "Impostos, obrigações, notas e rotina fiscal",
-    href: "/contabilidade-empresas",
+    href: "/solucoes/organizar-numeros-e-retiradas",
     kind: "accounting",
   },
   {
@@ -101,11 +99,8 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Planejamento tributário",
     text: "Análise de regime, operação, riscos e oportunidades",
-    href: buildWhatsappUrl(
-      "Olá, vim pelo link e quero falar sobre planejamento tributário.",
-    ),
+    href: "/solucoes/revisar-impostos-e-riscos",
     kind: "tax",
-    external: true,
   },
   {
     title: "Assessoria para contadores",
@@ -119,11 +114,8 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Endereço fiscal em Santarém",
     text: "Endereço fiscal para empresas que precisam de base local",
-    href: buildWhatsappUrl(
-      "Olá, vim pelo link e quero falar sobre endereço fiscal em Santarém.",
-    ),
+    href: "/endereco-fiscal-santarem",
     kind: "address",
-    external: true,
   },
   {
     title: "Correspondente empresarial",
@@ -137,7 +129,7 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Ver soluções",
     text: "Serviços contábeis, fiscais, tributários e financeiros",
-    href: "/#servicos",
+    href: "/#situacoes",
     kind: "solutions",
   },
   {
@@ -1685,61 +1677,98 @@ function LinksPage() {
     document.title = "Links | Nacional Contabilidade";
   }, []);
 
+  const featuredLink = linkTreeItems.find((item) => item.featured)!;
+  const serviceKinds = new Set<LinkKind>([
+    "switch",
+    "company",
+    "accounting",
+    "tax",
+    "address",
+    "correspondent",
+    "advisor",
+  ]);
+  const serviceLinks = linkTreeItems.filter((item) => serviceKinds.has(item.kind));
+  const quickLinks = linkTreeItems.filter(
+    (item) => !item.featured && !serviceKinds.has(item.kind),
+  );
+
+  const renderLink = (item: LinkItem, compact = false) => (
+    <a
+      className={`links-item${item.featured ? " links-item--featured" : ""}${compact ? " links-item--compact" : ""} links-item--${item.kind}`}
+      href={item.href}
+      key={item.title}
+      target={item.external ? "_blank" : undefined}
+      rel={item.external ? "noreferrer" : undefined}
+      aria-label={item.ariaLabel}
+    >
+      <span className="links-item__icon">
+        <LinkIcon kind={item.kind} />
+      </span>
+      <span className="links-item__text">
+        <strong>{item.title}</strong>
+        <small>{item.text}</small>
+      </span>
+      <span className="links-item__more" aria-hidden="true">→</span>
+    </a>
+  );
+
   return (
     <main className="links-page">
+      <div className="links-page__ledger" aria-hidden="true" />
       <section className="links-shell" aria-label="Links da Nacional Contabilidade">
-        <div className="links-profile">
-          <img
-            className="links-avatar"
-            src="/rodrigo-coelho.png"
-            alt="Rodrigo Coelho"
-          />
-          <h1>Rodrigo Coelho</h1>
-          <p className="links-profile__bio">
-            Contabilidade, regularização de CNPJ, endereço fiscal e apoio
-            empresarial.
-          </p>
-          <div className="links-flags" aria-label="Atendimento no Pará e em todo o Brasil">
-            <ParaFlag />
-            <BrazilFlag />
-            <span>Atendimento no Pará e em todo o Brasil</span>
-          </div>
+        <header className="links-header">
           <a className="links-logo" href="/" aria-label="Ir para o site da Nacional Contabilidade">
             <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
           </a>
-        </div>
+          <span>Contabilidade consultiva</span>
+        </header>
 
-        <div className="links-stack" aria-label="Links da Nacional Contabilidade">
-          {linkTreeItems.map((item) => (
-            <a
-              className={`links-item${item.featured ? " links-item--featured" : ""} links-item--${item.kind}`}
-              href={item.href}
-              key={item.title}
-              target={item.external ? "_blank" : undefined}
-              rel={item.external ? "noreferrer" : undefined}
-              aria-label={item.ariaLabel}
-            >
-              <span className="links-item__icon">
-                <LinkIcon kind={item.kind} />
-              </span>
-              <span className="links-item__text">
-                <strong>{item.title}</strong>
-                <small>{item.text}</small>
-              </span>
-              <span className="links-item__more" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="5" r="1.5" />
-                  <circle cx="12" cy="12" r="1.5" />
-                  <circle cx="12" cy="19" r="1.5" />
-                </svg>
-              </span>
-            </a>
-          ))}
-        </div>
+        <section className="links-profile">
+          <div className="links-profile__portrait">
+            <img className="links-avatar" src="/rodrigo-coelho.png" alt="Rodrigo Coelho" />
+            <span aria-hidden="true" />
+          </div>
+          <div className="links-profile__copy">
+            <p className="links-profile__eyebrow">Rodrigo Coelho • Contador</p>
+            <h1>Contabilidade para colocar decisões no lugar.</h1>
+            <p className="links-profile__bio">
+              Acesse os serviços, conteúdos e canais oficiais da Nacional Contabilidade.
+            </p>
+            <div className="links-flags" aria-label="Atendimento no Pará e em todo o Brasil">
+              <ParaFlag />
+              <BrazilFlag />
+              <span>Atendimento online no Pará e em todo o Brasil</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="links-primary" aria-label="Contato principal">
+          {renderLink(featuredLink)}
+        </section>
+
+        <section className="links-section" aria-labelledby="links-services-title">
+          <div className="links-section__heading">
+            <p>Como a Nacional pode ajudar</p>
+            <h2 id="links-services-title">Escolha o assunto da sua empresa.</h2>
+          </div>
+          <div className="links-stack links-stack--services">
+            {serviceLinks.map((item) => renderLink(item))}
+          </div>
+        </section>
+
+        <section className="links-section links-section--quick" aria-labelledby="links-quick-title">
+          <div className="links-section__heading">
+            <p>Outros caminhos</p>
+            <h2 id="links-quick-title">Informação e canais oficiais.</h2>
+          </div>
+          <div className="links-stack links-stack--quick">
+            {quickLinks.map((item) => renderLink(item, true))}
+          </div>
+        </section>
 
         <footer className="links-footer">
-          <p>{COMPANY_NAME}</p>
-          <p>CNPJ: {CNPJ}</p>
+          <a href="/">Nacional Contabilidade</a>
+          <p>{COMPANY_NAME} • CNPJ {CNPJ}</p>
         </footer>
       </section>
     </main>
