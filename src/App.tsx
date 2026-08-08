@@ -6,6 +6,7 @@ import AccessPortalPage from "./AccessPortalPage";
 import AccessRequestPage from "./AccessRequestPage";
 import FiscalAddressPage from "./FiscalAddressPage";
 import SearchLandingPage, { searchLandingPages } from "./SearchLandingPage";
+import ApprovedSwitchAccountantPage from "./ApprovedSwitchAccountantPage";
 import { usePageSeo } from "./usePageSeo";
 import { installLeadTracking } from "./analytics";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
@@ -2478,7 +2479,7 @@ export default function App() {
   }
 
   if (isSwitchAccountantPage) {
-    return <SwitchAccountantPage />;
+    return <ApprovedSwitchAccountantPage />;
   }
 
   if (isBusinessAccountingPage) {
