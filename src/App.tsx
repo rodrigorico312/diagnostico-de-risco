@@ -1498,63 +1498,176 @@ function ToolsPage() {
 }
 
 function LinksPage() {
+  const whatsappLink = linkTreeItems.find((item) => item.kind === "whatsapp")!;
+  const switchLink = linkTreeItems.find((item) => item.kind === "switch")!;
+  const featuredLinks = [
+    {
+      ...linkTreeItems.find((item) => item.kind === "company")!,
+      title: "Abrir ou regularizar CNPJ",
+    },
+    linkTreeItems.find((item) => item.kind === "accounting")!,
+    linkTreeItems.find((item) => item.kind === "tax")!,
+    linkTreeItems.find((item) => item.kind === "address")!,
+  ];
+  const moreLinks = [
+    linkTreeItems.find((item) => item.kind === "correspondent")!,
+    linkTreeItems.find((item) => item.kind === "advisor")!,
+    linkTreeItems.find((item) => item.kind === "solutions")!,
+  ];
+  const resourceLinks = [
+    linkTreeItems.find((item) => item.kind === "tools")!,
+    linkTreeItems.find((item) => item.kind === "blog")!,
+  ];
+  const footerLinks = [
+    linkTreeItems.find((item) => item.kind === "site")!,
+    linkTreeItems.find((item) => item.kind === "instagram")!,
+    linkTreeItems.find((item) => item.kind === "email")!,
+  ];
+
   useEffect(() => {
-    document.title = "Links | Nacional Contabilidade";
+    document.title = "Rodrigo Coelho | Nacional Contabilidade";
   }, []);
 
   return (
     <main className="links-page">
       <section className="links-shell" aria-label="Links da Nacional Contabilidade">
-        <div className="links-profile">
-          <img
-            className="links-avatar"
-            src="/rodrigo-coelho.png"
-            alt="Rodrigo Coelho"
-          />
-          <h1>Rodrigo Coelho</h1>
-          <p className="links-profile__bio">
-            Contabilidade, regularização de CNPJ, endereço fiscal e apoio
-            empresarial.
-          </p>
-          <div className="links-flags" aria-label="Atendimento no Pará e em todo o Brasil">
-            <ParaFlag />
-            <BrazilFlag />
-            <span>Atendimento no Pará e em todo o Brasil</span>
-          </div>
+        <div className="links-arcs" aria-hidden="true" />
+
+        <header className="links-profile">
           <a className="links-logo" href="/" aria-label="Ir para o site da Nacional Contabilidade">
             <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
           </a>
-        </div>
 
-        <div className="links-stack" aria-label="Links da Nacional Contabilidade">
-          {linkTreeItems.map((item) => (
+          <div className="links-avatar-frame">
+            <img
+              className="links-avatar"
+              src="/rodrigo-coelho.png"
+              alt="Rodrigo Coelho"
+            />
+          </div>
+          <p className="links-kicker">Contabilidade estratégica</p>
+          <h1>Rodrigo Coelho</h1>
+          <p className="links-profile__bio">
+            Contabilidade para empresas que querem <strong>crescer com segurança.</strong>
+          </p>
+          <div className="links-location" aria-label="Atendimento no Pará e em todo o Brasil">
+            <LinkIcon kind="address" />
+            <span>Pará · Atendimento nacional</span>
+          </div>
+        </header>
+
+        <nav className="links-primary" aria-label="Atalhos principais">
+          {[whatsappLink, switchLink].map((item) => (
             <a
-              className={`links-item${item.featured ? " links-item--featured" : ""} links-item--${item.kind}`}
+              className={`links-primary__item links-primary__item--${item.kind}`}
               href={item.href}
               key={item.title}
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noreferrer" : undefined}
               aria-label={item.ariaLabel}
             >
-              <span className="links-item__icon">
+              <span className="links-primary__icon">
                 <LinkIcon kind={item.kind} />
               </span>
-              <span className="links-item__text">
+              <span className="links-primary__text">
                 <strong>{item.title}</strong>
-                <small>{item.text}</small>
-              </span>
-              <span className="links-item__more" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="5" r="1.5" />
-                  <circle cx="12" cy="12" r="1.5" />
-                  <circle cx="12" cy="19" r="1.5" />
-                </svg>
+                <small>
+                  {item.kind === "whatsapp" ? "Resposta rápida e direta" : "Migração fácil e segura"}
+                </small>
               </span>
             </a>
           ))}
-        </div>
+        </nav>
+
+        <section className="links-section" aria-labelledby="links-featured-title">
+          <div className="links-section__heading">
+            <span aria-hidden="true" />
+            <h2 id="links-featured-title">Soluções mais procuradas</h2>
+            <span aria-hidden="true" />
+          </div>
+
+          <div className="links-service-grid">
+            {featuredLinks.map((item) => (
+              <a
+                className="links-service-card"
+                href={item.href}
+                key={item.kind}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noreferrer" : undefined}
+              >
+                <span className="links-service-card__icon">
+                  <LinkIcon kind={item.kind} />
+                </span>
+                <strong>{item.title}</strong>
+                <span className="links-chevron" aria-hidden="true">›</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="links-section" aria-labelledby="links-more-title">
+          <div className="links-section__heading">
+            <span aria-hidden="true" />
+            <h2 id="links-more-title">Mais soluções</h2>
+            <span aria-hidden="true" />
+          </div>
+
+          <div className="links-compact-list">
+            {moreLinks.map((item) => (
+              <a
+                className="links-compact-card"
+                href={item.href}
+                key={item.kind}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noreferrer" : undefined}
+              >
+                <span className="links-compact-card__icon">
+                  <LinkIcon kind={item.kind} />
+                </span>
+                <span className="links-compact-card__text">
+                  <strong>{item.title}</strong>
+                  <small>{item.text}</small>
+                </span>
+                <span className="links-chevron" aria-hidden="true">›</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="links-section" aria-labelledby="links-resources-title">
+          <div className="links-section__heading">
+            <span aria-hidden="true" />
+            <h2 id="links-resources-title">Conteúdos e ferramentas</h2>
+            <span aria-hidden="true" />
+          </div>
+
+          <div className="links-resource-grid">
+            {resourceLinks.map((item) => (
+              <a className="links-resource-card" href={item.href} key={item.kind}>
+                <span className="links-service-card__icon">
+                  <LinkIcon kind={item.kind} />
+                </span>
+                <strong>{item.kind === "blog" ? "Blog" : item.title}</strong>
+                <span className="links-chevron" aria-hidden="true">›</span>
+              </a>
+            ))}
+          </div>
+        </section>
 
         <footer className="links-footer">
+          <nav className="links-footer__nav" aria-label="Outros canais da Nacional">
+            {footerLinks.map((item) => (
+              <a
+                href={item.href}
+                key={item.kind}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noreferrer" : undefined}
+              >
+                <LinkIcon kind={item.kind} />
+                <span>{item.kind === "email" ? "E-mail" : item.title}</span>
+              </a>
+            ))}
+          </nav>
           <p>{COMPANY_NAME}</p>
           <p>CNPJ: {CNPJ}</p>
         </footer>
