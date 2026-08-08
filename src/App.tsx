@@ -8,6 +8,7 @@ import FiscalAddressPage from "./FiscalAddressPage";
 import SearchLandingPage, { searchLandingPages } from "./SearchLandingPage";
 import ApprovedSwitchAccountantPage from "./ApprovedSwitchAccountantPage";
 import ApprovedLinksPage from "./ApprovedLinksPage";
+import ApprovedHomePage from "./ApprovedHomePage";
 import { usePageSeo } from "./usePageSeo";
 import { installLeadTracking } from "./analytics";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
@@ -2472,8 +2473,12 @@ export default function App() {
     );
   }
 
-  if (isOfficialHomePage || isPreviewHomePage) {
-    return <PreviewHomePage previewMode={isPreviewHomePage} />;
+  if (isOfficialHomePage) {
+    return <ApprovedHomePage />;
+  }
+
+  if (isPreviewHomePage) {
+    return <PreviewHomePage previewMode />;
   }
 
   if (isPrivacyPolicyPage) {
