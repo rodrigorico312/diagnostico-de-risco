@@ -13,6 +13,14 @@
   ],
   "rewrites": [
     {
+      "source": "/credito-com-garantia/preview",
+      "destination": "/personal-banking-luiz-marcio.html"
+    },
+    {
+      "source": "/credito-com-garantia/preview/",
+      "destination": "/personal-banking-luiz-marcio.html"
+    },
+    {
       "source": "/api/calculadora-psicologia",
       "destination": "https://api.ogestordolucro.site/nacionalcon-calculator/v1/psychology-simulate"
     },
