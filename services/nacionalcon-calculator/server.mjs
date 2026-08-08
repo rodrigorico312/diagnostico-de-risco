@@ -2,7 +2,7 @@ import http from "node:http";
 
 const PORT = Number(process.env.PORT || 3334);
 const HOST = process.env.HOST || "127.0.0.1";
-const VERSION = "2026.08.1";
+const VERSION = "2026.08.4";
 
 const PARAMETERS = Object.freeze({
   minimumWage: 1621,
@@ -19,6 +19,15 @@ const ANNEX_III = Object.freeze([
   { limit: 1_800_000, nominalRate: 0.16, deduction: 35_640 },
   { limit: 3_600_000, nominalRate: 0.21, deduction: 125_640 },
   { limit: 4_800_000, nominalRate: 0.33, deduction: 648_000 },
+]);
+
+const ANNEX_I = Object.freeze([
+  { limit: 180_000, nominalRate: 0.04, deduction: 0, icmsShare: 0.34 },
+  { limit: 360_000, nominalRate: 0.073, deduction: 5_940, icmsShare: 0.34 },
+  { limit: 720_000, nominalRate: 0.095, deduction: 13_860, icmsShare: 0.335 },
+  { limit: 1_800_000, nominalRate: 0.107, deduction: 22_500, icmsShare: 0.335 },
+  { limit: 3_600_000, nominalRate: 0.143, deduction: 87_300, icmsShare: 0.335 },
+  { limit: 4_800_000, nominalRate: 0.19, deduction: 378_000, icmsShare: 0 },
 ]);
 
 const ANNEX_V = Object.freeze([
@@ -67,7 +76,7 @@ export function calculateMonthlyServiceFee(monthlyRevenue) {
   return Math.ceil(fee / 10) * 10;
 }
 
-export function calculateSimulation(monthlyRevenue) {
+export function calculateSimulation(monthlyRevenue, collaboratorPayroll = 0) {
   const annualRevenue = monthlyRevenue * 12;
 
   if (annualRevenue > PARAMETERS.simplesAnnualLimit) {
@@ -79,8 +88,11 @@ export function calculateSimulation(monthlyRevenue) {
 
   const annexIII = calculateEffectiveRate(annualRevenue, ANNEX_III);
   const annexV = calculateEffectiveRate(annualRevenue, ANNEX_V);
-  const recommendedProLabore = Math.max(monthlyRevenue * PARAMETERS.factorRTarget, PARAMETERS.minimumWage);
-  const projectedFactorR = recommendedProLabore / monthlyRevenue;
+  const targetMonthlyPayroll = monthlyRevenue * PARAMETERS.factorRTarget;
+  const remainingPayrollForTarget = Math.max(0, targetMonthlyPayroll - collaboratorPayroll);
+  const recommendedProLabore = Math.max(remainingPayrollForTarget, PARAMETERS.minimumWage);
+  const totalEligiblePayroll = collaboratorPayroll + recommendedProLabore;
+  const projectedFactorR = totalEligiblePayroll / monthlyRevenue;
   const inssBase = Math.min(recommendedProLabore, PARAMETERS.inssCeiling);
   const inss = inssBase * PARAMETERS.inssRate;
   const dasAnnexIII = monthlyRevenue * annexIII.effectiveRate;
@@ -98,17 +110,24 @@ export function calculateSimulation(monthlyRevenue) {
     warnings.unshift("Neste faturamento, o pró-labore mínimo de referência supera a receita mensal e exige análise individual de viabilidade.");
   }
 
+  if (collaboratorPayroll > 0) {
+    warnings.push("A folha de colaboradores foi tratada como valor elegível já existente. Encargos e custos trabalhistas adicionais não foram somados à comparação.");
+  }
+
   return {
     version: VERSION,
     calculatedAt: new Date().toISOString(),
     input: {
       monthlyRevenue: roundMoney(monthlyRevenue),
       projectedAnnualRevenue: roundMoney(annualRevenue),
+      collaboratorPayroll: roundMoney(collaboratorPayroll),
     },
     factorR: {
       target: PARAMETERS.factorRTarget,
       projected: projectedFactorR,
       recommendedProLabore: roundMoney(recommendedProLabore),
+      targetMonthlyPayroll: roundMoney(targetMonthlyPayroll),
+      totalEligiblePayroll: roundMoney(totalEligiblePayroll),
     },
     taxes: {
       annexIII: {
@@ -133,6 +152,150 @@ export function calculateSimulation(monthlyRevenue) {
       monthlyServiceFee: roundMoney(monthlyServiceFee),
       estimatedMonthlyOutlay: roundMoney(totalWithFactorR + monthlyServiceFee),
       scopeNote: "Valor estimado para a operação descrita na página, sujeito à confirmação do volume de documentos, equipe e complexidade.",
+    },
+    warnings,
+  };
+}
+
+export function calculateAestheticsSimulation({
+  beautyServiceRevenue = 0,
+  healthServiceRevenue = 0,
+  productRevenue = 0,
+  productPurchases = 0,
+  collaboratorPayroll = 0,
+  state = "PA",
+  simplesCashBasis = false,
+}) {
+  const monthlyRevenue = beautyServiceRevenue + healthServiceRevenue + productRevenue;
+  const annualRevenue = monthlyRevenue * 12;
+
+  if (annualRevenue > PARAMETERS.simplesAnnualLimit) {
+    const error = new Error("O faturamento projetado ultrapassa o limite anual do Simples Nacional.");
+    error.statusCode = 422;
+    error.code = "OUTSIDE_SIMPLES_LIMIT";
+    throw error;
+  }
+
+  const annexI = calculateEffectiveRate(annualRevenue, ANNEX_I);
+  const annexIII = calculateEffectiveRate(annualRevenue, ANNEX_III);
+  const annexV = calculateEffectiveRate(annualRevenue, ANNEX_V);
+  const factorRApplies = healthServiceRevenue > 0;
+  const targetMonthlyPayroll = factorRApplies ? monthlyRevenue * PARAMETERS.factorRTarget : 0;
+  const payrollGap = factorRApplies ? Math.max(0, targetMonthlyPayroll - collaboratorPayroll) : 0;
+  const recommendedProLabore = !factorRApplies || payrollGap === 0 ? 0 : Math.max(payrollGap, PARAMETERS.minimumWage);
+  const totalEligiblePayroll = collaboratorPayroll + recommendedProLabore;
+  const projectedFactorR = factorRApplies && monthlyRevenue > 0 ? totalEligiblePayroll / monthlyRevenue : 0;
+  const inssBase = Math.min(recommendedProLabore, PARAMETERS.inssCeiling);
+  const inss = inssBase * PARAMETERS.inssRate;
+
+  const beautyDas = beautyServiceRevenue * annexIII.effectiveRate;
+  const productsDasBeforeBenefit = productRevenue * annexI.effectiveRate;
+  const annexIBracket = ANNEX_I[annexI.bracket - 1];
+  const icmsInsideProductsDas = productsDasBeforeBenefit * annexIBracket.icmsShare;
+  const projectedCommercialVolume12m = Math.max(productRevenue, productPurchases) * 12;
+  const icmsBenefitEligible = state === "PA"
+    && !simplesCashBasis
+    && productRevenue > 0
+    && projectedCommercialVolume12m <= 120_000
+    && annualRevenue <= 3_600_000;
+  const estimatedIcmsExemption = icmsBenefitEligible ? icmsInsideProductsDas : 0;
+  const productsDas = productsDasBeforeBenefit - estimatedIcmsExemption;
+  const healthDasWithFactor = healthServiceRevenue * annexIII.effectiveRate;
+  const healthDasWithoutFactor = healthServiceRevenue * annexV.effectiveRate;
+  const directTaxes = beautyDas + productsDas;
+  const totalDasWithPlan = directTaxes + healthDasWithFactor;
+  const totalDasWithoutPlan = directTaxes + healthDasWithoutFactor;
+  const estimatedTaxSavings = totalDasWithoutPlan - totalDasWithPlan;
+  const estimatedNetSavingsAfterInss = estimatedTaxSavings - inss;
+  const monthlyServiceFee = calculateMonthlyServiceFee(monthlyRevenue);
+
+  const warnings = [
+    "A simulação pressupõe faturamento constante por 12 meses e serve apenas como referência educativa.",
+    "A classificação depende dos procedimentos efetivamente prestados, da habilitação profissional e dos CNAEs da empresa.",
+    "Receitas de serviços, procedimentos de saúde e comércio devem ser segregadas corretamente na emissão fiscal e no Simples Nacional.",
+  ];
+
+  if (icmsBenefitEligible) {
+    warnings.push("Foi aplicada a estimativa da isenção da parcela do ICMS no DAS prevista no art. 230-E do Anexo I do RICMS-PA.");
+  } else if (state === "PA" && productRevenue > 0 && projectedCommercialVolume12m > 120_000) {
+    warnings.push("A projeção das operações sujeitas ao ICMS ultrapassa R$ 120.000,00 em 12 meses; por isso, a isenção paraense não foi aplicada.");
+  } else if (state === "PA" && productRevenue > 0 && simplesCashBasis) {
+    warnings.push("A isenção paraense não foi aplicada porque o art. 230-E exclui optantes que apuram o Simples pelo regime de caixa.");
+  }
+
+  if (healthServiceRevenue === 0) {
+    warnings.push("Sem receita de serviços de saúde sujeita ao Fator R, o pró-labore não altera o anexo usado nesta simulação.");
+  }
+
+  if (recommendedProLabore > 0) {
+    warnings.push("O IRRF sobre o pró-labore, quando aplicável, não está incluído nesta estimativa.");
+  }
+
+  return {
+    version: VERSION,
+    calculatedAt: new Date().toISOString(),
+    input: {
+      beautyServiceRevenue: roundMoney(beautyServiceRevenue),
+      healthServiceRevenue: roundMoney(healthServiceRevenue),
+      productRevenue: roundMoney(productRevenue),
+      productPurchases: roundMoney(productPurchases),
+      collaboratorPayroll: roundMoney(collaboratorPayroll),
+      state,
+      simplesCashBasis,
+      monthlyRevenue: roundMoney(monthlyRevenue),
+      projectedAnnualRevenue: roundMoney(annualRevenue),
+    },
+    factorR: {
+      applies: factorRApplies,
+      target: PARAMETERS.factorRTarget,
+      projected: projectedFactorR,
+      recommendedProLabore: roundMoney(recommendedProLabore),
+      targetMonthlyPayroll: roundMoney(targetMonthlyPayroll),
+      totalEligiblePayroll: roundMoney(totalEligiblePayroll),
+    },
+    taxes: {
+      annexI: {
+        bracket: annexI.bracket,
+        effectiveRate: annexI.effectiveRate,
+        monthlyDas: roundMoney(productsDas),
+        monthlyDasBeforeIcmsBenefit: roundMoney(productsDasBeforeBenefit),
+        icmsShare: annexIBracket.icmsShare,
+      },
+      annexIII: {
+        bracket: annexIII.bracket,
+        effectiveRate: annexIII.effectiveRate,
+        beautyMonthlyDas: roundMoney(beautyDas),
+        healthMonthlyDas: roundMoney(healthDasWithFactor),
+      },
+      annexV: {
+        bracket: annexV.bracket,
+        effectiveRate: annexV.effectiveRate,
+        healthMonthlyDas: roundMoney(healthDasWithoutFactor),
+      },
+      inss: {
+        rate: PARAMETERS.inssRate,
+        contributionBase: roundMoney(inssBase),
+        monthlyAmount: roundMoney(inss),
+      },
+      totalDasWithPlan: roundMoney(totalDasWithPlan),
+      totalDasWithoutPlan: roundMoney(totalDasWithoutPlan),
+      estimatedTaxSavings: roundMoney(estimatedTaxSavings),
+      estimatedNetSavingsAfterInss: roundMoney(estimatedNetSavingsAfterInss),
+    },
+    icmsBenefit: {
+      jurisdiction: "PA",
+      legalReference: "Art. 230-E do Anexo I do RICMS-PA",
+      limit12m: 120_000,
+      eligible: icmsBenefitEligible,
+      projectedCommercialVolume12m: roundMoney(projectedCommercialVolume12m),
+      volumeBasis: productPurchases > productRevenue ? "purchases" : "revenue",
+      estimatedMonthlyExemption: roundMoney(estimatedIcmsExemption),
+      effectiveProductRateAfterBenefit: productRevenue > 0 ? productsDas / productRevenue : 0,
+    },
+    accounting: {
+      monthlyServiceFee: roundMoney(monthlyServiceFee),
+      estimatedMonthlyOutlay: roundMoney(totalDasWithPlan + inss + monthlyServiceFee),
+      scopeNote: "Estimativa sujeita à confirmação do volume de documentos, equipe, procedimentos e complexidade sanitária da operação.",
     },
     warnings,
   };
@@ -206,21 +369,64 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  if (request.method !== "POST" || url.pathname !== "/v1/psychology-simulate") {
+  const isPsychologyRoute = url.pathname === "/v1/psychology-simulate";
+  const isAestheticsRoute = url.pathname === "/v1/aesthetics-simulate";
+
+  if (request.method !== "POST" || (!isPsychologyRoute && !isAestheticsRoute)) {
     json(response, 404, { error: "Rota não encontrada." });
     return;
   }
 
   try {
     const body = await readJsonBody(request);
+
+    if (isAestheticsRoute) {
+      const beautyServiceRevenue = Number(body.beautyServiceRevenue || 0);
+      const healthServiceRevenue = Number(body.healthServiceRevenue || 0);
+      const productRevenue = Number(body.productRevenue || 0);
+      const productPurchases = Number(body.productPurchases || 0);
+      const collaboratorPayroll = Number(body.collaboratorPayroll || 0);
+      const state = body.state === "OTHER" ? "OTHER" : "PA";
+      const simplesCashBasis = body.simplesCashBasis === true;
+      const values = [beautyServiceRevenue, healthServiceRevenue, productRevenue, productPurchases, collaboratorPayroll];
+      const monthlyRevenue = beautyServiceRevenue + healthServiceRevenue + productRevenue;
+
+      if (values.some((value) => !Number.isFinite(value) || value < 0 || value > 400_000)) {
+        json(response, 422, { error: "Informe valores mensais válidos entre R$ 0,00 e R$ 400.000,00." });
+        return;
+      }
+
+      if (monthlyRevenue < 100 || monthlyRevenue > 400_000) {
+        json(response, 422, { error: "O faturamento mensal total deve ficar entre R$ 100,00 e R$ 400.000,00." });
+        return;
+      }
+
+      json(response, 200, calculateAestheticsSimulation({
+        beautyServiceRevenue,
+        healthServiceRevenue,
+        productRevenue,
+        productPurchases,
+        collaboratorPayroll,
+        state,
+        simplesCashBasis,
+      }));
+      return;
+    }
+
     const monthlyRevenue = Number(body.monthlyRevenue);
+    const collaboratorPayroll = body.collaboratorPayroll == null ? 0 : Number(body.collaboratorPayroll);
 
     if (!Number.isFinite(monthlyRevenue) || monthlyRevenue < 100 || monthlyRevenue > 400_000) {
       json(response, 422, { error: "Informe um faturamento mensal entre R$ 100,00 e R$ 400.000,00." });
       return;
     }
 
-    json(response, 200, calculateSimulation(monthlyRevenue));
+    if (!Number.isFinite(collaboratorPayroll) || collaboratorPayroll < 0 || collaboratorPayroll > 400_000) {
+      json(response, 422, { error: "Informe uma folha mensal de colaboradores entre R$ 0,00 e R$ 400.000,00." });
+      return;
+    }
+
+    json(response, 200, calculateSimulation(monthlyRevenue, collaboratorPayroll));
   } catch (error) {
     json(response, error.statusCode || 500, {
       error: error.statusCode ? error.message : "Não foi possível concluir a simulação.",
