@@ -9,6 +9,7 @@ import SearchLandingPage, { searchLandingPages } from "./SearchLandingPage";
 import ApprovedSwitchAccountantPage from "./ApprovedSwitchAccountantPage";
 import ApprovedLinksPage from "./ApprovedLinksPage";
 import ApprovedHomePage from "./ApprovedHomePage";
+import ApprovedClientAccessPage from "./ApprovedClientAccessPage";
 import { usePageSeo } from "./usePageSeo";
 import { installLeadTracking } from "./analytics";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
@@ -2396,12 +2397,9 @@ export default function App() {
   const isSwitchAccountantPage = normalizedPath === "/trocar-contador";
   const isBusinessAccountingPage = normalizedPath === "/contabilidade-empresas";
   const isToolsPage = normalizedPath === "/ferramentas";
-  const accessPortal = normalizedPath === "/area-do-cliente"
-    ? "cliente"
-    : normalizedPath === "/area-da-equipe"
-      ? "equipe"
-      : undefined;
-  const isAccessPage = Boolean(accessPortal);
+  const isClientAccessPage = normalizedPath === "/area-do-cliente";
+  const accessPortal = normalizedPath === "/area-da-equipe" ? "equipe" : undefined;
+  const isAccessPage = isClientAccessPage || Boolean(accessPortal);
   const isAccessRequestPage = normalizedPath === "/solicitar-acesso";
   const isFiscalAddressPage = normalizedPath === "/endereco-fiscal-santarem";
   const isSearchLandingPage = Boolean(searchLandingPages[normalizedPath]);
@@ -2499,6 +2497,10 @@ export default function App() {
 
   if (isToolsPage) {
     return <ToolsPage />;
+  }
+
+  if (isClientAccessPage) {
+    return <ApprovedClientAccessPage />;
   }
 
   if (isAccessPage && accessPortal) {
