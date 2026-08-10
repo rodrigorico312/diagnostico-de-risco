@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { buildServiceRequestUrl } from "./lead-routing";
 import "./approved-home-page.css";
 
-const WHATSAPP_URL =
-  "https://wa.me/5593992101980?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Nacional%20Contabilidade%20e%20quero%20falar%20com%20um%20contador%20sobre%20a%20minha%20empresa.";
+const REQUEST_SERVICE_URL = buildServiceRequestUrl({ origem: "Pagina inicial" });
 
 const solutions = [
   {
@@ -21,7 +21,10 @@ const solutions = [
     number: "03",
     title: "Contabilidade mensal",
     text: "Impostos, obrigações e números acompanhados com clareza durante o mês.",
-    href: "/contabilidade-empresas",
+    href: buildServiceRequestUrl({
+      interesse: "Contabilidade mensal",
+      origem: "Pagina inicial - Contabilidade mensal",
+    }),
   },
   {
     number: "04",
@@ -34,18 +37,18 @@ const solutions = [
 const processSteps = [
   {
     number: "01",
-    title: "Entendemos a empresa",
-    text: "Conversamos sobre a operação, o momento do negócio e o que precisa ser resolvido.",
+    title: "Você apresenta o cenário",
+    text: "A solicitação reúne a empresa, o momento do negócio e o que precisa ser resolvido.",
   },
   {
     number: "02",
-    title: "Apresentamos o caminho",
-    text: "Organizamos prioridades, documentos e decisões em um plano fácil de entender.",
+    title: "Avaliamos a aderência",
+    text: "Entendemos o problema o suficiente para indicar se e como a Nacional pode ajudar.",
   },
   {
     number: "03",
-    title: "Cuidamos da rotina",
-    text: "Executamos e acompanhamos o contábil, o fiscal e os números da empresa.",
+    title: "Indicamos o próximo passo",
+    text: "Quando existe aderência, apresentamos serviço, funcionamento, investimento e continuidade.",
   },
 ];
 
@@ -53,7 +56,7 @@ export default function ApprovedHomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "Nacional Contabilidade | Contabilidade clara para empresas";
+    document.title = "Nacional Contabilidade | Segurança tributária para empresas";
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
@@ -88,8 +91,8 @@ export default function ApprovedHomePage() {
             <a href="#sobre" onClick={closeMenu}>Sobre</a>
             <a href="/blog" onClick={closeMenu}>Conteúdos</a>
             <a href="/area-do-cliente" onClick={closeMenu}>Acessar</a>
-            <a className="approved-home-nav__cta" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-              Falar com um contador
+            <a className="approved-home-nav__cta" href={REQUEST_SERVICE_URL}>
+              Solicitar atendimento
             </a>
           </nav>
         </div>
@@ -98,17 +101,17 @@ export default function ApprovedHomePage() {
       <section className="approved-home-hero" aria-labelledby="approved-home-title">
         <div className="approved-home-container approved-home-hero__grid">
           <div className="approved-home-hero__content">
-            <p className="approved-home-eyebrow">Contabilidade para empresas</p>
+            <p className="approved-home-eyebrow">Contabilidade · Tributação · Financeiro</p>
             <h1 id="approved-home-title">
-              Contabilidade clara para sua empresa <span>crescer com segurança.</span>
+              Segurança tributária para empresas <span>em crescimento.</span>
             </h1>
             <p className="approved-home-hero__lead">
-              A Nacional cuida da rotina contábil, dos impostos e dos números do
-              negócio, com acompanhamento direto de contador.
+              A Nacional estrutura contabilidade, tributação e financeiro para
+              sustentar o crescimento, entendendo a operação antes de recomendar.
             </p>
             <div className="approved-home-actions">
-              <a className="approved-home-button approved-home-button--primary" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                Falar com um contador <span aria-hidden="true">→</span>
+              <a className="approved-home-button approved-home-button--primary" href={REQUEST_SERVICE_URL}>
+                Solicitar atendimento <span aria-hidden="true">→</span>
               </a>
               <a className="approved-home-button approved-home-button--secondary" href="#solucoes">
                 Ver soluções
@@ -226,10 +229,10 @@ export default function ApprovedHomePage() {
           <div>
             <p>Próximo passo</p>
             <h2 id="approved-home-final-title">Vamos colocar sua empresa em ordem?</h2>
-            <span>Conte o que está acontecendo e fale diretamente com a Nacional.</span>
+            <span>Conte brevemente sobre sua empresa. Analisamos as informações antes do contato.</span>
           </div>
-          <a className="approved-home-button approved-home-button--gold" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-            Falar com um contador <span aria-hidden="true">→</span>
+          <a className="approved-home-button approved-home-button--gold" href={REQUEST_SERVICE_URL}>
+            Solicitar atendimento <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
@@ -260,7 +263,7 @@ export default function ApprovedHomePage() {
             <strong>Atendimento</strong>
             <p>Santarém · Pará</p>
             <p>Empresas de todo o Brasil</p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp →</a>
+            <a href={REQUEST_SERVICE_URL}>Solicitar atendimento →</a>
           </div>
         </div>
 

@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import "./preview-home.css";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
 
-const WHATSAPP_URL =
-  "https://wa.me/5593992101980?text=Ol%C3%A1%2C%20quero%20falar%20com%20a%20Nacional%20Contabilidade.";
+const PRIVACY_EMAIL = "mailto:rodrigorico312@gmail.com";
 
 export default function PrivacyPolicyPage() {
   useEffect(() => {
@@ -25,7 +24,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <main className="preview-home privacy-page">
-      <SiteHeader contactUrl={WHATSAPP_URL} navigationId="privacy-navigation" />
+      <SiteHeader navigationId="privacy-navigation" />
 
       <section className="privacy-hero">
         <div className="preview-container">
@@ -102,17 +101,17 @@ export default function PrivacyPolicyPage() {
               <p>
                 Para dúvidas ou solicitações relacionadas a dados pessoais,
                 escreva para <a href="mailto:rodrigorico312@gmail.com">rodrigorico312@gmail.com</a>
-                ou fale com a Nacional pelo WhatsApp.
+                ou envie sua solicitação pelo e-mail institucional.
               </p>
-              <a className="preview-button preview-button--primary" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                Falar com a Nacional
+              <a className="preview-button preview-button--primary" href={PRIVACY_EMAIL}>
+                Enviar solicitação por e-mail
               </a>
             </section>
           </article>
         </div>
       </section>
 
-      <SiteFooter contactUrl={WHATSAPP_URL} />
+      <SiteFooter />
     </main>
   );
 }

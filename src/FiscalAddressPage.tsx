@@ -1,14 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
 import { usePageSeo } from "./usePageSeo";
+import { buildServiceRequestUrl } from "./lead-routing";
 import "./preview-home.css";
 import "./fiscal-address-page.css";
 
-const WHATSAPP_NUMBER = "5593992101980";
 const PAGE_URL = "https://www.nacionalcon.com/endereco-fiscal-santarem";
-
-const whatsappLink = (message: string) =>
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
 type Plan = {
   name: string;
@@ -66,22 +63,21 @@ const stateRegistrationPlans: Plan[] = [
   },
 ];
 
-const contactUrl = whatsappLink(
-  "Olá, quero saber se o endereço fiscal da Nacional é compatível com a minha empresa.",
-);
+const contactUrl = buildServiceRequestUrl({
+  interesse: "Abrir, alterar ou regularizar empresa",
+  origem: "Endereco fiscal",
+});
 
 function PricingGroup({
   eyebrow,
   title,
   description,
   plans,
-  contactMessage,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   plans: Plan[];
-  contactMessage: string;
 }) {
   return (
     <article className="fiscal-pricing-group">
@@ -103,9 +99,7 @@ function PricingGroup({
       </div>
       <a
         className="preview-button preview-button--primary"
-        href={whatsappLink(contactMessage)}
-        target="_blank"
-        rel="noreferrer"
+        href={contactUrl}
       >
         Consultar compatibilidade
       </a>
@@ -114,9 +108,6 @@ function PricingGroup({
 }
 
 export default function FiscalAddressPage() {
-  const [showWhatsapp, setShowWhatsapp] = useState(false);
-  const heroRef = useRef<HTMLElement | null>(null);
-
   usePageSeo({
     title: "Endereço fiscal em Santarém | Nacional Contabilidade",
     description: "Endereço fiscal em Santarém para empresas de serviços e operações que precisam solicitar inscrição estadual, com análise de viabilidade e planos transparentes.",
@@ -174,24 +165,11 @@ export default function FiscalAddressPage() {
     };
   }, []);
 
-  useEffect(() => {
-    const update = () => {
-      setShowWhatsapp(Boolean(heroRef.current && heroRef.current.getBoundingClientRect().bottom < 0));
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
   return (
     <main className="preview-home fiscal-address-page">
       <SiteHeader contactUrl={contactUrl} navigationId="fiscal-address-navigation" />
 
-      <section className="fiscal-address-hero" ref={heroRef} aria-labelledby="fiscal-address-title">
+      <section className="fiscal-address-hero" aria-labelledby="fiscal-address-title">
         <div className="preview-container fiscal-address-hero__grid">
           <div>
             <a className="fiscal-address-breadcrumb" href="/solucoes/abrir-ou-regularizar-empresa">
@@ -203,8 +181,8 @@ export default function FiscalAddressPage() {
             </p>
             <div className="preview-actions">
               <a className="preview-button preview-button--primary" href="#planos">Ver planos</a>
-              <a className="preview-button preview-button--text" href={contactUrl} target="_blank" rel="noreferrer">
-                Analisar minha atividade ↗
+              <a className="preview-button preview-button--text" href={contactUrl}>
+                Solicitar análise comercial →
               </a>
             </div>
           </div>
@@ -261,14 +239,12 @@ export default function FiscalAddressPage() {
             title="Endereço fiscal para serviços"
             description="Indicado principalmente para prestadores de serviços e operações sem circulação de mercadorias."
             plans={servicePlans}
-            contactMessage="Olá, quero analisar um plano de endereço fiscal para empresa sem inscrição estadual."
           />
           <PricingGroup
             eyebrow="Atividades com inscrição estadual"
             title="Estrutura adicional para solicitação de IE"
             description="Inclui a estrutura necessária do endereço, como identificação e suporte documental compatível com a solicitação."
             plans={stateRegistrationPlans}
-            contactMessage="Olá, minha atividade pode precisar de inscrição estadual e quero analisar o endereço fiscal adequado."
           />
         </div>
 
@@ -316,22 +292,12 @@ export default function FiscalAddressPage() {
           </div>
           <div>
             <p>Conte o que sua empresa faz. A Nacional verifica a necessidade de inscrição estadual e a compatibilidade do endereço antes da contratação.</p>
-            <a className="preview-button preview-button--light" href={contactUrl} target="_blank" rel="noreferrer">Analisar minha empresa</a>
+            <a className="preview-button preview-button--light" href={contactUrl}>Solicitar atendimento</a>
           </div>
         </div>
       </section>
 
       <SiteFooter contactUrl={contactUrl} />
-
-      {showWhatsapp && (
-        <a className="preview-whatsapp-float" href={contactUrl} target="_blank" rel="noreferrer" aria-label="Consultar endereço fiscal no WhatsApp">
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" />
-            <path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" />
-          </svg>
-          <span>Consultar endereço</span>
-        </a>
-      )}
     </main>
   );
 }

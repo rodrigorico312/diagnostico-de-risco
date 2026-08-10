@@ -1,0 +1,89 @@
+.request-service-page {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(194, 166, 92, 0.2), transparent 26%),
+    radial-gradient(circle at 91% 88%, rgba(25, 63, 107, 0.28), transparent 29%),
+    #193f6b !important;
+}
+
+.request-service-page .approved-switch-intro {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), transparent 48%), #193f6b;
+}
+
+.request-service-page .approved-switch-layout::after {
+  border-color: rgba(194, 166, 92, 0.24);
+}
+
+.request-service-kicker {
+  margin: 0 0 16px !important;
+  color: #d9c58b !important;
+  font-size: 0.7rem !important;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.request-service-page .approved-switch-copy {
+  margin-top: clamp(42px, 6vh, 70px);
+}
+
+.request-service-page .approved-switch-copy h1 {
+  font-family: "Manrope", "Inter", sans-serif;
+}
+
+.request-service-page .approved-switch-progress .is-active,
+.request-service-page .approved-switch-next {
+  background: #193f6b;
+}
+
+.request-service-page .approved-switch-form input:focus,
+.request-service-page .approved-switch-form select:focus,
+.request-service-page .approved-switch-form textarea:focus {
+  border-color: #193f6b;
+  box-shadow: 0 0 0 3px rgba(25, 63, 107, 0.09);
+}
+
+.request-service-final-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.request-service-observation {
+  grid-column: 1 / -1;
+}
+
+.request-service-success {
+  min-height: 390px;
+}
+
+.request-service-success > span {
+  background: #f3ead1;
+  color: #9a7625;
+}
+
+.request-service-success p {
+  margin-bottom: 8px;
+}
+
+.request-service-success strong {
+  display: block;
+  max-width: 430px;
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(25, 63, 107, 0.13);
+  color: #193f6b;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 559px) {
+  .request-service-final-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .request-service-observation {
+    grid-column: auto;
+  }
+
+  .request-service-page .approved-switch-copy {
+    margin-top: 30px;
+  }
+}

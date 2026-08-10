@@ -10,18 +10,17 @@ import ApprovedSwitchAccountantPage from "./ApprovedSwitchAccountantPage";
 import ApprovedLinksPage from "./ApprovedLinksPage";
 import ApprovedHomePage from "./ApprovedHomePage";
 import ApprovedClientAccessPage from "./ApprovedClientAccessPage";
+import RequestServicePage from "./RequestServicePage";
 import { usePageSeo } from "./usePageSeo";
-import { installLeadTracking } from "./analytics";
+import { installLeadTracking, trackLeadEvent } from "./analytics";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
+import { buildServiceRequestUrl, SERVICE_REQUEST_PATH } from "./lead-routing";
 import "./editorial-blog.css";
 import "./tools-editorial.css";
 import "./mobile-compact.css";
 import "./site-refinement.css";
 import "./links-page.css";
 
-const WHATSAPP_NUMBER = "5593992101980";
-const WHATSAPP_MESSAGE =
-  "Olá, vim pelo site e quero falar com a Nacional Contabilidade sobre minha empresa.";
 const INSTAGRAM_URL = "https://www.instagram.com/rodrigospcoelho";
 const EMAIL = "rodrigorico312@gmail.com";
 const COMPANY_NAME = "O GESTOR DO LUCRO CONSULTORIA LTDA";
@@ -29,13 +28,8 @@ const CNPJ = "62.560.654/0001-27";
 const ADDRESS =
   "Av. Plácido de Castro, 1505, Aparecida, Santarém-PA, CEP 68.040-090";
 
-const buildWhatsappUrl = (message = WHATSAPP_MESSAGE) =>
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-const whatsappUrl = buildWhatsappUrl();
-
 type LinkKind =
-  | "whatsapp"
+  | "request"
   | "instagram"
   | "email"
   | "switch"
@@ -62,13 +56,12 @@ type LinkItem = {
 
 const linkTreeItems: LinkItem[] = [
   {
-    title: "Falar no WhatsApp",
-    text: "Atendimento com a Nacional Contabilidade",
-    href: whatsappUrl,
-    kind: "whatsapp",
-    external: true,
+    title: "Solicitar atendimento",
+    text: "Conte sua situação para análise da Nacional",
+    href: buildServiceRequestUrl({ origem: "Pagina de links" }),
+    kind: "request",
     featured: true,
-    ariaLabel: "Falar com a Nacional Contabilidade no WhatsApp",
+    ariaLabel: "Solicitar atendimento à Nacional Contabilidade",
   },
   {
     title: "Trocar de contador",
@@ -109,11 +102,8 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Assessoria para contadores",
     text: "Apoio técnico, rotina, mentoria e análise de casos",
-    href: buildWhatsappUrl(
-      "Olá, vim pelo link e sou contador. Quero falar sobre assessoria e apoio técnico.",
-    ),
+    href: buildServiceRequestUrl({ interesse: "Outro", origem: "Links - Assessoria para contadores" }),
     kind: "advisor",
-    external: true,
   },
   {
     title: "Endereço fiscal em Santarém",
@@ -124,11 +114,8 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Correspondente empresarial",
     text: "Apoio local em Santarém para demandas empresariais",
-    href: buildWhatsappUrl(
-      "Olá, vim pelo link e quero falar sobre correspondente empresarial em Santarém.",
-    ),
+    href: buildServiceRequestUrl({ interesse: "Outro", origem: "Links - Correspondente empresarial" }),
     kind: "correspondent",
-    external: true,
   },
   {
     title: "Ver soluções",
@@ -1063,15 +1050,6 @@ function CheckList({ items }: { items: string[] }) {
 }
 
 function LinkIcon({ kind }: { kind: LinkKind }) {
-  if (kind === "whatsapp") {
-    return (
-      <svg aria-hidden="true" viewBox="0 0 24 24">
-        <path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" />
-        <path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" />
-      </svg>
-    );
-  }
-
   if (kind === "instagram") {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -1113,7 +1091,7 @@ function LinkIcon({ kind }: { kind: LinkKind }) {
     );
   }
 
-  if (kind === "company") {
+  if (kind === "request" || kind === "company") {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24">
         <path d="M6 20V5.8A1.8 1.8 0 0 1 7.8 4h8.4A1.8 1.8 0 0 1 18 5.8V20" />
@@ -1384,11 +1362,9 @@ function BlogPage({ slug }: { slug?: string }) {
                 <p>A Nacional analisa o contexto antes de indicar qualquer caminho tributário.</p>
                 <a
                   className="preview-button preview-button--light"
-                  href={buildWhatsappUrl(`Olá, vim pelo blog da Nacional e quero falar sobre: ${post.title}.`)}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={buildServiceRequestUrl({ origem: `Blog - ${post.title}` })}
                 >
-                  Agendar uma conversa
+                  Solicitar atendimento
                 </a>
               </div>
             </div>
@@ -1484,11 +1460,12 @@ function BlogPage({ slug }: { slug?: string }) {
             <p>A Nacional analisa documentos, atividade e contexto antes de indicar qualquer mudança.</p>
             <a
               className="preview-button preview-button--primary"
-              href={buildWhatsappUrl("Olá, vim pelo blog da Nacional e quero analisar a situação tributária da minha empresa.")}
-              target="_blank"
-              rel="noreferrer"
+              href={buildServiceRequestUrl({
+                interesse: "Problema ou revisão tributária",
+                origem: "Blog",
+              })}
             >
-              Agendar uma conversa
+              Solicitar atendimento
             </a>
           </div>
         </div>
@@ -1569,9 +1546,7 @@ function ToolsPage() {
     toolGroups[2].links[3],
   ];
   const totalTools = toolGroups.reduce((total, group) => total + group.links.length, 0);
-  const toolsContactUrl = buildWhatsappUrl(
-    "Olá, vim pela Central do Empresário e preciso de ajuda com a situação da minha empresa.",
-  );
+  const toolsContactUrl = buildServiceRequestUrl({ origem: "Central do empresario" });
 
   return (
     <main className="preview-home tools-editorial">
@@ -1664,8 +1639,8 @@ function ToolsPage() {
           </div>
           <div>
             <p>Explique a situação. A Nacional organiza o diagnóstico antes de indicar qualquer correção.</p>
-            <a className="preview-button preview-button--light" href={toolsContactUrl} target="_blank" rel="noreferrer">
-              Agendar uma conversa
+            <a className="preview-button preview-button--light" href={toolsContactUrl}>
+              Solicitar atendimento
             </a>
           </div>
         </div>
@@ -2022,7 +1997,7 @@ function SwitchAccountantPage() {
 
           {submitStatus === "error" && (
             <p className="form-alert form-alert--error" role="alert">
-              {errorMessage} Se preferir, fale direto pelo WhatsApp.
+              {errorMessage} Revise os dados e tente novamente.
             </p>
           )}
 
@@ -2034,14 +2009,6 @@ function SwitchAccountantPage() {
             >
               {submitStatus === "sending" ? "Enviando..." : "Enviar análise"}
             </button>
-            <a
-              className="button button--secondary"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Falar no WhatsApp
-            </a>
           </div>
         </form>
 
@@ -2062,6 +2029,7 @@ function BusinessAccountingPage() {
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const formStarted = useRef(false);
 
   useEffect(() => {
     document.title = "Contabilidade para empresas | Nacional Contabilidade";
@@ -2072,6 +2040,12 @@ function BusinessAccountingPage() {
     value: string,
   ) => {
     setForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const trackStart = () => {
+    if (formStarted.current) return;
+    formStarted.current = true;
+    trackLeadEvent("form_start", { form_id: "contabilidade_empresas" });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -2099,6 +2073,7 @@ function BusinessAccountingPage() {
       }
 
       setSubmitStatus("success");
+      trackLeadEvent("form_submit", { form_id: "contabilidade_empresas" });
       setForm(initialSwitchAccountantForm);
     } catch (error) {
       setSubmitStatus("error");
@@ -2129,7 +2104,7 @@ function BusinessAccountingPage() {
           </p>
         </div>
 
-        <form className="lead-form" onSubmit={handleSubmit}>
+        <form className="lead-form" onSubmit={handleSubmit} onFocusCapture={trackStart}>
           <div className="form-grid">
             <label>
               <span>Seu nome</span>
@@ -2342,15 +2317,16 @@ function BusinessAccountingPage() {
 
           {submitStatus === "success" && (
             <p className="form-alert form-alert--success" role="status">
-              Recebemos suas informações. A Nacional Contabilidade vai entrar em
-              contato pelo WhatsApp informado. Se preferir, você também pode
-              chamar a gente agora.
+              Solicitação recebida. A Nacional vai analisar as informações e,
+              quando houver aderência, retornar com o serviço indicado,
+              funcionamento e próximos passos. O envio não inicia consultoria
+              ou análise técnica.
             </p>
           )}
 
           {submitStatus === "error" && (
             <p className="form-alert form-alert--error" role="alert">
-              {errorMessage} Se preferir, fale direto pelo WhatsApp.
+              {errorMessage} Revise os dados e tente novamente.
             </p>
           )}
 
@@ -2362,16 +2338,6 @@ function BusinessAccountingPage() {
             >
               {submitStatus === "sending" ? "Enviando..." : "Enviar checklist"}
             </button>
-            <a
-              className="button button--secondary"
-              href={buildWhatsappUrl(
-                "Olá, vim pelo checklist de contabilidade para empresas e quero falar com a Nacional Contabilidade.",
-              )}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Chamar no WhatsApp
-            </a>
           </div>
         </form>
 
@@ -2401,65 +2367,13 @@ export default function App() {
   const accessPortal = normalizedPath === "/area-da-equipe" ? "equipe" : undefined;
   const isAccessPage = isClientAccessPage || Boolean(accessPortal);
   const isAccessRequestPage = normalizedPath === "/solicitar-acesso";
+  const isServiceRequestPage = normalizedPath === "/solicitar-atendimento";
   const isFiscalAddressPage = normalizedPath === "/endereco-fiscal-santarem";
   const isSearchLandingPage = Boolean(searchLandingPages[normalizedPath]);
   const isBlogPage = normalizedPath === "/blog" || normalizedPath.startsWith("/blog/");
   const blogSlug = normalizedPath.startsWith("/blog/")
     ? normalizedPath.replace("/blog/", "")
     : undefined;
-  const [showFloatingWhatsapp, setShowFloatingWhatsapp] = useState(false);
-  const heroSectionRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (
-      isLinksPage ||
-      isOfficialHomePage ||
-      isPreviewHomePage ||
-      isPrivacyPolicyPage ||
-      isSolutionPage ||
-      isSwitchAccountantPage ||
-      isBusinessAccountingPage ||
-      isToolsPage ||
-      isAccessPage ||
-      isAccessRequestPage ||
-      isFiscalAddressPage ||
-      isSearchLandingPage ||
-      isBlogPage
-    ) {
-      return;
-    }
-
-    const updateFloatingButton = () => {
-      const section = heroSectionRef.current;
-      if (!section) return;
-
-      setShowFloatingWhatsapp(section.getBoundingClientRect().bottom < 0);
-    };
-
-    updateFloatingButton();
-    window.addEventListener("scroll", updateFloatingButton, { passive: true });
-    window.addEventListener("resize", updateFloatingButton);
-
-    return () => {
-      window.removeEventListener("scroll", updateFloatingButton);
-      window.removeEventListener("resize", updateFloatingButton);
-    };
-  }, [
-    isLinksPage,
-    isOfficialHomePage,
-    isPreviewHomePage,
-    isPrivacyPolicyPage,
-    isSolutionPage,
-    isSwitchAccountantPage,
-    isBusinessAccountingPage,
-    isToolsPage,
-    isAccessPage,
-    isAccessRequestPage,
-    isFiscalAddressPage,
-    isSearchLandingPage,
-    isBlogPage,
-  ]);
-
   useEffect(() => installLeadTracking(), []);
 
   if (isLinksPage) {
@@ -2511,6 +2425,10 @@ export default function App() {
     return <AccessRequestPage />;
   }
 
+  if (isServiceRequestPage) {
+    return <RequestServicePage />;
+  }
+
   if (isFiscalAddressPage) {
     return <FiscalAddressPage />;
   }
@@ -2539,11 +2457,9 @@ export default function App() {
             <a href="#como-funciona">Como funciona</a>
             <a
               className="topbar__cta"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
+              href={SERVICE_REQUEST_PATH}
             >
-              WhatsApp
+              Solicitar atendimento
             </a>
           </nav>
         </div>
@@ -2552,7 +2468,6 @@ export default function App() {
       <section
         className="hero"
         aria-labelledby="hero-title"
-        ref={heroSectionRef}
       >
         <div className="container hero__grid">
           <div className="hero__content">
@@ -2575,12 +2490,9 @@ export default function App() {
             <div className="hero__actions">
               <a
                 className="button"
-                href={whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Falar com a Nacional Contabilidade no WhatsApp"
+                href={SERVICE_REQUEST_PATH}
               >
-                Falar no WhatsApp
+                Solicitar atendimento
               </a>
               <a className="button button--secondary" href="#servicos">
                 Ver serviços
@@ -2649,12 +2561,9 @@ export default function App() {
             </div>
             <a
               className="button button--inline"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Falar com a Nacional Contabilidade no WhatsApp"
+              href={SERVICE_REQUEST_PATH}
             >
-              Falar no WhatsApp
+              Solicitar atendimento
             </a>
           </div>
         </div>
@@ -2865,10 +2774,7 @@ export default function App() {
             </p>
             <a
               className="button button--inline"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Solicitar avaliação pelo WhatsApp"
+              href={SERVICE_REQUEST_PATH}
             >
               Solicitar avaliação
             </a>
@@ -2888,12 +2794,9 @@ export default function App() {
           </p>
           <a
             className="button button--inline"
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Chamar a Nacional Contabilidade no WhatsApp"
+            href={SERVICE_REQUEST_PATH}
           >
-            Chamar no WhatsApp
+            Solicitar atendimento
           </a>
         </div>
       </section>
@@ -2913,18 +2816,6 @@ export default function App() {
           </div>
           <nav className="footer__social" aria-label="Canais de contato">
             <a
-              className="icon-link icon-link--whatsapp"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Falar com a Nacional Contabilidade no WhatsApp"
-            >
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" />
-                <path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" />
-              </svg>
-            </a>
-            <a
               className="icon-link icon-link--instagram"
               href={INSTAGRAM_URL}
               target="_blank"
@@ -2941,20 +2832,6 @@ export default function App() {
         </div>
       </footer>
 
-      {showFloatingWhatsapp && (
-        <a
-          className="floating-whatsapp"
-          href={whatsappUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Falar com a Nacional Contabilidade no WhatsApp"
-        >
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" />
-            <path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" />
-          </svg>
-        </a>
-      )}
     </main>
   );
 }

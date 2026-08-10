@@ -1,8 +1,6 @@
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
+import { trackLeadEvent } from "./analytics";
 import "./switch-accountant-page.css";
-
-const WHATSAPP_URL =
-  "https://wa.me/5593992101980?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20falar%20com%20a%20Nacional%20Contabilidade%20sobre%20minha%20empresa.";
 
 type FormData = {
   nome: string;
@@ -99,6 +97,7 @@ export default function ApprovedSwitchAccountantPage() {
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [stepError, setStepError] = useState("");
+  const formStarted = useRef(false);
 
   useEffect(() => {
     document.title = "Trocar de contador | Nacional Contabilidade";
@@ -107,6 +106,12 @@ export default function ApprovedSwitchAccountantPage() {
   const updateField = (field: keyof FormData, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
     setStepError("");
+  };
+
+  const trackStart = () => {
+    if (formStarted.current) return;
+    formStarted.current = true;
+    trackLeadEvent("form_start", { form_id: "trocar_contador" });
   };
 
   const goToNextStep = () => {
@@ -163,6 +168,7 @@ export default function ApprovedSwitchAccountantPage() {
       }
 
       setSubmitStatus("success");
+      trackLeadEvent("form_submit", { form_id: "trocar_contador" });
       setForm(initialForm);
       setCurrentStep(3);
     } catch (error) {
@@ -195,15 +201,15 @@ export default function ApprovedSwitchAccountantPage() {
               Troque de contador sem parar a rotina da sua empresa.
             </h1>
             <p>
-              Conte o que está acontecendo. A Nacional analisa documentos,
-              acessos e possíveis pendências para orientar uma transição organizada.
+              Conte o que está acontecendo. A Nacional analisa as informações
+              para verificar a aderência e orientar os próximos passos comerciais.
             </p>
           </div>
 
           <ul className="approved-switch-assurances" aria-label="Diferenciais do atendimento">
             <li><span aria-hidden="true">✓</span> Atendimento humano</li>
             <li><span aria-hidden="true">✓</span> Pará e todo o Brasil</li>
-            <li><span aria-hidden="true">✓</span> Análise inicial sem compromisso</li>
+            <li><span aria-hidden="true">✓</span> Análise comercial da solicitação</li>
           </ul>
 
           <div className="approved-switch-how">
@@ -217,7 +223,7 @@ export default function ApprovedSwitchAccountantPage() {
         </div>
 
         <div className="approved-switch-form-column">
-          <form className="approved-switch-form" onSubmit={handleSubmit}>
+          <form className="approved-switch-form" onSubmit={handleSubmit} onFocusCapture={trackStart}>
             <div className="approved-switch-form-header">
               <div>
                 <p>Etapa {currentStep} de 3</p>
@@ -241,12 +247,10 @@ export default function ApprovedSwitchAccountantPage() {
                 <span aria-hidden="true">✓</span>
                 <h3>Informações recebidas.</h3>
                 <p>
-                  A equipe da Nacional vai analisar sua situação e entrar em
-                  contato pelo WhatsApp informado.
+                  A Nacional vai analisar as informações para verificar a aderência
+                  e indicar o serviço, o funcionamento e os próximos passos.
                 </p>
-                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                  Falar agora no WhatsApp
-                </a>
+                <strong>O envio não representa início de diagnóstico ou análise técnica.</strong>
               </div>
             ) : (
               <>
@@ -328,7 +332,7 @@ export default function ApprovedSwitchAccountantPage() {
                 {stepError && <p className="approved-switch-alert" role="alert">{stepError}</p>}
                 {submitStatus === "error" && (
                   <p className="approved-switch-alert" role="alert">
-                    {errorMessage} Se preferir, fale direto pelo WhatsApp.
+                    {errorMessage} Revise os dados e tente novamente.
                   </p>
                 )}
 
@@ -350,9 +354,8 @@ export default function ApprovedSwitchAccountantPage() {
             </p>
           </form>
 
-          <a className="approved-switch-whatsapp" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-            <span aria-hidden="true">●</span>
-            Prefere conversar agora? <strong>Chame no WhatsApp</strong>
+          <a className="request-service-client-link" href="/area-do-cliente">
+            Já é cliente? Acesse seus canais de atendimento →
           </a>
         </div>
       </section>

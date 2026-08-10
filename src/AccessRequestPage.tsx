@@ -1,4 +1,5 @@
 import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
+import { trackLeadEvent } from "./analytics";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
 import "./preview-home.css";
 import "./access-page.css";
@@ -138,6 +139,7 @@ export default function AccessRequestPage() {
     ].filter(Boolean).join("\n");
 
     setSubmitted(true);
+    trackLeadEvent("client_whatsapp_click", { source: "access_request" });
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
 

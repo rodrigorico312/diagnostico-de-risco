@@ -2,7 +2,7 @@ import { type ReactNode, useEffect } from "react";
 import "./approved-links-page.css";
 
 type LinkKind =
-  | "whatsapp"
+  | "request"
   | "instagram"
   | "email"
   | "switch"
@@ -43,7 +43,7 @@ export default function ApprovedLinksPage({
     document.title = "Rodrigo Coelho | Nacional Contabilidade";
   }, []);
 
-  const whatsappLink = items.find((item) => item.kind === "whatsapp")!;
+  const requestLink = items.find((item) => item.kind === "request")!;
   const switchLink = {
     ...items.find((item) => item.kind === "switch")!,
     href: "/trocar-contador",
@@ -105,7 +105,7 @@ export default function ApprovedLinksPage({
         </header>
 
         <nav className="approved-links-primary" aria-label="Atalhos principais">
-          {[whatsappLink, switchLink].map((item) => (
+          {[requestLink, switchLink].map((item) => (
             <a
               className={`approved-links-primary__item approved-links-primary__item--${item.kind}`}
               href={item.href}
@@ -118,8 +118,8 @@ export default function ApprovedLinksPage({
               <span className="approved-links-primary__text">
                 <strong>{item.title}</strong>
                 <small>
-                  {item.kind === "whatsapp"
-                    ? "Resposta rápida e direta"
+                  {item.kind === "request"
+                    ? "Análise antes do contato"
                     : "Migração fácil e segura"}
                 </small>
               </span>

@@ -52,6 +52,7 @@ export default function ApprovedClientAccessPage() {
             href={WHATSAPP_SUPPORT_URL}
             target="_blank"
             rel="noreferrer"
+            data-whatsapp-kind="client"
           >
             Precisa de ajuda?
           </a>
@@ -138,7 +139,7 @@ export default function ApprovedClientAccessPage() {
                 <span>Cliente sem acesso</span>
                 <strong>Solicitar ou recuperar acesso</strong>
               </a>
-              <a href="/solicitar-acesso?perfil=novo">
+              <a href="/solicitar-atendimento?origem=Area%20do%20cliente">
                 <span>Ainda não é cliente</span>
                 <strong>Conhecer a Nacional</strong>
               </a>

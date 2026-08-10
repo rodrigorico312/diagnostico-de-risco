@@ -1,15 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
 import { usePageSeo } from "./usePageSeo";
 import ResponsiveInfoCard from "./ResponsiveInfoCard";
+import { buildServiceRequestUrl } from "./lead-routing";
 import "./preview-home.css";
 import "./solution-page.css";
 import "./search-landing-page.css";
-
-const WHATSAPP_NUMBER = "5593992101980";
-
-const whatsappLink = (message: string) =>
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
 type ContentItem = { title: string; text: string };
 type RelatedLink = { label: string; href: string; text: string };
@@ -26,7 +22,6 @@ type SearchLandingConfig = {
   deliveries: ContentItem[];
   faqs: ContentItem[];
   related: RelatedLink[];
-  whatsappMessage: string;
 };
 
 export const searchLandingPages: Record<string, SearchLandingConfig> = {
@@ -65,7 +60,6 @@ export const searchLandingPages: Record<string, SearchLandingConfig> = {
       { label: "Trocar de contador", href: "/solucoes/trocar-de-contador", text: "Organize a transição contábil e os acessos da empresa." },
       { label: "Endereço fiscal", href: "/endereco-fiscal-santarem", text: "Conheça as opções de endereço empresarial em Santarém." },
     ],
-    whatsappMessage: "Olá, quero conhecer a contabilidade da Nacional para minha empresa em Santarém.",
   },
   "/abrir-empresa-em-santarem": {
     path: "/abrir-empresa-em-santarem",
@@ -102,7 +96,6 @@ export const searchLandingPages: Record<string, SearchLandingConfig> = {
       { label: "Contabilidade em Santarém", href: "/contabilidade-em-santarem", text: "Conheça o acompanhamento mensal depois da abertura." },
       { label: "Abertura e regularização", href: "/solucoes/abrir-ou-regularizar-empresa", text: "Veja o processo completo da Nacional." },
     ],
-    whatsappMessage: "Olá, quero abrir uma empresa em Santarém e preciso avaliar atividade, endereço e tributação.",
   },
   "/endereco-fiscal-para-prestadores-de-servicos": {
     path: "/endereco-fiscal-para-prestadores-de-servicos",
@@ -139,7 +132,6 @@ export const searchLandingPages: Record<string, SearchLandingConfig> = {
       { label: "Abrir empresa em Santarém", href: "/abrir-empresa-em-santarem", text: "Organize a constituição do CNPJ junto com a análise do endereço." },
       { label: "Contabilidade em Santarém", href: "/contabilidade-em-santarem", text: "Mantenha impostos, registros e documentos acompanhados." },
     ],
-    whatsappMessage: "Olá, sou prestador de serviços e quero verificar se posso usar o endereço fiscal da Nacional.",
   },
   "/endereco-fiscal-para-ecommerce": {
     path: "/endereco-fiscal-para-ecommerce",
@@ -176,7 +168,6 @@ export const searchLandingPages: Record<string, SearchLandingConfig> = {
       { label: "Planos de endereço fiscal", href: "/endereco-fiscal-santarem", text: "Compare todas as modalidades e condições." },
       { label: "Abrir empresa em Santarém", href: "/abrir-empresa-em-santarem", text: "Defina a estrutura do CNPJ antes de começar a vender." },
     ],
-    whatsappMessage: "Olá, tenho um e-commerce e quero avaliar endereço fiscal e inscrição estadual no Pará.",
   },
   "/endereco-fiscal-com-inscricao-estadual-para": {
     path: "/endereco-fiscal-com-inscricao-estadual-para",
@@ -213,28 +204,14 @@ export const searchLandingPages: Record<string, SearchLandingConfig> = {
       { label: "Todos os planos", href: "/endereco-fiscal-santarem", text: "Compare a modalidade de serviços com a opção que envolve inscrição estadual." },
       { label: "Abrir empresa em Santarém", href: "/abrir-empresa-em-santarem", text: "Planeje a empresa antes de solicitar os cadastros." },
     ],
-    whatsappMessage: "Olá, minha empresa precisa avaliar endereço fiscal com inscrição estadual no Pará.",
   },
 };
 
 export default function SearchLandingPage({ path }: { path: string }) {
   const content = searchLandingPages[path] ?? searchLandingPages["/contabilidade-em-santarem"];
-  const [showWhatsapp, setShowWhatsapp] = useState(false);
-  const heroRef = useRef<HTMLElement | null>(null);
-  const contactUrl = whatsappLink(content.whatsappMessage);
+  const contactUrl = buildServiceRequestUrl({ origem: `Busca organica - ${path}` });
 
   usePageSeo({ title: `${content.category} | Nacional Contabilidade`, description: content.description, path: content.path });
-
-  useEffect(() => {
-    const update = () => setShowWhatsapp(Boolean(heroRef.current && heroRef.current.getBoundingClientRect().bottom < 0));
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -254,13 +231,13 @@ export default function SearchLandingPage({ path }: { path: string }) {
   return (
     <main className="preview-home solution-page search-landing-page">
       <SiteHeader contactUrl={contactUrl} navigationId="search-landing-navigation" />
-      <section className="solution-hero" ref={heroRef}>
+      <section className="solution-hero">
         <div className="preview-container solution-hero__grid">
           <div className="solution-hero__content">
             <a className="solution-breadcrumb" href="/">← Voltar para a Nacional</a>
             <h1>{content.title}</h1>
             <p className="solution-hero__lead">{content.lead}</p>
-            <div className="preview-actions"><a className="preview-button preview-button--primary" href={contactUrl} target="_blank" rel="noreferrer">Conversar sobre minha empresa</a></div>
+            <div className="preview-actions"><a className="preview-button preview-button--primary" href={contactUrl}>Solicitar atendimento</a></div>
           </div>
         </div>
       </section>
@@ -305,12 +282,11 @@ export default function SearchLandingPage({ path }: { path: string }) {
       <section className="solution-final">
         <div className="preview-container solution-final__grid">
           <div><p className="preview-kicker">Próximo passo</p><h2>Conte o que sua empresa precisa.</h2></div>
-          <div><p>A Nacional verifica o contexto e indica o caminho compatível com a sua operação.</p><a className="preview-button preview-button--light" href={contactUrl} target="_blank" rel="noreferrer">Solicitar avaliação inicial</a></div>
+          <div><p>A Nacional verifica o contexto e indica o caminho compatível com a sua operação.</p><a className="preview-button preview-button--light" href={contactUrl}>Solicitar atendimento</a></div>
         </div>
       </section>
 
       <SiteFooter contactUrl={contactUrl} />
-      {showWhatsapp && <a className="preview-whatsapp-float" href={contactUrl} target="_blank" rel="noreferrer" aria-label="Falar com a Nacional Contabilidade no WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" /><path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" /></svg><span>Falar no WhatsApp</span></a>}
     </main>
   );
 }

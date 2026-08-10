@@ -47,7 +47,7 @@
   overflow: hidden;
   background:
     linear-gradient(160deg, rgba(255, 255, 255, 0.035), transparent 48%),
-    #082a4c;
+    #193f6b;
   color: #fff;
 }
 
@@ -216,7 +216,7 @@
 
 .approved-switch-form-header h2 {
   margin: 0;
-  color: #082a4c;
+  color: #193f6b;
   font-size: clamp(1.45rem, 2.4vw, 2rem);
   letter-spacing: -0.025em;
   line-height: 1.08;
@@ -356,7 +356,7 @@
 }
 
 .approved-switch-back:hover {
-  color: #082a4c;
+  color: #193f6b;
 }
 
 .approved-switch-next {
@@ -369,7 +369,7 @@
   padding: 12px 20px;
   border: 0;
   border-radius: 10px;
-  background: #082a4c;
+  background: #193f6b;
   box-shadow: 0 10px 22px rgba(8, 42, 76, 0.18);
   color: #fff;
   font: inherit;
@@ -397,30 +397,6 @@
   text-align: center;
 }
 
-.approved-switch-whatsapp {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 18px;
-  color: #52606d;
-  font-size: 0.84rem;
-  text-decoration: none;
-}
-
-.approved-switch-whatsapp span {
-  color: #159447;
-  font-size: 0.7rem;
-}
-
-.approved-switch-whatsapp strong {
-  color: #087d39;
-}
-
-.approved-switch-whatsapp:hover strong {
-  text-decoration: underline;
-}
-
 .approved-switch-success {
   display: grid;
   justify-items: center;
@@ -437,15 +413,15 @@
   margin-bottom: 18px;
   place-items: center;
   border-radius: 50%;
-  background: #e2f3e7;
-  color: #16833f;
+  background: #f3ead1;
+  color: #9a7625;
   font-size: 1.4rem;
   font-weight: 800;
 }
 
 .approved-switch-success h3 {
   margin: 0;
-  color: #082a4c;
+  color: #193f6b;
   font-size: 1.65rem;
 }
 
@@ -456,17 +432,26 @@
   line-height: 1.55;
 }
 
-.approved-switch-success a {
-  display: inline-flex;
-  min-height: 46px;
-  padding: 11px 18px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #16833f;
-  border-radius: 9px;
-  color: #087d39;
-  font-weight: 800;
+.approved-switch-success > strong {
+  max-width: 410px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(8, 42, 76, 0.13);
+  color: #193f6b;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.request-service-client-link {
+  color: #596876;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-decoration: none;
+}
+
+.request-service-client-link:hover,
+.request-service-client-link:focus-visible {
+  color: #193f6b;
+  outline: none;
 }
 
 @media (max-width: 959px) {
@@ -594,9 +579,4 @@
     align-self: center;
   }
 
-  .approved-switch-whatsapp {
-    flex-wrap: wrap;
-    padding: 0 14px;
-    text-align: center;
-  }
 }

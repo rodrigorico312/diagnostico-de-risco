@@ -1,22 +1,51 @@
-const requiredFields = [
-  "nome",
-  "whatsapp",
-  "cidade",
-  "regime",
-  "segmento",
-  "faturamento",
-  "motivo",
-  "pendencias",
-];
+const requiredFieldsByType = {
+  troca_contador: [
+    "nome",
+    "whatsapp",
+    "cidade",
+    "regime",
+    "segmento",
+    "faturamento",
+    "motivo",
+    "pendencias",
+  ],
+  contabilidade_empresas: [
+    "nome",
+    "whatsapp",
+    "cidade",
+    "regime",
+    "segmento",
+    "faturamento",
+    "motivo",
+    "pendencias",
+  ],
+  solicitar_atendimento: [
+    "nome",
+    "whatsapp",
+    "email",
+    "cidade",
+    "empresa",
+    "atividade",
+    "faturamento",
+    "contadorAtual",
+    "interesse",
+    "motivo",
+    "urgencia",
+    "momento",
+    "observacao",
+  ],
+};
 
 const leadTitles = {
   troca_contador: "Novo lead - Troca de contador",
   contabilidade_empresas: "Novo lead - Contabilidade para empresas",
+  solicitar_atendimento: "Nova solicitação de atendimento",
 };
 
 const whatsappSubjects = {
   troca_contador: "troca de contador",
   contabilidade_empresas: "contabilidade para empresas",
+  solicitar_atendimento: "solicitação de atendimento",
 };
 
 function readBody(request) {
@@ -56,6 +85,7 @@ function formatTelegramMessage(lead) {
     "",
     `<b>Nome:</b> ${escapeHtml(lead.nome)}`,
     `<b>WhatsApp:</b> ${escapeHtml(lead.whatsapp)}`,
+    `<b>E-mail:</b> ${escapeHtml(lead.email) || "Não informado"}`,
     `<b>Cidade/UF:</b> ${escapeHtml(lead.cidade)}`,
     `<b>Empresa:</b> ${escapeHtml(lead.empresa) || "Não informado"}`,
     `<b>Regime:</b> ${escapeHtml(lead.regime)}`,
@@ -66,6 +96,12 @@ function formatTelegramMessage(lead) {
   ];
 
   pushOptionalLine(lines, "Sócios", lead.socios);
+  pushOptionalLine(lines, "CNPJ", lead.cnpj);
+  pushOptionalLine(lines, "Atividade", lead.atividade);
+  pushOptionalLine(lines, "Área de interesse", lead.interesse);
+  pushOptionalLine(lines, "Contador atual", lead.contadorAtual);
+  pushOptionalLine(lines, "Urgência", lead.urgencia);
+  pushOptionalLine(lines, "Momento de decisão", lead.momento);
   pushOptionalLine(lines, "Notas fiscais", lead.notas);
   pushOptionalLine(lines, "Funcionários", lead.funcionarios);
   pushOptionalLine(lines, "Necessidade", lead.necessidade);
@@ -120,7 +156,7 @@ function buildTelegramReplyMarkup(lead) {
     inline_keyboard: [
       [
         {
-          text: "Chamar no WhatsApp",
+          text: "Chamar lead no WhatsApp",
           url: whatsappUrl,
         },
       ],
@@ -208,12 +244,19 @@ export default async function handler(request, response) {
     tipo: clean(body.tipo) || "troca_contador",
     nome: clean(body.nome),
     whatsapp: clean(body.whatsapp),
+    email: clean(body.email),
     cidade: clean(body.cidade),
     empresa: clean(body.empresa),
+    cnpj: clean(body.cnpj),
+    atividade: clean(body.atividade),
     regime: clean(body.regime),
     segmento: clean(body.segmento),
     faturamento: clean(body.faturamento),
     motivo: clean(body.motivo),
+    interesse: clean(body.interesse),
+    contadorAtual: clean(body.contadorAtual),
+    urgencia: clean(body.urgencia),
+    momento: clean(body.momento),
     pendencias: clean(body.pendencias),
     socios: clean(body.socios),
     notas: clean(body.notas),
@@ -224,6 +267,8 @@ export default async function handler(request, response) {
     pagina: clean(body.pagina),
   };
 
+  const requiredFields =
+    requiredFieldsByType[lead.tipo] || requiredFieldsByType.troca_contador;
   const missingFields = requiredFields.filter((field) => !lead[field]);
 
   if (missingFields.length > 0) {

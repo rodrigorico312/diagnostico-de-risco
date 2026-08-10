@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { SERVICE_REQUEST_PATH } from "./lead-routing";
 
-const DEFAULT_CONTACT_URL =
-  "https://wa.me/5593992101980?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20reuni%C3%A3o%20com%20a%20Nacional%20Contabilidade.";
+const DEFAULT_CONTACT_URL = SERVICE_REQUEST_PATH;
 
 type SiteHeaderProps = {
   contactUrl?: string;
@@ -57,10 +57,8 @@ export function SiteHeader({
           <a
             className="preview-header-cta"
             href={contactUrl}
-            target="_blank"
-            rel="noreferrer"
           >
-            Agendar reunião
+            Solicitar atendimento
           </a>
         </nav>
       </div>
@@ -114,9 +112,9 @@ export function SiteFooter({
           <strong>Atendimento</strong>
           <p>Atendimento 100% online</p>
           <p>Para empresas de todo o Brasil</p>
-          <p>Reuniões somente com agendamento</p>
-          <a className="preview-footer__meeting" href={contactUrl} target="_blank" rel="noreferrer">
-            Agendar reunião
+          <p>Novos atendimentos por solicitação</p>
+          <a className="preview-footer__meeting" href={contactUrl}>
+            Solicitar atendimento
           </a>
         </div>
       </div>

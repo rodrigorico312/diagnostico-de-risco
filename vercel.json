@@ -80,6 +80,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/solicitar-atendimento(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -149,6 +158,14 @@
     },
     {
       "source": "/solicitar-acesso/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solicitar-atendimento",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solicitar-atendimento/",
       "destination": "/index.html"
     },
     {

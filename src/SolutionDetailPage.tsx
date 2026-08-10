@@ -1,14 +1,9 @@
-import { useEffect, useRef, useState } from "react";
 import "./preview-home.css";
 import "./solution-page.css";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
 import { usePageSeo } from "./usePageSeo";
 import ResponsiveInfoCard from "./ResponsiveInfoCard";
-
-const WHATSAPP_NUMBER = "5593992101980";
-
-const whatsappLink = (message: string) =>
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+import { buildServiceRequestUrl } from "./lead-routing";
 
 type SolutionItem = {
   title: string;
@@ -24,7 +19,6 @@ type SolutionConfig = {
   analysis: SolutionItem[];
   deliveries: SolutionItem[];
   faqs: SolutionItem[];
-  whatsappMessage: string;
   primaryLabel?: string;
   primaryHref?: string;
 };
@@ -60,7 +54,6 @@ export const solutionPages: Record<string, SolutionConfig> = {
       { title: "É possível regularizar um CNPJ com dívidas?", text: "Em muitos casos, sim. Primeiro separamos pendências cadastrais, obrigações omitidas e débitos para definir a ordem correta de tratamento." },
       { title: "Preciso escolher o regime tributário antes?", text: "A análise tributária deve acontecer junto da abertura ou da retomada. A escolha depende da atividade, faturamento, folha, margem e operação real." },
     ],
-    whatsappMessage: "Olá, quero analisar a abertura ou regularização da minha empresa.",
   },
   "trocar-de-contador": {
     category: "Transição contábil",
@@ -92,7 +85,6 @@ export const solutionPages: Record<string, SolutionConfig> = {
       { title: "Posso trocar mesmo com pendências?", text: "Sim. As pendências precisam ser identificadas e registradas para que o novo acompanhamento comece com prioridades claras." },
       { title: "A empresa fica sem atendimento durante a troca?", text: "O planejamento busca justamente evitar essa lacuna. Datas, competências e responsabilidades são alinhadas para preservar a continuidade." },
     ],
-    whatsappMessage: "Olá, quero conversar sobre a troca de contador da minha empresa.",
     primaryLabel: "Iniciar diagnóstico de troca",
     primaryHref: "/trocar-contador",
   },
@@ -126,7 +118,6 @@ export const solutionPages: Record<string, SolutionConfig> = {
       { title: "É possível revisar períodos anteriores?", text: "Sim, observados o tipo de tributo, a documentação disponível e os prazos aplicáveis. O período adequado é definido após a avaliação inicial." },
       { title: "A revisão altera alguma declaração automaticamente?", text: "Não. Primeiro apresentamos o diagnóstico. Qualquer correção ou retificação deve ser avaliada e autorizada de forma específica." },
     ],
-    whatsappMessage: "Olá, quero solicitar uma revisão dos impostos e riscos da minha empresa.",
   },
   "organizar-numeros-e-retiradas": {
     category: "Contábil e financeiro",
@@ -158,8 +149,14 @@ export const solutionPages: Record<string, SolutionConfig> = {
       { title: "Distribuição de lucros é sempre isenta?", text: "A isenção depende do resultado apurado, da escrituração e das regras tributárias aplicáveis. A documentação contábil é essencial para sustentar o tratamento." },
       { title: "Balanço e DRE ajudam a conseguir crédito?", text: "Podem ajudar a demonstrar situação patrimonial e resultado, mas cada instituição possui critérios próprios. Os documentos precisam refletir registros consistentes." },
     ],
-    whatsappMessage: "Olá, quero organizar os números, o pró-labore e as retiradas da minha empresa.",
   },
+};
+
+const interestBySlug: Record<string, string> = {
+  "abrir-ou-regularizar-empresa": "Abrir, alterar ou regularizar empresa",
+  "trocar-de-contador": "Trocar de contador",
+  "revisar-impostos-e-riscos": "Problema ou revisão tributária",
+  "organizar-numeros-e-retiradas": "Organização financeira e resultados",
 };
 
 type SolutionDetailPageProps = {
@@ -168,9 +165,10 @@ type SolutionDetailPageProps = {
 
 export default function SolutionDetailPage({ slug }: SolutionDetailPageProps) {
   const content = solutionPages[slug] ?? solutionPages["abrir-ou-regularizar-empresa"];
-  const [showWhatsapp, setShowWhatsapp] = useState(false);
-  const heroRef = useRef<HTMLElement | null>(null);
-  const contactUrl = whatsappLink(content.whatsappMessage);
+  const contactUrl = buildServiceRequestUrl({
+    interesse: interestBySlug[slug],
+    origem: `Solucao - ${slug}`,
+  });
 
   usePageSeo({
     title: `${content.category} | Nacional Contabilidade`,
@@ -178,35 +176,22 @@ export default function SolutionDetailPage({ slug }: SolutionDetailPageProps) {
     path: `/solucoes/${slug}`,
   });
 
-  useEffect(() => {
-    const update = () => {
-      setShowWhatsapp(Boolean(heroRef.current && heroRef.current.getBoundingClientRect().bottom < 0));
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
   return (
     <main className="preview-home solution-page">
       <SiteHeader contactUrl={contactUrl} navigationId="solution-navigation" />
 
-      <section className="solution-hero" ref={heroRef}>
+      <section className="solution-hero">
         <div className="preview-container solution-hero__grid">
           <div className="solution-hero__content">
             <a className="solution-breadcrumb" href="/#situacoes">← Voltar para soluções</a>
             <h1>{content.title}</h1>
             <p className="solution-hero__lead">{content.lead}</p>
             <div className="preview-actions">
-              <a className="preview-button preview-button--primary" href={content.primaryHref ?? contactUrl} target={content.primaryHref ? undefined : "_blank"} rel={content.primaryHref ? undefined : "noreferrer"}>
-                {content.primaryLabel ?? "Conversar sobre minha empresa"}
+              <a className="preview-button preview-button--primary" href={content.primaryHref ?? contactUrl}>
+                {content.primaryLabel ?? "Solicitar atendimento"}
               </a>
               {content.primaryHref && (
-                <a className="preview-button preview-button--text" href={contactUrl} target="_blank" rel="noreferrer">Falar com a Nacional</a>
+                <a className="preview-button preview-button--text" href={contactUrl}>Outra necessidade</a>
               )}
             </div>
           </div>
@@ -294,22 +279,13 @@ export default function SolutionDetailPage({ slug }: SolutionDetailPageProps) {
           </div>
           <div>
             <p>A Nacional avalia o contexto e indica a forma mais segura de conduzir esta solução.</p>
-            <a className="preview-button preview-button--light" href={contactUrl} target="_blank" rel="noreferrer">Solicitar diagnóstico</a>
+            <a className="preview-button preview-button--light" href={contactUrl}>Solicitar atendimento</a>
           </div>
         </div>
       </section>
 
       <SiteFooter contactUrl={contactUrl} />
 
-      {showWhatsapp && (
-        <a className="preview-whatsapp-float" href={contactUrl} target="_blank" rel="noreferrer" aria-label="Falar com a Nacional Contabilidade no WhatsApp">
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M6.7 19.2 3.8 20l.8-2.8a8.2 8.2 0 1 1 2.1 2Z" />
-            <path d="M8.7 8.5c.2-.4.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.8l.5-.4c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.5.7-.4.2-.9.3-1.4.3-3.3 0-7.4-4.1-7.4-7.4 0-.5.1-1 .3-1.4Z" />
-          </svg>
-          <span>Falar no WhatsApp</span>
-        </a>
-      )}
     </main>
   );
 }

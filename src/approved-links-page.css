@@ -1,7 +1,7 @@
 .approved-links-page {
-  --approved-links-navy: #082a4c;
+  --approved-links-navy: #193f6b;
   --approved-links-navy-deep: #041d36;
-  --approved-links-gold: #b98a27;
+  --approved-links-gold: #c2a65c;
   --approved-links-ivory: #f8f5ed;
   width: 100%;
   max-width: none;
@@ -172,8 +172,8 @@
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.approved-links-primary__item--whatsapp {
-  background: linear-gradient(135deg, #139447, #087b36);
+.approved-links-primary__item--request {
+  background: linear-gradient(135deg, #c2a65c, #9b7a2d);
 }
 
 .approved-links-primary__item--switch {
