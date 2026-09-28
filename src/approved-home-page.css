@@ -162,15 +162,6 @@
   text-transform: uppercase;
 }
 
-.approved-home-eyebrow::before,
-.approved-home-section-heading > p::before,
-.approved-home-about__heading > p::before {
-  width: 28px;
-  height: 1px;
-  background: currentColor;
-  content: "";
-}
-
 .approved-home-hero h1 {
   max-width: 720px;
   margin: 20px 0 0;
@@ -463,11 +454,6 @@
   font-size: 0.82rem;
 }
 
-.approved-home-solution-card > strong span {
-  margin-left: 8px;
-  color: var(--home-gold);
-}
-
 .approved-home-address-link {
   display: flex;
   min-height: 92px;
@@ -550,12 +536,6 @@
   outline: none;
   background: #fff;
   transform: translateY(-2px);
-}
-
-.approved-home-secondary-services a span {
-  flex: 0 0 auto;
-  color: var(--home-gold);
-  font-size: 1rem;
 }
 
 .approved-home-process {

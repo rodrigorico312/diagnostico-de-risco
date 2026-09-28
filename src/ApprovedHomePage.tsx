@@ -139,7 +139,7 @@ export default function ApprovedHomePage() {
             </p>
             <div className="approved-home-actions">
               <a className="approved-home-button approved-home-button--primary" href={DIAGNOSTIC_REQUEST_URL}>
-                Solicitar diagnóstico <span aria-hidden="true">→</span>
+                Solicitar diagnóstico
               </a>
               <a className="approved-home-button approved-home-button--secondary" href="#solucoes">
                 Ver problemas que resolvemos
@@ -190,7 +190,7 @@ export default function ApprovedHomePage() {
                 <span className="approved-home-solution-card__number">{solution.number}</span>
                 <h3>{solution.title}</h3>
                 <p>{solution.text}</p>
-                <strong>Conhecer solução <span aria-hidden="true">→</span></strong>
+                <strong>Conhecer solução</strong>
               </a>
             ))}
           </div>
@@ -200,7 +200,7 @@ export default function ApprovedHomePage() {
             <div>
               {secondarySolutions.map((solution) => (
                 <a href={solution.href} key={solution.title}>
-                  {solution.title} <span aria-hidden="true">→</span>
+                  {solution.title}
                 </a>
               ))}
             </div>
@@ -263,7 +263,7 @@ export default function ApprovedHomePage() {
             <span>Conte o que aconteceu. A Nacional avalia a aderência antes de indicar o diagnóstico.</span>
           </div>
           <a className="approved-home-button approved-home-button--gold" href={DIAGNOSTIC_REQUEST_URL}>
-            Solicitar diagnóstico <span aria-hidden="true">→</span>
+            Solicitar diagnóstico
           </a>
         </div>
       </section>
@@ -294,7 +294,7 @@ export default function ApprovedHomePage() {
             <strong>Atendimento</strong>
             <p>Santarém · Pará</p>
             <p>Empresas de todo o Brasil</p>
-            <a href={DIAGNOSTIC_REQUEST_URL}>Solicitar diagnóstico →</a>
+            <a href={DIAGNOSTIC_REQUEST_URL}>Solicitar diagnóstico</a>
           </div>
         </div>
 
