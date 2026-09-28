@@ -120,7 +120,7 @@ const linkTreeItems: LinkItem[] = [
   {
     title: "Ver soluções",
     text: "Serviços contábeis, fiscais, tributários e financeiros",
-    href: "/#situacoes",
+    href: "/#solucoes",
     kind: "solutions",
   },
   {

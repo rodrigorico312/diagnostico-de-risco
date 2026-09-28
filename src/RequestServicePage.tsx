@@ -23,11 +23,14 @@ type RequestForm = {
 };
 
 const interestOptions = [
+  "Diagnóstico fiscal e cadastral",
+  "Regularização de CNPJ ou inscrição",
+  "Regularização de obrigações",
+  "Notificação ou fiscalização",
   "Trocar de contador",
   "Abrir, alterar ou regularizar empresa",
   "Contabilidade mensal",
   "Problema ou revisão tributária",
-  "Notificação ou fiscalização",
   "Organização financeira e resultados",
   "Diagnóstico ou análise",
   "Controles, dados ou automação",
@@ -51,11 +54,15 @@ const accountantOptions = [
 ];
 
 const reasonOptions = [
+  "CNPJ está inapto ou suspenso",
+  "Inscrição estadual está irregular",
+  "Existem declarações ou obrigações omitidas",
+  "Recebi notificação, intimação ou fiscalização",
+  "Preciso corrigir períodos anteriores",
   "Quero trocar de contador",
   "Quero abrir ou alterar uma empresa",
   "Suspeito que estou pagando imposto incorretamente",
   "Tenho problema, pendência ou dúvida tributária",
-  "Recebi notificação ou fiscalização",
   "Não consigo entender lucro ou caixa",
   "Preciso organizar controles e processos",
   "Preciso de dashboard, dados ou automação",
@@ -248,8 +255,8 @@ export default function RequestServicePage() {
 
           <ul className="approved-switch-assurances" aria-label="Como a solicitação funciona">
             <li><span aria-hidden="true">✓</span> Sem reunião obrigatória</li>
-            <li><span aria-hidden="true">✓</span> Análise comercial antes do contato</li>
-            <li><span aria-hidden="true">✓</span> Retorno conforme aderência</li>
+            <li><span aria-hidden="true">✓</span> Triagem comercial antes do contato</li>
+            <li><span aria-hidden="true">✓</span> Diagnóstico técnico com escopo próprio</li>
           </ul>
 
           <div className="approved-switch-how">
@@ -257,7 +264,7 @@ export default function RequestServicePage() {
             <ol>
               <li><span>1</span> Você apresenta o cenário</li>
               <li><span>2</span> A Nacional avalia a aderência</li>
-              <li><span>3</span> Indicamos serviço e próximos passos</li>
+              <li><span>3</span> Indicamos diagnóstico, escopo e próximos passos</li>
             </ol>
           </div>
         </div>

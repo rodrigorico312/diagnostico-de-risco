@@ -24,6 +24,130 @@ type SolutionConfig = {
 };
 
 export const solutionPages: Record<string, SolutionConfig> = {
+  "diagnostico-fiscal-cadastral": {
+    category: "Diagnóstico fiscal e cadastral",
+    title: "Entenda o que está irregular antes de começar a corrigir.",
+    lead:
+      "A Nacional levanta omissões, pendências, divergências e impedimentos para definir um plano de regularização compatível com a realidade da empresa.",
+    context:
+      "O diagnóstico é uma etapa técnica própria. Ele separa o que é cadastral, declaratório, fiscal e documental antes de qualquer transmissão, retificação ou promessa de resultado.",
+    situations: [
+      "O CNPJ está inapto, suspenso ou possui omissões que ninguém conseguiu explicar.",
+      "A empresa precisa saber quais declarações, inscrições ou períodos estão pendentes.",
+      "Existem cobranças, divergências ou avisos nos portais fiscais.",
+      "O histórico da empresa está desorganizado e não há segurança para começar a corrigir.",
+    ],
+    analysis: [
+      { title: "Situação cadastral", text: "Verificamos CNPJ, inscrições, cadastros e impedimentos identificados nos órgãos aplicáveis." },
+      { title: "Obrigações e omissões", text: "Levantamos declarações, escriturações e competências que exigem tratamento." },
+      { title: "Débitos e divergências", text: "Separamos valores declarados, pagamentos, cobranças e inconsistências aparentes." },
+      { title: "Documentos e operação", text: "Confrontamos o histórico disponível com a atividade e a movimentação informada." },
+    ],
+    deliveries: [
+      { title: "Relatório de diagnóstico", text: "Problemas encontrados, evidências disponíveis e limitações documentais registradas." },
+      { title: "Mapa de prioridades", text: "Pendências classificadas por urgência, impacto e dependência de informação." },
+      { title: "Plano de regularização", text: "Ordem recomendada das correções e documentos necessários para cada etapa." },
+      { title: "Proposta de execução", text: "Escopo e investimento apresentados separadamente quando a Nacional puder conduzir a solução." },
+    ],
+    faqs: [
+      { title: "O diagnóstico é cobrado?", text: "Após a triagem comercial, os casos que exigem análise técnica recebem uma proposta própria de diagnóstico. A execução das correções não está automaticamente incluída." },
+      { title: "O diagnóstico já deixa a empresa regular?", text: "Não. Ele identifica o cenário e define o caminho. Transmissões, retificações, defesas e demais providências dependem de contratação e autorização específicas." },
+      { title: "Quais documentos podem ser solicitados?", text: "A relação depende do caso e pode envolver extratos, notas, declarações anteriores, contratos, acessos, notificações e documentos cadastrais." },
+    ],
+  },
+  "regularizar-cnpj-inscricao": {
+    category: "Regularização empresarial",
+    title: "Regularize CNPJ e inscrições com as pendências na ordem certa.",
+    lead:
+      "A Nacional identifica por que a empresa está irregular e conduz as etapas cadastrais e fiscais compatíveis com o caso.",
+    context:
+      "CNPJ inapto, inscrição estadual irregular e impedimentos para emitir documentos podem ter causas diferentes. O trabalho começa pela identificação da origem, sem presumir que uma única transmissão resolverá tudo.",
+    situations: [
+      "O CNPJ aparece como inapto, suspenso ou possui omissões em aberto.",
+      "A inscrição estadual está irregular ou a empresa não consegue operar normalmente.",
+      "A empresa precisa retomar atividades, emitir documentos ou obter certidões.",
+      "Existem alterações cadastrais, declarações e débitos que precisam ser tratados em conjunto.",
+    ],
+    analysis: [
+      { title: "Origem da irregularidade", text: "Identificamos atos, omissões, exigências e eventos que afetaram os cadastros." },
+      { title: "Obrigações relacionadas", text: "Verificamos quais declarações e competências precisam ser entregues ou corrigidas." },
+      { title: "Cadastros e licenças", text: "Mapeamos CNPJ, inscrição estadual, município e demais registros aplicáveis." },
+      { title: "Sequência de regularização", text: "Definimos o que depende do cliente, da Nacional e da análise dos órgãos públicos." },
+    ],
+    deliveries: [
+      { title: "Mapa das pendências", text: "Relação objetiva do que impede ou limita a regularidade da empresa." },
+      { title: "Execução contratada", text: "Protocolos, transmissões e ajustes previstos no escopo aprovado." },
+      { title: "Acompanhamento do processo", text: "Controle das etapas que dependem de processamento ou decisão externa." },
+      { title: "Orientação pós-regularização", text: "Próximas obrigações e cuidados para preservar a situação cadastral alcançada." },
+    ],
+    faqs: [
+      { title: "Uma declaração atrasada regulariza o CNPJ imediatamente?", text: "Nem sempre. É necessário verificar todas as omissões e o tempo de processamento de cada sistema. Outras pendências podem permanecer mesmo após uma transmissão." },
+      { title: "A Nacional garante o deferimento?", text: "Não. A Nacional organiza e conduz as providências contratadas, mas decisões cadastrais e fiscais dependem dos órgãos competentes e das informações apresentadas." },
+      { title: "É possível regularizar uma empresa que teve movimento?", text: "Sim, desde que a realidade da operação possa ser reconstruída e declarada com suporte documental. Movimento conhecido não deve ser tratado como período zerado." },
+    ],
+  },
+  "notificacoes-intimacoes": {
+    category: "Notificações e intimações",
+    title: "Recebeu uma notificação? Organize o caso antes de responder.",
+    lead:
+      "A Nacional analisa o documento, o prazo e as informações relacionadas para definir o suporte técnico e os próximos passos.",
+    context:
+      "Avisos, termos de intimação, cobranças e autuações exigem leitura cuidadosa. A resposta adequada depende do órgão, do fato apontado, dos documentos disponíveis e do prazo em andamento.",
+    situations: [
+      "A empresa recebeu uma intimação e não sabe quais documentos apresentar.",
+      "Existe prazo em andamento para explicar divergências ou corrigir obrigações.",
+      "Uma cobrança parece incompatível com declarações ou pagamentos realizados.",
+      "O caso exige organizar informações contábeis e fiscais antes de qualquer manifestação.",
+    ],
+    analysis: [
+      { title: "Documento e prazo", text: "Identificamos o órgão, a exigência, a ciência e a data limite informada." },
+      { title: "Origem da divergência", text: "Relacionamos a notificação com declarações, pagamentos e documentos disponíveis." },
+      { title: "Suporte técnico", text: "Definimos cálculos, relatórios, retificações ou esclarecimentos necessários ao caso." },
+      { title: "Competências envolvidas", text: "Indicamos quando a atuação exige parceria jurídica ou outro especialista." },
+    ],
+    deliveries: [
+      { title: "Leitura técnica do caso", text: "Resumo do que foi exigido, prazo identificado e informações faltantes." },
+      { title: "Checklist documental", text: "Relação dos arquivos e evidências necessários para sustentar a providência." },
+      { title: "Plano de resposta", text: "Medidas técnicas recomendadas conforme o escopo e os limites profissionais aplicáveis." },
+      { title: "Acompanhamento contratado", text: "Controle das providências executadas e dos retornos recebidos durante o trabalho." },
+    ],
+    faqs: [
+      { title: "Devo esperar para procurar ajuda?", text: "Não é recomendável ignorar o documento. Informe a data da ciência e o prazo logo na solicitação para que a viabilidade do atendimento seja avaliada." },
+      { title: "Toda notificação exige uma defesa?", text: "Não. Alguns casos pedem esclarecimento, entrega, retificação ou pagamento. A medida depende do conteúdo do documento e da análise do histórico." },
+      { title: "Quando um advogado pode ser necessário?", text: "Quando o caso ultrapassa a análise contábil e fiscal ou exige atuação jurídica, a Nacional informa essa necessidade e pode trabalhar de forma coordenada com profissional habilitado." },
+    ],
+  },
+  "regularizar-obrigacoes": {
+    category: "Regularização de obrigações",
+    title: "Corrija omissões e períodos anteriores com base na operação real.",
+    lead:
+      "A Nacional levanta as competências pendentes, verifica os documentos disponíveis e estrutura a regularização das obrigações contratadas.",
+    context:
+      "Empresa sem movimento e empresa que operou sem escrituração exigem trabalhos diferentes. Declarações zeradas só são compatíveis com períodos efetivamente sem fatos a informar.",
+    situations: [
+      "Existem PGDAS-D, DEFIS, DCTFWeb ou escriturações omitidas.",
+      "Declarações anteriores foram entregues com dados incompletos ou incompatíveis.",
+      "A empresa movimentou contas ou exerceu atividade sem organização documental adequada.",
+      "Períodos antigos precisam ser reconstruídos para regularizar o cadastro ou responder a uma cobrança.",
+    ],
+    analysis: [
+      { title: "Obrigação e competência", text: "Confirmamos quais entregas são aplicáveis e quais períodos estão em aberto." },
+      { title: "Movimentação existente", text: "Separamos receitas, transferências, aportes e outras entradas conforme os documentos." },
+      { title: "Fontes de informação", text: "Confrontamos extratos, notas, relatórios, declarações e registros disponíveis." },
+      { title: "Risco da correção", text: "Avaliamos efeitos declaratórios, débitos, multas e limitações antes de transmitir." },
+    ],
+    deliveries: [
+      { title: "Levantamento por período", text: "Competências, obrigações e documentos necessários organizados em uma sequência de trabalho." },
+      { title: "Reconstrução possível", text: "Apuração realizada com as informações suficientes e compatíveis com a realidade identificada." },
+      { title: "Transmissões autorizadas", text: "Entregas e retificações previstas no escopo, após validação das informações pelo cliente." },
+      { title: "Registro de limitações", text: "Pendências documentais e pontos que impedem uma conclusão segura formalmente indicados." },
+    ],
+    faqs: [
+      { title: "Posso entregar tudo zerado para ativar o CNPJ?", text: "Somente quando o período foi efetivamente sem movimento e isso é compatível com os fatos disponíveis. Se houve atividade, a regularização precisa refletir a operação reconstruída." },
+      { title: "A ausência de nota fiscal significa ausência de receita?", text: "Não necessariamente. Recebimentos, contratos, extratos e outros elementos podem demonstrar atividade. Cada entrada precisa ser identificada de acordo com sua natureza." },
+      { title: "E se não existirem documentos suficientes?", text: "A Nacional informa a limitação e não transmite informações sem suporte adequado. O cliente recebe orientação sobre o que precisa localizar ou esclarecer." },
+    ],
+  },
   "abrir-ou-regularizar-empresa": {
     category: "Abertura e regularização",
     title: "Abra ou regularize sua empresa com o caminho definido.",
@@ -153,6 +277,10 @@ export const solutionPages: Record<string, SolutionConfig> = {
 };
 
 const interestBySlug: Record<string, string> = {
+  "diagnostico-fiscal-cadastral": "Diagnóstico fiscal e cadastral",
+  "regularizar-cnpj-inscricao": "Regularização de CNPJ ou inscrição",
+  "notificacoes-intimacoes": "Notificação ou fiscalização",
+  "regularizar-obrigacoes": "Regularização de obrigações",
   "abrir-ou-regularizar-empresa": "Abrir, alterar ou regularizar empresa",
   "trocar-de-contador": "Trocar de contador",
   "revisar-impostos-e-riscos": "Problema ou revisão tributária",
@@ -183,7 +311,7 @@ export default function SolutionDetailPage({ slug }: SolutionDetailPageProps) {
       <section className="solution-hero">
         <div className="preview-container solution-hero__grid">
           <div className="solution-hero__content">
-            <a className="solution-breadcrumb" href="/#situacoes">← Voltar para soluções</a>
+            <a className="solution-breadcrumb" href="/#solucoes">← Voltar para soluções</a>
             <h1>{content.title}</h1>
             <p className="solution-hero__lead">{content.lead}</p>
             <div className="preview-actions">

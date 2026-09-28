@@ -3,52 +3,80 @@ import { buildServiceRequestUrl } from "./lead-routing";
 import "./approved-home-page.css";
 
 const REQUEST_SERVICE_URL = buildServiceRequestUrl({ origem: "Pagina inicial" });
+const DIAGNOSTIC_REQUEST_URL = buildServiceRequestUrl({
+  interesse: "Diagnóstico fiscal e cadastral",
+  origem: "Pagina inicial - Diagnostico fiscal e cadastral",
+});
 
 const solutions = [
   {
     number: "01",
-    title: "Abrir ou regularizar CNPJ",
-    text: "Atividade, endereço, registros e tributação definidos antes de executar.",
-    href: "/solucoes/abrir-ou-regularizar-empresa",
+    title: "Diagnóstico fiscal e cadastral",
+    text: "Omissões, pendências, divergências e riscos identificados antes de qualquer correção.",
+    href: "/solucoes/diagnostico-fiscal-cadastral",
   },
   {
     number: "02",
-    title: "Trocar de contador",
-    text: "Uma transição organizada, com documentos, acessos e pendências mapeados.",
-    href: "/trocar-contador",
+    title: "Regularizar CNPJ e inscrições",
+    text: "CNPJ inapto, inscrição irregular e cadastros empresariais tratados na ordem correta.",
+    href: "/solucoes/regularizar-cnpj-inscricao",
   },
   {
     number: "03",
+    title: "Notificações e intimações",
+    text: "Leitura técnica, organização de documentos e definição do caminho de resposta.",
+    href: "/solucoes/notificacoes-intimacoes",
+  },
+  {
+    number: "04",
+    title: "Corrigir obrigações e períodos",
+    text: "Declarações omitidas ou incorretas reconstruídas conforme a realidade da operação.",
+    href: "/solucoes/regularizar-obrigacoes",
+  },
+];
+
+const secondarySolutions = [
+  {
+    title: "Abrir ou alterar empresa",
+    href: "/solucoes/abrir-ou-regularizar-empresa",
+  },
+  {
+    title: "Trocar de contador",
+    href: "/trocar-contador",
+  },
+  {
     title: "Contabilidade mensal",
-    text: "Impostos, obrigações e números acompanhados com clareza durante o mês.",
     href: buildServiceRequestUrl({
       interesse: "Contabilidade mensal",
       origem: "Pagina inicial - Contabilidade mensal",
     }),
   },
   {
-    number: "04",
-    title: "Revisar impostos e riscos",
-    text: "Análise da operação para identificar erros, riscos e possibilidades reais.",
-    href: "/solucoes/revisar-impostos-e-riscos",
+    title: "Endereço fiscal em Santarém",
+    href: "/endereco-fiscal-santarem",
   },
 ];
 
 const processSteps = [
   {
     number: "01",
-    title: "Você apresenta o cenário",
-    text: "A solicitação reúne a empresa, o momento do negócio e o que precisa ser resolvido.",
+    title: "Triagem do caso",
+    text: "Você apresenta a empresa, o problema, a urgência e o resultado que precisa alcançar.",
   },
   {
     number: "02",
-    title: "Avaliamos a aderência",
-    text: "Entendemos o problema o suficiente para indicar se e como a Nacional pode ajudar.",
+    title: "Diagnóstico técnico",
+    text: "Quando existe aderência, o diagnóstico é contratado para mapear documentos, omissões e riscos.",
   },
   {
     number: "03",
-    title: "Indicamos o próximo passo",
-    text: "Quando existe aderência, apresentamos serviço, funcionamento, investimento e continuidade.",
+    title: "Plano e orçamento",
+    text: "Você recebe as prioridades, as dependências, o escopo da execução e o investimento necessário.",
+  },
+  {
+    number: "04",
+    title: "Execução acompanhada",
+    text: "Após a aprovação, conduzimos as correções contratadas e informamos cada próximo passo.",
   },
 ];
 
@@ -56,7 +84,7 @@ export default function ApprovedHomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "Nacional Contabilidade | Segurança tributária para empresas";
+    document.title = "Diagnóstico e regularização fiscal | Nacional Contabilidade";
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
@@ -92,7 +120,7 @@ export default function ApprovedHomePage() {
             <a href="/blog" onClick={closeMenu}>Conteúdos</a>
             <a href="/area-do-cliente" onClick={closeMenu}>Acessar</a>
             <a className="approved-home-nav__cta" href={REQUEST_SERVICE_URL}>
-              Solicitar atendimento
+              Solicitar diagnóstico
             </a>
           </nav>
         </div>
@@ -101,20 +129,20 @@ export default function ApprovedHomePage() {
       <section className="approved-home-hero" aria-labelledby="approved-home-title">
         <div className="approved-home-container approved-home-hero__grid">
           <div className="approved-home-hero__content">
-            <p className="approved-home-eyebrow">Contabilidade · Tributação · Financeiro</p>
+            <p className="approved-home-eyebrow">Diagnóstico fiscal · Regularização empresarial · Contabilidade</p>
             <h1 id="approved-home-title">
-              Segurança tributária para empresas <span>em crescimento.</span>
+              CNPJ inapto, pendências ou notificação fiscal? <span>Existe um caminho para regularizar.</span>
             </h1>
             <p className="approved-home-hero__lead">
-              A Nacional estrutura contabilidade, tributação e financeiro para
-              sustentar o crescimento, entendendo a operação antes de recomendar.
+              A Nacional identifica omissões, divergências e impedimentos,
+              organiza os documentos e conduz cada etapa com responsabilidade técnica.
             </p>
             <div className="approved-home-actions">
-              <a className="approved-home-button approved-home-button--primary" href={REQUEST_SERVICE_URL}>
-                Solicitar atendimento <span aria-hidden="true">→</span>
+              <a className="approved-home-button approved-home-button--primary" href={DIAGNOSTIC_REQUEST_URL}>
+                Solicitar diagnóstico <span aria-hidden="true">→</span>
               </a>
               <a className="approved-home-button approved-home-button--secondary" href="#solucoes">
-                Ver soluções
+                Ver problemas que resolvemos
               </a>
             </div>
             <p className="approved-home-hero__note">
@@ -144,16 +172,16 @@ export default function ApprovedHomePage() {
           <div><strong>100% online</strong><span>Atendimento em todo o Brasil</span></div>
           <div><strong>Direto com contador</strong><span>Comunicação sem complicação</span></div>
           <div><strong>CRC/PA 024335</strong><span>Responsabilidade técnica</span></div>
-          <div><strong>Visão completa</strong><span>Contábil, fiscal e financeiro</span></div>
+          <div><strong>Diagnóstico primeiro</strong><span>Correção somente com contexto</span></div>
         </div>
       </section>
 
       <section className="approved-home-solutions" id="solucoes" aria-labelledby="approved-home-solutions-title">
         <div className="approved-home-container">
           <div className="approved-home-section-heading">
-            <p>Como podemos ajudar</p>
-            <h2 id="approved-home-solutions-title">Escolha o que sua empresa precisa agora.</h2>
-            <span>Quatro caminhos claros para os momentos mais comuns de uma empresa.</span>
+            <p>Problemas que resolvemos</p>
+            <h2 id="approved-home-solutions-title">Comece pela situação que está travando sua empresa.</h2>
+            <span>O diagnóstico define o que precisa ser corrigido, em qual ordem e com quais documentos.</span>
           </div>
 
           <div className="approved-home-solutions__grid">
@@ -167,13 +195,16 @@ export default function ApprovedHomePage() {
             ))}
           </div>
 
-          <a className="approved-home-address-link" href="/endereco-fiscal-santarem">
-            <span>
-              <strong>Precisa de endereço fiscal em Santarém?</strong>
-              Conheça os planos e veja qual modalidade combina com sua operação.
-            </span>
-            <b aria-hidden="true">→</b>
-          </a>
+          <div className="approved-home-secondary-services" aria-label="Outras soluções da Nacional">
+            <p>Outras soluções</p>
+            <div>
+              {secondarySolutions.map((solution) => (
+                <a href={solution.href} key={solution.title}>
+                  {solution.title} <span aria-hidden="true">→</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -181,8 +212,8 @@ export default function ApprovedHomePage() {
         <div className="approved-home-container">
           <div className="approved-home-section-heading approved-home-section-heading--light">
             <p>Como funciona</p>
-            <h2 id="approved-home-process-title">Da conversa à rotina organizada.</h2>
-            <span>Você entende o que será feito, por que será feito e qual é o próximo passo.</span>
+            <h2 id="approved-home-process-title">Do problema ao plano de regularização.</h2>
+            <span>Triagem, diagnóstico, orçamento e execução são etapas separadas e transparentes.</span>
           </div>
 
           <div className="approved-home-process__grid">
@@ -207,18 +238,18 @@ export default function ApprovedHomePage() {
           <div className="approved-home-about__content">
             <p>
               A Nacional Contabilidade é liderada por Rodrigo Coelho e atende
-              empresas que precisam manter as obrigações em dia e entender melhor
-              os próprios números.
+              empresas que precisam resolver situações cadastrais, fiscais e
+              contábeis com método e responsabilidade.
             </p>
             <p>
-              O trabalho reúne contabilidade, tributação e organização financeira
-              com uma comunicação direta, para que decisões importantes não sejam
-              tomadas no escuro.
+              O trabalho começa pela realidade da operação e pelos documentos
+              disponíveis. A Nacional organiza o problema, delimita o escopo e
+              indica o caminho antes de transmitir ou corrigir qualquer obrigação.
             </p>
             <ul>
-              <li><span>✓</span> Atendimento próximo e sem linguagem complicada</li>
-              <li><span>✓</span> Análise antes de qualquer promessa tributária</li>
-              <li><span>✓</span> Rotina organizada para acompanhar o crescimento</li>
+              <li><span>✓</span> Regularização baseada em documentos e fatos</li>
+              <li><span>✓</span> Análise antes de qualquer correção ou promessa</li>
+              <li><span>✓</span> Escopo, responsabilidades e próximos passos claros</li>
             </ul>
           </div>
         </div>
@@ -228,11 +259,11 @@ export default function ApprovedHomePage() {
         <div className="approved-home-container approved-home-final__box">
           <div>
             <p>Próximo passo</p>
-            <h2 id="approved-home-final-title">Vamos colocar sua empresa em ordem?</h2>
-            <span>Conte brevemente sobre sua empresa. Analisamos as informações antes do contato.</span>
+            <h2 id="approved-home-final-title">Sua empresa precisa voltar à regularidade?</h2>
+            <span>Conte o que aconteceu. A Nacional avalia a aderência antes de indicar o diagnóstico.</span>
           </div>
-          <a className="approved-home-button approved-home-button--gold" href={REQUEST_SERVICE_URL}>
-            Solicitar atendimento <span aria-hidden="true">→</span>
+          <a className="approved-home-button approved-home-button--gold" href={DIAGNOSTIC_REQUEST_URL}>
+            Solicitar diagnóstico <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
@@ -241,7 +272,7 @@ export default function ApprovedHomePage() {
         <div className="approved-home-container approved-home-footer__grid">
           <div className="approved-home-footer__brand">
             <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
-            <p>Contabilidade clara para empresas que querem crescer com segurança.</p>
+            <p>Diagnóstico e regularização para empresas que precisam resolver situações fiscais e cadastrais.</p>
           </div>
 
           <nav aria-label="Links institucionais">
@@ -263,7 +294,7 @@ export default function ApprovedHomePage() {
             <strong>Atendimento</strong>
             <p>Santarém · Pará</p>
             <p>Empresas de todo o Brasil</p>
-            <a href={REQUEST_SERVICE_URL}>Solicitar atendimento →</a>
+            <a href={DIAGNOSTIC_REQUEST_URL}>Solicitar diagnóstico →</a>
           </div>
         </div>
 

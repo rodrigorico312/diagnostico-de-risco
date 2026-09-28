@@ -48,7 +48,7 @@ export function SiteHeader({
           id={navigationId}
           aria-label="Navegação principal"
         >
-          <a href="/#situacoes" onClick={() => setMenuOpen(false)}>Soluções</a>
+          <a href="/#solucoes" onClick={() => setMenuOpen(false)}>Soluções</a>
           <a href="/ferramentas" onClick={() => setMenuOpen(false)}>Ferramentas</a>
           <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
           <a href="/area-do-cliente" onClick={() => setMenuOpen(false)}>Área do cliente</a>
@@ -83,17 +83,19 @@ export function SiteFooter({
         <div className="preview-footer__brand">
           <img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" />
           <p>
-            Contabilidade, tributação e gestão para empresas que precisam decidir
-            com mais segurança.
+            Diagnóstico e regularização para empresas que precisam resolver
+            situações fiscais e cadastrais.
           </p>
         </div>
 
         <nav aria-label="Soluções da Nacional">
           <strong>Soluções</strong>
+          <a href="/solucoes/diagnostico-fiscal-cadastral">Diagnóstico fiscal</a>
+          <a href="/solucoes/regularizar-cnpj-inscricao">Regularizar CNPJ e inscrições</a>
+          <a href="/solucoes/notificacoes-intimacoes">Notificações e intimações</a>
+          <a href="/solucoes/regularizar-obrigacoes">Regularizar obrigações</a>
           <a href="/solucoes/abrir-ou-regularizar-empresa">Abrir ou regularizar</a>
           <a href="/solucoes/trocar-de-contador">Trocar de contador</a>
-          <a href="/solucoes/revisar-impostos-e-riscos">Revisar impostos</a>
-          <a href="/solucoes/organizar-numeros-e-retiradas">Organizar números</a>
           <a href="/endereco-fiscal-santarem">Endereço fiscal</a>
           <a href="/contabilidade-em-santarem">Contabilidade em Santarém</a>
           <a href="/abrir-empresa-em-santarem">Abrir empresa em Santarém</a>
