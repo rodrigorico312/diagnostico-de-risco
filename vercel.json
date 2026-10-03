@@ -1,6 +1,24 @@
 {
   "headers": [
     {
+      "source": "/validar-documento(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    },
+    {
+      "source": "/document-validation/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    },
+    {
       "source": "/preview/nova-home",
       "headers": [
         {
@@ -104,6 +122,8 @@
     }
   ],
   "rewrites": [
+    { "source": "/validar-documento", "destination": "/document-validation/index.html" },
+    { "source": "/validar-documento/", "destination": "/document-validation/index.html" },
     {
       "source": "/preview/clinica-estetica",
       "destination": "/preview/clinica-estetica/index.html"

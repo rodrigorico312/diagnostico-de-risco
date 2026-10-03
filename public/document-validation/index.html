@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Consulta de documento | O Gestor do Lucro</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/document-validation/style.css" />
+    <script type="module" src="/document-validation/validation.js"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="brand"><img src="/document-validation/caduceu.png" alt="" width="36" height="44" /><span>O GESTOR DO LUCRO<small>CONSULTORIA LTDA</small></span></div>
+      <a href="/">nacionalcon.com</a>
+    </header>
+    <main>
+      <h1>Consulta de documento</h1>
+      <form id="lookup-form">
+        <label for="document-code">Código de conferência</label>
+        <div class="lookup-row"><input id="document-code" name="codigo" type="text" maxlength="50" required autocomplete="off" autocapitalize="characters" spellcheck="false" /><button id="lookup-button" type="submit">Consultar</button></div>
+      </form>
+      <p id="lookup-status" class="notice" role="status" aria-live="polite" hidden></p>
+      <section id="record" hidden aria-labelledby="record-title">
+        <div class="section-heading"><h2 id="record-title"></h2><span id="revision"></span></div>
+        <dl class="metadata">
+          <div><dt>Empresa</dt><dd id="subject"></dd></div>
+          <div><dt>CNPJ da empresa</dt><dd id="subject-cnpj"></dd></div>
+          <div><dt>Período</dt><dd id="period"></dd></div>
+          <div><dt>Natureza</dt><dd id="nature"></dd></div>
+          <div><dt>Emissão</dt><dd id="issued-on"></dd></div>
+          <div><dt>Registro da versão</dt><dd id="registered-at"></dd></div>
+          <div><dt>Emissor</dt><dd id="issuer"></dd></div>
+          <div><dt>CNPJ do emissor</dt><dd id="issuer-cnpj"></dd></div>
+          <div class="wide"><dt>Responsável técnico</dt><dd id="accountant"></dd></div>
+        </dl>
+        <p id="signature-status" class="notice warning"></p>
+        <section class="file-check" aria-labelledby="check-title">
+          <h2 id="check-title">Conferência do arquivo</h2>
+          <label for="pdf-file">PDF recebido</label>
+          <input id="pdf-file" type="file" accept="application/pdf,.pdf" />
+          <p class="secondary">A conferência acontece neste dispositivo. O PDF não é enviado ao site.</p>
+          <p id="file-result" class="notice" role="status" aria-live="polite" hidden></p>
+          <dl class="fingerprint"><dt>SHA-256 da versão registrada</dt><dd><code id="registered-hash"></code></dd></dl>
+        </section>
+        <p class="scope">O registro permite conferir a origem informada e a integridade desta versão. Não certifica receitas, não substitui assinaturas e não representa validação por órgão público.</p>
+      </section>
+    </main>
+    <footer>O GESTOR DO LUCRO CONSULTORIA LTDA<span>CNPJ 62.560.654/0001-27 · Santarém/PA</span></footer>
+  </body>
+</html>
