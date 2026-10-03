@@ -22,7 +22,7 @@
         <div class="lookup-row"><input id="document-code" name="codigo" type="text" maxlength="50" required autocomplete="off" autocapitalize="characters" spellcheck="false" /><button id="lookup-button" type="submit">Consultar</button></div>
       </form>
       <p id="lookup-status" class="notice" role="status" aria-live="polite" hidden></p>
-      <section id="record" hidden aria-labelledby="record-title">
+      <section id="record" hidden tabindex="-1" aria-labelledby="record-title">
         <div class="section-heading"><h2 id="record-title"></h2><span id="revision"></span></div>
         <dl class="metadata">
           <div class="wide"><dt>Empresa</dt><dd id="subject"></dd></div>
@@ -55,6 +55,24 @@
         <p class="scope">O registro permite conferir a origem informada e a integridade desta versão. Não certifica receitas, não substitui assinaturas e não representa validação por órgão público.</p>
       </section>
     </main>
+    <dialog id="consultation-dialog" class="consultation-dialog" aria-labelledby="consultation-title" aria-describedby="consultation-status">
+      <div class="dialog-content">
+      <p class="dialog-source">O GESTOR DO LUCRO · REGISTRO DO ESCRITÓRIO</p>
+      <h2 id="consultation-title">Consultando documento</h2>
+      <p id="consultation-status" class="dialog-status" role="status" aria-live="polite"></p>
+      <progress id="consultation-progress" max="6" aria-label="Conferência do registro"></progress>
+      <ol class="consultation-steps">
+        <li id="lookup-step-0"><span id="lookup-step-marker-0" class="step-marker" aria-hidden="true">1</span><div><strong>Protocolo</strong><span id="lookup-step-status-0"></span></div></li>
+        <li id="lookup-step-1"><span id="lookup-step-marker-1" class="step-marker" aria-hidden="true">2</span><div><strong>Empresa e CNPJ cadastrados</strong><span id="lookup-step-status-1"></span></div></li>
+        <li id="lookup-step-2"><span id="lookup-step-marker-2" class="step-marker" aria-hidden="true">3</span><div><strong>Emissor e responsável técnico</strong><span id="lookup-step-status-2"></span></div></li>
+        <li id="lookup-step-3"><span id="lookup-step-marker-3" class="step-marker" aria-hidden="true">4</span><div><strong>Período e revisão</strong><span id="lookup-step-status-3"></span></div></li>
+        <li id="lookup-step-4"><span id="lookup-step-marker-4" class="step-marker" aria-hidden="true">5</span><div><strong>Referência do PDF</strong><span id="lookup-step-status-4"></span></div></li>
+        <li id="lookup-step-5"><span id="lookup-step-marker-5" class="step-marker" aria-hidden="true">6</span><div><strong>Situação das assinaturas</strong><span id="lookup-step-status-5"></span></div></li>
+      </ol>
+      <p class="dialog-scope">Consulta ao registro do escritório, sem integração com Receita Federal ou CFC e sem validação de receitas ou certificados de assinatura.</p>
+      </div>
+      <div class="dialog-actions"><button id="consultation-action" type="button" autofocus>Cancelar</button></div>
+    </dialog>
     <footer>O GESTOR DO LUCRO CONSULTORIA LTDA<span>CNPJ 62.560.654/0001-27 · Santarém/PA</span></footer>
   </body>
 </html>

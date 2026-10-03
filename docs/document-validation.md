@@ -6,6 +6,10 @@ not government registrations or verified digital signatures.
 The QR URL prefills the code only. No record request is made until the recipient
 submits the consultation form. Mobile layouts preserve browser zoom and keep
 supplementary issuer details and the technical digest collapsed by default.
+The consultation dialog shows actual registry-field checks and remains visible
+until dismissed. It has no fabricated loading delays or external-agency checks.
+Loading can be cancelled, and a 15-second timeout makes stalled requests recoverable.
+Pending or unverified signatures are warnings, never signature-validation successes.
 
 ## Registry
 

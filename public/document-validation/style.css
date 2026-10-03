@@ -47,6 +47,30 @@ input::file-selector-button { font: inherit; padding: 10px 14px; border-radius: 
 .scope { margin-top: 26px; }
 footer { border-top: 1px solid #ccc; padding-top: 20px; padding-bottom: 26px; font-size: 12px; color: #59625d; line-height: 1.7; }
 footer span { display: block; }
+body:has(.consultation-dialog[open]) { overflow: hidden; }
+.consultation-dialog { width: min(460px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 0; border: 1px solid #c5cac7; border-radius: 8px; color: #202322; background: #fff; overflow: hidden; }
+.consultation-dialog::backdrop { background: rgb(20 25 23 / 45%); }
+.consultation-dialog[open] { display: flex; flex-direction: column; animation: dialog-enter .15s ease-out; }
+.dialog-content { min-height: 0; padding: 24px 24px 0; overflow-y: auto; overscroll-behavior: contain; }
+.dialog-actions { padding: 16px 24px 24px; flex-shrink: 0; border-top: 1px solid #ebedec; }
+.dialog-source { font-size: 10px; color: #58615c; line-height: 1.5; margin: 0 0 12px; }
+.consultation-dialog h2 { font-size: 22px; }
+.dialog-status { font-size: 13px; line-height: 1.5; margin: 10px 0 16px; overflow-wrap: anywhere; }
+.consultation-dialog progress { width: 100%; height: 6px; accent-color: #38654e; display: block; }
+.consultation-steps { list-style: none; margin: 12px 0; padding: 0; }
+.consultation-steps li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; padding: 10px 0; border-bottom: 1px solid #ebedec; }
+.step-marker { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid #c1c7c3; border-radius: 50%; font-size: 13px; color: #626a65; }
+.consultation-steps strong { font-size: 13px; line-height: 1.4; display: block; }
+.consultation-steps div > span { display: block; font-size: 12px; line-height: 1.4; color: #626a65; margin-top: 3px; overflow-wrap: anywhere; }
+.consultation-steps [data-state=active] .step-marker { border: 2px solid #45564c; }
+.consultation-steps [data-state=done] .step-marker { color: #185a32; border-color: #79a18a; background: #edf6f0; }
+.consultation-steps [data-state=warning] .step-marker { color: #796021; border-color: #b29961; background: #faf5e9; }
+.consultation-steps [data-state=error] .step-marker { color: #84251f; border-color: #a1322b; background: #fff2f1; }
+.dialog-scope { font-size: 11px; color: #59625d; line-height: 1.5; margin: 14px 0 18px; }
+.consultation-dialog button { width: 100%; }
+#record:focus { outline: none; }
+@keyframes dialog-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .consultation-dialog[open] { animation: none; } }
 @media (max-width: 600px) {
   .masthead, main, footer { width: 100%; padding-left: 16px; padding-right: 16px; }
   .masthead { gap: 10px; min-height: 76px; padding-top: 14px; padding-bottom: 14px; }
@@ -72,6 +96,10 @@ footer span { display: block; }
   .secondary, .scope { font-size: 12px; line-height: 1.5; }
   .scope { margin-top: 18px; }
   footer { padding-top: 16px; padding-bottom: 20px; font-size: 11px; }
+  .dialog-content { padding: 18px 18px 0; }
+  .dialog-actions { padding: 14px 18px 18px; }
+  .consultation-dialog h2 { font-size: 20px; }
+  .consultation-steps li { padding: 8px 0; }
 }
 @media (max-width: 360px) {
   .brand { font-size: 13px; }

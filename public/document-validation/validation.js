@@ -10,12 +10,65 @@ export async function hashPdf(file) {
   return [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, "0")).join("");
 }
 
+export function inspectRegistration(result, requestedCode, report = () => {}) {
+  const present = value => typeof value === "string" && value.trim().length > 0;
+  const expectedCode = "GL-" + requestedCode.trim().toUpperCase().slice(3).replaceAll("-", "");
+  function check(index, valid, detail, state = "done") {
+    if (!valid) {
+      const error = new Error("O registro retornado está incompleto ou inconsistente. Tente novamente.");
+      error.step = index;
+      throw error;
+    }
+    report(index, state, detail);
+  }
+  check(0, result?.status === "active" && result.code === expectedCode, "Protocolo localizado no escritório");
+  check(1, present(result.subject?.name) && present(result.subject?.cnpj), "Nome e CNPJ presentes no registro");
+  check(2, [result.issuer?.name, result.issuer?.cnpj, result.accountant?.name, result.accountant?.crc].every(present), "Emissor e CRC informados no registro");
+  check(3, [result.period, result.revision, result.issuedOn, result.registeredAt].every(present) &&
+    !Number.isNaN(Date.parse(result.issuedOn)) && !Number.isNaN(Date.parse(result.registeredAt)),
+    "Período e revisão " + result.revision + " carregados");
+  check(4, /^[a-f0-9]{64}$/.test(result.sha256) && present(result.filename) &&
+    Number.isSafeInteger(result.byteLength) && result.byteLength > 0, "Referência SHA-256 disponível; PDF ainda não conferido");
+  check(5, ["pending", "provided"].includes(result.signatureStatus),
+    result.signatureStatus === "pending" ? "Assinaturas pendentes" : "Assinaturas informadas; certificados não verificados", "warning");
+}
+
 if (typeof document !== "undefined") {
   const get = id => document.getElementById(id);
   let record = null;
   let lookupSequence = 0;
   let fileSequence = 0;
   let request = null;
+  let modalPhase = "idle";
+  const dialog = get("consultation-dialog");
+  function step(index, state, detail) {
+    get("lookup-step-" + index).dataset.state = state;
+    get("lookup-step-status-" + index).textContent = detail;
+    get("lookup-step-marker-" + index).textContent = state === "done" ? "✓" : state === "warning" || state === "error" ? "!" : String(index + 1);
+    if (state === "done" || state === "warning") get("consultation-progress").value = index + 1;
+  }
+  function openConsultation() {
+    modalPhase = "loading";
+    for (let index = 0; index < 6; index++) step(index, "waiting", "Aguardando consulta");
+    step(0, "active", "Consultando o registro do escritório...");
+    get("consultation-progress").removeAttribute("value");
+    get("consultation-title").textContent = "Consultando documento";
+    get("consultation-status").textContent = "Buscando o protocolo no registro do escritório.";
+    get("consultation-action").textContent = "Cancelar";
+    if (!dialog.open) dialog.showModal();
+  }
+  function dismissConsultation() {
+    if (modalPhase === "loading") {
+      ++lookupSequence;
+      request?.abort();
+      get("lookup-button").disabled = false;
+      notice("lookup-status", "Consulta cancelada.");
+    }
+    const showRecord = modalPhase === "ready";
+    modalPhase = "idle";
+    dialog.close();
+    if (showRecord) get("record").focus({ preventScroll: true });
+  }
   function notice(id, message, kind = "") {
     const element = get(id);
     element.textContent = message;
@@ -38,8 +91,12 @@ if (typeof document !== "undefined") {
     notice("file-result", "");
     request?.abort();
     request = new AbortController();
+    const controller = request;
+    let timedOut = false;
+    const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, 15000);
     get("lookup-button").disabled = true;
     notice("lookup-status", "Consultando o registro do escritório...");
+    openConsultation();
     try {
       const response = await fetch("/api/documento?codigo=" + encodeURIComponent(code), {
         cache: "no-store", referrerPolicy: "no-referrer", signal: request.signal,
@@ -47,6 +104,7 @@ if (typeof document !== "undefined") {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Não foi possível consultar o documento.");
       if (sequence !== lookupSequence) return;
+      inspectRegistration(result, code, step);
       record = result;
       get("record-title").textContent = result.title;
       get("revision").textContent = "Revisão " + result.revision;
@@ -63,12 +121,31 @@ if (typeof document !== "undefined") {
         : "Assinaturas informadas pelo emissor. Esta consulta não verifica os certificados das assinaturas.";
       get("record").hidden = false;
       notice("lookup-status", "Registro localizado. Selecione o PDF recebido para conferir a integridade.");
+      modalPhase = "ready";
+      get("consultation-title").textContent = "Registro localizado";
+      get("consultation-status").textContent = result.signatureStatus === "pending"
+        ? "Cadastro localizado. Assinaturas pendentes. O PDF ainda não foi conferido."
+        : "Cadastro localizado. Certificados de assinatura não verificados. O PDF ainda não foi conferido.";
+      get("consultation-action").textContent = "Ver registro";
     } catch (error) {
-      if (sequence === lookupSequence && error.name !== "AbortError") notice("lookup-status", error.message || "Falha na consulta. Tente novamente.", "error");
+      if (sequence === lookupSequence) {
+        const message = timedOut ? "A consulta demorou demais. Tente novamente." : error.message || "Falha na consulta. Tente novamente.";
+        notice("lookup-status", message, "error");
+        step(error.step ?? 0, "error", "Consulta não concluída");
+        for (let index = (error.step ?? 0) + 1; index < 6; index++) step(index, "waiting", "Não conferido");
+        get("consultation-progress").value = error.step ?? 0;
+        modalPhase = "error";
+        get("consultation-title").textContent = "Não foi possível concluir";
+        get("consultation-status").textContent = message;
+        get("consultation-action").textContent = "Fechar";
+      }
     } finally {
+      clearTimeout(timeout);
       if (sequence === lookupSequence) get("lookup-button").disabled = false;
     }
   }
+  get("consultation-action").addEventListener("click", dismissConsultation);
+  dialog.addEventListener("cancel", event => { event.preventDefault(); dismissConsultation(); });
   get("lookup-form").addEventListener("submit", lookup);
   get("pdf-file").addEventListener("change", async event => {
     const selectedRecord = record;
