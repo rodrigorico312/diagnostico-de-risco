@@ -3,6 +3,9 @@
 The `/validar-documento` route is independent of the marketing app. It does not load
 third-party analytics, fonts, or pixels. Its QR codes identify private office records,
 not government registrations or verified digital signatures.
+The QR URL prefills the code only. No record request is made until the recipient
+submits the consultation form. Mobile layouts preserve browser zoom and keep
+supplementary issuer details and the technical digest collapsed by default.
 
 ## Registry
 

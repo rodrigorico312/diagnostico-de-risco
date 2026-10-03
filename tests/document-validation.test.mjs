@@ -67,3 +67,34 @@ test("invalid, empty and oversized files are rejected before hashing", async () 
   await assert.rejects(hashPdf(new File(["not-pdf"], "sample.pdf")), /não é um PDF/);
   await assert.rejects(hashPdf({ size: 30 * 1024 * 1024 }), /25 MB/);
 });
+test("QR prefills the code without fetching until the form is submitted", async () => {
+  const original = { document: globalThis.document, location: globalThis.location, fetch: globalThis.fetch };
+  const elements = new Map();
+  const events = new Map();
+  let requests = 0;
+  globalThis.document = { getElementById(id) {
+    if (!elements.has(id)) elements.set(id, { value: "", hidden: true,
+      addEventListener(type, callback) { events.set(id + ":" + type, callback); } });
+    return elements.get(id);
+  } };
+  globalThis.location = { search: "?codigo=" + code };
+  globalThis.fetch = async () => {
+    requests++;
+    return { ok: true, json: async () => sample };
+  };
+  try {
+    await import("../public/document-validation/validation.js?manual-submit-test");
+    assert.equal(elements.get("document-code").value, code);
+    assert.equal(elements.get("record"), undefined);
+    assert.equal(requests, 0);
+    await events.get("lookup-form:submit")({ preventDefault() {} });
+    assert.equal(requests, 1);
+    assert.equal(elements.get("record").hidden, false);
+    assert.equal(elements.get("subject").textContent, sample.subject.name);
+  } finally {
+    for (const [key, value] of Object.entries(original)) {
+      if (value === undefined) delete globalThis[key];
+      else globalThis[key] = value;
+    }
+  }
+});

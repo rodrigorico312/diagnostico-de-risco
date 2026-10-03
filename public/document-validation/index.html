@@ -25,24 +25,32 @@
       <section id="record" hidden aria-labelledby="record-title">
         <div class="section-heading"><h2 id="record-title"></h2><span id="revision"></span></div>
         <dl class="metadata">
-          <div><dt>Empresa</dt><dd id="subject"></dd></div>
-          <div><dt>CNPJ da empresa</dt><dd id="subject-cnpj"></dd></div>
-          <div><dt>Período</dt><dd id="period"></dd></div>
-          <div><dt>Natureza</dt><dd id="nature"></dd></div>
+          <div class="wide"><dt>Empresa</dt><dd id="subject"></dd></div>
+          <div class="mobile-wide"><dt>CNPJ da empresa</dt><dd id="subject-cnpj"></dd></div>
+          <div class="mobile-wide"><dt>Período</dt><dd id="period"></dd></div>
+          <div class="wide"><dt>Natureza</dt><dd id="nature"></dd></div>
           <div><dt>Emissão</dt><dd id="issued-on"></dd></div>
           <div><dt>Registro da versão</dt><dd id="registered-at"></dd></div>
-          <div><dt>Emissor</dt><dd id="issuer"></dd></div>
-          <div><dt>CNPJ do emissor</dt><dd id="issuer-cnpj"></dd></div>
-          <div class="wide"><dt>Responsável técnico</dt><dd id="accountant"></dd></div>
         </dl>
         <p id="signature-status" class="notice warning"></p>
+        <details class="registration-details">
+          <summary>Dados do emissor</summary>
+          <dl class="metadata">
+            <div class="wide"><dt>Emissor</dt><dd id="issuer"></dd></div>
+            <div class="wide"><dt>CNPJ do emissor</dt><dd id="issuer-cnpj"></dd></div>
+            <div class="wide"><dt>Responsável técnico</dt><dd id="accountant"></dd></div>
+          </dl>
+        </details>
         <section class="file-check" aria-labelledby="check-title">
           <h2 id="check-title">Conferência do arquivo</h2>
           <label for="pdf-file">PDF recebido</label>
           <input id="pdf-file" type="file" accept="application/pdf,.pdf" />
           <p class="secondary">A conferência acontece neste dispositivo. O PDF não é enviado ao site.</p>
           <p id="file-result" class="notice" role="status" aria-live="polite" hidden></p>
-          <dl class="fingerprint"><dt>SHA-256 da versão registrada</dt><dd><code id="registered-hash"></code></dd></dl>
+          <details class="fingerprint">
+            <summary>Identificador de integridade (SHA-256)</summary>
+            <code id="registered-hash"></code>
+          </details>
         </section>
         <p class="scope">O registro permite conferir a origem informada e a integridade desta versão. Não certifica receitas, não substitui assinaturas e não representa validação por órgão público.</p>
       </section>

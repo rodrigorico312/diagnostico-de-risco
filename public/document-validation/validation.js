@@ -91,6 +91,5 @@ if (typeof document !== "undefined") {
   const queryCode = new URLSearchParams(location.search).get("codigo");
   if (queryCode) {
     get("document-code").value = queryCode.slice(0, 50);
-    lookup();
   }
 }
