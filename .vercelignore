@@ -1,0 +1,9 @@
+node_modules/
+build/
+dist/
+coverage/
+.git/
+.vercel/
+.playwright-cli/
+.env*
+*.log
