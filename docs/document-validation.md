@@ -28,6 +28,12 @@ The code grants access to the limited registration metadata. Share it only with 
 document recipients. Random codes and noindex prevent enumeration and indexing, but
 are not a login system. The PDF itself is never served by this feature.
 
+`/api/qr-documento` renders a bounded PNG pointing only to the office portal. An
+optional `codigo` prefills that portal, but QR rendering does not assert that the
+code is registered. Four `parte` strips reconstruct one QR in a dynamic Sheets
+footer without fixed merged rows. Neither codes nor client records belong in
+public assets or repository files.
+
 ## Issuing a version
 
 1. Generate a fresh random code for a new revision and insert its URL into the PDF QR.
