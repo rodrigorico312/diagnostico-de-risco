@@ -1,5 +1,6 @@
 import { type FormEvent, useEffect, useState } from "react";
 import "./approved-client-access-page.css";
+import { portalApi } from "./portal-api";
 
 const WHATSAPP_SUPPORT_URL =
   "https://wa.me/5593992101980?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20para%20acessar%20a%20%C3%A1rea%20do%20cliente%20da%20Nacional%20Contabilidade.";
@@ -24,7 +25,9 @@ const accessBenefits = [
 
 export default function ApprovedClientAccessPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [notice, setNotice] = useState(false);
+  const [notice, setNotice] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [recovering, setRecovering] = useState(false);
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -35,9 +38,27 @@ export default function ApprovedClientAccessPage() {
     };
   }, []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setNotice(true);
+    if (busy) return;
+    const form = event.currentTarget;
+    const fields = new FormData(form);
+    setBusy(true);
+    setNotice("");
+    try {
+      if (recovering) {
+        const result = await portalApi<{ message: string }>("recover", { email: fields.get("email") });
+        setNotice(result.message);
+      } else {
+        await portalApi("login", { email: fields.get("email"), password: fields.get("password") });
+        form.reset();
+        window.location.replace("/area-do-cliente/painel");
+      }
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Não foi possível concluir o acesso.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -88,11 +109,11 @@ export default function ApprovedClientAccessPage() {
           <div className="approved-client-access__panel">
             <div className="approved-client-access__panel-heading">
               <p>Acesso reservado</p>
-              <h2>Entrar na área do cliente</h2>
-              <span>Informe suas credenciais individuais.</span>
+              <h2>{recovering ? "Recuperar seu acesso" : "Entrar na área do cliente"}</h2>
+              <span>{recovering ? "Informe o e-mail cadastrado para receber as instruções." : "Informe suas credenciais individuais."}</span>
             </div>
 
-            <form className="approved-client-access__form" onSubmit={handleSubmit}>
+            <form className="approved-client-access__form" onSubmit={handleSubmit} aria-busy={busy}>
               <label htmlFor="client-email">E-mail</label>
               <input
                 id="client-email"
@@ -103,7 +124,7 @@ export default function ApprovedClientAccessPage() {
                 required
               />
 
-              <div className="approved-client-access__password-heading">
+              {!recovering && <div className="approved-client-access__password-heading">
                 <label htmlFor="client-password">Senha</label>
                 <button
                   type="button"
@@ -113,26 +134,30 @@ export default function ApprovedClientAccessPage() {
                 >
                   {showPassword ? "Ocultar" : "Mostrar"}
                 </button>
-              </div>
-              <input
+              </div>}
+              {!recovering && <input
                 id="client-password"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 autoComplete="current-password"
                 placeholder="Digite sua senha"
                 required
-              />
+              />}
 
-              <button className="approved-client-access__submit" type="submit">
-                Entrar <span aria-hidden="true">→</span>
+              <button className="approved-client-access__submit" type="submit" disabled={busy}>
+                {busy ? "Aguarde…" : recovering ? "Enviar instruções" : "Entrar"} <span aria-hidden="true">→</span>
               </button>
 
               {notice && (
                 <p className="approved-client-access__notice" role="status" aria-live="polite">
-                  Não foi possível concluir o acesso. Confira seus dados ou solicite ajuda à equipe.
+                  {notice}
                 </p>
               )}
             </form>
+            <button type="button" className="approved-client-access__recover" disabled={busy}
+              onClick={() => { setRecovering(!recovering); setNotice(""); }}>
+              {recovering ? "Voltar para entrar" : "Esqueci minha senha"}
+            </button>
 
             <div className="approved-client-access__paths">
               <a href="/solicitar-acesso?perfil=cliente">

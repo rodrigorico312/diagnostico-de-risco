@@ -3,19 +3,43 @@
     {
       "source": "/validar-documento(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
-        { "key": "Referrer-Policy", "value": "no-referrer" },
-        { "key": "Cache-Control", "value": "no-store" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
       ]
     },
     {
       "source": "/document-validation/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
-        { "key": "Referrer-Policy", "value": "no-referrer" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
       ]
     },
     {
@@ -78,6 +102,22 @@
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
         }
       ]
     },
@@ -107,6 +147,40 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/portal-confirm/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/portal.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -122,8 +196,38 @@
     }
   ],
   "rewrites": [
-    { "source": "/validar-documento", "destination": "/document-validation/index.html" },
-    { "source": "/validar-documento/", "destination": "/document-validation/index.html" },
+    {
+      "source": "/area-do-cliente/confirmar",
+      "destination": "/portal-confirm/index.html"
+    },
+    {
+      "source": "/area-do-cliente/confirmar/",
+      "destination": "/portal-confirm/index.html"
+    },
+    {
+      "source": "/area-do-cliente/painel",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/area-do-cliente/painel/",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/area-do-cliente/senha",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/area-do-cliente/senha/",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/validar-documento",
+      "destination": "/document-validation/index.html"
+    },
+    {
+      "source": "/validar-documento/",
+      "destination": "/document-validation/index.html"
+    },
     {
       "source": "/preview/clinica-estetica",
       "destination": "/preview/clinica-estetica/index.html"
@@ -158,11 +262,11 @@
     },
     {
       "source": "/area-do-cliente",
-      "destination": "/index.html"
+      "destination": "/portal.html"
     },
     {
       "source": "/area-do-cliente/",
-      "destination": "/index.html"
+      "destination": "/portal.html"
     },
     {
       "source": "/area-da-equipe",

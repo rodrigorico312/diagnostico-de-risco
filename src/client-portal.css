@@ -1,0 +1,39 @@
+.client-portal { min-height: 100vh; background: #f8f6ef; color: #09253d; font-family: "Inter", sans-serif; }
+.client-portal__header { background: #fff; border-bottom: 1px solid #e0e4e8; padding: 22px max(24px, calc((100vw - 1160px) / 2)); display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+.client-portal__header img { width: 210px; max-width: 100%; }
+.client-portal__header > div { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; overflow-wrap: anywhere; }
+.client-portal__body { max-width: 1160px; margin: auto; padding: 40px 24px 72px; }
+.client-portal__eyebrow { color: #a67412; letter-spacing: .12em; font-size: 13px; font-weight: 700; }
+.client-portal h1 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; }
+.client-portal__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+.client-portal__card { padding: 28px; border: 1px solid #dfe5eb; border-radius: 20px; background: white; overflow-wrap: anywhere; }
+.client-portal__card h2 { margin-top: 0; font-size: 23px; }
+.client-portal__card p, .client-portal dd { line-height: 1.6; }
+.client-portal__card dl > div { padding: 10px 0; border-bottom: 1px solid #edf0f3; }
+.client-portal dt { font-size: 13px; color: #607186; }
+.client-portal dd { margin: 4px 0 0; font-weight: 600; white-space: pre-wrap; }
+.client-portal button { background: #0b2b49; color: #fff; border: 0; border-radius: 9px; padding: 12px 18px; cursor: pointer; font-weight: 600; }
+.client-portal button:disabled { opacity: .65; cursor: wait; }
+.client-portal input, .client-portal select, .client-portal textarea { box-sizing: border-box; padding: 12px; width: 100%; background: #fff; border: 1px solid #b5c5d4; border-radius: 9px; font: inherit; color: inherit; }
+.client-portal label { display: grid; gap: 8px; font-weight: 600; }
+.client-portal form { display: grid; gap: 20px; }
+.client-portal__company-picker { max-width: 640px; }
+.client-portal ul { padding: 0; list-style: none; }
+.client-portal li { display: flex; justify-content: space-between; gap: 16px; align-items: center; border-bottom: 1px solid #edf0f3; padding: 16px 0; }
+.client-portal li span { display: block; margin-top: 6px; font-size: 13px; color: #607186; }
+.client-portal li p { white-space: pre-wrap; }
+.client-portal a { color: #0b2b49; }
+.client-portal__notice { background: #fff; border: 1px solid #d5b976; border-radius: 12px; padding: 18px; margin-bottom: 24px; }
+.client-portal__password { max-width: 520px; }
+.client-portal__password > a { display: block; margin-bottom: 28px; }
+.client-portal__password form { margin-bottom: 24px; }
+.client-portal :focus-visible { outline: 3px solid #a87919; outline-offset: 3px; }
+.approved-client-access__recover { background: transparent; color: #0b2b49; border: 0; cursor: pointer; padding: 16px 0; font: inherit; font-weight: 600; }
+.approved-client-access__submit:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 700px) {
+  .client-portal__grid { grid-template-columns: 1fr; }
+  .client-portal__header { flex-wrap: wrap; padding: 20px; }
+  .client-portal__body { padding: 28px 18px 48px; }
+  .client-portal__card { padding: 22px; }
+  .client-portal li { flex-wrap: wrap; }
+}

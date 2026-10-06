@@ -8,3 +8,5 @@ coverage/
 !.env.example
 .vercel
 .env*.local
+.playwright-cli/
+output/playwright/
