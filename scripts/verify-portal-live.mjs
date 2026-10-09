@@ -8,6 +8,8 @@ import { handlePortal } from '../server/portal.mjs';
 if (process.env.PORTAL_VERIFY_REAL !== 'true') process.exit(0);
 assert.equal(process.env.SUPABASE_URL, 'https://cjqfurgqwlmfgyszcczk.supabase.co', 'Unexpected release-check database');
 const env = { ...process.env, PORTAL_ENABLED: 'true', VERCEL: '', PORTAL_ORIGIN: 'https://www.nacionalcon.com' };
+const target = process.env.PORTAL_VERIFY_TARGET;
+if (target) assert.equal(target, env.PORTAL_ORIGIN, 'Unexpected live API target');
 const admin = createClient(env.SUPABASE_URL, env.SUPABASE_SECRET_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 const users = [], companies = [], paths = [];
 function ok(result) { assert.equal(result.error, null, 'Provider operation failed'); return result.data; }
@@ -16,8 +18,15 @@ async function call(a, action, data = {}) {
   const read = action === 'me' || action === 'company';
   const query = new URLSearchParams({ action, ...(data.companyId ? { companyId: data.companyId } : {}) });
   const res = { headers: {}, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; }, setHeader(key, value) { this.headers[key] = value; } };
-  await handlePortal({ method: read ? 'GET' : 'POST', url: `/api/client-portal?${query}`, body: { action, ...data }, socket: { remoteAddress: a.ip },
-    headers: { origin: env.PORTAL_ORIGIN, 'content-type': 'application/json', cookie: [...a.cookies].map(([k,v]) => `${k}=${v}`).join('; ') } }, res, { env });
+  const request = { method: read ? 'GET' : 'POST', url: `/api/client-portal?${query}`, body: { action, ...data }, socket: { remoteAddress: a.ip },
+    headers: { origin: env.PORTAL_ORIGIN, 'content-type': 'application/json', cookie: [...a.cookies].map(([k,v]) => `${k}=${v}`).join('; ') } };
+  if (target) {
+    const response = await fetch(`${target}${request.url}`, { method: request.method, headers: request.headers,
+      body: read ? undefined : JSON.stringify(request.body), redirect: 'error', signal: AbortSignal.timeout(20000) });
+    res.code = response.status; res.body = await response.json();
+    res.headers['Cache-Control'] = response.headers.get('cache-control');
+    res.headers['Set-Cookie'] = response.headers.getSetCookie();
+  } else await handlePortal(request, res, { env });
   for (const cookie of res.headers['Set-Cookie'] || []) {
     assert.match(cookie, /HttpOnly/); assert.match(cookie, /Secure/); assert.match(cookie, /SameSite=Lax/);
     const [pair] = cookie.split(';'); const split = pair.indexOf('='); a.cookies.set(pair.slice(0, split), pair.slice(split + 1));
@@ -66,6 +75,7 @@ try {
   assert.equal((await call(c, 'login', { email: account.email, password: newPassword })).code, 200);
   assert.equal((await call(c, 'logout')).code, 200);
   console.log('PORTAL REAL: autenticação, cookies, isolamento Alfa/Beta, solicitações, storage, revogação, recuperação manual de uso único, nova senha e logout passaram. Nenhum e-mail enviado.');
+  console.log(target ? 'PORTAL REAL: verificação pela API HTTPS publicada em www.nacionalcon.com.' : 'PORTAL REAL: verificação do servidor contra Supabase real.');
 } finally {
   if (paths.length) ok(await admin.storage.from('portal-documents').remove(paths));
   if (companies.length) ok(await admin.from('portal_companies').delete().in('id', companies));
