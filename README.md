@@ -3,6 +3,13 @@
 Site institucional da Nacional Contabilidade, com landing page principal,
 pagina de links e formulario de lead para troca de contador.
 
+## Portal do cliente
+
+A implementação do acesso privado e o procedimento de configuração estão em
+[docs/client-portal.md](docs/client-portal.md). O acesso depende de Supabase,
+SMTP e variáveis de ambiente; permaneça com `PORTAL_ENABLED=false` até
+validar o ambiente. Para desenvolvimento com a API, use `npm run dev:portal`.
+
 ## Rodar localmente
 
 1. Instale as dependencias:

@@ -10,6 +10,8 @@ import ApprovedSwitchAccountantPage from "./ApprovedSwitchAccountantPage";
 import ApprovedLinksPage from "./ApprovedLinksPage";
 import ApprovedHomePage from "./ApprovedHomePage";
 import ApprovedClientAccessPage from "./ApprovedClientAccessPage";
+import ClientPortalPage from "./ClientPortalPage";
+import ClientPasswordPage from "./ClientPasswordPage";
 import RequestServicePage from "./RequestServicePage";
 import { usePageSeo } from "./usePageSeo";
 import { installLeadTracking, trackLeadEvent } from "./analytics";
@@ -2374,7 +2376,9 @@ export default function App() {
   const blogSlug = normalizedPath.startsWith("/blog/")
     ? normalizedPath.replace("/blog/", "")
     : undefined;
-  useEffect(() => installLeadTracking(), []);
+  useEffect(() => {
+    if (!normalizedPath.startsWith("/area-do-cliente")) return installLeadTracking();
+  }, [normalizedPath]);
 
   if (isLinksPage) {
     return (
@@ -2415,6 +2419,14 @@ export default function App() {
 
   if (isClientAccessPage) {
     return <ApprovedClientAccessPage />;
+  }
+
+  if (normalizedPath === "/area-do-cliente/painel") {
+    return <ClientPortalPage />;
+  }
+
+  if (normalizedPath === "/area-do-cliente/senha") {
+    return <ClientPasswordPage />;
   }
 
   if (isAccessPage && accessPortal) {
