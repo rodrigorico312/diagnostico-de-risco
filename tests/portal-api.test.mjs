@@ -75,15 +75,14 @@ test("empresa sem linha visível não chega a documentos ou solicitações", asy
   const { res } = await run({ method: "GET", url: `/api/client-portal?action=company&companyId=${companyId}`, client });
   assert.equal(res.statusCode, 404); assert.deepEqual(queried, ["portal_companies"]);
 });
-test("recuperação tem a mesma resposta quando o provedor não revela ou recusa a conta", async () => {
-  const bodies = [];
-  for (const error of [null, { message: "User not found" }]) {
-    const { res } = await run({ body: { action: "recover", email: user.email }, client: {
-      auth: { resetPasswordForEmail: async () => ({ error }) },
+test("recuperação pública nunca envia e-mail nem consulta a existência da conta", async () => {
+  for (const email of [user.email, "desconhecido@example.test"]) {
+    let sent = false;
+    const { res } = await run({ body: { action: "recover", email }, client: {
+      auth: { resetPasswordForEmail: async () => { sent = true; throw new Error("Envio proibido"); } },
     } });
-    assert.equal(res.statusCode, 200); bodies.push(res.body);
+    assert.equal(res.statusCode, 400); assert.equal(sent, false);
   }
-  assert.deepEqual(bodies[0], bodies[1]);
 });
 test("callback aceita apenas invite/recovery e não permite redirects arbitrários", async () => {
   const { res, calls } = await run({ body: { action: "confirm", type: "signup", token_hash: "a".repeat(64), next: "https://evil.example" } });

@@ -4,7 +4,7 @@ import { parseCookie, stringifySetCookie } from "cookie";
 import { createHmac } from "node:crypto";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const AUTH_ACTIONS = new Set(["login", "recover", "confirm"]);
+const AUTH_ACTIONS = new Set(["login", "confirm"]);
 export class PortalError extends Error {
   constructor(status, message) { super(message); this.status = status; }
 }
@@ -131,7 +131,7 @@ export async function handlePortal(request, response, dependencies = {}) {
     }
     const action = request.method === "GET" ? url.searchParams.get("action") : body.action;
     const permitted = request.method === "GET" ? ["me", "company"] :
-      ["login", "recover", "confirm", "password", "logout", "request", "download"];
+      ["login", "confirm", "password", "logout", "request", "download"];
     if (!permitted.includes(action)) throw new PortalError(400, "Operação inválida.");
     if (AUTH_ACTIONS.has(action)) {
       if (action !== "confirm") body.email = email(body.email);
@@ -146,13 +146,6 @@ export async function handlePortal(request, response, dependencies = {}) {
       if (error) throw new PortalError(401, "Não foi possível entrar. Confira os dados ou recupere seu acesso.");
       await currentUser(client);
       return response.status(200).json({ ok: true });
-    }
-    if (action === "recover") {
-      // Same response for existing and unknown accounts; provider errors never reveal account state.
-      await client.auth.resetPasswordForEmail(body.email, {
-        redirectTo: `${config.origin}/area-do-cliente/confirmar`,
-      });
-      return response.status(200).json({ ok: true, message: "Se houver uma conta, você receberá as instruções por e-mail." });
     }
     if (action === "confirm") {
       if (!["invite", "recovery"].includes(body.type) ||

@@ -1,11 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 
 try { process.loadEnvFile(".env.local"); } catch (error) { if (error.code !== "ENOENT") throw error; }
 const [command, inputPath] = process.argv.slice(2);
-if (!["company", "invite", "link", "revoke", "document"].includes(command) || !inputPath) {
-  console.error("Uso: node scripts/manage-portal.mjs company|invite|link|revoke|document arquivo.json");
+if (!["company", "invite", "recover", "link", "revoke", "document"].includes(command) || !inputPath) {
+  console.error("Uso: node scripts/manage-portal.mjs company|invite|recover|link|revoke|document arquivo.json");
   process.exit(1);
 }
 const uuid = (value) => {
@@ -43,17 +43,30 @@ try {
     const companyId = uuid(input.companyId);
     const company = result(await client.from("portal_companies").select("id").eq("id", companyId).maybeSingle());
     if (!company) throw new Error("Empresa inexistente.");
-    if (command === "invite") {
+    if (command === "invite" || command === "recover") {
       if (typeof input.email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email)) throw new Error("E-mail inválido.");
-      // This command sends an email. Run only for an explicitly requested, verified customer.
-      const invitation = result(await client.auth.admin.inviteUserByEmail(input.email, {
-        redirectTo: `${process.env.PORTAL_ORIGIN}/area-do-cliente/confirmar`,
+      if (!input.outputFile) throw new Error("Informe outputFile em local privado; o link não é enviado nem exibido nos logs.");
+      if (command === "recover") {
+        const userId = uuid(input.userId);
+        const account = result(await client.auth.admin.getUserById(userId)).user;
+        if (account.email?.toLowerCase() !== input.email.toLowerCase()) throw new Error("E-mail não corresponde ao usuário conferido.");
+        const member = result(await client.from("portal_memberships").select("user_id").eq("company_id", companyId).eq("user_id", userId).eq("active", true).maybeSingle());
+        if (!member) throw new Error("Usuário sem vínculo ativo com esta empresa.");
+      }
+      // generateLink does not send email. The owner verifies identity and shares privately.
+      const type = command === "invite" ? "invite" : "recovery";
+      const invitation = result(await client.auth.admin.generateLink({ type, email: input.email,
+        options: { redirectTo: `${process.env.PORTAL_ORIGIN}/area-do-cliente/confirmar` },
       }));
-      const membership = await client.from("portal_memberships").insert({ company_id: companyId, user_id: invitation.user.id });
-      if (membership.error) {
-        console.error("Convite enviado, mas o vínculo falhou. A conta permanece sem acesso a esta empresa. Vincule o usuário:", invitation.user.id);
-        process.exitCode = 1;
-      } else console.log("Convite enviado e vínculo criado. Usuário:", invitation.user.id);
+      if (command === "invite") {
+        const membership = await client.from("portal_memberships").insert({ company_id: companyId, user_id: invitation.user.id });
+        if (membership.error) throw new Error(`Vínculo falhou. Conta permanece sem acesso à empresa. Usuário: ${invitation.user.id}`);
+      }
+      const token = invitation.properties.hashed_token;
+      if (!token) throw new Error("Serviço não retornou link de definição de acesso.");
+      const url = `${process.env.PORTAL_ORIGIN}/area-do-cliente/confirmar#token_hash=${encodeURIComponent(token)}&type=${type}`;
+      await writeFile(input.outputFile, `${url}\n`, { encoding: "utf8", flag: "wx", mode: 0o600 });
+      console.log("Link individual salvo no arquivo privado indicado. Nenhum e-mail enviado. Compartilhe somente após conferir a identidade.");
     } else if (command === "link" || command === "revoke") {
       const userId = uuid(input.userId);
       result(await client.auth.admin.getUserById(userId));

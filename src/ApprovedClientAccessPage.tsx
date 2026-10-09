@@ -27,7 +27,6 @@ export default function ApprovedClientAccessPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
-  const [recovering, setRecovering] = useState(false);
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -46,14 +45,9 @@ export default function ApprovedClientAccessPage() {
     setBusy(true);
     setNotice("");
     try {
-      if (recovering) {
-        const result = await portalApi<{ message: string }>("recover", { email: fields.get("email") });
-        setNotice(result.message);
-      } else {
         await portalApi("login", { email: fields.get("email"), password: fields.get("password") });
         form.reset();
         window.location.replace("/area-do-cliente/painel");
-      }
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível concluir o acesso.");
     } finally {
@@ -109,8 +103,8 @@ export default function ApprovedClientAccessPage() {
           <div className="approved-client-access__panel">
             <div className="approved-client-access__panel-heading">
               <p>Acesso reservado</p>
-              <h2>{recovering ? "Recuperar seu acesso" : "Entrar na área do cliente"}</h2>
-              <span>{recovering ? "Informe o e-mail cadastrado para receber as instruções." : "Informe suas credenciais individuais."}</span>
+              <h2>Entrar na área do cliente</h2>
+              <span>Informe suas credenciais individuais.</span>
             </div>
 
             <form className="approved-client-access__form" onSubmit={handleSubmit} aria-busy={busy}>
@@ -124,7 +118,7 @@ export default function ApprovedClientAccessPage() {
                 required
               />
 
-              {!recovering && <div className="approved-client-access__password-heading">
+              <div className="approved-client-access__password-heading">
                 <label htmlFor="client-password">Senha</label>
                 <button
                   type="button"
@@ -134,18 +128,18 @@ export default function ApprovedClientAccessPage() {
                 >
                   {showPassword ? "Ocultar" : "Mostrar"}
                 </button>
-              </div>}
-              {!recovering && <input
+              </div>
+              <input
                 id="client-password"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 autoComplete="current-password"
                 placeholder="Digite sua senha"
                 required
-              />}
+              />
 
               <button className="approved-client-access__submit" type="submit" disabled={busy}>
-                {busy ? "Aguarde…" : recovering ? "Enviar instruções" : "Entrar"} <span aria-hidden="true">→</span>
+                {busy ? "Aguarde…" : "Entrar"} <span aria-hidden="true">→</span>
               </button>
 
               {notice && (
@@ -154,13 +148,12 @@ export default function ApprovedClientAccessPage() {
                 </p>
               )}
             </form>
-            <button type="button" className="approved-client-access__recover" disabled={busy}
-              onClick={() => { setRecovering(!recovering); setNotice(""); }}>
-              {recovering ? "Voltar para entrar" : "Esqueci minha senha"}
-            </button>
+            <a className="approved-client-access__recover" href={WHATSAPP_SUPPORT_URL} target="_blank" rel="noreferrer">
+              Esqueci minha senha — falar com a Nacional
+            </a>
 
             <div className="approved-client-access__paths">
-              <a href="/solicitar-acesso?perfil=cliente">
+              <a href={WHATSAPP_SUPPORT_URL} target="_blank" rel="noreferrer">
                 <span>Cliente sem acesso</span>
                 <strong>Solicitar ou recuperar acesso</strong>
               </a>
