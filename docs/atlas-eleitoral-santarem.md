@@ -11,7 +11,7 @@ O aplicativo React/TypeScript/Leaflet é compilado separadamente e entregue como
 - Fontes, hashes e notas: `/eleicoes/santarem/data/sources.json`.
 - Polígonos: `/eleicoes/santarem/data/bairros.geojson` e `municipio.geojson`.
 
-O mapa usa resultados oficiais do TSE por seção principal, 1º turno em CSV e 2º turno em 872 BUs conciliados com a totalização municipal. Mantém as lacunas de coordenadas e de bairros explícitas. Bairro do estabelecimento não representa necessariamente o voto de seus moradores. A malha de bairros é IBGE 2022 e não uma delimitação inventada para 2026. Os tratamentos e a cobertura estão na aba Qualidade e fontes.
+O mapa usa resultados oficiais do TSE por seção principal, 1º turno em CSV e 2º turno em 872 BUs conciliados com a totalização municipal. Agrupa os 304 locais pelos 56 nomes de bairros e localidades informados pelo TSE. Bairros urbanos, ribeirinhos, rural e planalto e demais localidades aparecem separados. A conferência cartográfica fica independente: 437 seções compatíveis, 125 divergentes, 309 fora da malha urbana e 1 com coordenada a conferir no segundo turno. As cores dos polígonos IBGE usam a posição da escola, sem misturar os nomes cadastrais divergentes. Bairro do estabelecimento não representa necessariamente o voto de seus moradores. A malha de bairros é IBGE 2022 e não uma delimitação inventada para 2026. Os tratamentos e a cobertura estão na aba Qualidade e fontes.
 
 ## Atualização
 
