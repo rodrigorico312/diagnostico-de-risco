@@ -197,6 +197,22 @@
   ],
   "rewrites": [
     {
+      "source": "/atlas/para",
+      "destination": "/atlas/para/index.html"
+    },
+    {
+      "source": "/atlas/para/",
+      "destination": "/atlas/para/index.html"
+    },
+    {
+      "source": "/eleicoes/para",
+      "destination": "/atlas/para/index.html"
+    },
+    {
+      "source": "/eleicoes/para/",
+      "destination": "/atlas/para/index.html"
+    },
+    {
       "source": "/eleicoes/santarem",
       "destination": "/eleicoes/santarem/index.html"
     },

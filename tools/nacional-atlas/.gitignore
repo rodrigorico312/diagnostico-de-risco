@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.sites-runtime/
+data/raw/
+*.log
+.env*
+.vercel/
+__pycache__/
