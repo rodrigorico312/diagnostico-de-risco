@@ -93,3 +93,30 @@ Territórios, períodos, medidas e fontes ficam separados. Novas camadas devem d
 - https://www.openstreetmap.org/copyright
 
 O manifesto registra as URLs específicas de cada totalização, dos BUs e dos arquivos, com SHA-256. Os arquivos publicados não incluem telefone do estabelecimento ou dados individuais de eleitores.
+
+
+## Bairros de Santarém, Alter do Chão e Belterra
+
+A camada de bairros agora colore e permite clicar nos 48 polígonos IBGE Censo 2022 de Santarém. A agregação usa `areaIbgeId`, definido pela posição da coordenada do estabelecimento. Não usa o nome cadastral para deslocar votos entre polígonos. Há 44 áreas com locais posicionados e quatro sem local posicionado no segundo turno; cinza/— significa ausência de estabelecimento no recorte, não ausência de eleitores residentes.
+
+Os atalhos Santarém / Alter / Belterra ficam acima do mapa. O seletor de área e os links compartilháveis usam `area`:
+
+- `/atlas/para/?turno=2&municipio=05355`: bairros de Santarém.
+- `/atlas/para/?turno=2&municipio=05355&area=alter-vila`: dois locais com os endereços explícitos “VILA DE ALTER DO CHÃO” e “COMUNIDADE UNIÃO DE ALTER DO CHÃO”. Não representa todos os moradores, limite legal da vila ou total do distrito.
+- `/atlas/para/?turno=2&municipio=05355&area=150680710`: distrito oficial de Alter do Chão, incluindo comunidades além da vila. São 25 locais com coordenadas dentro da malha original.
+- `/atlas/para/?turno=2&municipio=04804`: Belterra, 46 locais e sete grupos cadastrais no segundo turno. Um local não tem coordenada válida, mas seus votos seguem no total e na tabela. Não há polígonos de bairros de Belterra no arquivo PA_bairros_CD2022; não foram desenhados limites aproximados.
+
+Regerar os recortes após importar a base estadual:
+
+```powershell
+python scripts/import_territories.py
+npm test
+```
+
+O script baixa e conserva o ZIP oficial em `data/raw/PA_distritos_CD2022.zip`; grava geometria, método, IDs dos locais e SHA-256 em `public/para-data/territorios.json`. A seleção ponto/polígono usa a malha original; só a geometria visual é simplificada. Os resultados canônicos do TSE não são alterados. `attachAreas` adiciona a associação em memória tanto aos locais quanto às seções; filtros, exportação e comparação de turnos usam o mesmo recorte.
+
+Fonte de distritos: https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_de_setores_censitarios__divisoes_intramunicipais/censo_2022/distritos/shp/UF/PA_distritos_CD2022.zip
+
+Referência territorial complementar: https://servicodados.ibge.gov.br/api/v1/localidades/municipios/1506807/distritos
+
+Teste de conservação: somar os votos dos bairros e dos locais fora de um bairro reproduz exatamente o total municipal, sem duplicação. Distrito e vila são recortes alternativos, nunca somados como categorias mutuamente exclusivas. A tabela Áreas IBGE mostra todos os polígonos, inclusive sem escola no recorte. A tabela Cadastro TSE mantém separadamente os nomes registrados pela Justiça Eleitoral.
