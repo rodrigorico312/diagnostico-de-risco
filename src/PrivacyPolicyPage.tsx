@@ -87,7 +87,31 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
             <section>
-              <h2>5. Seus direitos</h2>
+              <h2>5. Guia gratuito pelo Instagram</h2>
+              <p>
+                Ao comentar a palavra GUIA em uma publicação habilitada da
+                Nacional Contabilidade, você solicita o envio do material no
+                Direct. Usamos os identificadores do comentário e da publicação,
+                o texto e os dados públicos retornados pela Meta para reconhecer
+                esse pedido, enviar uma resposta privada com o link e publicar
+                a confirmação quando a API aceitar o envio.
+              </p>
+              <p>
+                O processamento utiliza a plataforma Meta e uma automação própria
+                hospedada em servidor da Nacional. No fluxo ativo, o texto do
+                comentário é conservado por até 14 dias; os identificadores e
+                estados operacionais, por até 90 dias, para controlar duplicidade,
+                falhas e confirmações. A aceitação pela API é registrada
+                separadamente de eventual confirmação de entrega ou leitura.
+              </p>
+              <p>
+                O guia pode ser acessado sem cadastro. Para pedir a interrupção
+                desse tratamento ou a eliminação dos registros quando cabível,
+                utilize o canal de contato indicado nesta política.
+              </p>
+            </section>
+            <section>
+              <h2>6. Seus direitos</h2>
               <p>
                 Nos termos da Lei Geral de Proteção de Dados, você pode solicitar
                 confirmação do tratamento, acesso, correção, eliminação quando
@@ -97,7 +121,7 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
             <section>
-              <h2>6. Como falar conosco</h2>
+              <h2>7. Como falar conosco</h2>
               <p>
                 Para dúvidas ou solicitações relacionadas a dados pessoais,
                 escreva para <a href="mailto:rodrigorico312@gmail.com">rodrigorico312@gmail.com</a>
