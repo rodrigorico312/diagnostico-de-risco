@@ -197,6 +197,14 @@
   ],
   "rewrites": [
     {
+      "source": "/atlas",
+      "destination": "/atlas/index.html"
+    },
+    {
+      "source": "/atlas/",
+      "destination": "/atlas/index.html"
+    },
+    {
       "source": "/atlas/para",
       "destination": "/atlas/para/index.html"
     },

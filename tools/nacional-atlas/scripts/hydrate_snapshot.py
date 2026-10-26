@@ -9,6 +9,9 @@ if not (src/'index.json').exists():raise SystemExit('Informe --site-root com o c
 j=json.loads((src/'index.json').read_text(encoding='utf8'))
 if len(j['municipalities'])!=144 or not all(c['passed'] for c in j['meta']['checks']):raise SystemExit('Retrato não validado')
 shutil.copytree(src,root/'public/para-data',dirs_exist_ok=True)
+for name in ['world-data','context-data']:
+    context=repo/'public/atlas'/name
+    if context.exists():shutil.copytree(context,root/'public'/name,dirs_exist_ok=True)
 old=repo/'public/eleicoes/santarem/data'
 if old.exists():shutil.copytree(old,root/'public/data',dirs_exist_ok=True)
 print('Bases públicas restauradas. Execute npm ci, npm test e npm run dev.')

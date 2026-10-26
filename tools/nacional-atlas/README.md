@@ -1,6 +1,6 @@
 # Nacional Atlas
 
-Código do atlas estadual e do painel original de Santarém. Leia `README-PARA.md`.
+Mundo, municípios brasileiros e orçamento familiar: leia `README-MUNDO.md`. Eleições do Pará: leia `README-PARA.md`.
 
 ```powershell
 python scripts/hydrate_snapshot.py
@@ -9,4 +9,4 @@ npm test
 npm run dev
 ```
 
-As bases públicas versionadas são restauradas por `hydrate_snapshot.py`; os arquivos brutos do TSE não são incluídos no repositório. Para uma nova coleta, execute `python scripts/import_para.py`.
+Abra `/world.html` para o atlas mundial ou `/para.html` para o painel eleitoral, na porta informada. As bases públicas versionadas são restauradas pelo script; arquivos brutos e valores pessoais de orçamento não são publicados.
