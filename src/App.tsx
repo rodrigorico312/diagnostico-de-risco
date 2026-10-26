@@ -1,4 +1,4 @@
-import { type FormEvent, useEffect, useRef, useState } from "react";
+import { type FormEvent, lazy, Suspense, useEffect, useRef, useState } from "react";
 import PreviewHomePage from "./PreviewHomePage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
 import SolutionDetailPage, { solutionPages } from "./SolutionDetailPage";
@@ -22,6 +22,8 @@ import "./tools-editorial.css";
 import "./mobile-compact.css";
 import "./site-refinement.css";
 import "./links-page.css";
+
+const MeiGuidePage = lazy(() => import("./MeiGuidePage"));
 
 const INSTAGRAM_URL = "https://www.instagram.com/rodrigospcoelho";
 const EMAIL = "rodrigorico312@gmail.com";
@@ -2357,6 +2359,7 @@ export default function App() {
   const isOfficialHomePage = normalizedPath === "/";
   const isPreviewHomePage = normalizedPath === "/preview/nova-home";
   const isPrivacyPolicyPage = normalizedPath === "/politica-de-privacidade";
+  const isMeiGuidePage = normalizedPath === "/guia-mei";
   const solutionSlug = normalizedPath.startsWith("/solucoes/")
     ? normalizedPath.replace("/solucoes/", "")
     : undefined;
@@ -2379,6 +2382,10 @@ export default function App() {
   useEffect(() => {
     if (!normalizedPath.startsWith("/area-do-cliente")) return installLeadTracking();
   }, [normalizedPath]);
+
+  if (isMeiGuidePage) {
+    return <Suspense fallback={<p role="status">Abrindo o guia gratuito do MEI…</p>}><MeiGuidePage /></Suspense>;
+  }
 
   if (isLinksPage) {
     return (

@@ -197,6 +197,14 @@
   ],
   "rewrites": [
     {
+      "source": "/guia-mei",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guia-mei/",
+      "destination": "/index.html"
+    },
+    {
       "source": "/area-do-cliente/confirmar",
       "destination": "/portal-confirm/index.html"
     },

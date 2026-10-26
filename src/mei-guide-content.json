@@ -1,0 +1,942 @@
+{
+  "version": "web-v001",
+  "contentVersion": "guia-v002",
+  "checkedDate": "26/10/2026",
+  "sections": [
+    {
+      "id": "consultas",
+      "number": "01",
+      "title": "Faça as consultas",
+      "intro": [
+        {
+          "text": "Os passos abaixo vêm da orientação documental oficial. São caminhos de consulta, para você acessar como titular ou representante habilitado.",
+          "strong": false
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "heading",
+          "id": "item-2-0",
+          "title": "1. Veja o enquadramento no Simei",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-2-1",
+          "title": "",
+          "content": [
+            {
+              "text": "Abra o ",
+              "strong": false
+            },
+            {
+              "text": "Portal do Simples Nacional",
+              "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/",
+              "strong": true
+            },
+            {
+              "text": " e escolha ",
+              "strong": false
+            },
+            {
+              "text": "Consulta Optantes",
+              "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/aplicacoes.aspx?id=21",
+              "strong": true
+            },
+            {
+              "text": ". Informe o CNPJ e conclua a consulta. Leia a parte referente ao ",
+              "strong": false
+            },
+            {
+              "text": "Simei",
+              "strong": true
+            },
+            {
+              "text": " e os períodos anteriores. Anote início/fim dos períodos; guarde o resultado com a data da consulta.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "box",
+          "id": "item-2-2",
+          "title": "Como interpretar",
+          "content": [
+            {
+              "text": "“CNPJ ativo” e “optante pelo Simei” são informações diferentes. Exemplo hipotético: um CNPJ pode continuar ativo depois de sair do MEI. O cadastro de hoje, sozinho, não conta todo o histórico.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-2-3",
+          "title": "2. Localize os dados da dívida na Receita",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-2-4",
+          "title": "",
+          "content": [
+            {
+              "text": "No serviço ",
+              "strong": false
+            },
+            {
+              "text": "Consultar dívidas e pendências fiscais",
+              "href": "https://www.gov.br/pt-br/servicos/consultar-dividas-e-pendencias-fiscais",
+              "strong": true
+            },
+            {
+              "text": " [3]",
+              "href": "https://www.gov.br/pt-br/servicos/consultar-dividas-e-pendencias-fiscais",
+              "citation": true
+            },
+            {
+              "text": ", escolha iniciar e acesse como titular ou representante habilitado. Confira o contribuinte representado. Use o diagnóstico e o ",
+              "strong": false
+            },
+            {
+              "text": "Relatório de Situação Fiscal",
+              "strong": true
+            },
+            {
+              "text": " para identificar as pendências. Anote período, vencimento, origem e órgão cobrador; guarde os documentos disponíveis.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-2-5",
+          "title": "3. Confira também a dívida ativa, quando houver",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-2-6",
+          "title": "",
+          "content": [
+            {
+              "text": "Acesse o ",
+              "strong": false
+            },
+            {
+              "text": "Regularize",
+              "href": "https://www.regularize.pgfn.gov.br/",
+              "strong": true
+            },
+            {
+              "text": " pelo endereço oficial. A FAQ da PGFN orienta usar ",
+              "strong": false
+            },
+            {
+              "text": "Consulta Dívida Ativa",
+              "href": "https://www.regularize.pgfn.gov.br/",
+              "strong": true
+            },
+            {
+              "text": ". Leia o detalhamento e registre identificação da dívida e situação da negociação. Para saber o que existe em um parcelamento, obtenha também seu demonstrativo. ",
+              "strong": false
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "p",
+          "id": "item-2-7",
+          "title": "",
+          "content": [
+            {
+              "text": "Não apareceu informação suficiente?",
+              "strong": true
+            },
+            {
+              "text": " Registre o campo que falta; falha de consulta não decide o benefício. Para orientação na Receita, a página ",
+              "strong": false
+            },
+            {
+              "text": "Fale Conosco",
+              "href": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/fale-conosco",
+              "strong": false
+            },
+            {
+              "text": " ",
+              "strong": false
+            },
+            {
+              "text": " [8]",
+              "href": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/fale-conosco",
+              "citation": true
+            },
+            {
+              "text": " direciona o assunto ",
+              "strong": false
+            },
+            {
+              "text": "Simples Nacional e MEI",
+              "strong": true
+            },
+            {
+              "text": " ao ",
+              "strong": false
+            },
+            {
+              "text": "Receita Atende",
+              "href": "https://servicos.receitafederal.gov.br/servico/receita-atende",
+              "strong": true
+            },
+            {
+              "text": "; siga as instruções e acompanhe no sistema. Para cobrança da PGFN, veja o atendimento ",
+              "strong": false
+            },
+            {
+              "text": " [7]",
+              "href": "https://www.gov.br/pgfn/pt-br/canais_atendimento/atendimento-ao-contribuinte",
+              "citation": true
+            },
+            {
+              "text": ". Escolha o serviço adequado quando a dúvida exigir documentos ou análise específica.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ainda-mei",
+      "number": "02",
+      "title": "Continuo como MEI",
+      "intro": [
+        {
+          "text": "A conferência tem duas partes: o que já está em aberto e as contribuições que continuam vencendo. Não use o anúncio do perdão como confirmação de baixa de qualquer cobrança.",
+          "strong": false
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "check",
+          "id": "item-3-0",
+          "title": "Localizei natureza e vencimento da dívida antiga",
+          "content": [
+            {
+              "text": "A orientação da PGFN alcança a contribuição previdenciária própria do MEI vencida até 13/10/2026, com acréscimos, observados os requisitos. ICMS estadual e ISS municipal continuam devidos, mesmo no mesmo DAS. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "box",
+          "id": "item-3-1",
+          "title": "Competência e vencimento: exemplo hipotético",
+          "content": [
+            {
+              "text": "A competência é o mês a que a contribuição se refere. O vencimento é a data-limite para pagar. O DAS da competência outubro/2026 normalmente vence em novembro/2026. O nome “outubro” não significa que o pagamento vence em outubro.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "check",
+          "id": "item-3-2",
+          "title": "Organizei o pagamento das guias correntes devidas",
+          "content": [
+            {
+              "text": "O serviço oficial ",
+              "strong": false
+            },
+            {
+              "text": "Emitir DAS do MEI",
+              "href": "https://www.gov.br/pt-br/servicos/emitir-das-para-pagamento-de-tributos-do-mei",
+              "strong": true
+            },
+            {
+              "text": " [5]",
+              "href": "https://www.gov.br/pt-br/servicos/emitir-das-para-pagamento-de-tributos-do-mei",
+              "citation": true
+            },
+            {
+              "text": " direciona ao Programa Gerador de DAS do MEI (",
+              "strong": false
+            },
+            {
+              "text": "PGMEI",
+              "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/Aplicacoes/ATSPO/pgmei.app",
+              "strong": false
+            },
+            {
+              "text": ") ou ao ",
+              "strong": false
+            },
+            {
+              "text": "aplicativo MEI",
+              "href": "https://www.gov.br/pt-br/servicos/emitir-das-para-pagamento-de-tributos-do-mei",
+              "strong": false
+            },
+            {
+              "text": ". No emissor, identifique o contribuinte, selecione os períodos pertinentes, confira competência, vencimento e valores antes de obter a guia. Guarde o comprovante após pagar. Confira se a guia obtida corresponde ao período escolhido antes de pagar.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "box",
+          "id": "item-3-3",
+          "title": "Quais são os seis meses?",
+          "content": [
+            {
+              "text": "A lei exige pagamento em dia das contribuições da contrapartida de quem permanece MEI. Nossa leitura literal dos vencimentos subsequentes à vigência em 21/10 aponta novembro/2026 a abril/2027, referentes ordinariamente às competências outubro/2026 a março/2027. Essa leitura não é calendário operacional homologado; a FAQ consultada não lista os meses. Confira orientação posterior e mantenha os recolhimentos correntes pontuais. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "p",
+          "id": "item-3-4",
+          "title": "",
+          "content": [
+            {
+              "text": "Se a guia não aparecer no emissor:",
+              "strong": true
+            },
+            {
+              "text": " confirme se o débito está parcelado ou sob cobrança de outro órgão. O ",
+              "strong": false
+            },
+            {
+              "text": "PGMEI",
+              "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/Aplicacoes/ATSPO/pgmei.app",
+              "strong": false
+            },
+            {
+              "text": " não resolve qualquer tipo de negociação ou dívida ativa; use o canal identificado no extrato.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parcelamento",
+      "number": "03",
+      "title": "Tenho parcelamento",
+      "intro": [
+        {
+          "text": "Acordos ativos são alcançados pela lei dentro de seus requisitos. Cancelar voluntariamente antes não é condição para o crédito abrangido entrar. ",
+          "strong": false
+        },
+        {
+          "text": " [1]",
+          "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+          "citation": true
+        },
+        {
+          "text": " [2]",
+          "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+          "citation": true
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "check",
+          "id": "item-4-0",
+          "title": "Obtive o demonstrativo e identifiquei o responsável",
+          "content": [
+            {
+              "text": "Use o canal que administra o acordo: ",
+              "strong": false
+            },
+            {
+              "text": "Regularize",
+              "href": "https://www.regularize.pgfn.gov.br/",
+              "strong": false
+            },
+            {
+              "text": " para o que é cobrado pela PGFN; serviço correspondente da Receita para os débitos sob sua administração. Separe identificação do acordo, períodos, componentes e saldo.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "check",
+          "id": "item-4-1",
+          "title": "Conferi os créditos dentro do mesmo saldo",
+          "content": [
+            {
+              "text": "Procure contribuição própria do MEI e acréscimos, vencimentos e valores fora do alcance. O total da prestação ou a palavra “MEI” no nome do parcelamento não mostra sozinho quais componentes serão tratados pelo benefício.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "box",
+          "id": "item-4-2",
+          "title": "Exemplo resolvido: R$1.000 de saldo",
+          "content": [
+            {
+              "text": "Hipótese: R$900 são contribuição e acréscimos que atendem aos requisitos; R$100 são impostos locais. A parcela abrangida é R$900 e a remanescente é R$100. Não é proporção legal do DAS: é um exemplo para enxergar a composição. O resultado não é cancelar os R$1.000 inteiros.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-4-3",
+          "title": "O que fazer com o resultado da conferência?",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-4-4",
+          "title": "",
+          "content": [
+            {
+              "text": "Só existem créditos abrangidos:",
+              "strong": true
+            },
+            {
+              "text": " a FAQ prevê cancelamento do acordo em 01/01/2027. ",
+              "strong": false
+            },
+            {
+              "text": "Existem créditos abrangidos e remanescentes:",
+              "strong": true
+            },
+            {
+              "text": " a FAQ orienta solicitar revisão da negociação no ",
+              "strong": false
+            },
+            {
+              "text": "Regularize",
+              "href": "https://www.regularize.pgfn.gov.br/",
+              "strong": false
+            },
+            {
+              "text": " ou no ",
+              "strong": false
+            },
+            {
+              "text": "Portal de Serviços da Receita",
+              "href": "https://servicos.receitafederal.gov.br/",
+              "strong": false
+            },
+            {
+              "text": ", conforme quem administra. ",
+              "strong": false
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "p",
+          "id": "item-4-5",
+          "title": "",
+          "content": [
+            {
+              "text": "Como preparar essa revisão:",
+              "strong": true
+            },
+            {
+              "text": " guarde o demonstrativo, identifique os períodos e componentes e descreva qual parcela entende abrangida. A FAQ remete os detalhes operacionais a ato conjunto futuro; este guia não inventa um nome de formulário ou botão de remissão que ainda não foi confirmado.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "check",
+          "id": "item-4-6",
+          "title": "Defini a providência antes de interromper pagamentos",
+          "content": [
+            {
+              "text": "Se a composição não ficou clara, peça o detalhamento ao órgão. Cancelamento futuro não é autorização genérica para deixar de pagar hoje. Com a dívida extinta pelo benefício, acompanhe o saldo remanescente no canal competente.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "baixado",
+      "number": "04",
+      "title": "Baixei ou saí do MEI",
+      "intro": [
+        {
+          "text": "A diferença está no histórico: quando a alteração foi feita, desde quando vale e de quais períodos são as dívidas.",
+          "strong": false
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "check",
+          "id": "item-5-0",
+          "title": "Separei os documentos que mostram a mudança",
+          "content": [
+            {
+              "text": "Reúna comprovante de baixa ou comunicação/ato de desenquadramento ou exclusão, consulta dos períodos de opção e extratos da dívida. Anote a data do ato e a data de efeitos. Consulte a ",
+              "strong": false
+            },
+            {
+              "text": "seção de consultas",
+              "href": "#consultas",
+              "strong": false
+            },
+            {
+              "text": " para localizar o histórico.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "box",
+          "id": "item-5-1",
+          "title": "Entenda o efeito retroativo",
+          "content": [
+            {
+              "text": "Exemplo hipotético: uma decisão emitida em outubro determina que a saída vale desde janeiro. Outubro é a data do ato; janeiro é o início dos efeitos. Não tratar as duas datas como iguais ajuda a conferir o enquadramento exigido. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "check",
+          "id": "item-5-2",
+          "title": "Comparei a alteração com a publicação da lei",
+          "content": [
+            {
+              "text": "A publicação foi em 21/10/2026. Alteração posterior não afasta o benefício por si só; há exceção para efeito retroativo que descaracterize o enquadramento exigido. Para mudança anterior, os demais requisitos históricos precisam ser examinados. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "box",
+          "id": "item-5-3",
+          "title": "Não tenho mais DAS futuro. Fico excluído por isso?",
+          "content": [
+            {
+              "text": "A FAQ esclarece que a contrapartida de próximas contribuições não se aplica a quem baixou ou migrou de porte. Logo, ausência de novas guias não basta para excluir. Também não comprova, sozinha, os outros requisitos de qualquer caso antigo. Não crie contribuição de MEI que deixou de ser devida. ",
+              "strong": false
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "p",
+          "id": "item-5-4",
+          "title": "",
+          "content": [
+            {
+              "text": "Um caso para organizar:",
+              "strong": true
+            },
+            {
+              "text": " “Baixei em agosto/2026 e tenho dívida de quando era MEI.” O caminho é reunir origem, períodos e enquadramento histórico. Abrir outro CNPJ em novembro não reescreve essas informações nem substitui os requisitos do débito anterior.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "kind": "p",
+          "id": "item-5-5",
+          "title": "",
+          "content": [
+            {
+              "text": "Se precisar de esclarecimento:",
+              "strong": true
+            },
+            {
+              "text": " descreva a data do ato, seus efeitos e os períodos cobrados ao órgão competente. Guarde a resposta e os documentos; eles ajudam a conferir o fundamento da orientação recebida.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duvidas",
+      "number": "05",
+      "title": "Dúvidas que costumam ficar",
+      "intro": [
+        {
+          "text": "Estas respostas complementam os caminhos. Quando algo depende de documento ou de regra operacional, o motivo fica explícito.",
+          "strong": false
+        }
+      ],
+      "blocks": [
+        {
+          "kind": "heading",
+          "id": "item-6-0",
+          "title": "1. Preciso pedir agora? E quando acontece?",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-6-1",
+          "title": "",
+          "content": [
+            {
+              "text": "A FAQ da PGFN informa dispensa de solicitação neste momento e identificação/baixa a partir de 01/01/2027. Isso não garante atualização simultânea de todos os sistemas. A revisão de acordo misto e a condição relativa a ações judiciais têm tratamento próprio. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-6-2",
+          "title": "2. A guia que venceu em 20/10/2026 entra?",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-6-3",
+          "title": "",
+          "content": [
+            {
+              "text": "Pelo corte por vencimento da FAQ,20/10 é posterior a 13/10. Esse vencimento também é anterior à publicação de 21/10: não se transforma, por isso, em um dos vencimentos subsequentes da contrapartida. São dois testes diferentes. Caso ordinário, sem prorrogação específica. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-6-4",
+          "title": "3. Atrasar e pagar depois recupera o benefício?",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-6-5",
+          "title": "",
+          "content": [
+            {
+              "text": "A FAQ descreve cancelamento da remissão e recomposição da dívida por descumprir a pontualidade da contrapartida, com abatimento do pago. Quitar depois não garante restauração automática. Acordos extintos pelo benefício não reativam automaticamente. ",
+              "strong": false
+            },
+            {
+              "text": " [2]",
+              "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-6-6",
+          "title": "4. E o INSS dos meses perdoados?",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-6-7",
+          "title": "",
+          "content": [
+            {
+              "text": "Cancelar a cobrança não registra pagamento. Para conferir as contribuições, entre no ",
+              "strong": false
+            },
+            {
+              "text": "Meu INSS",
+              "href": "https://meu.inss.gov.br/",
+              "strong": false
+            },
+            {
+              "text": " ",
+              "strong": false
+            },
+            {
+              "text": " [9]",
+              "href": "https://www.gov.br/pt-br/servicos/emitir-extrato-de-contribuicao-cnis",
+              "citation": true
+            },
+            {
+              "text": ", busque ",
+              "strong": false
+            },
+            {
+              "text": "CNIS",
+              "href": "https://www.gov.br/pt-br/servicos/emitir-extrato-de-contribuicao-cnis",
+              "strong": true
+            },
+            {
+              "text": " em ",
+              "strong": false
+            },
+            {
+              "text": "Do que você precisa?",
+              "strong": true
+            },
+            {
+              "text": " e abra o serviço de extrato. Examine o histórico e a regra do benefício; remissão sozinha não cria meses pagos. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            },
+            {
+              "text": " [4]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-6-8",
+          "title": "5. Tenho ação judicial sobre essa dívida",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-6-9",
+          "title": "",
+          "content": [
+            {
+              "text": "O art. 6º trata de comprovar desistência/renúncia às pretensões sobre os créditos abrangidos. Isso não é desistir de qualquer ação. Confira os processos e as parcelas discutidas com quem responde pela ação. ",
+              "strong": false
+            },
+            {
+              "text": " [1]",
+              "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm",
+              "citation": true
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "id": "item-6-10",
+          "title": "6. Preciso pagar para saber o que fazer?",
+          "content": []
+        },
+        {
+          "kind": "p",
+          "id": "item-6-11",
+          "title": "",
+          "content": [
+            {
+              "text": "O guia e os serviços oficiais indicados oferecem caminhos gratuitos. Se precisar, use atendimento do órgão ",
+              "strong": false
+            },
+            {
+              "text": " [7]",
+              "href": "https://www.gov.br/pgfn/pt-br/canais_atendimento/atendimento-ao-contribuinte",
+              "citation": true
+            },
+            {
+              "text": " [8]",
+              "href": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/fale-conosco",
+              "citation": true
+            },
+            {
+              "text": ", respeitando seu escopo. Consultoria é opção para quem prefere delegar ou precisa de ajuda específica; informação essencial não fica reservada para a contratação.",
+              "strong": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "ativo",
+      "question": "“CNPJ ativo” prova que continuo como MEI.",
+      "correct": "false",
+      "explanation": "Situação cadastral e opção pelo Simei são informações diferentes. Confira o enquadramento e os períodos na Consulta Optantes.",
+      "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/aplicacoes.aspx?id=21",
+      "label": "Abrir Consulta Optantes"
+    },
+    {
+      "id": "saldo",
+      "question": "Todo o saldo de um parcelamento MEI terá o mesmo tratamento.",
+      "correct": "false",
+      "explanation": "É preciso conferir a natureza e o vencimento dos componentes. Um mesmo acordo pode reunir valores abrangidos e remanescentes.",
+      "href": "#parcelamento",
+      "label": "Reler o exemplo do parcelamento"
+    },
+    {
+      "id": "competencia",
+      "question": "Competência e vencimento são informações diferentes.",
+      "correct": "true",
+      "explanation": "A competência informa o período da contribuição; o vencimento informa o prazo para pagar. A competência outubro normalmente vence em novembro.",
+      "href": "#ainda-mei",
+      "label": "Reler competência e vencimento"
+    },
+    {
+      "id": "baixado",
+      "question": "Quem baixou precisa criar novas guias para completar seis.",
+      "correct": "false",
+      "explanation": "A FAQ da PGFN afasta a contrapartida de contribuições futuras para quem baixou ou migrou de porte. Os outros requisitos ainda precisam de conferência.",
+      "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei",
+      "label": "Ler a FAQ oficial da PGFN"
+    },
+    {
+      "id": "inss",
+      "question": "Um mês perdoado vira automaticamente mês pago no INSS.",
+      "correct": "false",
+      "explanation": "Cancelar a cobrança não registra um recolhimento. Confira seu histórico no extrato de contribuições (CNIS) e a regra do benefício.",
+      "href": "https://www.gov.br/pt-br/servicos/emitir-extrato-de-contribuicao-cnis",
+      "label": "Abrir o serviço de extrato CNIS"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "DAS",
+      "href": "https://www.gov.br/pt-br/servicos/emitir-das-para-pagamento-de-tributos-do-mei",
+      "content": [
+        {
+          "text": "Guia de pagamento do Simples Nacional. No MEI, pode reunir contribuição previdenciária própria e impostos locais.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "term": "Simei",
+      "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/aplicacoes.aspx?id=21",
+      "content": [
+        {
+          "text": "Sistema de recolhimento em valores fixos do MEI. Veja a opção e os períodos na ",
+          "strong": false
+        },
+        {
+          "text": "Consulta Optantes",
+          "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/aplicacoes.aspx?id=21",
+          "strong": false
+        },
+        {
+          "text": ".",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "term": "PGFN",
+      "href": "https://www.regularize.pgfn.gov.br/",
+      "content": [
+        {
+          "text": "Procuradoria-Geral da Fazenda Nacional, responsável pela cobrança da dívida ativa da União.",
+          "strong": false
+        }
+      ]
+    },
+    {
+      "term": "Crédito tributário",
+      "content": [
+        {
+          "text": "Valor que o Fisco tem a receber. Neste guia, é a dívida cobrada.",
+          "strong": false
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "1",
+      "title": "LC 238/2026, arts. 5º a 10",
+      "href": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp238.htm"
+    },
+    {
+      "id": "2",
+      "title": "PGFN - FAQ do perdão do MEI",
+      "href": "https://www.gov.br/pgfn/pt-br/servicos/perguntas-frequentes/perguntas-frequentes-perdao-do-mei"
+    },
+    {
+      "id": "3",
+      "title": "Receita - dívidas e pendências fiscais",
+      "href": "https://www.gov.br/pt-br/servicos/consultar-dividas-e-pendencias-fiscais"
+    },
+    {
+      "id": "4",
+      "title": "Lei 8.213/1991, arts. 27 e 29-A",
+      "href": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm"
+    },
+    {
+      "id": "5",
+      "title": "Emitir DAS para pagamento de tributos do MEI",
+      "href": "https://www.gov.br/pt-br/servicos/emitir-das-para-pagamento-de-tributos-do-mei"
+    },
+    {
+      "id": "6",
+      "title": "Simples Nacional - Consulta Optantes",
+      "href": "https://www8.receita.fazenda.gov.br/SimplesNacional/"
+    },
+    {
+      "id": "7",
+      "title": "PGFN - atendimento ao contribuinte",
+      "href": "https://www.gov.br/pgfn/pt-br/canais_atendimento/atendimento-ao-contribuinte"
+    },
+    {
+      "id": "8",
+      "title": "Receita - Fale Conosco",
+      "href": "https://www.gov.br/receitafederal/pt-br/canais_atendimento/fale-conosco"
+    },
+    {
+      "id": "9",
+      "title": "INSS - obter extrato de contribuição (CNIS)",
+      "href": "https://www.gov.br/pt-br/servicos/emitir-extrato-de-contribuicao-cnis"
+    }
+  ]
+}
