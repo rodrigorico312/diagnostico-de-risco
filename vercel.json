@@ -197,6 +197,14 @@
   ],
   "rewrites": [
     {
+      "source": "/eleicoes/santarem",
+      "destination": "/eleicoes/santarem/index.html"
+    },
+    {
+      "source": "/eleicoes/santarem/",
+      "destination": "/eleicoes/santarem/index.html"
+    },
+    {
       "source": "/guia-mei",
       "destination": "/index.html"
     },
