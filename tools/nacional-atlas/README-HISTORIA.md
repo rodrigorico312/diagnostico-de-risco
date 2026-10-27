@@ -6,13 +6,19 @@ Sem `visao`, um endereço antigo com `escala` ou `camada` abre o mapa de indicad
 
 ## Seleção histórica inicial
 
-48 acontecimentos, 64 referências e 16 nomeações selecionadas. Há lacunas importantes entre períodos; ausência de registro não significa ausência de acontecimento. Não é uma lista completa de ministros ou governos. Antes de 1500 há registros arqueológicos; `year=0` é somente um marcador de ordenação e aparece como período aproximado, sem exportar ano zero.
+56 acontecimentos, 73 referências e 16 nomeações selecionadas. Há lacunas importantes entre períodos; ausência de registro não significa ausência de acontecimento. Não é uma lista completa de ministros ou governos. Antes de 1500 há registros arqueológicos; `year=0` é somente um marcador de ordenação e aparece como período aproximado, sem exportar ano zero.
 
 Fontes oficiais e institucionais sustentam a maioria dos registros. Referências de pesquisa têm tipo próprio. O caso de passaportes de Flávio em 2026 está classificado como notícia, com a reportagem identificada. Nesta coleta não foram obtidos número do processo nem decisão original; o registro não afirma fuga, culpa, perseguição ou motivação partidária. Não foi incluída como fato a antiga alegação de prorrogação de votação por Zanin.
 
 Os textos separam contexto, decisão, efeitos descritivos, interpretação e limites. Uma lei demonstra o desenho normativo, não a eficácia. Nomeações não demonstram controle político; coincidência temporal ou vínculos por tema não demonstram causalidade. Números de julgamentos têm fase processual explícita (por exemplo, mérito da AP 470 em 2012, antes de recursos posteriores). Quando só sínteses institucionais foram lidas, não se afirma leitura integral do acórdão.
 
 ## Funcionalidades
+
+- **Falas e documentos**: seleção inicial de três registros primários (Ulysses/1988, Carta de Lula/2002, Bolsonaro/2016), oito novos acontecimentos de contexto e desdobramentos, nove novas fontes. Não é amostra representativa nem ranking de políticos.
+- Trecho literal com autor, cargo na época, data do acontecimento, localizador dentro da fonte, contexto declarado e limites sobre intenção. Data de republicação não substitui a data histórica.
+- Trilha do episódio de 2016: comando de Ustra, prisão/tortura de Dilma, processo civil Teles no TJSP e no STJ e resultado no Conselho de Ética. Não confundir responsabilidade civil com condenação penal ou atribuir tortura pessoal contra Dilma a Ustra com essas fontes.
+- Mapa atual de referências municipais (Brasília/DF e São Paulo/SP) associado aos documentos. Marcadores usam o centro do enquadramento da malha municipal simplificada do IBGE, não endereços ou fronteiras históricas. A carta de 2002 é localizada pela cidade de assinatura, sem afirmar o local exato de divulgação. Registros sem referência seguem na lista e nas contagens.
+- Novos filtros por tipo de registro e município. A entrada na aba de falas abre toda a seleção; filtros podem ser reaplicados em seguida. O CSV inclui trecho, fonte, limites e precisão municipal, sem anotações privadas.
 
 - Navegação temporal com reprodução: percorre apenas anos com registros, sem interpolar fatos nem representar duração pelo espaçamento do controle.
 - Aba **Mapa histórico**, integrada ao mesmo endereço (`h_tela=explorer&m_ano=1000`), com motor InvaderGIS: mapa temporal, relações, governantes, comparação e biblioteca de fontes. O ano do mapa é sincronizado por mensagens verificadas e pode ser compartilhado. O link do Atlas não preserva posição ou entidade selecionada dentro do mapa.
@@ -26,6 +32,8 @@ Os textos separam contexto, decisão, efeitos descritivos, interpretação e lim
 - CSV com fontes e limites; download do JSON integral com metadados e hashes dos arquivos editoriais de entrada.
 
 ## Reproduzir
+
+`python scripts/verify_statements.py` consulta separadamente as três fontes primárias HTML dos trechos selecionados, extrai texto e normaliza espaços, Unicode/capitalização e espaços antes da pontuação para conferir a citação. O relatório `history-data/statements-audit.json` registra URL, consulta, tamanho, SHA-256 e resultado, inclusive falhas de acesso. A conferência não gera fatos nem atesta a veracidade de afirmações feitas pelo autor; não roda automaticamente durante a compilação. Nesta revisão, os três trechos foram encontrados (HTTP 200).
 
 ### Mapa InvaderGIS para estudo pessoal
 
@@ -42,7 +50,7 @@ git -C ../referencias/InvaderGIS checkout c2acb1e9cddd75ded98246f8c518ac9acc74a5
 python scripts/prepare_invadergis.py --source ../referencias/InvaderGIS
 ```
 
-O script aplica adaptações idempotentes (caminho, alias Windows, tipos Node, tema, integração de ano, tradução parcial, manifesto), valida, compila e instala os arquivos estáticos em `public/invadergis`. Nenhum serviço pago ou chave de API é necessário para esse motor e essa base. Cada referência e as licenças das fontes permanecem consultáveis. A geração de estatísticas brasileiras continua independente:
+O script aplica adaptações idempotentes (caminho, alias Windows, tipos Node, tema, integração de ano, tradução parcial, manifesto), valida, compila e instala os arquivos estáticos em `public/invadergis`. Nenhum serviço pago ou chave de API é necessário para esse motor e essa base. Cada referência e as licenças das fontes permanecem consultáveis. A geração de estatísticas brasileiras continua independente. Para regenerar a cronologia, execute `python scripts/build_history.py`; o script reúne `research/foundations.json`, `justice.json`, `root.json` e `statements.json`, valida vínculos entre coleções e extrai `history-data/places.geojson` da malha municipal local do IBGE, com hash de origem. A seleção documental é editorial, sem ingestão automática de afirmações ou intenção:
 
 ```powershell
 npm ci

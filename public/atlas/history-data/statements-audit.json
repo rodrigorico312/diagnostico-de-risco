@@ -1,0 +1,32 @@
+{
+  "method": "HTML text extraction; whitespace/NFKC/case normalization and removal of spacing before punctuation. Confirms the excerpt occurs, not the truth of its claims.",
+  "records": [
+    {
+      "event": "bolsonaro-ustra-2016",
+      "url": "https://www.camara.leg.br/internet/sitaqweb/TextoHTML.asp?etapa=5&nuSessao=091.2.55.O&nuQuarto=3&nuOrador=1&nuInsercao=359&dtHorarioQuarto=14%3A04",
+      "checkedAt": "2026-10-27T21:43:43.599326+00:00",
+      "status": 200,
+      "sha256": "378e14926570f4cab109608fbf0cfb9224337247b36ad4a45ed219a3c32b818a",
+      "bytes": 8559,
+      "quotationFound": true
+    },
+    {
+      "event": "ulysses-discurso-1988",
+      "url": "https://www.camara.leg.br/radio/programas/277285-integra-do-discurso-presidente-da-assembleia-nacional-constituinte-dr-ulysses-guimaraes-10-23/?pagina=1",
+      "checkedAt": "2026-10-27T21:43:44.037295+00:00",
+      "status": 200,
+      "sha256": "62250aa625083ad7c5d9eb78c81dab8e32bc11a1eeb55d2eebbd40a30810df3e",
+      "bytes": 50931,
+      "quotationFound": true
+    },
+    {
+      "event": "lula-carta-2002",
+      "url": "https://fpabramo.org.br/carta-ao-povo-brasileiro-por-luiz-inacio-lula-da-silva/",
+      "checkedAt": "2026-10-27T21:43:44.352503+00:00",
+      "status": 200,
+      "sha256": "06079d94dad2f880a86a86264dd71e191a7f34d873200c394a05ed7922875e82",
+      "bytes": 445083,
+      "quotationFound": true
+    }
+  ]
+}
