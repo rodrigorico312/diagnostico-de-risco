@@ -5,7 +5,7 @@ Usage: git clone https://github.com/g-lanza/InvaderGIS.git ../referencias/Invade
 The upstream checkout must be at UPSTREAM_COMMIT; adaptations are idempotent.
 """
 from pathlib import Path
-import argparse, datetime, json, os, shutil, subprocess
+import argparse, datetime, json, os, shutil, subprocess, sys
 
 ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM_COMMIT = 'c2acb1e9cddd75ded98246f8c518ac9acc74a593'
@@ -121,6 +121,7 @@ metadata = {'project':'InvaderGIS','upstream':'https://github.com/g-lanza/Invade
  'coverage':{'startYear':500,'endYear':1500,'focus':'Europa medieval e regiões próximas'},
  'changes':['Base /atlas/invadergis/ e alias Windows compatível com tipos Node 22.20.0','Tema escuro inicial','Atalhos de ano sincronizados com Nacional Atlas','Guia automático desativado no modo incorporado','Tradução parcial dos comandos principais','Manifesto local e aviso noindex','Índices por ano não utilizados omitidos; índice temporal calculado na memória pelo motor original'],
  'validation':{'report':'validation.txt','scope':'Validador upstream: 12273 registros, 12 tipos; não audita integralmente os 16415 registros compilados','result':'0 erros e 106 avisos; inclui referências e vínculos não resolvidos'},
- 'limitations':['Base experimental de terceiros; referências e vínculos incompletos, ver validation.txt','Não representa a história completa do mundo','Interface e corpus majoritariamente em inglês','Link externo do Nacional Atlas preserva o ano, não a posição do mapa ou a seleção de entidades']}
+ 'limitations':['Base experimental de terceiros; referências e vínculos incompletos, ver validation.txt','Não representa a história completa do mundo','Explorador original em inglês; leitura estruturada em português disponível no Atlas','Link externo do Nacional Atlas preserva o ano, não a posição do mapa ou a seleção de entidades']}
 (destination/'integration.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding='utf-8')
+subprocess.run([sys.executable,str(ROOT/'scripts/build_medieval_pt.py')],check=True)
 print(json.dumps({'destination':str(destination),'upstreamCommit':commit,'files':sum(p.is_file() for p in destination.rglob('*'))}))

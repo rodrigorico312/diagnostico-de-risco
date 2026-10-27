@@ -77,3 +77,16 @@ python scripts/package_context.py --destination C:/caminho/do/repositorio/public
 O empacotador exige destino terminando em `public/atlas`, verifica as bases e copia assets, `world-data`, `context-data`, `para-data` e `history-data`. `world.html` contém a entrada React unificada e é publicado como `index.html`. Não é mais necessário compilar o módulo eleitoral com base separada para a navegação principal. A configuração de rotas está no `vercel.json` do repositório do domínio.
 
 Código: `src/atlas/` (navegação e compatibilidade), `src/history/` (cronologia), `src/world/` (indicadores) e `src/para/` (eleições). As fontes eleitorais e estatísticas mantêm sua documentação própria. Este módulo não altera votos, coordenadas ou séries oficiais.
+
+
+### Leitura cartográfica em português e guia de estudo (27/10/2026)
+
+A aba Mapa histórico agora abre uma leitura própria em português, construída com Leaflet e os mesmos 306 registros territoriais da versão fixada do InvaderGIS. Nomes, tipos, regiões, situação editorial e confiança receberam tradução editorial explícita em `research/medieval-pt.json`. Não traduzimos automaticamente as narrativas extensas. O explorador original e suas funções avançadas continuam acessíveis como opção identificada em inglês; títulos bibliográficos conservam o idioma de publicação.
+
+Execute `python scripts/build_medieval_pt.py` depois de restaurar `public/invadergis`; `prepare_invadergis.py` também o executa ao terminar. O catálogo derivado `history-data/medieval-pt.json` preserva IDs, datas e referências, inclui os hashes SHA-256 do JSON territorial e da camada GeoJSON original. Os desenhos são copiados da camada preparada pelo próprio InvaderGIS, sem alteração de coordenadas ou inferência sobre arrays legados que o upstream não publicou como geometria. A camada de continentes é Natural Earth local, preservada com os créditos do upstream, sem imagens de mapas atuais ou novas consultas a terceiros.
+
+A representação usa exclusivamente o último snapshot com ano menor ou igual ao escolhido e entidades dentro do período declarado pela base (extremos inclusivos). Não interpola coordenadas, não antecipa desenhos futuros e mantém fichas sem desenho na lista. Sobreposições, registros duplicados e lacunas do catálogo impedem interpretar contagens de fichas como quantidade de países, habitantes ou cobertura integral. Estado editorial e confiança são declarações do upstream, não auditoria independente.
+
+Controles permitem buscar nomes em português, filtrar região, escolher 500–1500, clicar em polígonos ou fichas e consultar as fontes. O botão da área brasileira explicita a falta de polígonos históricos brasileiros; o acesso à trilha arqueológica não inventa limites indígenas. A cronologia brasileira e o mapa medieval usam bases e controles temporais independentes.
+
+O botão recolhível Como estudar e a aba Fontes e método explicam cada área do Atlas, a leitura de documentos, limites causais e anotações privadas. Atalhos abrem marcos da coleção com filtros reiniciados. O guia não acrescenta fatos históricos, inferências sobre intenções ou dados populacionais.
