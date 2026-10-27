@@ -1,0 +1,918 @@
+{
+  "sources": [
+    {
+      "id": "olavo-obras",
+      "title": "Olavo de Carvalho — bibliografia no arquivo do autor",
+      "url": "https://olavodecarvalho.org/obras-publicadas/",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Fonte do próprio autor para títulos e anos; não é avaliação independente das obras."
+    },
+    {
+      "id": "olavo-individuo",
+      "title": "Olavo de Carvalho — Observações finais de A Nova Era e a Revolução Cultural",
+      "url": "https://olavodecarvalho.org/observacoes-finais-a-nova-era-e-a-revolucao-cultural/",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Excerto de edição revista, encerrado com Rio, março de 1994. O dia atribuído à postagem não foi tomado como dia da primeira publicação do livro."
+    },
+    {
+      "id": "olavo-cof",
+      "title": "Seminário de Filosofia — catálogo do Curso Online de Filosofia",
+      "url": "https://olavodecarvalho.com.br/cursos/curso-online-de-filosofia-cof",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Catálogo do responsável pelo curso: primeira aula em 14/03/2009. Conteúdo pago não foi acessado; o título não prova o conteúdo integral da aula."
+    },
+    {
+      "id": "olavo-critica",
+      "title": "Revista Brasileira de Ciência Política — Antigramscismo na América Latina",
+      "url": "https://www.scielo.br/j/rbcpol/a/cNMMcJJgvqbnjP3VKpkmKPQ",
+      "kind": "research",
+      "checkedAt": "2026-10-27",
+      "note": "Pesquisa acadêmica sobre circulação e transformação de ideias; sua interpretação é identificada como análise, não como fala de Olavo."
+    },
+    {
+      "id": "fraga-ancap",
+      "title": "Daniel Fraga — Anarcocapitalismo: o futuro (vídeo original)",
+      "url": "https://www.youtube.com/watch?v=5-K60s27UkU",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Título, canal e publicação conferidos nos metadados do vídeo. Timestamp original 2012-08-17T17:13:03-07:00; data da ficha normalizada para UTC. Não foi produzida transcrição da fala."
+    },
+    {
+      "id": "fraga-bitcoin",
+      "title": "Daniel Fraga — Bitcoin seja louvado (vídeo original)",
+      "url": "https://www.youtube.com/watch?v=f1mRsTL3HQA",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Título, canal e publicação conferidos nos metadados. Timestamp original 2012-12-08T20:39:11-08:00; data da ficha normalizada para UTC. Não foi produzida transcrição da fala."
+    },
+    {
+      "id": "fraga-recepcao",
+      "title": "Livecoins — Bitcoin seja louvado, por Dâniel Fraga (27/05/2020)",
+      "url": "https://livecoins.com.br/bitcoin-seja-louvado-por-daniel-fraga/",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Relato jornalístico retrospectivo, usado como tal para a interpretação das posições do autor; não substitui a transcrição do vídeo."
+    },
+    {
+      "id": "manifesto-edicao",
+      "title": "Marx e Engels — Manifesto do Partido Comunista: ficha da edição",
+      "url": "https://www.marxists.org/portugues/marx/1848/ManifestoDoPartidoComunista/index.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Texto histórico em tradução autorizada de José Barata Moura. Primeira publicação: fevereiro de 1848; dia não estabelecido nesta ficha. Notas editoriais do arquivo não são falas dos autores."
+    },
+    {
+      "id": "manifesto-cap2",
+      "title": "Marx e Engels — Manifesto, capítulo II",
+      "url": "https://www.marxists.org/portugues/marx/1848/ManifestoDoPartidoComunista/cap2.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Documento programático dos autores. Confirma a proposta defendida, não a veracidade de todas as suas teses."
+    },
+    {
+      "id": "capital-prefacio",
+      "title": "Karl Marx — prefácio de O Capital, 25/07/1867",
+      "url": "https://www.marxists.org/portugues/marx/1867/07/25.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Tradução portuguesa do prefácio. A data é a assinatura do prefácio, não o dia de lançamento do volume."
+    },
+    {
+      "id": "bernstein-edicao",
+      "title": "Eduard Bernstein — Evolutionary Socialism: edição de 1899",
+      "url": "https://www.marxists.org/reference/archive/bernstein/works/1899/evsoc/",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Original alemão de 1899; tradução inglesa publicada em 1907. O resumo do Atlas está em português; o documento consultado está em inglês."
+    },
+    {
+      "id": "bernstein-democracia",
+      "title": "Eduard Bernstein — Democracia e socialismo",
+      "url": "https://www.marxists.org/reference/archive/bernstein/works/1899/evsoc/ch03-2.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Texto do autor em tradução inglesa; seção III(c). Não se trata de uma posição compartilhada por todas as correntes socialistas."
+    },
+    {
+      "id": "lenin-edicao",
+      "title": "Lênin — O Estado e a Revolução: edição e cronologia",
+      "url": "https://www.marxists.org/portugues/lenin/1917/08/estadoerevolucao/index.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "O arquivo diferencia redação em agosto–setembro de 1917 de primeira edição em 1918. Notas editoriais são separadas do texto autoral."
+    },
+    {
+      "id": "lenin-cap1",
+      "title": "Lênin — O Estado e a Revolução, capítulo I",
+      "url": "https://www.marxists.org/portugues/lenin/1917/08/estadoerevolucao/cap1.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Tradução autorizada; seção 4 trata da revolução violenta e da extinção do Estado. Proposta teórica não comprova seus resultados históricos."
+    },
+    {
+      "id": "nazista-programa",
+      "title": "Yale / Avalon — programa do NSDAP, 25 pontos",
+      "url": "https://avalon.law.yale.edu/imt/nsdappro.asp",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Documento partidário histórico, em tradução inglesa. Conteúdo racista e antissemita é examinado criticamente; não é apresentado como descrição verdadeira de grupos humanos."
+    },
+    {
+      "id": "nazista-contexto",
+      "title": "USHMM — O Partido Nazista",
+      "url": "https://encyclopedia.ushmm.org/content/pt-br/article/the-nazi-party-1",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Museu do Holocausto dos Estados Unidos; síntese histórica em português contextualiza o programa de 1920 e o caráter antidemocrático e antissemita do partido."
+    },
+    {
+      "id": "hitler-livro",
+      "title": "USHMM — Mein Kampf",
+      "url": "https://encyclopedia.ushmm.org/content/pt-br/article/mein-kampf",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Síntese crítica institucional, não transcrição integral do livro. Distingue primeiro volume de 1925 e segundo de 1926."
+    },
+    {
+      "id": "hitler-poder",
+      "title": "USHMM — Adolf Hitler e a ascensão nazista ao poder",
+      "url": "https://encyclopedia.ushmm.org/content/pt-br/article/the-nazi-rise-to-power",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Síntese histórica em português sobre nomeação, alianças, violência e passagem da democracia à ditadura."
+    },
+    {
+      "id": "wannsee-protocolo",
+      "title": "Casa da Conferência de Wannsee — protocolo e documentos",
+      "url": "https://www.ghwk.de/en/conference/protocol-and-documents",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Memorial que disponibiliza o original alemão e traduções do protocolo de 20/01/1942. A ficha não atribui participação de Hitler na reunião."
+    },
+    {
+      "id": "wannsee-contexto",
+      "title": "Casa da Conferência de Wannsee — contexto da reunião de 20/01/1942",
+      "url": "https://www.ghwk.de/en/conference",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Contexto institucional: coordenação entre órgãos nazistas para a deportação e o assassinato dos judeus europeus, já em curso."
+    }
+  ],
+  "events": [
+    {
+      "id": "manifesto-1848",
+      "year": 1848,
+      "label": "Marx e Engels publicam o Manifesto do Partido Comunista",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Karl Marx",
+        "Friedrich Engels",
+        "Liga dos Comunistas"
+      ],
+      "summary": "O documento apresenta luta de classes e um programa de transformação da propriedade burguesa.",
+      "context": "Texto escrito para a Liga dos Comunistas, publicado em Londres em fevereiro de 1848.",
+      "decision": "Os autores defendem a organização política do proletariado.",
+      "effects": [
+        "Registro de um programa comunista e de seus objetivos declarados."
+      ],
+      "limits": "Não representa todo socialismo nem comprova, por si, efeitos de governos posteriores. Fevereiro de 1848 é conhecido; não se inventa um dia.",
+      "sources": [
+        "manifesto-edicao",
+        "manifesto-cap2"
+      ],
+      "evidence": "documented",
+      "related": [
+        "capital-1867",
+        "bernstein-1899",
+        "lenin-redacao-1917"
+      ],
+      "area": "Contexto internacional",
+      "statement": {
+        "kind": "publication",
+        "datePrecision": "year",
+        "speaker": "Karl Marx e Friedrich Engels",
+        "roleAtTime": "Autores do programa da Liga dos Comunistas",
+        "venue": "Manifesto do Partido Comunista, capítulo II",
+        "excerpt": "O capital não é, portanto, um poder pessoal, é um poder social.",
+        "source": "manifesto-cap2",
+        "locator": "Capítulo II; parágrafo iniciado por O capital não é",
+        "declaredContext": "A frase fundamenta a defesa da transformação da propriedade do capital; o capítulo distingue capital e apropriação pessoal.",
+        "intentLimit": "Um trecho não resume toda a obra; resultados e interpretações posteriores precisam de documentos próprios."
+      }
+    },
+    {
+      "id": "capital-1867",
+      "year": 1867,
+      "label": "Marx assina o prefácio da primeira edição de O Capital",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Karl Marx"
+      ],
+      "summary": "Marx declara que investiga a produção capitalista e as relações de produção e troca.",
+      "context": "O prefácio acompanha o primeiro volume e explica escolhas de método e exemplos.",
+      "decision": "O autor toma a Inglaterra como principal referência empírica na exposição.",
+      "effects": [
+        "Documento para estudar o método declarado e a crítica da economia política."
+      ],
+      "limits": "25/07/1867 é a assinatura do prefácio, não a data de lançamento. Sua tese é objeto de debate econômico, não verdade presumida.",
+      "sources": [
+        "capital-prefacio"
+      ],
+      "evidence": "documented",
+      "related": [
+        "manifesto-1848"
+      ],
+      "area": "Contexto internacional",
+      "date": "1867-07-25",
+      "statement": {
+        "kind": "publication",
+        "speaker": "Karl Marx",
+        "roleAtTime": "Autor de O Capital",
+        "venue": "Prefácio da primeira edição alemã",
+        "excerpt": "leitores que querem aprender algo de novo e que, portanto, também querem pensar por si.",
+        "source": "capital-prefacio",
+        "locator": "Parágrafo iniciado por À excepção da secção sobre a forma-valor",
+        "declaredContext": "Marx apresenta sua investigação sobre o capitalismo e as exigências de leitura.",
+        "intentLimit": "A declaração de método não prova a correção das conclusões nem explica toda a trajetória do autor."
+      }
+    },
+    {
+      "id": "bernstein-1899",
+      "year": 1899,
+      "label": "Bernstein defende uma via democrática e reformista para o socialismo",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Eduard Bernstein"
+      ],
+      "summary": "O livro de 1899 discute democracia, sufrágio e reformas na estratégia socialista.",
+      "context": "Debate interno à social-democracia sobre meios políticos e transformação econômica.",
+      "decision": "Bernstein contrapõe o desenvolvimento democrático à expectativa de ruptura violenta.",
+      "effects": [
+        "Formulação de uma posição que diverge de correntes revolucionárias."
+      ],
+      "limits": "É uma corrente específica. Original alemão de 1899 e tradução inglesa de 1907 têm datas diferentes; não se generaliza sua posição a todos os socialistas.",
+      "sources": [
+        "bernstein-edicao",
+        "bernstein-democracia"
+      ],
+      "evidence": "documented",
+      "related": [
+        "manifesto-1848",
+        "lenin-publicacao-1918"
+      ],
+      "area": "Contexto internacional"
+    },
+    {
+      "id": "lenin-redacao-1917",
+      "year": 1917,
+      "label": "Lênin redige O Estado e a Revolução",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Vladimir Lênin",
+        "Karl Marx",
+        "Friedrich Engels"
+      ],
+      "summary": "Lênin escreve o texto entre agosto e setembro de 1917.",
+      "context": "Discussão sobre Estado, classes e revolução durante a crise política russa.",
+      "decision": "O autor desenvolve sua interpretação revolucionária de Marx e Engels.",
+      "effects": [
+        "Manuscrito que dará origem à edição de 1918."
+      ],
+      "limits": "A redação em 1917 não deve ser confundida com a publicação em 1918. A referência aos autores anteriores não elimina divergências entre marxistas.",
+      "sources": [
+        "lenin-edicao"
+      ],
+      "evidence": "documented",
+      "related": [
+        "manifesto-1848",
+        "lenin-publicacao-1918"
+      ],
+      "area": "Contexto internacional"
+    },
+    {
+      "id": "lenin-publicacao-1918",
+      "year": 1918,
+      "label": "Primeira edição de O Estado e a Revolução",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Vladimir Lênin"
+      ],
+      "summary": "O livro apresenta a ruptura revolucionária com o Estado burguês e a transição para uma sociedade comunista.",
+      "context": "Primeira edição em Petrogrado, em 1918, depois da redação de 1917.",
+      "decision": "Lênin distingue substituição revolucionária do Estado e sua posterior extinção.",
+      "effects": [
+        "Publicação de uma formulação da estratégia revolucionária leninista."
+      ],
+      "limits": "O texto não descreve todos os governos comunistas nem demonstra que sua promessa de extinção do Estado se realizou.",
+      "sources": [
+        "lenin-edicao",
+        "lenin-cap1"
+      ],
+      "evidence": "documented",
+      "related": [
+        "lenin-redacao-1917",
+        "bernstein-1899"
+      ],
+      "area": "Contexto internacional"
+    },
+    {
+      "id": "nsdap-1920",
+      "year": 1920,
+      "label": "Programa nazista combina exclusão racial e Estado central forte",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Adolf Hitler",
+        "Partido Nazista (NSDAP)"
+      ],
+      "summary": "O programa de 25 pontos nega cidadania a judeus e exige concentração de autoridade.",
+      "context": "A plataforma é contextualizada pelo USHMM como parte da formação do partido nazista em 1920.",
+      "decision": "Os pontos 4 e 25 articulam cidadania racial e poder central.",
+      "effects": [
+        "Documento que explicita objetivos de exclusão e autoridade."
+      ],
+      "limits": "O nome nacional-socialista não basta para classificar a ideologia. A contextualização do USHMM distingue seu racismo e oposição ao marxismo. Proposta partidária não equivale automaticamente a execução integral.",
+      "sources": [
+        "nazista-programa",
+        "nazista-contexto"
+      ],
+      "evidence": "documented",
+      "related": [
+        "hitler-meinkampf-1925",
+        "hitler-chanceler-1933"
+      ],
+      "area": "Contexto internacional"
+    },
+    {
+      "id": "hitler-meinkampf-1925",
+      "year": 1925,
+      "label": "Primeiro volume de Mein Kampf: racismo, antissemitismo e expansionismo",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Adolf Hitler",
+        "Partido Nazista (NSDAP)"
+      ],
+      "summary": "O primeiro volume é publicado em 1925; o segundo, em 1926.",
+      "context": "Hitler iniciou a escrita na prisão após a tentativa de golpe de 1923.",
+      "decision": "O livro serve como veículo de propaganda de ideias nazistas.",
+      "effects": [
+        "Fonte para estudar o projeto ideológico e sua circulação."
+      ],
+      "limits": "Esta ficha usa análise crítica do USHMM, não transcrição integral. Ideias racistas são falsas hierarquizações humanas; sua difusão não explica sozinha a tomada do poder.",
+      "sources": [
+        "hitler-livro"
+      ],
+      "evidence": "documented",
+      "related": [
+        "nsdap-1920",
+        "hitler-chanceler-1933",
+        "wannsee-1942"
+      ],
+      "area": "Contexto internacional"
+    },
+    {
+      "id": "hitler-chanceler-1933",
+      "year": 1933,
+      "label": "Hindenburg nomeia Hitler chanceler da Alemanha",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Adolf Hitler",
+        "Paul von Hindenburg",
+        "Franz von Papen",
+        "Partido Nazista (NSDAP)"
+      ],
+      "summary": "A nomeação de 30/01/1933 ocorre após negociações políticas; a ditadura é construída nos meses seguintes.",
+      "context": "Crise da República de Weimar, crescimento eleitoral nazista e articulação de elites conservadoras.",
+      "decision": "Hindenburg entrega a chefia do governo a Hitler.",
+      "effects": [
+        "Acesso ao Executivo e início da destruição das garantias democráticas."
+      ],
+      "limits": "Não foi uma eleição presidencial vencida por Hitler. Nomeação, apoio eleitoral e consolidação da ditadura são etapas diferentes.",
+      "sources": [
+        "hitler-poder"
+      ],
+      "evidence": "documented",
+      "related": [
+        "nsdap-1920",
+        "hitler-meinkampf-1925",
+        "wannsee-1942"
+      ],
+      "area": "Contexto internacional",
+      "date": "1933-01-30"
+    },
+    {
+      "id": "wannsee-1942",
+      "year": 1942,
+      "label": "Conferência de Wannsee coordena a perseguição e o assassinato dos judeus europeus",
+      "period": "mundo",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Reinhard Heydrich",
+        "SS",
+        "Partido Nazista (NSDAP)",
+        "Ministérios do Reich"
+      ],
+      "summary": "Em 20/01/1942, representantes de órgãos nazistas coordenam tarefas do projeto genocida.",
+      "context": "A política de assassinato já estava em curso; a reunião articula sua implementação entre instituições.",
+      "decision": "O protocolo registra a coordenação burocrática da chamada solução final.",
+      "effects": [
+        "Documento do funcionamento institucional do genocídio."
+      ],
+      "limits": "Wannsee não marca o início de toda a perseguição ou de todos os assassinatos. Hitler não participou dessa reunião; sua inclusão na trilha contextualiza o regime, sem inventar sua presença.",
+      "sources": [
+        "wannsee-protocolo",
+        "wannsee-contexto"
+      ],
+      "evidence": "documented",
+      "related": [
+        "hitler-chanceler-1933",
+        "hitler-meinkampf-1925"
+      ],
+      "area": "Contexto internacional",
+      "date": "1942-01-20"
+    },
+    {
+      "id": "olavo-individuo-1994",
+      "year": 1994,
+      "label": "Olavo defende a consciência individual como crítica das ideologias",
+      "period": "democracia",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Olavo de Carvalho",
+        "Antonio Gramsci",
+        "Fritjof Capra"
+      ],
+      "summary": "Nas observações finais de seu livro, Olavo sustenta a primazia do juízo individual diante de ideologias coletivas.",
+      "context": "O texto integra sua crítica cultural e filosófica.",
+      "decision": "O autor apresenta uma defesa da consciência reflexiva como critério de julgamento.",
+      "effects": [
+        "Registro de uma posição pública para confrontar com outras obras e seus críticos."
+      ],
+      "limits": "É a posição do autor, não consenso filosófico. O arquivo contém edição revista; o fecho indica março de 1994, sem estabelecer aqui dia da primeira edição.",
+      "sources": [
+        "olavo-individuo",
+        "olavo-obras",
+        "olavo-critica"
+      ],
+      "evidence": "documented",
+      "related": [
+        "olavo-cof-2009",
+        "olavo-coletanea-2013",
+        "manifesto-1848"
+      ],
+      "area": "Brasil · circulação editorial",
+      "statement": {
+        "kind": "publication",
+        "datePrecision": "year",
+        "speaker": "Olavo de Carvalho",
+        "roleAtTime": "Autor de A Nova Era e a Revolução Cultural",
+        "venue": "Observações finais do livro, texto disponível no arquivo do autor",
+        "excerpt": "somente o pensamento do indivíduo como tal pode ter validade objetiva",
+        "source": "olavo-individuo",
+        "locator": "Parágrafo iniciado por Em oposição a este preconceito; fecho Rio, março de 1994",
+        "declaredContext": "Defesa da consciência individual para julgar ideologias e crítica do primado do pensamento coletivo.",
+        "intentLimit": "A leitura não permite inferir motivações privadas nem tomar todas as críticas a outros autores como demonstradas."
+      }
+    },
+    {
+      "id": "olavo-cof-2009",
+      "year": 2009,
+      "label": "Curso Online de Filosofia de Olavo: primeira aula no catálogo",
+      "period": "democracia",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Olavo de Carvalho"
+      ],
+      "summary": "O catálogo registra a primeira aula em 14/03/2009.",
+      "context": "Expansão de um formato de ensino filosófico pela internet.",
+      "decision": "A aula aparece sob o título O Eu Ideal e a Atividade Filosófica.",
+      "effects": [
+        "Marco documental de sua atividade de ensino online."
+      ],
+      "limits": "Conferimos o catálogo, não o conteúdo integral das aulas pagas. A ficha não mede a audiência nem atribui influência política individual a alunos.",
+      "sources": [
+        "olavo-cof"
+      ],
+      "evidence": "documented",
+      "related": [
+        "olavo-individuo-1994",
+        "olavo-coletanea-2013"
+      ],
+      "area": "Internet",
+      "date": "2009-03-14"
+    },
+    {
+      "id": "fraga-ancap-2012",
+      "year": 2012,
+      "label": "Daniel Fraga publica Anarcocapitalismo: o futuro",
+      "period": "democracia",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Daniel Fraga"
+      ],
+      "summary": "Vídeo publicado no canal Daniel Fraga; título e data foram localizados nos metadados originais.",
+      "context": "Comunicação política na plataforma YouTube.",
+      "decision": "O título apresenta explicitamente o anarcocapitalismo como tema.",
+      "effects": [
+        "Registro de uma publicação que pode ser aberta para estudo."
+      ],
+      "limits": "A data da ficha está em UTC: 18/08/2012; metadado original registra 17/08 às 17:13 no fuso -07. Não há transcrição verificada nesta coleta; não se inventam frases ou minutagens.",
+      "sources": [
+        "fraga-ancap"
+      ],
+      "evidence": "documented",
+      "related": [
+        "fraga-bitcoin-2012"
+      ],
+      "area": "Internet · data em UTC",
+      "date": "2012-08-18"
+    },
+    {
+      "id": "fraga-bitcoin-2012",
+      "year": 2012,
+      "label": "Daniel Fraga publica Bitcoin seja louvado",
+      "period": "democracia",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Daniel Fraga"
+      ],
+      "summary": "O vídeo original documenta uma publicação sobre Bitcoin no canal do autor.",
+      "context": "A reportagem retrospectiva de 2020 associa sua defesa da moeda a críticas à inflação e à emissão monetária.",
+      "decision": "O título, a autoria do canal e a publicação foram conferidos; a interpretação da fala depende de leitura própria.",
+      "effects": [
+        "Fonte audiovisual e relato de recepção disponíveis para investigação."
+      ],
+      "limits": "Data da ficha em UTC: 09/12/2012; metadado original indica 08/12 às 20:39 no fuso -08. Não comprova patrimônio, rendimentos, paradeiro ou desfecho de processos. Não há transcrição integral verificada.",
+      "sources": [
+        "fraga-bitcoin",
+        "fraga-recepcao"
+      ],
+      "evidence": "documented",
+      "related": [
+        "fraga-ancap-2012"
+      ],
+      "area": "Internet · data em UTC",
+      "date": "2012-12-09"
+    },
+    {
+      "id": "olavo-coletanea-2013",
+      "year": 2013,
+      "label": "Olavo publica O mínimo que você precisa saber para não ser um idiota",
+      "period": "democracia",
+      "topics": [
+        "ideias",
+        "comunicacao",
+        "instituicoes"
+      ],
+      "actors": [
+        "Olavo de Carvalho",
+        "Felipe Moura Brasil"
+      ],
+      "summary": "A bibliografia registra a coletânea de 2013, organizada por Felipe Moura Brasil.",
+      "context": "Reunião editorial de textos para circulação em livro.",
+      "decision": "A obra aparece no catálogo do autor como publicação da Record.",
+      "effects": [
+        "Marco para localizar e comparar textos em seu contexto original."
+      ],
+      "limits": "A data da coletânea não é necessariamente a data de cada artigo. Catálogo não comprova verdade das teses, vendas ou efeito eleitoral.",
+      "sources": [
+        "olavo-obras"
+      ],
+      "evidence": "documented",
+      "related": [
+        "olavo-individuo-1994",
+        "olavo-cof-2009"
+      ],
+      "area": "Brasil · circulação editorial"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "olavo",
+      "name": "Olavo de Carvalho",
+      "subtitle": "Consciência individual, crítica cultural e formação pela internet",
+      "tradition": "Crítica cultural e anticomunismo",
+      "intro": "Uma entrada pelas obras e posições públicas do autor, com leitura acadêmica crítica identificada separadamente.",
+      "actors": [
+        "Olavo de Carvalho"
+      ],
+      "claims": [
+        {
+          "title": "Juízo individual e ideologias",
+          "text": "No excerto de 1994, defende que a consciência individual pode julgar o pensamento coletivo. Isso documenta uma tese filosófica, não a demonstra.",
+          "sources": [
+            "olavo-individuo"
+          ],
+          "status": "primary"
+        },
+        {
+          "title": "Leitura acadêmica e controvérsia",
+          "text": "O estudo sobre antigramscismo examina a circulação e a transformação de ideias de Gramsci por intérpretes conservadores, incluindo Olavo.",
+          "sources": [
+            "olavo-critica"
+          ],
+          "status": "context"
+        }
+      ],
+      "questions": [
+        "O que Olavo atribui a Gramsci e onde o texto de Gramsci confirma ou contraria essa leitura?",
+        "Como distinguir argumento filosófico, crítica cultural e acusação política?",
+        "Que evidência demonstraria influência sobre uma decisão concreta?"
+      ],
+      "limits": "Seleção inicial. Não cobre toda sua filosofia ou todos os pronunciamentos. Relações de influência exigem documentação própria.",
+      "events": [
+        "olavo-individuo-1994",
+        "olavo-cof-2009",
+        "olavo-coletanea-2013"
+      ],
+      "sources": [
+        "olavo-individuo",
+        "olavo-obras",
+        "olavo-cof",
+        "olavo-critica"
+      ]
+    },
+    {
+      "id": "fraga",
+      "name": "Daniel Fraga",
+      "subtitle": "Anarcocapitalismo, Bitcoin e comunicação em vídeo",
+      "tradition": "Divulgação libertária",
+      "intro": "Os vídeos originais foram localizados. Metadados e reportagem de recepção têm graus de evidência diferentes.",
+      "actors": [
+        "Daniel Fraga"
+      ],
+      "claims": [
+        {
+          "title": "Tema anarcocapitalista",
+          "text": "O título do vídeo de 2012 identifica o tema. Os argumentos e termos exatos da fala ainda precisam de transcrição conferida.",
+          "sources": [
+            "fraga-ancap"
+          ],
+          "status": "primary"
+        },
+        {
+          "title": "Moeda e crítica ao Estado",
+          "text": "A reportagem de 2020 descreve críticas à emissão por bancos centrais e uma defesa do Bitcoin como alternativa à inflação. É uma leitura jornalística.",
+          "sources": [
+            "fraga-recepcao"
+          ],
+          "status": "reported"
+        }
+      ],
+      "questions": [
+        "Como ele fundamenta a crítica ao Estado e aos impostos no vídeo completo?",
+        "Quais premissas usa para defender trocas voluntárias e descentralização?",
+        "Quais limites e riscos reconhece? A transcrição ainda precisa ser feita."
+      ],
+      "limits": "Não há aqui comprovação de vínculo intelectual com Olavo, fortuna, paradeiro ou desfecho judicial. Nenhuma frase falada foi atribuída sem transcrição.",
+      "events": [
+        "fraga-ancap-2012",
+        "fraga-bitcoin-2012"
+      ],
+      "sources": [
+        "fraga-ancap",
+        "fraga-bitcoin",
+        "fraga-recepcao"
+      ]
+    },
+    {
+      "id": "marx-engels",
+      "name": "Karl Marx e Friedrich Engels",
+      "subtitle": "Classes, capital e transformação social",
+      "tradition": "Comunismo e crítica da economia política",
+      "intro": "Leia o programa de 1848 junto do método de investigação apresentado por Marx em 1867.",
+      "actors": [
+        "Karl Marx",
+        "Friedrich Engels"
+      ],
+      "claims": [
+        {
+          "title": "Propriedade e poder social",
+          "text": "O Manifesto associa a transformação das relações de propriedade à organização política do proletariado e distingue capital de apropriação pessoal.",
+          "sources": [
+            "manifesto-cap2"
+          ],
+          "status": "primary"
+        },
+        {
+          "title": "Objeto da investigação",
+          "text": "No prefácio de O Capital, Marx delimita a produção capitalista e suas relações de produção e troca, usando a Inglaterra como referência.",
+          "sources": [
+            "capital-prefacio"
+          ],
+          "status": "primary"
+        }
+      ],
+      "questions": [
+        "Qual diferença os autores fazem entre capital e bens de uso pessoal?",
+        "Quais dados sustentam ou desafiam uma tese econômica específica?",
+        "O que pertence ao texto dos autores e o que foi formulado por intérpretes posteriores?"
+      ],
+      "limits": "Nem todo socialismo é marxista; autores posteriores divergem. Uma obra não prova a experiência de todos os governos que a reivindicaram.",
+      "events": [
+        "manifesto-1848",
+        "capital-1867"
+      ],
+      "sources": [
+        "manifesto-edicao",
+        "manifesto-cap2",
+        "capital-prefacio"
+      ]
+    },
+    {
+      "id": "bernstein",
+      "name": "Eduard Bernstein",
+      "subtitle": "Reformas, sufrágio e democracia",
+      "tradition": "Socialismo reformista / social-democracia",
+      "intro": "Uma posição dentro do campo socialista que defende transformação por meios democráticos.",
+      "actors": [
+        "Eduard Bernstein"
+      ],
+      "claims": [
+        {
+          "title": "Democracia como meio de transformação",
+          "text": "Bernstein defende sufrágio, direitos e aprendizado democrático; critica a permanência da fórmula de ditadura do proletariado na estratégia parlamentar.",
+          "sources": [
+            "bernstein-democracia"
+          ],
+          "status": "primary"
+        },
+        {
+          "title": "Uma divergência interna",
+          "text": "Sua proposta permite examinar diferenças com estratégias revolucionárias, sem atribuir uma opinião única a todos os socialistas.",
+          "sources": [
+            "bernstein-edicao"
+          ],
+          "status": "context"
+        }
+      ],
+      "questions": [
+        "Como ele justifica a preferência por reformas e participação democrática?",
+        "Em quais pontos diverge da leitura de Estado e revolução de Lênin?"
+      ],
+      "limits": "O texto consultado é tradução inglesa de 1907 de obra alemã de 1899. Os resumos do Atlas estão em português e não são citações literais.",
+      "events": [
+        "bernstein-1899"
+      ],
+      "sources": [
+        "bernstein-edicao",
+        "bernstein-democracia"
+      ]
+    },
+    {
+      "id": "lenin",
+      "name": "Vladimir Lênin",
+      "subtitle": "Revolução, poder de Estado e transição",
+      "tradition": "Marxismo revolucionário / leninismo",
+      "intro": "O recorte começa por O Estado e a Revolução e distingue escrita, edição e proposta teórica.",
+      "actors": [
+        "Vladimir Lênin"
+      ],
+      "claims": [
+        {
+          "title": "Ruptura revolucionária",
+          "text": "O capítulo I defende substituir o Estado burguês por meio da revolução e distingue essa ruptura da posterior extinção do Estado.",
+          "sources": [
+            "lenin-cap1"
+          ],
+          "status": "primary"
+        },
+        {
+          "title": "Redação e publicação",
+          "text": "O texto foi redigido em 1917 e publicado pela primeira vez em 1918. Datas diferentes não significam obras diferentes.",
+          "sources": [
+            "lenin-edicao"
+          ],
+          "status": "primary"
+        }
+      ],
+      "questions": [
+        "Como justifica o poder de transição?",
+        "Que garantias impediram ou deixaram de impedir concentração de poder na experiência histórica?",
+        "Como confrontar a promessa do texto com instituições e práticas posteriores?"
+      ],
+      "limits": "Este recorte não é uma história completa da Revolução Russa ou da União Soviética. Propostas devem ser confrontadas com fontes sobre repressão, instituições e resultados, sem tratá-las como equivalentes.",
+      "events": [
+        "lenin-redacao-1917",
+        "lenin-publicacao-1918"
+      ],
+      "sources": [
+        "lenin-edicao",
+        "lenin-cap1"
+      ]
+    },
+    {
+      "id": "hitler",
+      "name": "Adolf Hitler",
+      "subtitle": "Nazismo, destruição da democracia e genocídio",
+      "tradition": "Nazismo / extrema direita",
+      "intro": "Estudo crítico de uma ideologia racista e antissemita e do regime que perseguiu e assassinou populações.",
+      "actors": [
+        "Adolf Hitler"
+      ],
+      "claims": [
+        {
+          "title": "Exclusão racial e poder",
+          "text": "O programa de 1920 e a contextualização do USHMM mostram a exclusão de judeus da cidadania e a defesa de autoridade central. Não são equivalentes ao socialismo marxista.",
+          "sources": [
+            "nazista-programa",
+            "nazista-contexto"
+          ],
+          "status": "context"
+        },
+        {
+          "title": "Propaganda, governo e crimes",
+          "text": "A trilha liga o livro, a nomeação de 1933 e documentos do regime. A conferência de Wannsee integra a coordenação do genocídio, já em curso.",
+          "sources": [
+            "hitler-livro",
+            "hitler-poder",
+            "wannsee-contexto"
+          ],
+          "status": "context"
+        }
+      ],
+      "questions": [
+        "Como propaganda, violência e alianças contribuíram para a chegada ao governo?",
+        "Quais atos desmontaram as garantias democráticas?",
+        "Como documentos registram as instituições e os responsáveis pelos crimes?"
+      ],
+      "limits": "Contextualização histórica, sem promoção. O nome do partido não define sozinho sua ideologia. Estudar ideias não relativiza os crimes nem reduz sua explicação a uma personalidade isolada.",
+      "events": [
+        "nsdap-1920",
+        "hitler-meinkampf-1925",
+        "hitler-chanceler-1933",
+        "wannsee-1942"
+      ],
+      "sources": [
+        "nazista-programa",
+        "nazista-contexto",
+        "hitler-livro",
+        "hitler-poder",
+        "wannsee-protocolo",
+        "wannsee-contexto"
+      ]
+    }
+  ]
+}

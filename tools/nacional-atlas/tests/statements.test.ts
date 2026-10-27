@@ -35,7 +35,7 @@ test('localização é municipal; malha e contagens não inventam pontos de ende
  const geo=JSON.parse(fs.readFileSync('public/history-data/places.geojson','utf8'));
  assert.deepEqual(geo.features.map((f:any)=>f.properties.id).sort(),['3550308','5300108']);
  assert.match(geo.metadata.precision,/não endereço exato/);assert.equal(geo.metadata.sourceFileSha256.length,64);
- for(const e of data.events.filter(e=>e.statement)){assert.ok(geo.features.some((f:any)=>f.properties.id===e.place?.municipalityCode));assert.ok(!('latitude' in e.place!));}
+ for(const e of data.events.filter(e=>e.statement&&e.place)){assert.ok(geo.features.some((f:any)=>f.properties.id===e.place?.municipalityCode));assert.ok(!('latitude' in e.place!));}
 });
 test('exportação separa trecho, atribuição e limites sem anotações pessoais',()=>{
  const row=historyExport(vote,data);assert.equal(row.tipo_registro,'Falas');assert.equal(row.codigo_ibge,'5300108');

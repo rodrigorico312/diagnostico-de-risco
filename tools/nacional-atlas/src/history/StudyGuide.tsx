@@ -1,5 +1,6 @@
 import {ArrowRight,BookOpen} from 'lucide-react';
 export const studyAreas=[
+ ['ideas','Pessoas e ideias','Estude obras e propostas por autor, distinguindo registros próprios, resumos editoriais e leituras de terceiros. Compare correntes pelas fontes, sem diagnosticar personalidades.'],
  ['timeline','Linha do tempo','Organiza acontecimentos por época. Abra a ficha para separar contexto, decisão, efeitos, interpretação e limites.'],
  ['statements','Falas e documentos','Mostra o trecho, quem falou, o cargo que ocupava e onde conferir o documento. A fala documenta o que a pessoa disse; suas alegações também precisam de verificação.'],
  ['explorer','Mapa histórico','Mostra territórios do catálogo 500–1500. Cor não é povoamento; o ano do desenho pode ser anterior ao escolhido. A cartografia é independente da cronologia brasileira.'],

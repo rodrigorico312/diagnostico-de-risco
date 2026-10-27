@@ -8,7 +8,7 @@ export function StatementEvidence({event,data}:{event:HistoryEvent;data:HistoryD
  return <section className="statement-evidence" aria-label="Trecho original e contexto da declaração">
   <span className="statement-label">{statement.kind==='speech'?<MessageSquare size={14}/>:<FileText size={14}/>} {statement.kind==='speech'?'FALA DOCUMENTADA':'PUBLICAÇÃO DOCUMENTADA'}</span>
   <blockquote>{statement.excerpt}</blockquote>
-  <p className="statement-author"><b>{statement.speaker}</b><span>{statement.roleAtTime}</span><span>{event.date?.split('-').reverse().join('/')} · {statement.venue}</span></p>
+  <p className="statement-author"><b>{statement.speaker}</b><span>{statement.roleAtTime}</span><span>{event.date?.split('-').reverse().join('/')??`${event.year} · ano da obra; dia não estabelecido`} · {statement.venue}</span></p>
   {source&&<a className="statement-original" href={source.url} target="_blank" rel="noreferrer">Consultar registro original <ArrowUpRight size={14}/></a>}
   <small className="statement-locator">Onde encontrar: {statement.locator}</small>
   {source?.note&&<small className="statement-locator">Sobre a fonte: {source.note}</small>}

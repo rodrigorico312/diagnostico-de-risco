@@ -1,0 +1,68 @@
+{
+  "method": "Confere ocorrência de três trechos literais em HTML e título, canal e data de publicação de dois vídeos. Não avalia a veracidade das alegações, não transcreve áudio e não audita integralmente as vinte novas referências. Data dos vídeos normalizada para UTC. Hash é do conteúdo recebido na consulta.",
+  "records": [
+    {
+      "event": "ideas:manifesto-1848",
+      "url": "https://www.marxists.org/portugues/marx/1848/ManifestoDoPartidoComunista/cap2.htm",
+      "checkedAt": "2026-10-27T23:39:10.072194+00:00",
+      "scope": "literal_excerpt",
+      "httpStatus": 200,
+      "sha256": "5b365194d324c4c8beff08867af7d6f0139f71934ef3c29892edc9db43bdd2e8",
+      "bytes": 24043,
+      "quotationFound": true,
+      "verified": true
+    },
+    {
+      "event": "ideas:capital-1867",
+      "url": "https://www.marxists.org/portugues/marx/1867/07/25.htm",
+      "checkedAt": "2026-10-27T23:39:11.430498+00:00",
+      "scope": "literal_excerpt",
+      "httpStatus": 200,
+      "sha256": "1085c1c2ba75c807bc2f76dc79f2726fed616714b11ac72891f5115d4d7e780d",
+      "bytes": 26882,
+      "quotationFound": true,
+      "verified": true
+    },
+    {
+      "event": "ideas:olavo-individuo-1994",
+      "url": "https://olavodecarvalho.org/observacoes-finais-a-nova-era-e-a-revolucao-cultural/",
+      "checkedAt": "2026-10-27T23:39:12.606907+00:00",
+      "scope": "literal_excerpt",
+      "httpStatus": 200,
+      "sha256": "ab8300f8868931536b33b7efbcae1c6a6f8f4fc6f90d04371bde1be71eaeed16",
+      "bytes": 53031,
+      "quotationFound": true,
+      "verified": true
+    },
+    {
+      "event": "ideas:fraga-ancap-2012",
+      "url": "https://www.youtube.com/watch?v=5-K60s27UkU",
+      "checkedAt": "2026-10-27T23:39:14.118302+00:00",
+      "scope": "video_metadata_only",
+      "httpStatus": 200,
+      "sha256": "c84fadacc98388c12d0e2b21a2fe34de30edd9488709bff35cfe9e8d8126cb49",
+      "bytes": 1571286,
+      "title": "Anarcocapitalismo: o futuro",
+      "channel": "Daniel Fraga",
+      "publishedAtOriginal": "2012-08-17T17:13:03-07:00",
+      "publishedAtUTC": "2012-08-18T00:13:03+00:00",
+      "speechTranscribed": false,
+      "verified": true
+    },
+    {
+      "event": "ideas:fraga-bitcoin-2012",
+      "url": "https://www.youtube.com/watch?v=f1mRsTL3HQA",
+      "checkedAt": "2026-10-27T23:39:15.164983+00:00",
+      "scope": "video_metadata_only",
+      "httpStatus": 200,
+      "sha256": "82ccce72f3829e56087e7dc73a5416a37042f239fb29d0d47f1fc50322c2ded3",
+      "bytes": 1446289,
+      "title": "Bitcoin seja louvado",
+      "channel": "Daniel Fraga",
+      "publishedAtOriginal": "2012-12-08T20:39:11-08:00",
+      "publishedAtUTC": "2012-12-09T04:39:11+00:00",
+      "speechTranscribed": false,
+      "verified": true
+    }
+  ]
+}
