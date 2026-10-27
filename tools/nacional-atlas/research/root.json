@@ -1,0 +1,547 @@
+{
+  "sources": [
+    {
+      "id": "biografia",
+      "title": "Câmara — biografia parlamentar de Lula",
+      "url": "https://www.camara.leg.br/deputados/139289/biografia",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "perfil",
+      "title": "Agência Câmara — perfil histórico de Lula (2006)",
+      "url": "https://www.camara.leg.br/noticias/91015-veja-o-perfil-de-lula-o-presidente-reeleito-do-brasil/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Usada para disputas eleitorais; a data da prisão sindical nesse texto diverge de outras fontes. Para prisão de 1980, ver Biblioteca da Presidência/FGV."
+    },
+    {
+      "id": "presidencia",
+      "title": "Biblioteca da Presidência — biografia de Lula",
+      "url": "https://www.gov.br/secretariageral/pt-br/centrais-de-conteudo/biblioteca-da-pr/galeria-dos-ex-presidentes/luiz-inacio-lula-da-silva/biografia-completa",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "campanha",
+      "title": "FGV — campanha e aliança presidencial em 2002",
+      "url": "https://atlas.fgv.br/verbete/6108",
+      "kind": "research",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "resultado",
+      "title": "TRE-MG — resultados presidenciais de 2002",
+      "url": "https://www.tre-mg.jus.br/eleicoes/eleicoes-2018/informacoes-para-imprensa-2o-turno/resultados-eleicoes-anteriores-2013-presidente",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Usada a linha nacional BR do segundo turno; não somar novamente a linha TOTAL com as UFs."
+    },
+    {
+      "id": "real",
+      "title": "Banco Central — história do Plano Real",
+      "url": "https://www.bcb.gov.br/controleinflacao/planoreal",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "bf",
+      "title": "Câmara — Lei 10.836/2004, Programa Bolsa Família",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2004/lei-10836-9-janeiro-2004-490604-norma-pl.html",
+      "kind": "primary",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "internet",
+      "title": "Presidência — Lei 12.965/2014, Marco Civil da Internet",
+      "url": "https://legislacao.presidencia.gov.br/atos/?ano=2014&ato=93eUTRE9ENVpWTdb6&data=23%2F04%2F2014&numero=12965&tipo=LEI",
+      "kind": "primary",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "auxilio",
+      "title": "Planalto — Lei 13.982/2020",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l13982.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "nikolas",
+      "title": "Câmara — perfil de Nikolas Ferreira",
+      "url": "https://www.camara.leg.br/deputados/209787",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Comprova o vínculo parlamentar. Não fornece uma estimativa causal de influência digital sobre votos."
+    },
+    {
+      "id": "passaporte",
+      "title": "Agência Estado/UOL — notícia sobre passaportes de Flávio (27/10/2026)",
+      "url": "https://noticias.uol.com.br/ultimas-noticias/agencia-estado/2026/10/27/pf-cancela-passaportes-de-flavio-bolsonaro-e-vai-comunicar-moraes-que-senador-descumpriu-ordem.htm",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Relato jornalístico de 27/10/2026, 13h21. Decisão original, número do processo e íntegra da fundamentação não obtidos nesta coleta. Não comprova fuga nem motivação político-partidária."
+    },
+    {
+      "id": "fhc-datas",
+      "title": "Biblioteca da Presidência — eleição de FHC em 1994",
+      "url": "https://www.gov.br/secretariageral/pt-br/centrais-de-conteudo/biblioteca-da-pr/galeria-dos-ex-presidentes/fernando-henrique-cardoso/copy_of_capa-dados-ex-presidente",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "tse-cronologia",
+      "title": "TSE — cronologia das eleições",
+      "url": "https://www.tse.jus.br/eleicoes/historia/cronologia-das-eleicoes",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27"
+    }
+  ],
+  "events": [
+    {
+      "id": "sindicato",
+      "year": 1975,
+      "label": "Lula chega à presidência do sindicato",
+      "period": "democracia",
+      "topics": [
+        "sociedade",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "Sindicato dos Metalúrgicos do ABC",
+        "Frei Chico"
+      ],
+      "summary": "O torneiro mecânico passa da experiência na indústria à liderança sindical.",
+      "context": "Industrialização do ABC paulista e organização dos trabalhadores.",
+      "decision": "Após integrar a direção desde 1969 e ser primeiro-secretário em 1972, Lula torna-se presidente do sindicato em 1975.",
+      "effects": [
+        "Ampliação da atuação representativa; reeleição em 1978."
+      ],
+      "limits": "A trajetória individual não explica sozinha o movimento sindical nem a futura vitória eleitoral.",
+      "sources": [
+        "biografia",
+        "presidencia"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "greves",
+        "pt"
+      ]
+    },
+    {
+      "id": "greves",
+      "year": 1980,
+      "label": "Greves do ABC: mobilização, intervenção e prisão",
+      "period": "democracia",
+      "topics": [
+        "sociedade",
+        "instituicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "João Figueiredo",
+        "Sindicato dos Metalúrgicos do ABC"
+      ],
+      "summary": "As greves e a repressão dão projeção política à liderança sindical.",
+      "context": "Reivindicações salariais sob a ditadura, após mobilizações de 1978 e 1979.",
+      "decision": "Em 1980, o governo intervém no sindicato e Lula e outros dirigentes são presos.",
+      "effects": [
+        "Conflito entre trabalhadores, empresas e Estado; continuidade da organização política."
+      ],
+      "limits": "Esta prisão sindical não é a prisão do caso do tríplex em 2018; não confundir processos e fundamentos.",
+      "sources": [
+        "presidencia"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "pt"
+      ]
+    },
+    {
+      "id": "pt",
+      "year": 1980,
+      "label": "PT: do movimento social à disputa institucional",
+      "period": "democracia",
+      "topics": [
+        "eleicoes",
+        "sociedade",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "Partido dos Trabalhadores"
+      ],
+      "summary": "Uma organização coletiva cria um veículo de disputa eleitoral.",
+      "context": "Abertura política e reorganização partidária no fim da ditadura.",
+      "decision": "Em 10/2/1980, sindicalistas, intelectuais e lideranças sociais e religiosas participam da fundação do PT.",
+      "effects": [
+        "Atuação política passa a incluir candidaturas e organização partidária."
+      ],
+      "limits": "A fundação não foi obra individual; base social e desempenho posterior exigem estudo próprio.",
+      "sources": [
+        "presidencia"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "1989",
+        "lula-2002"
+      ],
+      "date": "1980-02-10"
+    },
+    {
+      "id": "1989",
+      "year": 1989,
+      "label": "Lula disputa o segundo turno e perde para Collor",
+      "period": "democracia",
+      "topics": [
+        "eleicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "Fernando Collor"
+      ],
+      "summary": "A primeira candidatura presidencial de Lula termina em derrota.",
+      "context": "Retorno da eleição presidencial direta após a ditadura.",
+      "decision": "Collor derrota Lula no segundo turno.",
+      "effects": [
+        "O PT mantém a disputa nacional nas eleições seguintes."
+      ],
+      "limits": "O resultado não identifica, sozinho, o peso de televisão, campanha ou programa econômico.",
+      "sources": [
+        "perfil"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "1994",
+        "1998",
+        "lula-2002"
+      ]
+    },
+    {
+      "id": "real-1994",
+      "year": 1994,
+      "label": "Plano Real: moeda e combate à inflação",
+      "period": "democracia",
+      "topics": [
+        "economia",
+        "instituicoes",
+        "sociedade"
+      ],
+      "actors": [
+        "Itamar Franco",
+        "Fernando Henrique Cardoso",
+        "Banco Central"
+      ],
+      "summary": "A nova moeda faz parte de um processo de estabilização iniciado em 1993.",
+      "context": "Inflação elevada prejudicava contratos e planejamento de famílias e empresas.",
+      "decision": "O real começa a circular em 1/7/1994, após ajuste fiscal e a etapa da URV.",
+      "effects": [
+        "Redução da inflação e mudança no ambiente econômico."
+      ],
+      "limits": "Estabilização não equivale a crescimento permanente nem prova o peso exato do plano no voto.",
+      "sources": [
+        "real"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "1994",
+        "1998",
+        "alianca-2002"
+      ],
+      "date": "1994-07-01"
+    },
+    {
+      "id": "1994",
+      "year": 1994,
+      "label": "FHC vence Lula no primeiro turno",
+      "period": "democracia",
+      "topics": [
+        "eleicoes",
+        "economia"
+      ],
+      "actors": [
+        "Fernando Henrique Cardoso",
+        "Luiz Inácio Lula da Silva"
+      ],
+      "summary": "A eleição ocorre no ano de implantação do Real.",
+      "context": "Estabilização monetária e disputa sobre o projeto de governo.",
+      "decision": "Fernando Henrique Cardoso vence a eleição presidencial no primeiro turno.",
+      "effects": [
+        "Lula não chega ao segundo turno nessa disputa."
+      ],
+      "limits": "O contexto econômico é relevante, mas o registro do resultado não estima sua contribuição causal.",
+      "sources": [
+        "perfil",
+        "fhc-datas"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "real-1994",
+        "1998"
+      ],
+      "date": "1994-10-03"
+    },
+    {
+      "id": "1998",
+      "year": 1998,
+      "label": "FHC é reeleito; Lula sofre a terceira derrota presidencial",
+      "period": "democracia",
+      "topics": [
+        "eleicoes",
+        "instituicoes"
+      ],
+      "actors": [
+        "Fernando Henrique Cardoso",
+        "Luiz Inácio Lula da Silva"
+      ],
+      "summary": "A disputa seguinte também termina no primeiro turno.",
+      "context": "A regra de reeleição aprovada em 1997 permite a candidatura do presidente no cargo.",
+      "decision": "FHC vence novamente Lula em 1998.",
+      "effects": [
+        "A campanha de 2002 seria a quarta tentativa presidencial de Lula."
+      ],
+      "limits": "Regra eleitoral, alianças e economia são dimensões diferentes; não atribuir a derrota a uma causa única.",
+      "sources": [
+        "perfil",
+        "tse-cronologia"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "alianca-2002",
+        "lula-2002"
+      ],
+      "date": "1998-10-04"
+    },
+    {
+      "id": "alianca-2002",
+      "year": 2002,
+      "label": "Aliança com José Alencar e uma campanha mais conciliadora",
+      "period": "democracia",
+      "topics": [
+        "eleicoes",
+        "economia",
+        "comunicacao"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "José Alencar",
+        "Partido dos Trabalhadores",
+        "Partido Liberal"
+      ],
+      "summary": "Lula amplia a chapa para além de sua base tradicional.",
+      "context": "Após três derrotas, a campanha procura maior aceitação em outros setores.",
+      "decision": "O empresário e senador José Alencar integra a chapa como vice; a Carta ao Povo Brasileiro sinaliza compromissos de estabilidade.",
+      "effects": [
+        "Coalizão mais ampla e mudança de comunicação."
+      ],
+      "limits": "Não há aqui estimativa do peso isolado de cada aliança, compromisso ou ação de marketing.",
+      "sources": [
+        "campanha"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "lula-2002",
+        "real-1994"
+      ],
+      "interpretation": "A aproximação de setores empresariais é uma leitura documentada da estratégia; não prova que todos os empresários aderiram."
+    },
+    {
+      "id": "lula-2002",
+      "year": 2002,
+      "label": "Lula vence Serra e chega à Presidência",
+      "period": "democracia",
+      "topics": [
+        "eleicoes",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "José Serra",
+        "José Alencar"
+      ],
+      "summary": "Lula vence sua quarta disputa presidencial, com posse em janeiro de 2003.",
+      "context": "Campanha com ampliação de alianças e mudança de estratégia.",
+      "decision": "No segundo turno, Lula obtém 52.793.364 votos (61,27% dos válidos), contra 33.370.739 de Serra.",
+      "effects": [
+        "Vitória eleitoral permite formar governo e iniciar a agenda do mandato."
+      ],
+      "limits": "A biografia e a vitória não demonstram a qualidade das políticas posteriores; os números se referem a 2002.",
+      "sources": [
+        "resultado",
+        "perfil"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "alianca-2002",
+        "bolsa-2004"
+      ],
+      "date": "2002-10-27"
+    },
+    {
+      "id": "bolsa-2004",
+      "year": 2004,
+      "label": "Bolsa Família: unificação de ações de transferência de renda",
+      "period": "democracia",
+      "topics": [
+        "economia",
+        "sociedade",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "Congresso Nacional"
+      ],
+      "summary": "A Lei 10.836 cria o Programa Bolsa Família, antecedida por medida provisória em 2003.",
+      "context": "Existiam diferentes programas federais de transferência de renda.",
+      "decision": "A lei organiza benefícios e regras de gestão do programa.",
+      "effects": [
+        "Instituição legal de um desenho unificado de transferência de renda."
+      ],
+      "limits": "A lei comprova o desenho e a autoria institucional; efeitos sobre pobreza, aprendizagem ou autonomia precisam de avaliações e séries próprias.",
+      "sources": [
+        "bf"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "auxilio-2020"
+      ],
+      "date": "2004-01-09"
+    },
+    {
+      "id": "internet-2014",
+      "year": 2014,
+      "label": "Marco Civil: direitos e deveres no ambiente digital",
+      "period": "democracia",
+      "topics": [
+        "comunicacao",
+        "instituicoes",
+        "sociedade"
+      ],
+      "actors": [
+        "Dilma Rousseff",
+        "Congresso Nacional"
+      ],
+      "summary": "A Lei 12.965 estabelece princípios, garantias, direitos e deveres para o uso da internet.",
+      "context": "Expansão da internet nas relações sociais e políticas.",
+      "decision": "A lei define diretrizes para usuários, provedores e poder público.",
+      "effects": [
+        "Criação de uma referência normativa para o ambiente digital."
+      ],
+      "limits": "A existência da norma não comprova sua eficácia em cada plataforma; alterações e decisões posteriores devem ser examinadas por data.",
+      "sources": [
+        "internet"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "influencia-2023"
+      ],
+      "date": "2014-04-23"
+    },
+    {
+      "id": "auxilio-2020",
+      "year": 2020,
+      "label": "Auxílio emergencial na pandemia",
+      "period": "democracia",
+      "topics": [
+        "economia",
+        "sociedade",
+        "instituicoes"
+      ],
+      "actors": [
+        "Jair Bolsonaro",
+        "Congresso Nacional"
+      ],
+      "summary": "A Lei 13.982 prevê proteção social excepcional durante a emergência de Covid-19.",
+      "context": "Restrição da atividade econômica e perda de renda no início da pandemia.",
+      "decision": "A lei estabelece auxílio inicial de R$600 mensais, por três meses, sujeito a requisitos.",
+      "effects": [
+        "Criação da base legal de uma resposta de renda emergencial, posteriormente alterada e prorrogada."
+      ],
+      "limits": "Valor e regra iniciais não descrevem toda a execução; impactos, custos e diferenças entre etapas exigem dados adicionais.",
+      "sources": [
+        "auxilio"
+      ],
+      "evidence": "documented",
+      "area": "Brasil",
+      "related": [
+        "bolsa-2004"
+      ],
+      "date": "2020-04-02"
+    },
+    {
+      "id": "influencia-2023",
+      "year": 2023,
+      "label": "Redes sociais: como medir influência política?",
+      "period": "democracia",
+      "topics": [
+        "comunicacao",
+        "eleicoes",
+        "sociedade"
+      ],
+      "actors": [
+        "Nikolas Ferreira",
+        "Luiz Inácio Lula da Silva",
+        "Jair Bolsonaro"
+      ],
+      "summary": "Parlamentares, candidatos e comunicadores disputam atenção em plataformas digitais.",
+      "context": "A comunicação contemporânea permite alcance direto e circulação por redes de usuários.",
+      "decision": "Nikolas Ferreira, deputado federal registrado pela Câmara, é um caso possível para estudar a relação entre presença digital e atuação institucional.",
+      "effects": [
+        "Questão de pesquisa: exposição, engajamento, mobilização e voto são medidas distintas."
+      ],
+      "limits": "O perfil oficial comprova o mandato, não o tamanho nem o efeito causal da influência. Não há ranking ou contagem de seguidores nesta base.",
+      "sources": [
+        "nikolas"
+      ],
+      "evidence": "question",
+      "area": "Brasil",
+      "related": [
+        "internet-2014"
+      ]
+    },
+    {
+      "id": "passaportes-2026",
+      "year": 2026,
+      "label": "Passaportes de Flávio: notícia com documento original pendente",
+      "period": "democracia",
+      "topics": [
+        "instituicoes",
+        "eleicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Flávio Bolsonaro",
+        "Alexandre de Moraes",
+        "Polícia Federal"
+      ],
+      "summary": "Reportagem de 27/10 relata cancelamento dos passaportes e comunicação ao STF sobre alegado descumprimento de ordem.",
+      "context": "A notícia se refere aos dias seguintes ao segundo turno de 2026.",
+      "decision": "Segundo Agência Estado/UOL, a PF comunicaria Moraes sobre a não entrega dos documentos.",
+      "effects": [
+        "Há relato jornalístico de medidas envolvendo os passaportes; a íntegra judicial ainda falta nesta coleta."
+      ],
+      "limits": "Não foram obtidos número do processo e decisão original. Não se conclui fuga, culpa, perseguição ou favorecimento partidário. A condição deve ser atualizada com documentos.",
+      "sources": [
+        "passaporte"
+      ],
+      "evidence": "reported",
+      "area": "Brasil",
+      "related": [],
+      "date": "2026-10-27"
+    }
+  ],
+  "appointments": []
+}

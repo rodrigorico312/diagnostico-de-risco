@@ -1,5 +1,7 @@
 # Nacional Atlas · mundo e condições de vida
 
+> Atualização de 27/10/2026: a entrada principal agora é `/atlas/`, com História, Mundo e Brasil e Eleições na mesma navegação. Consulte `README-HISTORIA.md` para compilar e publicar a versão unificada. Os caminhos antigos redirecionam com preservação dos filtros.
+
 Aplicação escura e responsiva em `https://www.nacionalcon.com/atlas/`, conectada por um banner ao atlas eleitoral `/atlas/para/`. O mapa mundial oferece navegação até ruas pelo OpenStreetMap. As estatísticas continuam na escala territorial de sua fonte, independentemente do zoom.
 
 ## Executar

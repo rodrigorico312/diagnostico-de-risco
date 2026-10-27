@@ -193,6 +193,56 @@
       "source": "/orientacao/abertura-cnpj-psicologia/",
       "destination": "/blog/cnpj-para-psicologos",
       "permanent": true
+    },
+    {
+      "source": "/atlas/para",
+      "destination": "/atlas/?visao=eleicoes",
+      "permanent": false
+    },
+    {
+      "source": "/atlas/para/",
+      "destination": "/atlas/?visao=eleicoes",
+      "permanent": false
+    },
+    {
+      "source": "/atlas/para/index.html",
+      "destination": "/atlas/?visao=eleicoes",
+      "permanent": false
+    },
+    {
+      "source": "/eleicoes/para",
+      "destination": "/atlas/?visao=eleicoes",
+      "permanent": false
+    },
+    {
+      "source": "/eleicoes/para/",
+      "destination": "/atlas/?visao=eleicoes",
+      "permanent": false
+    },
+    {
+      "source": "/eleicoes/para/index.html",
+      "destination": "/atlas/?visao=eleicoes",
+      "permanent": false
+    },
+    {
+      "source": "/eleicoes/santarem",
+      "destination": "/atlas/?visao=eleicoes&municipio=05355",
+      "permanent": false
+    },
+    {
+      "source": "/eleicoes/santarem/",
+      "destination": "/atlas/?visao=eleicoes&municipio=05355",
+      "permanent": false
+    },
+    {
+      "source": "/eleicoes/santarem/index.html",
+      "destination": "/atlas/?visao=eleicoes&municipio=05355",
+      "permanent": false
+    },
+    {
+      "source": "/atlas/world.html",
+      "destination": "/atlas/?visao=mapa",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -203,30 +253,6 @@
     {
       "source": "/atlas/",
       "destination": "/atlas/index.html"
-    },
-    {
-      "source": "/atlas/para",
-      "destination": "/atlas/para/index.html"
-    },
-    {
-      "source": "/atlas/para/",
-      "destination": "/atlas/para/index.html"
-    },
-    {
-      "source": "/eleicoes/para",
-      "destination": "/atlas/para/index.html"
-    },
-    {
-      "source": "/eleicoes/para/",
-      "destination": "/atlas/para/index.html"
-    },
-    {
-      "source": "/eleicoes/santarem",
-      "destination": "/eleicoes/santarem/index.html"
-    },
-    {
-      "source": "/eleicoes/santarem/",
-      "destination": "/eleicoes/santarem/index.html"
     },
     {
       "source": "/guia-mei",

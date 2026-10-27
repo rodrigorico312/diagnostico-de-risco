@@ -1,5 +1,7 @@
 # Nacional Atlas · Pará
 
+> Atualização de 27/10/2026: a entrada principal agora é `/atlas/`, com História, Mundo e Brasil e Eleições na mesma navegação. Consulte `README-HISTORIA.md` para compilar e publicar a versão unificada. Os caminhos antigos redirecionam com preservação dos filtros.
+
 Atlas estadual em React, TypeScript e Leaflet, com interface escura, mapa OpenStreetMap, dados públicos TSE e geografia IBGE. Publicação prevista em `https://www.nacionalcon.com/atlas/para/`. O atlas original de Santarém continua em `/eleicoes/santarem/`.
 
 ## Cobertura da edição
