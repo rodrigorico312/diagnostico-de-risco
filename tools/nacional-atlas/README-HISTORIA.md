@@ -14,6 +14,7 @@ Os textos separam contexto, decisão, efeitos descritivos, interpretação e lim
 
 ## Funcionalidades
 
+- Painel de filtros recolhido por padrão em todas as telas; botão de hambúrguer abre o painel deslizante. Fechar, Escape ou clique fora recolhem a lateral e mantêm as seleções.
 - Filtros por período, década, ano com registro, tema, pessoa/instituição e estado da evidência.
 - Busca textual; detalhe com fontes; compartilhamento do recorte e do evento por URL.
 - Rede com até seis conexões por atores/temas ou vínculo editorial. A rede atravessa filtros temporais de propósito e avisa isso.
