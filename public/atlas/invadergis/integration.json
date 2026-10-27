@@ -1,0 +1,34 @@
+{
+  "project": "InvaderGIS",
+  "upstream": "https://github.com/g-lanza/InvaderGIS",
+  "commit": "c2acb1e9cddd75ded98246f8c518ac9acc74a593",
+  "preparedAt": "2026-10-27",
+  "purpose": "Estudo pessoal e não comercial",
+  "softwareLicense": "PolyForm Noncommercial 1.0.0",
+  "dataLicense": "CC BY-NC 4.0; ver também ATTRIBUTIONS.txt para fontes upstream",
+  "coverage": {
+    "startYear": 500,
+    "endYear": 1500,
+    "focus": "Europa medieval e regiões próximas"
+  },
+  "changes": [
+    "Base /atlas/invadergis/ e alias Windows compatível com tipos Node 22.20.0",
+    "Tema escuro inicial",
+    "Atalhos de ano sincronizados com Nacional Atlas",
+    "Guia automático desativado no modo incorporado",
+    "Tradução parcial dos comandos principais",
+    "Manifesto local e aviso noindex",
+    "Índices por ano não utilizados omitidos; índice temporal calculado na memória pelo motor original"
+  ],
+  "validation": {
+    "report": "validation.txt",
+    "scope": "Validador upstream: 12273 registros, 12 tipos; não audita integralmente os 16415 registros compilados",
+    "result": "0 erros e 106 avisos; inclui referências e vínculos não resolvidos"
+  },
+  "limitations": [
+    "Base experimental de terceiros; referências e vínculos incompletos, ver validation.txt",
+    "Não representa a história completa do mundo",
+    "Interface e corpus majoritariamente em inglês",
+    "Link externo do Nacional Atlas preserva o ano, não a posição do mapa ou a seleção de entidades"
+  ]
+}

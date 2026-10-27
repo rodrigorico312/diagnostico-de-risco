@@ -1,0 +1,89 @@
+{
+  "version": 8,
+  "name": "Parchment",
+  "metadata": {
+    "description": "Medieval-systems parchment aesthetic. Sepia palette over Natural Earth land/water with rivers and lakes.",
+    "license": "BSD-3 (style); land/water/rivers © Natural Earth (public domain)"
+  },
+  "glyphs": "/glyphs/{fontstack}/{range}.pbf",
+  "sources": {
+    "land": {
+      "type": "geojson",
+      "data": "/geo/ne_50m_land.geojson",
+      "attribution": "Natural Earth"
+    },
+    "lakes": {
+      "type": "geojson",
+      "data": "/geo/ne_50m_lakes.geojson"
+    },
+    "rivers": {
+      "type": "geojson",
+      "data": "/geo/ne_50m_rivers.geojson"
+    },
+    "glaciers": {
+      "type": "geojson",
+      "data": "/geo/ne_50m_glaciers.geojson"
+    }
+  },
+  "layers": [
+    {
+      "id": "ocean",
+      "type": "background",
+      "paint": {
+        "background-color": "#e8e0c8"
+      }
+    },
+    {
+      "id": "land-fill",
+      "type": "fill",
+      "source": "land",
+      "paint": {
+        "fill-color": "#efe7d0",
+        "fill-opacity": 1.0
+      }
+    },
+    {
+      "id": "land-outline",
+      "type": "line",
+      "source": "land",
+      "paint": {
+        "line-color": "#7a5c1e",
+        "line-width": 0.45,
+        "line-opacity": 0.55
+      }
+    },
+    {
+      "id": "glaciers",
+      "type": "fill",
+      "source": "glaciers",
+      "paint": {
+        "fill-color": "#ecebe4",
+        "fill-opacity": 0.85
+      }
+    },
+    {
+      "id": "lakes",
+      "type": "fill",
+      "source": "lakes",
+      "paint": {
+        "fill-color": "#cbb88a",
+        "fill-opacity": 0.85
+      }
+    },
+    {
+      "id": "rivers",
+      "type": "line",
+      "source": "rivers",
+      "paint": {
+        "line-color": "#9b7a3a",
+        "line-width": [
+          "interpolate", ["linear"], ["zoom"],
+          2, 0.3,
+          5, 0.7,
+          8, 1.2
+        ],
+        "line-opacity": 0.6
+      }
+    }
+  ]
+}

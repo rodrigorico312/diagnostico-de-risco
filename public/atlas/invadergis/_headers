@@ -1,0 +1,26 @@
+# Security + caching headers for static hosts that read a _headers file
+# (Netlify, Cloudflare Pages). Vite copies public/ to the dist root on build, so
+# this ships alongside index.html. Mirrors the CSP meta tag in index.html.
+#
+# InvaderGIS is a self-contained static SPA with ZERO runtime external calls, so
+# the CSP permits only 'self' (+ data:/blob: for inline SVG/raster and MapLibre
+# worker blobs). If a remote tile/basemap provider is ever added, extend img-src
+# and connect-src with that origin here AND in index.html.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Long-cache the content-hashed build assets (safe — filenames change on rebuild).
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The baked data + index are content the app fetches at runtime; revalidate.
+/data/*
+  Cache-Control: public, max-age=3600, must-revalidate
+/index/*
+  Cache-Control: public, max-age=3600, must-revalidate

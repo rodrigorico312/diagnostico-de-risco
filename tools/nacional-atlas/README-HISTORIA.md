@@ -14,6 +14,8 @@ Os textos separam contexto, decisão, efeitos descritivos, interpretação e lim
 
 ## Funcionalidades
 
+- Navegação temporal com reprodução: percorre apenas anos com registros, sem interpolar fatos nem representar duração pelo espaçamento do controle.
+- Aba **Mapa histórico**, integrada ao mesmo endereço (`h_tela=explorer&m_ano=1000`), com motor InvaderGIS: mapa temporal, relações, governantes, comparação e biblioteca de fontes. O ano do mapa é sincronizado por mensagens verificadas e pode ser compartilhado. O link do Atlas não preserva posição ou entidade selecionada dentro do mapa.
 - Painel de filtros recolhido por padrão em todas as telas; botão de hambúrguer abre o painel deslizante. Fechar, Escape ou clique fora recolhem a lateral e mantêm as seleções.
 - Filtros por período, década, ano com registro, tema, pessoa/instituição e estado da evidência.
 - Busca textual; detalhe com fontes; compartilhamento do recorte e do evento por URL.
@@ -24,6 +26,23 @@ Os textos separam contexto, decisão, efeitos descritivos, interpretação e lim
 - CSV com fontes e limites; download do JSON integral com metadados e hashes dos arquivos editoriais de entrada.
 
 ## Reproduzir
+
+### Mapa InvaderGIS para estudo pessoal
+
+Código upstream: https://github.com/g-lanza/InvaderGIS, commit `c2acb1e9cddd75ded98246f8c518ac9acc74a593`.
+O motor e a base de terceiros são incorporados em uma superfície própria; não alteram os registros brasileiros ou eleitorais. Cobertura: 500–1500, concentrada na Europa e regiões próximas. Não equivale a uma história completa de todos os povos. A interface original e o corpus são majoritariamente em inglês, com tradução parcial dos comandos principais. O tema inicial foi adaptado para escuro.
+
+Licenças: software PolyForm Noncommercial 1.0.0; curadoria/dados CC BY-NC 4.0; fontes upstream mantêm condições próprias, descritas em `ATTRIBUTIONS.txt`. Uso aqui declarado pessoal e não comercial. Aviso `noindex` não é controle de acesso: a audiência existente do Atlas foi preservada.
+
+A validação upstream verifica 12.273 registros de 12 tipos e retorna **0 erros e 106 avisos**, incluindo referências de fontes e vínculos não resolvidos. O compilador reúne 16.415 registros de 15 tipos. Isso **não** significa que todos foram auditados nem que toda afirmação tem referência resolvida. O relatório integral é distribuído com o mapa (`invadergis/validation.txt`), junto com licença, créditos e `integration.json`.
+
+```powershell
+git clone https://github.com/g-lanza/InvaderGIS.git ../referencias/InvaderGIS
+git -C ../referencias/InvaderGIS checkout c2acb1e9cddd75ded98246f8c518ac9acc74a593
+python scripts/prepare_invadergis.py --source ../referencias/InvaderGIS
+```
+
+O script aplica adaptações idempotentes (caminho, alias Windows, tipos Node, tema, integração de ano, tradução parcial, manifesto), valida, compila e instala os arquivos estáticos em `public/invadergis`. Nenhum serviço pago ou chave de API é necessário para esse motor e essa base. Cada referência e as licenças das fontes permanecem consultáveis. A geração de estatísticas brasileiras continua independente:
 
 ```powershell
 npm ci

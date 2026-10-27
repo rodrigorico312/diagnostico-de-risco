@@ -247,6 +247,14 @@
   ],
   "rewrites": [
     {
+      "source": "/atlas/invadergis/",
+      "destination": "/atlas/invadergis/index.html"
+    },
+    {
+      "source": "/atlas/invadergis",
+      "destination": "/atlas/invadergis/index.html"
+    },
+    {
       "source": "/atlas",
       "destination": "/atlas/index.html"
     },

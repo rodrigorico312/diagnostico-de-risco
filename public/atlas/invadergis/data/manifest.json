@@ -1,0 +1,50 @@
+{
+  "datasetId": "medieval-europe-500-1500",
+  "bakedAt": "2026-10-27T21:11:16.388Z",
+  "window": {
+    "start": 500,
+    "end": 1500
+  },
+  "counts": {
+    "polity": 306,
+    "event": 3075,
+    "journey": 152,
+    "relationship": 428,
+    "ruler": 285,
+    "source": 458,
+    "institution": 92,
+    "technology": 18,
+    "text": 1097,
+    "settlement": 4077,
+    "military": 2055,
+    "capital": 230,
+    "claim": 4123,
+    "annotation": 12,
+    "research_question": 7,
+    "total": 16415
+  },
+  "files": {
+    "records": [
+      "/data/records/polity.json",
+      "/data/records/event.json",
+      "/data/records/journey.json",
+      "/data/records/relationship.json",
+      "/data/records/ruler.json",
+      "/data/records/source.json",
+      "/data/records/institution.json",
+      "/data/records/technology.json",
+      "/data/records/text.json",
+      "/data/records/settlement.json",
+      "/data/records/military.json",
+      "/data/records/capital.json",
+      "/data/records/claim.json",
+      "/data/records/annotation.json",
+      "/data/records/research_question.json"
+    ],
+    "polities": "/data/layers/polities.geojson",
+    "events": "/data/layers/events.geojson",
+    "journeys": "/data/layers/journeys.geojson",
+    "adjacency": "/index/adjacency.json",
+    "search": "/index/search.json"
+  }
+}

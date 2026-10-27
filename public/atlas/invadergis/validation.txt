@@ -1,0 +1,116 @@
+
+> invadergis@0.2.0 validate
+> node scripts/validate/validate.mjs
+
+[validate] dataset: medieval-europe-500-1500 — window 500–1500 (warn-only)
+
+validated 12273 records across 12 types
+
+0 error(s), 106 warning(s)
+(plus 6362 internal donor-geojson geometry-provenance refs — not citations, not counted as warnings)
+warn: hunnic_empire: interval (370–453) entirely outside 500–1500
+warn: safavid_persia: interval (1501–1736) entirely outside 500–1500
+warn: swiss_confederation: source not found → rippmann_die_2006
+warn: western_roman_empire: interval (285–476) entirely outside 500–1500
+warn: alans_370: year (370) outside 500–1500 (±25)
+warn: alans_409: year (409) outside 500–1500 (±25)
+warn: attila_invasions_451: year (451) outside 500–1500 (±25)
+warn: barbarian_invasions_395: year (395) outside 500–1500 (±25)
+warn: battle_adrianople_378: year (378) outside 500–1500 (±25)
+warn: battle_chalons_451: year (451) outside 500–1500 (±25)
+warn: battle_granson_1476: source not found → rippmann_die_2006
+warn: battle_mohács_1526: year (1526) outside 500–1500 (±25)
+warn: battle_morgarten_1315: source not found → rippmann_die_2006
+warn: cologne_cathedral_1248: source not found → Binding, Das Kölner Domkapitel
+warn: council_chalcedon_451: year (451) outside 500–1500 (±25)
+warn: council_constantinople_i_381: year (381) outside 500–1500 (±25)
+warn: council_ephesus_431: year (431) outside 500–1500 (±25)
+warn: council_nicaea_325: year (325) outside 500–1500 (±25)
+warn: council_nicaea_i_325: year (325) outside 500–1500 (±25)
+warn: council_of_chalcedon_451: year (451) outside 500–1500 (±25)
+warn: council_sardica_343: year (343) outside 500–1500 (±25)
+warn: death_attila_453: year (453) outside 500–1500 (±25)
+warn: formation_swiss_confederacy_1291: source not found → rippmann_die_2006
+warn: margaret_i_denmark_1387: source not found → Sjöberg, Queen Margaret I of Denmark
+warn: sack_of_rome_410: year (410) outside 500–1500 (±25)
+warn: sack_rome_alaric_410: year (410) outside 500–1500 (±25)
+warn: suebi_kingdom_409: year (409) outside 500–1500 (±25)
+warn: swiss_battle_morgarten_1315: source not found → Sonderegger, Fußvolk
+warn: swiss_confederation_1291: source not found → rippmann_die_2006
+warn: swiss_peasant_wars_1315: source not found → rippmann_die_2006
+warn: union_lublin_1569: year (1569) outside 500–1500 (±25)
+warn: valentian_edict_445: year (445) outside 500–1500 (±25)
+warn: wd_battle_of_n_fels_1388: source not found → rippmann_die_2006
+warn: conquests_swiss_confederation_1315_1499: source not found → rippmann_die_2006
+warn: rel_duchy_of_swabia_to_swiss_confederation_fragmentation: source not found → rippmann_die_2006
+warn: rel_swiss_burgundy: source not found → rippmann_die_2006
+warn: rel_swiss_hre_independence: source not found → rippmann_die_2006
+warn: rel_swiss_savoy_disputes: source not found → rippmann_die_2006
+warn: aethelred_unready: ruler.polity unresolved → anglo_saxon_england
+warn: alan_great_brittany: ruler.polity unresolved → brittany
+warn: alfred_great_england: ruler.polity unresolved → kingdom_england
+warn: ali_ibn_abi_talib: ruler.polity unresolved → islamic_caliphate
+warn: al_hasan_b_ali: ruler.polity unresolved → islamic_caliphate
+warn: boso_of_provence: ruler.polity unresolved → kingdom_of_provence
+warn: canute_great: ruler.polity unresolved → anglo_saxon_england
+warn: charlemagne_frankish: ruler.polity unresolved → frankish_empire
+warn: charles_the_bald: ruler.polity unresolved → west_frankish_kingdom
+warn: charles_the_simple: ruler.polity unresolved → west_frankish_kingdom
+warn: columban: ruler.polity unresolved → merovingian_franks
+warn: edgar: ruler.polity unresolved → anglo_saxon_england
+warn: harald_harfager: ruler.polity unresolved → norway
+warn: henry_iii_ireland: ruler.polity unresolved → english_kingdom_lordship_ireland
+warn: henry_ii_england: ruler.polity unresolved → kingdom_england
+warn: hywel_ap_cadell: ruler.polity unresolved → wales
+warn: ibn_battuta: ruler.polity unresolved → diverse_islamic
+warn: leif_ericsson: ruler.polity unresolved → norse_greenlanders
+warn: liutprand_cremona: ruler.polity unresolved → bishop_cremona
+warn: louis_iv: ruler.polity unresolved → west_franks
+warn: louis_the_stammerer: ruler.polity unresolved → west_frankish_kingdom
+warn: odo_of_paris: ruler.polity unresolved → west_frankish_kingdom
+warn: pope_gregory_iii: ruler.polity unresolved → papal_state
+warn: rashi: ruler.polity unresolved → jewish_community_troyes
+warn: robert_guiscard: ruler.polity unresolved → normandy_southern_italy
+warn: samuel_ha_nagid: ruler.polity unresolved → taifa_granada
+warn: set_bath_43: start_year (43) outside 500–1500 (±25)
+warn: set_bursa_202: start_year (202) outside 500–1500 (±25)
+warn: set_constantinople: start_year (330) outside 500–1500 (±25)
+warn: set_derbent_438: start_year (438) outside 500–1500 (±25)
+warn: set_dvin_335: start_year (335) outside 500–1500 (±25)
+warn: set_edirne_125: start_year (125) outside 500–1500 (±25)
+warn: set_frankfurt_100: start_year (100) outside 500–1500 (±25)
+warn: set_ikeja_15: start_year (15) outside 500–1500 (±25)
+warn: set_ilorin_18: start_year (18) outside 500–1500 (±25)
+warn: set_lafia_17: start_year (17) outside 500–1500 (±25)
+warn: set_newcastle_upon_tyne_200: start_year (200) outside 500–1500 (±25)
+warn: set_nicea: start_year (325) outside 500–1500 (±25)
+warn: set_nik_i_400: start_year (400) outside 500–1500 (±25)
+warn: set_novyy_afon_300: start_year (300) outside 500–1500 (±25)
+warn: set_raqqa_244: start_year (244) outside 500–1500 (±25)
+warn: set_ravenna: start_year (402) outside 500–1500 (±25)
+warn: set_san_marino_301: start_year (301) outside 500–1500 (±25)
+warn: set_tblisi: start_year (458) outside 500–1500 (±25)
+warn: set_tiberias_20: start_year (20) outside 500–1500 (±25)
+warn: set_toledo: end_year (1560) outside 500–1500 (±25)
+warn: set_turkistan_401: start_year (401) outside 500–1500 (±25)
+warn: battle_panipat_1: start_year (1526) outside 500–1500 (±25)
+warn: battle_panipat_1: end_year (1526) outside 500–1500 (±25)
+warn: aksumite_empire: start_year (100) outside 500–1500 (±25)
+warn: byzantine_empire: start_year (330) outside 500–1500 (±25)
+warn: delhi_sultanate: end_year (1526) outside 500–1500 (±25)
+warn: duchy_of_ferrara: end_year (1598) outside 500–1500 (±25)
+warn: duchy_of_lorraine: end_year (1766) outside 500–1500 (±25)
+warn: duchy_of_naxos: end_year (1579) outside 500–1500 (±25)
+warn: funan: start_year (50) outside 500–1500 (±25)
+warn: gupta_empire: start_year (320) outside 500–1500 (±25)
+warn: hafsid_sultanate: end_year (1574) outside 500–1500 (±25)
+warn: khanate_of_kazan: end_year (1552) outside 500–1500 (±25)
+warn: kingdom_of_galicia: end_year (1833) outside 500–1500 (±25)
+warn: kingdom_of_kent: start_year (455) outside 500–1500 (±25)
+warn: margraviate_of_brandenburg: end_year (1618) outside 500–1500 (±25)
+warn: pomerania: end_year (1637) outside 500–1500 (±25)
+warn: principality_of_wales: end_year (1542) outside 500–1500 (±25)
+warn: republic_of_ragusa: end_year (1808) outside 500–1500 (±25)
+warn: republic_of_siena: end_year (1555) outside 500–1500 (±25)
+warn: suebi_kingdom: start_year (409) outside 500–1500 (±25)
+warn: visigothic_kingdom: start_year (418) outside 500–1500 (±25)

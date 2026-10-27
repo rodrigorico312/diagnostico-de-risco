@@ -12,6 +12,6 @@ if not history['events'] or not all(c['passed'] for c in history['meta']['checks
 html=(dist/'world.html').read_text(encoding='utf8')
 if '/atlas/assets/' not in html:raise SystemExit('Compile com ATLAS_BASE_PATH=/atlas/')
 dest.mkdir(parents=True,exist_ok=True)
-for name in ['assets','world-data','context-data','para-data','history-data']:shutil.copytree(dist/name,dest/name,dirs_exist_ok=True)
+for name in ['assets','world-data','context-data','para-data','history-data','invadergis']:shutil.copytree(dist/name,dest/name,dirs_exist_ok=True)
 shutil.copy2(dist/'world.html',dest/'index.html');shutil.copy2(dist/'world.html',dest/'world.html')
 print(json.dumps({'destination':str(dest),'countries':217,'municipalities':5571,'files':sum(1 for p in dest.rglob('*') if p.is_file())},ensure_ascii=True))
