@@ -1,7 +1,7 @@
 import type {CaseActor,CaseRelation,HistoryData,HistoryCase} from './types';
 
 export const caseBasisLabels={documented:'Documento consultado',reported:'Relatado pela imprensa'};
-export const claimLabels={documented:'Documento consultado',reported:'Notícia · original pendente',interpretation:'Distinção / leitura delimitada',pending:'Em aberto'};
+export const claimLabels={documented:'Documento consultado',reported:'Notícia · original pendente',interpretation:'Distinção / leitura delimitada',pending:'Em aberto',refuted:'Contradito pelos documentos'};
 const fold=(text:string)=>text.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLocaleLowerCase('pt-BR');
 export function caseActorMatches(actor:CaseActor,query:string){return fold([actor.name,actor.role,actor.action].join(' ')).includes(fold(query.trim()));}
 export function caseRelations(c:HistoryCase,actor:string,basis:string){return c.relations.filter(r=>(actor==='all'||r.from===actor||r.to===actor)&&(basis==='all'||r.basis===basis));}
@@ -10,7 +10,7 @@ export function caseRelationExport(relation:CaseRelation,c:HistoryCase,data:Hist
 export function checkCases(data:HistoryData){
  const cases=data.cases??[],eventIds=new Set(data.events.map(e=>e.id)),sourceById=new Map(data.sources.map(s=>[s.id,s])),trailIds=new Set(data.trails?.map(t=>t.id));
  const unique=(ids:string[])=>new Set(ids).size===ids.length;
- const supported=(row:{sources:string[];basis?:string;status?:string},allowed:Set<string>)=>row.sources.length>0&&row.sources.every(id=>allowed.has(id)&&sourceById.has(id))&&((row.basis??row.status)!=='documented'||row.sources.some(id=>['primary','institutional'].includes(sourceById.get(id)!.kind)));
+ const supported=(row:{sources:string[];basis?:string;status?:string},allowed:Set<string>)=>row.sources.length>0&&row.sources.every(id=>allowed.has(id)&&sourceById.has(id))&&(!['documented','refuted'].includes(row.basis??row.status??'')||row.sources.some(id=>['primary','institutional'].includes(sourceById.get(id)!.kind)));
  if(!unique(cases.map(c=>c.id)))throw Error('Casos com identificadores duplicados.');
  for(const c of cases){
   const actorIds=new Set(c.actors.map(a=>a.id)),allowed=new Set(c.sources);

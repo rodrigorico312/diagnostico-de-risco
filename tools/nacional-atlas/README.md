@@ -20,3 +20,8 @@ A área unificada `/atlas/?visao=historia&h_tela=trails` contém os percursos do
 ## Participantes e relações com evidências
 
 A aba Quem participa (`/atlas/?visao=historia&h_tela=cases&h_caso=tagliaferro`) distingue funções, relações documentais, relatos da imprensa e perguntas em aberto. Pesquisa, filtros de relações e exportação CSV estão disponíveis. Consulte [research/README-networks.md](research/README-networks.md) para fontes, lacunas e reprodução.
+
+
+## Origem e transformações do STF
+
+A aba STF e indicações (`/atlas/?visao=historia&h_tela=court`) inclui antecedentes monárquicos, organização no governo Deodoro, participantes e intervenções históricas. O caso e a trilha `stf-origem` distinguem fatos documentados, afirmações contraditas e questões pendentes. Fontes, limitações e reprodução em [research/README-stf.md](research/README-stf.md). As nomeações permanecem uma seleção histórica, não a composição atual do tribunal.

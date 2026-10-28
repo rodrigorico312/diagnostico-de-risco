@@ -8,7 +8,7 @@ export interface IdeaProfile{id:string;name:string;subtitle:string;tradition:str
 export interface HistoryTrail{id:string;title:string;intro:string;limits:string;steps:{event:string;prompt:string}[]}
 export interface CaseActor{id:string;name:string;role:string;action:string;basis:'documented'|'reported';sources:string[]}
 export interface CaseRelation{id:string;from:string;to:string;label:string;detail:string;period:string;basis:'documented'|'reported';sources:string[]}
-export interface CaseClaim{id:string;claim:string;assessment:string;status:'documented'|'reported'|'interpretation'|'pending';sources:string[];origin?:string;needed?:string}
+export interface CaseClaim{id:string;claim:string;assessment:string;status:'documented'|'reported'|'interpretation'|'pending'|'refuted';sources:string[];origin?:string;needed?:string}
 export interface HistoryCase{id:string;title:string;summary:string;asOf:string;trail:string;material:string;limits:string;events:string[];sources:string[];actors:CaseActor[];relations:CaseRelation[];claims:CaseClaim[];gaps:string[]}
 export interface HistoryData{cases?:HistoryCase[];trails?:HistoryTrail[];profiles?:IdeaProfile[];meta:{updatedAt:string;scope:string;limitations:string[];checks:{name:string;passed:boolean}[];inputHashes:Record<string,string>};sources:HistorySource[];events:HistoryEvent[];appointments:Appointment[]}
 export interface HistoryFilters{query:string;period:string;decade:string;year:string;topic:string;person:string;evidence:string;kind:string;place:string}

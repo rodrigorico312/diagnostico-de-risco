@@ -7,7 +7,7 @@ export const studyAreas=[
  ['statements','Falas e documentos','Mostra o trecho, quem falou, o cargo que ocupava e onde conferir o documento. A fala documenta o que a pessoa disse; suas alegações também precisam de verificação.'],
  ['explorer','Mapa histórico','Mostra territórios do catálogo 500–1500. Cor não é povoamento; o ano do desenho pode ser anterior ao escolhido. A cartografia é independente da cronologia brasileira.'],
  ['connections','Conexões','Sugere relações por atores, temas ou vínculos editoriais. Use como pista para investigar; proximidade na rede não comprova causa, aliança ou troca de favores.'],
- ['court','STF e indicações','Registra quem indicou cada ministro nesta seleção e permite consultar acontecimentos associados. Nomeação não demonstra obediência política; confira o processo e o fundamento de cada voto.'],
+ ['court','STF e indicações','Percorra a origem do tribunal, o governo de Deodoro e as intervenções históricas. Confira as nomeações e os limites dos ministros pelas fontes, distinguindo vínculo de governo e controle político.'],
  ['sources','Fontes e método','Explica a cobertura e as lacunas. Abra o documento primário quando disponível e confira data, autoria, trecho e alcance da conclusão.'],
 ] as const;
 export default function StudyGuide({onArea,onStart}:{onArea:(area:string)=>void;onStart:(id:string)=>void}){

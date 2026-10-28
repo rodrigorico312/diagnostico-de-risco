@@ -1,0 +1,893 @@
+{
+ "sources": [
+  {
+   "id": "decreto510",
+   "title": "Câmara — Decreto 510, de 22/06/1890: Constituição Provisória",
+   "url": "https://www2.camara.leg.br/legin/fed/decret/1824-1899/decreto-510-22-junho-1890-507621-publicacaooriginal-1-pe.html",
+   "kind": "primary",
+   "checkedAt": "2026-10-28",
+   "note": "O texto publicado já emprega Supremo Tribunal Federal. O art. 3º limita os pontos que vigorariam de imediato; não é a Constituição promulgada em fevereiro de 1891."
+  },
+  {
+   "id": "decreto848",
+   "title": "Câmara — Decreto 848, de 11/10/1890: organização da Justiça Federal",
+   "url": "https://www2.camara.leg.br/legin/fed/decret/1824-1899/decreto-848-11-outubro-1890-499488-publicacaooriginal-1-pe.html",
+   "kind": "primary",
+   "checkedAt": "2026-10-28",
+   "note": "Arts. 1º, 4º e 5º; ao final, Deodoro da Fonseca e Campos Salles. Estrutura o STF com 15 juízes; a instalação ocorreu depois."
+  },
+  {
+   "id": "instalacao",
+   "title": "STF — Instalação de 1891: presidência provisória e eleição",
+   "url": "https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=461420&tip=UN",
+   "kind": "institutional",
+   "checkedAt": "2026-10-28",
+   "note": "Sayão Lobato presidiu interinamente a sessão inaugural; Freitas Henriques foi eleito primeiro presidente. São papéis diferentes."
+  },
+  {
+   "id": "equipe",
+   "title": "Biblioteca da Presidência — Ministérios do governo Deodoro",
+   "url": "https://www.biblioteca.presidencia.gov.br/presidencia/ex-presidentes/deodoro-fonseca/equipe-de-governo/ministerios",
+   "kind": "institutional",
+   "checkedAt": "2026-10-28",
+   "note": "Datas de exercício de Rui Barbosa, Benjamin Constant, Floriano e Wandenkolk. Participação no governo não equivale a autoria de cada ato."
+  },
+  {
+   "id": "deodoro-biografia",
+   "title": "Arquivo Nacional — Deodoro, trajetória e Governo Provisório",
+   "url": "https://presidentes.an.gov.br/index.php/centro-de-referencia-de-acervos-presidenciais/assuntos/biografias/212-manuel-deodoro-da-fonseca",
+   "kind": "institutional",
+   "checkedAt": "2026-10-28",
+   "note": "Síntese institucional sobre a coalizão republicana e o governo militar. A página pode apresentar bloqueio de acesso; não foi usada para presumir relações partidárias atuais."
+  },
+  {
+   "id": "cf1891",
+   "title": "Câmara — Constituição de 24/02/1891, texto original",
+   "url": "https://www2.camara.leg.br/legin/fed/consti/1824-1899/constituicao-35081-24-fevereiro-1891-532699-publicacaooriginal-15017-pl.html",
+   "kind": "primary",
+   "checkedAt": "2026-10-28",
+   "note": "Arts. 55–59: organização, composição e competências do Judiciário federal; texto distinto da Constituição Provisória de 1890."
+  },
+  {
+   "id": "vargas1931",
+   "title": "Câmara — Decreto 19.711/1931: aposentadoria de seis ministros",
+   "url": "https://www2.camara.leg.br/legin/fed/decret/1930-1939/decreto-19711-18-fevereiro-1931-517595-publicacaooriginal-1-pe.html",
+   "kind": "primary",
+   "checkedAt": "2026-10-28",
+   "note": "Ato de 18/02, publicado em 21/02/1931, assinado por Getúlio Vargas e Oswaldo Aranha. A justificativa do preâmbulo pertence ao governo que editou o ato."
+  },
+  {
+   "id": "cassacoes1969",
+   "title": "STF — Aposentadorias compulsórias e protestos de janeiro de 1969",
+   "url": "https://noticias.stf.jus.br/postsnoticias/um-ato-de-repudio-contra-as-aposentadorias-compulsorias/",
+   "kind": "institutional",
+   "checkedAt": "2026-10-28",
+   "note": "Retrospectiva institucional, não cópia do decreto de aposentadoria: distingue cassações de 16/1 e pedido de saída de Gonçalves de Oliveira dois dias depois."
+  },
+  {
+   "id": "cf-atual",
+   "title": "Câmara — Constituição de 1988, texto atualizado",
+   "url": "https://www2.camara.leg.br/legin/fed/consti/1988/constituicao-1988-5-outubro-1988-322142-normaatualizada-pl.html",
+   "kind": "primary",
+   "checkedAt": "2026-10-28",
+   "note": "Arts. 52, II e III; 93, IX; 95; 101 e 102. O texto compilado incorpora emendas; não se atribui toda a redação atual ao dia da promulgação."
+  },
+  {
+   "id": "cpc",
+   "title": "Câmara — Código de Processo Civil atualizado, art. 1.021",
+   "url": "https://www2.camara.leg.br/legin/fed/lei/2015/lei-13105-16-marco-2015-780273-normaatualizada-pl.html",
+   "kind": "primary",
+   "checkedAt": "2026-10-28",
+   "note": "Agravo interno de decisão do relator para o colegiado no processo civil. Não se generaliza cabimento ou prazo para toda classe processual do STF."
+  },
+  {
+   "id": "decisoes",
+   "title": "STF — Distinção entre decisões monocráticas e colegiadas",
+   "url": "https://portal.stf.jus.br/textos/verTexto.asp?pagina=entendadecisoes&servico=estatistica",
+   "kind": "institutional",
+   "checkedAt": "2026-10-28",
+   "note": "Explicação institucional geral publicada em 2018; não substitui o regimento atualizado e o exame de cada processo."
+  },
+  {
+   "id": "moraes-sabatina",
+   "title": "Senado — Sabatina de Moraes e vínculos políticos anteriores, 21/02/2017",
+   "url": "https://www12.senado.leg.br/noticias/materias/2017/02/21/moraes-garante-atuacao-isenta-e-pede-judiciario-menos-ativista",
+   "kind": "institutional",
+   "checkedAt": "2026-10-28",
+   "note": "Registra passagem pelo PSDB e por governos de PSDB, DEM e PMDB, além da promessa de imparcialidade. A promessa não comprova a conduta posterior."
+  },
+  {
+   "id": "casa1808",
+   "title": "STF — Da Casa da Suplicação ao Supremo Tribunal Federal",
+   "url": "https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=391404",
+   "kind": "institutional",
+   "checkedAt": "2026-10-28",
+   "note": "Retrospectiva institucional: alvará de 10/05/1808 e criação do tribunal imperial em 1828. Para as regras republicanas, são consultados os atos de 1890 e a Constituição de 1891."
+  }
+ ],
+ "events": [
+  {
+   "id": "casa1808",
+   "year": 1808,
+   "date": "1808-05-10",
+   "label": "1808 — Casa da Suplicação do Brasil, antecedente do Supremo",
+   "period": "colonia",
+   "topics": [
+    "instituicoes"
+   ],
+   "actors": [
+    "Dom João",
+    "Coroa portuguesa"
+   ],
+   "summary": "A transferência da Corte portuguesa trouxe uma instância superior de Justiça no Brasil: a Casa da Suplicação, organizada em 1808.",
+   "context": "O antecedente pertence à monarquia portuguesa e não ao regime constitucional republicano.",
+   "decision": "Reorganizar a instância superior da Justiça no território brasileiro.",
+   "effects": [
+    "A trajetória institucional precede o Supremo Tribunal de Justiça do Império e o STF republicano."
+   ],
+   "limits": "Antecedente não significa identidade de competências, composição ou legitimidade política. Não é a criação do STF de 1890–1891.",
+   "sources": [
+    "casa1808"
+   ],
+   "evidence": "documented",
+   "recordNature": "historical",
+   "related": [
+    "justice:justice-stj-imperio",
+    "decreto848"
+   ],
+   "area": "Brasil"
+  },
+  {
+   "id": "decreto510",
+   "year": 1890,
+   "date": "1890-06-22",
+   "label": "Junho de 1890 — a denominação STF na Constituição Provisória",
+   "period": "republica",
+   "topics": [
+    "instituicoes"
+   ],
+   "actors": [
+    "Deodoro da Fonseca",
+    "Governo Provisório da República"
+   ],
+   "summary": "O Decreto 510 publicou um projeto constitucional que já empregava o nome Supremo Tribunal Federal.",
+   "context": "Deodoro chefiava o Governo Provisório instaurado após a derrubada da monarquia.",
+   "decision": "Submeter um texto constitucional à futura representação constituinte, com vigência imediata limitada nos termos do art. 3º.",
+   "effects": [
+    "A denominação antecede a organização judiciária de outubro e a instalação de fevereiro de 1891."
+   ],
+   "limits": "O texto provisório não se confunde com a Constituição aprovada pelo Congresso em 1891. Mencionar o órgão não é o mesmo que já tê-lo instalado.",
+   "sources": [
+    "decreto510",
+    "justice:justice-hist-stf"
+   ],
+   "evidence": "documented",
+   "recordNature": "law",
+   "related": [
+    "decreto848",
+    "justice:justice-stf-republica"
+   ],
+   "area": "Brasil"
+  },
+  {
+   "id": "decreto848",
+   "year": 1890,
+   "date": "1890-10-11",
+   "label": "Outubro de 1890 — Deodoro e Campos Sales organizam o STF",
+   "period": "republica",
+   "topics": [
+    "instituicoes",
+    "forcas"
+   ],
+   "actors": [
+    "Deodoro da Fonseca",
+    "Manuel Ferraz de Campos Sales",
+    "Governo Provisório da República"
+   ],
+   "summary": "O Decreto 848 organizou a Justiça Federal com um Supremo Tribunal Federal e juízes de seção. O ato traz os nomes de Deodoro e Campos Salles e prevê 15 juízes no Supremo.",
+   "context": "O governo era uma chefia militar republicana apoiada por participantes civis e militares. O PT não existia nessa época.",
+   "decision": "Definir estrutura, competências e regras de nomeação da Justiça Federal republicana.",
+   "effects": [
+    "Constituição de 1891 e instalação da Corte completaram outros marcos desse processo."
+   ],
+   "limits": "Não foi um ato de Lula ou do PT. Autoria normativa, participação no governo, revisão constitucional e exercício posterior de cargo são vínculos diferentes. O ato não comprova um plano para governos de mais de um século depois.",
+   "sources": [
+    "decreto848",
+    "deodoro-biografia",
+    "root:presidencia"
+   ],
+   "evidence": "documented",
+   "recordNature": "law",
+   "related": [
+    "decreto510",
+    "foundations:f-republica1889",
+    "justice:justice-stf-republica",
+    "root:pt"
+   ],
+   "area": "Brasil"
+  },
+  {
+   "id": "vargas1931",
+   "year": 1931,
+   "date": "1931-02-18",
+   "label": "1931 — Vargas afasta seis ministros por decreto",
+   "period": "vargas",
+   "topics": [
+    "instituicoes"
+   ],
+   "actors": [
+    "Getúlio Vargas",
+    "Oswaldo Aranha",
+    "Godofredo Cunha",
+    "Edmundo Muniz Barreto",
+    "Antônio Pires e Albuquerque",
+    "Pedro Mibielli",
+    "Pedro dos Santos",
+    "Geminiano da Franca"
+   ],
+   "summary": "O Decreto 19.711 aposentou seis ministros do STF e dispensou exame de sanidade, invocando razões de ordem pública e outros motivos em seu preâmbulo.",
+   "context": "A medida foi tomada pelo Governo Provisório de Vargas, após a ruptura de 1930.",
+   "decision": "Retirar os ministros identificados no art. 1º por ato do Executivo.",
+   "effects": [
+    "Alteração direta da composição da Corte pelo governo."
+   ],
+   "limits": "A justificativa oficial documenta o argumento do governo, não prova a correção das razões alegadas. O episódio não explica automaticamente situações posteriores sob outras Constituições.",
+   "sources": [
+    "vargas1931"
+   ],
+   "evidence": "documented",
+   "recordNature": "law",
+   "related": [
+    "foundations:f-vargas1930",
+    "aposentadorias1969"
+   ],
+   "area": "Brasil"
+  },
+  {
+   "id": "cadeiras1965",
+   "year": 1965,
+   "date": "1965-10-27",
+   "label": "1965 — AI-2 amplia de 11 para 16 as cadeiras do STF",
+   "period": "ditadura",
+   "topics": [
+    "instituicoes",
+    "forcas"
+   ],
+   "actors": [
+    "Humberto Castelo Branco",
+    "Supremo Tribunal Federal",
+    "Governo militar"
+   ],
+   "summary": "O AI-2 ampliou para 16 a composição do STF, alterando o número anterior de 11 ministros.",
+   "context": "O mesmo ato restringiu a organização política e modificou a ordem constitucional durante a ditadura.",
+   "decision": "Intervenção normativa do regime na estrutura do tribunal.",
+   "effects": [
+    "A ampliação abriu novas vagas para nomeação pelo governo."
+   ],
+   "limits": "Número de vagas, preenchimento e comportamento de cada ministro precisam ser distinguidos. A ficha não transforma todas as decisões da época em um bloco único.",
+   "sources": [
+    "military:ai2"
+   ],
+   "evidence": "documented",
+   "recordNature": "law",
+   "related": [
+    "military:ai2-1965",
+    "aposentadorias1969"
+   ],
+   "area": "Brasil"
+  },
+  {
+   "id": "aposentadorias1969",
+   "year": 1969,
+   "date": "1969-01-16",
+   "label": "1969 — três ministros do STF são aposentados à força",
+   "period": "ditadura",
+   "topics": [
+    "instituicoes",
+    "forcas"
+   ],
+   "actors": [
+    "Artur da Costa e Silva",
+    "Victor Nunes Leal",
+    "Hermes Lima",
+    "Evandro Lins e Silva",
+    "Antônio Gonçalves de Oliveira"
+   ],
+   "summary": "O governo militar aposentou compulsoriamente Victor Nunes Leal, Hermes Lima e Evandro Lins e Silva, usando os poderes do AI-5.",
+   "context": "Dois dias depois, Gonçalves de Oliveira renunciou à presidência da Corte e pediu aposentadoria em protesto.",
+   "decision": "Afastamento forçado de integrantes do tribunal pelo Executivo, segundo a retrospectiva institucional.",
+   "effects": [
+    "Mudança na composição do STF e protesto de sua presidência."
+   ],
+   "limits": "Esta coleta consultou a retrospectiva do STF, não a íntegra do decreto de cassação. A existência de pressões históricas não dispensa a prova de novas alegações em casos atuais.",
+   "sources": [
+    "cassacoes1969"
+   ],
+   "evidence": "documented",
+   "recordNature": "historical",
+   "related": [
+    "foundations:f-ai51968",
+    "cadeiras1965",
+    "justice:justice-cf-nomeacoes"
+   ],
+   "area": "Brasil"
+  },
+  {
+   "id": "moraes-sabatina2017",
+   "year": 2017,
+   "date": "2017-02-21",
+   "label": "2017 — Moraes é questionado no Senado sobre vínculos políticos",
+   "period": "democracia",
+   "topics": [
+    "instituicoes",
+    "eleicoes"
+   ],
+   "actors": [
+    "Alexandre de Moraes",
+    "Eduardo Braga",
+    "Senado Federal",
+    "Michel Temer"
+   ],
+   "summary": "Na sabatina, Moraes declarou que atuaria com imparcialidade e sem vínculos com sua atividade partidária anterior. O Senado registrou sua passagem pelo PSDB e por governos de PSDB, DEM e PMDB.",
+   "context": "O indicado era ex-ministro da Justiça de Temer e seria avaliado para uma vaga no STF.",
+   "decision": "Manifestação e questionamentos em audiência de indicação.",
+   "effects": [
+    "O registro permite confrontar compromissos declarados com atos posteriores, sem presumir o resultado dessa análise."
+   ],
+   "limits": "Promessa de imparcialidade não comprova imparcialidade efetiva. Vínculo anterior não prova sozinho controle atual, favorecimento ou participação em crime.",
+   "sources": [
+    "moraes-sabatina"
+   ],
+   "evidence": "documented",
+   "recordNature": "testimony",
+   "related": [
+    "moraes-nomeacao2017",
+    "networks:cassacao2026",
+    "networks:noticia2026"
+   ],
+   "area": "Brasil"
+  },
+  {
+   "id": "moraes-nomeacao2017",
+   "year": 2017,
+   "date": "2017-02-22",
+   "label": "2017 — Temer nomeia Alexandre de Moraes para o STF",
+   "period": "democracia",
+   "topics": [
+    "instituicoes"
+   ],
+   "actors": [
+    "Michel Temer",
+    "Alexandre de Moraes",
+    "Senado Federal"
+   ],
+   "summary": "O registro do STF identifica a indicação de Moraes por Michel Temer em 6/2/2017, o decreto de nomeação em 22/2 e a posse em 22/3.",
+   "context": "A escolha preencheu a vaga deixada por Teori Zavascki, após o rito de apreciação pelo Senado.",
+   "decision": "Nomeação presidencial de Moraes, não realizada por Lula ou pelo PT.",
+   "effects": [
+    "Ingresso de Moraes na Corte em março de 2017."
+   ],
+   "limits": "Identificar quem nomeou não demonstra a quem o ministro obedeceria nem resolve a legalidade de decisões posteriores. Cada processo exige exame próprio.",
+   "sources": [
+    "justice:justice-moraes"
+   ],
+   "evidence": "documented",
+   "recordNature": "law",
+   "related": [
+    "moraes-sabatina2017",
+    "justice:justice-temer-bolsonaro",
+    "justice:justice-cf-nomeacoes"
+   ],
+   "area": "Brasil"
+  }
+ ],
+ "trails": [
+  {
+   "id": "stf-origem",
+   "title": "STF: origem, governos, intervenções e controles",
+   "intro": "Da Justiça superior da monarquia ao tribunal republicano e às regras atuais. Separe antecedentes, nome da instituição, organização por decreto, instalação, composição e decisões concretas.",
+   "limits": "Seleção histórica, sem lista exaustiva de governos, ministros ou julgamentos. Coalizões do século XIX não são siglas atuais. Nomeação não comprova obediência; existência de regras não comprova que foram respeitadas em cada processo. A composição histórica selecionada não é a lista atual de ministros em exercício.",
+   "steps": [
+    {
+     "event": "casa1808",
+     "prompt": "A história da Justiça superior é anterior à República."
+    },
+    {
+     "event": "justice:justice-stj-imperio",
+     "prompt": "Pedro I sanciona a lei do tribunal imperial: antecedente distinto do STF republicano."
+    },
+    {
+     "event": "foundations:f-republica1889",
+     "prompt": "Situe a derrubada da monarquia e a chegada de Deodoro ao governo."
+    },
+    {
+     "event": "decreto510",
+     "prompt": "Quando aparece o nome Supremo Tribunal Federal?"
+    },
+    {
+     "event": "decreto848",
+     "prompt": "Quem assina a organização judiciária de outubro de 1890?"
+    },
+    {
+     "event": "foundations:f-constituicao1891",
+     "prompt": "A Constituição definitiva é outra etapa, de fevereiro de 1891."
+    },
+    {
+     "event": "justice:justice-stf-republica",
+     "prompt": "Distinga a presidência provisória da sessão e o primeiro presidente eleito."
+    },
+    {
+     "event": "military:deodoro1891",
+     "prompt": "O governo fundador também enfrentou crise e fechamento do Congresso."
+    },
+    {
+     "event": "vargas1931",
+     "prompt": "Examine um afastamento coletivo documentado no governo Vargas."
+    },
+    {
+     "event": "cadeiras1965",
+     "prompt": "A ditadura ampliou o tribunal: veja o ato, não apenas o nome do governo."
+    },
+    {
+     "event": "aposentadorias1969",
+     "prompt": "Aposentadoria forçada e protesto são ações diferentes."
+    },
+    {
+     "event": "root:pt",
+     "prompt": "O PT foi fundado em 1980, cerca de noventa anos após a organização do STF."
+    },
+    {
+     "event": "justice:justice-cf-nomeacoes",
+     "prompt": "A Constituição de 1988 define o rito de indicação e aprovação."
+    },
+    {
+     "event": "justice:justice-ap470",
+     "prompt": "Veja condenações de dirigentes do PT e o papel do relator indicado por Lula; o caso não mede toda a independência da Corte."
+    },
+    {
+     "event": "moraes-sabatina2017",
+     "prompt": "Que vínculos anteriores foram registrados e o que Moraes prometeu?"
+    },
+    {
+     "event": "moraes-nomeacao2017",
+     "prompt": "Temer indicou e nomeou Moraes em 2017."
+    },
+    {
+     "event": "justice:justice-hc164493",
+     "prompt": "Um voto de ministro indicado por FHC pode beneficiar Lula: examine o fundamento."
+    },
+    {
+     "event": "military:fux2025",
+     "prompt": "A divergência também precisa ser registrada, não confundida com o resultado majoritário."
+    },
+    {
+     "event": "networks:cassacao2026",
+     "prompt": "Examine a crítica documentada à imparcialidade no precedente italiano, com seus limites de alcance."
+    }
+   ]
+  }
+ ],
+ "cases": [
+  {
+   "id": "stf-origem",
+   "title": "Quem criou o STF e quem integrava o governo?",
+   "summary": "Os atos de 1890–1891 pertencem ao Governo Provisório de Deodoro e à Constituinte republicana. Veja os participantes, os antecedentes e as distinções necessárias para estudar influência política.",
+   "asOf": "2026-10-28",
+   "trail": "stf-origem",
+   "material": "A pergunta de pesquisa foi a alegação de que um governo de esquerda ou o PT teria criado o STF para um plano político atual. O caso confronta a alegação com datas e atos oficiais, sem transformar críticas atuais ao tribunal em fatos presumidos.",
+   "limits": "Os participantes não formavam um partido equivalente ao PT de hoje. Relações de gabinete e assinaturas documentam atuação naquele período; não provam aliança permanente ou intenção sobre acontecimentos de mais de um século depois.",
+   "events": [
+    "casa1808",
+    "justice:justice-stj-imperio",
+    "decreto510",
+    "decreto848",
+    "justice:justice-stf-republica",
+    "vargas1931",
+    "cadeiras1965",
+    "aposentadorias1969",
+    "moraes-sabatina2017",
+    "moraes-nomeacao2017",
+    "justice:justice-cf-nomeacoes",
+    "justice:justice-ap470"
+   ],
+   "sources": [
+    "decreto510",
+    "decreto848",
+    "instalacao",
+    "equipe",
+    "deodoro-biografia",
+    "cf1891",
+    "vargas1931",
+    "cassacoes1969",
+    "cf-atual",
+    "cpc",
+    "decisoes",
+    "moraes-sabatina",
+    "justice:justice-lei1828",
+    "justice:justice-hist-stj",
+    "justice:justice-hist-stf",
+    "root:presidencia",
+    "justice:justice-moraes",
+    "justice:justice-nunes",
+    "justice:justice-mendonca",
+    "justice:justice-barbosa",
+    "justice:justice-ap470-encerramento",
+    "military:fux",
+    "networks:cassazione-resumo",
+    "casa1808"
+   ],
+   "actors": [
+    {
+     "id": "deodoro",
+     "name": "Deodoro da Fonseca",
+     "role": "Chefe do Governo Provisório, 1889–1891",
+     "action": "Liderou a ruptura republicana e assina o Decreto 848. Sua trajetória incluiu proximidade anterior com a monarquia.",
+     "basis": "documented",
+     "sources": [
+      "decreto848",
+      "deodoro-biografia"
+     ]
+    },
+    {
+     "id": "campos",
+     "name": "Manuel Ferraz de Campos Sales",
+     "role": "Ministro da Justiça do Governo Provisório",
+     "action": "Seu nome aparece ao final do decreto que organiza a Justiça Federal. A fonte preserva a grafia Campos Salles.",
+     "basis": "documented",
+     "sources": [
+      "decreto848"
+     ]
+    },
+    {
+     "id": "rui",
+     "name": "Rui Barbosa",
+     "role": "Ministro da Fazenda no Governo Provisório",
+     "action": "Integra o governo de Deodoro; esse vínculo não o torna autor exclusivo da criação do tribunal.",
+     "basis": "documented",
+     "sources": [
+      "equipe",
+      "deodoro-biografia"
+     ]
+    },
+    {
+     "id": "benjamin",
+     "name": "Benjamin Constant",
+     "role": "Ministro da Guerra no início do governo",
+     "action": "Participou da equipe inicial. O exercício na Guerra terminou em março de 1890, antes do Decreto 848.",
+     "basis": "documented",
+     "sources": [
+      "equipe"
+     ]
+    },
+    {
+     "id": "quintino",
+     "name": "Quintino Bocaiúva",
+     "role": "Responsável pelas Relações Exteriores no governo inicial",
+     "action": "Republicano participante da coalizão do Governo Provisório; não se presumiu que redigiu o Decreto 848.",
+     "basis": "documented",
+     "sources": [
+      "deodoro-biografia"
+     ]
+    },
+    {
+     "id": "wandenkolk",
+     "name": "Eduardo Wandenkolk",
+     "role": "Ministro da Marinha no Governo Provisório",
+     "action": "Representou a participação naval na equipe governamental, com exercício até janeiro de 1891.",
+     "basis": "documented",
+     "sources": [
+      "equipe"
+     ]
+    },
+    {
+     "id": "pedro",
+     "name": "Dom Pedro I",
+     "role": "Imperador do Brasil no marco de 1828",
+     "action": "Sancionou a lei de organização do Supremo Tribunal de Justiça do Império.",
+     "basis": "documented",
+     "sources": [
+      "justice:justice-lei1828",
+      "justice:justice-hist-stj"
+     ]
+    },
+    {
+     "id": "imperial",
+     "name": "Supremo Tribunal de Justiça do Império",
+     "role": "Tribunal instalado em 1829",
+     "action": "Antecedente institucional com competências próprias; distinto do STJ criado pela Constituição de 1988.",
+     "basis": "documented",
+     "sources": [
+      "justice:justice-hist-stj"
+     ]
+    },
+    {
+     "id": "stf",
+     "name": "STF republicano",
+     "role": "Tribunal organizado em 1890 e instalado em 1891",
+     "action": "Recebeu estrutura republicana própria; sua primeira composição prevista era de 15 juízes.",
+     "basis": "documented",
+     "sources": [
+      "decreto848",
+      "cf1891",
+      "instalacao"
+     ]
+    },
+    {
+     "id": "sayao",
+     "name": "Sayão Lobato, Visconde de Sabará",
+     "role": "Presidente interino da sessão de instalação",
+     "action": "Conduziu a sessão inaugural, na transição do tribunal imperial para o republicano.",
+     "basis": "documented",
+     "sources": [
+      "instalacao"
+     ]
+    },
+    {
+     "id": "freitas",
+     "name": "Freitas Henriques",
+     "role": "Primeiro presidente eleito do STF",
+     "action": "Foi eleito após a abertura da sessão de instalação; esse papel é distinto da presidência interina de Sayão Lobato.",
+     "basis": "documented",
+     "sources": [
+      "instalacao"
+     ]
+    },
+    {
+     "id": "congresso",
+     "name": "Congresso Nacional Constituinte de 1891",
+     "role": "Autor da Constituição republicana de 24/02/1891",
+     "action": "Organizou constitucionalmente o Judiciário federal e as competências do STF.",
+     "basis": "documented",
+     "sources": [
+      "cf1891"
+     ]
+    }
+   ],
+   "relations": [
+    {
+     "id": "justica",
+     "from": "deodoro",
+     "to": "campos",
+     "label": "Chefia do governo e Ministério da Justiça",
+     "detail": "Ambos constam do ato de organização da Justiça Federal.",
+     "period": "11/10/1890",
+     "basis": "documented",
+     "sources": [
+      "decreto848"
+     ]
+    },
+    {
+     "id": "fazenda",
+     "from": "deodoro",
+     "to": "rui",
+     "label": "Participação na equipe de governo",
+     "detail": "Rui foi ministro da Fazenda, sem que isso demonstre autoria de todos os atos do governo.",
+     "period": "1889–janeiro de 1891",
+     "basis": "documented",
+     "sources": [
+      "equipe"
+     ]
+    },
+    {
+     "id": "guerra",
+     "from": "deodoro",
+     "to": "benjamin",
+     "label": "Participação na equipe inicial",
+     "detail": "Benjamin exerceu a pasta da Guerra até março de 1890; não se transporta esse cargo para outubro.",
+     "period": "Novembro de 1889–março de 1890",
+     "basis": "documented",
+     "sources": [
+      "equipe"
+     ]
+    },
+    {
+     "id": "exteriores",
+     "from": "deodoro",
+     "to": "quintino",
+     "label": "Coalizão governamental republicana",
+     "detail": "Bocaiúva integrou a equipe inicial nas Relações Exteriores.",
+     "period": "Governo Provisório iniciado em 1889",
+     "basis": "documented",
+     "sources": [
+      "deodoro-biografia"
+     ]
+    },
+    {
+     "id": "marinha",
+     "from": "deodoro",
+     "to": "wandenkolk",
+     "label": "Ministério da Marinha",
+     "detail": "O vínculo documenta participação no governo, não uma posição idêntica de todos os integrantes da Marinha.",
+     "period": "Novembro de 1889–janeiro de 1891",
+     "basis": "documented",
+     "sources": [
+      "equipe"
+     ]
+    },
+    {
+     "id": "organizacao",
+     "from": "deodoro",
+     "to": "stf",
+     "label": "Organização por decreto do Governo Provisório",
+     "detail": "O ato estrutura o tribunal republicano; sua instalação é posterior.",
+     "period": "11/10/1890",
+     "basis": "documented",
+     "sources": [
+      "decreto848"
+     ]
+    },
+    {
+     "id": "assinatura",
+     "from": "campos",
+     "to": "stf",
+     "label": "Participação formal no ato organizador",
+     "detail": "Campos Salles aparece no fecho do Decreto 848 como ministro da Justiça.",
+     "period": "11/10/1890",
+     "basis": "documented",
+     "sources": [
+      "decreto848"
+     ]
+    },
+    {
+     "id": "imperio",
+     "from": "pedro",
+     "to": "imperial",
+     "label": "Sanção da lei do tribunal imperial",
+     "detail": "Antecedente monárquico, com regime e competências próprios.",
+     "period": "18/09/1828",
+     "basis": "documented",
+     "sources": [
+      "justice:justice-lei1828"
+     ]
+    },
+    {
+     "id": "sucessao",
+     "from": "imperial",
+     "to": "stf",
+     "label": "Sucessão institucional",
+     "detail": "Não equivale a identidade de funções nem ao Superior Tribunal de Justiça atual.",
+     "period": "Transição de 1890–1891",
+     "basis": "documented",
+     "sources": [
+      "justice:justice-hist-stf",
+      "justice:justice-hist-stj"
+     ]
+    },
+    {
+     "id": "sessao",
+     "from": "sayao",
+     "to": "stf",
+     "label": "Presidência interina da instalação",
+     "detail": "Conduziu a abertura antes da eleição da primeira presidência.",
+     "period": "28/02/1891",
+     "basis": "documented",
+     "sources": [
+      "instalacao"
+     ]
+    },
+    {
+     "id": "presidente",
+     "from": "freitas",
+     "to": "stf",
+     "label": "Primeira presidência eleita",
+     "detail": "A eleição ocorreu na sessão inaugural; não se confunde com a condução interina.",
+     "period": "28/02/1891",
+     "basis": "documented",
+     "sources": [
+      "instalacao"
+     ]
+    },
+    {
+     "id": "constituinte",
+     "from": "congresso",
+     "to": "stf",
+     "label": "Previsão na Constituição republicana",
+     "detail": "A Constituição promulgada organiza o tribunal e suas competências.",
+     "period": "24/02/1891",
+     "basis": "documented",
+     "sources": [
+      "cf1891"
+     ]
+    }
+   ],
+   "claims": [
+    {
+     "id": "esquerda",
+     "claim": "O STF foi criado pelo PT ou por um governo de esquerda ligado ao PT?",
+     "assessment": "Não. O STF republicano foi organizado no Governo Provisório militar de Deodoro: denominação em junho de 1890, organização pelo Decreto 848 em outubro e instalação em fevereiro de 1891. O PT foi fundado em 1980. Os antecedentes monárquicos são ainda anteriores.",
+     "status": "refuted",
+     "sources": [
+      "decreto510",
+      "decreto848",
+      "justice:justice-hist-stf",
+      "root:presidencia"
+     ]
+    },
+    {
+     "id": "aliados",
+     "claim": "Quem estava no governo que organizou o tribunal?",
+     "assessment": "Campos Sales, Rui Barbosa, Benjamin Constant, Quintino Bocaiúva e Eduardo Wandenkolk integraram a equipe republicana, com pastas e períodos distintos. A composição da equipe não demonstra que todos participaram da redação de cada ato nem autoriza classificá-los por partidos de hoje.",
+     "status": "documented",
+     "sources": [
+      "equipe",
+      "deodoro-biografia",
+      "decreto848"
+     ]
+    },
+    {
+     "id": "moraes",
+     "claim": "Alexandre de Moraes foi indicado para o STF por Lula?",
+     "assessment": "Não. A indicação foi feita por Michel Temer em 2017. O Senado registra vínculos políticos anteriores de Moraes com o PSDB e cargos em governos de PSDB, DEM e PMDB. Isso não prova seu alinhamento atual nem a regularidade de cada decisão posterior.",
+     "status": "refuted",
+     "sources": [
+      "justice:justice-moraes",
+      "moraes-sabatina"
+     ]
+    },
+    {
+     "id": "todos",
+     "claim": "Todos os ministros da seleção histórica foram indicados pelo PT?",
+     "assessment": "Não. Há indicações por FHC, Temer e Bolsonaro, além de Lula e Dilma. A lista de 16 nomeações exibida neste módulo é uma seleção histórica, incluindo ministros que já deixaram a Corte; não é a composição atual nem mede controle partidário.",
+     "status": "refuted",
+     "sources": [
+      "justice:justice-moraes",
+      "justice:justice-nunes",
+      "justice:justice-mendonca"
+     ]
+    },
+    {
+     "id": "nomeacao",
+     "claim": "Quem indica consegue determinar automaticamente os votos?",
+     "assessment": "Nomeação não basta para provar obediência. Joaquim Barbosa foi indicado por Lula e relatou a AP 470, com condenações de dirigentes do PT; Fux, indicado por Dilma, divergiu na AP 2668. Exemplos não constituem uma medição estatística da independência do tribunal.",
+     "status": "interpretation",
+     "sources": [
+      "justice:justice-barbosa",
+      "justice:justice-ap470-encerramento",
+      "military:fux"
+     ]
+    },
+    {
+     "id": "controle",
+     "claim": "Quais limites e controles estão previstos para os ministros?",
+     "assessment": "A Constituição define competências, exige fundamentação e prevê o Senado como julgador de crimes de responsabilidade de ministros do STF. Há decisões individuais e colegiadas; o CPC prevê agravo interno de decisão do relator no processo civil. Cabimento e revisão dependem do caso. A existência dessas regras não prova seu cumprimento efetivo em todos os processos.",
+     "status": "documented",
+     "sources": [
+      "cf-atual",
+      "cpc",
+      "decisoes"
+     ]
+    },
+    {
+     "id": "ditadura",
+     "claim": "A origem do STF demonstra que hoje todo o Judiciário é uma ditadura?",
+     "assessment": "Essa é uma caracterização política ampla, não uma consequência demonstrada pela data de criação. O exame pode ser feito por critérios concretos: competência, defesa, fundamentação, revisão, cumprimento de decisões e mecanismos de responsabilização. Críticas documentadas à imparcialidade também devem ser examinadas, como no precedente italiano disponível neste Atlas.",
+     "status": "pending",
+     "sources": [
+      "cf-atual",
+      "networks:cassazione-resumo"
+     ],
+     "origin": "Caracterização política apresentada como hipótese de pesquisa.",
+     "needed": "Definir os critérios da avaliação e reunir processos, decisões, votos divergentes, recursos e resultados de controle; não substituir esse exame por rótulo ou nomeação presidencial."
+    },
+    {
+     "id": "plano",
+     "claim": "Os atos de 1890 comprovam um plano partidário atual já arquitetado naquela época?",
+     "assessment": "Não foi encontrada evidência desse nexo nos documentos examinados. Eles mostram organização de um governo e de um tribunal republicanos naquele contexto, quase noventa anos antes da fundação do PT. A ruptura de 1889 e eventuais abusos atuais são questões históricas distintas.",
+     "status": "pending",
+     "sources": [
+      "decreto848",
+      "root:presidencia"
+     ],
+     "origin": "Hipótese de coordenação entre períodos históricos distintos.",
+     "needed": "Documentos identificáveis que vinculem agentes, objetivos e ações entre os períodos; coincidência temporal, sucessão institucional ou julgamentos favoráveis isolados não estabelecem o plano."
+    }
+   ],
+   "gaps": [
+    "Não foi montado um inventário de todas as alianças e biografias dos participantes do Governo Provisório.",
+    "As 16 nomeações históricas não são o quadro atual do STF; não calcular composição partidária atual a partir delas.",
+    "Não houve leitura integral de todos os autos citados nem auditoria estatística dos votos por origem da indicação.",
+    "Aposentadorias compulsórias históricas, críticas atuais e cumprimento de controles legais precisam de evidências específicas e contextualizadas."
+   ]
+  }
+ ]
+}
