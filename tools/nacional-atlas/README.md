@@ -30,3 +30,8 @@ A aba STF e indicações (`/atlas/?visao=historia&h_tela=court`) inclui antecede
 ## Teori Zavascki
 
 A trilha `/atlas/?visao=historia&h_tela=trails&h_trilha=teori-zavascki` reúne nove etapas: ingresso no STF, atuação, morte, sucessões e apurações. A nomeação também está em STF e indicações. Fontes, alcance da conferência e documentos pendentes estão em [research/README-teori.md](research/README-teori.md).
+
+
+### Rui Barbosa, Floriano Peixoto e José Martí
+
+Três perfis em Pessoas e ideias e sete novos marcos, com fontes, limites e referências aos acontecimentos existentes. Método, divergências de datas e alcance da consulta em [research/README-republicanos.md](research/README-republicanos.md).

@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import type {HistoryData} from '../src/history/types';
 import {checkHistory,historyExport,initialFilters,matchesHistory,readHistoryView} from '../src/history/data';
 const data:HistoryData=JSON.parse(fs.readFileSync('public/history-data/index.json','utf8'));
-test('ideias: seis entradas com documentos, limites e marcos que existem',()=>{
- assert.equal(data.profiles?.length,6);assert.equal(checkHistory(data),data);
+test('ideias: nove entradas com documentos, limites e marcos que existem',()=>{
+ assert.equal(data.profiles?.length,9);assert.equal(checkHistory(data),data);
  for(const p of data.profiles!){assert.ok(p.claims.length&&p.questions.length&&p.limits&&p.events.length);for(const id of p.events)assert.ok(data.events.some(e=>e.id===id));for(const c of p.claims)assert.ok(c.sources.every(id=>p.sources.includes(id)));}
  const broken=structuredClone(data);broken.profiles![0].claims[0].sources=['missing'];assert.throws(()=>checkHistory(broken),/Perfil/);
 });
