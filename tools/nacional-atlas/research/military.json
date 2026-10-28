@@ -1,0 +1,1290 @@
+{
+  "sources": [
+    {
+      "id": "imperio-partidos",
+      "title": "Senado — Bernardo Pereira de Vasconcelos e o Partido Conservador",
+      "url": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/1517",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Biografia histórica; registra a fundação do Partido Conservador em 1837. Não se trata de partido atual."
+    },
+    {
+      "id": "armada",
+      "title": "FGV CPDOC — Revolta da Armada",
+      "url": "https://atlas.fgv.br/verbetes/revolta-da-armada",
+      "kind": "research",
+      "checkedAt": "2026-10-27",
+      "note": "Síntese historiográfica sobre as crises de 1891 e 1893–1894; distingue grupos e dirigentes."
+    },
+    {
+      "id": "republica-civil",
+      "title": "Câmara — A Primeira República",
+      "url": "https://www2.camara.leg.br/a-camara/conheca/historia/a1republica.html/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Cronologia institucional, incluindo a posse de Prudente de Moraes em 15/11/1894."
+    },
+    {
+      "id": "udn",
+      "title": "TSE — Registro e estatuto da UDN de 1945",
+      "url": "https://www.tse.jus.br/partidos/partidos-registrados-no-tse/historico/registros-de-partidos-politicos-1945-a-1979-1/uniao-democratica-nacional",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Estatuto, decisões de registro e anotação da extinção decorrente do AI-2."
+    },
+    {
+      "id": "ai2",
+      "title": "Câmara — Ato Institucional nº 2, de 27/10/1965",
+      "url": "https://www2.camara.leg.br/legin/fed/atoins/1960-1969/atoinstitucional-2-27-outubro-1965-363603-publicacaooriginal-1-pe.html",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Art. 18 extingue os partidos então existentes; a linguagem justificadora do preâmbulo pertence ao regime que editou o ato."
+    },
+    {
+      "id": "reforma1979",
+      "title": "Presidência — Lei nº 6.767, de 20/12/1979",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/1970-1979/l6767.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Reorganização partidária; art. 2º encerra as organizações derivadas do Ato Complementar nº 4/1965."
+    },
+    {
+      "id": "transicao",
+      "title": "Senado — A redemocratização em dez atos",
+      "url": "https://www12.senado.leg.br/noticias/infomaterias/2025/03/a-redemocratizacao-em-dez-atos",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Reconstituição publicada em 21/03/2025, não documento produzido em 1985."
+    },
+    {
+      "id": "cf1988",
+      "title": "Câmara — Constituição de 1988, texto original",
+      "url": "https://www2.camara.leg.br/legin/fed/consti/1988/constituicao-1988-5-outubro-1988-322142-publicacaooriginal-1-pl.html",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Arts. 2º, 142 e 144; para aplicação atual é necessário consultar também as emendas e a jurisprudência."
+    },
+    {
+      "id": "bolsonaro-posto",
+      "title": "Câmara — Perfil histórico de Jair Bolsonaro",
+      "url": "https://www.camara.leg.br/radio/radioagencia/550435-conheca-perfil-do-presidente-da-republica-jair-bolsonaro/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Perfil publicado na posse de 2019: chegou ao posto de capitão. Não certifica a situação atual de patente após processos posteriores."
+    },
+    {
+      "id": "tse2022",
+      "title": "TSE — Proclamação dos eleitos em 2022",
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2022/Dezembro/tse-proclama-eleitos-presidente-e-vice-presidente-da-republica-luiz-inacio-lula-da-silva-e-geraldo-alckmin",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Relatório final de totalização aprovado pelo TSE. A eleição referida é a de 30/10/2022, não a de 2026."
+    },
+    {
+      "id": "dutra-cancelamento",
+      "title": "Senado — Dutra atribui a Freire Gomes cancelamento de operação em 29/12/2022",
+      "url": "https://www12.senado.leg.br/noticias/materias/2023/09/14/general-diz-que-ex-comandante-do-exercito-mandou-cancelar-acao-da-pm-em-acampamento-golpista",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Cobertura do depoimento de 14/09/2023. O fato narrado ocorreu em dezembro de 2022; não confundir os dois dias."
+    },
+    {
+      "id": "intervencao",
+      "title": "Presidência — Decreto nº 11.377, de 08/01/2023",
+      "url": "https://www.presidencia.gov.br/ccivil_03/_ato2023-2026/2023/decreto/d11377.htm",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Intervenção federal limitada à segurança pública do DF; não é decreto de intervenção militar ou de GLO."
+    },
+    {
+      "id": "resposta-stf",
+      "title": "STF — Resposta imediata aos ataques de 8 de janeiro",
+      "url": "https://noticias.stf.jus.br/postsnoticias/8-de-janeiro-a-resposta-imediata-do-stf-aos-atos-antidemocraticos/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Retrospectiva institucional; registra medidas de 8/1 e conduções de 9/1. Não substitui a íntegra de cada decisão nem individualiza os conduzidos."
+    },
+    {
+      "id": "naime",
+      "title": "CLDF — Depoimento de Jorge Eduardo Naime, 16/03/2023",
+      "url": "https://www.cl.df.gov.br/-/ex-comandante-naime-diz-a-cpi-que-exercito-protegeu-terroristas",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Cobertura da CPI distrital. Registra a versão do depoente, que posteriormente foi condenado na AP 2417; consultar o desdobramento na trilha."
+    },
+    {
+      "id": "dutra-cldf",
+      "title": "CLDF — Depoimento de Gustavo Dutra, 18/05/2023",
+      "url": "https://www.cl.df.gov.br/pt/-/general-dutra-nega-que-o-exercito-teria-impedido-desmonte-do-acampamento-em-frente-ao-qg",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Versão do então ex-comandante do CMP: planejamento, risco de vítimas e negativa de confronto com a PM. Não é decisão judicial sobre sua conduta."
+    },
+    {
+      "id": "dutra-ata",
+      "title": "Senado — Íntegra taquigráfica da oitiva de Dutra, 14/09/2023",
+      "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/r/11830",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Localizar “Guarani”, “21h” e as intervenções da relatora. Perguntas dos parlamentares e respostas do general têm autores distintos."
+    },
+    {
+      "id": "adi6457",
+      "title": "STF — ADI 6457: Forças Armadas não exercem poder moderador",
+      "url": "https://noticias.stf.jus.br/postsnoticias/por-unanimidade-ministros-do-stf-rejeitam-tese-de-poder-moderador-das-forcas-armadas/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Resumo do julgamento unânime concluído em 08/04/2024; relator Luiz Fux."
+    },
+    {
+      "id": "defesas",
+      "title": "STF — Sustentações das defesas na AP 2668, 03/09/2025",
+      "url": "https://noticias.stf.jus.br/postsnoticias/ap-2668-concluidas-sustentacoes-orais-das-defesas-dos-reus-por-tentativa-de-golpe-de-estado/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Resumo dos argumentos defensivos, não acolhimento desses argumentos pelo colegiado."
+    },
+    {
+      "id": "fux",
+      "title": "STF — Voto divergente de Luiz Fux na AP 2668, 10/09/2025",
+      "url": "https://noticias.stf.jus.br/postsnoticias/ministro-luiz-fux-absolve-seis-reus-na-acao-sobre-golpe-de-estado/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Voto individual, vencido em parte; não confundir a proposta de absolvição com o resultado da Turma."
+    },
+    {
+      "id": "acordao2668",
+      "title": "STF — AP 2668, inteiro teor do acórdão (1.991 páginas)",
+      "url": "https://noticias-stf-wp-prd.s3.sa-east-1.amazonaws.com/wp-content/uploads/wpallimport/uploads/2025/10/22075642/downloadPeca.pdf",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Conferidas a ementa e a parte dispositiva nas primeiras 18 páginas do PDF oficial. Não foi feita revisão integral das 1.991 páginas e de cada prova citada."
+    },
+    {
+      "id": "publicacao2668",
+      "title": "STF — Publicação do acórdão da AP 2668, 22/10/2025",
+      "url": "https://noticias.stf.jus.br/postsnoticias/ap-2668-publicado-acordao-que-condenou-o-ex-presidente-bolsonaro-e-outros-sete-reus-por-tentativa-de-golpe/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Distingue o julgamento de 11/09 da publicação de 22/10/2025 e fornece o PDF oficial."
+    },
+    {
+      "id": "pm2417",
+      "title": "STF — AP 2417: início do cumprimento das penas, 12/03/2026",
+      "url": "https://noticias.stf.jus.br/postsnoticias/stf-determina-inicio-do-cumprimento-da-pena-de-ex-integrantes-do-comando-da-pmdf-condenados-pelos-atos-de-8-de-janeiro/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Noticia decisão de execução após o esgotamento de recursos; identifica os cinco ex-integrantes do comando da PMDF. Não condena a corporação inteira."
+    },
+    {
+      "id": "junta1969",
+      "title": "Câmara — Quinta República e a junta militar de 1969",
+      "url": "https://www2.camara.leg.br/a-camara/conheca/historia/Ex_presidentesCD_Republica/republica5.html",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Cronologia com os três ministros militares e o afastamento temporário de Costa e Silva."
+    },
+    {
+      "id": "presidentes-ditadura",
+      "title": "Câmara — Os presidentes da ditadura militar",
+      "url": "https://www.camara.leg.br/noticias/93692-os-president",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Síntese das presidências de 1964–1985, incluindo a junta de 1969. A participação civil e as diferenças internas exigem fontes adicionais."
+    }
+  ],
+  "events": [
+    {
+      "id": "partidos-imperio",
+      "year": 1837,
+      "label": "1837 — partidos já existiam no Império",
+      "period": "imperio",
+      "topics": [
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "Bernardo Pereira de Vasconcelos",
+        "Partido Conservador",
+        "Partido Liberal"
+      ],
+      "summary": "A biografia de Bernardo Pereira de Vasconcelos no Senado o identifica como fundador do Partido Conservador em 1837. Liberais e conservadores atuavam ainda na monarquia.",
+      "context": "Os agrupamentos imperiais tinham organização e eleitorado diferentes dos partidos atuais.",
+      "decision": "Formação de organizações e alianças para disputar a direção do Estado imperial.",
+      "effects": [
+        "A disputa partidária precede a República e a ditadura de 1964."
+      ],
+      "limits": "1837 é um marco desta seleção; não atribui uma data única ao nascimento de toda a vida partidária nem equipara nomes históricos a siglas atuais.",
+      "sources": [
+        "imperio-partidos"
+      ],
+      "evidence": "documented",
+      "related": [
+        "foundations:f-constituicao1824",
+        "foundations:f-republica1889"
+      ],
+      "area": "Brasil",
+      "recordNature": "historical"
+    },
+    {
+      "id": "deodoro1891",
+      "year": 1891,
+      "date": "1891-11-23",
+      "label": "1891 — crise, pressão naval e renúncia de Deodoro",
+      "period": "republica",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Deodoro da Fonseca",
+        "Floriano Peixoto",
+        "Custódio de Melo",
+        "Marinha",
+        "Exército"
+      ],
+      "summary": "Deodoro renunciou após uma crise que incluiu o fechamento do Congresso e a reação de forças políticas e navais. Floriano Peixoto assumiu a Presidência.",
+      "context": "A República recém-instalada enfrentava disputas sobre a distribuição e os limites do poder.",
+      "decision": "A saída de Deodoro transferiu a chefia do Executivo ao vice-presidente.",
+      "effects": [
+        "A sucessão e a exigência de novas eleições continuaram em disputa."
+      ],
+      "limits": "Não foi uma disputa uniforme de todos os marinheiros contra todos os integrantes do Exército. A síntese da FGV é uma interpretação historiográfica.",
+      "sources": [
+        "armada",
+        "republica-civil"
+      ],
+      "evidence": "documented",
+      "related": [
+        "foundations:f-republica1889",
+        "foundations:f-constituicao1891",
+        "armada1893"
+      ],
+      "area": "Brasil",
+      "recordNature": "historical"
+    },
+    {
+      "id": "armada1893",
+      "year": 1893,
+      "date": "1893-09-06",
+      "label": "1893–1894 — Revolta da Armada contra Floriano",
+      "period": "republica",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Custódio de Melo",
+        "Eduardo Wandenkolk",
+        "Saldanha da Gama",
+        "Floriano Peixoto",
+        "Marinha",
+        "Exército"
+      ],
+      "summary": "Um grupo de oficiais da Marinha rebelou-se contra Floriano. Custódio de Melo e, depois, Saldanha da Gama tiveram papéis de liderança.",
+      "context": "Disputavam-se a legalidade da permanência de Floriano, projetos políticos e espaço de dirigentes navais na República.",
+      "decision": "Os revoltosos recorreram à força armada para contestar o governo.",
+      "effects": [
+        "A crise produziu combate e repressão; a rebelião foi derrotada."
+      ],
+      "limits": "Rivalidades entre oficiais e forças não explicam sozinhas a crise. Não há cadeia causal demonstrada ligando esta revolta ao 8 de janeiro de 2023.",
+      "sources": [
+        "armada"
+      ],
+      "evidence": "documented",
+      "related": [
+        "deodoro1891",
+        "civil1894"
+      ],
+      "area": "Brasil",
+      "recordNature": "historical"
+    },
+    {
+      "id": "civil1894",
+      "year": 1894,
+      "date": "1894-11-15",
+      "label": "1894 — Prudente de Moraes, primeiro presidente civil",
+      "period": "republica",
+      "topics": [
+        "forcas",
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "Prudente de Moraes",
+        "Floriano Peixoto"
+      ],
+      "summary": "Prudente de Moraes tomou posse como primeiro presidente civil da República após Deodoro e Floriano.",
+      "context": "O governo civil foi estabelecido dentro de uma República de participação eleitoral restrita.",
+      "decision": "Transferência da Presidência a um civil eleito.",
+      "effects": [
+        "Encerrou-se a sequência inicial de presidentes militares de 1889–1894."
+      ],
+      "limits": "Governo civil não equivale a democracia inclusiva. A República iniciada em 1889 não é o mesmo regime da ditadura instaurada em 1964.",
+      "sources": [
+        "republica-civil"
+      ],
+      "evidence": "documented",
+      "related": [
+        "foundations:f-republica1889",
+        "armada1893",
+        "foundations:f-vargas1930"
+      ],
+      "area": "Brasil",
+      "recordNature": "historical"
+    },
+    {
+      "id": "udn1945",
+      "year": 1945,
+      "date": "1945-04-07",
+      "label": "1945 — UDN e reorganização partidária",
+      "period": "vargas",
+      "topics": [
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "União Democrática Nacional",
+        "Tribunal Superior Eleitoral"
+      ],
+      "summary": "O estatuto da UDN registra sua fundação em 7 de abril de 1945. O TSE preserva o registro e os atos posteriores da legenda.",
+      "context": "A reorganização partidária antecedeu o golpe de 1964.",
+      "decision": "Constituição de um partido de âmbito nacional e submissão ao registro eleitoral.",
+      "effects": [
+        "Havia partidos organizados e eleições antes da ditadura militar."
+      ],
+      "limits": "Esta ficha é um exemplo documentado, não um inventário de todas as legendas de 1945. O nome histórico não deve ser confundido com partidos de outras épocas.",
+      "sources": [
+        "udn"
+      ],
+      "evidence": "documented",
+      "related": [
+        "foundations:f-estadonovo1937",
+        "foundations:f-golpe1964",
+        "ai2-1965"
+      ],
+      "area": "Brasil",
+      "recordNature": "historical"
+    },
+    {
+      "id": "ai2-1965",
+      "year": 1965,
+      "date": "1965-10-27",
+      "label": "1965 — AI-2 extingue os partidos existentes",
+      "period": "ditadura",
+      "topics": [
+        "forcas",
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "Humberto Castelo Branco",
+        "Forças Armadas",
+        "Partidos políticos"
+      ],
+      "summary": "O artigo 18 do AI-2 extinguiu os partidos existentes e cancelou seus registros. O ato também estabeleceu a eleição indireta do presidente.",
+      "context": "O regime criado pelo golpe de 1964 ampliava os mecanismos de controle político.",
+      "decision": "Modificar a ordem constitucional e dissolver o sistema partidário então vigente.",
+      "effects": [
+        "A organização partidária foi submetida a novas regras autoritárias."
+      ],
+      "limits": "O AI-2 não criou os primeiros partidos do Brasil. A configuração de Arena e MDB exige também o exame dos atos complementares e dos registros posteriores.",
+      "sources": [
+        "ai2"
+      ],
+      "evidence": "documented",
+      "related": [
+        "udn1945",
+        "foundations:f-golpe1964",
+        "foundations:f-ai51968",
+        "reforma1979"
+      ],
+      "area": "Brasil",
+      "recordNature": "law"
+    },
+    {
+      "id": "reforma1979",
+      "year": 1979,
+      "date": "1979-12-20",
+      "label": "1979 — reforma abre nova organização partidária",
+      "period": "ditadura",
+      "topics": [
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "João Figueiredo",
+        "Petrônio Portella",
+        "Tribunal Superior Eleitoral"
+      ],
+      "summary": "A Lei nº 6.767 reorganizou a fundação e o funcionamento dos partidos e extinguiu as organizações derivadas das regras de 1965.",
+      "context": "A reforma ocorreu ainda durante a ditadura, no processo de abertura.",
+      "decision": "Estabelecer novas exigências para a organização e o registro partidário.",
+      "effects": [
+        "Abriu-se espaço para um novo sistema com múltiplas legendas."
+      ],
+      "limits": "A lei não encerrou imediatamente a ditadura nem restabeleceu a eleição presidencial direta. Datas de fundação e de registro de cada partido são acontecimentos diferentes.",
+      "sources": [
+        "reforma1979"
+      ],
+      "evidence": "documented",
+      "related": [
+        "ai2-1965",
+        "root:pt",
+        "civil1985"
+      ],
+      "area": "Brasil",
+      "recordNature": "law"
+    },
+    {
+      "id": "civil1985",
+      "year": 1985,
+      "date": "1985-03-15",
+      "label": "1985 — retorno de um civil à Presidência",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "Tancredo Neves",
+        "José Sarney"
+      ],
+      "summary": "José Sarney assumiu a Presidência em razão da internação de Tancredo Neves, eleito indiretamente pelo Colégio Eleitoral.",
+      "context": "A passagem ao governo civil resultou de uma transição longa, com mobilização social e negociação política.",
+      "decision": "Posse do vice-presidente eleito diante da impossibilidade de Tancredo assumir.",
+      "effects": [
+        "Terminou o ciclo de presidentes militares iniciado em 1964; a reconstrução institucional prosseguiu."
+      ],
+      "limits": "A população não elegeu diretamente o presidente em 1985. Constituição de 1988 e eleição direta de 1989 são marcos posteriores distintos.",
+      "sources": [
+        "transicao"
+      ],
+      "evidence": "documented",
+      "related": [
+        "reforma1979",
+        "foundations:f-constituicao1988",
+        "root:1989"
+      ],
+      "area": "Brasil",
+      "recordNature": "historical"
+    },
+    {
+      "id": "forcas1988",
+      "year": 1988,
+      "date": "1988-10-05",
+      "label": "1988 — Forças Armadas e PM têm funções distintas",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Assembleia Nacional Constituinte",
+        "Marinha",
+        "Exército",
+        "Aeronáutica",
+        "Polícias Militares"
+      ],
+      "summary": "O art. 142 trata das Forças Armadas sob autoridade do presidente. O art. 144 trata da segurança pública e subordina as PMs aos governadores.",
+      "context": "São cadeias de comando e atribuições diferentes, mesmo havendo militares nas duas estruturas.",
+      "decision": "Definir constitucionalmente a defesa nacional, a preservação da ordem pública e seus responsáveis.",
+      "effects": [
+        "O adjetivo militar não torna a PM um ramo do Exército."
+      ],
+      "limits": "Esta ficha lê o texto original de 1988. A interpretação atual exige emendas e jurisprudência, como a ADI 6457; não existe autorização genérica para derrubar governos.",
+      "sources": [
+        "cf1988",
+        "adi6457"
+      ],
+      "evidence": "documented",
+      "related": [
+        "foundations:f-constituicao1988",
+        "adi2024",
+        "ataques2023"
+      ],
+      "area": "Brasil",
+      "recordNature": "law"
+    },
+    {
+      "id": "bolsonaro2019",
+      "year": 2019,
+      "date": "2019-01-01",
+      "label": "2019 — Bolsonaro assume como presidente eleito",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "Jair Bolsonaro",
+        "Exército"
+      ],
+      "summary": "O perfil da Câmara na posse de 2019 registra que Bolsonaro chegou ao posto de capitão e seguiu carreira política. Não era general.",
+      "context": "Seu histórico militar é distinto do cargo civil de presidente da República.",
+      "decision": "Início do mandato presidencial após a eleição de 2018.",
+      "effects": [
+        "Como presidente, exerceu a autoridade constitucional do Executivo, que não decorre da patente de capitão."
+      ],
+      "limits": "A fonte descreve a trajetória até 2019. Esta ficha não certifica a situação atual de patente após processos posteriores nem demonstra alinhamento político de toda a tropa.",
+      "sources": [
+        "bolsonaro-posto",
+        "cf1988"
+      ],
+      "evidence": "documented",
+      "related": [
+        "forcas1988",
+        "eleicao2022",
+        "condenacao2025"
+      ],
+      "area": "Brasil",
+      "recordNature": "historical"
+    },
+    {
+      "id": "eleicao2022",
+      "year": 2022,
+      "date": "2022-10-30",
+      "label": "2022 — Lula vence o segundo turno contra Jair Bolsonaro",
+      "period": "democracia",
+      "topics": [
+        "eleicoes",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "Jair Bolsonaro",
+        "Geraldo Alckmin",
+        "Tribunal Superior Eleitoral"
+      ],
+      "summary": "A totalização final registrou 60.345.999 votos para Lula (50,9%) e 58.206.354 para Jair Bolsonaro (49,1%). A diferença foi de 2.139.645 votos.",
+      "context": "O segundo turno ocorreu em 30 de outubro de 2022, e a proclamação dos eleitos foi posterior.",
+      "decision": "Reconhecimento eleitoral da chapa Lula–Alckmin pelo TSE.",
+      "effects": [
+        "O mandato seguinte iniciou-se em janeiro de 2023."
+      ],
+      "limits": "Estes números são de 2022 e o adversário foi Jair Bolsonaro, não Flávio. O resultado não descreve a conduta individual de participantes de acampamentos.",
+      "sources": [
+        "tse2022"
+      ],
+      "evidence": "documented",
+      "related": [
+        "camp2022",
+        "ataques2023"
+      ],
+      "area": "Brasil",
+      "recordNature": "election"
+    },
+    {
+      "id": "camp2022",
+      "year": 2022,
+      "date": "2022-12-29",
+      "label": "29/12/2022 — operação no acampamento cancelada, segundo Dutra",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "Marco Antônio Freire Gomes",
+        "Gustavo Henrique Dutra de Menezes",
+        "Polícia Militar do Distrito Federal",
+        "Exército"
+      ],
+      "summary": "Em depoimento de setembro de 2023, Dutra atribuiu a Freire Gomes o cancelamento de uma operação da PM no acampamento diante do QG do Exército.",
+      "context": "A narrativa refere-se ao fim do governo Bolsonaro, antes da posse de Lula.",
+      "decision": "O depoente atribuiu a suspensão ao então comandante do Exército e citou a ausência de ordem judicial.",
+      "effects": [
+        "O acampamento continuou existindo depois daquela data."
+      ],
+      "limits": "A data é do fato narrado, não da oitiva. A existência do depoimento é documentada; sua justificativa não é uma conclusão judicial. Freire Gomes em dezembro e Arruda em janeiro são comandantes diferentes.",
+      "sources": [
+        "dutra-cancelamento"
+      ],
+      "evidence": "documented",
+      "related": [
+        "eleicao2022",
+        "ataques2023",
+        "dutra-setembro"
+      ],
+      "area": "Brasília, DF",
+      "recordNature": "testimony"
+    },
+    {
+      "id": "ataques2023",
+      "year": 2023,
+      "date": "2023-01-08",
+      "label": "8 de janeiro de 2023 — invasão das sedes dos Três Poderes",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes",
+        "eleicoes"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "Ricardo Cappelli",
+        "Exército",
+        "Polícia Militar do Distrito Federal",
+        "Supremo Tribunal Federal",
+        "Congresso Nacional"
+      ],
+      "summary": "As sedes do Congresso, do STF e da Presidência foram invadidas e depredadas em Brasília. Lula já havia tomado posse; os ataques ocorreram após a eleição de 2022.",
+      "context": "A invasão dos prédios e os episódios posteriores no acampamento são locais e momentos diferentes.",
+      "decision": "As autoridades retomaram os edifícios e iniciaram a resposta policial e judicial.",
+      "effects": [
+        "Houve detenções e apurações sobre executores, organização e falhas de segurança."
+      ],
+      "limits": "Presença em um acampamento, autoria de depredação e comando de uma organização não são a mesma conduta. A responsabilidade precisa ser individualizada.",
+      "sources": [
+        "resposta-stf",
+        "intervencao"
+      ],
+      "evidence": "documented",
+      "related": [
+        "eleicao2022",
+        "intervencao2023",
+        "desocupacao2023",
+        "naime-marco",
+        "dutra-maio",
+        "condenacao2025"
+      ],
+      "area": "Brasília, DF",
+      "place": {
+        "municipalityCode": "5300108",
+        "label": "Brasília, DF",
+        "basis": "O decreto identifica o DF e as sedes federais; referência municipal, sem coordenada exata dos episódios."
+      },
+      "studyLinks": [
+        {
+          "event": "eleicao2022",
+          "label": "Qual eleição antecedeu os ataques?"
+        },
+        {
+          "event": "naime-marco",
+          "label": "O que um coronel da PM afirmou?"
+        },
+        {
+          "event": "dutra-maio",
+          "label": "Qual foi a versão do general Dutra?"
+        },
+        {
+          "event": "dutra-setembro",
+          "label": "O que consta na ata sobre os blindados?"
+        },
+        {
+          "event": "condenacao2025",
+          "label": "O que foi julgado depois?"
+        }
+      ],
+      "recordNature": "historical"
+    },
+    {
+      "id": "intervencao2023",
+      "year": 2023,
+      "date": "2023-01-08",
+      "label": "8/1/2023 — intervenção federal na segurança do DF",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Inácio Lula da Silva",
+        "Ricardo Cappelli"
+      ],
+      "summary": "O Decreto nº 11.377 nomeou Ricardo Cappelli interventor na segurança pública do DF até 31 de janeiro de 2023.",
+      "context": "O decreto cita a violência e a invasão dos prédios públicos como grave comprometimento da ordem.",
+      "decision": "Intervenção limitada à área de segurança pública, fundamentada nos arts. 34, III, e 84, X, da Constituição.",
+      "effects": [
+        "O interventor passou a exercer as atribuições necessárias à segurança abrangida pelo decreto."
+      ],
+      "limits": "Intervenção federal civil na segurança pública não é transferência do governo aos militares e não se confunde com GLO.",
+      "sources": [
+        "intervencao"
+      ],
+      "evidence": "documented",
+      "related": [
+        "ataques2023",
+        "forcas1988",
+        "desocupacao2023"
+      ],
+      "area": "Distrito Federal",
+      "recordNature": "law"
+    },
+    {
+      "id": "desocupacao2023",
+      "year": 2023,
+      "date": "2023-01-09",
+      "label": "9/1/2023 — retirada do acampamento e conduções à PF",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Alexandre de Moraes",
+        "Polícia Federal",
+        "Polícia Militar do Distrito Federal",
+        "Exército"
+      ],
+      "summary": "Após ordem de dissolução dos acampamentos em 24 horas, pessoas foram conduzidas do acampamento à Academia Nacional de Polícia no dia 9.",
+      "context": "A retrospectiva do STF situa a ordem na resposta judicial do dia 8 e distingue prisões, conduções e liberações.",
+      "decision": "Executar a desmobilização e submeter as situações individuais à apuração.",
+      "effects": [
+        "Houve liberações e manutenção de prisões, segundo a análise de cada situação."
+      ],
+      "limits": "Conduzido não significa condenado. Esta coleta não estabelece hora exata da assinatura da ordem; o dia 9 da ficha é o da operação, não uma data inventada para a decisão.",
+      "sources": [
+        "resposta-stf",
+        "dutra-cldf"
+      ],
+      "evidence": "documented",
+      "related": [
+        "ataques2023",
+        "naime-marco",
+        "dutra-maio",
+        "pm2026"
+      ],
+      "area": "Brasília, DF",
+      "recordNature": "judgment"
+    },
+    {
+      "id": "naime-marco",
+      "year": 2023,
+      "date": "2023-03-16",
+      "label": "Março de 2023 — Naime diz que Exército impediu entrada da PM",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Jorge Eduardo Naime Barreto",
+        "Gustavo Henrique Dutra de Menezes",
+        "Ricardo Cappelli",
+        "Polícia Militar do Distrito Federal",
+        "Exército"
+      ],
+      "summary": "Na CPI da CLDF, Naime afirmou que presenciou Cappelli tentar entrar no acampamento e Dutra não permitir. Atribuiu ao Exército proteção dos envolvidos após os ataques.",
+      "context": "Era o relato de um oficial da PM sobre a noite de 8 de janeiro, produzido em investigação parlamentar.",
+      "decision": "Apresentação de uma versão sobre a atuação no acampamento.",
+      "effects": [
+        "A acusação de obstrução passou a integrar o debate investigativo."
+      ],
+      "limits": "Depoimento documenta uma alegação, não prova sozinho intenção partidária ou combate armado. Naime foi posteriormente condenado na AP 2417; a condenação tampouco torna automaticamente falsa cada afirmação sua.",
+      "sources": [
+        "naime",
+        "pm2417"
+      ],
+      "evidence": "documented",
+      "related": [
+        "dutra-maio",
+        "dutra-setembro",
+        "pm2026"
+      ],
+      "area": "Brasília, DF",
+      "statement": {
+        "kind": "speech",
+        "speaker": "Jorge Eduardo Naime Barreto",
+        "roleAtTime": "Coronel da PMDF, ouvido pela CPI distrital",
+        "venue": "CPI dos Atos Antidemocráticos, CLDF",
+        "excerpt": "Presenciei o [interventor Ricardo] Cappelli tentando entrar e o general Dutra não permitindo",
+        "source": "naime",
+        "locator": "Notícia da CLDF de 16/03/2023, primeiro depoimento citado; colchetes pertencem à publicação.",
+        "declaredContext": "O depoente sustentava que militares impediram a atuação da PM no acampamento.",
+        "intentLimit": "O relato exige confronto com ordens, imagens e outras testemunhas; não demonstra a intenção de toda a instituição."
+      },
+      "recordNature": "testimony"
+    },
+    {
+      "id": "dutra-maio",
+      "year": 2023,
+      "date": "2023-05-18",
+      "label": "Maio de 2023 — Dutra nega obstrução e invoca risco de mortes",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Gustavo Henrique Dutra de Menezes",
+        "Júlio César de Arruda",
+        "Ricardo Cappelli",
+        "Luiz Inácio Lula da Silva",
+        "Exército",
+        "Polícia Militar do Distrito Federal"
+      ],
+      "summary": "Dutra negou ter impedido a desocupação. Afirmou que uma operação noturna sem planejamento poderia causar mortes e que a retirada para a manhã seguinte foi acertada com autoridades.",
+      "context": "Depoimento à CPI distrital em resposta a acusações sobre o acampamento.",
+      "decision": "Apresentação da justificativa operacional do ex-comandante do CMP.",
+      "effects": [
+        "A versão contesta o relato de obstrução e de possível confronto com a PM."
+      ],
+      "limits": "A conversa com Lula e o acordo são a versão do depoente. Não foram comprovados aqui por gravação independente. A divergência entre relatos não equivale a um combate armado demonstrado.",
+      "sources": [
+        "dutra-cldf"
+      ],
+      "evidence": "documented",
+      "related": [
+        "naime-marco",
+        "dutra-setembro",
+        "desocupacao2023"
+      ],
+      "area": "Brasília, DF",
+      "statement": {
+        "kind": "speech",
+        "speaker": "Gustavo Henrique Dutra de Menezes",
+        "roleAtTime": "General e ex-comandante do Comando Militar do Planalto",
+        "venue": "CPI dos Atos Antidemocráticos, CLDF",
+        "excerpt": "Se nós entrarmos agora, sem planejamento, podemos terminar essa noite com sangue",
+        "source": "dutra-cldf",
+        "locator": "Cobertura de 18/05/2023, seção “Prisões”; Dutra relata o que teria dito a Lula na noite de 8/1.",
+        "declaredContext": "Justificou a necessidade de planejar a retirada e negou proteção partidária ou confronto entre instituições.",
+        "intentLimit": "A transcrição indireta da conversa pelo depoente não autentica a conversa nem decide se a justificativa foi suficiente."
+      },
+      "recordNature": "testimony"
+    },
+    {
+      "id": "dutra-setembro",
+      "year": 2023,
+      "date": "2023-09-14",
+      "label": "Setembro de 2023 — ata registra perguntas sobre blindados e PM",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Gustavo Henrique Dutra de Menezes",
+        "Eliziane Gama",
+        "Júlio César de Arruda",
+        "Exército",
+        "Polícia Militar do Distrito Federal"
+      ],
+      "summary": "Na CPMI, Dutra foi questionado sobre blindados diante da PM. Afirmou que eram dois Guarani sem armamento instalado e que o reforço do perímetro buscava dissuadir o retorno de manifestantes.",
+      "context": "A ata permite distinguir as perguntas dos parlamentares das respostas do general.",
+      "decision": "O general atribuiu o reforço noturno à ordem do comandante do Exército, por volta das 21h.",
+      "effects": [
+        "O registro documenta a controvérsia sobre o emprego dos veículos."
+      ],
+      "limits": "A configuração dos veículos e a finalidade alegada são declarações de Dutra. Esta coleta não demonstra troca de tiros, ordem de ataque à PM ou que um combate armado fosse iminente.",
+      "sources": [
+        "dutra-ata"
+      ],
+      "evidence": "documented",
+      "related": [
+        "camp2022",
+        "naime-marco",
+        "dutra-maio"
+      ],
+      "area": "Brasília, DF",
+      "recordNature": "testimony"
+    },
+    {
+      "id": "adi2024",
+      "year": 2024,
+      "date": "2024-04-08",
+      "label": "2024 — STF afasta poder moderador das Forças Armadas",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Fux",
+        "Supremo Tribunal Federal",
+        "Marinha",
+        "Exército",
+        "Aeronáutica"
+      ],
+      "summary": "No julgamento unânime da ADI 6457, o STF afastou a interpretação de que as Forças Armadas possam arbitrar conflitos entre os Poderes.",
+      "context": "A discussão dizia respeito ao alcance do art. 142 da Constituição.",
+      "decision": "A autoridade presidencial sobre os militares não permite empregar as Forças Armadas contra os Poderes da República.",
+      "effects": [
+        "O julgamento explicitou limites constitucionais do emprego militar interno."
+      ],
+      "limits": "É decisão sobre interpretação constitucional, não sentença individual sobre cada pessoa presente nos acampamentos ou nos ataques.",
+      "sources": [
+        "adi6457"
+      ],
+      "evidence": "documented",
+      "related": [
+        "forcas1988",
+        "ataques2023"
+      ],
+      "area": "Brasil",
+      "recordNature": "judgment"
+    },
+    {
+      "id": "defesas2025",
+      "year": 2025,
+      "date": "2025-09-03",
+      "label": "2025 — defesas contestam autoria, provas e competência na AP 2668",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Jair Bolsonaro",
+        "Paulo Sérgio Nogueira",
+        "Walter Braga Netto",
+        "Augusto Heleno",
+        "Supremo Tribunal Federal"
+      ],
+      "summary": "As defesas questionaram o acesso às provas, a colaboração de Mauro Cid e a existência de atos concretos suficientes para os crimes imputados.",
+      "context": "Sustentações orais precederam os votos do julgamento.",
+      "decision": "Apresentação das teses defensivas, com pedidos de absolvição e alegações de nulidade.",
+      "effects": [
+        "Os argumentos foram submetidos à apreciação dos ministros."
+      ],
+      "limits": "O registro das teses não significa que foram acolhidas. A decisão majoritária e a divergência estão em fichas próprias; os argumentos variam por réu.",
+      "sources": [
+        "defesas"
+      ],
+      "evidence": "documented",
+      "related": [
+        "fux2025",
+        "condenacao2025"
+      ],
+      "area": "Brasília, DF",
+      "recordNature": "defense"
+    },
+    {
+      "id": "fux2025",
+      "year": 2025,
+      "date": "2025-09-10",
+      "label": "2025 — voto de Fux diverge da condenação na AP 2668",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Luiz Fux",
+        "Jair Bolsonaro",
+        "Almir Garnier",
+        "Mauro Cid",
+        "Walter Braga Netto"
+      ],
+      "summary": "Fux votou por absolver seis réus, incluindo Bolsonaro e Garnier, e condenar Cid e Braga Netto por tentativa de abolição violenta do Estado Democrático de Direito.",
+      "context": "O voto divergiu do relator sobre competência, prova e enquadramento de condutas.",
+      "decision": "Posição individual no julgamento da AP 2668.",
+      "effects": [
+        "A divergência foi incorporada ao acórdão, mas não prevaleceu no resultado final."
+      ],
+      "limits": "Absolvição proposta em um voto não equivale à absolvição pela Turma. A leitura da divergência deve ser acompanhada da fundamentação majoritária.",
+      "sources": [
+        "fux"
+      ],
+      "evidence": "documented",
+      "related": [
+        "defesas2025",
+        "condenacao2025"
+      ],
+      "area": "Brasília, DF",
+      "recordNature": "vote"
+    },
+    {
+      "id": "condenacao2025",
+      "year": 2025,
+      "date": "2025-09-11",
+      "label": "2025 — AP 2668 condena Bolsonaro e outros sete réus",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Jair Bolsonaro",
+        "Almir Garnier",
+        "Augusto Heleno",
+        "Paulo Sérgio Nogueira",
+        "Walter Braga Netto",
+        "Mauro Cid",
+        "Anderson Torres",
+        "Alexandre Ramagem",
+        "Supremo Tribunal Federal"
+      ],
+      "summary": "A Primeira Turma condenou os oito réus do Núcleo 1. A ementa reconhece organização criminosa e atos voltados à ruptura institucional; há divergência parcial de Fux.",
+      "context": "O julgamento examinou uma sequência de atos, não somente as depredações de 8 de janeiro.",
+      "decision": "Condenações individualizadas na AP 2668; o acórdão foi publicado em 22/10/2025.",
+      "effects": [
+        "O ex-comandante da Marinha Almir Garnier está entre os condenados, assim como integrantes ligados ao Exército e autoridades civis."
+      ],
+      "limits": "A condenação de dirigentes não condena a Marinha ou o Exército como coletividades. Foram conferidas ementa e dispositivo nas primeiras 18 páginas, não todas as provas. Não é um levantamento atualizado de toda execução penal ou de processos sobre patentes.",
+      "sources": [
+        "acordao2668",
+        "publicacao2668"
+      ],
+      "evidence": "documented",
+      "related": [
+        "ataques2023",
+        "defesas2025",
+        "fux2025",
+        "pm2026"
+      ],
+      "area": "Brasil",
+      "recordNature": "judgment"
+    },
+    {
+      "id": "pm2026",
+      "year": 2026,
+      "date": "2026-03-12",
+      "label": "2026 — execução das penas de ex-integrantes do comando da PMDF",
+      "period": "democracia",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Alexandre de Moraes",
+        "Fábio Augusto Vieira",
+        "Klépter Rosa Gonçalves",
+        "Jorge Eduardo Naime Barreto",
+        "Paulo José Ferreira de Sousa Bezerra",
+        "Marcelo Casimiro Vasconcelos",
+        "Polícia Militar do Distrito Federal"
+      ],
+      "summary": "O STF noticiou a ordem de início do cumprimento das penas de cinco ex-integrantes do comando da PMDF, condenados na AP 2417 por omissão relacionada aos ataques.",
+      "context": "A decisão veio após o esgotamento dos recursos, segundo a comunicação do Tribunal.",
+      "decision": "Execução das penas de 16 anos e perda dos cargos públicos, conforme a condenação individual.",
+      "effects": [
+        "Naime, cujo depoimento consta nesta trilha, está entre os condenados."
+      ],
+      "limits": "A notícia é de 12/03/2026; não certifica a situação prisional em todas as datas posteriores. Não transforma a PM inteira em autora de crimes nem resolve automaticamente a veracidade de cada depoimento.",
+      "sources": [
+        "pm2417"
+      ],
+      "evidence": "documented",
+      "related": [
+        "naime-marco",
+        "ataques2023",
+        "condenacao2025"
+      ],
+      "area": "Brasília, DF",
+      "recordNature": "judgment"
+    },
+    {
+      "id": "junta1969",
+      "year": 1969,
+      "date": "1969-08-31",
+      "label": "1969 — junta reúne chefes da Marinha, Exército e Aeronáutica",
+      "period": "ditadura",
+      "topics": [
+        "forcas",
+        "instituicoes"
+      ],
+      "actors": [
+        "Augusto Rademaker",
+        "Aurélio de Lyra Tavares",
+        "Márcio de Souza e Melo",
+        "Artur da Costa e Silva",
+        "Pedro Aleixo",
+        "Humberto Castelo Branco",
+        "Emílio Garrastazu Médici",
+        "Ernesto Geisel",
+        "João Figueiredo",
+        "Marinha",
+        "Exército",
+        "Aeronáutica"
+      ],
+      "summary": "Com Costa e Silva doente, os ministros Augusto Rademaker (Marinha), Lyra Tavares (Exército) e Márcio de Souza e Melo (Aeronáutica) assumiram em junta. O vice civil Pedro Aleixo foi impedido de assumir.",
+      "context": "O ciclo presidencial de 1964–1985 incluiu Castelo Branco, Costa e Silva, Médici, Geisel e Figueiredo, além da junta de 1969.",
+      "decision": "O AI-12 atribuiu o exercício da Presidência aos três ministros militares.",
+      "effects": [
+        "O poder permaneceu sob direção militar; a junta foi sucedida por Médici em outubro."
+      ],
+      "limits": "Este episódio de atuação conjunta não apaga disputas internas. A sucessão não decorreu de eleição presidencial popular direta. Compará-lo a 1893 ou 2023 exige considerar regimes e documentos distintos.",
+      "sources": [
+        "junta1969",
+        "presidentes-ditadura"
+      ],
+      "evidence": "documented",
+      "recordNature": "historical",
+      "related": [
+        "foundations:f-golpe1964",
+        "foundations:f-ai51968",
+        "civil1985"
+      ],
+      "area": "Brasil"
+    }
+  ],
+  "trails": [
+    {
+      "id": "oito-janeiro",
+      "title": "8 de janeiro: o que aconteceu e quem responde por quê?",
+      "intro": "Da eleição de 2022 aos desdobramentos judiciais. Compare versões sobre o acampamento sem confundir relato, ato administrativo, decisão constitucional e condenação penal.",
+      "limits": "A proteção de pessoas contra risco físico, a obstrução de uma operação e o apoio político são hipóteses diferentes. Esta seleção não comprova combate armado entre Exército e PM nem permite atribuir uma única posição política a todos os militares. A situação processual é a descrita em cada fonte datada.",
+      "steps": [
+        {
+          "event": "eleicao2022",
+          "prompt": "Comece pela eleição correta: Jair Bolsonaro disputou com Lula em 2022."
+        },
+        {
+          "event": "camp2022",
+          "prompt": "Qual operação foi cancelada antes da posse e quem recebeu a ordem, segundo o depoimento?"
+        },
+        {
+          "event": "ataques2023",
+          "prompt": "Separe os ataques às sedes dos Poderes do que ocorreu depois no acampamento."
+        },
+        {
+          "event": "intervencao2023",
+          "prompt": "Quem assumiu a segurança pública do DF e com qual fundamento?"
+        },
+        {
+          "event": "desocupacao2023",
+          "prompt": "Diferencie condução, prisão, liberação e condenação."
+        },
+        {
+          "event": "naime-marco",
+          "prompt": "Leia a acusação de obstrução como relato atribuído ao depoente."
+        },
+        {
+          "event": "dutra-maio",
+          "prompt": "Compare a negativa e a justificativa operacional apresentadas por Dutra."
+        },
+        {
+          "event": "dutra-setembro",
+          "prompt": "Confira a ata: blindados no perímetro não demonstram por si só uma ordem de atacar a PM."
+        },
+        {
+          "event": "adi2024",
+          "prompt": "O que a Constituição permite às Forças Armadas?"
+        },
+        {
+          "event": "defesas2025",
+          "prompt": "O que os advogados contestaram antes da votação?"
+        },
+        {
+          "event": "fux2025",
+          "prompt": "Qual foi a posição que divergiu da maioria?"
+        },
+        {
+          "event": "condenacao2025",
+          "prompt": "O que o colegiado decidiu sobre os réus do Núcleo 1?"
+        },
+        {
+          "event": "pm2026",
+          "prompt": "Verifique também a responsabilização de ex-comandantes da PM, incluindo o depoente Naime."
+        }
+      ]
+    },
+    {
+      "id": "imperio-democracia",
+      "title": "Do Império à democracia: militares, partidos e poder",
+      "intro": "Um caminho cronológico pelos regimes e suas mudanças. Império brasileiro e imperialismo são conceitos distintos; 1889, 1937 e 1964 também representam rupturas diferentes.",
+      "limits": "É uma seleção inicial, com lacunas. Continuidade temporal ou presença de militares não estabelece uma causa única para crises separadas por décadas. Grupos, projetos políticos e instituições mudaram; não transporte siglas e alianças atuais para o passado.",
+      "steps": [
+        {
+          "event": "foundations:f-independencia",
+          "prompt": "Independência: formação de um Estado e disputas nas províncias."
+        },
+        {
+          "event": "foundations:f-constituicao1824",
+          "prompt": "Quais poderes a Constituição imperial atribuía ao imperador?"
+        },
+        {
+          "event": "partidos-imperio",
+          "prompt": "Partidos políticos já existiam sob a monarquia."
+        },
+        {
+          "event": "foundations:f-abolicao",
+          "prompt": "Mudanças sociais também alteravam as condições da política."
+        },
+        {
+          "event": "foundations:f-republica1889",
+          "prompt": "Dom Pedro II perdeu o trono em 1889; não foi o início da ditadura de 1964."
+        },
+        {
+          "event": "foundations:f-constituicao1891",
+          "prompt": "A República construiu outra ordem constitucional."
+        },
+        {
+          "event": "deodoro1891",
+          "prompt": "Deodoro, Floriano e a pressão de oficiais da Marinha."
+        },
+        {
+          "event": "armada1893",
+          "prompt": "Identifique os dirigentes da revolta e os projetos em disputa."
+        },
+        {
+          "event": "civil1894",
+          "prompt": "O primeiro governo civil republicano veio em 1894."
+        },
+        {
+          "event": "foundations:f-vargas1930",
+          "prompt": "A ruptura de 1930 altera a organização do poder."
+        },
+        {
+          "event": "foundations:f-eleitoral1932",
+          "prompt": "Observe mudanças no voto e na Justiça Eleitoral."
+        },
+        {
+          "event": "foundations:f-estadonovo1937",
+          "prompt": "O Estado Novo é outra ditadura, anterior à de 1964."
+        },
+        {
+          "event": "udn1945",
+          "prompt": "A reorganização partidária de 1945 antecede o regime militar."
+        },
+        {
+          "event": "foundations:f-golpe1964",
+          "prompt": "Golpe de 1964: aqui começa a ditadura militar de 1964–1985."
+        },
+        {
+          "event": "ai2-1965",
+          "prompt": "O regime extingue partidos e altera as regras eleitorais."
+        },
+        {
+          "event": "foundations:f-ai51968",
+          "prompt": "Aprofundamento da repressão e restrição de garantias."
+        },
+        {
+          "event": "junta1969",
+          "prompt": "As três forças também governaram juntas: verifique os nomes e a sucessão."
+        },
+        {
+          "event": "reforma1979",
+          "prompt": "A volta de múltiplas legendas começou ainda durante a ditadura."
+        },
+        {
+          "event": "civil1985",
+          "prompt": "Transição ao governo civil por eleição indireta."
+        },
+        {
+          "event": "forcas1988",
+          "prompt": "Conheça os comandos e atribuições constitucionais de Forças Armadas e PM."
+        },
+        {
+          "event": "root:1989",
+          "prompt": "Retorno da eleição presidencial direta."
+        },
+        {
+          "event": "bolsonaro2019",
+          "prompt": "Histórico militar e cargo político não são a mesma coisa: Bolsonaro chegou a capitão."
+        },
+        {
+          "event": "ataques2023",
+          "prompt": "Investigue o 8 de janeiro com documentos próprios do episódio."
+        },
+        {
+          "event": "adi2024",
+          "prompt": "Interpretação constitucional dos limites do emprego militar."
+        },
+        {
+          "event": "condenacao2025",
+          "prompt": "Consulte decisões por pessoa e conduta, sem culpa coletiva."
+        },
+        {
+          "event": "pm2026",
+          "prompt": "Acompanhe os desdobramentos pela data de cada documento."
+        }
+      ]
+    }
+  ]
+}
