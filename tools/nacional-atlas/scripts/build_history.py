@@ -2,8 +2,8 @@
 from pathlib import Path
 import json,hashlib,datetime
 ROOT=Path(__file__).resolve().parents[1]
-sources=[];events=[];appointments=[];profiles=[];trails=[];hashes={}
-for stem in ['foundations','justice','root','statements','ideas','military']:
+sources=[];events=[];appointments=[];profiles=[];trails=[];cases=[];hashes={}
+for stem in ['foundations','justice','root','statements','ideas','military','networks']:
     p=ROOT/'research'/f'{stem}.json';raw=p.read_bytes();j=json.loads(raw);hashes[p.name]=hashlib.sha256(raw).hexdigest()
     prefix=lambda id:id if ':' in id else stem+':'+id
     for s in j['sources']:sources.append({**s,'id':prefix(s['id'])})
@@ -14,6 +14,8 @@ for stem in ['foundations','justice','root','statements','ideas','military']:
         events.append(item)
     for trail in j.get('trails',[]):
         trails.append({**trail,'steps':[{**step,'event':prefix(step['event'])} for step in trail['steps']]})
+    for case in j.get('cases',[]):
+        cases.append({**case,'sources':[prefix(id) for id in case['sources']],'events':[prefix(id) for id in case['events']],'actors':[{**a,'sources':[prefix(id) for id in a['sources']]} for a in case['actors']],'relations':[{**r,'sources':[prefix(id) for id in r['sources']]} for r in case['relations']],'claims':[{**c,'sources':[prefix(id) for id in c['sources']]} for c in case['claims']]})
     for profile in j.get('profiles',[]):
         profiles.append({**profile,'sources':[prefix(id) for id in profile['sources']],'events':[prefix(id) for id in profile['events']],'claims':[{**c,'sources':[prefix(id) for id in c['sources']]} for c in profile['claims']]})
     for a in j.get('appointments',[]):appointments.append({**a,'id':prefix(a['id']),'source':prefix(a['source'])})
@@ -36,7 +38,13 @@ check('Perfis de ideias com fontes e marcos resolvidos',len({p['id'] for p in pr
 check('Trilhas de estudo com destinos existentes',all(link.get('label') and link['event'] in event_ids for e in events for link in e.get('studyLinks',[])))
 by_id={e['id']:e for e in events}
 check('Percursos cronológicos com marcos únicos e destinos existentes',len({t['id'] for t in trails})==len(trails) and all(t['title'] and t['intro'] and t['limits'] and t['steps'] and len({s['event'] for s in t['steps']})==len(t['steps']) and all(s['prompt'] and s['event'] in event_ids for s in t['steps']) and [by_id[s['event']]['year'] for s in t['steps']]==sorted(by_id[s['event']]['year'] for s in t['steps']) for t in trails))
-check('Natureza documental identificada',all(not e.get('recordNature') or e['recordNature'] in ['testimony','law','judgment','historical','election','defense','vote'] for e in events))
+check('Natureza documental identificada',all(not e.get('recordNature') or e['recordNature'] in ['testimony','law','judgment','historical','election','defense','vote','institutional_response'] for e in events))
+source_by_id={s['id']:s for s in sources}
+def case_ok(c):
+    actor_ids={a['id'] for a in c['actors']};allowed=set(c['sources'])
+    supported=lambda r:bool(r['sources']) and all(id in allowed and id in source_ids for id in r['sources']) and (r.get('basis',r.get('status'))!='documented' or any(source_by_id[id]['kind'] in ['primary','institutional'] for id in r['sources']))
+    return all(c.get(k) for k in ['id','title','summary','asOf','material','limits','events','sources','actors','claims','gaps']) and c['trail'] in {t['id'] for t in trails} and len(set(c['events']))==len(c['events']) and all(id in event_ids for id in c['events']) and allowed<=source_ids and len(actor_ids)==len(c['actors']) and all(a['name'] and a['role'] and a['action'] and a['basis'] in ['documented','reported'] and supported(a) for a in c['actors']) and len({r['id'] for r in c['relations']})==len(c['relations']) and all(r['from'] in actor_ids and r['to'] in actor_ids and r['from']!=r['to'] and r['label'] and r['detail'] and r['period'] and r['basis'] in ['documented','reported'] and supported(r) for r in c['relations']) and len({r['id'] for r in c['claims']})==len(c['claims']) and all(r['claim'] and r['assessment'] and r['status'] in ['documented','reported','interpretation','pending'] and set(r['sources'])<=allowed and (bool(r.get('origin') and r.get('needed')) if r['status']=='pending' else supported(r)) for r in c['claims'])
+check('Participantes, relações e verificações com evidência e limites',len({c['id'] for c in cases})==len(cases) and all(case_ok(c) for c in cases))
 geographic=json.loads((ROOT/'public/context-data/municipios.geojson').read_text(encoding='utf8'))
 place_ids={e['place']['municipalityCode'] for e in events if e.get('place')}
 features=[f for f in geographic['features'] if str(f['properties'].get('id')) in place_ids]
@@ -46,7 +54,8 @@ meta={'updatedAt':'27/10/2026','scope':'Primeira seleção editorial para navega
 meta['limitations'].append('Falas e publicações são uma seleção editorial, sem representatividade estatística. A fonte da fala comprova ocorrência e atribuição; suas alegações e a intenção do autor exigem exame próprio. O mapa usa referências municipais atuais, sem precisão de endereço.')
 meta['limitations'].append('Pessoas e ideias reúne uma seleção de obras e posições públicas. Não é diagnóstico psicológico nem biografia completa. Resumos do Atlas, textos dos autores e leituras de terceiros são identificados separadamente. Datas sem dia confirmado usam apenas o ano; metadados de vídeo não equivalem à transcrição da fala.')
 meta['limitations'].append('A trilha do 8 de janeiro distingue depoimentos, normas, argumentos defensivos, votos individuais e decisões do colegiado. Uma fonte oficial de uma fala comprova o registro da versão, não toda a sua veracidade. A coleta não demonstra confronto armado entre Exército e PM nem uma posição política uniforme das corporações. Na AP 2668 foram conferidas ementa e dispositivo nas primeiras 18 páginas, não as 1.991 páginas e todas as provas. Situações processuais são datadas nas fichas, sem atualização automática.')
+meta['limitations'].append('Quem participa distingue vínculos documentais de relações relatadas pela imprensa. Setas não demonstram causalidade ou influência ilícita. As capturas enviadas iniciaram a pesquisa, mas não foram republicadas como prova. A sentença italiana 21634/2026 foi consultada como precedente distinto; a íntegra específica de Catanzaro sobre Tagliaferro não foi localizada nesta coleta, e a negativa permanece identificada como notícia. Receber denúncia, condenar, negar extradição e conceder asilo são atos diferentes.')
 out=ROOT/'public/history-data';out.mkdir(parents=True,exist_ok=True)
-(out/'index.json').write_text(json.dumps({'meta':meta,'sources':sources,'events':events,'appointments':appointments,'profiles':profiles,'trails':trails},ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+(out/'index.json').write_text(json.dumps({'meta':meta,'sources':sources,'events':events,'appointments':appointments,'profiles':profiles,'trails':trails,'cases':cases},ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 (out/'places.geojson').write_text(json.dumps({'type':'FeatureCollection','features':features,'metadata':{'sourceUrl':'https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&qualidade=minima&intrarregiao=municipio','sourceFileSha256':hashlib.sha256((ROOT/'public/context-data/municipios.geojson').read_bytes()).hexdigest(),'precision':'Malha municipal atual simplificada; marcadores representam o centro do enquadramento cartográfico, não endereço exato nem limites históricos.'}},ensure_ascii=False,separators=(',',':')),encoding='utf8')
-print(json.dumps({'events':len(events),'sources':len(sources),'appointments':len(appointments),'profiles':len(profiles),'trails':len(trails),'checks':len(checks)}))
+print(json.dumps({'events':len(events),'sources':len(sources),'appointments':len(appointments),'profiles':len(profiles),'trails':len(trails),'cases':len(cases),'checks':len(checks)}))

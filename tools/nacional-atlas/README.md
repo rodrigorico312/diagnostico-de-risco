@@ -16,3 +16,7 @@ Abra `/world.html` para o atlas mundial ou `/para.html` para o painel eleitoral,
 ## Trilhas históricas: militares e democracia
 
 A área unificada `/atlas/?visao=historia&h_tela=trails` contém os percursos do 8 de janeiro e do Império à democracia. Fontes, alcance da conferência, distinção entre depoimento e decisão e instruções de reprodução estão em [research/README-military.md](research/README-military.md). Execute `python scripts/build_history.py` antes do build ao editar as bases históricas.
+
+## Participantes e relações com evidências
+
+A aba Quem participa (`/atlas/?visao=historia&h_tela=cases&h_caso=tagliaferro`) distingue funções, relações documentais, relatos da imprensa e perguntas em aberto. Pesquisa, filtros de relações e exportação CSV estão disponíveis. Consulte [research/README-networks.md](research/README-networks.md) para fontes, lacunas e reprodução.

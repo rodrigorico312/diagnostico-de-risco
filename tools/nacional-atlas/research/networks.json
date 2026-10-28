@@ -1,0 +1,968 @@
+{
+  "sources": [
+    {
+      "id": "nomeacao",
+      "title": "TSE — Portaria 771, de 16/08/2022: nomeação de Tagliaferro",
+      "url": "https://www.tse.jus.br/legislacao/compilada/prt/2022/portaria-no-771-de-16-de-agosto-de-2022",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Art. 1º exonera Frederico Franco Alvim; art. 2º nomeia Eduardo de Oliveira Tagliaferro. O ato documenta o vínculo funcional, não uma aliança política."
+    },
+    {
+      "id": "exoneracao",
+      "title": "TSE / DOU — Portaria 358, de 09/05/2023: exoneração",
+      "url": "https://sintse.tse.jus.br/documentos/2023/Mai/10/diario-oficial-da-uniao-secao-2-edicao-extra/portaria-no-358-de-9-de-maio-de-2023-exoneracao-eduardo-de-oliveira-tagliaferro-cj3-aeed",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Ato de 9 de maio, publicado em 10 de maio de 2023. Não foi extraído deste ato um motivo penal para a exoneração."
+    },
+    {
+      "id": "folha-reportagens",
+      "title": "Folha — Reportagem sobre relatórios do TSE e gabinete do STF, 13/08/2024",
+      "url": "https://www1.folha.uol.com.br/amp/poder/2024/08/moraes-usou-tse-fora-do-rito-para-investigar-bolsonaristas-no-supremo-revelam-mensagens.shtml",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Investigação jornalística baseada em mensagens. O Atlas não recebeu o acervo original nem realizou perícia independente dos aparelhos, áudios ou relatórios."
+    },
+    {
+      "id": "folha-audios",
+      "title": "Folha — Áudios atribuídos a Airton Vieira e a circulação dos relatórios",
+      "url": "https://www1.folha.uol.com.br/poder/2024/08/auxiliar-de-moraes-sugere-em-audios-estrategia-para-evitar-uso-descarado-do-tse-ouca.shtml",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Publicação de 13/08/2024. Orientações atribuídas a Cristina Kusahara aparecem em fala de Airton, conforme a reportagem; isso é uma atribuição indireta."
+    },
+    {
+      "id": "folha-autores",
+      "title": "Folha — Participantes e casos descritos pelos repórteres, 14/08/2024",
+      "url": "https://www1.folha.uol.com.br/poder/2024/08/uso-do-tse-por-moraes-mirou-eduardo-bolsonaro-e-serie-de-aliados-de-ex-presidente.shtml",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Matéria assinada por Fabio Serapião e Glenn Greenwald. Distinguir autoria jornalística de autoria das mensagens e de fornecimento da informação."
+    },
+    {
+      "id": "nota-stf",
+      "title": "STF — Nota do gabinete de Moraes, 13/08/2024",
+      "url": "https://noticias.stf.jus.br/postsnoticias/nota-do-gabinete-do-ministro-alexandre-de-moraes-6/",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Resposta oficial do gabinete: sustenta a regularidade dos procedimentos nos INQs 4781 e 4878. É a manifestação da instituição envolvida, não uma auditoria externa dos fatos."
+    },
+    {
+      "id": "senado-glenn",
+      "title": "Senado — Ata da audiência com Glenn Greenwald, 30/04/2025",
+      "url": "https://www.congressonacional.leg.br/web/atividade/notas-taquigraficas/-/notas/r/13490",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Flávio Bolsonaro preside a sessão. Na discussão sobre a fonte, Glenn ressalta o dever de sigilo e não confirma diretamente sua identidade. As demais alegações dos participantes precisam de exame próprio."
+    },
+    {
+      "id": "pet12936",
+      "title": "STF — PET 12.936: decisões e resultado do recebimento da denúncia",
+      "url": "https://portal.stf.jus.br/processos/abaDecisoes.asp?incidente=7013522",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Registro oficial: sessão virtual de 07 a 14/11/2025; resultado lançado em 17/11/2025. Recebimento de denúncia não é condenação. Foi consultado o registro do resultado, não toda a instrução."
+    },
+    {
+      "id": "italia2025",
+      "title": "Agência Brasil — Notificação sobre extradição na Itália, 01/10/2025",
+      "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2025-10/ex-assessor-de-moraes-e-detido-na-italia-e-notificado-sobre-extradicao",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Notícia da agência pública, não cópia da decisão de Catanzaro. Informa a liberação após a notificação e medidas restritivas."
+    },
+    {
+      "id": "tratado",
+      "title": "Câmara — Tratado Brasil–Itália promulgado pelo Decreto 863/1993",
+      "url": "https://www2.camara.leg.br/legin/fed/decret/1993/decreto-863-9-julho-1993-336651-publicacaooriginal-1-pe.html",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Art. 5º: direitos mínimos de defesa e direitos fundamentais; arts. 3º e 6º trazem outros fundamentos de recusa. Ler o motivo concreto de cada decisão."
+    },
+    {
+      "id": "cassazione-resumo",
+      "title": "Corte de Cassação italiana — Sentença 21634/2026, resumo oficial",
+      "url": "https://www.cortedicassazione.it/en/penale_dettaglio.page?contentId=SZP50894",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Audiência em 22/05/2026, depósito em 11/06/2026. O resumo oficial afirma que a falta de imparcialidade objetiva pode impedir a entrega. Não é a sentença de Tagliaferro."
+    },
+    {
+      "id": "cassazione-pdf",
+      "title": "Corte de Cassação — PDF oficial anonimizado da sentença 21634/2026",
+      "url": "https://www.cortedicassazione.it/resources/cms/documents/21634_06_2026_osc_noindex.pdf",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "16 páginas. Conferidos visualmente o dispositivo na p. 15 e o carimbo de depósito na p. 16, além do resumo oficial. Não foi feita revisão integral de todos os fundamentos. SHA-256: 127613fba16898e0127dce609ca6d8b12f756c8350fd95635ea12d3bfb8f7e72."
+    },
+    {
+      "id": "folha-negativa",
+      "title": "Folha — Notícia da recusa de extradição de Tagliaferro, 27/10/2026",
+      "url": "https://www1.folha.uol.com.br/poder/2026/10/italia-nega-extradicao-de-eduardo-tagliaferro-ex-assessor-de-alexandre-de-moraes.shtml",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Relata ter acesso à sentença e informa possibilidade de recurso. A íntegra original de Catanzaro não foi localizada nesta coleta; a ficha permanece como notícia."
+    },
+    {
+      "id": "veja-negativa",
+      "title": "Veja — Negativa de extradição: datas de deliberação e registro",
+      "url": "https://veja.abril.com.br/brasil/justica-italiana-nega-extradicao-de-eduardo-tagliaferro-ao-brasil/",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Publicada em 26/10/2026; informa deliberação em 29/04 e registro em 22/10. Essas datas não foram certificadas aqui por cópia da sentença de Catanzaro."
+    },
+    {
+      "id": "italiano-negativa",
+      "title": "Cosenza Channel — Advogado, colegiado e sentença relatados na Itália",
+      "url": "https://amp.cosenzachannel.it/amp/cronaca/torano-castello-tagliaferro-estradizione-negata-de-moraes-tg57isjb",
+      "kind": "press",
+      "checkedAt": "2026-10-27",
+      "note": "Reportagem de Antonio Alizzi identifica o advogado Roberto Le Pera, o colegiado e a sentença 17/26. Não substitui o documento judicial. Não foi adotada a afirmação biográfica incorreta de que Moraes teria sido ministro da Justiça de Lula."
+    },
+    {
+      "id": "mjsp-extradicao",
+      "title": "MJSP — O que é extradição e quem tramita o pedido",
+      "url": "https://www.gov.br/mj/pt-br/assuntos/sua-protecao/cooperacao-internacional/extradicao",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Explicação geral das competências do DRCI/Senajus; não certifica resultado em nenhum caso individual."
+    },
+    {
+      "id": "interpol-notices",
+      "title": "INTERPOL — O que é uma difusão vermelha",
+      "url": "https://www.interpol.int/en/How-we-work/Notices/Red-Notices",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Alerta para localização e prisão provisória, sujeito às leis nacionais; não é mandado internacional de prisão nem julgamento de extradição."
+    },
+    {
+      "id": "interpol-imprensa",
+      "title": "INTERPOL — Informações para jornalistas e limites da lista pública",
+      "url": "https://www.interpol.int/en/Resources/Information-for-journalists",
+      "kind": "institutional",
+      "checkedAt": "2026-10-27",
+      "note": "Apenas parte dos avisos é pública. Não encontrar um nome no site não prova inexistência, cancelamento ou motivo de uma decisão individual."
+    },
+    {
+      "id": "asilo",
+      "title": "Lei de Migração — Lei 13.445/2017, publicação no Senado",
+      "url": "https://legis.senado.gov.br/norma/17696552/publicacao/17696561",
+      "kind": "primary",
+      "checkedAt": "2026-10-27",
+      "note": "Institutos de asilo e extradição têm regras próprias; a existência de um procedimento não certifica o resultado de outro em país estrangeiro."
+    }
+  ],
+  "events": [
+    {
+      "id": "tratado1993",
+      "year": 1993,
+      "date": "1993-07-09",
+      "label": "1993 — tratado Brasil–Itália prevê limites à extradição",
+      "period": "democracia",
+      "topics": [
+        "instituicoes"
+      ],
+      "actors": [
+        "Brasil",
+        "Itália"
+      ],
+      "summary": "O Decreto 863 promulgou o tratado bilateral. Seu art. 5º impede a extradição quando faltam direitos mínimos de defesa ou há risco de violação de direitos fundamentais.",
+      "context": "O tratado foi assinado em 1989; o decreto é de julho de 1993 e o texto prevê entrada em vigor em agosto.",
+      "decision": "Incorporar o tratado à ordem interna brasileira.",
+      "effects": [
+        "Pedidos de entrega estão sujeitos a condições e motivos de recusa."
+      ],
+      "limits": "A norma não demonstra, sozinha, que houve perseguição em um caso concreto. A negativa de entrega não equivale a absolvição penal nem concede automaticamente asilo.",
+      "sources": [
+        "tratado",
+        "asilo"
+      ],
+      "evidence": "documented",
+      "recordNature": "law",
+      "related": [
+        "cassacao2026",
+        "noticia2026"
+      ],
+      "area": "Brasil e Itália"
+    },
+    {
+      "id": "nomeacao2022",
+      "year": 2022,
+      "date": "2022-08-16",
+      "label": "2022 — Tagliaferro é nomeado chefe da assessoria do TSE",
+      "period": "democracia",
+      "topics": [
+        "instituicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Eduardo de Oliveira Tagliaferro",
+        "Frederico Franco Alvim",
+        "Tribunal Superior Eleitoral"
+      ],
+      "summary": "A Portaria 771 nomeou Eduardo de Oliveira Tagliaferro assessor-chefe da Assessoria Especial de Enfrentamento à Desinformação e exonerou Frederico Franco Alvim daquele cargo.",
+      "context": "O vínculo funcional tem documentação própria, anterior às reportagens sobre mensagens.",
+      "decision": "Substituir o ocupante do cargo em comissão.",
+      "effects": [
+        "Tagliaferro passou a exercer a chefia indicada no ato."
+      ],
+      "limits": "O cargo não comprova relação pessoal de confiança, orientação partidária ou participação em ilegalidades. A portaria não cria, por si, a assessoria que já possuía chefe anterior.",
+      "sources": [
+        "nomeacao"
+      ],
+      "evidence": "documented",
+      "recordNature": "law",
+      "related": [
+        "exoneracao2023",
+        "reportagem2024"
+      ],
+      "area": "Brasil"
+    },
+    {
+      "id": "exoneracao2023",
+      "year": 2023,
+      "date": "2023-05-09",
+      "label": "2023 — exoneração de Tagliaferro do cargo no TSE",
+      "period": "democracia",
+      "topics": [
+        "instituicoes"
+      ],
+      "actors": [
+        "Eduardo de Oliveira Tagliaferro",
+        "Tribunal Superior Eleitoral"
+      ],
+      "summary": "A Portaria 358 exonerou Tagliaferro do cargo de assessor-chefe da AEED. O ato foi publicado no DOU em 10 de maio.",
+      "context": "A data do ato e a data de publicação são diferentes.",
+      "decision": "Encerrar o exercício daquele cargo em comissão.",
+      "effects": [
+        "Nas reportagens e procedimentos posteriores, aparece como ex-assessor."
+      ],
+      "limits": "Esta ficha documenta o encerramento do vínculo e não extrai do texto da portaria um motivo penal ou uma conclusão sobre culpa.",
+      "sources": [
+        "exoneracao"
+      ],
+      "evidence": "documented",
+      "recordNature": "law",
+      "related": [
+        "nomeacao2022",
+        "reportagem2024"
+      ],
+      "area": "Brasil"
+    },
+    {
+      "id": "reportagem2024",
+      "year": 2024,
+      "date": "2024-08-13",
+      "label": "2024 — Folha publica mensagens sobre relatórios entre TSE e STF",
+      "period": "democracia",
+      "topics": [
+        "instituicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Glenn Greenwald",
+        "Fabio Serapião",
+        "Airton Vieira",
+        "Eduardo de Oliveira Tagliaferro",
+        "Marco Antônio Martins Vargas",
+        "Cristina Yukiko Kusahara Gomes",
+        "Alexandre de Moraes"
+      ],
+      "summary": "A Folha noticiou solicitações de relatórios do gabinete de Moraes no STF à equipe do TSE, com base em mensagens entre auxiliares. A investigação jornalística questionou o rito adotado.",
+      "context": "As conversas relatadas abrangem 2022–2023; esta ficha data a publicação em 2024.",
+      "decision": "Publicação jornalística, não julgamento da legalidade dos procedimentos.",
+      "effects": [
+        "O episódio gerou resposta oficial e investigações próprias."
+      ],
+      "limits": "O Atlas não realizou perícia do acervo original. Atribuições de ordens e motivos permanecem vinculadas às fontes; a identidade de uma fonte jornalística não é presumida.",
+      "sources": [
+        "folha-reportagens",
+        "folha-autores",
+        "folha-audios"
+      ],
+      "evidence": "reported",
+      "recordNature": "historical",
+      "related": [
+        "nomeacao2022",
+        "nota2024",
+        "audiencia2025",
+        "recebimento2025"
+      ],
+      "area": "Brasil",
+      "studyLinks": [
+        {
+          "event": "nomeacao2022",
+          "label": "Qual era o cargo formal de Tagliaferro?"
+        },
+        {
+          "event": "nota2024",
+          "label": "Como o gabinete respondeu?"
+        },
+        {
+          "event": "audiencia2025",
+          "label": "O que foi declarado no Senado?"
+        },
+        {
+          "event": "noticia2026",
+          "label": "Qual desdobramento foi noticiado na Itália?"
+        }
+      ]
+    },
+    {
+      "id": "nota2024",
+      "year": 2024,
+      "date": "2024-08-13",
+      "label": "2024 — gabinete de Moraes sustenta regularidade dos relatórios",
+      "period": "democracia",
+      "topics": [
+        "instituicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Gabinete de Alexandre de Moraes",
+        "Tribunal Superior Eleitoral",
+        "Supremo Tribunal Federal",
+        "Procuradoria-Geral da República"
+      ],
+      "summary": "Em nota, o gabinete afirmou que solicitações e relatórios estavam documentados e que os procedimentos eram regulares, com participação da PGR.",
+      "context": "Resposta às reportagens sobre a circulação de relatórios entre os órgãos.",
+      "decision": "Manifestação pública de defesa da regularidade institucional.",
+      "effects": [
+        "A resposta apresenta uma versão oficial contrastante com as críticas jornalísticas."
+      ],
+      "limits": "A nota comprova a posição declarada do gabinete; não é auditoria independente nem decisão definitiva sobre cada relatório, ordem ou mensagem.",
+      "sources": [
+        "nota-stf"
+      ],
+      "evidence": "documented",
+      "recordNature": "institutional_response",
+      "related": [
+        "reportagem2024",
+        "recebimento2025"
+      ],
+      "area": "Brasil",
+      "statement": {
+        "kind": "publication",
+        "speaker": "Gabinete do ministro Alexandre de Moraes",
+        "roleAtTime": "Gabinete do relator no STF",
+        "venue": "Portal de notícias do STF",
+        "excerpt": "Todos os procedimentos foram oficiais, regulares e estão devidamente documentados nos inquéritos e investigações em curso no STF",
+        "source": "nota-stf",
+        "locator": "Nota de 13/08/2024, trecho final do parágrafo.",
+        "declaredContext": "Sustenta a regularidade das requisições e dos relatórios referidos nas notícias.",
+        "intentLimit": "Uma resposta institucional não decide, sozinha, se cada procedimento respeitou as regras; os autos e atos concretos precisam ser examinados."
+      }
+    },
+    {
+      "id": "audiencia2025",
+      "year": 2025,
+      "date": "2025-04-30",
+      "label": "2025 — Glenn depõe no Senado e ressalta sigilo da fonte",
+      "period": "democracia",
+      "topics": [
+        "instituicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Glenn Greenwald",
+        "Flávio Bolsonaro",
+        "Eduardo Girão",
+        "Comissão de Segurança Pública do Senado"
+      ],
+      "summary": "Glenn participou de audiência presidida por Flávio Bolsonaro. Questionado sobre sua fonte, invocou o dever de sigilo e não confirmou diretamente a identidade.",
+      "context": "A ata registra manifestações, perguntas e opiniões de participantes identificados.",
+      "decision": "Audiência parlamentar de esclarecimentos.",
+      "effects": [
+        "As declarações ficaram registradas em notas taquigráficas."
+      ],
+      "limits": "Presidir uma audiência ou ouvir um jornalista não comprova controle editorial ou aliança permanente. A sessão não autentica todas as alegações sobre os fatos discutidos.",
+      "sources": [
+        "senado-glenn"
+      ],
+      "evidence": "documented",
+      "recordNature": "testimony",
+      "related": [
+        "reportagem2024",
+        "recebimento2025"
+      ],
+      "area": "Brasília, DF"
+    },
+    {
+      "id": "italia2025",
+      "year": 2025,
+      "date": "2025-10-01",
+      "label": "2025 — imprensa noticia notificação de Tagliaferro na Itália",
+      "period": "democracia",
+      "topics": [
+        "instituicoes"
+      ],
+      "actors": [
+        "Eduardo de Oliveira Tagliaferro",
+        "Corte de Apelação de Catanzaro",
+        "Autoridades italianas"
+      ],
+      "summary": "A Agência Brasil informou que Tagliaferro foi levado à polícia, notificado sobre o pedido de extradição e liberado, com restrições de viagem.",
+      "context": "O pedido de entrega e a apreciação penal no Brasil seguem procedimentos distintos.",
+      "decision": "Medidas cautelares na Itália, segundo a notícia.",
+      "effects": [
+        "A matéria informa que ele não permaneceu preso após a notificação."
+      ],
+      "limits": "A decisão original italiana de 2025 não foi examinada. Notificação, prisão cautelar e decisão final de extradição não são o mesmo ato.",
+      "sources": [
+        "italia2025"
+      ],
+      "evidence": "reported",
+      "recordNature": "historical",
+      "related": [
+        "recebimento2025",
+        "noticia2026"
+      ],
+      "area": "Itália"
+    },
+    {
+      "id": "recebimento2025",
+      "year": 2025,
+      "date": "2025-11-14",
+      "label": "2025 — STF recebe denúncia contra Tagliaferro na PET 12.936",
+      "period": "democracia",
+      "topics": [
+        "instituicoes"
+      ],
+      "actors": [
+        "Eduardo de Oliveira Tagliaferro",
+        "Procuradoria-Geral da República",
+        "Alexandre de Moraes",
+        "Primeira Turma do STF"
+      ],
+      "summary": "O registro oficial informa recebimento unânime da denúncia por violação de sigilo, coação, tentativa de abolição violenta do Estado Democrático de Direito e obstrução de investigação.",
+      "context": "A sessão virtual foi de 7 a 14 de novembro; o resultado foi lançado em 17/11/2025.",
+      "decision": "Admitir a acusação para processamento penal, segundo os requisitos indicados no registro da Turma.",
+      "effects": [
+        "O recebimento permite a persecução em juízo."
+      ],
+      "limits": "Receber denúncia não equivale a condenar ou provar a motivação atribuída pela acusação. Não foi feita revisão de toda a instrução nem certificado o desfecho penal atual.",
+      "sources": [
+        "pet12936"
+      ],
+      "evidence": "documented",
+      "recordNature": "judgment",
+      "related": [
+        "reportagem2024",
+        "italia2025",
+        "noticia2026"
+      ],
+      "area": "Brasil"
+    },
+    {
+      "id": "cassacao2026",
+      "year": 2026,
+      "date": "2026-05-22",
+      "label": "2026 — Cassação italiana reconhece recusa por falta de imparcialidade",
+      "period": "mundo",
+      "topics": [
+        "instituicoes"
+      ],
+      "actors": [
+        "Corte Suprema de Cassação italiana"
+      ],
+      "summary": "Na sentença 21634/2026, a Sexta Seção considerou a falta de imparcialidade objetiva obstáculo à entrega. O dispositivo anulou a decisão recorrida sem reenvio e declarou ausentes as condições de extradição.",
+      "context": "Julgamento em 22/05 e depósito em 11/06/2026. O resumo oficial trata de julgador também prejudicado pelos fatos atribuídos à pessoa requerida.",
+      "decision": "Reconhecer motivo de recusa ligado ao direito de defesa e ao julgamento imparcial.",
+      "effects": [
+        "O dispositivo manda cessar a cautelar e liberar a requerente, se não detida por outra causa."
+      ],
+      "limits": "Este é um precedente distinto da sentença de Tagliaferro. O PDF é anonimizado; não se reidentificaram pessoas a partir das ocultações. Conferidos o resumo e as páginas 15–16, não todos os fundamentos.",
+      "sources": [
+        "cassazione-resumo",
+        "cassazione-pdf"
+      ],
+      "evidence": "documented",
+      "recordNature": "judgment",
+      "related": [
+        "tratado1993",
+        "noticia2026"
+      ],
+      "area": "Itália"
+    },
+    {
+      "id": "noticia2026",
+      "year": 2026,
+      "date": "2026-10-26",
+      "label": "Outubro de 2026 — imprensa noticia negativa de extradição de Tagliaferro",
+      "period": "democracia",
+      "topics": [
+        "instituicoes",
+        "comunicacao"
+      ],
+      "actors": [
+        "Eduardo de Oliveira Tagliaferro",
+        "Alexandre de Moraes",
+        "Corte de Apelação de Catanzaro",
+        "Roberto Le Pera",
+        "Glenn Greenwald",
+        "Fabio Serapião"
+      ],
+      "summary": "Veículos brasileiros e italiano noticiaram que Catanzaro recusou a extradição por risco à imparcialidade e ao direito de defesa. A Folha informa possibilidade de recurso.",
+      "context": "A ficha data a notícia de 26/10. Veja distingue deliberação em 29/04 e registro em 22/10; a Folha de 27/10 se refere à sentença de 22/10.",
+      "decision": "Resultado judicial relatado pela imprensa; a íntegra específica de Catanzaro permanece pendente nesta coleta.",
+      "effects": [
+        "As notícias informam revogação das restrições de viagem e devolução de documentos."
+      ],
+      "limits": "Não foi certificado trânsito em julgado, recurso posterior ou concessão de asilo. A crítica à imparcialidade relatada não deve ser apagada, mas não equivale a uma conclusão judicial universal sobre todos os processos brasileiros.",
+      "sources": [
+        "folha-negativa",
+        "veja-negativa",
+        "italiano-negativa"
+      ],
+      "evidence": "reported",
+      "recordNature": "historical",
+      "related": [
+        "reportagem2024",
+        "recebimento2025",
+        "cassacao2026",
+        "root:passaportes-2026"
+      ],
+      "area": "Brasil e Itália"
+    }
+  ],
+  "trails": [
+    {
+      "id": "tagliaferro-extradicao",
+      "title": "Tagliaferro: assessoria, mensagens, imprensa e extradição",
+      "intro": "Acompanhe os documentos do vínculo funcional, a publicação das mensagens, a resposta do gabinete, o processo brasileiro e o debate sobre a entrega ao Brasil. Cada etapa identifica o tipo e o alcance da fonte.",
+      "limits": "A sentença de Cassação 21634/2026 foi consultada como precedente distinto. A íntegra da decisão específica de Catanzaro sobre Tagliaferro não foi localizada; sua negativa permanece identificada como notícia. Não se presumiu identidade de fonte jornalística, culpa penal ou controle político de todos os participantes.",
+      "steps": [
+        {
+          "event": "tratado1993",
+          "prompt": "Quais direitos o tratado de extradição exige preservar?"
+        },
+        {
+          "event": "nomeacao2022",
+          "prompt": "Confira o cargo de Tagliaferro e quem o ocupava antes."
+        },
+        {
+          "event": "exoneracao2023",
+          "prompt": "Quando o vínculo funcional terminou?"
+        },
+        {
+          "event": "reportagem2024",
+          "prompt": "Quem publicou e que mecanismo as mensagens descrevem?"
+        },
+        {
+          "event": "nota2024",
+          "prompt": "Como o gabinete respondeu às acusações?"
+        },
+        {
+          "event": "audiencia2025",
+          "prompt": "Quais participantes levaram o tema ao Senado?"
+        },
+        {
+          "event": "italia2025",
+          "prompt": "Notificação e cautelar não são a decisão final de entrega."
+        },
+        {
+          "event": "recebimento2025",
+          "prompt": "O STF recebeu a denúncia; isso é diferente de condenar."
+        },
+        {
+          "event": "cassacao2026",
+          "prompt": "Leia o precedente oficial sobre imparcialidade, distinto do caso Tagliaferro."
+        },
+        {
+          "event": "noticia2026",
+          "prompt": "O que foi noticiado e que documentos ainda faltam conferir?"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "tagliaferro",
+      "title": "Tagliaferro, relatórios e extradição",
+      "summary": "Além do ministro e do ex-assessor: quem produziu informação, encaminhou pedidos, publicou as mensagens, respondeu e tomou decisões.",
+      "asOf": "2026-10-27",
+      "trail": "tagliaferro-extradicao",
+      "material": "A investigação partiu de três capturas enviadas pelo usuário de uma publicação atribuída a Glenn Greenwald, traduzida automaticamente pelo Grok. A URL original e o texto integral em inglês não foram obtidos. Os prints são pistas de pesquisa e não foram republicados como prova judicial.",
+      "limits": "Relação funcional, circulação de documentos, autoria jornalística e representação jurídica não demonstram, por si, influência ilícita, aliança política ou motivo psicológico. Cada relação abaixo informa se o suporte foi um documento consultado ou uma reportagem.",
+      "events": [
+        "nomeacao2022",
+        "exoneracao2023",
+        "reportagem2024",
+        "nota2024",
+        "audiencia2025",
+        "italia2025",
+        "recebimento2025",
+        "cassacao2026",
+        "noticia2026"
+      ],
+      "sources": [
+        "nomeacao",
+        "exoneracao",
+        "folha-reportagens",
+        "folha-audios",
+        "folha-autores",
+        "nota-stf",
+        "senado-glenn",
+        "pet12936",
+        "italia2025",
+        "tratado",
+        "cassazione-resumo",
+        "cassazione-pdf",
+        "folha-negativa",
+        "veja-negativa",
+        "italiano-negativa",
+        "mjsp-extradicao",
+        "interpol-notices",
+        "interpol-imprensa",
+        "asilo"
+      ],
+      "actors": [
+        {
+          "id": "tagliaferro",
+          "name": "Eduardo de Oliveira Tagliaferro",
+          "role": "Assessor-chefe da AEED/TSE em 2022–2023",
+          "action": "Nomeado pela Portaria 771 e exonerado pela Portaria 358; depois denunciado e alvo do pedido de entrega.",
+          "basis": "documented",
+          "sources": [
+            "nomeacao",
+            "exoneracao",
+            "pet12936"
+          ]
+        },
+        {
+          "id": "alvim",
+          "name": "Frederico Franco Alvim",
+          "role": "Antecessor na chefia da AEED",
+          "action": "Foi exonerado do cargo no mesmo ato que nomeou Tagliaferro. Isso documenta a sucessão funcional.",
+          "basis": "documented",
+          "sources": [
+            "nomeacao"
+          ]
+        },
+        {
+          "id": "moraes",
+          "name": "Alexandre de Moraes",
+          "role": "Ministro do STF; presidiu o TSE em 2022–2024",
+          "action": "Seu gabinete respondeu às notícias. Foi relator no recebimento da denúncia da PET 12.936.",
+          "basis": "documented",
+          "sources": [
+            "nota-stf",
+            "pet12936"
+          ]
+        },
+        {
+          "id": "airton",
+          "name": "Airton Vieira",
+          "role": "Juiz instrutor no gabinete do STF, segundo as notícias",
+          "action": "Mensagens publicadas lhe atribuem pedidos de relatórios a Tagliaferro.",
+          "basis": "reported",
+          "sources": [
+            "folha-autores",
+            "folha-audios"
+          ]
+        },
+        {
+          "id": "vargas",
+          "name": "Marco Antônio Martins Vargas",
+          "role": "Juiz auxiliar no TSE no período relatado",
+          "action": "Aparece nas mensagens e no modelo de encaminhamento descrito pela Folha.",
+          "basis": "reported",
+          "sources": [
+            "folha-reportagens",
+            "folha-audios"
+          ]
+        },
+        {
+          "id": "cristina",
+          "name": "Cristina Yukiko Kusahara Gomes",
+          "role": "Chefe de gabinete no STF, identificada na reportagem",
+          "action": "Airton cita orientações atribuídas a ela sobre a forma de envio. A atribuição é indireta.",
+          "basis": "reported",
+          "sources": [
+            "folha-audios"
+          ]
+        },
+        {
+          "id": "glenn",
+          "name": "Glenn Greenwald",
+          "role": "Jornalista e coautor das reportagens",
+          "action": "Assina matérias com Fabio Serapião; participou de audiência no Senado.",
+          "basis": "documented",
+          "sources": [
+            "folha-autores",
+            "senado-glenn"
+          ]
+        },
+        {
+          "id": "fabio",
+          "name": "Fabio Serapião",
+          "role": "Jornalista e coautor das reportagens",
+          "action": "Assina a cobertura das mensagens; autoria da reportagem não identifica quem forneceu os dados.",
+          "basis": "reported",
+          "sources": [
+            "folha-autores"
+          ]
+        },
+        {
+          "id": "flavio",
+          "name": "Flávio Bolsonaro",
+          "role": "Presidente da audiência da CSP em 30/04/2025",
+          "action": "Conduziu a sessão com Glenn. A ata documenta essa participação específica.",
+          "basis": "documented",
+          "sources": [
+            "senado-glenn"
+          ]
+        },
+        {
+          "id": "pgr",
+          "name": "Procuradoria-Geral da República",
+          "role": "Órgão acusador no procedimento brasileiro",
+          "action": "A denúncia foi recebida pela Turma; uma acusação não é sentença de culpa.",
+          "basis": "documented",
+          "sources": [
+            "pet12936"
+          ]
+        },
+        {
+          "id": "catanzaro",
+          "name": "Corte de Apelação de Catanzaro",
+          "role": "Órgão italiano que apreciou o pedido de entrega",
+          "action": "A imprensa noticia a negativa. A sentença específica e sua situação recursal continuam pendentes de conferência direta.",
+          "basis": "reported",
+          "sources": [
+            "folha-negativa",
+            "italiano-negativa"
+          ]
+        },
+        {
+          "id": "lepera",
+          "name": "Roberto Le Pera",
+          "role": "Advogado italiano identificado pela imprensa local",
+          "action": "A reportagem de Cosenza o identifica como representante de Tagliaferro na oposição à entrega.",
+          "basis": "reported",
+          "sources": [
+            "italiano-negativa"
+          ]
+        },
+        {
+          "id": "cassacao",
+          "name": "Corte Suprema de Cassação italiana",
+          "role": "Tribunal do precedente 21634/2026",
+          "action": "Reconheceu obstáculo à entrega por falta de imparcialidade objetiva; não é o mesmo ato de Catanzaro.",
+          "basis": "documented",
+          "sources": [
+            "cassazione-resumo",
+            "cassazione-pdf"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "id": "sucessao",
+          "from": "alvim",
+          "to": "tagliaferro",
+          "label": "Sucessão no cargo",
+          "detail": "A mesma portaria exonera o antecessor e nomeia o sucessor; não demonstra escolha pessoal do antecessor.",
+          "period": "16/08/2022",
+          "basis": "documented",
+          "sources": [
+            "nomeacao"
+          ]
+        },
+        {
+          "id": "pedidos",
+          "from": "airton",
+          "to": "tagliaferro",
+          "label": "Pedidos de relatórios atribuídos nas mensagens",
+          "detail": "Relação operacional descrita pela investigação jornalística, sem perícia independente do Atlas.",
+          "period": "2022–2023; publicação em 2024",
+          "basis": "reported",
+          "sources": [
+            "folha-autores"
+          ]
+        },
+        {
+          "id": "origem",
+          "from": "airton",
+          "to": "vargas",
+          "label": "Encaminhamento em nome do auxiliar do TSE",
+          "detail": "A matéria descreve orientação para atribuir formalmente o envio ao juiz do TSE.",
+          "period": "Outubro de 2022, segundo a reportagem",
+          "basis": "reported",
+          "sources": [
+            "folha-audios"
+          ]
+        },
+        {
+          "id": "orientacao",
+          "from": "cristina",
+          "to": "airton",
+          "label": "Orientação atribuída por Airton",
+          "detail": "A indicação parte de fala atribuída a Airton; não é uma ordem direta de Cristina examinada aqui.",
+          "period": "Mensagens publicadas em agosto de 2024",
+          "basis": "reported",
+          "sources": [
+            "folha-audios"
+          ]
+        },
+        {
+          "id": "reportagem",
+          "from": "glenn",
+          "to": "fabio",
+          "label": "Coautoria jornalística",
+          "detail": "Os dois assinam matérias sobre o episódio. Coautoria não demonstra direção política externa.",
+          "period": "Agosto de 2024",
+          "basis": "reported",
+          "sources": [
+            "folha-autores"
+          ]
+        },
+        {
+          "id": "audiencia",
+          "from": "flavio",
+          "to": "glenn",
+          "label": "Audiência parlamentar",
+          "detail": "Um presidiu a sessão e o outro foi ouvido; isso não comprova controle do jornalista.",
+          "period": "30/04/2025",
+          "basis": "documented",
+          "sources": [
+            "senado-glenn"
+          ]
+        },
+        {
+          "id": "acusacao",
+          "from": "pgr",
+          "to": "tagliaferro",
+          "label": "Acusação recebida pelo STF",
+          "detail": "O registro documenta o recebimento da denúncia; não certifica condenação.",
+          "period": "Sessão de 7 a 14/11/2025",
+          "basis": "documented",
+          "sources": [
+            "pet12936"
+          ]
+        },
+        {
+          "id": "relatoria",
+          "from": "moraes",
+          "to": "tagliaferro",
+          "label": "Relatoria da PET 12.936",
+          "detail": "O registro identifica Moraes como relator do procedimento e o resultado colegiado.",
+          "period": "2025",
+          "basis": "documented",
+          "sources": [
+            "pet12936"
+          ]
+        },
+        {
+          "id": "defesa",
+          "from": "lepera",
+          "to": "tagliaferro",
+          "label": "Representação na Itália, segundo a notícia",
+          "detail": "A relação profissional é informada pelo veículo italiano, sem procuração examinada pelo Atlas.",
+          "period": "Procedimento de extradição noticiado em 2026",
+          "basis": "reported",
+          "sources": [
+            "italiano-negativa"
+          ]
+        },
+        {
+          "id": "entrega",
+          "from": "catanzaro",
+          "to": "tagliaferro",
+          "label": "Recusa da entrega relatada pela imprensa",
+          "detail": "A alegada negativa refere-se ao pedido concreto e admite discussão recursal, conforme a Folha.",
+          "period": "Notícias de 26–27/10/2026",
+          "basis": "reported",
+          "sources": [
+            "folha-negativa"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "vinculo",
+          "claim": "Tagliaferro ocupou cargo na assessoria do TSE?",
+          "assessment": "Sim: as portarias de nomeação e exoneração documentam esse vínculo, com datas e denominação do cargo.",
+          "status": "documented",
+          "sources": [
+            "nomeacao",
+            "exoneracao"
+          ]
+        },
+        {
+          "id": "italia",
+          "claim": "A recusa de extradição foi noticiada?",
+          "assessment": "Sim. Folha, Veja e imprensa italiana relatam a negativa e a crítica à imparcialidade. A íntegra específica de Catanzaro ainda não foi obtida nesta coleta.",
+          "status": "reported",
+          "sources": [
+            "folha-negativa",
+            "veja-negativa",
+            "italiano-negativa"
+          ]
+        },
+        {
+          "id": "precedente",
+          "claim": "Há documento oficial italiano sobre imparcialidade como motivo de recusa?",
+          "assessment": "Sim. O resumo oficial e o dispositivo da sentença 21634/2026 sustentam esse fundamento em outro procedimento. É preciso distinguir o precedente da sentença de Tagliaferro.",
+          "status": "documented",
+          "sources": [
+            "cassazione-resumo",
+            "cassazione-pdf"
+          ]
+        },
+        {
+          "id": "fonte",
+          "claim": "O Atlas pode afirmar quem foi a fonte jornalística?",
+          "assessment": "Não com estes elementos. Na audiência examinada, Glenn invocou o sigilo da fonte e não confirmou diretamente a identidade. Atribuição em acusação ou print não basta para a identificação independente.",
+          "status": "pending",
+          "sources": [
+            "senado-glenn"
+          ],
+          "origin": "Pergunta suscitada pelas capturas enviadas e pela cobertura do caso.",
+          "needed": "Documento ou declaração original que estabeleça a identidade, com avaliação do alcance e da autenticidade; não presumir a partir do cargo."
+        },
+        {
+          "id": "absolvicao",
+          "claim": "Negar extradição equivale a absolver ou conceder asilo?",
+          "assessment": "São decisões diferentes. Recusar a entrega por direitos de defesa não decide, por si, a culpa penal e não comprova concessão de asilo. Não foi localizado um ato de asilo de Tagliaferro.",
+          "status": "interpretation",
+          "sources": [
+            "tratado",
+            "mjsp-extradicao",
+            "asilo"
+          ]
+        },
+        {
+          "id": "paises",
+          "claim": "Espanha, Itália, INTERPOL e EUA chegaram todos à mesma conclusão?",
+          "assessment": "Essa generalização das capturas não foi demonstrada nesta coleta. Exige casos, autoridades, datas e fundamentos próprios. INTERPOL não é país e não julga pedidos de extradição.",
+          "status": "pending",
+          "sources": [
+            "interpol-notices"
+          ],
+          "origin": "Paráfrase de alegação na publicação traduzida mostrada nos prints; URL original não obtida.",
+          "needed": "Íntegra e identificação de cada decisão citada, incluindo pedidos, respostas e eventual recurso; distinguir Justiça, governo, asilo e alertas policiais."
+        },
+        {
+          "id": "interpol",
+          "claim": "A ausência de um nome na lista pública da INTERPOL prova recusa política?",
+          "assessment": "Não. A organização informa que só parte dos avisos é pública. Sem a decisão individual, não se pode concluir inexistência do alerta nem o motivo de eventual negativa.",
+          "status": "documented",
+          "sources": [
+            "interpol-imprensa",
+            "interpol-notices"
+          ]
+        }
+      ],
+      "gaps": [
+        "Íntegra da sentença específica de Catanzaro, relatada como 17/26, e certidão de registro; conferir deliberação e depósito separadamente.",
+        "Informação oficial sobre recurso e eventual definitividade da negativa de entrega.",
+        "Texto integral original da publicação atribuída a Glenn em 27/10/2026; tradução automática pode alterar termos jurídicos.",
+        "Acervo original de mensagens e relatórios e suas verificações de autenticidade; as notícias não equivalem à perícia do Atlas.",
+        "Documentos individualizados para as alegações sobre Espanha, EUA e INTERPOL; não foi generalizado o resultado italiano.",
+        "Desfecho penal posterior ao recebimento da denúncia: não certificado nesta coleta."
+      ]
+    }
+  ]
+}

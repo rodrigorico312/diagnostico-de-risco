@@ -1,5 +1,6 @@
 import {ArrowRight,BookOpen} from 'lucide-react';
 export const studyAreas=[
+ ['cases','Quem participa','Conheça assessores, intermediários e instituições por função e ação. Cada relação aponta a fonte e distingue documento, notícia e hipótese pendente.'],
  ['trails','Trilhas históricas','Percorra a história dos regimes ou investigue o 8 de janeiro com relatos atribuídos, fontes e julgamentos em ordem cronológica.'],
  ['ideas','Pessoas e ideias','Estude obras e propostas por autor, distinguindo registros próprios, resumos editoriais e leituras de terceiros. Compare correntes pelas fontes, sem diagnosticar personalidades.'],
  ['timeline','Linha do tempo','Organiza acontecimentos por época. Abra a ficha para separar contexto, decisão, efeitos, interpretação e limites.'],
