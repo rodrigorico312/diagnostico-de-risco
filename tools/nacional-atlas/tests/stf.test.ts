@@ -24,7 +24,7 @@ test('STF: contraposição documental exige documento, e incerteza exige lacuna'
 });
 
 test('STF: composição histórica e papéis de governo não viram controle atual',()=>{
- assert.equal(data.appointments.length,16);
+ assert.equal(data.appointments.length,17);
  assert.match(c.claims.find(r=>r.id==='todos')!.assessment,/não é a composição atual/);
  assert.match(c.actors.find(a=>a.id==='benjamin')!.action,/antes do Decreto 848/);
  assert.match(c.actors.find(a=>a.id==='sayao')!.role,/interino/);

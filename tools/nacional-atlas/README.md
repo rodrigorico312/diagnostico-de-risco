@@ -25,3 +25,8 @@ A aba Quem participa (`/atlas/?visao=historia&h_tela=cases&h_caso=tagliaferro`) 
 ## Origem e transformações do STF
 
 A aba STF e indicações (`/atlas/?visao=historia&h_tela=court`) inclui antecedentes monárquicos, organização no governo Deodoro, participantes e intervenções históricas. O caso e a trilha `stf-origem` distinguem fatos documentados, afirmações contraditas e questões pendentes. Fontes, limitações e reprodução em [research/README-stf.md](research/README-stf.md). As nomeações permanecem uma seleção histórica, não a composição atual do tribunal.
+
+
+## Teori Zavascki
+
+A trilha `/atlas/?visao=historia&h_tela=trails&h_trilha=teori-zavascki` reúne nove etapas: ingresso no STF, atuação, morte, sucessões e apurações. A nomeação também está em STF e indicações. Fontes, alcance da conferência e documentos pendentes estão em [research/README-teori.md](research/README-teori.md).

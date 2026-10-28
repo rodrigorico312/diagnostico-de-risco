@@ -3,7 +3,7 @@ from pathlib import Path
 import json,hashlib,datetime
 ROOT=Path(__file__).resolve().parents[1]
 sources=[];events=[];appointments=[];profiles=[];trails=[];cases=[];hashes={}
-for stem in ['foundations','justice','root','statements','ideas','military','networks','stf']:
+for stem in ['foundations','justice','root','statements','ideas','military','networks','stf','teori']:
     p=ROOT/'research'/f'{stem}.json';raw=p.read_bytes();j=json.loads(raw);hashes[p.name]=hashlib.sha256(raw).hexdigest()
     prefix=lambda id:id if ':' in id else stem+':'+id
     for s in j['sources']:sources.append({**s,'id':prefix(s['id'])})
@@ -38,7 +38,7 @@ check('Perfis de ideias com fontes e marcos resolvidos',len({p['id'] for p in pr
 check('Trilhas de estudo com destinos existentes',all(link.get('label') and link['event'] in event_ids for e in events for link in e.get('studyLinks',[])))
 by_id={e['id']:e for e in events}
 check('Percursos cronológicos com marcos únicos e destinos existentes',len({t['id'] for t in trails})==len(trails) and all(t['title'] and t['intro'] and t['limits'] and t['steps'] and len({s['event'] for s in t['steps']})==len(t['steps']) and all(s['prompt'] and s['event'] in event_ids for s in t['steps']) and [by_id[s['event']]['year'] for s in t['steps']]==sorted(by_id[s['event']]['year'] for s in t['steps']) for t in trails))
-check('Natureza documental identificada',all(not e.get('recordNature') or e['recordNature'] in ['testimony','law','judgment','historical','election','defense','vote','institutional_response'] for e in events))
+check('Natureza documental identificada',all(not e.get('recordNature') or e['recordNature'] in ['testimony','law','judgment','historical','election','defense','vote','institutional_response','investigation'] for e in events))
 source_by_id={s['id']:s for s in sources}
 def case_ok(c):
     actor_ids={a['id'] for a in c['actors']};allowed=set(c['sources'])
@@ -56,6 +56,7 @@ meta['limitations'].append('Pessoas e ideias reúne uma seleção de obras e pos
 meta['limitations'].append('A trilha do 8 de janeiro distingue depoimentos, normas, argumentos defensivos, votos individuais e decisões do colegiado. Uma fonte oficial de uma fala comprova o registro da versão, não toda a sua veracidade. A coleta não demonstra confronto armado entre Exército e PM nem uma posição política uniforme das corporações. Na AP 2668 foram conferidas ementa e dispositivo nas primeiras 18 páginas, não as 1.991 páginas e todas as provas. Situações processuais são datadas nas fichas, sem atualização automática.')
 meta['limitations'].append('Quem participa distingue vínculos documentais de relações relatadas pela imprensa. Setas não demonstram causalidade ou influência ilícita. As capturas enviadas iniciaram a pesquisa, mas não foram republicadas como prova. A sentença italiana 21634/2026 foi consultada como precedente distinto; a íntegra específica de Catanzaro sobre Tagliaferro não foi localizada nesta coleta, e a negativa permanece identificada como notícia. Receber denúncia, condenar, negar extradição e conceder asilo são atos diferentes.')
 meta['limitations'].append('A origem do STF distingue antecedentes monárquicos, denominação, organização normativa, Constituição e instalação. As nomeações são uma seleção histórica, não o quadro atual da Corte. Afirmações contraditas por documentos recebem rótulo próprio; caracterizações políticas amplas exigem critérios e análise de processos. Controles previstos em lei não comprovam sua eficácia em cada caso.')
+meta['limitations'].append('Teori Zavascki: a investigação do CENIPA é preventiva e a manifestação do MPF é peça de apuração criminal, não sentença. Foram conferidos trechos identificados de cópia da promoção de arquivamento; faltam a íntegra do ato judicial e a leitura integral dos autos. A vaga de ministro foi ocupada por Moraes, enquanto a relatoria da Lava Jato foi redistribuída a Fachin.')
 out=ROOT/'public/history-data';out.mkdir(parents=True,exist_ok=True)
 (out/'index.json').write_text(json.dumps({'meta':meta,'sources':sources,'events':events,'appointments':appointments,'profiles':profiles,'trails':trails,'cases':cases},ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 (out/'places.geojson').write_text(json.dumps({'type':'FeatureCollection','features':features,'metadata':{'sourceUrl':'https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&qualidade=minima&intrarregiao=municipio','sourceFileSha256':hashlib.sha256((ROOT/'public/context-data/municipios.geojson').read_bytes()).hexdigest(),'precision':'Malha municipal atual simplificada; marcadores representam o centro do enquadramento cartográfico, não endereço exato nem limites históricos.'}},ensure_ascii=False,separators=(',',':')),encoding='utf8')

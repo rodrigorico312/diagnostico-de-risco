@@ -7,7 +7,7 @@ const data:HistoryData=JSON.parse(fs.readFileSync('public/history-data/index.jso
 const event=(id:string)=>data.events.find(e=>e.id==='military:'+id)!;
 
 test('trilhas: cada percurso mantém ordem temporal e não repete marcos',()=>{
- assert.equal(data.trails?.length,4);
+ assert.equal(data.trails?.length,5);
  for(const trail of data.trails!){
   const dates=trail.steps.map(s=>{const e=data.events.find(e=>e.id===s.event)!;return e.date??`${e.year}-01-01`;});
   assert.deepEqual(dates,[...dates].sort());

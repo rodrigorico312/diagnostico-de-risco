@@ -376,9 +376,17 @@
    "related": [
     "moraes-sabatina2017",
     "justice:justice-temer-bolsonaro",
-    "justice:justice-cf-nomeacoes"
+    "justice:justice-cf-nomeacoes",
+    "teori:morte2017",
+    "teori:fachin2017"
    ],
-   "area": "Brasil"
+   "area": "Brasil",
+   "studyLinks": [
+    {
+     "event": "teori:fachin2017",
+     "label": "Distinguir a vaga na Corte e a relatoria da Lava Jato"
+    }
+   ]
   }
  ],
  "trails": [
@@ -827,7 +835,7 @@
     {
      "id": "todos",
      "claim": "Todos os ministros da seleção histórica foram indicados pelo PT?",
-     "assessment": "Não. Há indicações por FHC, Temer e Bolsonaro, além de Lula e Dilma. A lista de 16 nomeações exibida neste módulo é uma seleção histórica, incluindo ministros que já deixaram a Corte; não é a composição atual nem mede controle partidário.",
+     "assessment": "Não. Há indicações por FHC, Temer e Bolsonaro, além de Lula e Dilma. A lista de nomeações exibida neste módulo é uma seleção histórica, incluindo ministros que já deixaram a Corte; não é a composição atual nem mede controle partidário.",
      "status": "refuted",
      "sources": [
       "justice:justice-moraes",
@@ -884,7 +892,7 @@
    ],
    "gaps": [
     "Não foi montado um inventário de todas as alianças e biografias dos participantes do Governo Provisório.",
-    "As 16 nomeações históricas não são o quadro atual do STF; não calcular composição partidária atual a partir delas.",
+    "As nomeações históricas não são o quadro atual do STF; não calcular composição partidária atual a partir delas.",
     "Não houve leitura integral de todos os autos citados nem auditoria estatística dos votos por origem da indicação.",
     "Aposentadorias compulsórias históricas, críticas atuais e cumprimento de controles legais precisam de evidências específicas e contextualizadas."
    ]
