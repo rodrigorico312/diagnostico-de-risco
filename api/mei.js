@@ -18,9 +18,10 @@ export default async function handler(req,res) {
   }
   // Vercel sets x-vercel-forwarded-for at the edge; never trust a client-supplied session ID.
   const ip=String(req.headers['x-vercel-forwarded-for']||req.socket?.remoteAddress||'unknown').split(',')[0];
+  const sessionCookie=String(req.headers.cookie||'').split(';').map(value=>value.trim()).find(value=>/^__Host-mei-session=[A-Za-z0-9_-]{32,100}$/.test(value))||'';
   const response=await fetch((origin.endsWith('/')?origin.slice(0,-1):origin)+'/v1/'+route[1],{
    method:route[0],redirect:'error',signal:AbortSignal.timeout(12000),
-   headers:{'content-type':'application/json','x-mei-service':key,'x-mei-client':createHmac('sha256',key).update(ip).digest('hex'),'cookie':String(req.headers.cookie||'').slice(0,8192)},
+   headers:{'content-type':'application/json','x-mei-service':key,'x-mei-client':createHmac('sha256',key).update(ip).digest('hex'),'cookie':sessionCookie},
    body:payload
   });
   const cookies=response.headers.getSetCookie();
