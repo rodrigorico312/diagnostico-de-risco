@@ -1,0 +1,25 @@
+[Unit]
+Description=Nacional MEI API
+After=network-online.target docker.service
+Wants=network-online.target
+[Service]
+User=nacional-mei
+Group=nacional-mei
+WorkingDirectory=/opt/nacional-mei
+LoadCredentialEncrypted=mei-secrets:/etc/nacional-mei/secrets.cred
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HOME=/var/lib/nacional-mei
+ExecStartPre=/opt/nacional-mei/venv/bin/python migrate.py
+ExecStart=/opt/nacional-mei/venv/bin/uvicorn app:app --host 127.0.0.1 --port 8793 --no-access-log
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/nacional-mei
+MemoryMax=512M
+CPUQuota=60%
+UMask=0077
+[Install]
+WantedBy=multi-user.target

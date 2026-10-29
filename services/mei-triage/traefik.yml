@@ -1,0 +1,19 @@
+http:
+  routers:
+    nacional-mei:
+      rule: "Host(`api.ogestordolucro.site`) && PathPrefix(`/nacional-mei/`)"
+      priority: 110
+      entryPoints: [websecure]
+      middlewares: [nacional-mei-strip]
+      service: nacional-mei
+      tls:
+        certResolver: letsencrypt
+  middlewares:
+    nacional-mei-strip:
+      stripPrefix:
+        prefixes: [/nacional-mei]
+  services:
+    nacional-mei:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8793"

@@ -1,0 +1,24 @@
+[Unit]
+Description=Nacional MEI worker
+After=network-online.target docker.service nacional-mei-api.service
+Wants=network-online.target
+[Service]
+User=nacional-mei
+Group=nacional-mei
+WorkingDirectory=/opt/nacional-mei
+LoadCredentialEncrypted=mei-secrets:/etc/nacional-mei/secrets.cred
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=HOME=/var/lib/nacional-mei
+ExecStart=/opt/nacional-mei/venv/bin/python worker.py
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/nacional-mei
+MemoryMax=512M
+CPUQuota=60%
+UMask=0077
+[Install]
+WantedBy=multi-user.target
