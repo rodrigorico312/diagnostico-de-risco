@@ -5,12 +5,12 @@ type Cadastro = {cnpj:string;name:string;opened_at:string|null;status:string|nul
 type Case = {cnpj:string;state:string;source:{cadastro?:Cadastro|null;cadastro_status?:string;checked_at?:string;official?:{status:string;url:string}};answers:Record<string,string>;revision:number;questions:string[];plan:{title:string;scope?:string;complete:boolean;steps:{title:string;text:string;url:string}[]}};
 const official='https://consopt.www8.receita.fazenda.gov.br/consultaoptantes';
 const questionData:Record<string,{title:string;help:string;choices:[string,string][]}>= {
- identity:{title:'É esta a empresa que você quer conferir?',help:'Confira o nome e o CNPJ antes de continuar.',choices:[['yes','Sim, é minha empresa'],['no','Não. Quero corrigir o CNPJ']]},
- simei:{title:'Seu CNPJ está enquadrado como MEI hoje?',help:'CNPJ ativo e enquadramento no MEI são informações diferentes. Se precisar, abra a Consulta Optantes abaixo e veja a situação no Simei.',choices:[['yes','Sim, está no MEI'],['former','Já foi MEI, mas saiu ou foi baixado'],['never','Nunca foi MEI'],['unknown','Ainda não sei']]},
- debt:{title:'Você sabe se há guias ou dívidas em aberto?',help:'A consulta cadastral não mostra a dívida. Se ainda não conferiu os valores nos portais, escolha “Ainda não sei”.',choices:[['yes','Sim, tenho valores em aberto'],['no','Conferi e não encontrei valores em aberto'],['unknown','Ainda não sei']]},
- installment:{title:'Existe algum parcelamento do MEI?',help:'Parcelas de um acordo e DAS mensal corrente precisam ser conferidos separadamente. Este quiz não acessa o seu acordo.',choices:[['yes','Sim, existe parcelamento'],['no','Não tenho parcelamento'],['unknown','Ainda não sei']]},
- lawsuit:{title:'Existe ação judicial sobre essa dívida?',help:'Se um profissional cuida de algum processo, confira com ele. A existência de ação pode mudar as providências necessárias.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei informar']]},
- payments:{title:'As guias mensais atuais estão em dia?',help:'Considere as guias correntes, sem confundir com parcelas de acordo. A resposta ajuda a organizar sua conferência.',choices:[['yes','Sim, conferi os vencimentos'],['no','Há atraso'],['unknown','Ainda preciso conferir']]},
+ identity:{title:'É esta a empresa?',help:'',choices:[['yes','Sim, é esta empresa'],['no','Corrigir CNPJ']]},
+ simei:{title:'Este CNPJ é MEI hoje?',help:'Estar com o CNPJ ativo não significa ser MEI. Na Consulta Optantes, veja a situação no Simei.',choices:[['yes','Sim, é MEI'],['former','Não. Já foi MEI'],['never','Nunca foi MEI'],['unknown','Não sei']]},
+ debt:{title:'Há dívidas em aberto?',help:'A consulta cadastral não mostra dívidas. Se ainda não conferiu as guias nos portais, escolha “Não sei”.',choices:[['yes','Sim'],['no','Não, já conferi'],['unknown','Não sei']]},
+ installment:{title:'Tem parcelamento do MEI?',help:'Parcelas de um acordo e DAS mensal corrente precisam ser conferidos separadamente. Este quiz não acessa o seu acordo.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei']]},
+ lawsuit:{title:'Há processo judicial sobre a dívida?',help:'Se um profissional cuida de algum processo, confira com ele. A existência de ação pode mudar as providências necessárias.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei']]},
+ payments:{title:'As guias mensais atuais estão em dia?',help:'Considere as guias correntes, sem confundir com parcelas de acordo. A resposta ajuda a organizar sua conferência.',choices:[['yes','Sim'],['no','Há guias atrasadas'],['unknown','Ainda não conferi']]},
 };
 async function api(op:string,body?:unknown):Promise<Case> {
  const r=await fetch('/api/mei?op='+op,{method:body===undefined?'GET':'POST',credentials:'same-origin',cache:'no-store',headers:body===undefined?undefined:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});
@@ -36,22 +36,68 @@ export default function MeiQuizPage(){
  async function reset(){if(busy)return;setBusy(true);setError('');epoch.current++;try{await api('delete',{});setCurrent(null);setCnpj('');setEditing(null);setSlow(false);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
  function download(){if(!current)return;const lines=['MINHA CONFERÊNCIA DO MEI',format(current.cnpj),current.source.cadastro?.name||'Identidade não recuperada','Preparada em '+new Date().toLocaleString('pt-BR'),'','Fonte cadastral: '+(current.source.cadastro?.provider||'Não disponível'),'Consulta oficial do Simei: não validada automaticamente','Valores de dívida: não consultados','',...order.map(k=>questionData[k].title+' '+questionData[k].choices.find(([v])=>v===current.answers[k])?.[1]),'',...current.plan.steps.flatMap(s=>[s.title,s.text,new URL(s.url,window.location.origin).href,'']),current.plan.scope||''];const url=URL.createObjectURL(new Blob(['﻿'+lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='minha-conferencia-mei.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
  const data=current?.source.cadastro;
- return <div className="mq"><a className="mq-skip" href="#quiz">Ir para a consulta</a><header className="mq-header"><a href="/" aria-label="Página inicial da Nacional"><img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" width="170" height="44"/></a><a href="/guia-mei?material=1">Abrir guia completo ↗</a></header><main id="quiz" className="mq-main">
- <div className="mq-eyebrow"><span/> GRATUITO · SEM CADASTRO</div>
- {!current?<section className="mq-card mq-intro"><span className="mq-step">SEU PONTO DE PARTIDA</span><h1 ref={heading} tabIndex={-1}>Seu MEI.<br/><em>Um passo de cada vez.</em></h1><p>Informe o CNPJ. Vamos buscar os dados cadastrais e te guiar na conferência de guias, dívidas e próximos passos.</p><form onSubmit={start}><label htmlFor="cnpj">Qual CNPJ você quer conferir?</label><input autoComplete="off" autoCapitalize="characters" spellCheck={false} id="cnpj" name="cnpj" maxLength={24} value={cnpj} onChange={e=>setCnpj(e.target.value.toUpperCase())} placeholder="00.000.000/0001-00" required aria-describedby="mq-data"/><button className="mq-primary" disabled={busy||!cnpj.trim()}>{busy?'Abrindo…':'Começar minha conferência →'}</button></form><p id="mq-data" className="mq-small">O CNPJ será consultado na BrasilAPI / Minha Receita, fonte auxiliar de dados públicos. O portal oficial do Simples exige verificação humana. A conferência fica salva por até 24 horas, com um cookie exclusivo, e você pode apagá-la ao terminar. <a href="/politica-de-privacidade">Privacidade ↗</a></p><div className="mq-note">Você recebe orientação gratuita e pode seguir por conta própria. Atendimento é uma escolha sua.</div></section>:<>
- <div className="mq-case"><div><span className="mq-step">SUA CONFERÊNCIA</span><strong>{format(current.cnpj)}</strong></div><button disabled={busy} onClick={reset}>Trocar CNPJ</button></div>
- {['queued','working'].includes(current.state)?<section className="mq-card" aria-live="polite"><div className="mq-loading" aria-hidden="true"/><h1 ref={heading} tabIndex={-1}>Buscando os dados da empresa…</h1><p>Você não precisa preencher nome ou data de abertura.</p><p className="mq-small">{slow?'A consulta está demorando. Você pode aguardar ou abrir o guia completo.':'Assim que a fonte responder, você poderá conferir o resultado.'}</p></section>:<>
- {q?<section className="mq-card"><div className="mq-progress" aria-label={'Etapa '+(order.indexOf(active!)+1)+' de '+order.length}>{order.map((k,i)=><span key={k} className={i<=order.indexOf(active!)?'is-done':''}/>)}</div><span className="mq-step">ETAPA {order.indexOf(active!)+1} DE {order.length}</span><h1 ref={heading} tabIndex={-1}>{q.title}</h1><p>{q.help}</p>
- {active==='identity'&&data&&<div className="mq-company"><h2>{data.name}</h2><dl><div><dt>CNPJ</dt><dd>{format(data.cnpj)}</dd></div><div><dt>Abertura</dt><dd>{date(data.opened_at)}</dd></div><div><dt>Situação cadastral</dt><dd>{data.status||'Não informada'}</dd></div></dl><p className="mq-small">Fonte auxiliar: <a href={data.url} target="_blank" rel="noreferrer">{data.provider} ↗</a>. Consultada em {date(current.source.checked_at)}. {data.reference_date?'Data-base: '+date(data.reference_date)+'.':'A fonte não informou a data-base do cadastro.'}</p></div>}
- {active==='simei'&&<div className="mq-note">{data?.simei!==null&&data?.simei!==undefined?<p>A fonte auxiliar indica: <strong>{data.simei?'optante pelo MEI':'não optante pelo MEI'}</strong>. Confirme a situação atual no portal oficial.</p>:<p>Não recuperamos o enquadramento oficial. Você pode conferir agora ou seguir com “Ainda não sei”.</p>}<a href={official} target="_blank" rel="noreferrer">Abrir Consulta Optantes ↗</a></div>}
- {!data&&active===order[0]&&<div className="mq-note">{current.source.cadastro_status==='not_found'?'Esse CNPJ não foi encontrado na base auxiliar. Isso não comprova inexistência ou baixa.':'Não foi possível recuperar o cadastro nesta consulta.'} Você pode seguir respondendo o que já sabe ou corrigir o CNPJ.</div>}
- <div className="mq-choices">{q.choices.map(([v,label])=><button key={v} disabled={busy} aria-pressed={current.answers[active!]===v} onClick={()=>answer(v)}>{label}<span aria-hidden="true">→</span></button>)}</div>
- {order.indexOf(active!)>0&&<button className="mq-back" disabled={busy} onClick={()=>setEditing(order[order.indexOf(active!)-1])}>← Voltar uma etapa</button>}
- </section>:<section className="mq-card mq-result"><span className="mq-step">CONFERÊNCIA ORGANIZADA</span><h1 ref={heading} tabIndex={-1}>{current.plan.title}</h1><p>{data?.name||format(current.cnpj)}</p><div className="mq-note">{current.plan.scope}</div><ol>{current.plan.steps.map(s=><li key={s.title}><h2>{s.title}</h2><p>{s.text}</p><a href={s.url} target={s.url.startsWith('https')?'_blank':undefined} rel="noreferrer">Abrir orientação ou portal ↗</a></li>)}</ol><details><summary>Revisar minhas respostas</summary>{order.map(k=><div className="mq-answer" key={k}><strong>{questionData[k].title}</strong><span>{questionData[k].choices.find(([v])=>v===current.answers[k])?.[1]}</span><button disabled={busy} onClick={()=>setEditing(k)}>Corrigir</button></div>)}</details><button className="mq-primary" onClick={download}>Baixar minha conferência ↓</button><a className="mq-secondary" href="/guia-mei?material=1">Ler as explicações completas ↗</a><aside className="mq-optional"><strong>Prefere acompanhamento?</strong><p>Se quiser ajuda individual, conheça o atendimento da Nacional. O guia e os links continuam gratuitos.</p><a href="/solicitar-atendimento?origem=Quiz%20MEI">Conhecer o atendimento ↗</a></aside></section>}
- <p className="mq-small mq-coverage">Cobertura desta consulta: cadastro público auxiliar e respostas suas. O robô não validou o Simei no portal oficial, não consultou valores de dívida, não cancelou parcelamentos e não emitiu guias.</p>
- </>}
- </>}
- {error&&<div className="mq-error" role="alert">{error}</div>}
- <div className="mq-help"><a href="/guia-mei?material=1">Precisa entender algum termo? Abra o guia ↗</a>{current&&<button onClick={reset} disabled={busy}>Apagar esta conferência</button>}</div>
- </main><footer className="mq-footer">Nacional Contabilidade · Informação para você decidir.<a href="/guias/mei/guia-mei-v002.pdf">Guia em PDF ↓</a></footer></div>;
+ return <div className="mq">
+  <a className="mq-skip" href="#quiz">Ir para a consulta</a>
+  <header className="mq-header">
+   <a href="/" aria-label="Página inicial da Nacional"><img src="/nacional-contabilidade-logo-topbar.png" alt="Nacional Contabilidade" width="170" height="44" /></a>
+   <details className="mq-tools" key={active || current?.state || 'start'}>
+    <summary>Ajuda</summary>
+    <div className="mq-tools-panel">
+     <h2>Sobre esta consulta</h2>
+     <p>Buscamos o cadastro público na BrasilAPI / Minha Receita. O enquadramento oficial no MEI e os valores das dívidas precisam ser conferidos nos portais.</p>
+     {data && <dl><div><dt>Fonte do cadastro</dt><dd><a href={data.url} target="_blank" rel="noreferrer">{data.provider}</a></dd></div><div><dt>Consulta realizada</dt><dd>{date(current?.source.checked_at)}</dd></div><div><dt>Data-base</dt><dd>{date(data.reference_date)}</dd></div><div><dt>Abertura da empresa</dt><dd>{date(data.opened_at)}</dd></div><div><dt>Situação cadastral</dt><dd>{data.status || 'Não informada'}</dd></div></dl>}
+     <p>A sessão expira em 24 horas. Você pode apagar esta conferência ou trocar o CNPJ.</p>
+     {current?.plan.scope && <p>{current.plan.scope}</p>}
+     <nav aria-label="Ajuda da consulta">
+      <a href="/guia-mei?material=1">Ler o guia completo</a>
+      <a href="/guias/mei/guia-mei-v002.pdf">Baixar o guia em PDF</a>
+      <a href="/politica-de-privacidade">Privacidade</a>
+      {current && <><button type="button" disabled={busy} onClick={reset}>Trocar CNPJ</button><button type="button" disabled={busy} onClick={reset}>Apagar esta conferência</button></>}
+     </nav>
+    </div>
+   </details>
+  </header>
+  <main id="quiz" className="mq-main">
+   {!current ? <section className="mq-card mq-intro" aria-busy={busy}>
+    <h1 ref={heading} tabIndex={-1}>Qual é o CNPJ?</h1>
+    <form onSubmit={start}>
+     <label className="mq-visually-hidden" htmlFor="cnpj">CNPJ da empresa</label>
+     <input autoComplete="off" autoCapitalize="characters" spellCheck={false} id="cnpj" name="cnpj" maxLength={24} value={cnpj} onChange={e => setCnpj(e.target.value.toUpperCase())} placeholder="00.000.000/0001-00" required />
+     <button className="mq-primary" disabled={busy || !cnpj.trim()}>{busy ? 'Abrindo…' : 'Continuar'}</button>
+    </form>
+   </section> : ['queued', 'working'].includes(current.state) ? <section className="mq-card" role="status">
+    <h1 ref={heading} tabIndex={-1}>Buscando a empresa…</h1>
+    {slow && <p>A consulta está demorando um pouco. Aguarde ou tente novamente mais tarde.</p>}
+   </section> : q ? <section className="mq-card" aria-busy={busy}>
+    <span className="mq-step">Pergunta {order.indexOf(active!) + 1}</span>
+    <h1 ref={heading} tabIndex={-1}>{q.title}</h1>
+    {active === 'identity' && data && <div className="mq-company"><h2>{data.name}</h2><p>{format(data.cnpj)}</p></div>}
+    {!data && active === order[0] && <p className="mq-inline-note">Não conseguimos recuperar o cadastro. Responda o que souber ou corrija o CNPJ em “Ajuda”.</p>}
+    <div className="mq-choices">{q.choices.map(([value, label]) => <button type="button" key={value} disabled={busy} aria-pressed={current.answers[active!] === value} onClick={() => answer(value)}>{label}</button>)}</div>
+    <div className="mq-question-tools">
+     {order.indexOf(active!) > 0 && <button type="button" className="mq-back" disabled={busy} onClick={() => setEditing(order[order.indexOf(active!) - 1])}>Voltar</button>}
+     {active !== 'identity' && <details className="mq-question-help" key={active}>
+      <summary>Entender a pergunta</summary>
+      <div><p>{q.help}</p>
+       {active === 'simei' && <>
+        {data?.simei !== null && data?.simei !== undefined && <p>O cadastro auxiliar indica <strong>{data.simei ? 'optante pelo MEI' : 'não optante pelo MEI'}</strong>. Confira a situação atual no portal oficial.</p>}
+        <a href={official} target="_blank" rel="noreferrer">Consultar enquadramento oficial</a>
+       </>}
+      </div>
+     </details>}
+    </div>
+   </section> : <section className="mq-card mq-result">
+    <h1 ref={heading} tabIndex={-1}>{current.plan.title}</h1>
+    <p className="mq-result-scope">Orientação inicial. O resultado não confirma perdão de dívida.</p>
+    <div className="mq-plan">{current.plan.steps.map((step, i) => <details className="mq-plan-step" key={step.title} open={i === 0 ? true : undefined}>
+     <summary><span>{i + 1}.</span><h2>{step.title}</h2></summary>
+     <div><p>{step.text}</p><a href={step.url} target={step.url.startsWith('https') ? '_blank' : undefined} rel="noreferrer">Abrir orientação</a></div>
+    </details>)}</div>
+    <button type="button" className="mq-primary" onClick={download}>Salvar meu plano</button>
+    <details className="mq-review"><summary>Revisar respostas</summary>{order.map(key => <div className="mq-answer" key={key}><strong>{questionData[key].title}</strong><span>{questionData[key].choices.find(([value]) => value === current.answers[key])?.[1]}</span><button type="button" disabled={busy} onClick={() => setEditing(key)}>Corrigir</button></div>)}</details>
+    <details className="mq-optional"><summary>Prefere acompanhamento?</summary><p>O guia é gratuito. Se quiser ajuda individual, você pode conhecer o atendimento da Nacional.</p><a href="/solicitar-atendimento?origem=Quiz%20MEI">Conhecer o atendimento</a></details>
+   </section>}
+   {error && <div className="mq-error" role="alert">{error}</div>}
+  </main>
+ </div>;
 }
