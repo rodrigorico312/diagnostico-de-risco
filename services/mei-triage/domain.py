@@ -1,7 +1,7 @@
 """Validation and conservative guidance. No debt or remittance eligibility inference."""
 import re
 OPTANTES = 'https://consopt.www8.receita.fazenda.gov.br/consultaoptantes'
-PGMEI = 'https://www8.receita.fazenda.gov.br/SimplesNacional/Aplicacoes/ATPGMEI.app/Identificacao'
+PGMEI = 'https://www8.receita.fazenda.gov.br/SimplesNacional/Aplicacoes/ATSPO/pgmei.app/Identificacao'
 REGULARIZE = 'https://www.regularize.pgfn.gov.br/'
 QUESTIONS = {
  'identity': {'yes','no'}, 'simei': {'yes','former','never','unknown'},
@@ -19,8 +19,14 @@ def cnpj_clean(value):
  if base!=value: raise ValueError('Os dígitos verificadores do CNPJ não conferem.')
  return value
 
-def questions(source):
- return ['identity'] + list(k for k in QUESTIONS if k!='identity') if source.get('cadastro') else list(k for k in QUESTIONS if k!='identity')
+def questions(source,answers=None):
+ a=answers or {}
+ order=(['identity'] if source.get('cadastro') else [])+['simei']
+ if a.get('simei')=='never':return order
+ order+=['debt']
+ if a.get('debt')!='no':order+=['installment','lawsuit']
+ if a.get('simei')=='yes' and a.get('debt')!='no':order+=['payments']
+ return order
 
 def plan(answers,source):
  steps=[]
@@ -28,6 +34,9 @@ def plan(answers,source):
  if answers.get('identity')=='no':
   return {'title':'Vamos corrigir o CNPJ','steps':[], 'complete':False}
  simei=answers.get('simei')
+ if simei=='never':
+  add('Confirme se já houve enquadramento no MEI','Você informou que este CNPJ nunca foi MEI. O percurso de dívidas do MEI pode não se aplicar. Confira os períodos no Simei; se identificar enquadramento anterior, corrija sua resposta para receber os próximos passos.',OPTANTES)
+  return {'title':'Confirme primeiro o histórico','steps':steps,'complete':all(k in answers for k in questions(source,answers)),'scope':'Resposta baseada na sua declaração, sem validação automática do histórico oficial. Não é decisão sobre dívidas ou benefícios.'}
  if simei in {'former','never','unknown'}:
   add('Confira o histórico de enquadramento', 'Na Consulta Optantes, confira a situação no Simei e os períodos de entrada e saída. Estar com CNPJ ativo não significa estar enquadrado como MEI. Anote as datas que aparecerem.',OPTANTES)
  else:
@@ -43,4 +52,4 @@ def plan(answers,source):
   add('Confira eventual processo judicial','Se houver ação relacionada ao débito, reúna número, objeto e andamento. Não desista nem renuncie a direitos por uma resposta automática; consulte o responsável pelo processo.','/guia-mei?material=1#duvidas')
  if answers.get('payments')!='yes' and simei=='yes':
   add('Organize o pagamento mensal','Confira os vencimentos das guias correntes no PGMEI. Não confunda a competência da guia com a data em que ela vence. A análise de um benefício depende também de seu período e condições específicos.',PGMEI)
- return {'title':'Seu plano de conferência','steps':steps,'complete':all(k in answers for k in questions(source)), 'scope':'Orientação inicial. Não é certidão, apuração de dívida nem aprovação de perdão. Valores e critérios que não foram consultados permanecem sem confirmação.'}
+ return {'title':'Seu plano de conferência','steps':steps,'complete':all(k in answers for k in questions(source,answers)), 'scope':'Orientação inicial. Não é certidão, apuração de dívida nem aprovação de perdão. Valores e critérios que não foram consultados permanecem sem confirmação.'}

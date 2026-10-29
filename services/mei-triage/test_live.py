@@ -10,6 +10,10 @@ def req(path,body=None,cookie=None):
  try:
   with urllib.request.urlopen(r,timeout=10) as response:return response.status,json.load(response),response.headers.get('set-cookie','').split(';')[0]
  except urllib.error.HTTPError as e:return e.code,json.load(e),''
+for _ in range(30):
+ try:
+  urllib.request.urlopen(base+'/health',timeout=2).close();break
+ except urllib.error.URLError:time.sleep(.2)
 assert cnpj_clean('62.560.654/0001-27')=='62560654000127'
 try:cnpj_clean('62560654000128');raise AssertionError('accepted invalid')
 except ValueError:pass
@@ -30,7 +34,8 @@ if result['source']['cadastro']:
 assert result['source']['official']['status']=='human_required'
 assert 'debt_amount' not in result['source']
 assert req('answer',{'question':'payments','value':'yes','revision':0},cookie)[0]==422
-for k in result['questions']:
+while not result['plan']['complete']:
+ k=next(k for k in result['questions'] if k not in result['answers'])
  v='yes' if k=='identity' else 'unknown'
  code,result,_=req('answer',{'question':k,'value':v,'revision':result['revision']},cookie)
  assert code==200,(code,result)

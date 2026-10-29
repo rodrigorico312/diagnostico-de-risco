@@ -18,7 +18,7 @@ def health():
  with db() as c: c.execute('SELECT 1')
  return {'ok':True,'service':'mei-triage','version':'1.0.0'}
 def view(row):
- return {'cnpj':row['cnpj'],'state':row['state'],'source':row['source'],'answers':row['answers'],'revision':row['revision'],'questions':questions(row['source']),'plan':plan(row['answers'],row['source'])}
+ return {'cnpj':row['cnpj'],'state':row['state'],'source':row['source'],'answers':row['answers'],'revision':row['revision'],'questions':questions(row['source'],row['answers']),'plan':plan(row['answers'],row['source'])}
 @app.post('/v1/start')
 async def start(request:Request,response:Response):
  body=await request.json()
@@ -56,7 +56,7 @@ async def answer(request:Request):
   if not row:raise HTTPException(404,'A consulta expirou. Informe o CNPJ novamente.')
   if row['state']!='ready':raise HTTPException(409,'Aguarde a consulta terminar.')
   if body.get('revision')!=row['revision']:raise HTTPException(409,'A consulta foi atualizada. Recarregue para continuar.')
-  order=questions(row['source'])
+  order=questions(row['source'],row['answers'])
   if key not in order or any(k not in row['answers'] for k in order[:order.index(key)]):raise HTTPException(422,'Responda a etapa anterior.')
   answers={k:v for k,v in row['answers'].items() if k in order[:order.index(key)]}
   answers[key]=value
