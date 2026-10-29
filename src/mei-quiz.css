@@ -1,6 +1,7 @@
 .mq {
   --mq-blue: #163f68;
   --mq-ink: #152f47;
+  min-height: 100vh;
   min-height: 100dvh;
   background: #f6f8fa;
   color: var(--mq-ink);
@@ -24,8 +25,8 @@
 .mq-header { height: 88px; max-width: 1120px; padding: 20px 28px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .mq-header img { width: 170px; height: auto; display: block; }
 .mq-tools { position: relative; z-index: 2; }
-.mq-tools > summary { padding: 10px 8px; font-size: 14px; color: #516575; text-decoration: underline; text-underline-offset: 4px; }
-.mq-tools-panel { position: absolute; top: 52px; right: 0; width: min(360px, calc(100vw - 40px)); max-height: 72dvh; overflow-y: auto; background: white; border: 1px solid #d5dfe7; border-radius: 12px; padding: 24px; box-shadow: 0 12px 36px #17394e14; }
+.mq-tools > summary { display: flex; align-items: center; min-height: 44px; min-width: 44px; padding: 10px 8px; font-size: 14px; color: #516575; text-decoration: underline; text-underline-offset: 4px; }
+.mq-tools-panel { position: absolute; top: 52px; right: 0; width: min(360px, calc(100vw - 40px)); max-height: min(72vh, calc(100vh - 100px)); max-height: min(72dvh, calc(100dvh - 100px)); overflow-y: auto; overscroll-behavior: contain; background: white; border: 1px solid #d5dfe7; border-radius: 12px; padding: 24px; box-shadow: 0 12px 36px #17394e14; }
 .mq .mq-tools-panel h2 { font-size: 18px; margin: 0 0 16px; line-height: 1.4; }
 .mq .mq-tools-panel p { font-size: 14px; margin: 14px 0; }
 .mq-tools-panel dl { margin: 20px 0; }
@@ -34,19 +35,17 @@
 .mq-tools-panel dd { margin: 2px 0 0; }
 .mq-tools-panel nav { display: grid; gap: 2px; margin-top: 20px; }
 .mq-tools-panel nav a, .mq-tools-panel nav button { min-height: 44px; padding: 10px 0; font-size: 14px; text-align: left; background: none; border: 0; color: var(--mq-blue); text-decoration: underline; text-underline-offset: 4px; }
-.mq-main { max-width: 650px; margin: auto; padding: 62px 24px 64px; }
-.mq-card { background: #fff; border: 1px solid #dfe6eb; border-radius: 18px; padding: 40px; }
+.mq-main { width: 100%; min-width: 0; max-width: 650px; margin: auto; padding: 62px 24px max(64px, env(safe-area-inset-bottom)); }
+.mq-card { min-width: 0; background: #fff; border: 1px solid #dfe6eb; border-radius: 18px; padding: 40px; }
 .mq h1 { font-size: 31px; font-weight: 650; line-height: 1.3; letter-spacing: -.65px; margin: 0 0 28px; }
 .mq p { font-size: 16px; color: #516575; margin: 16px 0; }
 .mq-step { display: block; font-size: 13px; color: #516575; margin-bottom: 16px; }
 .mq form { margin-top: 8px; }
-.mq input { width: 100%; min-height: 60px; border: 1px solid #9dafbd; border-radius: 9px; padding: 14px 16px; color: var(--mq-ink); background: #fff; font-size: 20px; letter-spacing: .6px; }
+.mq input { width: 100%; min-width: 0; max-width: 100%; min-height: 60px; border: 1px solid #9dafbd; border-radius: 9px; padding: 14px 16px; color: var(--mq-ink); background: #fff; font-size: 20px; letter-spacing: .6px; }
 .mq input::placeholder { color: #617583; opacity: 1; }
 .mq-primary { width: 100%; min-height: 56px; margin-top: 20px; padding: 16px 22px; background: var(--mq-blue); color: #fff; border: 0; border-radius: 9px; font-size: 16px !important; font-weight: 600 !important; }
-.mq-primary:hover { background: #0e3154; }
 .mq-choices { display: grid; gap: 12px; margin-top: 28px; }
 .mq-choices button { padding: 17px 20px; min-height: 60px; border: 1px solid #b7c7d3; border-radius: 9px; background: #fff; color: #173b5a; font-size: 16px; font-weight: 550; text-align: left; }
-.mq-choices button:hover { background: #f1f6fa; border-color: #315d7e; }
 .mq-choices button[aria-pressed=true] { background: #eaf2f8; border: 2px solid #315d7e; padding: 16px 19px; }
 .mq-company { padding: 20px; background: #f5f8fa; border-radius: 10px; margin: 0 0 28px; }
 .mq-company h2 { font-size: 18px; font-weight: 600; line-height: 1.5; margin: 0 0 10px; overflow-wrap: anywhere; }
@@ -63,10 +62,9 @@
 .mq-plan { margin: 24px 0 12px; }
 .mq-plan-step { padding: 18px 0; border-bottom: 1px solid #dfe6eb; }
 .mq-plan-step:first-child { padding-top: 0; }
-.mq-plan-step summary { display: flex; align-items: baseline; gap: 10px; }
+.mq-plan-step summary { min-height: 44px; display: flex; align-items: baseline; gap: 10px; }
 .mq-plan-step summary > span { font-size: 16px; font-weight: 600; color: #516575; }
 .mq .mq-plan-step h2 { font-size: 18px; font-weight: 600; line-height: 1.5; margin: 0; }
-.mq-plan-step summary:hover h2 { text-decoration: underline; text-underline-offset: 4px; }
 .mq-plan-step > div { padding-left: 25px; }
 .mq-plan-step p, .mq-plan-step a { font-size: 15px; }
 .mq-review, .mq-optional { font-size: 14px; margin-top: 18px; }
@@ -77,7 +75,7 @@
 .mq-answer button { justify-self: start; min-height: 44px; background: none; border: 0; padding: 10px 0; color: var(--mq-blue); font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
 .mq-error { margin-top: 18px; padding: 16px; background: #fff3ed; color: #8b3721; border: 1px solid #e8c5b7; border-radius: 10px; font-size: 15px; }
 @media (max-width: 600px) {
- .mq-header { height: 78px; padding: 16px 20px; }
+ .mq-header { height: 78px; padding: 16px max(20px, env(safe-area-inset-right)) 16px max(20px, env(safe-area-inset-left)); }
  .mq-header img { width: 145px; }
  .mq-main { padding: 28px 16px 40px; }
  .mq-card { padding: 28px 24px; border-radius: 14px; }
@@ -87,4 +85,28 @@
  .mq-company { padding: 18px; }
  .mq-company h2 { font-size: 17px; }
  .mq-tools-panel { right: 0; }
+}
+
+/* Keep touch targets and secondary content usable across phones, tablets and split views. */
+.mq-tools-panel, .mq-answer, .mq-error, .mq-plan-step { overflow-wrap: anywhere; }
+.mq-question-tools > *, .mq-plan-step summary > h2 { min-width: 0; }
+@media (hover: hover) and (pointer: fine) {
+.mq-primary:hover { background: #0e3154; }
+.mq-choices button:hover { background: #f1f6fa; border-color: #315d7e; }
+.mq-plan-step summary:hover h2 { text-decoration: underline; text-underline-offset: 4px; }
+}
+@media (min-width: 601px) and (max-width: 1100px) {
+ .mq-main { padding-top: 48px; }
+ .mq-card { padding: 36px; }
+}
+@media (max-width: 359px) {
+ .mq-card { padding: 24px 18px; }
+ .mq-question-tools { gap: 8px 12px; }
+ .mq-question-help { min-width: 0; flex: 1 1 140px; }
+ .mq-company p { font-size: 14px; letter-spacing: 0; }
+}
+@media (max-height: 600px) {
+ .mq-header { height: auto; min-height: 64px; padding-top: 10px; padding-bottom: 10px; }
+ .mq-main { padding-top: 20px; padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+ .mq-card { padding-top: 24px; padding-bottom: 24px; }
 }
