@@ -29,6 +29,8 @@ function addressLines(value?:Address|null){
 }
 export default function MeiQuizPage(){
  const [cnpj,setCnpj]=useState(''),[current,setCurrent]=useState<Case|null>(null),[busy,setBusy]=useState(true),[error,setError]=useState(''),[editing,setEditing]=useState<string|null>(null),[slow,setSlow]=useState(false);
+ const [copyState,setCopyState]=useState<'idle'|'copied'|'failed'>('idle');
+ const copyFallback=useRef<HTMLInputElement>(null);
  const alive=useRef(true), epoch=useRef(0),heading=useRef<HTMLHeadingElement>(null);
  usePageSeo({title:'Consulta guiada do MEI | Nacional Contabilidade',description:'Informe o CNPJ, confirme os dados e encontre os próximos passos para organizar a situação do MEI. Gratuito, sem cadastro.',path:'/guia-mei'});
  useEffect(()=>{alive.current=true;const version=epoch.current;api('current').then(async d=>{if(!alive.current||epoch.current!==version)return;if(d.needs_refresh)d=await api('start',{cnpj:d.cnpj});if(alive.current&&epoch.current===version){setCurrent(d);setCnpj(d.cnpj);}}).catch(e=>{if(e.status!==404&&alive.current)setError(e.message);}).finally(()=>{if(alive.current)setBusy(false);});return()=>{alive.current=false;};},[]);
@@ -40,6 +42,9 @@ export default function MeiQuizPage(){
  },[current?.state,current?.cnpj]);
  const order=current?.questions||[], next=order.find(k=>!current?.answers[k]),active=editing||next, q=active?questionData[active]:null;
  useEffect(()=>{if(current?.state==='ready')heading.current?.focus();},[active,current?.state]);
+ useEffect(()=>{setCopyState('idle');},[current?.cnpj,active]);
+ useEffect(()=>{if(copyState==='failed'){copyFallback.current?.focus();copyFallback.current?.select();}},[copyState]);
+ async function copyCnpj(){if(!current)return;try{await navigator.clipboard.writeText(current.cnpj);setCopyState('copied');}catch{setCopyState('failed');}}
  async function start(e:React.FormEvent){e.preventDefault();if(busy)return;setBusy(true);setError('');setSlow(false);epoch.current++;try{const d=await api('start',{cnpj});setCurrent(d);setCnpj(d.cnpj);setEditing(null);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
  async function answer(value:string){if(!current||!active||busy)return;if(active==='identity'&&value==='no'){await reset();return;}setBusy(true);setError('');try{setCurrent(await api('answer',{question:active,value,revision:current.revision}));setEditing(null);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
  async function reset(){if(busy)return;setBusy(true);setError('');epoch.current++;try{await api('delete',{});setCurrent(null);setCnpj('');setEditing(null);setSlow(false);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
@@ -90,7 +95,13 @@ export default function MeiQuizPage(){
     </div>}
     {!data && active === order[0] && <p className="mq-inline-note">Não conseguimos recuperar o cadastro. Responda o que souber ou corrija o CNPJ em “Ajuda”.</p>}
     {active === 'simei_check' && <div className="mq-registry-check">
-     <p>Abra a <a href={OPTANTES} target="_blank" rel="noopener noreferrer">Consulta Optantes da Receita</a>, informe o CNPJ <strong>{format(current.cnpj)}</strong> e procure “Situação no SIMEI”.</p>
+     <button type="button" className="mq-copy-cnpj" onClick={copyCnpj} aria-label={'Copiar CNPJ '+format(current.cnpj)}>
+      <span>{format(current.cnpj)}</span>
+      <small>{copyState==='copied'?'CNPJ copiado':'Clique no CNPJ para copiar'}</small>
+     </button>
+     <span className="mq-visually-hidden" role="status">{copyState==='copied'?'CNPJ copiado':copyState==='failed'?'Não foi possível copiar automaticamente. O CNPJ está selecionado para copiar manualmente.':''}</span>
+     {copyState==='failed' && <div className="mq-copy-fallback"><label htmlFor="cnpj-copy">Copie o CNPJ selecionado:</label><input id="cnpj-copy" ref={copyFallback} readOnly value={current.cnpj} onFocus={e=>e.currentTarget.select()} /></div>}
+     <p>Abra a <a href={OPTANTES} target="_blank" rel="noopener noreferrer">Consulta Optantes da Receita</a>, cole o CNPJ e procure “Situação no SIMEI”.</p>
      <p>Depois, volte aqui e escolha o que apareceu.</p>
     </div>}
     <div className="mq-choices">{q.choices.map(([value, label]) => <button type="button" key={value} disabled={busy} aria-pressed={current.answers[active!] === value} onClick={() => answer(value)}>{label}</button>)}</div>

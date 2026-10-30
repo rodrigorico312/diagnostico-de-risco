@@ -120,3 +120,16 @@
 .mq .mq-registry-check p { font-size: 15px; }
 .mq-registry-check a { display: inline; }
 .mq-registry-check strong { white-space: nowrap; }
+
+.mq-copy-cnpj { width: 100%; min-height: 78px; padding: 16px; border: 1px solid #9dafbd; border-radius: 9px; background: #f5f8fa; color: var(--mq-ink); text-align: left; }
+.mq-copy-cnpj > span { display: block; font-size: 20px; font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
+.mq-copy-cnpj > small { display: block; margin-top: 5px; font-size: 13px; color: var(--mq-blue); }
+.mq-copy-fallback { margin-top: 12px; }
+.mq-copy-fallback label { display: block; margin-bottom: 8px; font-size: 14px; }
+.mq-copy-fallback input { font-size: 18px; letter-spacing: 0; }
+@media (hover: hover) and (pointer: fine) {
+ .mq-copy-cnpj:hover { background: #eaf2f8; border-color: #315d7e; }
+}
+@media (max-width: 359px) {
+ .mq-copy-cnpj > span { font-size: 18px; }
+}
