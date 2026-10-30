@@ -3,6 +3,7 @@ from fastapi import FastAPI,Request,HTTPException,Response
 from psycopg.types.json import Jsonb
 from store import config,db,digest,get_case
 from domain import cnpj_clean,QUESTIONS,questions,plan
+from guidance import question_guidance,answer_feedback
 app=FastAPI(docs_url=None,redoc_url=None,openapi_url=None)
 COOKIE='__Host-mei-session'
 @app.middleware('http')
@@ -20,7 +21,7 @@ def health():
 def view(row):
  answers={k:v for k,v in row['answers'].items() if k in QUESTIONS}
  needs_refresh=row['state']=='ready' and row['source'].get('schema_version',0)<2
- return {'cnpj':row['cnpj'],'state':row['state'],'source':row['source'],'answers':answers,'revision':row['revision'],'questions':questions(row['source'],answers),'plan':plan(answers,row['source']),'needs_refresh':needs_refresh}
+ return {'cnpj':row['cnpj'],'state':row['state'],'source':row['source'],'answers':answers,'revision':row['revision'],'questions':questions(row['source'],answers),'plan':plan(answers,row['source']),'needs_refresh':needs_refresh,'guidance':question_guidance(),'feedback':{k:answer_feedback(k,v,answers) for k,v in answers.items()}}
 @app.post('/v1/start')
 async def start(request:Request,response:Response):
  body=await request.json()
@@ -77,3 +78,13 @@ def delete(request:Request,response:Response):
  with db() as c:c.execute('DELETE FROM mei_cases WHERE sid=%s',(digest(request.cookies.get(COOKIE,'')),))
  response.delete_cookie(COOKIE,path='/',secure=True,httponly=True,samesite='lax')
  return {'deleted':True}
+
+@app.get('/v1/pdf')
+def pdf(request:Request):
+ with db() as c:
+  row=get_case(c,request.cookies.get(COOKIE))
+  if not row:raise HTTPException(404,'A consulta expirou. Informe o CNPJ novamente.')
+  result=view(row)
+  if row['state']!='ready' or not result['plan']['complete']:raise HTTPException(409,'Conclua as perguntas para baixar seu plano.')
+ from plan_pdf import build_pdf
+ return Response(build_pdf(row,result['plan']),media_type='application/pdf',headers={'Content-Disposition':'attachment; filename="meu-plano-mei.pdf"'})

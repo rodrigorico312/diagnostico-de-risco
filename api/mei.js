@@ -1,5 +1,5 @@
 import { createHmac } from 'node:crypto';
-const routes = {start:['POST','start'],current:['GET','current'],answer:['POST','answer'],delete:['POST','delete']};
+const routes = {start:['POST','start'],current:['GET','current'],answer:['POST','answer'],delete:['POST','delete'],pdf:['GET','pdf']};
 const origins = new Set(['https://www.nacionalcon.com','https://nacionalcon.com']);
 export default async function handler(req,res) {
  res.setHeader('Cache-Control','private, no-store');
@@ -26,7 +26,14 @@ export default async function handler(req,res) {
   });
   const cookies=response.headers.getSetCookie();
   if(cookies.length)res.setHeader('Set-Cookie',cookies);
+  if(route[1]==='pdf' && response.status===200){
+   if(!(response.headers.get('content-type')||'').startsWith('application/pdf'))throw Error('Invalid PDF response');
+   const bytes=Buffer.from(await response.arrayBuffer());
+   if(bytes.length>4000000||bytes.subarray(0,5).toString()!=='%PDF-')throw Error('Invalid PDF data');
+   res.setHeader('Content-Type','application/pdf');res.setHeader('Content-Disposition','attachment; filename="meu-plano-mei.pdf"');
+   return res.status(200).send(bytes);
+  }
   const result=await response.json();
   return res.status(response.status).json(result);
- } catch { return res.status(502).json({detail:'Não foi possível consultar agora. Seus dados não foram considerados quitados. Tente novamente.'}); }
+ } catch { return res.status(502).json({detail:'Não foi possível carregar agora. Tente novamente em instantes.'}); }
 }

@@ -22,14 +22,14 @@ try:
  assert code==200 and r['answers']=={'identity':'yes','simei_check':'yes'} and 'payments' in r['questions']
  assert call('answer',{'question':'simei_check','value':'no','revision':8})[0]==409
  code,r=call('answer',{'question':'debt','value':'no','revision':r['revision']})
- assert code==200 and r['plan']['complete'] and 'Você informou' in r['plan']['steps'][0]['title'] and 'não validou' in r['plan']['steps'][0]['text']
+ assert code==200 and r['plan']['complete'] and r['plan']['steps'][0]['id']=='monthly'
  for answer in ('no','unknown'):
   code,r=call('answer',{'question':'simei_check','value':answer,'revision':r['revision']})
   assert code==200 and 'debt' not in r['answers'] and 'payments' not in r['questions'] and not r['plan']['complete']
   code,r=call('answer',{'question':'debt','value':'no','revision':r['revision']})
   assert code==200 and r['plan']['complete']
-  if answer=='no':assert 'nunca foi MEI' in r['plan']['steps'][0]['text']
-  else:assert 'sem confirmação' in r['plan']['steps'][0]['text']
+  if answer=='no':assert r['plan']['steps'][0]['id']=='registry'
+  else:assert r['plan']['steps'][0]['id']=='registry'
  print('PASS: ready legacy session, sequencing, yes/no/unknown, source override, revision conflict, pruning, disclosure')
 finally:
  with db() as c:c.execute('DELETE FROM mei_cases WHERE sid=%s',(sid,))

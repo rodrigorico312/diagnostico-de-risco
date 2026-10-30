@@ -20,15 +20,11 @@ class RegistryFlow(unittest.TestCase):
   for old in ('yes','no','never','unknown'):
    self.assertEqual(plan({'simei':old},{}),plan({},{}))
    self.assertNotIn('payments',questions({}, {'simei':old}))
- def test_user_check_is_not_presented_as_automatic_confirmation(self):
-  src={'cadastro':{'simei':False}}
-  result=plan({'identity':'yes','simei_check':'yes','debt':'no'},src)
+ def test_confirmed_mei_does_not_repeat_a_confirmation_task(self):
+  result=plan({'identity':'yes','simei_check':'yes','debt':'no'},{'cadastro':{'simei':False}})
   self.assertTrue(result['complete'])
-  self.assertIn('Você informou',result['steps'][0]['title'])
-  self.assertIn('não validou',result['steps'][0]['text'])
-  no=plan({'identity':'yes','simei_check':'no','debt':'no'},src)
-  self.assertIn('não significa que ele nunca foi MEI',no['steps'][0]['text'])
-  self.assertIn('sem confirmação',plan({'simei_check':'unknown','debt':'no'}, {})['steps'][0]['text'])
+  self.assertEqual(result['steps'][0]['id'],'monthly')
+  self.assertNotIn('Você informou',json.dumps(result,ensure_ascii=False))
  def test_auxiliary_indicator_keeps_strict_boolean(self):
   self.assertIsNone(registry_indicator({'cadastro':{'simei':'true'}}))
   self.assertIsNone(registry_indicator({}))

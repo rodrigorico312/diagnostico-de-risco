@@ -133,3 +133,22 @@
 @media (max-width: 359px) {
  .mq-copy-cnpj > span { font-size: 18px; }
 }
+
+.mq-learning { margin-top: 20px; }
+.mq-howto { border-top: 1px solid #dfe6eb; padding: 10px 0; }
+.mq-howto > summary { min-height: 44px; padding: 10px 0; color: var(--mq-blue); font-size: 15px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.mq-guide-content { overflow-wrap: anywhere; }
+.mq-instructions { padding-left: 22px; margin: 18px 0; }
+.mq-instructions li { padding-left: 4px; margin: 0 0 18px; font-size: 15px; line-height: 1.7; color: #324e62; }
+.mq .mq-guide-note, .mq .mq-example { font-size: 14px; line-height: 1.7; }
+.mq .mq-example { padding: 14px 16px; border-left: 3px solid #b2975b; background: #f6f8fa; }
+.mq-table-wrap { max-width: 100%; margin: 20px 0; overflow-x: auto; }
+.mq-table-wrap table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.mq-table-wrap th, .mq-table-wrap td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #dfe6eb; }
+.mq-table-wrap th { background: #eaf2f8; font-weight: 600; }
+.mq-portal-links, .mq-sources ul { padding-left: 20px; font-size: 14px; }
+.mq-portal-links li, .mq-sources li { margin: 12px 0; }
+.mq-sources { font-size: 14px; margin-top: 18px; }
+.mq-sources > summary { color: var(--mq-blue); text-decoration: underline; text-underline-offset: 4px; min-height: 44px; padding: 10px 0; }
+.mq .mq-sources p { font-size: 14px; }
+@media (max-width: 600px) { .mq-plan-step > .mq-guide-content { padding-left: 0; } }

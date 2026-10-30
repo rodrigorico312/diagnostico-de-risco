@@ -3,14 +3,18 @@ import { usePageSeo } from './usePageSeo';
 import './mei-quiz.css';
 type Address = {street_type:string|null;street:string|null;number:string|null;complement:string|null;neighborhood:string|null;city:string|null;state:string|null;postal_code:string|null};
 type Cadastro = {cnpj:string;name:string;opened_at:string|null;address?:Address|null;status:string|null;simei:boolean|null;provider:string;url:string;reference_date:string|null};
-type Case = {needs_refresh?:boolean;cnpj:string;state:string;source:{cadastro?:Cadastro|null;cadastro_status?:string;checked_at?:string;official?:{status:string;url:string}};answers:Record<string,string>;revision:number;questions:string[];plan:{title:string;scope?:string;complete:boolean;steps:{title:string;text:string;url:string}[]}};
+type PortalLink = {label:string;url:string};
+type Guide = {id?:string;title:string;text:string;instructions?:{text:string;link?:PortalLink}[];notes?:string[];example?:string;table?:{headers:string[];rows:string[][]};links?:PortalLink[];url?:string};
+type Case = {guidance?:Record<string,{intro:string;cards:Guide[]}>;feedback?:Record<string,Guide|null>;needs_refresh?:boolean;cnpj:string;state:string;source:{cadastro?:Cadastro|null;cadastro_status?:string;checked_at?:string;official?:{status:string;url:string}};answers:Record<string,string>;revision:number;questions:string[];plan:{title:string;scope?:string;complete:boolean;steps:Guide[];sources?:PortalLink[];reviewed_at?:string;content_version?:number}};
 const OPTANTES='https://consopt.www8.receita.fazenda.gov.br/consultaoptantes';
 const questionData:Record<string,{title:string;help:string;choices:[string,string][]}>= {
  simei_check:{title:'Este CNPJ é MEI hoje?',help:'Veja a linha “Situação no SIMEI”. “Optante pelo SIMEI” significa que é MEI. Ser optante apenas pelo Simples Nacional não basta para confirmar MEI. Se o portal não abrir ou você não conseguir conferir, escolha “Ainda não consegui verificar”.',choices:[['yes','Sim, aparece “Optante pelo SIMEI”'],['no','Não, aparece “Não optante pelo SIMEI”'],['unknown','Ainda não consegui verificar']]},
  identity:{title:'É esta a empresa?',help:'',choices:[['yes','Sim, é esta empresa'],['no','Corrigir CNPJ']]},
- debt:{title:'Há dívidas em aberto?',help:'A consulta cadastral não mostra dívidas. Se ainda não conferiu as guias nos portais, escolha “Não sei”.',choices:[['yes','Sim'],['no','Não, já conferi'],['unknown','Não sei']]},
- installment:{title:'Tem parcelamento do MEI?',help:'Parcelas de um acordo e DAS mensal corrente precisam ser conferidos separadamente. Este quiz não acessa o seu acordo.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei']]},
- lawsuit:{title:'Há processo judicial sobre a dívida?',help:'Se um profissional cuida de algum processo, confira com ele. A existência de ação pode mudar as providências necessárias.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei']]},
+ debt_period:{title:'Quando essas guias venciam?',help:'Use o vencimento original, não a data de uma guia atualizada. Confira no extrato e escolha Não sei se ainda não separou os períodos.',choices:[['before','Até 13/10/2026'],['after','Depois de 13/10/2026'],['both','Há vencimentos antes e depois'],['unknown','Ainda não sei']]},
+ installment_channel:{title:'Onde foi feito o parcelamento?',help:'Veja o órgão no comprovante do acordo. Receita Federal e PGFN têm canais de consulta diferentes.',choices:[['rfb','Na Receita Federal'],['pgfn','Na PGFN / Regularize'],['both','Tenho acordos nos dois'],['unknown','Ainda não sei']]},
+ debt:{title:'Há dívidas em aberto?',help:'Confira as instruções abaixo para consultar a Receita e a PGFN. Se uma consulta ainda está faltando, escolha “Não sei”.',choices:[['yes','Sim'],['no','Não, já conferi'],['unknown','Não sei']]},
+ installment:{title:'Tem parcelamento do MEI?',help:'Parcelas de um acordo e DAS mensal corrente precisam ser conferidos separadamente. A prestação do acordo paga uma dívida antiga.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei']]},
+ lawsuit:{title:'Há processo judicial sobre a dívida?',help:'Se um profissional cuida de algum processo, confira com ele. Uma ação sua para discutir a dívida e uma execução fiscal têm procedimentos diferentes.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei']]},
  payments:{title:'As guias mensais atuais estão em dia?',help:'Considere as guias correntes, sem confundir com parcelas de acordo. A resposta ajuda a organizar sua conferência.',choices:[['yes','Sim'],['no','Há guias atrasadas'],['unknown','Ainda não conferi']]},
 };
 async function api(op:string,body?:unknown):Promise<Case> {
@@ -27,8 +31,20 @@ function addressLines(value?:Address|null){
  const postal=value.postal_code?.length===8?value.postal_code.slice(0,5)+'-'+value.postal_code.slice(5):value.postal_code;
  return [first,value.complement,value.neighborhood,[city,postal?'CEP '+postal:null].filter(Boolean).join(' · ')].filter((v):v is string=>Boolean(v));
 }
+function GuideContent({guide}:{guide:Guide}){
+ return <div className="mq-guide-content">
+  <p>{guide.text}</p>
+  {!!guide.instructions?.length && <ol className="mq-instructions">{guide.instructions.map((item,i)=><li key={i}>{item.link && <><a href={item.link.url} target="_blank" rel="noopener noreferrer">{item.link.label}</a>. </>}{item.text}</li>)}</ol>}
+  {guide.example && <p className="mq-example"><strong>Exemplo:</strong> {guide.example}</p>}
+  {guide.table && <div className="mq-table-wrap"><table><thead><tr>{guide.table.headers.map(h=><th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{guide.table.rows.map((row,i)=><tr key={i}>{row.map((cell,j)=><td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>}
+  {guide.notes?.map((text,i)=><p className="mq-guide-note" key={i}>{text}</p>)}
+  {!!guide.links?.length && <ul className="mq-portal-links">{guide.links.map(link=><li key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a></li>)}</ul>}
+  {!guide.instructions && guide.url && <a href={guide.url} target="_blank" rel="noopener noreferrer">Consultar no portal</a>}
+ </div>;
+}
 export default function MeiQuizPage(){
  const [cnpj,setCnpj]=useState(''),[current,setCurrent]=useState<Case|null>(null),[busy,setBusy]=useState(true),[error,setError]=useState(''),[editing,setEditing]=useState<string|null>(null),[slow,setSlow]=useState(false);
+ const [feedback,setFeedback]=useState<Guide|null>(null),[pdfBusy,setPdfBusy]=useState(false);
  const [copyState,setCopyState]=useState<'idle'|'copied'|'failed'>('idle');
  const copyFallback=useRef<HTMLInputElement>(null);
  const alive=useRef(true), epoch=useRef(0),heading=useRef<HTMLHeadingElement>(null);
@@ -41,14 +57,22 @@ export default function MeiQuizPage(){
   timer=setTimeout(poll,1600);return()=>{stopped=true;clearTimeout(timer);};
  },[current?.state,current?.cnpj]);
  const order=current?.questions||[], next=order.find(k=>!current?.answers[k]),active=editing||next, q=active?questionData[active]:null;
- useEffect(()=>{if(current?.state==='ready')heading.current?.focus();},[active,current?.state]);
+ useEffect(()=>{if(current?.state==='ready')heading.current?.focus();},[active,current?.state,feedback]);
  useEffect(()=>{setCopyState('idle');},[current?.cnpj,active]);
  useEffect(()=>{if(copyState==='failed'){copyFallback.current?.focus();copyFallback.current?.select();}},[copyState]);
  async function copyCnpj(){if(!current)return;try{await navigator.clipboard.writeText(current.cnpj);setCopyState('copied');}catch{setCopyState('failed');}}
  async function start(e:React.FormEvent){e.preventDefault();if(busy)return;setBusy(true);setError('');setSlow(false);epoch.current++;try{const d=await api('start',{cnpj});setCurrent(d);setCnpj(d.cnpj);setEditing(null);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
- async function answer(value:string){if(!current||!active||busy)return;if(active==='identity'&&value==='no'){await reset();return;}setBusy(true);setError('');try{setCurrent(await api('answer',{question:active,value,revision:current.revision}));setEditing(null);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
- async function reset(){if(busy)return;setBusy(true);setError('');epoch.current++;try{await api('delete',{});setCurrent(null);setCnpj('');setEditing(null);setSlow(false);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
- function download(){if(!current)return;const lines=['MINHA CONFERÊNCIA DO MEI',format(current.cnpj),current.source.cadastro?.name||'Identidade não recuperada','Preparada em '+new Date().toLocaleString('pt-BR'),'','Fonte cadastral: '+(current.source.cadastro?.provider||'Não disponível'),'Enquadramento MEI: resposta informada pela pessoa; sem validação automática na Receita','Enquadramento auxiliar: '+(current.source.cadastro?.simei===true?'Indica MEI':current.source.cadastro?.simei===false?'Não indica MEI':'Não informado'),'Abertura: '+date(current.source.cadastro?.opened_at),'Endereço: '+(addressLines(current.source.cadastro?.address).join(', ')||'Não informado pela fonte'),'Valores de dívida: não consultados','',...order.map(k=>questionData[k].title+' '+(questionData[k].choices.find(([v])=>v===current.answers[k])?.[1]||'Não respondida')),'',...current.plan.steps.flatMap(s=>[s.title,s.text,new URL(s.url,window.location.origin).href,'']),current.plan.scope||''];const url=URL.createObjectURL(new Blob(['﻿'+lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='minha-conferencia-mei.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+ async function answer(value:string){if(!current||!active||busy)return;if(active==='identity'&&value==='no'){await reset();return;}setBusy(true);setError('');try{const result=await api('answer',{question:active,value,revision:current.revision});setCurrent(result);setFeedback(result.feedback?.[active]||null);setEditing(null);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+ async function reset(){if(busy)return;setBusy(true);setError('');epoch.current++;try{await api('delete',{});setCurrent(null);setCnpj('');setEditing(null);setFeedback(null);setSlow(false);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+ async function download(){
+  if(pdfBusy)return;setPdfBusy(true);setError('');
+  try{
+   const response=await fetch('/api/mei?op=pdf',{credentials:'same-origin',cache:'no-store'});
+   if(!response.ok){const body=await response.json();throw new Error(body.detail||'Não foi possível preparar seu PDF. Tente novamente.');}
+   if(!response.headers.get('content-type')?.startsWith('application/pdf'))throw new Error('Não foi possível preparar seu PDF. Tente novamente.');
+   const url=URL.createObjectURL(await response.blob());const a=document.createElement('a');a.href=url;a.download='meu-plano-mei.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }catch(e){setError((e as Error).message);}finally{setPdfBusy(false);}
+ }
  const data=current?.source.cadastro;
  return <div className="mq">
   <a className="mq-skip" href="#quiz">Ir para a consulta</a>
@@ -58,13 +82,11 @@ export default function MeiQuizPage(){
     <summary>Ajuda</summary>
     <div className="mq-tools-panel">
      <h2>Sobre esta consulta</h2>
-     <p>Buscamos o cadastro público na BrasilAPI / Minha Receita. Você confere o enquadramento no portal oficial e informa a resposta aqui. As respostas são declaradas por você; este site não valida o MEI nem consulta valores de dívidas na Receita.</p>
+     <p>Este roteiro organiza seus próximos passos a partir das suas respostas. Os dados básicos da empresa vêm da BrasilAPI / Minha Receita. Os extratos e os pagamentos são conferidos nos portais indicados em cada etapa.</p>
      {data && <dl><div><dt>Fonte do cadastro</dt><dd><a href={data.url} target="_blank" rel="noreferrer">{data.provider}</a></dd></div><div><dt>Consulta realizada</dt><dd>{date(current?.source.checked_at)}</dd></div><div><dt>Data-base</dt><dd>{date(data.reference_date)}</dd></div><div><dt>Abertura da empresa</dt><dd>{date(data.opened_at)}</dd></div><div><dt>Situação cadastral</dt><dd>{data.status || 'Não informada'}</dd></div></dl>}
      <p>A sessão expira em 24 horas. Você pode apagar esta conferência ou trocar o CNPJ.</p>
      {current?.plan.scope && <p>{current.plan.scope}</p>}
      <nav aria-label="Ajuda da consulta">
-      <a href="/guia-mei?material=1">Ler o guia completo</a>
-      <a href="/guias/mei/guia-mei-v002.pdf">Baixar o guia em PDF</a>
       <a href="/politica-de-privacidade">Privacidade</a>
       {current && <><button type="button" disabled={busy} onClick={reset}>Trocar CNPJ</button><button type="button" disabled={busy} onClick={reset}>Apagar esta conferência</button></>}
      </nav>
@@ -82,6 +104,11 @@ export default function MeiQuizPage(){
    </section> : ['queued', 'working'].includes(current.state) ? <section className="mq-card" role="status">
     <h1 ref={heading} tabIndex={-1}>Buscando a empresa…</h1>
     {slow && <p>A consulta está demorando um pouco. Aguarde ou tente novamente mais tarde.</p>}
+   </section> : feedback ? <section className="mq-card mq-feedback">
+    <span className="mq-step">Seu próximo passo</span>
+    <h1 ref={heading} tabIndex={-1}>{feedback.title}</h1>
+    <GuideContent guide={feedback} />
+    <button type="button" className="mq-primary" onClick={()=>setFeedback(null)}>Continuar</button>
    </section> : q ? <section className="mq-card" aria-busy={busy}>
     <span className="mq-step">Pergunta {order.indexOf(active!) + 1}</span>
     <h1 ref={heading} tabIndex={-1}>{q.title}</h1>
@@ -104,6 +131,10 @@ export default function MeiQuizPage(){
      <p>Abra a <a href={OPTANTES} target="_blank" rel="noopener noreferrer">Consulta Optantes da Receita</a>, cole o CNPJ e procure “Situação no SIMEI”.</p>
      <p>Depois, volte aqui e escolha o que apareceu.</p>
     </div>}
+    {current.guidance?.[active!] && <div className="mq-learning">
+     <p>{current.guidance[active!].intro}</p>
+     {current.guidance[active!].cards.map(guide=><details className="mq-howto" key={guide.id||guide.title}><summary>{guide.title}</summary><GuideContent guide={guide} /></details>)}
+    </div>}
     <div className="mq-choices">{q.choices.map(([value, label]) => <button type="button" key={value} disabled={busy} aria-pressed={current.answers[active!] === value} onClick={() => answer(value)}>{label}</button>)}</div>
     <div className="mq-question-tools">
      {order.indexOf(active!) > 0 && <button type="button" className="mq-back" disabled={busy} onClick={() => setEditing(order[order.indexOf(active!) - 1])}>Voltar</button>}
@@ -116,13 +147,14 @@ export default function MeiQuizPage(){
     </div>
    </section> : <section className="mq-card mq-result">
     <h1 ref={heading} tabIndex={-1}>{current.plan.title}</h1>
-    <p className="mq-result-scope">Orientação inicial. O resultado não confirma perdão de dívida.</p>
+    <p className="mq-result-scope">Siga as etapas abaixo. Você pode abrir uma por vez e guardar tudo em PDF.</p>
     <div className="mq-plan">{current.plan.steps.map((step, i) => <details className="mq-plan-step" key={step.title} open={i === 0 ? true : undefined}>
      <summary><span>{i + 1}.</span><h2>{step.title}</h2></summary>
-     <div><p>{step.text}</p><a href={step.url} target={step.url.startsWith('https') ? '_blank' : undefined} rel="noreferrer">Abrir orientação</a></div>
+     <GuideContent guide={step} />
     </details>)}</div>
-    <button type="button" className="mq-primary" onClick={download}>Salvar meu plano</button>
-    <details className="mq-review"><summary>Revisar respostas</summary>{order.map(key => <div className="mq-answer" key={key}><strong>{questionData[key].title}</strong><span>{questionData[key].choices.find(([value]) => value === current.answers[key])?.[1]}</span><button type="button" disabled={busy} onClick={() => setEditing(key)}>Corrigir</button></div>)}</details>
+    <button type="button" className="mq-primary" disabled={pdfBusy} onClick={download}>{pdfBusy?'Preparando PDF…':'Baixar meu plano em PDF'}</button>
+    <details className="mq-review"><summary>Revisar respostas</summary>{order.map(key => <div className="mq-answer" key={key}><strong>{questionData[key].title}</strong><span>{questionData[key].choices.find(([value]) => value === current.answers[key])?.[1]}</span><button type="button" disabled={busy} onClick={() => {setFeedback(null);setEditing(key);}}>Corrigir</button></div>)}</details>
+    {current.plan.sources && <details className="mq-sources"><summary>Fontes e atualização</summary><p>Orientações revisadas em {date(current.plan.reviewed_at)}.</p><ul>{current.plan.sources.map(link=><li key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a></li>)}</ul></details>}
     <details className="mq-optional"><summary>Prefere acompanhamento?</summary><p>O guia é gratuito. Se quiser ajuda individual, você pode conhecer o atendimento da Nacional.</p><a href="/solicitar-atendimento?origem=Quiz%20MEI">Conhecer o atendimento</a></details>
    </section>}
    {error && <div className="mq-error" role="alert">{error}</div>}
