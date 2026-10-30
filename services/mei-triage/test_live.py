@@ -40,7 +40,7 @@ while not result['plan']['complete']:
  code,result,_=req('answer',{'question':k,'value':v,'revision':result['revision']},cookie)
  assert code==200,(code,result)
 assert result['plan']['complete']
-assert req('answer',{'question':'simei','value':'yes','revision':0},cookie)[0]==409
+assert req('answer',{'question':'debt','value':'yes','revision':0},cookie)[0]==409
 code,revised,_=req('answer',{'question':result['questions'][0],'value':'yes' if result['questions'][0]=='identity' else 'unknown','revision':result['revision']},cookie)
 assert code==200 and len(revised['answers'])==1
 # Independent visitor obtains no other visitor's answers.

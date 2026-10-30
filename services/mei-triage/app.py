@@ -18,7 +18,9 @@ def health():
  with db() as c: c.execute('SELECT 1')
  return {'ok':True,'service':'mei-triage','version':'1.0.0'}
 def view(row):
- return {'cnpj':row['cnpj'],'state':row['state'],'source':row['source'],'answers':row['answers'],'revision':row['revision'],'questions':questions(row['source'],row['answers']),'plan':plan(row['answers'],row['source'])}
+ answers={k:v for k,v in row['answers'].items() if k in QUESTIONS}
+ needs_refresh=row['state']=='ready' and row['source'].get('schema_version',0)<2
+ return {'cnpj':row['cnpj'],'state':row['state'],'source':row['source'],'answers':answers,'revision':row['revision'],'questions':questions(row['source'],answers),'plan':plan(answers,row['source']),'needs_refresh':needs_refresh}
 @app.post('/v1/start')
 async def start(request:Request,response:Response):
  body=await request.json()
@@ -30,7 +32,13 @@ async def start(request:Request,response:Response):
  with db() as c:
   c.execute('SELECT pg_advisory_xact_lock(8793001)')
   old=get_case(c,token,True)
-  if old and old['cnpj']==cnpj:return view(old)
+  if old and old['cnpj']==cnpj:
+   if old['state']!='ready' or old['source'].get('schema_version',0)>=2:return view(old)
+   queue=c.execute("SELECT count(*) AS n FROM mei_cases WHERE state IN ('queued','working') AND expires_at>now()").fetchone()['n']
+   if queue>=80:raise HTTPException(429,'Muitas consultas neste momento. Tente novamente mais tarde.')
+   refreshed=c.execute("UPDATE mei_cases SET state='queued',source='{}',answers='{}',attempts=0,lease_token=NULL,lease_until=NULL,revision=revision+1 WHERE sid=%s RETURNING *",(old['sid'],)).fetchone()
+   response.status_code=202
+   return view(refreshed)
   count=c.execute("SELECT count(*) AS n FROM mei_cases WHERE client_hash=%s AND created_at>now()-interval '1 hour'",(client,)).fetchone()['n']
   queue=c.execute("SELECT count(*) AS n FROM mei_cases WHERE state IN ('queued','working') AND expires_at>now()").fetchone()['n']
   if count>=15 or queue>=80:raise HTTPException(429,'Muitas consultas neste momento. Tente novamente mais tarde.')
@@ -50,6 +58,7 @@ def current(request:Request):
 async def answer(request:Request):
  body=await request.json()
  key,value=body.get('question'),body.get('value')
+ if key=='simei':raise HTTPException(409,'A consulta foi atualizada. Recarregue a página para continuar com os dados consultados automaticamente.')
  if key not in QUESTIONS or value not in QUESTIONS[key]:raise HTTPException(422,'Resposta inválida.')
  with db() as c:
   row=get_case(c,request.cookies.get(COOKIE),True)

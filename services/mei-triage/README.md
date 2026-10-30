@@ -11,8 +11,8 @@ Status: API e worker Python na VPS; consulta cadastral auxiliar real. NÃO há c
 - Credenciais novas em /etc/nacional-mei/secrets.cred, criptografadas com systemd-creds/host; LoadCredentialEncrypted nas unidades. Não incluir valores no repositório.
 
 ## Fontes e limites
-Teste normal com Chrome154, Playwright1.64.1, usuário Unix separado, contexto novo, sandbox ativo: Consulta Optantes devolveu explicitamente “Impedido por proteção Captcha. Comportamento de Robô”. Não repetir tentativas automáticas, resolver/burlar desafio nem usar sessão privada compartilhada. O conector oficial está suspenso. Usuário abre o portal e declara o que conferiu.
-BrasilAPI/Minha Receita preenche apenas CNPJ, razão social, abertura, situação e indicador auxiliar MEI. Data-base desconhecida é declarada, não substituída pela data da consulta. Só campos permitidos são gravados; sócios, CPF, telefone, endereço não são persistidos. CNPJ divergente descarta retorno. Falha ou404 não representa zero dívida nem empresa inexistente. Formato alfanumérico validado conforme documentação RFB; provedor auxiliar ainda numérico, demais casos seguem com perguntas e limite expresso.
+Teste normal com Chrome154, Playwright1.64.1, usuário Unix separado, contexto novo, sandbox ativo: Consulta Optantes devolveu explicitamente “Impedido por proteção Captcha. Comportamento de Robô”. Não repetir tentativas automáticas, resolver/burlar desafio nem usar sessão privada compartilhada. O conector oficial está suspenso. Desde a revisão de 30/10, o sistema usa o indicador auxiliar identificado para orientar as perguntas; não pede autodeclaração de enquadramento. A confirmação oficial permanece pendente.
+BrasilAPI/Minha Receita preenche apenas CNPJ, razão social, abertura, situação e indicador auxiliar MEI. Data-base desconhecida é declarada, não substituída pela data da consulta. Só campos permitidos são gravados; sócios, CPF e telefone não são persistidos. Endereço cadastral estruturado foi incluído por pedido expresso do usuário em 30/10, limitado a logradouro/tipo, número, complemento, bairro, município, UF e CEP. Campos ausentes permanecem ausentes; endereço incompleto é identificado como parcial. CNPJ divergente descarta retorno. Falha ou404 não representa zero dívida nem empresa inexistente. Formato alfanumérico validado conforme documentação RFB; conector atual limitado a CNPJ numérico, demais casos seguem com perguntas e limite expresso.
 Plano não avalia direito definitivo à remissão nem recomenda cancelar acordos. Não há apuração de saldos, emissão deDAS nem acesso aPGMEI/Regularize autenticado. Integração completa permanece pendente de canal permitido/autorizado para essas fontes.
 
 ## Operação
@@ -32,3 +32,8 @@ Não existe backup externo automatizado configurado por esta entrega. Dados são
 - https://brasilapi.com.br/docs#tag/CNPJ
 - https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/documentos-tecnicos/cnpj
 - https://consopt.www8.receita.fazenda.gov.br/consultaoptantes
+
+## Revisão de cadastro v004 — 30/10/2026
+A confirmação exibe razão social, CNPJ, abertura e endereço disponível. O indicador MEI é recuperado da fonte auxiliar e qualificado como preliminar, com confirmação oficial pendente. A pergunta manual simei foi retirada; respostas antigas a ela são ignoradas. Nenhuma conclusão de “nunca foi MEI” é inferida por opção falsa/ausente.
+Resultados carregam source.schema_version=2. GET current sinaliza needs_refresh em casos antigos; ao retomar, o frontend pede POST start para o mesmo CNPJ e o serviço renova somente uma vez o caso legado, invalida a revisão anterior e reinicia a confirmação. Trabalhos já na fila não são duplicados; o limite global de fila permanece respeitado.
+Testes adicionais: test_registry_flow.py (normalização e precedência da fonte sobre autodeclaração) e test_registry_refresh.py (renovação de caso antigo com CNPJ fornecido pelo usuário, cobertura oficial pendente).

@@ -15,7 +15,7 @@ def get_case(conn,token,lock=False):
 def claim():
  with db() as c:
   c.execute('DELETE FROM mei_cases WHERE expires_at<now()')
-  c.execute("UPDATE mei_cases SET state='ready',source=%s,lease_token=NULL,lease_until=NULL WHERE state='working' AND lease_until<now() AND attempts>=3",(Jsonb({'official':{'status':'unavailable'},'cadastro':None,'cadastro_status':'unavailable'}),))
+  c.execute("UPDATE mei_cases SET state='ready',source=%s,lease_token=NULL,lease_until=NULL WHERE state='working' AND lease_until<now() AND attempts>=3",(Jsonb({'schema_version':2,'official':{'status':'unavailable'},'cadastro':None,'cadastro_status':'unavailable'}),))
   row=c.execute("SELECT sid,cnpj FROM mei_cases WHERE expires_at>now() AND attempts<3 AND (state='queued' OR (state='working' AND lease_until<now())) ORDER BY created_at FOR UPDATE SKIP LOCKED LIMIT 1").fetchone()
   if not row:return None
   lease=str(uuid.uuid4())

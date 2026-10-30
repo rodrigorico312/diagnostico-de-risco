@@ -110,3 +110,10 @@
  .mq-main { padding-top: 20px; padding-bottom: max(28px, env(safe-area-inset-bottom)); }
  .mq-card { padding-top: 24px; padding-bottom: 24px; }
 }
+
+.mq-company-details { margin: 22px 0 0; }
+.mq-company-details > div { margin-top: 16px; }
+.mq-company-details dt { font-size: 13px; color: #516575; }
+.mq-company-details dd { margin: 4px 0 0; font-size: 15px; color: #152f47; overflow-wrap: anywhere; }
+.mq-company-details dd > span { display: block; }
+.mq .mq-official-pending { margin-top: 18px; padding-top: 14px; border-top: 1px solid #dfe6eb; font-size: 13px; letter-spacing: 0; }

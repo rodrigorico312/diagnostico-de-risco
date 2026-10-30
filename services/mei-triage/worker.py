@@ -3,9 +3,17 @@ import json,time,logging,urllib.request,urllib.error,datetime
 from store import claim,finish
 from domain import cnpj_clean,OPTANTES
 logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s')
+def clean_text(value,limit=200):
+ return value.strip()[:limit] if isinstance(value,str) and value.strip() else None
+
+def address_from(d):
+ fields={'street_type':'descricao_tipo_de_logradouro','street':'logradouro','number':'numero','complement':'complemento','neighborhood':'bairro','city':'municipio','state':'uf','postal_code':'cep'}
+ result={key:clean_text(d.get(field)) for key,field in fields.items()}
+ return result if any(result.values()) else None
+
 def lookup(cnpj):
  checked=datetime.datetime.now(datetime.timezone.utc).isoformat()
- out={'checked_at':checked,'official':{'status':'human_required','url':OPTANTES,'reason':'O portal exige verificação humana. Consulta automática suspensa após bloqueio explícito no piloto.'},'cadastro':None,'cadastro_status':'unavailable'}
+ out={'schema_version':2,'checked_at':checked,'official':{'status':'human_required','url':OPTANTES,'reason':'O portal exige verificação humana. Consulta automática suspensa após bloqueio explícito no piloto.'},'cadastro':None,'cadastro_status':'unavailable'}
  if not cnpj.isdigit():
   out['cadastro_status']='unsupported_format';return out
  try:
@@ -17,7 +25,7 @@ def lookup(cnpj):
   if cnpj_clean(str(d.get('cnpj','')))!=cnpj:raise ValueError('wrong_cnpj')
   name=d.get('razao_social')
   if not isinstance(name,str) or not name.strip():raise ValueError('missing_identity')
-  out['cadastro']={'cnpj':cnpj,'name':name[:200],'opened_at':d.get('data_inicio_atividade'),'status':d.get('descricao_situacao_cadastral'),'simei':d.get('opcao_pelo_mei') if isinstance(d.get('opcao_pelo_mei'),bool) else None,'simei_since':d.get('data_opcao_pelo_mei'),'simei_until':d.get('data_exclusao_do_mei'),'provider':'BrasilAPI / Minha Receita','url':'https://brasilapi.com.br/docs#tag/CNPJ','reference_date':d.get('data_atualizacao') or d.get('ultima_atualizacao') or None}
+  out['cadastro']={'cnpj':cnpj,'name':name[:200],'opened_at':d.get('data_inicio_atividade'),'address':address_from(d),'status':d.get('descricao_situacao_cadastral'),'simei':d.get('opcao_pelo_mei') if isinstance(d.get('opcao_pelo_mei'),bool) else None,'simei_since':d.get('data_opcao_pelo_mei'),'simei_until':d.get('data_exclusao_do_mei'),'provider':'BrasilAPI / Minha Receita','url':'https://brasilapi.com.br/docs#tag/CNPJ','reference_date':d.get('data_atualizacao') or d.get('ultima_atualizacao') or None}
   out['cadastro_status']='found'
  except urllib.error.HTTPError as e:out['cadastro_status']='not_found' if e.code==404 else 'unavailable'
  except Exception:out['cadastro_status']='unavailable'
