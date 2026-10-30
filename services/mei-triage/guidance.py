@@ -29,6 +29,7 @@ def revenue():
  return card('revenue','Descubra quais guias estão em aberto na Receita',
  'A Receita administra as guias que ainda não foram encaminhadas à cobrança da dívida ativa. Uma guia emitida pode já ter sido paga: confirme no extrato.',
  [step('Procure SIMEI - Serviços ou MEI - Serviços e entre em Cálculo e Declaração > PGMEI - versão completa. Faça a autenticação oferecida pelo portal.','Abrir Portal do Simples Nacional',SIMPLES),
+ step('Se forem pedidos CNPJ, CPF do responsável e código de acesso, use os dados do titular. Código de acesso não é a senha gov.br: se ainda não tiver, procure Solicitar ou alterar código de acesso no próprio portal. Se o serviço oferecer gov.br, entre com a conta do responsável e selecione a empresa.'),
  step('Na versão completa, abra Consulta Extrato/Pendências > Consulta Pendência no SIMEI. Veja os períodos em cobrança e eventuais declarações anuais pendentes.'),
  step('Abra também Consulta Extrato/Pendências > Consulta Extrato. Escolha o ano e veja cada competência, os valores por tributo e a indicação de pagamento. Repita para os anos com pendências.'),
  step('Anote competência, vencimento original, INSS, ICMS e ISS. Use a opção de imprimir o extrato em PDF para guardar o resultado.')],
