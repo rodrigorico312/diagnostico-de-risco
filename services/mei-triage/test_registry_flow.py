@@ -2,16 +2,34 @@ import unittest,json
 from unittest.mock import patch
 from domain import questions,plan,registry_indicator
 from worker import lookup
+
 class RegistryFlow(unittest.TestCase):
- def test_enquadramento_is_not_a_user_question(self):
+ def test_manual_check_is_required_regardless_of_auxiliary_flag(self):
   for flag in (True,False,None):
    src={'cadastro':{'simei':flag}}
-   self.assertNotIn('simei',questions(src))
-   self.assertEqual(questions(src,{'simei':'never'}),questions(src))
-   self.assertEqual(plan({'simei':'never'},src),plan({},src))
- def test_auxiliary_true_can_only_guide_preliminary_questions(self):
-  self.assertIn('payments',questions({'cadastro':{'simei':True}}))
-  self.assertNotIn('payments',questions({'cadastro':{'simei':None}},{'simei':'yes'}))
+   self.assertEqual(questions(src)[:3],['identity','simei_check','debt'])
+   self.assertNotIn('payments',questions(src))
+   self.assertFalse(plan({'identity':'yes','debt':'no'},src)['complete'])
+  self.assertEqual(questions({})[:2],['simei_check','debt'])
+ def test_payment_branch_uses_the_user_check_and_not_auxiliary_flag(self):
+  self.assertIn('payments',questions({'cadastro':{'simei':False}},{'simei_check':'yes'}))
+  for answer in ('no','unknown'):
+   self.assertNotIn('payments',questions({'cadastro':{'simei':True}},{'simei_check':answer}))
+  self.assertNotIn('payments',questions({}, {'simei_check':'yes','debt':'no'}))
+ def test_legacy_declaration_is_not_reused(self):
+  for old in ('yes','no','never','unknown'):
+   self.assertEqual(plan({'simei':old},{}),plan({},{}))
+   self.assertNotIn('payments',questions({}, {'simei':old}))
+ def test_user_check_is_not_presented_as_automatic_confirmation(self):
+  src={'cadastro':{'simei':False}}
+  result=plan({'identity':'yes','simei_check':'yes','debt':'no'},src)
+  self.assertTrue(result['complete'])
+  self.assertIn('Você informou',result['steps'][0]['title'])
+  self.assertIn('não validou',result['steps'][0]['text'])
+  no=plan({'identity':'yes','simei_check':'no','debt':'no'},src)
+  self.assertIn('não significa que ele nunca foi MEI',no['steps'][0]['text'])
+  self.assertIn('sem confirmação',plan({'simei_check':'unknown','debt':'no'}, {})['steps'][0]['text'])
+ def test_auxiliary_indicator_keeps_strict_boolean(self):
   self.assertIsNone(registry_indicator({'cadastro':{'simei':'true'}}))
   self.assertIsNone(registry_indicator({}))
  def test_normalization_keeps_only_requested_business_address(self):

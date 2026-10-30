@@ -58,7 +58,7 @@ def current(request:Request):
 async def answer(request:Request):
  body=await request.json()
  key,value=body.get('question'),body.get('value')
- if key=='simei':raise HTTPException(409,'A consulta foi atualizada. Recarregue a página para continuar com os dados consultados automaticamente.')
+ if key=='simei':raise HTTPException(409,'A consulta foi atualizada. Recarregue a página para conferir o enquadramento no portal e informar sua resposta.')
  if key not in QUESTIONS or value not in QUESTIONS[key]:raise HTTPException(422,'Resposta inválida.')
  with db() as c:
   row=get_case(c,request.cookies.get(COOKIE),True)

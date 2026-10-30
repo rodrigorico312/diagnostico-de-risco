@@ -13,7 +13,7 @@ for _ in range(30):
 try:
  with db() as c:
   c.execute("INSERT INTO mei_cases(sid,cnpj,client_hash,state,source,answers,revision) VALUES (%s,'62560654000127','test-refresh','ready',%s,%s,8)",(sid,Jsonb({'cadastro':{'cnpj':'62560654000127','name':'FIXTURE DE CACHE ANTIGO','simei':True}}),Jsonb({'identity':'yes','simei':'never','debt':'unknown'})))
- code,old=call('current');assert old['needs_refresh'];assert 'simei' not in old['answers'];assert 'simei' not in old['questions']
+ code,old=call('current');assert old['needs_refresh'];assert 'simei' not in old['answers'];assert 'simei_check' in old['questions']
  code,refresh=call('start',{'cnpj':'62560654000127'});assert code==202;assert refresh['revision']==9;assert refresh['answers']=={}
  _,again=call('start',{'cnpj':'62560654000127'});assert again['revision']==9
  for _ in range(40):
@@ -27,8 +27,8 @@ try:
   assert data['cnpj']=='62560654000127';assert data['opened_at'];assert data['address']
   print('verified fields: legal name, CNPJ, opening date, address; indicator:',data['simei'])
   _,confirmed=call('answer',{'question':'identity','value':'yes','revision':fresh['revision']})
-  assert 'simei' not in confirmed['questions']
+  assert 'simei_check' in confirmed['questions']
  assert fresh['source']['official']['status']=='human_required'
- print('PASS: legacy refresh, deduplication, version, no manual MEI question, explicit official pending')
+ print('PASS: legacy refresh, deduplication, version, user-confirmed MEI question, explicit official pending')
 finally:
  with db() as c:c.execute('DELETE FROM mei_cases WHERE sid=%s',(sid,))

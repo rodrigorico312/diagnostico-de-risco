@@ -4,7 +4,9 @@ import './mei-quiz.css';
 type Address = {street_type:string|null;street:string|null;number:string|null;complement:string|null;neighborhood:string|null;city:string|null;state:string|null;postal_code:string|null};
 type Cadastro = {cnpj:string;name:string;opened_at:string|null;address?:Address|null;status:string|null;simei:boolean|null;provider:string;url:string;reference_date:string|null};
 type Case = {needs_refresh?:boolean;cnpj:string;state:string;source:{cadastro?:Cadastro|null;cadastro_status?:string;checked_at?:string;official?:{status:string;url:string}};answers:Record<string,string>;revision:number;questions:string[];plan:{title:string;scope?:string;complete:boolean;steps:{title:string;text:string;url:string}[]}};
+const OPTANTES='https://consopt.www8.receita.fazenda.gov.br/consultaoptantes';
 const questionData:Record<string,{title:string;help:string;choices:[string,string][]}>= {
+ simei_check:{title:'Este CNPJ é MEI hoje?',help:'Veja a linha “Situação no SIMEI”. “Optante pelo SIMEI” significa que é MEI. Ser optante apenas pelo Simples Nacional não basta para confirmar MEI. Se o portal não abrir ou você não conseguir conferir, escolha “Ainda não consegui verificar”.',choices:[['yes','Sim, aparece “Optante pelo SIMEI”'],['no','Não, aparece “Não optante pelo SIMEI”'],['unknown','Ainda não consegui verificar']]},
  identity:{title:'É esta a empresa?',help:'',choices:[['yes','Sim, é esta empresa'],['no','Corrigir CNPJ']]},
  debt:{title:'Há dívidas em aberto?',help:'A consulta cadastral não mostra dívidas. Se ainda não conferiu as guias nos portais, escolha “Não sei”.',choices:[['yes','Sim'],['no','Não, já conferi'],['unknown','Não sei']]},
  installment:{title:'Tem parcelamento do MEI?',help:'Parcelas de um acordo e DAS mensal corrente precisam ser conferidos separadamente. Este quiz não acessa o seu acordo.',choices:[['yes','Sim'],['no','Não'],['unknown','Não sei']]},
@@ -41,7 +43,7 @@ export default function MeiQuizPage(){
  async function start(e:React.FormEvent){e.preventDefault();if(busy)return;setBusy(true);setError('');setSlow(false);epoch.current++;try{const d=await api('start',{cnpj});setCurrent(d);setCnpj(d.cnpj);setEditing(null);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
  async function answer(value:string){if(!current||!active||busy)return;if(active==='identity'&&value==='no'){await reset();return;}setBusy(true);setError('');try{setCurrent(await api('answer',{question:active,value,revision:current.revision}));setEditing(null);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
  async function reset(){if(busy)return;setBusy(true);setError('');epoch.current++;try{await api('delete',{});setCurrent(null);setCnpj('');setEditing(null);setSlow(false);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
- function download(){if(!current)return;const lines=['MINHA CONFERÊNCIA DO MEI',format(current.cnpj),current.source.cadastro?.name||'Identidade não recuperada','Preparada em '+new Date().toLocaleString('pt-BR'),'','Fonte cadastral: '+(current.source.cadastro?.provider||'Não disponível'),'Consulta oficial do Simei: não validada automaticamente','Enquadramento auxiliar: '+(current.source.cadastro?.simei===true?'Indica MEI':current.source.cadastro?.simei===false?'Não indica MEI':'Não informado'),'Abertura: '+date(current.source.cadastro?.opened_at),'Endereço: '+(addressLines(current.source.cadastro?.address).join(', ')||'Não informado pela fonte'),'Valores de dívida: não consultados','',...order.map(k=>questionData[k].title+' '+questionData[k].choices.find(([v])=>v===current.answers[k])?.[1]),'',...current.plan.steps.flatMap(s=>[s.title,s.text,new URL(s.url,window.location.origin).href,'']),current.plan.scope||''];const url=URL.createObjectURL(new Blob(['﻿'+lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='minha-conferencia-mei.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+ function download(){if(!current)return;const lines=['MINHA CONFERÊNCIA DO MEI',format(current.cnpj),current.source.cadastro?.name||'Identidade não recuperada','Preparada em '+new Date().toLocaleString('pt-BR'),'','Fonte cadastral: '+(current.source.cadastro?.provider||'Não disponível'),'Enquadramento MEI: resposta informada pela pessoa; sem validação automática na Receita','Enquadramento auxiliar: '+(current.source.cadastro?.simei===true?'Indica MEI':current.source.cadastro?.simei===false?'Não indica MEI':'Não informado'),'Abertura: '+date(current.source.cadastro?.opened_at),'Endereço: '+(addressLines(current.source.cadastro?.address).join(', ')||'Não informado pela fonte'),'Valores de dívida: não consultados','',...order.map(k=>questionData[k].title+' '+(questionData[k].choices.find(([v])=>v===current.answers[k])?.[1]||'Não respondida')),'',...current.plan.steps.flatMap(s=>[s.title,s.text,new URL(s.url,window.location.origin).href,'']),current.plan.scope||''];const url=URL.createObjectURL(new Blob(['﻿'+lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='minha-conferencia-mei.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
  const data=current?.source.cadastro;
  return <div className="mq">
   <a className="mq-skip" href="#quiz">Ir para a consulta</a>
@@ -51,7 +53,7 @@ export default function MeiQuizPage(){
     <summary>Ajuda</summary>
     <div className="mq-tools-panel">
      <h2>Sobre esta consulta</h2>
-     <p>Buscamos o cadastro público na BrasilAPI / Minha Receita. O enquadramento oficial no MEI e os valores das dívidas precisam ser conferidos nos portais.</p>
+     <p>Buscamos o cadastro público na BrasilAPI / Minha Receita. Você confere o enquadramento no portal oficial e informa a resposta aqui. As respostas são declaradas por você; este site não valida o MEI nem consulta valores de dívidas na Receita.</p>
      {data && <dl><div><dt>Fonte do cadastro</dt><dd><a href={data.url} target="_blank" rel="noreferrer">{data.provider}</a></dd></div><div><dt>Consulta realizada</dt><dd>{date(current?.source.checked_at)}</dd></div><div><dt>Data-base</dt><dd>{date(data.reference_date)}</dd></div><div><dt>Abertura da empresa</dt><dd>{date(data.opened_at)}</dd></div><div><dt>Situação cadastral</dt><dd>{data.status || 'Não informada'}</dd></div></dl>}
      <p>A sessão expira em 24 horas. Você pode apagar esta conferência ou trocar o CNPJ.</p>
      {current?.plan.scope && <p>{current.plan.scope}</p>}
@@ -84,11 +86,13 @@ export default function MeiQuizPage(){
      <dl className="mq-company-details">
       <div><dt>Abertura</dt><dd>{date(data.opened_at)}</dd></div>
       <div><dt>{data.address && (!data.address.street || !data.address.number) ? 'Endereço disponível (parcial)' : 'Endereço'}</dt><dd>{addressLines(data.address).length ? addressLines(data.address).map((line,i)=><span key={i}>{line}</span>) : 'Não informado pela fonte'}</dd></div>
-      <div><dt>Enquadramento preliminar</dt><dd>{data.simei===true?'A base consultada indica MEI':data.simei===false?'A base consultada não indica MEI':'A base não informou o enquadramento'}</dd></div>
      </dl>
-     <p className="mq-official-pending">Confirmação oficial na Receita: pendente.</p>
     </div>}
     {!data && active === order[0] && <p className="mq-inline-note">Não conseguimos recuperar o cadastro. Responda o que souber ou corrija o CNPJ em “Ajuda”.</p>}
+    {active === 'simei_check' && <div className="mq-registry-check">
+     <p>Abra a <a href={OPTANTES} target="_blank" rel="noopener noreferrer">Consulta Optantes da Receita</a>, informe o CNPJ <strong>{format(current.cnpj)}</strong> e procure “Situação no SIMEI”.</p>
+     <p>Depois, volte aqui e escolha o que apareceu.</p>
+    </div>}
     <div className="mq-choices">{q.choices.map(([value, label]) => <button type="button" key={value} disabled={busy} aria-pressed={current.answers[active!] === value} onClick={() => answer(value)}>{label}</button>)}</div>
     <div className="mq-question-tools">
      {order.indexOf(active!) > 0 && <button type="button" className="mq-back" disabled={busy} onClick={() => setEditing(order[order.indexOf(active!) - 1])}>Voltar</button>}
