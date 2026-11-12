@@ -1,8 +1,8 @@
 # Redesign e captação da Nacional — prévia para revisão
 
-**Prévia atual:** teste Tailark simplificado, escolhido por Rodrigo para experimentar. Veja [alterações e validação](teste-tailark.md). A aprovação final continua pendente.
+**Prévia atual:** composição baseada na primeira versão aprovada, com fontes DM Sans/Lora, gráfico azul e refinamentos posteriores. A última correção integra a hero mobile ao gráfico com degradê, retira o retrato em cápsula e o N interno. Veja [direção vigente e validações](ajustes-visuais-rodrigo.md). Disponível na porta 57194; revisão visual desta alteração e publicação continuam pendentes.
 
-**Estado da primeira composição:** Rodrigo rejeitou o layout desta primeira prévia. A composição não está aprovada. O [estudo de repositórios para a próxima revisão](referencias-layout.md) reúne código, demonstrações, condições de reutilização e direção proposta. Os resultados técnicos abaixo não equivalem a aprovação visual ou comercial.
+**Histórico:** a primeira composição foi inicialmente rejeitada; após testar Tailark, Rodrigo recuperou a referência e aprovou sua fonte, copy e gráfico, solicitando os refinamentos registrados. O [estudo de repositórios](referencias-layout.md) e o [teste Tailark](teste-tailark.md) documentam as etapas anteriores. Aprovação visual não autoriza publicação.
 
 Brief recebido em 11/11/2026. Base: `rodrigorico312/diagnostico-de-risco`, commit `54828f0ee158a71cd53676579d38dccec6727222`. Trabalho em `redesign/premium-captacao-20261111`, sem push, merge ou publicação no domínio oficial.
 

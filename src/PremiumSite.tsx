@@ -96,7 +96,6 @@ function FinalCta() {
 function GrowthVisual() {
   return <div className="nc-growth-art" aria-label="Seu começo como MEI, seu próximo passo de estruturação e seu novo momento com a Nacional">
     <div className="nc-art-grid" aria-hidden="true"/><div className="nc-art-orbit" aria-hidden="true"/>
-    <div className="nc-art-top"><span className="nc-official-symbol" aria-hidden="true"><img src="/nacional-contabilidade-logo-topbar.png" alt="" width="620" height="166"/></span></div>
     <div className="nc-art-title">Crescer é uma conquista.<br/><em>Ter direção faz a diferença.</em></div>
     <svg viewBox="0 0 520 210" className="nc-growth-line" aria-hidden="true"><defs><linearGradient id="line-gold"><stop stopColor="#8c7748"/><stop offset="1" stopColor="#ead9aa"/></linearGradient></defs><path d="M22 186H500M22 126H500M22 66H500" stroke="white" strokeOpacity=".08"/><path d="M30 179C104 179 100 146 162 144S215 124 254 123 321 92 351 92 420 32 482 25" fill="none" stroke="url(#line-gold)" strokeWidth="3"/><circle cx="30" cy="179" r="5" fill="#C2A65C"/><circle cx="254" cy="123" r="5" fill="#C2A65C"/><circle cx="482" cy="25" r="7" fill="#ead9aa"/></svg>
     <div className="nc-art-stages"><span>Seu começo<strong>MEI</strong></span><span>Seu próximo passo<strong>Estruturação</strong></span><span>Seu novo momento<strong>Com a Nacional</strong></span></div>
@@ -106,9 +105,10 @@ function GrowthVisual() {
 function Home() {
   return <>
     <section className="nc-hero nc-home-hero"><div className="nc-container nc-home-hero-grid">
-      <div className="nc-hero-heading"><h1>Sua empresa cresceu.<br/><span className="nc-title-with-portrait">É hora de dar <span className="nc-title-portrait" aria-hidden="true"><img src="/rodrigo-coelho.png" width="843" height="1264" alt="" fetchPriority="high"/></span></span><br/><em>o próximo passo.</em></h1></div>
-      <GrowthVisual/>
-      <div className="nc-hero-copy"><p>Da evolução do MEI à contabilidade da sua empresa: orientação próxima para organizar os números e decidir com mais clareza.</p><Actions/><div className="nc-hero-trust"><span><Icon name="check"/> Avaliação inicial gratuita</span><span><Icon name="check"/> Atendimento em todo o Brasil</span></div></div>
+      <div className="nc-hero-heading"><h1>Sua empresa cresceu.<br/>É hora de dar<br/><em>o próximo passo.</em></h1></div>
+      <div className="nc-home-story"><GrowthVisual/>
+        <div className="nc-hero-copy"><p>Da evolução do MEI à contabilidade da sua empresa: orientação próxima para organizar os números e decidir com mais clareza.</p><Actions/><div className="nc-hero-trust"><span><Icon name="check"/> Avaliação inicial gratuita</span><span><Icon name="check"/> Atendimento em todo o Brasil</span></div></div>
+      </div>
     </div></section>
     <section className="nc-section" id="solucoes"><div className="nc-container"><div className="nc-section-heading"><h2>Escolha a contabilidade para<br/>o momento da sua empresa.</h2><p>Reconheça seu cenário e conheça o acompanhamento que faz sentido para o seu negócio.</p></div><div className="nc-services">{premiumServices.map(s => <a className="nc-service" href={s.href} key={s.number}><div><Icon name={s.icon}/><span>{s.number}</span></div><h3>{s.title}</h3><p>{s.text}</p><span className="nc-service-link">Conhecer solução</span></a>)}</div></div></section>
     <section className="nc-mei-feature"><div className="nc-container nc-feature-grid"><div><h2>Seu crescimento merece<br/>mais do que uma dúvida<br/><em>sobre o limite.</em></h2><p>Comece pelo faturamento. Compare suas receitas com o limite do MEI e entenda o que precisa de atenção antes de avaliar a transição.</p></div><a className="nc-calculator-teaser" href="/calculadora-mei"><div className="nc-teaser-label"><Icon name="calculator"/><span>FERRAMENTA GRATUITA</span></div><h3>Seu faturamento<br/>ainda cabe no MEI?</h3><p>Compare o que já faturou e o que prevê receber com o limite do seu ano.</p><div className="nc-teaser-scale" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><div className="nc-teaser-scale-label"><span>Receita acumulada</span><span>Limite do ano</span></div><span className="nc-text-link">Usar a calculadora</span><small>Sem cadastro. Resultado preliminar.</small></a></div></section>

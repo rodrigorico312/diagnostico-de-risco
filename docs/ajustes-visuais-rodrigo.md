@@ -1,5 +1,15 @@
 # Ajustes visuais indicados por Rodrigo
 
+## Correção seguinte — hero contínua no celular
+
+Rodrigo rejeitou a fotografia em cápsula/círculo dentro do título e pediu a retirada do N isolado do card. Essa orientação substitui os dois itens correspondentes da seleção anterior. A marca do cabeçalho permanece.
+
+Aplicado: retrato removido da abertura e N retirado do gráfico, inclusive no desktop. No mobile, o bloco azul deixou de ser um cartão com margem, moldura e sombra. Uma superfície de largura total faz a transição do fundo claro para o azul, reunindo frase, gráfico, etapas, descrição e diagnóstico. Título e fontes aprovados preservados; o CTA usa dourado sobre a área azul para manter destaque e contraste. No desktop, o gráfico continua ao lado do título, simplificado.
+
+Build de prévia e TypeScript aprovados. Edge instalado: larguras 320, 390, 430, 700, 768, 1024 e 1440px sem transbordamento ou erros JS. Confirmados zero imagens dentro da hero, uma marca no cabeçalho e gráfico transparente/sem sombra no mobile. Axe A/AA da home mobile sem violações. Emulação não representa teste físico de Safari. Evidências em `%LOCALAPPDATA%\CodexWork\Nacional\Site-hero-degrade-20261111`.
+
+Prévia atualizada: `http://192.168.18.4:57194/?revisao=4`. Mesmo Wi-Fi e computador ligado. Sem alteração no domínio oficial, nas integrações ou na calculadora.
+
 ## Seleção aprovada e aplicada — segunda revisão de 11/11/2026
 
 As dez fotos posteriores encerram a pendência de seleção descrita no histórico abaixo. Rodrigo aprovou a primeira composição (`4e20b4a`): fonte DM Sans com Lora em dourado, a chamada “Sua empresa cresceu. É hora de dar o próximo passo.”, card azul, aviso de cookies, seis cartões de serviços e três cartões de recursos. Esta revisão está na porta **57194**. A referência histórica permanece inalterada na 57196.
