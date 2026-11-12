@@ -1,3 +1,4 @@
+import { qualifyLead } from "../services/lead-qualification.mjs";
 const requiredFieldsByType = {
   troca_contador: [
     "nome",
@@ -95,6 +96,14 @@ function formatTelegramMessage(lead) {
     `<b>Motivo:</b> ${escapeHtml(lead.motivo)}`,
   ];
 
+  pushOptionalLine(lines, "Situação do CNPJ", lead.situacaoCnpj);
+  pushOptionalLine(lines, "Diagnóstico inicial gratuito", lead.diagnosticoInicial);
+  pushOptionalLine(lines, "Prioridade sugerida", lead.qualificacao);
+  pushOptionalLine(lines, "Origem comercial", lead.origem);
+  pushOptionalLine(lines, "Fonte", lead.utm_source);
+  pushOptionalLine(lines, "Meio", lead.utm_medium);
+  pushOptionalLine(lines, "Campanha", lead.utm_campaign);
+  pushOptionalLine(lines, "Primeira página", lead.landing_page);
   pushOptionalLine(lines, "Sócios", lead.socios);
   pushOptionalLine(lines, "CNPJ", lead.cnpj);
   pushOptionalLine(lines, "Atividade", lead.atividade);
@@ -264,8 +273,17 @@ export default async function handler(request, response) {
     necessidade: clean(body.necessidade),
     observacao: clean(body.observacao),
     origem: clean(body.origem),
-    pagina: clean(body.pagina),
+    pagina: clean(body.pagina).split("?")[0].split("#")[0],
+    situacaoCnpj: clean(body.situacaoCnpj),
+    diagnosticoInicial: clean(body.diagnosticoInicial),
+    privacyAcknowledged: clean(body.privacyAcknowledged),
+    privacyVersion: clean(body.privacyVersion),
+    utm_source: clean(body.utm_source), utm_medium: clean(body.utm_medium),
+    utm_campaign: clean(body.utm_campaign), landing_page: clean(body.landing_page).split("?")[0],
+    referrer_host: clean(body.referrer_host), source_group: clean(body.source_group),
   };
+
+  lead.qualificacao = qualifyLead(lead);
 
   const requiredFields =
     requiredFieldsByType[lead.tipo] || requiredFieldsByType.troca_contador;
@@ -308,13 +326,13 @@ export default async function handler(request, response) {
     return response.status(502).json({
       ok: false,
       error: "Não foi possível entregar o lead",
-      details: failures.map((failure) => failure.reason.message),
+
     });
   }
 
   return response.status(200).json({
     ok: true,
-    delivered: successes.length,
-    warnings: failures.map((failure) => failure.reason.message),
+    delivered: results.filter(result => result.status === "fulfilled" && result.value.ok).length,
+    warnings: failures.length ? ["Uma integração não confirmou a entrega."] : [],
   });
 }

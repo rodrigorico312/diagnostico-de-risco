@@ -8,7 +8,8 @@ import FiscalAddressPage from "./FiscalAddressPage";
 import SearchLandingPage, { searchLandingPages } from "./SearchLandingPage";
 import ApprovedSwitchAccountantPage from "./ApprovedSwitchAccountantPage";
 import ApprovedLinksPage from "./ApprovedLinksPage";
-import ApprovedHomePage from "./ApprovedHomePage";
+import { PremiumPage } from "./PremiumSite";
+import { premiumMetadata } from "./premium-content";
 import ApprovedClientAccessPage from "./ApprovedClientAccessPage";
 import ClientPortalPage from "./ClientPortalPage";
 import ClientPasswordPage from "./ClientPasswordPage";
@@ -2383,6 +2384,8 @@ export default function App() {
     if (!normalizedPath.startsWith("/area-do-cliente")) return installLeadTracking();
   }, [normalizedPath]);
 
+  if (premiumMetadata[normalizedPath]) return <PremiumPage path={normalizedPath}/>;
+
   if (isMeiGuidePage) {
     return <Suspense fallback={<p role="status">Abrindo o guia gratuito do MEI…</p>}><MeiGuidePage /></Suspense>;
   }
@@ -2397,7 +2400,7 @@ export default function App() {
   }
 
   if (isOfficialHomePage) {
-    return <ApprovedHomePage />;
+    return <PremiumPage />;
   }
 
   if (isPreviewHomePage) {

@@ -21,9 +21,9 @@
   --brand-blue-soft: rgba(0, 48, 112, 0.09);
   --brand-gold: #d0a020;
   --brand-gold-soft: rgba(208, 160, 32, 0.14);
-  --green: #16833f;
-  --green-dark: #0f6b31;
-  --green-soft: rgba(22, 131, 63, 0.1);
+  --green: #193f6b;
+  --green-dark: #102b48;
+  --green-soft: rgba(25, 63, 107, 0.1);
   --dark: #07172d;
   --max: 1120px;
 }
@@ -767,7 +767,7 @@ p {
 
 .icon-link--whatsapp {
   border-color: transparent;
-  background: #16833f;
+  background: #193f6b;
 }
 
 .icon-link--instagram {
@@ -816,7 +816,7 @@ p {
 
 .floating-whatsapp:hover,
 .floating-whatsapp:focus-visible {
-  background: #16833f;
+  background: #193f6b;
   outline: none;
 }
 

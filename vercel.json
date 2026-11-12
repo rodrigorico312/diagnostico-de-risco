@@ -247,6 +247,54 @@
   ],
   "rewrites": [
     {
+      "source": "/mei-em-crescimento",
+      "destination": "/mei-em-crescimento/index.html"
+    },
+    {
+      "source": "/mei-em-crescimento/",
+      "destination": "/mei-em-crescimento/index.html"
+    },
+    {
+      "source": "/calculadora-mei",
+      "destination": "/calculadora-mei/index.html"
+    },
+    {
+      "source": "/calculadora-mei/",
+      "destination": "/calculadora-mei/index.html"
+    },
+    {
+      "source": "/contabilidade-empresarial",
+      "destination": "/contabilidade-empresarial/index.html"
+    },
+    {
+      "source": "/contabilidade-empresarial/",
+      "destination": "/contabilidade-empresarial/index.html"
+    },
+    {
+      "source": "/desenquadramento-mei",
+      "destination": "/desenquadramento-mei/index.html"
+    },
+    {
+      "source": "/desenquadramento-mei/",
+      "destination": "/desenquadramento-mei/index.html"
+    },
+    {
+      "source": "/consultoria-financeira-tributaria",
+      "destination": "/consultoria-financeira-tributaria/index.html"
+    },
+    {
+      "source": "/consultoria-financeira-tributaria/",
+      "destination": "/consultoria-financeira-tributaria/index.html"
+    },
+    {
+      "source": "/conteudos-e-ferramentas",
+      "destination": "/conteudos-e-ferramentas/index.html"
+    },
+    {
+      "source": "/conteudos-e-ferramentas/",
+      "destination": "/conteudos-e-ferramentas/index.html"
+    },
+    {
       "source": "/atlas/invadergis/",
       "destination": "/atlas/invadergis/index.html"
     },

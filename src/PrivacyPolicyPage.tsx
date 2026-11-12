@@ -70,10 +70,8 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2>3. Cookies e tecnologias de medição</h2>
               <p>
-                O site pode utilizar cookies e ferramentas de medição, inclusive
-                o Meta Pixel, para analisar visitas e a efetividade de campanhas.
-                Essas tecnologias podem registrar eventos de navegação conforme
-                as configurações do seu navegador e das plataformas utilizadas.
+                A medição opcional (Meta Pixel e Google Analytics, quando configurado) depende da sua escolha no aviso de privacidade. Você pode recusá-la e alterar a escolha em “Preferências de cookies”, no rodapé. Não enviamos nome, telefone, e-mail, respostas do formulário ou valores da calculadora aos eventos de medição. A recusa não impede o atendimento.
+                A calculadora processa seus valores no próprio navegador. Para relacionar uma solicitação à sua origem, conservamos na sessão os parâmetros de campanha, a página inicial e o domínio de referência, sem dados de contato. O formulário encaminha essa origem junto à solicitação para os canais operacionais do escritório.
               </p>
             </section>
             <section>
