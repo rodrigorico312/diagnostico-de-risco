@@ -1,5 +1,9 @@
 # Ajustes visuais indicados por Rodrigo
 
+## Legenda retirada do cartão da calculadora — 12/11/2026
+
+Rodrigo pediu retirar “Sem cadastro. Resultado preliminar.”, reforçando a preferência por menos notas pequenas e acessórios. A legenda foi removida do cartão da home e seu espaço deixou de ser renderizado. A ação da calculadora permanece no lugar.
+
 ## Brilho e pulsação mais nítidos — 12/11/2026
 
 Rodrigo considerou a pulsação fraca e pediu brilho mais perceptível, com acabamento profissional e pesquisa de código. O CSS existente já usava `nc-action-light` e `nc-card-light`; o destaque dos cartões chegava a apenas 0,5 de opacidade, sobre uma borda também translúcida. Foram consultados [Shimmer Button](https://github.com/magicuidesign/magicui/blob/main/apps/www/registry/magicui/shimmer-button.tsx) e [Border Beam](https://github.com/magicuidesign/magicui/blob/main/apps/www/registry/magicui/border-beam.tsx), do Magic UI, como referências de luz e definição de borda. Nenhum componente externo foi copiado ou instalado.
