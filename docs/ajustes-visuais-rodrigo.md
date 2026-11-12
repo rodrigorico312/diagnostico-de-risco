@@ -1,5 +1,9 @@
 # Ajustes visuais indicados por Rodrigo
 
+## Retirada das legendas abaixo do botão — 12/11/2026
+
+Rodrigo pediu remover da abertura as duas legendas com check: “Avaliação inicial gratuita” e “Atendimento em todo o Brasil”. O bloco foi retirado do HTML em desktop e mobile, eliminando também seu espaçamento. O botão de diagnóstico e as demais seções foram preservados.
+
 ## Correção seguinte — hero contínua no celular
 
 Rodrigo rejeitou a fotografia em cápsula/círculo dentro do título e pediu a retirada do N isolado do card. Essa orientação substitui os dois itens correspondentes da seleção anterior. A marca do cabeçalho permanece.

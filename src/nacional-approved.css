@@ -205,8 +205,6 @@ body:has(.nc-header) .approved-switch-time { display: none; }
   .nc-home-story .nc-hero-copy > p:not(.nc-eyebrow) { color: #d9e3ed; }
   .nc-home-hero .nc-home-story .nc-button { background: var(--nc-gold); border-color: var(--nc-gold); color: var(--nc-navy) !important; }
   .nc-home-hero .nc-home-story .nc-button:hover { background: #d3ba7a; }
-  .nc-home-story .nc-hero-trust { color: #d1deea; }
-  .nc-home-story .nc-hero-trust .nc-icon { color: #d5bd7c; }
   .nc-home-hero .nc-hero-copy { padding-top: 0; width: 100%; }
   .nc-home-hero .nc-hero-copy > p { margin-top: 0; }
   .nc-hero h1 { font-size: clamp(34px,8.8vw,56px); line-height: 1.13; }

@@ -107,7 +107,7 @@ function Home() {
     <section className="nc-hero nc-home-hero"><div className="nc-container nc-home-hero-grid">
       <div className="nc-hero-heading"><h1>Sua empresa cresceu.<br/>É hora de dar<br/><em>o próximo passo.</em></h1></div>
       <div className="nc-home-story"><GrowthVisual/>
-        <div className="nc-hero-copy"><p>Da evolução do MEI à contabilidade da sua empresa: orientação próxima para organizar os números e decidir com mais clareza.</p><Actions/><div className="nc-hero-trust"><span><Icon name="check"/> Avaliação inicial gratuita</span><span><Icon name="check"/> Atendimento em todo o Brasil</span></div></div>
+        <div className="nc-hero-copy"><p>Da evolução do MEI à contabilidade da sua empresa: orientação próxima para organizar os números e decidir com mais clareza.</p><Actions/></div>
       </div>
     </div></section>
     <section className="nc-section" id="solucoes"><div className="nc-container"><div className="nc-section-heading"><h2>Escolha a contabilidade para<br/>o momento da sua empresa.</h2><p>Reconheça seu cenário e conheça o acompanhamento que faz sentido para o seu negócio.</p></div><div className="nc-services">{premiumServices.map(s => <a className="nc-service" href={s.href} key={s.number}><div><Icon name={s.icon}/><span>{s.number}</span></div><h3>{s.title}</h3><p>{s.text}</p><span className="nc-service-link">Conhecer solução</span></a>)}</div></div></section>
