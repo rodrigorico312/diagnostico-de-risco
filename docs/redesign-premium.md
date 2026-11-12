@@ -1,10 +1,10 @@
-# Redesign e captação da Nacional — prévia para revisão
+# Redesign e captação da Nacional
 
-**Estado atual em 12/11/2026:** Rodrigo autorizou expressamente a publicação da atualização e os ajustes necessários do briefing original para o site e mecanismos de busca. Rodapé Shadcn Space Footer 02 adaptado, frases decorativas retiradas e degradê refinado. Prévia de revisão na porta 57194. Preparação da versão de produção em andamento; a confirmação do domínio será registrada após a troca e os testes.
+**Estado atual em 12/11/2026:** publicado em [www.nacionalcon.com](https://www.nacionalcon.com), após autorização expressa de Rodrigo. Fonte `535d2b8` integrada por avanço direto a `origin/main`. Rodapé Shadcn Space Footer 02 adaptado, frases decorativas retiradas e degradê refinado. As 34 URLs do sitemap passaram na conferência pública; 33 páginas React têm HTML próprio pré-renderizado e o artigo independente de psicologia foi preservado. [Registro de publicação, testes e pendências reais](publicacao-20261112.md).
 
 **Histórico:** a primeira composição foi inicialmente rejeitada; após testar Tailark, Rodrigo recuperou a referência e aprovou sua fonte, copy e gráfico, solicitando os refinamentos registrados. O [estudo de repositórios](referencias-layout.md) e o [teste Tailark](teste-tailark.md) documentam as etapas anteriores. Aprovação visual não autoriza publicação.
 
-Brief recebido em 11/11/2026. Base: `rodrigorico312/diagnostico-de-risco`, commit `54828f0ee158a71cd53676579d38dccec6727222`. Trabalho em `redesign/premium-captacao-20261111`, sem push, merge ou publicação no domínio oficial.
+Brief recebido em 11/11/2026. Base: `rodrigorico312/diagnostico-de-risco`, commit `54828f0ee158a71cd53676579d38dccec6727222`. Trabalho em `redesign/premium-captacao-20261111`, publicado e integrado em 12/11. Os registros abaixo descrevem as etapas e restrições vigentes em cada momento; o estado atual e as pendências constam no registro de publicação.
 
 ## Fase 1 — auditoria e direção visual
 
@@ -51,7 +51,7 @@ O diagnóstico inicial gratuito foi separado do diagnóstico técnico aprofundad
 
 ## Fase 5 — SEO, privacidade e eventos
 
-Sete páginas comerciais possuem HTML pré-renderizado, títulos, descrições, canonical, Open Graph e dados estruturados com identidade da Nacional, atuação nacional e presença em Santarém. Isso permite leitura do conteúdo inicial sem executar JavaScript. As seis URLs novas foram incluídas no sitemap e na configuração de rotas; as antigas permanecem. Não foram criados depoimentos, avaliações, resultados, métricas ou promessas de posicionamento.
+As 33 páginas públicas renderizadas pelo React possuem HTML próprio, títulos, descrições, canonical, Open Graph e dados estruturados pertinentes. A identificação da Nacional informa atuação nacional e presença em Santarém. Isso permite leitura do conteúdo inicial sem executar JavaScript. O sitemap tem 34 URLs, incluindo o artigo independente de psicologia, cuja implementação foi preservada. URLs antigas continuam acessíveis. Não foram criados depoimentos, avaliações, resultados, métricas ou promessas de posicionamento.
 
 | Evento | Momento |
 | --- | --- |
