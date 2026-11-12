@@ -1,5 +1,15 @@
 # Ajustes visuais indicados por Rodrigo
 
+## Brilho e pulsação mais nítidos — 12/11/2026
+
+Rodrigo considerou a pulsação fraca e pediu brilho mais perceptível, com acabamento profissional e pesquisa de código. O CSS existente já usava `nc-action-light` e `nc-card-light`; o destaque dos cartões chegava a apenas 0,5 de opacidade, sobre uma borda também translúcida. Foram consultados [Shimmer Button](https://github.com/magicuidesign/magicui/blob/main/apps/www/registry/magicui/shimmer-button.tsx) e [Border Beam](https://github.com/magicuidesign/magicui/blob/main/apps/www/registry/magicui/border-beam.tsx), do Magic UI, como referências de luz e definição de borda. Nenhum componente externo foi copiado ou instalado.
+
+Aplicado em CSS próprio: contorno dourado mais definido, halo em camadas nos botões principais e WhatsApp e luz periférica nos cartões. Ciclos parametrizados em `--nc-pulse-speed` (3,8s) e `--nc-card-pulse-speed` (4,8s). Cartões alternam intensidade e ficam destacados no hover/foco. Sem escala, deslocamento ou piscada rápida. Movimento reduzido continua desativando as animações e o foco de teclado permanece visível.
+
+Validação: build aprovado; comparação dos estados de mínimo/máximo no Edge instalado, em mobile e desktop. Botão permaneceu com 239,75 × 54px nos dois estados e `transform: none`; contorno/halo variam. Cartão passou de opacidade 0,18 a 0,95. Movimento reduzido: animação `none` em botão e cartão. Foco com contorno de 3px. Sem transbordamento em 320, 390 e 1440px ou erros JS. Evidências em `%LOCALAPPDATA%\CodexWork\Nacional\Site-brilho-20261112`.
+
+Prévia `http://192.168.18.4:57194/?revisao=6`, sem alteração no domínio oficial.
+
 ## Retirada das legendas abaixo do botão — 12/11/2026
 
 Rodrigo pediu remover da abertura as duas legendas com check: “Avaliação inicial gratuita” e “Atendimento em todo o Brasil”. O bloco foi retirado do HTML em desktop e mobile, eliminando também seu espaçamento. O botão de diagnóstico e as demais seções foram preservados.
