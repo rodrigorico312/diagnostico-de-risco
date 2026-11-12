@@ -1,5 +1,9 @@
 # Ajustes visuais indicados por Rodrigo
 
+## Texto e lógica do atendimento — 12/11/2026
+
+Rodrigo rejeitou a redação da seção “Do primeiro contato ao próximo passo”, sobretudo “Definimos o próximo passo”. A seção passou a apresentar o que o empresário recebe e como decide a contratação: “Clareza antes de contratar”, com “Entendemos sua empresa”, “Você recebe uma orientação inicial” e “Você escolhe com a proposta em mãos”. Os textos explicam atividade/faturamento/necessidade, orientação sobre obrigações e ajustes e apresentação dos serviços, inclusões e valores. A mudança alcança home, MEI e páginas comerciais que compartilham o componente, sem alterar o fluxo de atendimento ou criar prazos e promessas de resultado.
+
 ## Legenda retirada do cartão da calculadora — 12/11/2026
 
 Rodrigo pediu retirar “Sem cadastro. Resultado preliminar.”, reforçando a preferência por menos notas pequenas e acessórios. A legenda foi removida do cartão da home e seu espaço deixou de ser renderizado. A ação da calculadora permanece no lugar.

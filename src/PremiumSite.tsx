@@ -86,7 +86,12 @@ export function Faq({ items = meiFaqs }: { items?: string[][] }) {
 }
 
 function Process() {
-  return <section className="nc-section nc-process" id="como-funciona"><div className="nc-container"><h2>Do primeiro contato ao próximo passo.</h2><ol className="nc-steps">{[["Você conta o cenário", "Apresente sua empresa e a principal dúvida."], ["Avaliamos as informações", "Você recebe uma orientação inicial sobre o que precisa de atenção."], ["Definimos o próximo passo", "Se precisar de acompanhamento, apresentamos uma proposta com escopo e valor."]].map(([title,text]) => <li key={title}><h3>{title}</h3><p>{text}</p></li>)}</ol></div></section>;
+  const steps = [
+    ["Entendemos sua empresa", "Conhecemos sua atividade, o faturamento e o que você precisa resolver."],
+    ["Você recebe uma orientação inicial", "Explicamos as obrigações e os ajustes que merecem atenção no seu negócio."],
+    ["Você escolhe com a proposta em mãos", "Você conhece os serviços indicados, o que está incluído e quanto custa antes de contratar."],
+  ];
+  return <section className="nc-section nc-process" id="como-funciona"><div className="nc-container"><h2>Clareza antes de contratar.</h2><ol className="nc-steps">{steps.map(([title,text]) => <li key={title}><h3>{title}</h3><p>{text}</p></li>)}</ol></div></section>;
 }
 
 function FinalCta() {
