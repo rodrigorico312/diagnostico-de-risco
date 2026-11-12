@@ -173,7 +173,7 @@ export default function FiscalAddressPage() {
         <div className="preview-container fiscal-address-hero__grid">
           <div>
             <a className="fiscal-address-breadcrumb" href="/solucoes/abrir-ou-regularizar-empresa">
-              ← Abertura de empresa
+               Abertura de empresa
             </a>
             <h1 id="fiscal-address-title">Seu CNPJ não precisa expor o endereço da sua casa.</h1>
             <p className="fiscal-address-hero__lead">
@@ -182,7 +182,7 @@ export default function FiscalAddressPage() {
             <div className="preview-actions">
               <a className="preview-button preview-button--primary" href="#planos">Ver planos</a>
               <a className="preview-button preview-button--text" href={contactUrl}>
-                Solicitar análise comercial →
+                Solicitar análise comercial
               </a>
             </div>
           </div>

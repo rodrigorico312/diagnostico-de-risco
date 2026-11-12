@@ -234,7 +234,7 @@ export default function SearchLandingPage({ path }: { path: string }) {
       <section className="solution-hero">
         <div className="preview-container solution-hero__grid">
           <div className="solution-hero__content">
-            <a className="solution-breadcrumb" href="/">← Voltar para a Nacional</a>
+            <a className="solution-breadcrumb" href="/"> Voltar para a Nacional</a>
             <h1>{content.title}</h1>
             <p className="solution-hero__lead">{content.lead}</p>
             <div className="preview-actions"><a className="preview-button preview-button--primary" href={contactUrl}>Solicitar atendimento</a></div>
@@ -267,7 +267,7 @@ export default function SearchLandingPage({ path }: { path: string }) {
         <div className="preview-container">
           <div className="solution-section__heading"><h2 id="search-related-title">Continue por aqui</h2><p>Conteúdos e serviços relacionados ao mesmo momento da empresa.</p></div>
           <div className="search-related__grid">
-            {content.related.map((item) => <a href={item.href} key={item.href}><span>{item.label}</span><p>{item.text}</p><strong>Conhecer →</strong></a>)}
+            {content.related.map((item) => <a href={item.href} key={item.href}><span>{item.label}</span><p>{item.text}</p><strong>Conhecer </strong></a>)}
           </div>
         </div>
       </section>

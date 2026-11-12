@@ -1,7 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { calculateMei, parseMoney } from "../src/mei-calculator.ts";
+import { calculateMei, parseMoney, formatMoneyInput } from "../src/mei-calculator.ts";
 const base={year:2026,openingYear:2025,openingMonth:1,activity:"servicos",revenue:0,expected:0};
+test("máscara BRL mantém os centavos e rejeita valores colados inválidos sem os transformar",()=>{
+  assert.equal(parseMoney(formatMoneyInput("8100001")),8_100_001);
+  assert.equal(parseMoney(formatMoneyInput("R$ 12.500,56")),1_250_056);
+  assert.equal(parseMoney(formatMoneyInput("0")),0);
+  assert.equal(formatMoneyInput(""),"");
+  for (const raw of ["-125,00","999999999999999999999","1e9"]) assert.throws(()=>parseMoney(formatMoneyInput(raw)));
+});
 test("limite anual distingue exatamente teto, 20% e um centavo além",()=>{
   assert.equal(calculateMei({...base,revenue:8_100_000}).actual,"within");
   assert.equal(calculateMei({...base,revenue:8_100_001}).actual,"excess20");

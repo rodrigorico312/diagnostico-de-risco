@@ -16,6 +16,16 @@ export function parseMoney(raw: string): number {
   return cents;
 }
 export const formatMoney = (cents: number) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
+/** Numeric keyboard: the final two digits are cents, like a banking money field. */
+export function formatMoneyInput(raw: string): string {
+  if (/[^\d\sR$.,]/.test(raw)) return raw;
+  const digits = raw.replace(/\D/g, "").replace(/^0+(?=\d)/, "");
+  if (!digits) return "";
+  const cents = Number(digits);
+  // Keep invalid pasted amounts intact so validation rejects them, never truncates them.
+  if (!Number.isSafeInteger(cents) || cents > 100_000_000_000) return raw;
+  return formatMoney(cents);
+}
 export function calculateMei(input: MeiInput) {
   const { year, openingYear, openingMonth, activity, revenue, expected } = input;
   if (!MEI_YEARS.includes(year as typeof MEI_YEARS[number])) throw new Error("Esta versão calcula somente 2024, 2025 e 2026. Outros anos exigem revisão das regras.");

@@ -1,5 +1,30 @@
 # Ajustes visuais indicados por Rodrigo
 
+## Seleção aprovada e aplicada — segunda revisão de 11/11/2026
+
+As dez fotos posteriores encerram a pendência de seleção descrita no histórico abaixo. Rodrigo aprovou a primeira composição (`4e20b4a`): fonte DM Sans com Lora em dourado, a chamada “Sua empresa cresceu. É hora de dar o próximo passo.”, card azul, aviso de cookies, seis cartões de serviços e três cartões de recursos. Esta revisão está na porta **57194**. A referência histórica permanece inalterada na 57196.
+
+Alterações aplicadas:
+
+- Faixa superior contínua “Contabilidade para empresas em crescimento”, com controle de pausa e movimento reduzido. Área do cliente mantida no menu.
+- Fotografia integrada ao título e card logo após o título no celular. Sem a legenda introdutória repetida.
+- Card com o N oficial, recortado por CSS do arquivo original; retirada das frases “Um novo momento para sua empresa” e “Decisões com contexto / Um passo de cada vez”. Mantidas as três etapas; última com “Com a Nacional”. Gráfico ilustrativo, sem métricas comerciais.
+- Setas decorativas removidas das ações públicas revisadas; halo lento azul/dourado em botões e cartões, sem expansão. Rótulos, foco visível e contraste preservados. WhatsApp oficial flutuante azul, com triagem inicial, oculto enquanto o aviso de cookies ocupa a tela.
+- Serviços como cenários selecionáveis. Título “Escolha a contabilidade para o momento da sua empresa”. Títulos internos, fontes e espaçamento harmonizados, preservando as rotas anteriores.
+- Seção MEI com um único cartão de acesso à calculadora. Sem “Conhecer/entender o próximo passo”. Na landing, a primeira ação leva à simulação; diagnóstico mantido no convite final.
+- Calculadora com R$, milhar e centavos; teclado numérico; os dois últimos dígitos são centavos, conforme orientação visível. Negativos e valores excessivos colados são rejeitados, sem conversão silenciosa em positivos ou truncamento. Regra fiscal preservada.
+- Campos da calculadora e das três etapas do formulário em pelo menos 16px, mantendo zoom de acessibilidade. Fontes oficiais em seção estática, sem triângulo/setas, com método e limitações preservados.
+- “Atendimento próximo. Em todo o Brasil.” mantido. Segmentos expressamente confirmados por Rodrigo: advocacia, construção civil, reformas, marketing, atacado, consultorias, empresas de contabilidade e imobiliárias. Sem nomes de clientes ou resultados inventados.
+- Recursos preservados: calculadora, “MEI × ME / Sair do MEI” e gestão tributária/fator R. Rodapé compacto com marca, contato, quatro atalhos, identificação e privacidade/cookies. Introdução do formulário simplificada.
+
+Referências consultadas: [Magic UI / Shimmer Button](https://github.com/magicuidesign/magicui/blob/main/apps/www/registry/magicui/shimmer-button.tsx) e [Tailark / Footer](https://github.com/tailark/blocks/blob/main/registry/bases/base/dusk/blocks/footer/one.tsx). Brilho em CSS próprio, sem instalar catálogos ou Motion. Aviso MIT do header Tailark preservado.
+
+Validação: build e TypeScript aprovados; 61 testes aprovados. Edge instalado, 36 combinações de 18 rotas em 390/1440px, sem transbordamento, com um H1 e tipografia comum, sem setas textuais e com controles de pelo menos 16px. Axe A/AA sem violações nas cinco páginas conferidas. Cálculo verificado com previsão separada, fronteira de 20% e seis meses de abertura. Formulário percorrido com dados fictícios: zero POST e aviso de prévia; fontes 16px nas três etapas. Menu/Escape, pausa e movimento reduzido conferidos. Emulação não representa teste físico no Safari/iPhone.
+
+Evidências: `%LOCALAPPDATA%\CodexWork\Nacional\Site-base-aprovada-20261111`. Prévia: `http://192.168.18.4:57194/`, com mesmo Wi-Fi e computador ligado. Sem push, merge ou publicação.
+
+## Histórico da comparação anterior
+
 Registro de 11/11/2026, após revisão da prévia Tailark no iPhone. As quatro imagens anexadas mostram a abertura, os campos monetários, a seção de fontes da calculadora e a página de contabilidade empresarial.
 
 ## Pedido imediato

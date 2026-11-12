@@ -311,7 +311,7 @@ export default function SolutionDetailPage({ slug }: SolutionDetailPageProps) {
       <section className="solution-hero">
         <div className="preview-container solution-hero__grid">
           <div className="solution-hero__content">
-            <a className="solution-breadcrumb" href="/#solucoes">← Voltar para soluções</a>
+            <a className="solution-breadcrumb" href="/#solucoes"> Voltar para soluções</a>
             <h1>{content.title}</h1>
             <p className="solution-hero__lead">{content.lead}</p>
             <div className="preview-actions">

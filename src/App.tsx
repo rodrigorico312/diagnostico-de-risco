@@ -1299,7 +1299,7 @@ function BlogPage({ slug }: { slug?: string }) {
         <article aria-labelledby="blog-post-title">
           <header className="editorial-article-hero">
             <div className="preview-container">
-              <a className="editorial-breadcrumb" href="/blog">← Voltar ao blog</a>
+              <a className="editorial-breadcrumb" href="/blog"> Voltar ao blog</a>
               <p className="preview-kicker">{post.category}</p>
               <h1 id="blog-post-title">{post.title}</h1>
               <p className="editorial-article-hero__lead">{post.intro}</p>
@@ -1388,7 +1388,7 @@ function BlogPage({ slug }: { slug?: string }) {
                     <small>{item.category}</small>
                     <strong>{item.title}</strong>
                     <p>{item.excerpt}</p>
-                    <em>Ler análise →</em>
+                    <em>Ler análise </em>
                   </a>
                 ))}
               </div>
@@ -1451,7 +1451,7 @@ function BlogPage({ slug }: { slug?: string }) {
                 <small>{item.category}</small>
                 <strong>{item.title}</strong>
                 <p>{item.excerpt}</p>
-                <em>{item.readTime} de leitura →</em>
+                <em>{item.readTime} de leitura </em>
               </a>
             ))}
           </div>
@@ -1530,7 +1530,7 @@ function ResponsiveToolGroup({ group, index }: { group: ToolGroup; index: number
               <strong>{link.title}</strong>
               <small>{link.text}</small>
             </div>
-            <em aria-hidden="true">↗</em>
+            <em aria-hidden="true"></em>
           </a>
         ))}
       </div>
@@ -1591,7 +1591,7 @@ function ToolsPage() {
                 <small>Acesso oficial</small>
                 <strong>{link.title}</strong>
                 <p>{link.text}</p>
-                <em>Abrir plataforma ↗</em>
+                <em>Abrir plataforma </em>
               </a>
             ))}
           </div>
@@ -1692,7 +1692,7 @@ function LinksPage() {
         <strong>{item.title}</strong>
         <small>{item.text}</small>
       </span>
-      <span className="links-item__more" aria-hidden="true">→</span>
+      <span className="links-item__more" aria-hidden="true"></span>
     </a>
   );
 
@@ -2420,7 +2420,7 @@ export default function App() {
   }
 
   if (isBusinessAccountingPage) {
-    return <BusinessAccountingPage />;
+    return <><SiteHeader/><BusinessAccountingPage/><SiteFooter/></>;
   }
 
   if (isToolsPage) {

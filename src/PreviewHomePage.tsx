@@ -113,7 +113,7 @@ const diagnostics = [
 ];
 
 function Arrow() {
-  return <span aria-hidden="true">↗</span>;
+  return <span aria-hidden="true"></span>;
 }
 
 type PreviewHomePageProps = {

@@ -1,5 +1,6 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { trackLeadEvent } from "./analytics";
+import { SiteHeader, SiteFooter } from "./SiteChrome";
 import "./switch-accountant-page.css";
 
 type FormData = {
@@ -182,7 +183,7 @@ export default function ApprovedSwitchAccountantPage() {
   };
 
   return (
-    <main className="lead-page approved-switch-page">
+    <><SiteHeader/><main className="lead-page approved-switch-page" id="conteudo">
       <section className="approved-switch-layout" aria-labelledby="troca-contador-title">
         <div className="approved-switch-intro">
           <a
@@ -339,7 +340,7 @@ export default function ApprovedSwitchAccountantPage() {
                 <div className="approved-switch-actions">
                   {currentStep > 1 && <button className="approved-switch-back" type="button" onClick={goToPreviousStep}>Voltar</button>}
                   {currentStep < 3 ? (
-                    <button className="approved-switch-next" type="button" onClick={goToNextStep}>Continuar <span aria-hidden="true">→</span></button>
+                    <button className="approved-switch-next" type="button" onClick={goToNextStep}>Continuar <span aria-hidden="true"></span></button>
                   ) : (
                     <button className="approved-switch-next" type="submit" disabled={submitStatus === "sending"}>
                       {submitStatus === "sending" ? "Enviando..." : "Enviar para análise"}
@@ -355,10 +356,10 @@ export default function ApprovedSwitchAccountantPage() {
           </form>
 
           <a className="request-service-client-link" href="/area-do-cliente">
-            Já é cliente? Acesse seus canais de atendimento →
+            Já é cliente? Acesse seus canais de atendimento
           </a>
         </div>
       </section>
-    </main>
+    </main><SiteFooter/></>
   );
 }
