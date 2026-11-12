@@ -247,12 +247,100 @@
   ],
   "rewrites": [
     {
-      "source": "/mei-em-crescimento",
-      "destination": "/mei-em-crescimento/index.html"
+      "source": "/abrir-empresa-em-santarem",
+      "destination": "/abrir-empresa-em-santarem/index.html"
     },
     {
-      "source": "/mei-em-crescimento/",
-      "destination": "/mei-em-crescimento/index.html"
+      "source": "/abrir-empresa-em-santarem/",
+      "destination": "/abrir-empresa-em-santarem/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/abrir-empresa",
+      "destination": "/blog/abrir-empresa/index.html"
+    },
+    {
+      "source": "/blog/abrir-empresa/",
+      "destination": "/blog/abrir-empresa/index.html"
+    },
+    {
+      "source": "/blog/clinica-estetica-economia-tributaria",
+      "destination": "/blog/clinica-estetica-economia-tributaria/index.html"
+    },
+    {
+      "source": "/blog/clinica-estetica-economia-tributaria/",
+      "destination": "/blog/clinica-estetica-economia-tributaria/index.html"
+    },
+    {
+      "source": "/blog/cnpj-regular",
+      "destination": "/blog/cnpj-regular/index.html"
+    },
+    {
+      "source": "/blog/cnpj-regular/",
+      "destination": "/blog/cnpj-regular/index.html"
+    },
+    {
+      "source": "/blog/fator-r-simples-nacional",
+      "destination": "/blog/fator-r-simples-nacional/index.html"
+    },
+    {
+      "source": "/blog/fator-r-simples-nacional/",
+      "destination": "/blog/fator-r-simples-nacional/index.html"
+    },
+    {
+      "source": "/blog/financeiro-organizado",
+      "destination": "/blog/financeiro-organizado/index.html"
+    },
+    {
+      "source": "/blog/financeiro-organizado/",
+      "destination": "/blog/financeiro-organizado/index.html"
+    },
+    {
+      "source": "/blog/icms-simples-para",
+      "destination": "/blog/icms-simples-para/index.html"
+    },
+    {
+      "source": "/blog/icms-simples-para/",
+      "destination": "/blog/icms-simples-para/index.html"
+    },
+    {
+      "source": "/blog/mapa-economia-tributaria",
+      "destination": "/blog/mapa-economia-tributaria/index.html"
+    },
+    {
+      "source": "/blog/mapa-economia-tributaria/",
+      "destination": "/blog/mapa-economia-tributaria/index.html"
+    },
+    {
+      "source": "/blog/mei-simples-nacional",
+      "destination": "/blog/mei-simples-nacional/index.html"
+    },
+    {
+      "source": "/blog/mei-simples-nacional/",
+      "destination": "/blog/mei-simples-nacional/index.html"
+    },
+    {
+      "source": "/blog/nota-fiscal-imposto",
+      "destination": "/blog/nota-fiscal-imposto/index.html"
+    },
+    {
+      "source": "/blog/nota-fiscal-imposto/",
+      "destination": "/blog/nota-fiscal-imposto/index.html"
+    },
+    {
+      "source": "/blog/trocar-de-contador",
+      "destination": "/blog/trocar-de-contador/index.html"
+    },
+    {
+      "source": "/blog/trocar-de-contador/",
+      "destination": "/blog/trocar-de-contador/index.html"
     },
     {
       "source": "/calculadora-mei",
@@ -263,12 +351,36 @@
       "destination": "/calculadora-mei/index.html"
     },
     {
+      "source": "/consultoria-financeira-tributaria",
+      "destination": "/consultoria-financeira-tributaria/index.html"
+    },
+    {
+      "source": "/consultoria-financeira-tributaria/",
+      "destination": "/consultoria-financeira-tributaria/index.html"
+    },
+    {
+      "source": "/contabilidade-em-santarem",
+      "destination": "/contabilidade-em-santarem/index.html"
+    },
+    {
+      "source": "/contabilidade-em-santarem/",
+      "destination": "/contabilidade-em-santarem/index.html"
+    },
+    {
       "source": "/contabilidade-empresarial",
       "destination": "/contabilidade-empresarial/index.html"
     },
     {
       "source": "/contabilidade-empresarial/",
       "destination": "/contabilidade-empresarial/index.html"
+    },
+    {
+      "source": "/conteudos-e-ferramentas",
+      "destination": "/conteudos-e-ferramentas/index.html"
+    },
+    {
+      "source": "/conteudos-e-ferramentas/",
+      "destination": "/conteudos-e-ferramentas/index.html"
     },
     {
       "source": "/desenquadramento-mei",
@@ -279,20 +391,116 @@
       "destination": "/desenquadramento-mei/index.html"
     },
     {
-      "source": "/consultoria-financeira-tributaria",
-      "destination": "/consultoria-financeira-tributaria/index.html"
+      "source": "/endereco-fiscal-com-inscricao-estadual-para",
+      "destination": "/endereco-fiscal-com-inscricao-estadual-para/index.html"
     },
     {
-      "source": "/consultoria-financeira-tributaria/",
-      "destination": "/consultoria-financeira-tributaria/index.html"
+      "source": "/endereco-fiscal-com-inscricao-estadual-para/",
+      "destination": "/endereco-fiscal-com-inscricao-estadual-para/index.html"
     },
     {
-      "source": "/conteudos-e-ferramentas",
-      "destination": "/conteudos-e-ferramentas/index.html"
+      "source": "/endereco-fiscal-para-ecommerce",
+      "destination": "/endereco-fiscal-para-ecommerce/index.html"
     },
     {
-      "source": "/conteudos-e-ferramentas/",
-      "destination": "/conteudos-e-ferramentas/index.html"
+      "source": "/endereco-fiscal-para-ecommerce/",
+      "destination": "/endereco-fiscal-para-ecommerce/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-para-prestadores-de-servicos",
+      "destination": "/endereco-fiscal-para-prestadores-de-servicos/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-para-prestadores-de-servicos/",
+      "destination": "/endereco-fiscal-para-prestadores-de-servicos/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-santarem",
+      "destination": "/endereco-fiscal-santarem/index.html"
+    },
+    {
+      "source": "/endereco-fiscal-santarem/",
+      "destination": "/endereco-fiscal-santarem/index.html"
+    },
+    {
+      "source": "/ferramentas",
+      "destination": "/ferramentas/index.html"
+    },
+    {
+      "source": "/ferramentas/",
+      "destination": "/ferramentas/index.html"
+    },
+    {
+      "source": "/mei-em-crescimento",
+      "destination": "/mei-em-crescimento/index.html"
+    },
+    {
+      "source": "/mei-em-crescimento/",
+      "destination": "/mei-em-crescimento/index.html"
+    },
+    {
+      "source": "/solucoes/abrir-ou-regularizar-empresa",
+      "destination": "/solucoes/abrir-ou-regularizar-empresa/index.html"
+    },
+    {
+      "source": "/solucoes/abrir-ou-regularizar-empresa/",
+      "destination": "/solucoes/abrir-ou-regularizar-empresa/index.html"
+    },
+    {
+      "source": "/solucoes/diagnostico-fiscal-cadastral",
+      "destination": "/solucoes/diagnostico-fiscal-cadastral/index.html"
+    },
+    {
+      "source": "/solucoes/diagnostico-fiscal-cadastral/",
+      "destination": "/solucoes/diagnostico-fiscal-cadastral/index.html"
+    },
+    {
+      "source": "/solucoes/notificacoes-intimacoes",
+      "destination": "/solucoes/notificacoes-intimacoes/index.html"
+    },
+    {
+      "source": "/solucoes/notificacoes-intimacoes/",
+      "destination": "/solucoes/notificacoes-intimacoes/index.html"
+    },
+    {
+      "source": "/solucoes/organizar-numeros-e-retiradas",
+      "destination": "/solucoes/organizar-numeros-e-retiradas/index.html"
+    },
+    {
+      "source": "/solucoes/organizar-numeros-e-retiradas/",
+      "destination": "/solucoes/organizar-numeros-e-retiradas/index.html"
+    },
+    {
+      "source": "/solucoes/regularizar-cnpj-inscricao",
+      "destination": "/solucoes/regularizar-cnpj-inscricao/index.html"
+    },
+    {
+      "source": "/solucoes/regularizar-cnpj-inscricao/",
+      "destination": "/solucoes/regularizar-cnpj-inscricao/index.html"
+    },
+    {
+      "source": "/solucoes/regularizar-obrigacoes",
+      "destination": "/solucoes/regularizar-obrigacoes/index.html"
+    },
+    {
+      "source": "/solucoes/regularizar-obrigacoes/",
+      "destination": "/solucoes/regularizar-obrigacoes/index.html"
+    },
+    {
+      "source": "/solucoes/revisar-impostos-e-riscos",
+      "destination": "/solucoes/revisar-impostos-e-riscos/index.html"
+    },
+    {
+      "source": "/solucoes/revisar-impostos-e-riscos/",
+      "destination": "/solucoes/revisar-impostos-e-riscos/index.html"
+    },
+    {
+      "source": "/solucoes/trocar-de-contador",
+      "destination": "/solucoes/trocar-de-contador/index.html"
+    },
+    {
+      "source": "/solucoes/trocar-de-contador/",
+      "destination": "/solucoes/trocar-de-contador/index.html"
     },
     {
       "source": "/atlas/invadergis/",
@@ -415,14 +623,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/endereco-fiscal-santarem",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/endereco-fiscal-santarem/",
-      "destination": "/index.html"
-    },
-    {
       "source": "/contabilidade-em-santarem(.*)",
       "destination": "/index.html"
     },
@@ -496,22 +696,6 @@
     },
     {
       "source": "/contabilidade-empresas/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/ferramentas",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/ferramentas/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/blog/",
       "destination": "/index.html"
     },
     {

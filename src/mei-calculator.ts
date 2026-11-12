@@ -1,5 +1,5 @@
-/** Revenue-only screening. Legal review: 2026-11-11. All money is integer cents. */
-export const MEI_REVIEW_DATE = "11/11/2026";
+/** Revenue-only screening. Legal review: 2026-11-12. All money is integer cents. */
+export const MEI_REVIEW_DATE = "12/11/2026";
 export const MEI_YEARS = [2024, 2025, 2026] as const;
 export const MEI_SOURCES = [
   { label: "Receita Federal · Manual de desenquadramento do SIMEI", url: "https://www8.receita.fazenda.gov.br/SimplesNacional/Arquivos/manual/MANUAL_DESENQUADRAMENTO_SIMEI.pdf" },

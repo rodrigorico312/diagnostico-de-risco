@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 
 type PageSeo = {
   title: string;
@@ -6,6 +6,9 @@ type PageSeo = {
   path: string;
   image?: string;
 };
+
+// Per-render collection used only by the static build, without shared request state.
+export const PageSeoCaptureContext = createContext<((metadata: PageSeo) => void) | null>(null);
 
 function getOrCreateMeta(selector: string, attribute: "name" | "property", value: string) {
   const existing = document.querySelector<HTMLMetaElement>(selector);
@@ -17,6 +20,8 @@ function getOrCreateMeta(selector: string, attribute: "name" | "property", value
 }
 
 export function usePageSeo({ title, description, path, image }: PageSeo) {
+  const capture = useContext(PageSeoCaptureContext);
+  capture?.({ title, description, path, image });
   useEffect(() => {
     const url = `https://www.nacionalcon.com${path}`;
     const previousTitle = document.title;

@@ -1,6 +1,6 @@
 # Redesign e captação da Nacional — prévia para revisão
 
-**Prévia atual:** composição baseada na primeira versão aprovada, com fontes DM Sans/Lora, gráfico azul e refinamentos posteriores. A última correção integra a hero mobile ao gráfico com degradê, retira o retrato em cápsula e o N interno. Veja [direção vigente e validações](ajustes-visuais-rodrigo.md). Disponível na porta 57194; revisão visual desta alteração e publicação continuam pendentes.
+**Estado atual em 12/11/2026:** Rodrigo autorizou expressamente a publicação da atualização e os ajustes necessários do briefing original para o site e mecanismos de busca. Rodapé Shadcn Space Footer 02 adaptado, frases decorativas retiradas e degradê refinado. Prévia de revisão na porta 57194. Preparação da versão de produção em andamento; a confirmação do domínio será registrada após a troca e os testes.
 
 **Histórico:** a primeira composição foi inicialmente rejeitada; após testar Tailark, Rodrigo recuperou a referência e aprovou sua fonte, copy e gráfico, solicitando os refinamentos registrados. O [estudo de repositórios](referencias-layout.md) e o [teste Tailark](teste-tailark.md) documentam as etapas anteriores. Aprovação visual não autoriza publicação.
 

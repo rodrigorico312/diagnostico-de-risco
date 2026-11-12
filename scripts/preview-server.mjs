@@ -3,7 +3,7 @@ import http from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 const root=path.resolve("dist"), port=Number(process.env.PORT||57193);
-const allowedFiles = new Set(["/nacional-contabilidade-logo-topbar.png","/nacional-contabilidade-logo.png","/rodrigo-coelho.png","/favicon.ico","/favicon.png","/apple-touch-icon.png","/og.png","/portal.html"]);
+const allowedFiles = new Set(["/nacional-contabilidade-logo-topbar.png","/nacional-contabilidade-logo.png","/rodrigo-coelho.png","/favicon.ico","/favicon.png","/apple-touch-icon.png","/og.png","/preview-home-ledger.png","/portal.html"]);
 const mime={".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".svg":"image/svg+xml",".png":"image/png",".jpg":"image/jpeg",".jpeg":"image/jpeg",".ico":"image/x-icon",".woff2":"font/woff2"};
 http.createServer(async(req,res)=>{
   const send=(status,body,type="text/plain; charset=utf-8")=>{res.writeHead(status,{"Content-Type":type,"X-Robots-Tag":"noindex, nofollow","Cache-Control":"no-store","X-Content-Type-Options":"nosniff"});res.end(body)};

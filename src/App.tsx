@@ -1214,8 +1214,8 @@ function ResponsiveArticleSection({
   index: number;
 }) {
   const mobileQuery = "(max-width: 760px)";
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia(mobileQuery).matches);
-  const [open, setOpen] = useState(() => !window.matchMedia(mobileQuery).matches || index === 0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     const media = window.matchMedia(mobileQuery);
@@ -1485,12 +1485,14 @@ type ToolGroup = (typeof toolGroups)[number];
 
 function ResponsiveToolGroup({ group, index }: { group: ToolGroup; index: number }) {
   const mobileQuery = "(max-width: 760px)";
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia(mobileQuery).matches);
-  const [open, setOpen] = useState(() => !window.matchMedia(mobileQuery).matches);
+  const [isMobile, setIsMobile] = useState(false);
+  const [open, setOpen] = useState(true);
   const headingId = `tool-group-${index + 1}`;
 
   useEffect(() => {
     const media = window.matchMedia(mobileQuery);
+    setIsMobile(media.matches);
+    setOpen(!media.matches);
     const update = (event: MediaQueryListEvent) => {
       setIsMobile(event.matches);
       setOpen(!event.matches);
@@ -2355,8 +2357,8 @@ function BusinessAccountingPage() {
   );
 }
 
-export default function App() {
-  const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
+export default function App({ initialPath }: { initialPath?: string } = {}) {
+  const normalizedPath = (initialPath ?? window.location.pathname).replace(/\/+$/, "") || "/";
   const isOfficialHomePage = normalizedPath === "/";
   const isPreviewHomePage = normalizedPath === "/preview/nova-home";
   const isPrivacyPolicyPage = normalizedPath === "/politica-de-privacidade";

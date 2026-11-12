@@ -1,5 +1,13 @@
 # Ajustes visuais indicados por Rodrigo
 
+## Rodapé de repositório e degradê simplificado — 12/11/2026
+
+Rodrigo rejeitou o rodapé anterior e pediu código de um componente profissional aplicado ao projeto. Foi adaptado o [Footer 02 do Shadcn Space](https://github.com/shadcnspace/shadcnspace/blob/main/src/components/shadcn-space/blocks/footer-02/footer.tsx), blob `2024c7ea18e6818f174d44a617e59be8aed166a1`, em `src/NacionalFooter.tsx` e `src/nacional-footer.css`. Licença MIT e autoria preservadas em `LICENSES/Shadcn-Space.md`. Fechamento azul unificado, marca existente em branco por CSS, CTA integrado apenas nas páginas comerciais, duas colunas de navegação e base legal compacta. Sem newsletter, placeholders ou dependências novas. Formulário e páginas de apoio usam a versão sem CTA repetido. Cookies, contato e acessos foram preservados.
+
+Na correção seguinte, Rodrigo pediu retirar “Crescer é uma conquista / Ter direção faz a diferença” e melhorar o degradê. As frases saíram de desktop e mobile. A transição usa paradas progressivas em tons de azul e interpolação OKLab quando disponível, com alternativa CSS convencional. Foram consultados [PostCSS Easing Gradients](https://github.com/larsenwork/postcss-easing-gradients) e a [documentação de interpolação da MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color-interpolation-method). Nenhum plugin de gradiente foi instalado.
+
+Conferência do rodapé: seis páginas em três larguras, um único rodapé por página e sem CTA duplicado. Axe A/AA sem violações em mobile e desktop. Abertura das preferências de cookies e link do diagnóstico com origem “Rodapé” funcionaram. Degradê conferido em 320/390/430/1440px, sem transbordamento. Evidências em `%LOCALAPPDATA%\CodexWork\Nacional\Site-rodape-20261112`.
+
 ## Texto e lógica do atendimento — 12/11/2026
 
 Rodrigo rejeitou a redação da seção “Do primeiro contato ao próximo passo”, sobretudo “Definimos o próximo passo”. A seção passou a apresentar o que o empresário recebe e como decide a contratação: “Clareza antes de contratar”, com “Entendemos sua empresa”, “Você recebe uma orientação inicial” e “Você escolhe com a proposta em mãos”. Os textos explicam atividade/faturamento/necessidade, orientação sobre obrigações e ajustes e apresentação dos serviços, inclusões e valores. A mudança alcança home, MEI e páginas comerciais que compartilham o componente, sem alterar o fluxo de atendimento ou criar prazos e promessas de resultado.

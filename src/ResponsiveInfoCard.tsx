@@ -15,11 +15,13 @@ export default function ResponsiveInfoCard({
   text,
   tone = "light",
 }: ResponsiveInfoCardProps) {
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches);
-  const [open, setOpen] = useState(() => !window.matchMedia(MOBILE_QUERY).matches);
+  const [isMobile, setIsMobile] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     const media = window.matchMedia(MOBILE_QUERY);
+    setIsMobile(media.matches);
+    setOpen(!media.matches);
     const update = (event: MediaQueryListEvent) => {
       setIsMobile(event.matches);
       setOpen(!event.matches);
