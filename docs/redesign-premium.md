@@ -1,5 +1,9 @@
 # Redesign e captação da Nacional — prévia para revisão
 
+**Prévia atual:** teste Tailark simplificado, escolhido por Rodrigo para experimentar. Veja [alterações e validação](teste-tailark.md). A aprovação final continua pendente.
+
+**Estado da primeira composição:** Rodrigo rejeitou o layout desta primeira prévia. A composição não está aprovada. O [estudo de repositórios para a próxima revisão](referencias-layout.md) reúne código, demonstrações, condições de reutilização e direção proposta. Os resultados técnicos abaixo não equivalem a aprovação visual ou comercial.
+
 Brief recebido em 11/11/2026. Base: `rodrigorico312/diagnostico-de-risco`, commit `54828f0ee158a71cd53676579d38dccec6727222`. Trabalho em `redesign/premium-captacao-20261111`, sem push, merge ou publicação no domínio oficial.
 
 ## Fase 1 — auditoria e direção visual
