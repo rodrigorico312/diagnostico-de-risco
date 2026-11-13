@@ -106,6 +106,14 @@ function formatTelegramMessage(lead) {
   pushOptionalLine(lines, "Primeira página", lead.landing_page);
   pushOptionalLine(lines, "Sócios", lead.socios);
   pushOptionalLine(lines, "CNPJ", lead.cnpj);
+  pushOptionalLine(lines, "Informação do CNPJ", lead.cnpjInformacao);
+  pushOptionalLine(lines, "Empresa confirmada", lead.cnpjConfirmado);
+  pushOptionalLine(lines, "Razão social consultada", lead.cnpjRazaoSocial);
+  pushOptionalLine(lines, "Nome fantasia consultado", lead.cnpjNomeFantasia);
+  pushOptionalLine(lines, "Município/UF cadastral", lead.cnpjMunicipioUf);
+  pushOptionalLine(lines, "Situação na base pública", lead.cnpjSituacao);
+  pushOptionalLine(lines, "Atividade na base pública", lead.cnpjAtividade);
+  pushOptionalLine(lines, "Fonte cadastral", lead.cnpjConsultaFonte);
   pushOptionalLine(lines, "Atividade", lead.atividade);
   pushOptionalLine(lines, "Área de interesse", lead.interesse);
   pushOptionalLine(lines, "Contador atual", lead.contadorAtual);
@@ -257,6 +265,14 @@ export default async function handler(request, response) {
     cidade: clean(body.cidade),
     empresa: clean(body.empresa),
     cnpj: clean(body.cnpj),
+    cnpjInformacao: clean(body.cnpjInformacao).slice(0, 180),
+    cnpjConfirmado: clean(body.cnpjConfirmado).slice(0, 180),
+    cnpjRazaoSocial: clean(body.cnpjRazaoSocial).slice(0, 180),
+    cnpjNomeFantasia: clean(body.cnpjNomeFantasia).slice(0, 180),
+    cnpjMunicipioUf: clean(body.cnpjMunicipioUf).slice(0, 180),
+    cnpjSituacao: clean(body.cnpjSituacao).slice(0, 180),
+    cnpjAtividade: clean(body.cnpjAtividade).slice(0, 180),
+    cnpjConsultaFonte: clean(body.cnpjConsultaFonte).slice(0, 180),
     atividade: clean(body.atividade),
     regime: clean(body.regime),
     segmento: clean(body.segmento),

@@ -57,6 +57,14 @@ export default function PrivacyPolicyPage() {
                 navegação, como endereço IP, navegador, dispositivo, páginas
                 acessadas e eventos de interação.
               </p>
+              <p>
+                Ao informar o CNPJ na solicitação de atendimento, o número é
+                consultado automaticamente na BrasilAPI para localizar dados
+                públicos da empresa. Exibimos nome empresarial, nome fantasia,
+                município/UF, situação cadastral e atividade principal para sua
+                confirmação. Essa base pode estar desatualizada e não substitui
+                uma análise fiscal. Você pode continuar sem informar o CNPJ.
+              </p>
             </section>
             <section>
               <h2>2. Para que usamos esses dados</h2>

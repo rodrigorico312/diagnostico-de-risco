@@ -1,5 +1,7 @@
 # Redesign e captação da Nacional
 
+**Revisão de 13/11/2026 em prévia:** formulário reorganizado em quatro etapas, com identificação da empresa na etapa 3, consulta automática à BrasilAPI e confirmação do cadastro. A publicação de 12/11 permanece como estado de produção; esta revisão ainda não foi publicada. [Fluxo, validação e prévia](formulario-cnpj-20261113.md).
+
 **Estado atual em 12/11/2026:** publicado em [www.nacionalcon.com](https://www.nacionalcon.com), após autorização expressa de Rodrigo. Fonte `535d2b8` integrada por avanço direto a `origin/main`. Rodapé Shadcn Space Footer 02 adaptado, frases decorativas retiradas e degradê refinado. As 34 URLs do sitemap passaram na conferência pública; 33 páginas React têm HTML próprio pré-renderizado e o artigo independente de psicologia foi preservado. [Registro de publicação, testes e pendências reais](publicacao-20261112.md).
 
 **Histórico:** a primeira composição foi inicialmente rejeitada; após testar Tailark, Rodrigo recuperou a referência e aprovou sua fonte, copy e gráfico, solicitando os refinamentos registrados. O [estudo de repositórios](referencias-layout.md) e o [teste Tailark](teste-tailark.md) documentam as etapas anteriores. Aprovação visual não autoriza publicação.

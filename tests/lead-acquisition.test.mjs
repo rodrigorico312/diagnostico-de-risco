@@ -14,5 +14,18 @@ test("mantém planilha e notificação, inclui qualificação e origem sem query
 test("uma integração configurada com falha não conta canal ausente como entrega",async()=>isolated({TELEGRAM_BOT_TOKEN:"fixture-only",TELEGRAM_CHAT_ID:"fixture"},async()=>({ok:false,text:async()=>"secret provider detail"}),async()=>{const r=response();await handler({method:"POST",body:fixture},r);assert.equal(r.code,502);assert.equal(r.body.ok,false);assert.doesNotMatch(JSON.stringify(r.body),/secret provider detail/)}));
 test("entrega parcial é contabilizada sem expor falha de provedor",async()=>isolated({TELEGRAM_BOT_TOKEN:"fixture-only",TELEGRAM_CHAT_ID:"fixture",GOOGLE_SHEETS_WEBHOOK_URL:"https://sheets.example.test"},async(url)=>url.includes("telegram")?{ok:false,text:async()=>"secret provider detail"}:{ok:true},async()=>{const r=response();await handler({method:"POST",body:fixture},r);assert.equal(r.code,200);assert.equal(r.body.delivered,1);assert.equal(r.body.warnings.length,1);assert.doesNotMatch(JSON.stringify(r.body),/secret provider detail/)}));
 test("perguntar preço não descarta uma oportunidade",()=>assert.equal(qualifyLead(fixture),"Prioridade de contato"));
+
+test("dados confirmados do CNPJ chegam aos dois canais separados do relato do visitante",async()=>{
+  const sent=[];
+  const company={cnpj:"11.222.333/0001-81",cnpjInformacao:"Informado",cnpjConfirmado:"Sim, pelo visitante",cnpjRazaoSocial:"Empresa fictícia",cnpjNomeFantasia:"Exemplo",cnpjMunicipioUf:"Cidade/PA",cnpjSituacao:"ATIVA",cnpjAtividade:"Serviço fictício",cnpjConsultaFonte:"BrasilAPI - base pública, sujeita a atualização"};
+  await isolated({TELEGRAM_BOT_TOKEN:"fixture-only",TELEGRAM_CHAT_ID:"fixture",GOOGLE_SHEETS_WEBHOOK_URL:"https://sheets.example.test"},async(url,init)=>{sent.push({url,body:JSON.parse(init.body)});return {ok:true}},async()=>{
+    const r=response();await handler({method:"POST",body:{...fixture,...company}},r);assert.equal(r.code,200);
+  });
+  const sheet=sent.find(s=>s.url.includes("sheets.example.test")).body;
+  for(const [key,value] of Object.entries(company))assert.equal(sheet[key],value);
+  const telegram=sent.find(s=>s.url.includes("api.telegram.org")).body.text;
+  assert.match(telegram,/Município\/UF cadastral/);assert.match(telegram,/ATIVA/);assert.match(telegram,/BrasilAPI/);
+  assert.equal(sheet.situacaoCnpj,fixture.situacaoCnpj);
+});
 test("honeypot não dispara integrações",async()=>isolated({},()=>{throw Error("Network forbidden")},async()=>{const r=response();await handler({method:"POST",body:{...fixture,website:"spam.test"}},r);assert.equal(r.code,200)}));
 test("campos essenciais ausentes e método errado não executam envios",async()=>isolated({},()=>{throw Error("Network forbidden")},async()=>{let r=response();await handler({method:"GET"},r);assert.equal(r.code,405);r=response();await handler({method:"POST",body:{tipo:"solicitar_atendimento"}},r);assert.equal(r.code,400)}));
