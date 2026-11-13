@@ -1,6 +1,6 @@
 # Formulário em quatro etapas e identificação por CNPJ
 
-13/11/2026 — implementação em prévia; produção não alterada nesta revisão.
+13/11/2026 — publicado após autorização expressa de Rodrigo. [Registro da publicação](publicacao-formulario-20261113.md).
 
 Rodrigo apontou que o expansor de dados complementares escondia informações importantes. Pediu abri-lo como etapa própria, consultar a BrasilAPI e permitir que o visitante confirme a empresa ou informe que não sabe o CNPJ.
 
