@@ -1,5 +1,7 @@
 # Redesign e captação da Nacional
 
+**Auditoria Google após o formulário:** propriedade HTTPS/www verificada no Search Console, sitemap processado com 34 páginas e home/página MEI confirmadas no índice. Atualização da home solicitada; desempenho ainda em processamento. Analytics e Ads preparados, sem instalação GA4 ou ativação de campanha; aceites pendentes. [Estado e limites da conferência](google-rastreamento-medicao.md).
+
 **Atualização publicada em 13/11/2026:** formulário reorganizado em quatro etapas, com identificação da empresa na etapa 3, consulta automática à BrasilAPI e confirmação do cadastro. Nome empresarial/fantasia identificados, cartão reorganizado e legenda técnica retirada. Publicação autorizada por Rodrigo e conferida no domínio oficial. [Fluxo](formulario-cnpj-20261113.md) e [registro da publicação](publicacao-formulario-20261113.md).
 
 **Publicação anterior, em 12/11/2026:** publicado em [www.nacionalcon.com](https://www.nacionalcon.com), após autorização expressa de Rodrigo. Fonte `535d2b8` integrada por avanço direto a `origin/main`. Rodapé Shadcn Space Footer 02 adaptado, frases decorativas retiradas e degradê refinado. As 34 URLs do sitemap passaram na conferência pública; 33 páginas React têm HTML próprio pré-renderizado e o artigo independente de psicologia foi preservado. [Registro de publicação, testes e pendências reais](publicacao-20261112.md).
