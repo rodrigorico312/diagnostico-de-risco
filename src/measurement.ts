@@ -30,6 +30,9 @@ export function initializeMeasurement() {
     w.dataLayer = w.dataLayer || [];
     w.gtag = function () { w.dataLayer!.push(arguments); };
     w.gtag("consent", "default", { analytics_storage: "granted", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+    // Apply before tag initialization: the Google-managed container may initialize
+    // its destination before processing the stream-specific config command.
+    w.gtag("set", { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false, page_location: `${window.location.origin}${window.location.pathname}`, page_referrer: "" });
     w.gtag("js", new Date()); w.gtag("config", id, { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false });
     const script = document.createElement("script"); script.async = true; script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`; document.head.appendChild(script);
     w.gtag("event", "page_view", { page_location: `${window.location.origin}${window.location.pathname}`, page_referrer: "", page_title: document.title });
