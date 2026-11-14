@@ -22,10 +22,14 @@ Auditoria HTTP pública com timestamp `2026-11-14T10:39:30.790Z`: 34/34 URLs do 
 
 HTML pré-renderizado, metadados e entidade AccountingService preservados. As restrições intencionais de páginas privadas e do formulário não foram removidas. Permitir rastreamento não garante ranking ou citação por IA.
 
-## Medição e publicidade ainda pendentes
+## Analytics — continuidade autorizada em 14/11/2026
 
-Não há ID GA4 real instalado na configuração de produção consultada. A configuração gratuita foi preparada, mas parou antes do aceite contratual solicitado ao responsável; sem propriedade/fluxo finalizados e sem identificador inventado. Meta Pixel existente preservado.
+Rodrigo autorizou avançar no cadastro após o pedido específico de aceite. Criadas a conta **Nacional Contabilidade**, a propriedade **Nacional Contabilidade — Site** e o fluxo **Site Nacional Contabilidade**, para `https://www.nacionalcon.com`, em reais e com o fuso de Santarém. ID verdadeiro: `G-XEX4N8C1FE`; código do fluxo: `16341315175`.
 
-Ao concluir o Analytics: usar apenas envio efetivamente confirmado como evento principal (`generate_lead`), rever medição automática de formulários para evitar duplicidade e validar consentimento e ausência de dados pessoais. Os botões Continuar não são leads; clique no WhatsApp não comprova conversa ou contrato.
+O ID foi configurado em `VITE_GA_MEASUREMENT_ID` somente no ambiente de produção da Vercel. O código existente carrega a tag apenas após aceitar a medição opcional e preserva o Meta Pixel. A política passou a identificar o uso do Analytics e a apontar para a explicação oficial de tratamento de dados do Google.
+
+A medição otimizada adicional do fluxo foi desativada com confirmação na interface, para manter os eventos explícitos do site e evitar interações automáticas de formulário. Usar apenas envio efetivamente confirmado como evento principal (`generate_lead`). Os botões Continuar não são leads; clique no WhatsApp não comprova conversa ou contrato. A criação da conta e a configuração do ID não comprovam, por si, coleta; o recebimento e a publicação precisam ser conferidos separadamente.
+
+## Publicidade
 
 O cadastro de Ads também permanece incompleto. Nenhuma campanha, orçamento, cobrança ou gasto foi ativado. Concluir cadastro não autoriza veiculação. Planejamento de aquisição, evidências das contas e pendências comerciais permanecem na documentação operacional privada da Nacional, fora deste repositório público.

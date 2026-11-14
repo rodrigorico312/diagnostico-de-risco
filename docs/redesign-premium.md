@@ -1,6 +1,6 @@
 # Redesign e captação da Nacional
 
-**Auditoria Google após o formulário:** propriedade HTTPS/www verificada no Search Console, sitemap processado com 34 páginas e home/página MEI confirmadas no índice. Atualização da home solicitada; desempenho ainda em processamento. Analytics e Ads preparados, sem instalação GA4 ou ativação de campanha; aceites pendentes. [Estado e limites da conferência](google-rastreamento-medicao.md).
+**Auditoria Google após o formulário:** propriedade HTTPS/www verificada no Search Console, sitemap processado com 34 páginas e home/página MEI confirmadas no índice. Após autorização de Rodrigo em 14/11/2026, conta e fluxo GA4 criados, com ID real configurado no ambiente de produção; publicação e recebimento conferidos em etapa própria. Ads segue em preparação, sem campanha ativa ou gasto. [Estado e limites da conferência](google-rastreamento-medicao.md).
 
 **Atualização publicada em 13/11/2026:** formulário reorganizado em quatro etapas, com identificação da empresa na etapa 3, consulta automática à BrasilAPI e confirmação do cadastro. Nome empresarial/fantasia identificados, cartão reorganizado e legenda técnica retirada. Publicação autorizada por Rodrigo e conferida no domínio oficial. [Fluxo](formulario-cnpj-20261113.md) e [registro da publicação](publicacao-formulario-20261113.md).
 
