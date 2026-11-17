@@ -1,5 +1,7 @@
 # Redesign e captação da Nacional
 
+**Calculadora da consultoria publicada em 17/11/2026:** a pedido de Rodrigo, disponível em [nacionalcon.com/caucu](https://nacionalcon.com/caucu), com percentuais ajustáveis, entrada sobre a soma de cinco parcelas e cálculo decimal exato. Publicação autorizada e conferida no domínio oficial em desktop/mobile. [Regra, arquivos e validações](calculadora-consultoria-20261117.md).
+
 **Auditoria Google após o formulário:** propriedade HTTPS/www verificada no Search Console, sitemap processado com 34 páginas e home/página MEI confirmadas no índice. Após autorização de Rodrigo em 14/11/2026, conta e fluxo GA4 criados, com ID real configurado no ambiente de produção; publicação e recebimento conferidos em etapa própria. Ads segue em preparação, sem campanha ativa ou gasto. [Estado e limites da conferência](google-rastreamento-medicao.md).
 
 **Atualização publicada em 13/11/2026:** formulário reorganizado em quatro etapas, com identificação da empresa na etapa 3, consulta automática à BrasilAPI e confirmação do cadastro. Nome empresarial/fantasia identificados, cartão reorganizado e legenda técnica retirada. Publicação autorizada por Rodrigo e conferida no domínio oficial. [Fluxo](formulario-cnpj-20261113.md) e [registro da publicação](publicacao-formulario-20261113.md).

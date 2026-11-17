@@ -32,4 +32,20 @@ A entrada incide sobre a soma das cinco parcelas. Não é uma fração do total 
 - Build de produção aprovado, com HTML próprio de `/caucu` e preservação das páginas anteriores.
 - Revisão local no Edge instalado: casos da tabela, precisão de centavos, validações, atalhos, foco e teclado; larguras 1280, 390 e 320 px sem transbordamento horizontal. Sem POST ou erros JavaScript/hidratação nas interações.
 - Não foi localizado ambiente remoto de testes isolado configurado para esta tarefa. A revisão usa Edge instalado e perfil exclusivo local, sem baixar navegador. Evidências em `%LOCALAPPDATA%\CodexWork\Nacional\Calculadora-Consultoria-20261117`.
-- A conclusão da publicação e a conferência pública serão registradas abaixo após o retorno da Vercel.
+- Fonte da aplicação: commit `614128164813657f1fa4a3b7e79777abcae70856`, integrado por avanço direto em `origin/main`, sobre a base `35d5f77`. Sem sobrescrever alterações remotas.
+- Vercel confirmou **READY / Production** para `dpl_GzekSgcqxwP624bMjqF9diyHW1jZ`, em `https://diagnostico-de-risco-kij0rldc7-rodrigorico312s-projects.vercel.app`, com aliases `nacionalcon.com` e `www.nacionalcon.com`. A referência anterior é `dpl_3tKJhWHLm28wLZ13Lo9YoGYWzU8u`.
+- `https://nacionalcon.com/caucu` retorna 200 após o redirecionamento já existente para `https://www.nacionalcon.com/caucu`. A variante `/caucu/` também retorna 200; ambas entregam HTML próprio da calculadora e canonical `/caucu`.
+- Os mesmos cenários funcionais e larguras 1280/390/320 foram repetidos no domínio oficial, com **PASS**, zero erros JavaScript/hidratação e zero requisições de escrita. Foram inspecionadas capturas locais e publicada. A emulação não substitui testes em aparelhos físicos/Safari.
+- Home, calculadora MEI, solicitação de atendimento e área do cliente continuam retornando 200. A API do portal sem sessão retorna 401 com cache privado. Não houve envio de lead ou mensagem de teste, alteração de DNS, banco ou credenciais.
+- Consulta dos logs de erro da implantação publicada, no recorte da última hora, retornou zero registros. Isso descreve o recorte consultado, não uma garantia de disponibilidade futura. Drenos e monitoramento externo não foram auditados nesta alteração de frontend.
+
+## Arquivos da entrega
+
+- `src/ConsultationCalculatorPage.tsx`: interface e validação dos campos.
+- `src/consultation-calculator.css`: identidade, contraste e adaptação às telas pequenas.
+- `src/consultation-pricing.ts`: interpretação e cálculo decimal exato.
+- `src/App.tsx`, `src/premium-prerender.tsx` e `vercel.json`: rota, HTML e rewrites.
+- `tests/consultation-pricing.test.mjs`: dez testes de regras e fronteiras de arredondamento.
+- Este registro e `docs/redesign-premium.md`: documentação da publicação.
+
+O registro documental posterior conserva o mesmo código de aplicação. Nenhuma etapa de publicação depende do computador local ou da prévia de teste permanecer ligada.
