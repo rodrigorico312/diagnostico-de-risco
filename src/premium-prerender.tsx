@@ -6,6 +6,7 @@ import { solutionPages } from "./SolutionDetailPage";
 import { searchLandingPages } from "./SearchLandingPage";
 export { premiumMetadata, premiumServices } from "./premium-content";
 export const additionalPublicPaths = [
+  "/caucu",
   ...Object.keys(solutionPages).map(slug => `/solucoes/${slug}`),
   ...Object.keys(searchLandingPages),
 ];

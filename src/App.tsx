@@ -23,6 +23,7 @@ import "./tools-editorial.css";
 import "./mobile-compact.css";
 import "./site-refinement.css";
 import "./links-page.css";
+import ConsultationCalculatorPage from "./ConsultationCalculatorPage";
 
 const MeiGuidePage = lazy(() => import("./MeiGuidePage"));
 
@@ -2386,6 +2387,7 @@ export default function App({ initialPath }: { initialPath?: string } = {}) {
     if (!normalizedPath.startsWith("/area-do-cliente")) return installLeadTracking();
   }, [normalizedPath]);
 
+  if (normalizedPath === "/caucu") return <ConsultationCalculatorPage />;
   if (premiumMetadata[normalizedPath]) return <PremiumPage path={normalizedPath}/>;
 
   if (isMeiGuidePage) {

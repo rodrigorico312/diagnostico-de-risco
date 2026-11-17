@@ -247,6 +247,14 @@
   ],
   "rewrites": [
     {
+      "source": "/caucu",
+      "destination": "/caucu/index.html"
+    },
+    {
+      "source": "/caucu/",
+      "destination": "/caucu/index.html"
+    },
+    {
       "source": "/abrir-empresa-em-santarem",
       "destination": "/abrir-empresa-em-santarem/index.html"
     },
