@@ -49,3 +49,9 @@ A entrada incide sobre a soma das cinco parcelas. Não é uma fração do total 
 - Este registro e `docs/redesign-premium.md`: documentação da publicação.
 
 O registro documental posterior conserva o mesmo código de aplicação. Nenhuma etapa de publicação depende do computador local ou da prévia de teste permanecer ligada.
+
+## Encerramento dos testes locais
+
+Navegador exclusivo `nacional-caucu` fechado e servidor de prévia da porta 57217 encerrado, com ausência de listener conferida. Nenhum navegador foi baixado; a pasta `browsers` não existe. As capturas e relatórios necessários permanecem no diretório de evidências.
+
+**Pendência de limpeza:** a revisão automática rejeitou a exclusão de `browser-profile` e `temp` em `%LOCALAPPDATA%\CodexWork\Nacional\Calculadora-Consultoria-20261117`, com o motivo genérico `blocked by policy`. Os caminhos foram conferidos como diretórios normais dentro da tarefa e sem navegador usando o perfil. A tentativa posterior com `Remove-Item -LiteralPath` e destinos absolutos explícitos também foi rejeitada. Essas duas pastas permanecem locais; não fazem parte do repositório, do site nem do deploy. Não houve tentativa por outro shell para contornar o bloqueio.
