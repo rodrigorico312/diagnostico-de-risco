@@ -3,6 +3,12 @@
 .nc-pricing-heading { max-width: 720px; margin-bottom: 34px; }
 .nc-pricing-heading h1 { font-size: clamp(35px, 4vw, 49px); }
 .nc-pricing-heading > p { margin-top: 18px; color: var(--nc-muted); font-size: 17px; }
+.nc-pricing-tiers { border: 0; margin: 0 0 28px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.nc-pricing-tiers legend { font-size: 17px; font-weight: 600; padding: 0 0 12px; }
+.nc-pricing-tiers label { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 12px; border: 1px solid #9eacb9; border-radius: 5px; background: white; cursor: pointer; font-size: 17px; font-weight: 600; }
+.nc-pricing-tiers label:has(input:checked) { background: var(--nc-blue); border-color: var(--nc-blue); color: white; box-shadow: 0 0 0 2px #c2a65c80; }
+.nc-pricing-tiers label:has(input:focus-visible) { outline: 3px solid #9d7d30; outline-offset: 4px; }
+.nc-pricing-tiers input { width: 18px; height: 18px; flex: 0 0 18px; accent-color: var(--nc-gold-dark); margin: 0; }
 .nc-pricing-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
 .nc-pricing-form, .nc-pricing-result { min-width: 0; padding: 32px; border-radius: 8px; }
 .nc-pricing-form { background: white; border: 1px solid var(--nc-line); }
@@ -13,11 +19,8 @@
 .nc-pricing-field input::placeholder { color: #637182; opacity: 1; }
 .nc-pricing-field input[aria-invalid=true] { border-color: #a02d2d; }
 .nc-pricing-field .nc-pricing-error { color: #a02d2d; font-size: 14px; margin-top: 8px; line-height: 1.5; }
-.nc-pricing-presets { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-.nc-pricing-presets button { padding: 8px 16px; min-height: 44px; border: 1px solid #9eacb9; border-radius: 4px; color: var(--nc-blue); background: white; cursor: pointer; font-size: 15px; font-weight: 600; }
-.nc-pricing-presets button[aria-pressed=true] { border-color: var(--nc-blue); background: var(--nc-blue); color: white; }
-.nc-pricing-presets button:hover { box-shadow: 0 0 0 2px #c2a65c80; }
-.nc-pricing-form > .nc-button { width: 100%; font-size: 16px; }
+.nc-pricing-field .nc-pricing-hint { margin-top: 8px; color: var(--nc-muted); font-size: 14px; line-height: 1.5; }
+.nc-pricing-form > .nc-pricing-field:last-child { margin-bottom: 0; }
 .nc-pricing-result { background: var(--nc-navy); color: white; border-top: 4px solid var(--nc-gold); }
 .nc-pricing-result h2 { color: white; }
 .nc-pricing-result dl { margin: 0; font-variant-numeric: tabular-nums; }
@@ -37,6 +40,8 @@
   .nc-pricing-container { width: calc(100% - 36px); padding-block: 32px 40px; }
   .nc-pricing-heading { margin-bottom: 26px; }
   .nc-pricing-heading > p { font-size: 16px; }
+  .nc-pricing-tiers { gap: 8px; }
+  .nc-pricing-tiers label { font-size: 16px; padding: 10px 6px; gap: 7px; }
   .nc-pricing-layout { grid-template-columns: 1fr; gap: 22px; }
   .nc-pricing-form, .nc-pricing-result { padding: 24px 21px; }
   .nc-pricing-field label { font-size: 16px; }

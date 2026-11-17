@@ -1,6 +1,20 @@
 /** Exact decimal arithmetic: round each installment first, then the entry. */
 type Decimal = { units: bigint; scale: bigint };
 
+export const CONSULTATION_PRESETS = [
+  { id: "baixa", label: "Baixa", installmentPercent: "6,63", entryPercent: "30" },
+  { id: "media", label: "Média", installmentPercent: "10", entryPercent: "30" },
+  { id: "alta", label: "Alta", installmentPercent: "", entryPercent: "30" },
+] as const;
+
+/** Banking-style field: the last two digits are cents. Invalid text stays invalid. */
+export function formatPricingRevenueInput(raw: string): string {
+  const value = raw.trim().replace(/^R\$\s*/, "");
+  if (value.length > 60 || /[^\d.,\s]/.test(value)) return raw;
+  const digits = value.replace(/\D/g, "");
+  return digits ? formatPricingMoney(BigInt(digits)) : "";
+}
+
 function parseDecimal(raw: string, money: boolean): Decimal {
   let value = raw.trim();
   if (money) value = value.replace(/^R\$\s*/, "");

@@ -2,7 +2,22 @@
 
 Rodrigo solicitou implementar e publicar a calculadora em `https://nacionalcon.com/caucu`, com essa grafia exata. A autorização inclui produção. Integração ao site existente React/TypeScript/Vite e ao projeto Vercel `diagnostico-de-risco`, sem servidor Python ou dependências adicionais.
 
-## Regra solicitada
+## Revisão solicitada em 17/11 — faixas e moeda durante a edição
+
+Rodrigo pediu retirar o botão de calcular, formatar o faturamento como dinheiro durante a edição e organizar opções Baixa, Média e Alta. Na correção final da conversa, definiu parcela de **6,63% do faturamento** e entrada de **30% da soma das cinco parcelas**. Essa é a configuração inicial da opção Baixa. A Média conserva parcela de 10% e entrada de 30%. A Alta permite personalizar a parcela; seu coeficiente fixo permanece pendente de definição. A entrada inicial da Alta é de 30% e continua ajustável. Nenhuma faixa implica preço obrigatório de mercado ou aceite de cliente.
+
+| Opção com faturamento de R$ 60.000,00 | Parcela | Soma das cinco | Entrada | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Baixa: parcela 6,63%, entrada 30% | R$ 3.978,00 | R$ 19.890,00 | R$ 5.967,00 | R$ 25.857,00 |
+| Média: parcela 10%, entrada 30% | R$ 6.000,00 | R$ 30.000,00 | R$ 9.000,00 | R$ 39.000,00 |
+
+O faturamento usa máscara com `R$`, agrupamento de milhar e dois centavos, com os dois últimos dígitos como centavos durante a digitação. A colagem integral aceita valores em reais, como `60000` ou `60.000,00`, para evitar mudança de unidade ao colar. A edição no meio do campo preserva a posição pelos dígitos à direita; textos inválidos são mantidos para validação, sem conversão silenciosa. O cálculo acompanha os campos sem envio, botão ou formulário de submissão. As opções usam controles de seleção nativos; os percentuais continuam editáveis.
+
+TypeScript e build aprovados, com 82 testes passando. A revisão no Edge instalado conferiu cálculo automático, faixas, moeda durante digitação, cursor no meio, colagem integral em reais, validações, zero e arredondamento. Larguras 1280, 390 e 320 px sem transbordamento e com controles de 18 px. Zero erros JavaScript/hidratação ou requisições de escrita nos cenários. Capturas e relatório `browser-faixas-local-report.txt` no diretório de evidências já indicado abaixo. As duas skills existentes do projeto foram atualizadas e validadas pelo `quick_validate.py` em UTF-8.
+
+A publicação desta revisão é acompanhada no domínio oficial; o retorno será registrado após a conferência pública.
+
+## Regra e configuração da publicação inicial
 
 Base lógica: script Python anterior da calculadora, mantido fora do repositório. Na web, o faturamento é informado em reais; a parcela começa em 10% e a entrada em 30%, ambos ajustáveis. Há atalhos de entrada em 30% e 36%. São cinco parcelas mensais após a entrada.
 

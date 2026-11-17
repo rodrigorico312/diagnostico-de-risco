@@ -1,6 +1,29 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { calculateConsultation, formatPricingMoney, formatPricingRevenue } from "../src/consultation-pricing.ts";
+import { CONSULTATION_PRESETS, calculateConsultation, formatPricingMoney, formatPricingRevenue, formatPricingRevenueInput, validatePricingInput } from "../src/consultation-pricing.ts";
+
+test("baixa usa parcela de 6,63% do faturamento e entrada de 30% das cinco parcelas", () => {
+  const preset = CONSULTATION_PRESETS.find(item => item.id === "baixa");
+  assert.deepEqual(calculateConsultation("60.000,00", preset.installmentPercent, preset.entryPercent), { installment: 397800n, installmentsTotal: 1989000n, entry: 596700n, total: 2585700n });
+});
+test("média conserva a referência de 10% e entrada de 30%; alta requer escolha do percentual", () => {
+  const medium = CONSULTATION_PRESETS.find(item => item.id === "media");
+  const high = CONSULTATION_PRESETS.find(item => item.id === "alta");
+  assert.equal(calculateConsultation("60000", medium.installmentPercent, medium.entryPercent).total, 3900000n);
+  assert.throws(() => calculateConsultation("60000", high.installmentPercent, high.entryPercent));
+});
+test("máscara monetária mostra reais, milhar e centavos sem usar ponto flutuante", () => {
+  for (const raw of ["6000000", "R$ 60.000,00", "06000000"])
+    assert.equal(formatPricingRevenueInput(raw), "R$ 60.000,00");
+  assert.equal(formatPricingRevenueInput("1"), "R$ 0,01");
+  assert.equal(formatPricingRevenueInput("0"), "R$ 0,00");
+  assert.equal(formatPricingRevenueInput(""), "");
+  assert.equal(formatPricingRevenueInput("90071992547409991"), "R$ 900.719.925.474.099,91");
+  for (const raw of ["-100", "abc", "1e6", "1".repeat(61)]) {
+    assert.equal(formatPricingRevenueInput(raw), raw);
+    assert.notEqual(validatePricingInput(formatPricingRevenueInput(raw), true), "");
+  }
+});
 
 test("65 mil: entrada de 30% sobre cinco parcelas", () => {
   assert.deepEqual(calculateConsultation("65.000,00"), { installment: 650000n, installmentsTotal: 3250000n, entry: 975000n, total: 4225000n });
