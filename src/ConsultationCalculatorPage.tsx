@@ -7,6 +7,7 @@ import "./consultation-calculator.css";
 export default function ConsultationCalculatorPage() {
   usePageSeo({ path: "/caucu", title: "Calculadora de precificação da consultoria | Nacional Contabilidade", description: "Simule a entrada, as cinco parcelas mensais e o total da consultoria, com percentuais ajustáveis." });
   const [revenue, setRevenue] = useState("");
+  const [clientCompany, setClientCompany] = useState("");
   const [installmentPercent, setInstallmentPercent] = useState<string>(CONSULTATION_PRESETS[0].installmentPercent);
   const [entryPercent, setEntryPercent] = useState("30");
   const [selectedPreset, setSelectedPreset] = useState<string | null>("baixa");
@@ -79,6 +80,10 @@ export default function ConsultationCalculatorPage() {
           <section className="nc-pricing-form" aria-labelledby="pricing-values-title">
             <h2 id="pricing-values-title">Valores da simulação</h2>
             <div className="nc-pricing-field">
+              <label htmlFor="pricing-client-company">Empresa cliente (opcional)</label>
+              <input id="pricing-client-company" type="text" autoComplete="off" maxLength={160} placeholder="Nome da empresa" value={clientCompany} onChange={event => setClientCompany(event.target.value)} />
+            </div>
+            <div className="nc-pricing-field">
               <label htmlFor="pricing-revenue">Faturamento mensal (R$)</label>
               <input id="pricing-revenue" type="text" inputMode="numeric" autoComplete="off" spellCheck={false} maxLength={60} placeholder="R$ 0,00" value={revenue} aria-invalid={touched.revenue && !!errors.revenue} aria-describedby={`pricing-revenue-hint${touched.revenue && errors.revenue ? " pricing-revenue-error" : ""}`} onChange={editRevenue} onPaste={pasteRevenue} onBlur={() => touch("revenue")} />
               <p className="nc-pricing-hint" id="pricing-revenue-hint">Os dois últimos dígitos são os centavos.</p>
@@ -97,6 +102,7 @@ export default function ConsultationCalculatorPage() {
           </section>
           <section className="nc-pricing-result" aria-labelledby="pricing-result-title">
             <h2 id="pricing-result-title">Resumo do projeto</h2>
+            {clientCompany.trim() && <p className="nc-pricing-client">{clientCompany.trim()}</p>}
             <div aria-live="polite" aria-atomic="true">
               {result ? <>
                 <dl>
@@ -108,7 +114,6 @@ export default function ConsultationCalculatorPage() {
                 <p className="nc-pricing-schedule">Pagamento: entrada + 5 parcelas mensais.</p>
               </> : <p className="nc-pricing-empty">{selectedPreset === "alta" && !installmentPercent ? "Defina o percentual da parcela para simular a opção alta." : Object.keys(touched).length ? "Confira os campos para visualizar o cálculo atualizado." : "Preencha o faturamento para ver a entrada, as parcelas e o total."}</p>}
             </div>
-            <p className="nc-pricing-rule">A entrada é calculada sobre a soma das cinco parcelas, não sobre o total do projeto.</p>
           </section>
         </div>
         <p className="nc-pricing-note">Percentuais ajustáveis para a sua simulação. Os valores são calculados nesta página, sem envio ao servidor.</p>

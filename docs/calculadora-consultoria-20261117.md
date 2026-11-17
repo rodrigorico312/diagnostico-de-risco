@@ -2,6 +2,10 @@
 
 Rodrigo solicitou implementar e publicar a calculadora em `https://nacionalcon.com/caucu`, com essa grafia exata. A autorização inclui produção. Integração ao site existente React/TypeScript/Vite e ao projeto Vercel `diagnostico-de-risco`, sem servidor Python ou dependências adicionais.
 
+**Ajuste visual posterior em 17/11:** Rodrigo pediu retirar do resumo a frase “A entrada é calculada sobre a soma das cinco parcelas, não sobre o total do projeto.” A legenda e sua linha separadora foram removidas. O rótulo do campo continua identificando a base da entrada; a fórmula permanece a mesma.
+
+Na mesma revisão, pediu campo opcional para o nome da empresa cliente. O nome aparece no resumo da simulação e permanece somente no estado da página, sem persistência, consulta cadastral, envio ao servidor, URL ou evento de medição. O campo começa vazio; nenhum nome real de cliente é incluído no código ou no HTML inicial. O computador retornou `ENOSPC` ao tentar o build local; a publicação utiliza o build remoto existente da Vercel, seguida de conferência pública.
+
 ## Revisão solicitada em 17/11 — faixas e moeda durante a edição
 
 Rodrigo pediu retirar o botão de calcular, formatar o faturamento como dinheiro durante a edição e organizar opções Baixa, Média e Alta. Na correção final da conversa, definiu parcela de **6,63% do faturamento** e entrada de **30% da soma das cinco parcelas**. Essa é a configuração inicial da opção Baixa. A Média conserva parcela de 10% e entrada de 30%. A Alta permite personalizar a parcela; seu coeficiente fixo permanece pendente de definição. A entrada inicial da Alta é de 30% e continua ajustável. Nenhuma faixa implica preço obrigatório de mercado ou aceite de cliente.
