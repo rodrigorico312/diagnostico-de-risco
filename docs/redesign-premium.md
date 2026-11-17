@@ -1,6 +1,6 @@
 # Redesign e captação da Nacional
 
-**Calculadora da consultoria publicada em 17/11/2026:** a pedido de Rodrigo, disponível em [nacionalcon.com/caucu](https://nacionalcon.com/caucu), com percentuais ajustáveis, entrada sobre a soma de cinco parcelas e cálculo decimal exato. Publicação autorizada e conferida no domínio oficial em desktop/mobile. [Regra, arquivos e validações](calculadora-consultoria-20261117.md).
+**Calculadora da consultoria publicada e revisada em 17/11/2026:** a pedido de Rodrigo, disponível em [nacionalcon.com/caucu](https://nacionalcon.com/caucu), com moeda durante a digitação e cálculo automático sem botão. Baixa com parcela de 6,63% do faturamento; Média com 10%; entrada inicial de 30% sobre a soma de cinco parcelas. Alta personalizável, com coeficiente fixo a definir. Publicação autorizada e conferida no domínio oficial em desktop/mobile; 82 testes aprovados. [Regra, arquivos e validações](calculadora-consultoria-20261117.md).
 
 **Auditoria Google após o formulário:** propriedade HTTPS/www verificada no Search Console, sitemap processado com 34 páginas e home/página MEI confirmadas no índice. Após autorização de Rodrigo em 14/11/2026, conta e fluxo GA4 criados, com ID real configurado no ambiente de produção; publicação e recebimento conferidos em etapa própria. Ads segue em preparação, sem campanha ativa ou gasto. [Estado e limites da conferência](google-rastreamento-medicao.md).
 

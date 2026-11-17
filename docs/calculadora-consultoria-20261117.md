@@ -15,7 +15,9 @@ O faturamento usa máscara com `R$`, agrupamento de milhar e dois centavos, com 
 
 TypeScript e build aprovados, com 82 testes passando. A revisão no Edge instalado conferiu cálculo automático, faixas, moeda durante digitação, cursor no meio, colagem integral em reais, validações, zero e arredondamento. Larguras 1280, 390 e 320 px sem transbordamento e com controles de 18 px. Zero erros JavaScript/hidratação ou requisições de escrita nos cenários. Capturas e relatório `browser-faixas-local-report.txt` no diretório de evidências já indicado abaixo. As duas skills existentes do projeto foram atualizadas e validadas pelo `quick_validate.py` em UTF-8.
 
-A publicação desta revisão é acompanhada no domínio oficial; o retorno será registrado após a conferência pública.
+Revisão publicada e conferida no domínio oficial: aplicação `84c02c1c92c972b1877e9601b68627e629c3b492`, deploy `dpl_FHiDHG6x7L3mMqvsnXrpzmRPETFW`, **READY / Production**, em `https://diagnostico-de-risco-2mcy5a7ys-rodrigorico312s-projects.vercel.app`, com aliases do domínio Nacional. `/caucu` e `/caucu/` retornam 200 com a nova configuração e sem o botão antigo. Os mesmos cenários foram repetidos no navegador em `https://www.nacionalcon.com/caucu`, com **PASS**, zero erros e zero escritas. A consulta aos logs de erro do deploy retornou zero registros no recorte da última hora. Home e calculadora MEI retornam 200; portal sem sessão retorna 401 com cache privado.
+
+O navegador efêmero `nacional-caucu-faixas` foi fechado, com remoção automática de seu perfil temporário conferida (`existsAfterClose: false`), e o servidor da porta 57217 foi encerrado. Nenhum navegador foi baixado. A pendência antiga de exclusão das duas pastas da primeira publicação, registrada ao fim deste documento, não foi novamente executada. Evidências desta revisão: `browser-faixas-published-report.txt` e capturas `published-faixas-1280.png`, `published-faixas-390.png` e `published-faixas-320.png` no mesmo diretório local de evidências.
 
 ## Regra e configuração da publicação inicial
 
